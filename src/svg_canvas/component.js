@@ -1,14 +1,17 @@
-import { Canvas } from "./canvas";
+import { Position } from "./position";
 
 export class Component {
   #canvas = null;
   #componentEl = null;
-
-  #x = 0;
-  #y = 0;
+  #parent = null;
+  #moveable = true;
+  #pos = new Position(0, 0);
   #moving = false;
   #startMovePos = null;
   #startMovePointerPos = null;
+
+  /** The list of child components */
+  #components = [];
 
   constructor() {
     let self = this;
@@ -26,34 +29,44 @@ export class Component {
     });
   }
 
-  get x() {
-      return this.#x;
+  get pos() {
+    return this.#pos;
   }
 
-  set x(val) {
-    this.#x = val;
-    this.#updateSVGElement();
+  set pos(val) {
+    this.#pos = val;
+    this.updateSVGElement();
   }
-
-  get y() {
-      return this.#y;
-  }
-
-  set y(val) {
-    this.#y = val;
-    this.#updateSVGElement();
-  }
-
   get canvas() {
-      return this.#canvas;
+    return this.#canvas;
   }
 
   set canvas(val) {
-      this.#canvas = val;
+    this.#canvas = val;
   }
 
   get componentEl() {
-      return this.#componentEl;
+    return this.#componentEl;
+  }
+
+  get svgEl() {
+    return this.#canvas.svgEl;
+  }
+
+  get moveable() {
+    return this.#moveable;
+  }
+
+  set moveable(val) {
+    this.#moveable = val;
+  }
+
+  get parent() {
+    return this.#parent;
+  }
+
+  set parent(val) {
+    this.#parent = val;
   }
 
   /**
@@ -61,14 +74,15 @@ export class Component {
    * @param {*} e The mousedown event
    */
   #onPointerDown(e) {
-    this.#moving = true;
-    this.#startMovePos = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
-    this.#startMovePointerPos = this.#canvas.svgEl.createSVGPoint();
-    this.#startMovePointerPos.x = this.#x;
-    this.#startMovePointerPos.y = this.#y;
-    this.#componentEl.setPointerCapture(e.pointerId);
-
-    e.stopPropagation();
+    if (this.#moveable) {
+      this.#moving = true;
+      this.#startMovePos = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
+      this.#startMovePointerPos = this.#canvas.svgEl.createSVGPoint();
+      this.#startMovePointerPos.x = this.#pos.x;
+      this.#startMovePointerPos.y = this.#pos.y;
+      this.#componentEl.setPointerCapture(e.pointerId);
+      e.stopPropagation();
+    }
   }
 
   /**
@@ -76,9 +90,11 @@ export class Component {
    * @param {*} e The mouseup event
    */
   #onPointerUp(e) {
-    this.#moving = false;
-    this.#componentEl.releasePointerCapture(e.pointerId);
-    e.stopPropagation();
+    if (this.#moveable) {
+      this.#moving = false;
+      this.#componentEl.releasePointerCapture(e.pointerId);
+      e.stopPropagation();
+    }
   }
 
   /**
@@ -86,58 +102,107 @@ export class Component {
    * @param {*} e The mousemove event
    */
   #onPointerMove(e) {
-    if (!this.#moving) {
-      return;
+    if (this.#moveable) {
+      if (!this.#moving) {
+        return;
+      }
+      let movePoint = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
+      let xDiff = movePoint.x - this.#startMovePos.x;
+      let yDiff = movePoint.y - this.#startMovePos.y;
+
+      // This effectively move the element
+      this.#pos.x = xDiff + this.#startMovePointerPos.x;
+      this.#pos.y = yDiff + this.#startMovePointerPos.y;
+      this.updateSVGElement();
+      e.stopPropagation();
     }
-    let movePoint = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
-    let xDiff = movePoint.x - this.#startMovePos.x;
-    let yDiff = movePoint.y - this.#startMovePos.y;
-
-    // This effectively move the element
-    this.x = xDiff + this.#startMovePointerPos.x;
-    this.y = yDiff + this.#startMovePointerPos.y;
-    e.stopPropagation();
   }
 
+  /**
+   * This method must be overridden in a child concrete class
+   */
   createElement() {
-    throw new Error('Element must be defined in a subclass!')
+    throw new Error("Element must be defined in a subclass!");
   }
 
-  #updateSVGElement() {
-    this.#componentEl.setAttribute('transform', `translate(${this.#x},${this.#y})`);
+  /**
+   * Returns the absolute position of this component, in terms
+   * of canvas coordinates
+   */
+  get absPos() {
+    let pos = new Position(this.#pos.x, this.#pos.y);
+    if (this.#parent) {
+      let parentPos = this.#parent.absPos;
+      pos = pos.add(parentPos);
+    }
+    return pos;
+  }
+
+  /**
+   * Update the component element according to x and y local coordinates,
+   * if this component is a child component, coordinates in canvas space
+   * are computed
+   */
+  updateSVGElement() {
+    let pos = this.absPos;
+    this.#componentEl.setAttribute("transform", `translate(${pos.x},${pos.y})`);
+
+    // Update all children also
+    for (let c of this.#components) {
+      c.updateSVGElement();
+    }
+  }
+
+  /**
+   * Add a new component as child component
+   * @param {*} component Component to add
+   */
+  addComponent(component) {
+    this.#components.push(component);
+    component.parent = this;
+    component.canvas = this.canvas;
+    this.svgEl.appendChild(component.componentEl);
+    component.updateSVGElement();
+  }
+
+  removeComponent(component) {
+    this.components = this.#components.filter((c) => c !== component);
+    this.svgEl.removeChild(component.componentEl);
   }
 }
 
 export class TestComponent extends Component {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    createElement() {
-        let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        pathEl.setAttribute("d", `M 0 0 Q 10 40 100 20`);
-        pathEl.setAttribute("stroke", "red");
-        pathEl.setAttribute("stroke-width", "5");
-        pathEl.setAttribute("fill", "transparent");
-    
-        return pathEl;
-    }
+  createElement() {
+    let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    // pathEl.setAttribute("d", `M 0 0 Q 10 40 100 20`);
+    pathEl.setAttribute("d", `M 100 30 L 50 120 C 70 100 90 140 210 220 Z`);
+    pathEl.setAttribute("stroke", "red");
+    pathEl.setAttribute("stroke-width", "5");
+    pathEl.setAttribute("fill", "blue");
+    pathEl.setAttribute("fill-opacity", "0.7");
+
+    return pathEl;
+  }
 }
 
 export class TestComponent2 extends Component {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    createElement() {
-        let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        pathEl.setAttribute("width", `200`);
-        pathEl.setAttribute("height", `100`);
-        pathEl.setAttribute("stroke", "blue");
-        pathEl.setAttribute("fill-opacity", "0.5");
-        pathEl.setAttribute("stroke-width", "5");
-        pathEl.setAttribute("fill", "green");
-    
-        return pathEl;
-    }
+  createElement() {
+    let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    pathEl.setAttribute("width", `200`);
+    pathEl.setAttribute("height", `100`);
+    pathEl.setAttribute("stroke", "blue");
+    pathEl.setAttribute("fill-opacity", "0.5");
+    pathEl.setAttribute("stroke-width", "5");
+    pathEl.setAttribute("fill", "green");
+
+    return pathEl;
+  }
 }

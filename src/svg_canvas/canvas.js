@@ -1,5 +1,4 @@
 export class Canvas {
-
   /** The main svg element */
   #svgEl = null;
 
@@ -172,7 +171,11 @@ export class Canvas {
   }
 
   removeComponent(component) {
-    this.components = this.#components.filter(c => c !== component);
-    this.#svgEl.removeChild(component.componentEl)
+    this.components = this.#components.filter((c) => c !== component);
+    this.#svgEl.removeChild(component.componentEl);
+  }
+
+  clear() {
+    this.#svgEl.innerHTML = "";
   }
 }

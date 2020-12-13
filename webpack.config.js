@@ -1,11 +1,11 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    library: 'cnodesui',
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    library: "cnodesui",
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -13,14 +13,16 @@ module.exports = {
         test: /\.m?js$/,
         // exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-class-properties','@babel/plugin-proposal-private-methods']
-          }
-        }
-      }
-    ]
-  }
-  
+            presets: ["@babel/preset-env"],
+            plugins: [
+              "@babel/plugin-proposal-class-properties",
+              "@babel/plugin-proposal-private-methods",
+            ],
+          },
+        },
+      },
+    ],
+  },
 };

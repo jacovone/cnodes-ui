@@ -4,31 +4,42 @@ import {
   TestComponent,
   TestComponent2,
 } from "./svg_canvas/component";
+import { TextComponent } from "./svg_canvas/text";
+import { HTMLComponent } from "./svg_canvas/html";
 import { Position } from "./svg_canvas/position";
 
 let can;
 
 export function fill() {
   can.clear();
-  for (let i = 0; i < 1000; i++) {
-    let x = Math.random() * 40000;
-    let y = Math.random() * 20000;
+  for (let i = 0; i < 100; i++) {
+    let x = Math.random() * 8000;
+    let y = Math.random() * 8000;
 
-    let comp = new TestComponent2();
-    comp.pos = new Position(x, y);
-    can.addComponent(comp);
+    let comp3 = new HTMLComponent(
+      `<div 
+        style='border: 5px solid orange;border-radius:20px;
+        top:0;left:0;right:0;bottom:0;position:absolute;
+        background-color: lightyellow;
+        display: flex;
+        flex-flow: column;
+        padding:5px;user-select:none'>
 
-    let comp2 = new TestComponent();
-    // comp2.moveable = false;
+        <div style="display: flex; flex-flow: row">
+          <div style="flex: 1 1 auto"></div>
+          <div style="font-size: 24px; font-weight: bold">Add</div>
+          <div style="flex: 1 1 auto"></div>
+        </div>
 
-    comp2.pos = new Position(200, 200);
-    comp.addComponent(comp2);
 
-    let comp3 = new TestComponent();
-    comp3.moveable = false;
 
-    comp3.pos = new Position(200, 200);
-    comp2.addComponent(comp3);
+      </div>`,
+      200,
+      300
+    );
+    comp3.moveable = true;
+    comp3.pos = new Position(x, y);
+    can.addComponent(comp3);
   }
 }
 

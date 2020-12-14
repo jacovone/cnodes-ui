@@ -178,8 +178,8 @@ export class TestComponent extends Component {
 
   createElement() {
     let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    // pathEl.setAttribute("d", `M 0 0 Q 10 40 100 20`);
-    pathEl.setAttribute("d", `M 100 30 L 50 120 C 70 100 90 140 210 220 Z`);
+    pathEl.setAttribute("d", `M 0 0 Q 10 40 100 20`);
+    // pathEl.setAttribute("d", `M 100 30 L 50 120 C 70 100 90 140 210 220 Z`);
     pathEl.setAttribute("stroke", "red");
     pathEl.setAttribute("stroke-width", "5");
     pathEl.setAttribute("fill", "blue");

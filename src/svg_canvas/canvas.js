@@ -113,6 +113,7 @@ export class Canvas {
     this.#vbY = newTop;
 
     this.#updateSVGViewBox();
+    e.stopPropagation();
   }
 
   clientToSvgPoint(clientX, clientY) {

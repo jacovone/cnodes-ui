@@ -1,12 +1,8 @@
-import { Canvas } from "./svg_canvas/canvas";
-import {
-  Component,
-  TestComponent,
-  TestComponent2,
-} from "./svg_canvas/component";
-import { TextComponent } from "./svg_canvas/text";
-import { HTMLComponent } from "./svg_canvas/html";
-import { Position } from "./svg_canvas/position";
+import { Canvas } from "./canvas/canvas";
+import { Component, TestComponent, TestComponent2 } from "./canvas/component";
+import { TextComponent } from "./canvas/text";
+import { HTMLComponent } from "./canvas/html";
+import { Position } from "./canvas/position";
 
 let can;
 

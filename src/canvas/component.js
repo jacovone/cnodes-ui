@@ -170,39 +170,3 @@ export class Component {
     this.svgEl.removeChild(component.componentEl);
   }
 }
-
-export class TestComponent extends Component {
-  constructor() {
-    super();
-  }
-
-  createElement() {
-    let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    pathEl.setAttribute("d", `M 0 0 Q 10 40 100 20`);
-    // pathEl.setAttribute("d", `M 100 30 L 50 120 C 70 100 90 140 210 220 Z`);
-    pathEl.setAttribute("stroke", "red");
-    pathEl.setAttribute("stroke-width", "5");
-    pathEl.setAttribute("fill", "blue");
-    pathEl.setAttribute("fill-opacity", "0.7");
-
-    return pathEl;
-  }
-}
-
-export class TestComponent2 extends Component {
-  constructor() {
-    super();
-  }
-
-  createElement() {
-    let pathEl = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    pathEl.setAttribute("width", `200`);
-    pathEl.setAttribute("height", `100`);
-    pathEl.setAttribute("stroke", "blue");
-    pathEl.setAttribute("fill-opacity", "0.5");
-    pathEl.setAttribute("stroke-width", "5");
-    pathEl.setAttribute("fill", "green");
-
-    return pathEl;
-  }
-}

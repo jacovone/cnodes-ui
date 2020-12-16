@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html style="height: 100%; margin: 0">
+<html style="height: 100%; margin: 0; position:relative">
 
 <head>
   <meta charset="utf-8" />
   <title>CANVAS-UI test board</title>
 </head>
 
-<body style="height: 90%; margin: 0; overflow: hidden">
+<body style="margin: 0; overflow: hidden; background-color: gray;position: absolute; top:0;left:0;right:0;bottom:0">
   <button onclick="cnodesui.fill()">New</button>
-  <div id="cnodes" style="height: 100%; margin: 0; margin: 40px; border: 10px solid lightgray"></div>
+  <div id="cnodes"
+    style="margin: 10px; border: 10px solid lightgray; background-color: white; position: absolute; top:20px; left:0; right:0; bottom:0">
+  </div>
 
   <script src="main.js"></script>
   <script>
-    cnodesui.canvas('cnodes');
+    let canvas = cnui.canvas('cnodes');
+    let consoleNod = cnui.Env.getInstance('console');
+    let ifNod = cnui.Env.getInstance('if');
+
+    let comp1 = new cnui.CnodeComponent(consoleNod);
+    comp1.moveable = true;
+    comp1.pos = new cnui.Position(100, 100);
+
+    let comp2 = new cnui.CnodeComponent(ifNod);
+    comp2.moveable = true;
+    comp2.pos = new cnui.Position(400, 100);
+
+    canvas.addComponent(comp1);
+    canvas.addComponent(comp2);
   </script>
 </body>
 

@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    library: "cnodesui",
+    library: "cnui",
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },

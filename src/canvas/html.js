@@ -10,6 +10,7 @@ export class HTMLComponent extends Component {
     this.html = html;
     this.width = width;
     this.height = height;
+    super.setup();
   }
 
   get html() {
@@ -40,10 +41,8 @@ export class HTMLComponent extends Component {
   }
 
   createElement() {
-    let htmlEl = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "foreignObject"
-    );
+    let htmlEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+    htmlEl.setAttribute("style", "position: relative;");
     htmlEl.setAttribute("x", "0");
     htmlEl.setAttribute("y", "0");
     return htmlEl;

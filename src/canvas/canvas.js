@@ -87,7 +87,10 @@ export class Canvas {
    * @param {*} e Wheel event
    */
   #onWheel(e) {
-    let p = this.clientToSvgPoint(e.clientX, e.clientY);
+    let p = this.clientToSvgPoint(
+      e.clientX - this.#svgEl.getBoundingClientRect().left,
+      e.clientY - this.#svgEl.getBoundingClientRect().top
+    );
 
     let zoomFactor = 0.003;
     let zoom = 1 + e.deltaY * zoomFactor;

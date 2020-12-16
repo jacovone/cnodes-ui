@@ -8,12 +8,14 @@ export class TextComponent extends Component {
   constructor(text) {
     super();
     this.text = text;
-    this.#style = "style: 24px sans-serif;";
+    this.#style = "24px sans-serif;";
     this.componentEl.style = this.#style;
     this.componentEl.setAttribute("fill", this.#color);
     this.componentEl.setAttribute("x", "0");
     this.componentEl.setAttribute("y", "0");
     this.componentEl.innerHTML = this.text;
+
+    super.setup();
   }
 
   get text() {

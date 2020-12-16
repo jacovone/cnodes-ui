@@ -13,7 +13,9 @@ export class Component {
   /** The list of child components */
   #components = [];
 
-  constructor() {
+  constructor() {}
+
+  setup() {
     let self = this;
 
     this.#componentEl = this.createElement();

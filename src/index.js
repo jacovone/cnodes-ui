@@ -2,9 +2,10 @@ import { Canvas } from "./canvas/canvas";
 import { Component } from "./canvas/component";
 import { Position } from "./canvas/position";
 import { CnodeComponent } from "./components/cnode";
+import { Theme } from "./components/theme";
 import { Env } from "@marco.jacovone/cnodes/core/env";
 
-export { Canvas, Component, CnodeComponent, Position };
+export { Canvas, Component, CnodeComponent, Position, Theme };
 
 export * from "@marco.jacovone/cnodes/cnodes.js";
 

@@ -2,7 +2,7 @@ import { Component } from "../canvas/component";
 import { Position } from "../canvas/position";
 import { PrevSocketComponent } from "./prev";
 import { NextSocketComponent } from "./next";
-import * as theme from "./theme";
+import { Theme } from "./theme";
 import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
 
@@ -27,7 +27,7 @@ export class CnodeComponent extends Component {
 
   get height() {
     return (
-      theme.NODE_BORDER_RADIUS * 0.5 +
+      Theme.current.NODE_BORDER_RADIUS * 0.5 +
       40 + // Title
       30 * Math.max(1, this.node.nexts.length) + // Nexts/prevs, at least 1 prev
       30 * Math.max(0, this.node.outputs.length) + // Outputs
@@ -49,37 +49,41 @@ export class CnodeComponent extends Component {
     this.#containerEl.setAttribute(
       "d",
       `
-      M 0 ${theme.NODE_BORDER_RADIUS * 1.3} 
-      A ${theme.NODE_BORDER_RADIUS * 1.3} ${theme.NODE_BORDER_RADIUS * 1.3} 0 0 0 ${theme.NODE_BORDER_RADIUS * 1.3} 0 
-      L ${theme.NODE_WIDTH - theme.NODE_BORDER_RADIUS} 0 
-      A ${theme.NODE_BORDER_RADIUS} ${theme.NODE_BORDER_RADIUS} 0 0 1 ${theme.NODE_WIDTH} ${theme.NODE_BORDER_RADIUS} 
-      L ${theme.NODE_WIDTH} ${this.height - theme.NODE_BORDER_RADIUS} 
-      A ${theme.NODE_BORDER_RADIUS} ${theme.NODE_BORDER_RADIUS} 0 0 1 ${theme.NODE_WIDTH - theme.NODE_BORDER_RADIUS} ${this.height} 
-      L ${theme.NODE_BORDER_RADIUS} ${this.height} 
-      A ${theme.NODE_BORDER_RADIUS} ${theme.NODE_BORDER_RADIUS} 0 0 1 0 ${this.height - theme.NODE_BORDER_RADIUS} 
+      M 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 
+      A ${Theme.current.NODE_BORDER_RADIUS * 1.3} ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 0 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 
+      L ${Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS} 0 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${Theme.current.NODE_WIDTH} ${
+        Theme.current.NODE_BORDER_RADIUS
+      } 
+      L ${Theme.current.NODE_WIDTH} ${this.height - Theme.current.NODE_BORDER_RADIUS} 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${
+        Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS
+      } ${this.height} 
+      L ${Theme.current.NODE_BORDER_RADIUS} ${this.height} 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 0 ${this.height - Theme.current.NODE_BORDER_RADIUS} 
       Z
       `
     );
 
     this.#titleEl.innerHTML = this.node.name;
-    this.#titleEl.style = `font: ${theme.NODE_TITLE_FONT}; color: ${theme.NODE_TITLE_COLOR}; text-align: center; user-select: none`;
-    this.#titleEl.setAttribute("x", theme.NODE_BORDER_RADIUS * 0.5);
-    this.#titleEl.setAttribute("y", theme.NODE_BORDER_RADIUS * 0.5);
-    this.#titleEl.setAttribute("width", theme.NODE_WIDTH - theme.NODE_BORDER_RADIUS * 0.5 * 2);
+    this.#titleEl.style = `font: ${Theme.current.NODE_TITLE_FONT}; color: ${Theme.current.NODE_TITLE_COLOR}; text-align: center; user-select: none`;
+    this.#titleEl.setAttribute("x", Theme.current.NODE_BORDER_RADIUS * 0.5);
+    this.#titleEl.setAttribute("y", Theme.current.NODE_BORDER_RADIUS * 0.5);
+    this.#titleEl.setAttribute("width", Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS * 0.5 * 2);
     this.#titleEl.setAttribute("height", 20);
 
-    this.#containerEl.setAttribute("stroke", theme.NODE_STROKE_COLOR);
-    this.#containerEl.setAttribute("stroke-width", theme.NODE_STROKE_WIDTH);
-    this.#containerEl.setAttribute("fill", theme.NODE_FILL_COLOR);
+    this.#containerEl.setAttribute("stroke", Theme.current.NODE_STROKE_COLOR);
+    this.#containerEl.setAttribute("stroke-width", Theme.current.NODE_STROKE_WIDTH);
+    this.#containerEl.setAttribute("fill", Theme.current.NODE_FILL_COLOR);
     this.#containerEl.setAttribute("x", "0");
     this.#containerEl.setAttribute("y", "0");
 
     this.#symbolEl.setAttribute("cx", 0);
     this.#symbolEl.setAttribute("cy", 0);
-    this.#symbolEl.setAttribute("r", theme.NODE_BORDER_RADIUS * 0.9);
-    this.#symbolEl.setAttribute("stroke", theme.NODE_SYMBOL_STROKE_COLOR);
-    this.#symbolEl.setAttribute("stroke-width", theme.NODE_SYMBOL_STROKE_WIDTH);
-    this.#symbolEl.setAttribute("fill", theme.NODE_SYMBOL_FILL_COLOR);
+    this.#symbolEl.setAttribute("r", Theme.current.NODE_BORDER_RADIUS * 0.9);
+    this.#symbolEl.setAttribute("stroke", Theme.current.NODE_SYMBOL_STROKE_COLOR);
+    this.#symbolEl.setAttribute("stroke-width", Theme.current.NODE_SYMBOL_STROKE_WIDTH);
+    this.#symbolEl.setAttribute("fill", Theme.current.NODE_SYMBOL_FILL_COLOR);
 
     nodeEl.setAttribute("x", "0");
     nodeEl.setAttribute("y", "0");
@@ -87,7 +91,7 @@ export class CnodeComponent extends Component {
   }
 
   #attachSubcomponents() {
-    let posY = 40 + 0.5 * theme.NODE_BORDER_RADIUS;
+    let posY = 40 + 0.5 * Theme.current.NODE_BORDER_RADIUS;
 
     // Prev
     if (this.node.prev) {
@@ -99,7 +103,7 @@ export class CnodeComponent extends Component {
     // Nexts
     for (const next of this.node.nexts) {
       let nComp = new NextSocketComponent(next);
-      nComp.pos = new Position(theme.NODE_WIDTH, posY);
+      nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
       this.addComponent(nComp);
       posY += 30;
     }
@@ -107,7 +111,7 @@ export class CnodeComponent extends Component {
     // Output
     for (const output of this.node.outputs) {
       let nComp = new OutputSocketComponent(output);
-      nComp.pos = new Position(theme.NODE_WIDTH, posY);
+      nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
       this.addComponent(nComp);
       posY += 30;
     }

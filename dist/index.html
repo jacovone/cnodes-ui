@@ -14,6 +14,32 @@
 
   <script src="main.js"></script>
   <script>
+
+    class MyTheme extends cnui.Theme {
+      // get NODE_STROKE_COLOR() {
+      //   return "red";
+      // }
+      // get NODE_BORDER_RADIUS() {
+      //   return 10;
+      // }
+      // get NODE_TITLE_COLOR() {
+      //   return 'white';
+      // }
+      // get NODE_FILL_COLOR() {
+      //   return 'black';
+      // }
+      // get NODE_PREV_NEXT_NAME_COLOR() {
+      //   return 'white';
+      // }
+      // get NODE_IO_NAME_COLOR() {
+      //   return 'cyan';
+      // }
+      // get NODE_STROKE_COLOR() {
+      //   return 'orange';
+      // }
+    }
+    cnui.Theme.current = new MyTheme();
+
     let canvas = cnui.canvas('cnodes');
     let consoleNod = cnui.Env.getInstance('while');
     let ifNod = cnui.Env.getInstance('if');

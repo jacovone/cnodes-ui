@@ -1,18 +1,10 @@
-import { Component } from "../canvas/component";
-import * as theme from "./theme";
+import { SocketComponent } from "../canvas/socket";
+import { Theme } from "./theme";
 
-export class InputSocketComponent extends Component {
-  #socket = null;
-
+export class InputSocketComponent extends SocketComponent {
   constructor(socket) {
-    super();
-    this.#socket = socket;
-    this.moveable = false;
+    super(socket);
     super.setup();
-  }
-
-  get socket() {
-    return this.#socket;
   }
 
   createElement() {
@@ -21,16 +13,16 @@ export class InputSocketComponent extends Component {
     symbolElem.setAttribute("cx", 0);
     symbolElem.setAttribute("cy", 0);
     symbolElem.setAttribute("r", 10);
-    symbolElem.setAttribute("stroke-width", theme.NODE_IO_STROKE_WIDTH);
-    symbolElem.setAttribute("stroke", theme.NODE_IO_STROKE_COLOR);
-    symbolElem.setAttribute("fill", theme.NODE_IO_FILL_COLOR);
+    symbolElem.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
+    symbolElem.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
+    symbolElem.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
 
     let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     labelElem.style = `
-    font: ${theme.NODE_IO_NAME_FONT}; 
-    color: ${theme.NODE_IO_NAME_COLOR}; 
+    font: ${Theme.current.NODE_IO_NAME_FONT}; 
+    color: ${Theme.current.NODE_IO_NAME_COLOR}; 
     text-align: left;
-    width: ${theme.NODE_WIDTH / 2 - 15}px;
+    width: ${Theme.current.NODE_WIDTH / 2 - 15}px;
     height: 30px;
     line-height: 30px;
     user-select: none;
@@ -41,13 +33,13 @@ export class InputSocketComponent extends Component {
     labelElem.setAttribute("x", 0);
     labelElem.setAttribute("y", 0);
     labelElem.setAttribute("transform", `translate(${15}, ${-15})`);
-    labelElem.setAttribute("width", theme.NODE_WIDTH / 2 - 15);
+    labelElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
     labelElem.setAttribute("height", 30);
 
     let textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     textInputElem.style = `
-    font: ${theme.NODE_IO_NAME_FONT}; 
-    color: ${theme.NODE_IO_NAME_COLOR}; 
+    font: ${Theme.current.NODE_IO_NAME_FONT}; 
+    color: ${Theme.current.NODE_IO_NAME_COLOR}; 
     text-align: left;
     line-height: 30px;
     user-select: none;
@@ -55,15 +47,15 @@ export class InputSocketComponent extends Component {
 
     textInputElem.setAttribute("x", 0);
     textInputElem.setAttribute("y", 0);
-    textInputElem.setAttribute("transform", `translate(${theme.NODE_WIDTH / 2}, ${-15})`);
-    textInputElem.setAttribute("width", theme.NODE_WIDTH / 2 - 15);
+    textInputElem.setAttribute("transform", `translate(${Theme.current.NODE_WIDTH / 2}, ${-15})`);
+    textInputElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
     textInputElem.setAttribute("height", 30);
 
     let textFieldElem = document.createElement("input");
     textFieldElem.style = `
-    font: ${theme.NODE_IO_NAME_FONT}; 
-    color: ${theme.NODE_IO_NAME_COLOR}; 
-    width: ${theme.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
+    font: ${Theme.current.NODE_IO_NAME_FONT}; 
+    color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+    width: ${Theme.current.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
     height: ${20}px;
     border: 0;
     padding: 2px;

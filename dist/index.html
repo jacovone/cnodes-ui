@@ -17,17 +17,20 @@
     let canvas = cnui.canvas('cnodes');
     let consoleNod = cnui.Env.getInstance('while');
     let ifNod = cnui.Env.getInstance('if');
+    let forNod = cnui.Env.getInstance('for');
 
-    let comp1 = new cnui.CnodeComponent(consoleNod);
+    let comp1 = new cnui.CnodeComponent(consoleNod, canvas);
     comp1.moveable = true;
     comp1.pos = new cnui.Position(100, 100);
 
-    let comp2 = new cnui.CnodeComponent(ifNod);
+    let comp2 = new cnui.CnodeComponent(ifNod, canvas);
     comp2.moveable = true;
     comp2.pos = new cnui.Position(400, 100);
 
-    canvas.addComponent(comp1);
-    canvas.addComponent(comp2);
+    let comp3 = new cnui.CnodeComponent(forNod, canvas);
+    comp3.moveable = true;
+    comp3.pos = new cnui.Position(700, 100);
+
   </script>
 </body>
 

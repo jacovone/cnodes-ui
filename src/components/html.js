@@ -1,4 +1,4 @@
-import { Component } from "./component";
+import { Component } from "../canvas/component";
 
 export class HTMLComponent extends Component {
   #html = "";

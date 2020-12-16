@@ -20,15 +20,17 @@ export class Component {
 
     this.#componentEl = this.createElement();
 
-    this.#componentEl.addEventListener("pointerdown", (e) => {
-      self.#onPointerDown(e);
-    });
-    this.#componentEl.addEventListener("pointerup", (e) => {
-      self.#onPointerUp(e);
-    });
-    this.#componentEl.addEventListener("pointermove", (e) => {
-      self.#onPointerMove(e);
-    });
+    if (this.moveable) {
+      this.#componentEl.addEventListener("pointerdown", (e) => {
+        self.#onPointerDown(e);
+      });
+      this.#componentEl.addEventListener("pointerup", (e) => {
+        self.#onPointerUp(e);
+      });
+      this.#componentEl.addEventListener("pointermove", (e) => {
+        self.#onPointerMove(e);
+      });
+    }
   }
 
   get pos() {

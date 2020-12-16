@@ -8,6 +8,7 @@ import { InputSocketComponent } from "./input";
 
 export class CnodeComponent extends Component {
   #node;
+
   #containerEl;
   #titleEl;
   #symbolEl;

@@ -1,4 +1,4 @@
-import { Component } from "../canvas/component";
+import { Component } from "./component";
 
 export class TextComponent extends Component {
   #style = "style: 24px sans-serif;";

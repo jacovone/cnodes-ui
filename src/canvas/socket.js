@@ -1,15 +1,41 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { Component } from "./component";
 import { Position } from "./position";
 
+/**
+ * A Socket is a special case of component. Tipically, to design
+ * a component node in canvas-ui, you define a base component, and attach
+ * to it a list of subcomponents that derives from Socket class, for
+ * give the user the chance to link nodes
+ */
 export class SocketComponent extends Component {
+  /** This socket is connecting, the user is dragging with the mouse */
   #connecting = false;
+
+  /** The last (other) socket pointed by the mouse cursor while connecting */
   #currentPeerSocketComponent = null;
-  #socket = null;
+
   #tempConnectionEl = null;
 
   constructor(socket) {
     super();
     this.#socket = socket;
+  }
+
+  get connecting() {
+    return this.#connecting;
+  }
+
+  set connecting(val) {
+    this.#connecting = val;
   }
 
   get currentPeerSocketComponent() {
@@ -26,26 +52,36 @@ export class SocketComponent extends Component {
 
     let self = this;
     this.componentEl.addEventListener("pointerdown", (e) => {
-      self.#onPointerDown(e);
+      self.onPointerDown(e);
     });
     this.componentEl.addEventListener("pointerup", (e) => {
-      self.#onPointerUp(e);
+      self.onPointerUp(e);
     });
     this.componentEl.addEventListener("pointermove", (e) => {
-      self.#onPointerMove(e);
+      self.onPointerMove(e);
     });
   }
 
-  #onPointerDown(e) {
-    this.#connecting = true;
-    this.componentEl.setPointerCapture(e.pointerId);
-    e.stopPropagation();
+  onPointerDown(e) {
+    if (!this.hasSingleConnection || !this.isConnected) {
+      this.#connecting = true;
+      this.componentEl.setPointerCapture(e.pointerId);
+      e.stopPropagation();
 
-    // Connect action is started
-    this.connectionStarted();
+      // Connect action is started
+      this.connectionStarted();
+    } else {
+      let peerComponent = this.getPeerComponent();
+      peerComponent.onPointerDown(e);
+
+      let con = this.canvas.getConnectionsFor(this)[0];
+      this.canvas.removeConnection(con);
+
+      e.stopPropagation();
+    }
   }
 
-  #onPointerUp(e) {
+  onPointerUp(e) {
     this.#connecting = false;
     this.componentEl.releasePointerCapture(e.pointerId);
     e.stopPropagation();
@@ -59,7 +95,7 @@ export class SocketComponent extends Component {
     }
   }
 
-  #onPointerMove(e) {
+  onPointerMove(e) {
     if (this.#connecting) {
       // Test if a socket is pointed
       let pointedComponent = this.canvas.componentFromPosition(e.clientX, e.clientY, true);
@@ -114,7 +150,7 @@ export class SocketComponent extends Component {
     this.#tempConnectionEl.setAttribute(
       "d",
       `
-      M ${this.absPos.x} ${this.absPos.y}
+      M ${sourcePoint.x} ${sourcePoint.y}
       L ${targetPoint.x} ${targetPoint.y}
     `
     );
@@ -145,7 +181,28 @@ export class SocketComponent extends Component {
    * @param {*} socketComp Peer socket to connect
    */
   canAcceptPeerSocket(socketComp) {
-    throw new Error("This method must be overridden in a subclass");
+    throw new Error("This method must be overridden in a subclass!");
+  }
+
+  get hasSingleConnection() {
+    throw new Error("This method must be overridden in a subclass!");
+  }
+
+  get isConnected() {
+    return this.canvas.getConnectionsFor(this).length > 0;
+  }
+
+  getPeerComponent() {
+    if (!this.hasSingleConnection) {
+      return null;
+    } else {
+      let con = this.canvas.getConnectionsFor(this)[0];
+      if (this === con.source) {
+        return con.target;
+      } else {
+        return con.source;
+      }
+    }
   }
 
   get socket() {

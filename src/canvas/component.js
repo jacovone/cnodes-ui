@@ -1,24 +1,63 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { Position } from "./position";
 
+/**
+ * This class is the base class for all components in the cnodes-ui canvas.
+ * The class is responsible for manage mobility of components. This is not
+ * yet the class for the cnodes nodes, is more abstract so that the user can
+ * derive from that to implement components that are not explicitly connected
+ * to the cnodes library, such as decorators, comments, etc.
+ */
 export class Component {
+  /** A reference to the enclosing canvas */
   #canvas = null;
+
+  /** A reference to the SVG element that implement the component */
   #componentEl = null;
+
+  /** The parent component if there is one */
   #parent = null;
+
+  /** Is this component moveable? */
   #moveable = true;
+
+  /** The position fo this component inside the canvas, in SVG coordinates */
   #pos = new Position(0, 0);
+
+  /** The component is actually moving */
   #moving = false;
+
+  /** A reference to the position of the component at the time hi starts moving */
   #startMovePos = null;
+
+  /** The pointer position at the time in which the component starts moving */
   #startMovePointerPos = null;
 
-  /** The list of child components */
+  /** The list of eventual child components */
   #components = [];
 
   constructor() {}
 
+  /**
+   * Sets up the component. The component creation follow a specific flow.
+   * The user that creates the component have to call this method after, to
+   * initializes the internal SVG component and optionally installs pointer
+   * event listeners to manage moving.
+   */
   setup() {
-    let self = this;
-
+    // Create the SVG element. A subclass must override this method
+    // to define the graphical aspect of the component
     this.#componentEl = this.createElement();
+
+    let self = this;
 
     // Register a reference of this component inside the HTML element
     this.#componentEl.componentRef = this;
@@ -39,7 +78,6 @@ export class Component {
   get pos() {
     return this.#pos;
   }
-
   set pos(val) {
     this.#pos = val;
     this.updateSVGElement();
@@ -47,15 +85,12 @@ export class Component {
   get canvas() {
     return this.#canvas;
   }
-
   set canvas(val) {
     this.#canvas = val;
   }
-
   get componentEl() {
     return this.#componentEl;
   }
-
   get svgEl() {
     return this.#canvas.svgEl;
   }
@@ -63,15 +98,12 @@ export class Component {
   get moveable() {
     return this.#moveable;
   }
-
   set moveable(val) {
     this.#moveable = val;
   }
-
   get parent() {
     return this.#parent;
   }
-
   set parent(val) {
     this.#parent = val;
   }
@@ -126,7 +158,8 @@ export class Component {
   }
 
   /**
-   * This method must be overridden in a child concrete class
+   * This method must be overridden in a child concrete class.
+   * The setup() mthod calls this one during the creation process
    */
   createElement() {
     throw new Error("Element must be defined in a subclass!");
@@ -134,7 +167,8 @@ export class Component {
 
   /**
    * Returns the absolute position of this component, in terms
-   * of canvas coordinates
+   * of canvas coordinates, by travering the child-parent component
+   * hierarchy
    */
   get absPos() {
     let pos = new Position(this.#pos.x, this.#pos.y);
@@ -154,14 +188,22 @@ export class Component {
     let pos = this.absPos;
     this.#componentEl.setAttribute("transform", `translate(${pos.x},${pos.y})`);
 
-    // Update all children also
+    // Also update all children
     for (let c of this.#components) {
       c.updateSVGElement();
+    }
+
+    // Update all connections
+    if (this.canvas) {
+      this.canvas.updateAllConnections();
     }
   }
 
   /**
-   * Add a new component as child component
+   * Add a new component as child component.
+   * WARNING: before attach child components, this component
+   * must to be attached to the canvas itself, otherwise the method
+   * fails
    * @param {*} component Component to add
    */
   addComponent(component) {
@@ -172,10 +214,19 @@ export class Component {
     component.updateSVGElement();
   }
 
+  /**
+   * Remove a child subcomponent
+   * @param {*} component The component to remove
+   */
   removeComponent(component) {
     this.components = this.#components.filter((c) => c !== component);
+    component.destroy();
     this.svgEl.removeChild(component.componentEl);
   }
 
+  /**
+   * This method is called when this component is removed
+   * from the canvas of from its parent component
+   */
   destroy() {}
 }

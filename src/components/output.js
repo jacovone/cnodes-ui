@@ -1,6 +1,8 @@
 import { SocketComponent } from "../canvas/socket";
-import { InputSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Theme } from "./theme";
+import { InputSocket } from "@marco.jacovone/cnodes/core/socket";
+import { Position } from "../canvas/position";
+import { IOConnection } from "../connections/io_connection";
 
 export class OutputSocketComponent extends SocketComponent {
   constructor(socket) {
@@ -13,7 +15,7 @@ export class OutputSocketComponent extends SocketComponent {
 
     symbolElem.setAttribute("cx", 0);
     symbolElem.setAttribute("cy", 0);
-    symbolElem.setAttribute("r", 10);
+    symbolElem.setAttribute("r", Theme.current.NODE_IO_POINT_RADIUS);
     symbolElem.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
     symbolElem.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
     symbolElem.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
@@ -47,11 +49,69 @@ export class OutputSocketComponent extends SocketComponent {
   }
 
   /**
-   * Quesry if this socket could accept a connection with
+   * The user is moving the pointer around, with a connection pending
+   * @param {*} x The x coordinate in SVG space
+   * @param {*} y The y coordinate in SVG space
+   * @param {*} invalid true if the pointer is overing a unacceptable socket
+   */
+  connectionMoving(x, y, invalid) {
+    let sourcePoint = new Position(this.absPos.x, this.absPos.y);
+    let targetPoint = new Position(
+      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x,
+      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y
+    );
+
+    let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
+    let cp1 = sourcePoint.add(new Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
+    let cp2 = targetPoint.add(new Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+
+    this.tempConnectionEl.setAttribute(
+      "d",
+      `
+      M ${this.absPos.x} ${this.absPos.y}
+      C ${cp1.x} ${cp1.y} ${cp2.x} ${cp2.y} ${targetPoint.x} ${targetPoint.y}
+    `
+    );
+
+    this.tempConnectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_IO_WIDTH);
+    this.tempConnectionEl.setAttribute(
+      "stroke",
+      invalid
+        ? Theme.current.CONNECTION_IO_INVALID_COLOR
+        : this.currentPeerSocketComponent
+        ? Theme.current.CONNECTION_IO_VALID_COLOR
+        : Theme.current.CONNECTION_IO_COLOR
+    );
+    this.tempConnectionEl.setAttribute("fill", "transparent");
+  }
+
+  /**
+   * The user has completed a valid connection
+   * @param {*} socketComp Peer socket to connect
+   */
+  connectionDone(socketComp) {
+    super.connectionDone(socketComp);
+
+    // if there is another connection for the target component,
+    // delete the oldest one
+    if (socketComp.isConnected) {
+      this.canvas.removeConnection(this.canvas.getConnectionsFor(socketComp)[0]);
+    }
+
+    // This creates the connection and connects sockets
+    new IOConnection(this, socketComp, this.canvas);
+  }
+
+  /**
+   * Query if this socket could accept a connection with
    * a peer socket passed as parmeter
    * @param {*} socketComp Peer socket to connect
    */
   canAcceptPeerSocket(socketComp) {
     return socketComp.socket instanceof InputSocket;
+  }
+
+  get hasSingleConnection() {
+    return false;
   }
 }

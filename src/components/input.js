@@ -2,6 +2,7 @@ import { SocketComponent } from "../canvas/socket";
 import { Theme } from "./theme";
 import { OutputSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Position } from "../canvas/position";
+import { IOConnection } from "../connections/io_connection";
 
 export class InputSocketComponent extends SocketComponent {
   constructor(socket) {
@@ -14,20 +15,20 @@ export class InputSocketComponent extends SocketComponent {
 
     symbolElem.setAttribute("cx", 0);
     symbolElem.setAttribute("cy", 0);
-    symbolElem.setAttribute("r", 10);
+    symbolElem.setAttribute("r", Theme.current.NODE_IO_POINT_RADIUS);
     symbolElem.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
     symbolElem.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
     symbolElem.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
 
     let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     labelElem.style = `
-    font: ${Theme.current.NODE_IO_NAME_FONT}; 
-    color: ${Theme.current.NODE_IO_NAME_COLOR}; 
-    text-align: left;
-    width: ${Theme.current.NODE_WIDTH / 2 - 15}px;
-    height: 30px;
-    line-height: 30px;
-    user-select: none;
+      font: ${Theme.current.NODE_IO_NAME_FONT}; 
+      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+      text-align: left;
+      width: ${Theme.current.NODE_WIDTH / 2 - 15}px;
+      height: 30px;
+      line-height: 30px;
+      user-select: none;
     `;
 
     labelElem.innerHTML = `${this.socket.name}`;
@@ -40,11 +41,11 @@ export class InputSocketComponent extends SocketComponent {
 
     let textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     textInputElem.style = `
-    font: ${Theme.current.NODE_IO_NAME_FONT}; 
-    color: ${Theme.current.NODE_IO_NAME_COLOR}; 
-    text-align: left;
-    line-height: 30px;
-    user-select: none;
+      font: ${Theme.current.NODE_IO_NAME_FONT}; 
+      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+      text-align: left;
+      line-height: 30px;
+      user-select: none;
     `;
 
     textInputElem.setAttribute("x", 0);
@@ -55,13 +56,13 @@ export class InputSocketComponent extends SocketComponent {
 
     let textFieldElem = document.createElement("input");
     textFieldElem.style = `
-    font: ${Theme.current.NODE_IO_NAME_FONT}; 
-    color: ${Theme.current.NODE_IO_NAME_COLOR}; 
-    width: ${Theme.current.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
-    height: ${20}px;
-    border: 0;
-    padding: 2px;
-    margin: 2px;
+      font: ${Theme.current.NODE_IO_NAME_FONT}; 
+      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+      width: ${Theme.current.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
+      height: ${20}px;
+      border: 0;
+      padding: 2px;
+      margin: 2px;
     `;
 
     textFieldElem.setAttribute("value", this.socket.value);
@@ -92,8 +93,9 @@ export class InputSocketComponent extends SocketComponent {
       this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y
     );
 
-    let cp1 = sourcePoint.add(new Position(-0.8 * Math.abs(sourcePoint.x - targetPoint.x), -0.1 * (sourcePoint.y - targetPoint.y)));
-    let cp2 = targetPoint.add(new Position(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 0.1 * (sourcePoint.y - targetPoint.y)));
+    let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
+    let cp1 = sourcePoint.add(new Position(-cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
+    let cp2 = targetPoint.add(new Position(cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
 
     this.tempConnectionEl.setAttribute(
       "d",
@@ -116,11 +118,26 @@ export class InputSocketComponent extends SocketComponent {
   }
 
   /**
+   * The user has completed a valid connection
+   * @param {*} socketComp Peer socket to connect
+   */
+  connectionDone(socketComp) {
+    super.connectionDone(socketComp);
+
+    // This creates the connection and connects sockets
+    new IOConnection(socketComp, this, this.canvas);
+  }
+
+  /**
    * Quesry if this socket could accept a connection with
    * a peer socket passed as parmeter
    * @param {*} socketComp Peer socket to connect
    */
   canAcceptPeerSocket(socketComp) {
     return socketComp.socket instanceof OutputSocket;
+  }
+
+  get hasSingleConnection() {
+    return true;
   }
 }

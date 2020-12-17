@@ -1,5 +1,23 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { SocketComponent } from "./socket";
 
+/**
+ * This is the main Canvas class. This class implement a general purpose canvas
+ * that can manage nodes, sockets (a special subset of components) and connections
+ * between sockets. The canvas is able to zoom and pan itself as well as to move
+ * components. Components are organized in a hierarchical way, so that moving a component
+ * will move all its subcomponents, including sockets. Sockets are (sub)components
+ * that can be connected through connections to other sockets.
+ * The class use SVG to render all elements.
+ */
 export class Canvas {
   /** The main svg element */
   #svgEl = null;
@@ -37,17 +55,21 @@ export class Canvas {
    * @param {*} el The parent element in which create the SVG element
    */
   constructor(el) {
+    // Create the main SVG element
     this.#svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
     this.#svgEl.style.width = "100%";
     this.#svgEl.style.height = "100%";
     el.appendChild(this.#svgEl);
 
+    // Now create a "g" element that will be the parent of all connections. This is
+    // important to guarantee that connections will be always behind components
     this.#connectionsEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
     this.#svgEl.appendChild(this.#connectionsEl);
 
     this.#adaptSVGSize();
 
+    // Define all pointer events to manager pan and zoom
     let self = this;
     window.addEventListener("resize", () => {
       self.#adaptSVGSize();
@@ -128,21 +150,30 @@ export class Canvas {
     e.stopPropagation();
   }
 
+  /**
+   * This method is responsible for translate client (browser) coordinates
+   * to SVG space coordinates
+   * @param {*} clientX The client x coordinate
+   * @param {*} clientY The client y coordinate
+   */
   clientToSvgPoint(clientX, clientY) {
+    // Subtract the SVG's origin
     clientX -= this.#svgEl.getBoundingClientRect().left;
     clientY -= this.#svgEl.getBoundingClientRect().top;
 
+    // Create a point in SVG space
     let p = this.#svgEl.createSVGPoint();
 
     p.x = clientX;
     p.y = clientY;
 
+    // Translate coordinates using the SVG transofrmation matrix
     let pSVG = p.matrixTransform(this.#svgEl.getCTM().inverse());
     return pSVG;
   }
 
   /**
-   * Manager the mousedown event to implement pan
+   * Manage the mousedown event to implement pan
    * @param {*} e The mousedown event
    */
   #onPointerDown(e) {
@@ -177,18 +208,22 @@ export class Canvas {
   }
 
   /**
-   * This method detect a cnodes-ui component inside a canvas
+   * This method detect a cnodes-ui component inside the canvas
    * at specified location (x,y). Optionally the user can request
-   * only sockets component, this is useful when you have to search
-   * a possible connection peer
+   * only sockets component, this is useful when you want to search
+   * a possible connection peer during the link process
    * @param {*} x The x coordinate in the canvas
    * @param {*} y Te y coordinate in the canvas
    * @param {*} onlySockets If true, this method search only for socket components
    */
   componentFromPosition(x, y, onlySockets = false) {
+    // Get the DOM element at x,y in client space
     let pointedEl = document.elementFromPoint(x, y);
 
+    // Searching for an element with the property "componentRef". When cnodes-ui
+    // add a component, insert this property inside the SVG root element of the component
     while (pointedEl) {
+      // Traverse the DOM tree
       if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof SocketComponent)) {
         return pointedEl.componentRef;
       }
@@ -197,14 +232,23 @@ export class Canvas {
     return null;
   }
 
+  /**
+   * Add a new connection to the canvas, also add the related element to
+   * the main SVG group of connections
+   * @param {*} connection The connection to add
+   */
   addConnection(connection) {
     this.#connections.push(connection);
-    copnnection.canvas = this;
+    connection.canvas = this;
     this.#connectionsEl.appendChild(connection.connectionEl);
   }
 
+  /**
+   * Remove a connection from the canvas, also remove the related SVG element
+   * @param {*} connection The connection to remove
+   */
   removeConnection(connection) {
-    // Signal the connection will be destroyed
+    // Signal the connection that will be destroyed
     connection.destroy();
     this.#connections = this.#connections.filter((c) => c !== connection);
     this.#connectionsEl.removeChild(connection.connectionEl);
@@ -241,11 +285,22 @@ export class Canvas {
   }
 
   /**
-   * Clear the canvas
+   * Update all connections in terms of SVG properties. This is
+   * important because when components are moved, this ensures that
+   * connections will follow them
    */
-  clear() {
-    this.#svgEl.innerHTML = "";
-    this.#components = [];
-    this.#connections = [];
+  updateAllConnections() {
+    for (let connection of this.#connections) {
+      connection.updateSVGElement();
+    }
+  }
+
+  /**
+   * This method extract all connections in the canvas, that have
+   * the source or the target SocketComponent as endpoint
+   * @param {*} socket The socket component for which search the connection
+   */
+  getConnectionsFor(socket) {
+    return this.#connections.filter((c) => c.source === socket || c.target === socket);
   }
 }

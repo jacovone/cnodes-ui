@@ -63,6 +63,9 @@ export class Theme {
   get NODE_PREV_NEXT_NAME_COLOR() {
     return "bold 11px black";
   }
+  get NODE_PREV_NEXT_POINT_RADIUS() {
+    return 8;
+  }
 
   get NODE_IO_STROKE_WIDTH() {
     return 2;
@@ -79,13 +82,15 @@ export class Theme {
   get NODE_IO_NAME_COLOR() {
     return "bold 11px black";
   }
+  get NODE_IO_POINT_RADIUS() {
+    return 10;
+  }
 
   // IO Connections
 
   get CONNECTION_IO_WIDTH() {
     return 4;
   }
-
   get CONNECTION_IO_INVALID_COLOR() {
     return "red";
   }
@@ -93,7 +98,22 @@ export class Theme {
     return "green";
   }
   get CONNECTION_IO_COLOR() {
+    return "#008EBF";
+  }
+  get CONNECTION_PREV_NEXT_WIDTH() {
+    return 4;
+  }
+  get CONNECTION_PREV_NEXT_INVALID_COLOR() {
+    return "red";
+  }
+  get CONNECTION_PREV_NEXT_VALID_COLOR() {
+    return "green";
+  }
+  get CONNECTION_PREV_NEXT_COLOR() {
     return "#069DD1";
+  }
+  get CONNECTION_PREV_NEXT_COLOR() {
+    return "#31A200";
   }
 
   static current = new Theme();

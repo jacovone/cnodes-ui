@@ -66,15 +66,22 @@ export class CnodeComponent extends Component {
     );
 
     this.#titleEl.innerHTML = this.node.name;
-    this.#titleEl.style = `font: ${Theme.current.NODE_TITLE_FONT}; color: ${Theme.current.NODE_TITLE_COLOR}; text-align: center; user-select: none`;
+    this.#titleEl.style = `
+      font: ${Theme.current.NODE_TITLE_FONT}; 
+      color: ${!this.node.functional ? Theme.current.NODE_TITLE_COLOR : Theme.current.NODE_FUNCTIONAL_TITLE_COLOR}; 
+      text-align: center; 
+      user-select: none`;
     this.#titleEl.setAttribute("x", Theme.current.NODE_BORDER_RADIUS * 0.5);
     this.#titleEl.setAttribute("y", Theme.current.NODE_BORDER_RADIUS * 0.5);
     this.#titleEl.setAttribute("width", Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS * 0.5 * 2);
     this.#titleEl.setAttribute("height", 20);
 
-    this.#containerEl.setAttribute("stroke", Theme.current.NODE_STROKE_COLOR);
+    this.#containerEl.setAttribute(
+      "stroke",
+      !this.node.functional ? Theme.current.NODE_STROKE_COLOR : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
+    );
     this.#containerEl.setAttribute("stroke-width", Theme.current.NODE_STROKE_WIDTH);
-    this.#containerEl.setAttribute("fill", Theme.current.NODE_FILL_COLOR);
+    this.#containerEl.setAttribute("fill", this.node.functional ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR : Theme.current.NODE_FILL_COLOR);
     this.#containerEl.setAttribute("x", "0");
     this.#containerEl.setAttribute("y", "0");
 

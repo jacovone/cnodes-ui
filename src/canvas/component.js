@@ -20,6 +20,9 @@ export class Component {
 
     this.#componentEl = this.createElement();
 
+    // Register a reference of this component inside the HTML element
+    this.#componentEl.componentRef = this;
+
     if (this.moveable) {
       this.#componentEl.addEventListener("pointerdown", (e) => {
         self.#onPointerDown(e);
@@ -173,4 +176,6 @@ export class Component {
     this.components = this.#components.filter((c) => c !== component);
     this.svgEl.removeChild(component.componentEl);
   }
+
+  destroy() {}
 }

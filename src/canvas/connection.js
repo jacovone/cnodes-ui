@@ -28,4 +28,6 @@ export class Connection {
   get svgEl() {
     return this.#canvas.svgEl;
   }
+
+  destroy() {}
 }

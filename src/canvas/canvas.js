@@ -1,3 +1,5 @@
+import { SocketComponent } from "./socket";
+
 export class Canvas {
   /** The main svg element */
   #svgEl = null;
@@ -22,6 +24,9 @@ export class Canvas {
 
   /** The list of components in the canvas */
   #components = [];
+
+  /** The list of connections between components in the canvas */
+  #connections = [];
 
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
@@ -66,10 +71,7 @@ export class Canvas {
    * stored in private fields #vbX, #vbY, #vbWidth and #vbHeight
    */
   #updateSVGViewBox() {
-    this.#svgEl.setAttribute(
-      "viewBox",
-      `${this.#vbX} ${this.#vbY} ${this.#vbWidth} ${this.#vbHeight}`
-    );
+    this.#svgEl.setAttribute("viewBox", `${this.#vbX} ${this.#vbY} ${this.#vbWidth} ${this.#vbHeight}`);
   }
 
   /**
@@ -87,10 +89,7 @@ export class Canvas {
    * @param {*} e Wheel event
    */
   #onWheel(e) {
-    let p = this.clientToSvgPoint(
-      e.clientX - this.#svgEl.getBoundingClientRect().left,
-      e.clientY - this.#svgEl.getBoundingClientRect().top
-    );
+    let p = this.clientToSvgPoint(e.clientX - this.#svgEl.getBoundingClientRect().left, e.clientY - this.#svgEl.getBoundingClientRect().top);
 
     let zoomFactor = 0.003;
     let zoom = 1 + e.deltaY * zoomFactor;
@@ -103,12 +102,8 @@ export class Canvas {
     if (newHeight > 50000) return;
     if (newWidth > 50000) return;
 
-    let newLeft =
-      this.#vbX -
-      (newWidth - this.#vbWidth) * ((p.x - this.#vbX) / this.#vbWidth);
-    let newTop =
-      this.#vbY -
-      (newHeight - this.#vbHeight) * ((p.y - this.#vbY) / this.#vbHeight);
+    let newLeft = this.#vbX - (newWidth - this.#vbWidth) * ((p.x - this.#vbX) / this.#vbWidth);
+    let newTop = this.#vbY - (newHeight - this.#vbHeight) * ((p.y - this.#vbY) / this.#vbHeight);
 
     this.#vbHeight = newHeight;
     this.#vbWidth = newWidth;
@@ -165,6 +160,27 @@ export class Canvas {
   }
 
   /**
+   * This method detect a cnodes-ui component inside a canvas
+   * at specified location (x,y). Optionally the user can request
+   * only sockets component, this is useful when you have to search
+   * a possible connection peer
+   * @param {*} x The x coordinate in the canvas
+   * @param {*} y Te y coordinate in the canvas
+   * @param {*} onlySockets If true, this method search only for socket components
+   */
+  componentFromPosition(x, y, onlySockets = false) {
+    let pointedEl = document.elementFromPoint(x, y);
+
+    while (pointedEl) {
+      if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof SocketComponent)) {
+        return pointedEl.componentRef;
+      }
+      pointedEl = pointedEl.parentElement;
+    }
+    return null;
+  }
+
+  /**
    * Add a new component to the canvas
    * @param {*} component Component to add
    */
@@ -174,12 +190,32 @@ export class Canvas {
     this.#svgEl.appendChild(component.componentEl);
   }
 
+  /**
+   * Remove a component from the canvas
+   * @param {*} component Component to remove
+   */
   removeComponent(component) {
+    // Signal component that will be removed
+    c.destroy();
     this.components = this.#components.filter((c) => c !== component);
     this.#svgEl.removeChild(component.componentEl);
+
+    // Signal related connections that will be removed
+    this.#connections.forEach((c) => {
+      if (c.source === component || c.target === component) {
+        c.destroy();
+      }
+    });
+    // Remove related connections
+    this.#connections = this.#connections.filter((c) => c.source !== component && c.target !== component);
   }
 
+  /**
+   * Clear the canvas
+   */
   clear() {
     this.#svgEl.innerHTML = "";
+    this.#components = [];
+    this.#connections = [];
   }
 }

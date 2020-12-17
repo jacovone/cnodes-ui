@@ -23,14 +23,14 @@
       //   return 10;
       // }
       // get NODE_TITLE_COLOR() {
-      //   return 'white';
+      //   return 'brown';
       // }
       // get NODE_FILL_COLOR() {
-      //   return 'black';
+      //   return 'brown';
       // }
-      // get NODE_PREV_NEXT_NAME_COLOR() {
-      //   return 'white';
-      // }
+      get NODE_PREV_NEXT_NAME_COLOR() {
+        return 'white';
+      }
       // get NODE_IO_NAME_COLOR() {
       //   return 'cyan';
       // }
@@ -44,6 +44,7 @@
     let consoleNod = cnui.Env.getInstance('while');
     let ifNod = cnui.Env.getInstance('if');
     let forNod = cnui.Env.getInstance('for');
+    let faddNod = cnui.Env.getInstance('fadd');
 
     let comp1 = new cnui.CnodeComponent(consoleNod, canvas);
     comp1.moveable = true;
@@ -55,7 +56,11 @@
 
     let comp3 = new cnui.CnodeComponent(forNod, canvas);
     comp3.moveable = true;
-    comp3.pos = new cnui.Position(700, 100);
+    comp3.pos = new cnui.Position(700, 50);
+
+    let comp4 = new cnui.CnodeComponent(faddNod, canvas);
+    comp4.moveable = true;
+    comp4.pos = new cnui.Position(900, 50);
 
   </script>
 </body>

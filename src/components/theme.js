@@ -11,15 +11,24 @@ export class Theme {
   get NODE_FILL_COLOR() {
     return "#FAD7A0";
   }
+  get NODE_FUNCTIONAL_FILL_COLOR() {
+    return "#C5F0FF";
+  }
   get NODE_STROKE_COLOR() {
     return "#FAD7A0";
+  }
+  get NODE_FUNCTIONAL_STROKE_COLOR() {
+    return "#C5F0FF";
   }
   get NODE_STROKE_WIDTH() {
     return 3;
   }
 
   get NODE_TITLE_COLOR() {
-    return "black";
+    return "brown";
+  }
+  get NODE_FUNCTIONAL_TITLE_COLOR() {
+    return "069DD1";
   }
   get NODE_TITLE_FONT() {
     return "bold 18px verdana";

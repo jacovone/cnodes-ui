@@ -1,4 +1,5 @@
 import { SocketComponent } from "../canvas/socket";
+import { NextSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Theme } from "./theme";
 
 export class PrevSocketComponent extends SocketComponent {
@@ -50,5 +51,14 @@ export class PrevSocketComponent extends SocketComponent {
     prevElem.appendChild(labelElem);
 
     return prevElem;
+  }
+
+  /**
+   * Quesry if this socket could accept a connection with
+   * a peer socket passed as parmeter
+   * @param {*} socketComp Peer socket to connect
+   */
+  canAcceptPeerSocket(socketComp) {
+    return socketComp.socket instanceof NextSocket;
   }
 }

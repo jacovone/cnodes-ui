@@ -1,6 +1,7 @@
 import { SocketComponent } from "../canvas/socket";
 import { Theme } from "./theme";
 import { OutputSocket } from "@marco.jacovone/cnodes/core/socket";
+import { Position } from "../canvas/position";
 
 export class InputSocketComponent extends SocketComponent {
   constructor(socket) {
@@ -76,6 +77,42 @@ export class InputSocketComponent extends SocketComponent {
     inputElem.appendChild(textInputElem);
 
     return inputElem;
+  }
+
+  /**
+   * The user is moving the pointer around, with a connection pending
+   * @param {*} x The x coordinate in SVG space
+   * @param {*} y The y coordinate in SVG space
+   * @param {*} invalid true if the pointer is overing a unacceptable socket
+   */
+  connectionMoving(x, y, invalid) {
+    let sourcePoint = new Position(this.absPos.x, this.absPos.y);
+    let targetPoint = new Position(
+      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x,
+      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y
+    );
+
+    let cp1 = sourcePoint.add(new Position(-0.8 * Math.abs(sourcePoint.x - targetPoint.x), -0.1 * (sourcePoint.y - targetPoint.y)));
+    let cp2 = targetPoint.add(new Position(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 0.1 * (sourcePoint.y - targetPoint.y)));
+
+    this.tempConnectionEl.setAttribute(
+      "d",
+      `
+      M ${this.absPos.x} ${this.absPos.y}
+      C ${cp1.x} ${cp1.y} ${cp2.x} ${cp2.y} ${targetPoint.x} ${targetPoint.y}
+    `
+    );
+
+    this.tempConnectionEl.setAttribute("stroke-width", 4);
+    this.tempConnectionEl.setAttribute(
+      "stroke",
+      invalid
+        ? Theme.current.CONNECTION_IO_INVALID_COLOR
+        : this.currentPeerSocketComponent
+        ? Theme.current.CONNECTION_IO_VALID_COLOR
+        : Theme.current.CONNECTION_IO_COLOR
+    );
+    this.tempConnectionEl.setAttribute("fill", "transparent");
   }
 
   /**

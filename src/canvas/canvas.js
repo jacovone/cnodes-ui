@@ -4,6 +4,9 @@ export class Canvas {
   /** The main svg element */
   #svgEl = null;
 
+  /** A group under the main svg element to store connections */
+  #connectionsEl = null;
+
   /** The current SVG box view left coord */
   #vbX = 0;
 
@@ -35,9 +38,13 @@ export class Canvas {
    */
   constructor(el) {
     this.#svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
     this.#svgEl.style.width = "100%";
     this.#svgEl.style.height = "100%";
     el.appendChild(this.#svgEl);
+
+    this.#connectionsEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    this.#svgEl.appendChild(this.#connectionsEl);
 
     this.#adaptSVGSize();
 
@@ -67,6 +74,13 @@ export class Canvas {
   }
 
   /**
+   * Return the internal SVG connections element
+   */
+  get connectionsEl() {
+    return this.#connectionsEl;
+  }
+
+  /**
    * Updates the box view coordinates based on coordinates
    * stored in private fields #vbX, #vbY, #vbWidth and #vbHeight
    */
@@ -89,7 +103,7 @@ export class Canvas {
    * @param {*} e Wheel event
    */
   #onWheel(e) {
-    let p = this.clientToSvgPoint(e.clientX - this.#svgEl.getBoundingClientRect().left, e.clientY - this.#svgEl.getBoundingClientRect().top);
+    let p = this.clientToSvgPoint(e.clientX, e.clientY);
 
     let zoomFactor = 0.003;
     let zoom = 1 + e.deltaY * zoomFactor;
@@ -115,6 +129,9 @@ export class Canvas {
   }
 
   clientToSvgPoint(clientX, clientY) {
+    clientX -= this.#svgEl.getBoundingClientRect().left;
+    clientY -= this.#svgEl.getBoundingClientRect().top;
+
     let p = this.#svgEl.createSVGPoint();
 
     p.x = clientX;

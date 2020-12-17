@@ -1,6 +1,8 @@
 export class Theme {
   constructor() {}
 
+  // Node container
+
   get NODE_WIDTH() {
     return 200;
   }
@@ -44,6 +46,8 @@ export class Theme {
     return "#FEF9E7";
   }
 
+  // Sockets
+
   get NODE_PREV_NEXT_STROKE_WIDTH() {
     return 2;
   }
@@ -74,6 +78,18 @@ export class Theme {
   }
   get NODE_IO_NAME_COLOR() {
     return "bold 11px black";
+  }
+
+  // Cnnections
+
+  get CONNECTION_IO_INVALID_COLOR() {
+    return "red";
+  }
+  get CONNECTION_IO_VALID_COLOR() {
+    return "green";
+  }
+  get CONNECTION_IO_COLOR() {
+    return "#069DD1";
   }
 
   static current = new Theme();

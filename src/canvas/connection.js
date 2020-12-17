@@ -1,16 +1,20 @@
 import { Component } from "./component";
 
 export class Connection {
-  #canvas;
-  #componentEl;
+  #canvas = null;
+  #connectionEl = null;
 
-  #source;
-  #target;
+  // a socket component
+  #source = null;
+  #target = null;
 
-  constructor() {}
+  constructor(source, target) {
+    this.#source = source;
+    this.target = target;
+  }
 
   setup() {
-    this.#componentEl = this.createElement();
+    this.#connectionEl = this.createElement();
   }
 
   get canvas() {
@@ -21,12 +25,32 @@ export class Connection {
     this.#canvas = val;
   }
 
-  get componentEl() {
-    return this.#componentEl;
+  get source() {
+    return this.#source;
+  }
+
+  set source(val) {
+    this.#source = val;
+  }
+
+  get target() {
+    return this.#target;
+  }
+
+  set target(val) {
+    this.#target = val;
+  }
+
+  get connectionEl() {
+    return this.#connectionEl;
   }
 
   get svgEl() {
     return this.#canvas.svgEl;
+  }
+
+  createElement() {
+    throw new Error("Element must be defined in a subclass!");
   }
 
   destroy() {}

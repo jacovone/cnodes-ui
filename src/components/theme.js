@@ -80,7 +80,11 @@ export class Theme {
     return "bold 11px black";
   }
 
-  // Cnnections
+  // IO Connections
+
+  get CONNECTION_IO_WIDTH() {
+    return 4;
+  }
 
   get CONNECTION_IO_INVALID_COLOR() {
     return "red";

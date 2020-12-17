@@ -197,6 +197,19 @@ export class Canvas {
     return null;
   }
 
+  addConnection(connection) {
+    this.#connections.push(connection);
+    copnnection.canvas = this;
+    this.#connectionsEl.appendChild(connection.connectionEl);
+  }
+
+  removeConnection(connection) {
+    // Signal the connection will be destroyed
+    connection.destroy();
+    this.#connections = this.#connections.filter((c) => c !== connection);
+    this.#connectionsEl.removeChild(connection.connectionEl);
+  }
+
   /**
    * Add a new component to the canvas
    * @param {*} component Component to add

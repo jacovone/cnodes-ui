@@ -103,7 +103,7 @@ export class InputSocketComponent extends SocketComponent {
     `
     );
 
-    this.tempConnectionEl.setAttribute("stroke-width", 4);
+    this.tempConnectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_IO_WIDTH);
     this.tempConnectionEl.setAttribute(
       "stroke",
       invalid

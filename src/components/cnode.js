@@ -29,7 +29,7 @@ export class CnodeComponent extends Component {
     return (
       Theme.current.NODE_BORDER_RADIUS * 0.5 +
       40 + // Title
-      30 * Math.max(1, this.node.nexts.length) + // Nexts/prevs, at least 1 prev
+      30 * Math.max(this.node.functional ? 0 : 1, this.node.nexts.length) + // Nexts/prevs, at least 1 prev
       30 * Math.max(0, this.node.outputs.length) + // Outputs
       30 * Math.max(0, this.node.inputs.length) + // Inputs
       15

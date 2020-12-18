@@ -5,6 +5,7 @@ import { NextSocketComponent } from "./next";
 import { Theme } from "./theme";
 import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
+import { CnodesSocketComponent } from "./cnodessocket";
 
 export class CnodeComponent extends Component {
   #node;
@@ -130,5 +131,14 @@ export class CnodeComponent extends Component {
       this.addComponent(nComp);
       posY += 30;
     }
+  }
+
+  /**
+   * This method returns a cnodes socket component from the cnodes socket
+   * inside this node
+   * @param {*} cnodesSocket The cnodes socket
+   */
+  getCnodesSocketComponentFromSocket(cnodesSocket) {
+    return this.components.find((c) => c instanceof CnodesSocketComponent && c.socket === cnodesSocket);
   }
 }

@@ -1,11 +1,10 @@
-import { SocketComponent } from "../canvas/socket";
 import { NextSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Theme } from "./theme";
 import { Position } from "../canvas/position";
-import { IOConnection } from "../connections/io_connection";
 import { PrevNextConnection } from "../connections/prevnext_connection";
+import { CnodesSocketComponent } from "./cnodessocket";
 
-export class PrevSocketComponent extends SocketComponent {
+export class PrevSocketComponent extends CnodesSocketComponent {
   constructor(socket) {
     super(socket);
     super.setup();

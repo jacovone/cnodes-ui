@@ -30,7 +30,7 @@ export class Connection {
    */
   constructor(source, target) {
     this.#source = source;
-    this.target = target;
+    this.#target = target;
   }
 
   /**

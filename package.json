@@ -23,6 +23,6 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "@marco.jacovone/cnodes": "0.0.12"
+    "@marco.jacovone/cnodes": "0.0.14"
   }
 }

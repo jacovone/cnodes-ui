@@ -88,6 +88,19 @@ export class Canvas {
     });
   }
 
+  get components() {
+    return this.#components;
+  }
+  set components(val) {
+    this.#components = val;
+  }
+  get connections() {
+    return this.#connections;
+  }
+  set connections(val) {
+    this.#connections = val;
+  }
+
   /**
    * Return the internal SVG element
    */
@@ -302,5 +315,31 @@ export class Canvas {
    */
   getConnectionsFor(socket) {
     return this.#connections.filter((c) => c.source === socket || c.target === socket);
+  }
+
+  /**
+   * Remoives all connections from the canvas
+   */
+  removeAllConnections() {
+    while (this.#connections.length > 0) {
+      this.removeConnection(this.#connections[0]);
+    }
+  }
+
+  /**
+   * Removes all components from the canvas
+   */
+  removeAllComponents() {
+    while (this.#components.length > 0) {
+      this.removeComponent(this.#components[0]);
+    }
+  }
+
+  /**
+   * Remoives all connections and all components from the canvas
+   */
+  removeAll() {
+    this.removeAllConnections();
+    this.removeAllComponents();
   }
 }

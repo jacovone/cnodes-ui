@@ -23,29 +23,30 @@ export class SocketComponent extends Component {
   /** The last (other) socket pointed by the mouse cursor while connecting */
   #currentPeerSocketComponent = null;
 
+  /** This SVG component is used to display a temporary floating link during the connection */
   #tempConnectionEl = null;
 
-  constructor(socket) {
+  constructor() {
     super();
-    this.#socket = socket;
   }
 
   get connecting() {
     return this.#connecting;
   }
-
   set connecting(val) {
     this.#connecting = val;
   }
-
   get currentPeerSocketComponent() {
     return this.#currentPeerSocketComponent;
   }
-
   get tempConnectionEl() {
     return this.#tempConnectionEl;
   }
 
+  /**
+   * Sets up a socket. A socket is not movable by default and
+   * calls the createElement() method to prepare the SVG element
+   */
   setup() {
     this.moveable = false;
     super.setup();
@@ -62,6 +63,16 @@ export class SocketComponent extends Component {
     });
   }
 
+  /**
+   * Manages the pointerdown event to implement the start of the
+   * drag-and-link process. If the socket is a one-link socket, such as
+   * a "next" connection to another node, a pointerdown should disconnect
+   * the old connection and restart the dragging of the peek socket, to give
+   * the user the chance to connect the peer socket to another one.
+   * If the socket was not already connected, call the connectionStarted()
+   * method that will be overridden in subclasses
+   * @param {*} e The pointerdown event
+   */
   onPointerDown(e) {
     if (!this.hasSingleConnection || !this.isConnected) {
       this.#connecting = true;
@@ -81,6 +92,15 @@ export class SocketComponent extends Component {
     }
   }
 
+  /**
+   * This method manages the pointerup event to implement
+   * the final part of the connection. If the pointer is overing a
+   * valid peer socket, then the connection ca be done, and the
+   * connectionDone() method can be calles. Otherwise the
+   * connectionCancelled() is called. Both methods must be overridden
+   * in subclasses.
+   * @param {*} e The pointerup event
+   */
   onPointerUp(e) {
     this.#connecting = false;
     this.componentEl.releasePointerCapture(e.pointerId);
@@ -95,6 +115,15 @@ export class SocketComponent extends Component {
     }
   }
 
+  /**
+   * This method manages the pointermove event to implement the
+   * middle part of the connection process. During this phase, cnodes-ui
+   * check if the pointer is overing a valid peer socket component, and
+   * if true, show the temprary link in a "valid state", such as a special color
+   * of the stroke stroke, and store the peer component in the currentPeerSocketComponent
+   * for future use.
+   * @param {*} e The pointermove event
+   */
   onPointerMove(e) {
     if (this.#connecting) {
       // Test if a socket is pointed
@@ -184,6 +213,7 @@ export class SocketComponent extends Component {
     throw new Error("This method must be overridden in a subclass!");
   }
 
+  /************ */
   get hasSingleConnection() {
     throw new Error("This method must be overridden in a subclass!");
   }
@@ -203,9 +233,5 @@ export class SocketComponent extends Component {
         return con.source;
       }
     }
-  }
-
-  get socket() {
-    return this.#socket;
   }
 }

@@ -4,14 +4,16 @@ import { Position } from "../canvas/position";
 import { Theme } from "../components/theme";
 
 export class IOConnection extends Connection {
-  constructor(source, target, canvas) {
+  constructor(source, target, canvas, connect = true) {
     super(source, target);
     super.setup();
     canvas.addConnection(this);
     this.updateSVGElement();
 
-    // Connect cnodes sockets
-    this.source.socket.connect(this.target.socket);
+    if (connect) {
+      // Connect cnodes sockets
+      this.source.socket.connect(this.target.socket);
+    }
   }
 
   createElement() {

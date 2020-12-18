@@ -95,7 +95,7 @@ export class Theme {
     return "red";
   }
   get CONNECTION_IO_VALID_COLOR() {
-    return "green";
+    return "lightblue";
   }
   get CONNECTION_IO_COLOR() {
     return "#008EBF";
@@ -107,7 +107,7 @@ export class Theme {
     return "red";
   }
   get CONNECTION_PREV_NEXT_VALID_COLOR() {
-    return "green";
+    return "lightgreen";
   }
   get CONNECTION_PREV_NEXT_COLOR() {
     return "#069DD1";

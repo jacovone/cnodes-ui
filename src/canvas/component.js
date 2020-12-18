@@ -91,6 +91,13 @@ export class Component {
   get componentEl() {
     return this.#componentEl;
   }
+  get components() {
+    return this.#components;
+  }
+  set components(val) {
+    this.#components = val;
+  }
+
   get svgEl() {
     return this.#canvas.svgEl;
   }

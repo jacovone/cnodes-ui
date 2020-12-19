@@ -65,6 +65,10 @@ export class InputSocketComponent extends CnodesSocketComponent {
       margin: 2px;
     `;
 
+    textFieldElem.addEventListener("keyup", (e) => {
+      this.socket.value = e.target.value;
+    });
+
     textFieldElem.setAttribute("value", this.socket.value);
     textFieldElem.setAttribute("type", "text");
 

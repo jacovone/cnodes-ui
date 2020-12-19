@@ -46,6 +46,8 @@ export class IOConnection extends Connection {
 
   destroy() {
     this.source.socket.disconnect(this.target.socket);
+    console.log(this.target.socket);
+    console.log(this.source.socket);
     super.destroy();
   }
 }

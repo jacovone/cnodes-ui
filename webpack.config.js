@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  mode: "development",
   entry: "./src/index.js",
   output: {
     library: "cnui",
@@ -16,10 +17,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
-            plugins: [
-              "@babel/plugin-proposal-class-properties",
-              "@babel/plugin-proposal-private-methods",
-            ],
+            plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-private-methods"],
           },
         },
       },

@@ -1,3 +1,13 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+import { Env } from "@marco.jacovone/cnodes/core/env";
 import { Canvas } from "../canvas/canvas";
 import { Position } from "../canvas/position";
 import { IOConnection } from "../connections/io_connection";
@@ -5,6 +15,10 @@ import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodeComponent } from "./cnode";
 import { Theme } from "./theme";
 
+/**
+ * This is the entry-point class for managing the canvas
+ * relative to a cnodes program.
+ */
 export class CnodesCanvas extends Canvas {
   /** The edited program */
   #program = null;
@@ -48,6 +62,9 @@ export class CnodesCanvas extends Canvas {
   get program() {
     return this.#program;
   }
+  /**
+   * This setter is a trigger for the import procedure
+   */
   set program(val) {
     this.#importCnodesProgram(val);
     this.#program = val;
@@ -58,6 +75,13 @@ export class CnodesCanvas extends Canvas {
    */
   run() {
     this.#program.process();
+  }
+
+  /**
+   * Dump the internal CNODES program to the console
+   */
+  dump() {
+    console.log(Env.export(this.#program));
   }
 
   /**
@@ -87,25 +111,6 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
-   * This method returns che cnode's component from the cnode
-   * @param {*} cnode The cnode
-   */
-  getCnodeComponentFromCnode(cnode) {
-    return this.components.find((c) => c instanceof CnodeComponent && c.node === cnode);
-  }
-
-  /**
-   * Checks if there is a connection between sockets already
-   * @param {*} socket1 First socket component
-   * @param {*} socket2 Second socket component
-   */
-  alreadyConnected(socket1, socket2) {
-    return (
-      this.connections.findIndex((c) => (c.source === socket1 && c.target === socket2) || (c.source === socket2 && c.target === socket1)) !== -1
-    );
-  }
-
-  /**
    * This method imports an entire cnodes program
    * @param {*} program Program to import
    */
@@ -117,18 +122,25 @@ export class CnodesCanvas extends Canvas {
     for (let n of program.nodes) {
       let comp = new CnodeComponent(n, this);
       comp.moveable = true;
-      comp.pos = new Position(100, 100);
+
+      // Extract meta info
+      if (!n.meta) {
+        n.meta = {};
+      }
+      if (n.meta.pos) {
+        comp.pos = new Position(n.meta.pos.x, n.meta.pos.y);
+      } else {
+        comp.pos = new Position(100, 100);
+      }
     }
 
     // Setup connections
     for (let n of program.nodes) {
-      let thisNodeComponent = this.getCnodeComponentFromCnode(n);
       // Setup prev
       if (n.prev && n.prev.peers.length > 0) {
         for (let peer of n.prev.peers) {
-          let thisSocketComponent = thisNodeComponent.getCnodesSocketComponentFromSocket(n.prev);
-          let otherNodeComponent = this.getCnodeComponentFromCnode(peer.node);
-          let otherSocketComponent = otherNodeComponent.getCnodesSocketComponentFromSocket(peer);
+          let thisSocketComponent = n.prev.__comp;
+          let otherSocketComponent = peer.__comp;
 
           if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
             // Create connection component without creating the connection on cnodes sockets
@@ -139,9 +151,8 @@ export class CnodesCanvas extends Canvas {
       // Setup nexts
       for (let next of n.nexts) {
         if (next.peer) {
-          let thisSocketComponent = thisNodeComponent.getCnodesSocketComponentFromSocket(next);
-          let otherNodeComponent = this.getCnodeComponentFromCnode(next.peer.node);
-          let otherSocketComponent = otherNodeComponent.getCnodesSocketComponentFromSocket(next.peer);
+          let thisSocketComponent = next.__comp;
+          let otherSocketComponent = next.peer.__comp;
 
           if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
             // Create connection component without creating the connection on cnodes sockets
@@ -152,9 +163,8 @@ export class CnodesCanvas extends Canvas {
       // Setup inputs
       for (let inp of n.inputs) {
         if (inp.peer) {
-          let thisSocketComponent = thisNodeComponent.getCnodesSocketComponentFromSocket(inp);
-          let otherNodeComponent = this.getCnodeComponentFromCnode(inp.peer.node);
-          let otherSocketComponent = otherNodeComponent.getCnodesSocketComponentFromSocket(inp.peer);
+          let thisSocketComponent = inp.__comp;
+          let otherSocketComponent = inp.peer.__comp;
 
           if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
             // Create connection component without creating the connection on cnodes sockets
@@ -166,9 +176,8 @@ export class CnodesCanvas extends Canvas {
       for (let outp of n.outputs) {
         if (outp.peers.length > 0) {
           for (let peer of outp.peers) {
-            let thisSocketComponent = thisNodeComponent.getCnodesSocketComponentFromSocket(outp);
-            let otherNodeComponent = this.getCnodeComponentFromCnode(peer.node);
-            let otherSocketComponent = otherNodeComponent.getCnodesSocketComponentFromSocket(peer);
+            let thisSocketComponent = outp.__comp;
+            let otherSocketComponent = peer.__comp;
 
             if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
               // Create connection component without creating the connection on cnodes sockets

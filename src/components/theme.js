@@ -1,3 +1,30 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+/**
+ * This class contains all values needed to draw all elements
+ * of design for cnodes-ui. The user can customize the graphic
+ * aspect of element by defining a theme.
+ * For exemple to modify the node with you can define your own
+ * property inside a custom theme:
+ *
+ * class MyTheme extends cnui.Theme {
+ *   get NODE_WIDTH() {
+ *     return 400;
+ *   }
+ * }
+ *
+ * Now activate the theme by setting:
+ *
+ * cnui.Theme.current = new MyTheme();
+ *
+ */
 export class Theme {
   constructor() {}
 

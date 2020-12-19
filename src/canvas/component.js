@@ -15,6 +15,9 @@ import { Position } from "./position";
  * yet the class for the cnodes nodes, is more abstract so that the user can
  * derive from that to implement components that are not explicitly connected
  * to the cnodes library, such as decorators, comments, etc.
+ * In general component can have sumcomponents. Special examples of subcomponents are
+ * a sockets. The socket is the a component that can be connected through connections,
+ * in the canvas-ui class model.
  */
 export class Component {
   /** A reference to the enclosing canvas */
@@ -235,5 +238,8 @@ export class Component {
    * This method is called when this component is removed
    * from the canvas of from its parent component
    */
-  destroy() {}
+  destroy() {
+    // Removes all subcomponents
+    this.components.forEach((c) => this.removeComponent(c));
+  }
 }

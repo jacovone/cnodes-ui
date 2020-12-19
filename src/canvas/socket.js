@@ -82,7 +82,7 @@ export class SocketComponent extends Component {
       // Connect action is started
       this.connectionStarted();
     } else {
-      let peerComponent = this.getPeerComponent();
+      let peerComponent = this.getSinglePeerComponent();
       peerComponent.onPointerDown(e);
 
       let con = this.canvas.getConnectionsFor(this)[0];
@@ -213,16 +213,25 @@ export class SocketComponent extends Component {
     throw new Error("This method must be overridden in a subclass!");
   }
 
-  /************ */
+  /**
+   * Return true if this socket only support one connection at most
+   */
   get hasSingleConnection() {
     throw new Error("This method must be overridden in a subclass!");
   }
 
+  /**
+   * Is this socket actually connected?
+   */
   get isConnected() {
     return this.canvas.getConnectionsFor(this).length > 0;
   }
 
-  getPeerComponent() {
+  /**
+   * Return the peer component of the socket in case
+   * of this socket is a single connection. Otherwise return null
+   */
+  getSinglePeerComponent() {
     if (!this.hasSingleConnection) {
       return null;
     } else {
@@ -234,4 +243,10 @@ export class SocketComponent extends Component {
       }
     }
   }
+
+  /**
+   * This method was called from the connections each time the
+   * socket is connected and disconnected
+   */
+  updateStatus() {}
 }

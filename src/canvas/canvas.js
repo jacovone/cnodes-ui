@@ -268,6 +268,17 @@ export class Canvas {
   }
 
   /**
+   * Checks if there is a connection between sockets already
+   * @param {*} socket1 First socket component
+   * @param {*} socket2 Second socket component
+   */
+  alreadyConnected(socket1, socket2) {
+    return (
+      this.connections.findIndex((c) => (c.source === socket1 && c.target === socket2) || (c.source === socket2 && c.target === socket1)) !== -1
+    );
+  }
+
+  /**
    * Add a new component to the canvas
    * @param {*} component Component to add
    */
@@ -283,7 +294,9 @@ export class Canvas {
    */
   removeComponent(component) {
     // Signal component that will be removed
-    c.destroy();
+    component.destroy();
+
+    // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
     this.#svgEl.removeChild(component.componentEl);
 
@@ -293,6 +306,7 @@ export class Canvas {
         c.destroy();
       }
     });
+
     // Remove related connections
     this.#connections = this.#connections.filter((c) => c.source !== component && c.target !== component);
   }

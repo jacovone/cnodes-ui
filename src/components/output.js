@@ -1,15 +1,31 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { Theme } from "./theme";
 import { InputSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Position } from "../canvas/position";
 import { IOConnection } from "../connections/io_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 
+/**
+ * This class implements a socket representing a Output in the
+ * cnodes world
+ */
 export class OutputSocketComponent extends CnodesSocketComponent {
   constructor(socket) {
     super(socket);
     super.setup();
   }
 
+  /**
+   * Lets create the element
+   */
   createElement() {
     let symbolElem = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
@@ -111,6 +127,10 @@ export class OutputSocketComponent extends CnodesSocketComponent {
     return socketComp.socket instanceof InputSocket;
   }
 
+  /**
+   * This socket is a multi-connection socket. This means that
+   * many sockets can be connected to it
+   */
   get hasSingleConnection() {
     return false;
   }

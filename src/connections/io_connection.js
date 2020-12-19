@@ -1,8 +1,22 @@
-import { Component } from "../canvas/component";
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { Connection } from "../canvas/connection";
 import { Position } from "../canvas/position";
 import { Theme } from "../components/theme";
 
+/**
+ * This class implements a connection for Input->Output connection
+ * in the cnodes world. It embed both source and target sockets that
+ * must be of type InputSocketComponent and OutputSocketComponent, and manages
+ * the connection status of the embedded cnodes's socket
+ */
 export class IOConnection extends Connection {
   constructor(source, target, canvas, connect = true) {
     super(source, target);
@@ -16,12 +30,18 @@ export class IOConnection extends Connection {
     }
   }
 
+  /**
+   * Lets create the element
+   */
   createElement() {
     let el = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     return el;
   }
 
+  /**
+   * Update the aspect of the connection
+   */
   updateSVGElement() {
     let sourcePoint = new Position(this.source.absPos.x, this.source.absPos.y);
     let targetPoint = new Position(this.target.absPos.x - Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
@@ -44,10 +64,11 @@ export class IOConnection extends Connection {
     this.connectionEl.setAttribute("fill", "transparent");
   }
 
+  /**
+   * Diconnect the internal cnodes sockets
+   */
   destroy() {
     this.source.socket.disconnect(this.target.socket);
-    console.log(this.target.socket);
-    console.log(this.source.socket);
     super.destroy();
   }
 }

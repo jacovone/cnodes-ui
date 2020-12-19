@@ -1,15 +1,31 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { PrevSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Theme } from "./theme";
 import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 
+/**
+ * This class implements a socket representing the Next socket in the
+ * cnodes context
+ */
 export class NextSocketComponent extends CnodesSocketComponent {
   constructor(socket) {
     super(socket);
     super.setup();
   }
 
+  /**
+   * Lets create the element
+   */
   createElement() {
     let symbolElem = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
@@ -57,7 +73,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
   }
 
   /**
-   * Quesry if this socket could accept a connection with
+   * Query if this socket could accept a connection with
    * a peer socket passed as parmeter
    * @param {*} socketComp Peer socket to connect
    */
@@ -122,6 +138,10 @@ export class NextSocketComponent extends CnodesSocketComponent {
     return socketComp.socket instanceof PrevSocket;
   }
 
+  /**
+   * This socket supports single connection, so if the user
+   * connects another socket to it, we have to delete previous connections
+   */
   get hasSingleConnection() {
     return true;
   }

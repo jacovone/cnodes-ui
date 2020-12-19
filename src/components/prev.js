@@ -1,15 +1,31 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { NextSocket } from "@marco.jacovone/cnodes/core/socket";
 import { Theme } from "./theme";
 import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 
+/**
+ * This class implements a socket that represents a Prev object
+ * in the cnodes world
+ */
 export class PrevSocketComponent extends CnodesSocketComponent {
   constructor(socket) {
     super(socket);
     super.setup();
   }
 
+  /**
+   * Lets create the element
+   */
   createElement() {
     let symbolElem = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
@@ -118,6 +134,10 @@ export class PrevSocketComponent extends CnodesSocketComponent {
     return socketComp.socket instanceof NextSocket;
   }
 
+  /**
+   * This socket is a multi-connection socket. This means that
+   * many sockets can be connected to it
+   */
   get hasSingleConnection() {
     return false;
   }

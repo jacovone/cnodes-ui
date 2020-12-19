@@ -4,12 +4,41 @@
 <head>
   <meta charset="utf-8" />
   <title>CANVAS-UI test board</title>
+  <style>
+    .action {
+      border: none;
+      border-radius: 5px;
+      padding: 6px;
+      margin: 2px;
+      font-weight: bold;
+      font-size: 12px;
+      font: sans-serif;
+    }
+  </style>
 </head>
 
 <body style="margin: 0; overflow: hidden; background-color: gray;position: absolute; top:0;left:0;right:0;bottom:0">
-  <button onclick="canvas.run()">New</button>
-  <button onclick="addWhile();">While</button>
-  <button onclick="addFor();">For</button>
+  <button class="action" onclick="newCanvas()">New</button>
+  <button class="action" onclick="canvas.run()">Run</button>
+  <button class="action" onclick="canvas.dump()">DUMP</button>
+  <button class="action" onclick="addNode('Setvar');">Setvar</button>
+  <button class="action" onclick="addNode('Getvar');">Getvar</button>
+  <button class="action" onclick="addNode('FGetvar');">FGetvar</button>
+  <button class="action" onclick="addNode('Call');">Call</button>
+  <button class="action" onclick="addNode('Console');">Console</button>
+  <button class="action" onclick="addNode('If');">If</button>
+  <button class="action" onclick="addNode('While');">While</button>
+  <button class="action" onclick="addNode('For');">For</button>
+  <button class="action" onclick="addNode('FDiv');">FDiv</button>
+  <button class="action" onclick="addNode('FMul');">FMul</button>
+  <button class="action" onclick="addNode('FAdd');">FAdd</button>
+  <button class="action" onclick="addNode('FNotEqual');">FNotEqual</button>
+  <button class="action" onclick="addNode('FLTE');">FLTE</button>
+  <button class="action" onclick="addNode('FLT');">FLT</button>
+  <button class="action" onclick="addNode('FGTE');">FGTE</button>
+  <button class="action" onclick="addNode('FGT');">FGT</button>
+  <button class="action" onclick="addNode('FEqual');">FEqual</button>
+  <button class="action" onclick="exampleCanvas()">Example</button>
   <div id="cnodes"
     style="margin: 10px; border: 10px solid lightgray; background-color: white; position: absolute; top:20px; left:0; right:0; bottom:0">
   </div>
@@ -19,40 +48,22 @@
 
     let canvas = cnui.canvas('cnodes');
 
-    function addWhile() {
-      let whileNod = cnui.Env.getInstance('While');
-      let comp = new cnui.CnodeComponent(whileNod, canvas);
+    function exampleCanvas() {
+      let prg = cnui.Env.import(JSON.parse(`{"id":"NID_0","version":1,"lastNodeIndex":10,"lastSocketIndex":35,"enter":"NID_8","exit":"NID_9","nodes":[{"id":"NID_8","name":"Enter","functional":false,"meta":{"pos":{"x":50.815093994140625,"y":32.951229095458984}},"inputs":[{"id":"SID_29","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peer":null}],"outputs":[{"id":"SID_30","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peers":[]}],"prev":null,"nexts":[{"id":"SID_31","name":"Begin","node":null,"peer":null}]},{"id":"NID_9","name":"Exit","functional":false,"meta":{"pos":{"x":1389.4457244873047,"y":499.25010681152344}},"inputs":[{"id":"SID_32","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peer":null}],"outputs":[{"id":"SID_33","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peers":[]}],"prev":{"id":"SID_34","name":"End","node":null,"peers":[]},"nexts":[]},{"id":"NID_0","name":"Setvar","functional":false,"meta":{"pos":{"x":398.8492431640625,"y":-53.77235794067383}},"inputs":[{"id":"SID_0","name":"Name","node":null,"type":{},"value":"N","peer":null},{"id":"SID_1","name":"Val","node":null,"type":{},"value":0,"peer":null}],"outputs":[{"id":"SID_2","name":"Val","node":null,"type":{},"value":0,"peers":[]}],"prev":{"id":"SID_4","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_3","name":"Out","node":null,"peer":null}]},{"id":"NID_1","name":"FGetvar","functional":true,"meta":{"pos":{"x":87.34089660644531,"y":497.06622314453125}},"inputs":[{"id":"SID_5","name":"Name","node":null,"type":{},"value":"N","peer":null}],"outputs":[{"id":"SID_6","name":"Val","node":null,"type":{},"value":10,"peers":[]}],"prev":null,"nexts":[]},{"id":"NID_2","name":"Console","functional":false,"meta":{"pos":{"x":866.8677368164062,"y":106.60197448730469}},"inputs":[{"id":"SID_7","name":"Val","node":null,"type":{},"value":9,"peer":null}],"outputs":[],"prev":{"id":"SID_9","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_8","name":"Out","node":null,"peer":null}]},{"id":"NID_3","name":"FAdd","functional":true,"meta":{"pos":{"x":290.9339599609375,"y":306.57843017578125}},"inputs":[{"id":"SID_10","name":"Val1","node":null,"type":{},"value":9,"peer":null},{"id":"SID_11","name":"Val2","node":null,"type":{"type":"number","isArray":false},"value":1,"peer":null}],"outputs":[{"id":"SID_12","name":"Val","node":null,"type":{"type":"number","isArray":false},"value":10,"peers":[]}],"prev":null,"nexts":[]},{"id":"NID_4","name":"Setvar","functional":false,"meta":{"pos":{"x":1318.6676025390625,"y":110.02011108398438}},"inputs":[{"id":"SID_13","name":"Name","node":null,"type":{},"value":"N","peer":null},{"id":"SID_14","name":"Val","node":null,"type":{"type":"number","isArray":false},"value":10,"peer":null}],"outputs":[{"id":"SID_15","name":"Val","node":null,"type":{},"value":10,"peers":[]}],"prev":{"id":"SID_17","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_16","name":"Out","node":null,"peer":null}]},{"id":"NID_5","name":"FGTE","functional":true,"meta":{"pos":{"x":424.3751220703125,"y":715.3446044921875}},"inputs":[{"id":"SID_18","name":"Val1","node":null,"type":{},"value":10,"peer":null},{"id":"SID_19","name":"Val2","node":null,"type":{"type":"number","isArray":false},"value":10,"peer":null}],"outputs":[{"id":"SID_20","name":"Val","node":null,"type":{"type":"boolean","isArray":false},"value":true,"peers":[]}],"prev":null,"nexts":[]},{"id":"NID_6","name":"If","functional":false,"meta":{"pos":{"x":982.6358642578125,"y":508.57965087890625}},"inputs":[{"id":"SID_21","name":"Condition","node":null,"type":{"type":"boolean","isArray":false},"value":true,"peer":null}],"outputs":[],"prev":{"id":"SID_24","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_22","name":"Then","node":null,"peer":null},{"id":"SID_23","name":"Else","node":null,"peer":null}]}],"connections":[{"type":"pn","sourceNode":"NID_8","sourceSocket":"SID_31","targetNode":"NID_0","targetSocket":"SID_4"},{"type":"pn","sourceNode":"NID_6","sourceSocket":"SID_22","targetNode":"NID_9","targetSocket":"SID_34"},{"type":"pn","sourceNode":"NID_0","sourceSocket":"SID_3","targetNode":"NID_2","targetSocket":"SID_9"},{"type":"io","sourceNode":"NID_1","sourceSocket":"SID_6","targetNode":"NID_2","targetSocket":"SID_7"},{"type":"io","sourceNode":"NID_1","sourceSocket":"SID_6","targetNode":"NID_3","targetSocket":"SID_10"},{"type":"io","sourceNode":"NID_1","sourceSocket":"SID_6","targetNode":"NID_5","targetSocket":"SID_18"},{"type":"pn","sourceNode":"NID_6","sourceSocket":"SID_23","targetNode":"NID_2","targetSocket":"SID_9"},{"type":"pn","sourceNode":"NID_2","sourceSocket":"SID_8","targetNode":"NID_4","targetSocket":"SID_17"},{"type":"io","sourceNode":"NID_3","sourceSocket":"SID_12","targetNode":"NID_4","targetSocket":"SID_14"},{"type":"pn","sourceNode":"NID_4","sourceSocket":"SID_16","targetNode":"NID_6","targetSocket":"SID_24"},{"type":"io","sourceNode":"NID_5","sourceSocket":"SID_20","targetNode":"NID_6","targetSocket":"SID_21"}]}`));
+      canvas.program = prg;
+    }
+
+    function newCanvas() {
+      canvas.program = new cnui.Program();
+    }
+
+    function addNode(name) {
+      let node = cnui.Env.getInstance(name);
+      let comp = new cnui.CnodeComponent(node, canvas);
       comp.pos = new cnui.Position(100, 100);
     }
 
-    function addFor() {
-      let forNod = cnui.Env.getInstance('For');
-      let comp = new cnui.CnodeComponent(forNod, canvas);
-      comp.pos = new cnui.Position(100, 100);
-    }
-
-    // let ifNod = cnui.Env.getInstance('if');
-    // let forNod = cnui.Env.getInstance('for');
-    // let faddNod = cnui.Env.getInstance('fadd');
-
-    // let comp1 = new cnui.CnodeComponent(consoleNod, canvas);
-    // comp1.moveable = true;
-    // comp1.pos = new cnui.Position(100, 100);
-
-    // let comp2 = new cnui.CnodeComponent(ifNod, canvas);
-    // comp2.moveable = true;
-    // comp2.pos = new cnui.Position(400, 100);
-
-    // let comp3 = new cnui.CnodeComponent(forNod, canvas);
-    // comp3.moveable = true;
-    // comp3.pos = new cnui.Position(700, 50);
-
-    // let comp4 = new cnui.CnodeComponent(faddNod, canvas);
-    // comp4.moveable = true;
-    // comp4.pos = new cnui.Position(900, 50);
-
-    let prg = cnui.Env.import(JSON.parse(`{"id":"NID_7","version":1,"lastNodeIndex":10,"lastSocketIndex":35,"enter":"NID_8","exit":"NID_9","nodes":[{"id":"NID_8","name":"Enter","functional":false,"inputs":[{"id":"SID_29","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peer":null}],"outputs":[{"id":"SID_30","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peers":[]}],"prev":null,"nexts":[{"id":"SID_31","name":"Begin","node":null,"peer":null}]},{"id":"NID_9","name":"Exit","functional":false,"inputs":[{"id":"SID_32","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peer":null}],"outputs":[{"id":"SID_33","name":"Val","node":null,"type":{"type":"any","isArray":false},"value":0,"peers":[]}],"prev":{"id":"SID_34","name":"End","node":null,"peers":[]},"nexts":[]},{"id":"NID_0","name":"Setvar","functional":false,"inputs":[{"id":"SID_0","name":"Name","node":null,"type":{},"value":"N","peer":null},{"id":"SID_1","name":"Val","node":null,"type":{},"value":0,"peer":null}],"outputs":[{"id":"SID_2","name":"Val","node":null,"type":{},"value":0,"peers":[]}],"prev":{"id":"SID_4","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_3","name":"Out","node":null,"peer":null}]},{"id":"NID_1","name":"FGetvar","functional":true,"inputs":[{"id":"SID_5","name":"Name","node":null,"type":{},"value":"N","peer":null}],"outputs":[{"id":"SID_6","name":"Val","node":null,"type":{},"value":10,"peers":[]}],"prev":null,"nexts":[]},{"id":"NID_2","name":"Console","functional":false,"inputs":[{"id":"SID_7","name":"Val","node":null,"type":{},"value":9,"peer":null}],"outputs":[],"prev":{"id":"SID_9","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_8","name":"Out","node":null,"peer":null}]},{"id":"NID_3","name":"FAdd","functional":true,"inputs":[{"id":"SID_10","name":"Val1","node":null,"type":{},"value":9,"peer":null},{"id":"SID_11","name":"Val2","node":null,"type":{"type":"number","isArray":false},"value":1,"peer":null}],"outputs":[{"id":"SID_12","name":"Val","node":null,"type":{"type":"number","isArray":false},"value":10,"peers":[]}],"prev":null,"nexts":[]},{"id":"NID_4","name":"Setvar","functional":false,"inputs":[{"id":"SID_13","name":"Name","node":null,"type":{},"value":"N","peer":null},{"id":"SID_14","name":"Val","node":null,"type":{"type":"number","isArray":false},"value":10,"peer":null}],"outputs":[{"id":"SID_15","name":"Val","node":null,"type":{},"value":10,"peers":[]}],"prev":{"id":"SID_17","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_16","name":"Out","node":null,"peer":null}]},{"id":"NID_5","name":"FGTE","functional":true,"inputs":[{"id":"SID_18","name":"Val1","node":null,"type":{},"value":10,"peer":null},{"id":"SID_19","name":"Val2","node":null,"type":{"type":"number","isArray":false},"value":10,"peer":null}],"outputs":[{"id":"SID_20","name":"Val","node":null,"type":{"type":"boolean","isArray":false},"value":true,"peers":[]}],"prev":null,"nexts":[]},{"id":"NID_6","name":"If","functional":false,"inputs":[{"id":"SID_21","name":"Condition","node":null,"type":{"type":"boolean","isArray":false},"value":true,"peer":null}],"outputs":[],"prev":{"id":"SID_24","name":"In","node":null,"peers":[]},"nexts":[{"id":"SID_22","name":"Then","node":null,"peer":null},{"id":"SID_23","name":"Else","node":null,"peer":null}]}],"connections":[{"type":"pn","sourceNode":"NID_8","sourceSocket":"SID_31","targetNode":"NID_0","targetSocket":"SID_4"},{"type":"pn","sourceNode":"NID_0","sourceSocket":"SID_3","targetNode":"NID_2","targetSocket":"SID_9"},{"type":"io","sourceNode":"NID_1","sourceSocket":"SID_6","targetNode":"NID_2","targetSocket":"SID_7"},{"type":"io","sourceNode":"NID_1","sourceSocket":"SID_6","targetNode":"NID_3","targetSocket":"SID_10"},{"type":"io","sourceNode":"NID_1","sourceSocket":"SID_6","targetNode":"NID_5","targetSocket":"SID_18"},{"type":"pn","sourceNode":"NID_6","sourceSocket":"SID_23","targetNode":"NID_2","targetSocket":"SID_9"},{"type":"pn","sourceNode":"NID_2","sourceSocket":"SID_8","targetNode":"NID_4","targetSocket":"SID_17"},{"type":"io","sourceNode":"NID_3","sourceSocket":"SID_12","targetNode":"NID_4","targetSocket":"SID_14"},{"type":"pn","sourceNode":"NID_4","sourceSocket":"SID_16","targetNode":"NID_6","targetSocket":"SID_24"},{"type":"io","sourceNode":"NID_5","sourceSocket":"SID_20","targetNode":"NID_6","targetSocket":"SID_21"}]}`));
-    canvas.program = prg;
+    newCanvas();
 
   </script>
 </body>

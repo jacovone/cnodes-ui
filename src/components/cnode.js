@@ -1,3 +1,12 @@
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
 import { Component } from "../canvas/component";
 import { Position } from "../canvas/position";
 import { PrevSocketComponent } from "./prev";
@@ -5,20 +14,34 @@ import { NextSocketComponent } from "./next";
 import { Theme } from "./theme";
 import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
-import { CnodesSocketComponent } from "./cnodessocket";
 
+/**
+ * This is the main class for managing a single CNode
+ * inside the cnodes-ui canvas. It embed a cnodes node instance
+ */
 export class CnodeComponent extends Component {
+  /** The cnodes nod instance */
   #node;
 
+  /** An SVG element to draw the container of the node */
   #containerEl;
+
+  /** An SVG element to draw the title of the node */
   #titleEl;
+
+  /** An SVG element to draw the top-left symbol for the node */
   #symbolEl;
 
   constructor(node, canvas) {
     super();
     this.#node = node;
+
+    // write a back-reference
+    this.#node.__comp = this;
+
     super.setup();
     canvas.addComponent(this);
+
     this.#attachSubcomponents();
   }
 
@@ -26,6 +49,11 @@ export class CnodeComponent extends Component {
     return this.#node;
   }
 
+  /**
+   * Computes the node vertical size, based on node
+   * characteristics in terms of number of input, output,
+   * and nexts. It takes account of the current theme
+   */
   get height() {
     return (
       Theme.current.NODE_BORDER_RADIUS * 0.5 +
@@ -37,6 +65,9 @@ export class CnodeComponent extends Component {
     );
   }
 
+  /**
+   * Lets create the SVG element
+   */
   createElement() {
     let nodeEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
     this.#containerEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -98,6 +129,10 @@ export class CnodeComponent extends Component {
     return nodeEl;
   }
 
+  /**
+   * This method construct all sub components. They are all sockets
+   * representing input, outputs, prev and nexts.
+   */
   #attachSubcomponents() {
     let posY = 40 + 0.5 * Theme.current.NODE_BORDER_RADIUS;
 
@@ -106,6 +141,9 @@ export class CnodeComponent extends Component {
       let nComp = new PrevSocketComponent(this.node.prev);
       nComp.pos = new Position(0, posY);
       this.addComponent(nComp);
+
+      // write a back_reference
+      this.node.prev.__comp = nComp;
     }
 
     // Nexts
@@ -114,6 +152,9 @@ export class CnodeComponent extends Component {
       nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
       this.addComponent(nComp);
       posY += 30;
+
+      // write a back-reference
+      next.__comp = nComp;
     }
 
     // Output
@@ -122,6 +163,9 @@ export class CnodeComponent extends Component {
       nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
       this.addComponent(nComp);
       posY += 30;
+
+      // write a back-reference
+      output.__comp = nComp;
     }
 
     // Input
@@ -130,15 +174,26 @@ export class CnodeComponent extends Component {
       nComp.pos = new Position(0, posY);
       this.addComponent(nComp);
       posY += 30;
+
+      // write a back-reference
+      input.__comp = nComp;
     }
   }
 
   /**
-   * This method returns a cnodes socket component from the cnodes socket
-   * inside this node
-   * @param {*} cnodesSocket The cnodes socket
+   * Intercept by overriding this method to update
+   * graphical cooordinates in the program structure
    */
-  getCnodesSocketComponentFromSocket(cnodesSocket) {
-    return this.components.find((c) => c instanceof CnodesSocketComponent && c.socket === cnodesSocket);
+  updateSVGElement() {
+    super.updateSVGElement();
+
+    // Update UI data in meta info
+    if (!this.#node.meta) {
+      this.node.meta = {};
+    }
+    this.#node.meta.pos = {
+      x: this.pos.x,
+      y: this.pos.y,
+    };
   }
 }

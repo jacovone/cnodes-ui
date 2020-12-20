@@ -19,6 +19,9 @@ Try a demo test board at:
 
 [DEMO Test board](https://unpkg.com/@marco.jacovone/cnodes-ui/dist/index.html)
 
+Once you've built the graph, you can press the **Run** button ti test its effect. please check the console
+to see the "Console" node output.
+
 ## State of the art
 
 The project is actually in a early alpha stage, but is growing rapidly ;-)

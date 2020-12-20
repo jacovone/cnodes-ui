@@ -13,6 +13,12 @@ I strongly believe in the separation between the graphic interface and the proce
 
 Taking advantage of this separation, it is possible to imagine the scenario in which the graphic part is integrated within a WEB client, while the server part, which is able to independently execute the processes defined with the client, can be integrated into the backend.
 
+## Demo
+
+Try a demo test board at:
+
+[DEMO Test board](https://unpkg.com/@marco.jacovone/cnodes-ui/dist/index.html)
+
 ## State of the art
 
 The project is actually in a early alpha stage, but is growing rapidly ;-)

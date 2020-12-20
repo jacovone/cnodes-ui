@@ -18,18 +18,28 @@ import { CnodesSocketComponent } from "./cnodessocket";
  * cnodes context
  */
 export class NextSocketComponent extends CnodesSocketComponent {
+  /** The socket symbol element */
+  #socketSymbol = null;
+
   constructor(socket) {
     super(socket);
     super.setup();
   }
 
   /**
+   * Customize the drag element
+   */
+  get dragElement() {
+    return this.#socketSymbol;
+  }
+
+  /**
    * Lets create the element
    */
   createElement() {
-    let symbolElem = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    this.#socketSymbol = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-    symbolElem.setAttribute(
+    this.#socketSymbol.setAttribute(
       "d",
       `
       M -7 -8
@@ -40,9 +50,9 @@ export class NextSocketComponent extends CnodesSocketComponent {
       Z
       `
     );
-    symbolElem.setAttribute("stroke", Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
-    symbolElem.setAttribute("stroke-width", Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
-    symbolElem.setAttribute("fill", Theme.current.NODE_PREV_NEXT_FILL_COLOR);
+    this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
+    this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
+    this.#socketSymbol.setAttribute("fill", Theme.current.NODE_PREV_NEXT_FILL_COLOR);
 
     let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     labelElem.style = `
@@ -66,7 +76,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
     let prevElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
     prevElem.setAttribute("x", 0);
     prevElem.setAttribute("y", 0);
-    prevElem.appendChild(symbolElem);
+    prevElem.appendChild(this.#socketSymbol);
     prevElem.appendChild(labelElem);
 
     return prevElem;

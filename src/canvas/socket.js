@@ -51,16 +51,30 @@ export class SocketComponent extends Component {
     this.moveable = false;
     super.setup();
 
+    // All sockets does not manage pointer events so events
+    // can pass through to the base componentEl element....
+    this.componentEl.style["pointer-events"] = "none";
+    // ... but the dragEle element (that by default is the entire componentEl ;-)
+    this.dragElement.style["pointer-events"] = "auto";
+
     let self = this;
-    this.componentEl.addEventListener("pointerdown", (e) => {
+    this.dragElement.addEventListener("pointerdown", (e) => {
       self.onPointerDown(e);
     });
-    this.componentEl.addEventListener("pointerup", (e) => {
+    this.dragElement.addEventListener("pointerup", (e) => {
       self.onPointerUp(e);
     });
-    this.componentEl.addEventListener("pointermove", (e) => {
+    this.dragElement.addEventListener("pointermove", (e) => {
       self.onPointerMove(e);
     });
+  }
+
+  /**
+   * Returns the element that responds to pointer events. By
+   * default this is the entire root element
+   */
+  get dragElement() {
+    return this.componentEl;
   }
 
   /**
@@ -76,7 +90,7 @@ export class SocketComponent extends Component {
   onPointerDown(e) {
     if (!this.hasSingleConnection || !this.isConnected) {
       this.#connecting = true;
-      this.componentEl.setPointerCapture(e.pointerId);
+      this.dragElement.setPointerCapture(e.pointerId);
       e.stopPropagation();
 
       // Connect action is started
@@ -103,7 +117,7 @@ export class SocketComponent extends Component {
    */
   onPointerUp(e) {
     this.#connecting = false;
-    this.componentEl.releasePointerCapture(e.pointerId);
+    this.dragElement.releasePointerCapture(e.pointerId);
     e.stopPropagation();
 
     if (this.#currentPeerSocketComponent) {
@@ -132,15 +146,15 @@ export class SocketComponent extends Component {
       let p = this.canvas.clientToSvgPoint(e.clientX, e.clientY);
       if (pointedComponent) {
         if (this.canAcceptPeerSocket(pointedComponent)) {
-          this.#currentPeerSocketComponent = pointedComponent;
           this.connectionMoving(p.x, p.y, false);
+          this.#currentPeerSocketComponent = pointedComponent;
         } else {
-          this.#currentPeerSocketComponent = null;
           this.connectionMoving(p.x, p.y, true);
+          this.#currentPeerSocketComponent = null;
         }
       } else {
-        this.#currentPeerSocketComponent = null;
         this.connectionMoving(p.x, p.y, false);
+        this.#currentPeerSocketComponent = null;
       }
 
       e.stopPropagation();

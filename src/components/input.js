@@ -21,23 +21,33 @@ export class InputSocketComponent extends CnodesSocketComponent {
   /** A reference to the imput element */
   #inputElement = null;
 
+  /** The symbol element */
+  #socketSymbol = null;
+
   constructor(socket) {
     super(socket);
     super.setup();
   }
 
   /**
+   * Customize the drag element
+   */
+  get dragElement() {
+    return this.#socketSymbol;
+  }
+
+  /**
    * Lets create the element
    */
   createElement() {
-    let symbolElem = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    this.#socketSymbol = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-    symbolElem.setAttribute("cx", 0);
-    symbolElem.setAttribute("cy", 0);
-    symbolElem.setAttribute("r", Theme.current.NODE_IO_POINT_RADIUS);
-    symbolElem.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
-    symbolElem.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
-    symbolElem.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
+    this.#socketSymbol.setAttribute("cx", 0);
+    this.#socketSymbol.setAttribute("cy", 0);
+    this.#socketSymbol.setAttribute("r", Theme.current.NODE_IO_POINT_RADIUS);
+    this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
+    this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
+    this.#socketSymbol.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
 
     let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     labelElem.style = `
@@ -65,6 +75,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
       text-align: left;
       line-height: 30px;
       user-select: none;
+      pointer-events: auto;
     `;
 
     textInputElem.setAttribute("x", 0);
@@ -96,7 +107,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     let inputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
     inputElem.setAttribute("x", 0);
     inputElem.setAttribute("y", 0);
-    inputElem.appendChild(symbolElem);
+    inputElem.appendChild(this.#socketSymbol);
     inputElem.appendChild(labelElem);
     inputElem.appendChild(textInputElem);
 
@@ -175,5 +186,6 @@ export class InputSocketComponent extends CnodesSocketComponent {
   updateStatus() {
     // Show/Hide the imput component
     this.#inputElement.style["display"] = this.isConnected ? "block" : "none";
+    this.socket.value = this.#inputElement.value;
   }
 }

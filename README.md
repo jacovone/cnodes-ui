@@ -7,7 +7,7 @@ It is inspired by the interface model proposed for the Unreal Engine product, wh
 
 I therefore decided to develop a project completely created in javascript, to make a tool available to the community that they can use within their own projects.
 
-![Screenshot](https://github.com/marco-jacovone/cnodes-ui/blob/main/doc/images/Schermata%202020-12-20%20alle%2002.36.38.png?raw=true)
+![Screenshot](https://github.com/marco-jacovone/cnodes-ui/blob/main/doc/images/screenshot1.png?raw=true)
 
 I strongly believe in the separation between the graphic interface and the processing engine. This is the reason that prompted me to create two distinct projects.
 

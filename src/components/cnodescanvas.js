@@ -26,37 +26,31 @@ export class CnodesCanvas extends Canvas {
   constructor(el) {
     super(el);
 
-    let ioArrowMarker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
-    ioArrowMarker.setAttribute("id", "io-arrow");
-    ioArrowMarker.setAttribute("viewBox", "0 0 10 10");
-    ioArrowMarker.setAttribute("refX", "7");
-    ioArrowMarker.setAttribute("refY", "5");
-    ioArrowMarker.setAttribute("markerWidth", "5");
-    ioArrowMarker.setAttribute("markerHeight", "5");
-    ioArrowMarker.setAttribute("fill", Theme.current.CONNECTION_IO_COLOR);
+    let defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
 
-    ioArrowMarker.setAttribute("orient", "auto-start-reverse");
+    defsEl.innerHTML = `
+      <filter xmlns="http://www.w3.org/2000/svg" id="dropshadow" height="130%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
+        <feOffset dx="0" dy="0" result="offsetblur"/> 
+        <feComponentTransfer>
+          <feFuncA type="linear" slope="0.7"/>
+        </feComponentTransfer>
+        <feMerge> 
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/> 
+        </feMerge>
+      </filter>
+      <marker id="io-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.CONNECTION_IO_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 Z">
+        </path>
+      </marker>
+      <marker id="prevnext-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.CONNECTION_PREV_NEXT_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 Z">
+        </path>
+      </marker>      
+    `;
 
-    let ioArrowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    ioArrowPath.setAttribute("d", "M 0 0 L 10 5 L 0 10 Z");
-    ioArrowMarker.appendChild(ioArrowPath);
-
-    let prevNextArrowMarker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
-    prevNextArrowMarker.setAttribute("id", "prevnext-arrow");
-    prevNextArrowMarker.setAttribute("viewBox", "0 0 10 10");
-    prevNextArrowMarker.setAttribute("refX", "7");
-    prevNextArrowMarker.setAttribute("refY", "5");
-    prevNextArrowMarker.setAttribute("markerWidth", "5");
-    prevNextArrowMarker.setAttribute("markerHeight", "5");
-    prevNextArrowMarker.setAttribute("fill", Theme.current.CONNECTION_PREV_NEXT_COLOR);
-
-    prevNextArrowMarker.setAttribute("orient", "auto-start-reverse");
-
-    let prevNextArrowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    prevNextArrowPath.setAttribute("d", "M 0 0 L 10 5 L 0 10 Z");
-    prevNextArrowMarker.appendChild(prevNextArrowPath);
-    this.svgEl.appendChild(ioArrowMarker);
-    this.svgEl.appendChild(prevNextArrowMarker);
+    this.svgEl.appendChild(defsEl);
   }
 
   get program() {

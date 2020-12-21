@@ -44,10 +44,10 @@ export class Theme {
     return "#C5F0FF";
   }
   get NODE_STROKE_COLOR() {
-    return "#FAD7A0";
+    return "#FFFFFF";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
-    return "#C5F0FF";
+    return "#FFFFFF";
   }
   get NODE_STROKE_WIDTH() {
     return 3;
@@ -71,6 +71,14 @@ export class Theme {
   }
   get NODE_SYMBOL_FILL_COLOR() {
     return "#FEF9E7";
+  }
+
+  get NODE_SIGN_COLOR() {
+    return "#31A200";
+  }
+
+  get NODE_FUNCTIONAL_SIGN_COLOR() {
+    return "#008EBF";
   }
 
   // Sockets

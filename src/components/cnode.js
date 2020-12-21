@@ -32,6 +32,9 @@ export class CnodeComponent extends Component {
   /** An SVG element to draw the top-left symbol for the node */
   #symbolEl;
 
+  /** An SVG element to draw the top-left sign for the node */
+  #signEl;
+
   constructor(node, canvas) {
     super();
     this.#node = node;
@@ -73,10 +76,12 @@ export class CnodeComponent extends Component {
     this.#containerEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
     this.#titleEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     this.#symbolEl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    this.#signEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     nodeEl.appendChild(this.#containerEl);
     nodeEl.appendChild(this.#titleEl);
     nodeEl.appendChild(this.#symbolEl);
+    nodeEl.appendChild(this.#signEl);
 
     this.#containerEl.setAttribute(
       "d",
@@ -123,6 +128,32 @@ export class CnodeComponent extends Component {
     this.#symbolEl.setAttribute("stroke", Theme.current.NODE_SYMBOL_STROKE_COLOR);
     this.#symbolEl.setAttribute("stroke-width", Theme.current.NODE_SYMBOL_STROKE_WIDTH);
     this.#symbolEl.setAttribute("fill", Theme.current.NODE_SYMBOL_FILL_COLOR);
+
+    let signRadius = Theme.current.NODE_BORDER_RADIUS * 0.7;
+    this.#signEl.setAttribute(
+      "d",
+      !this.node.functional
+        ? `
+      M ${signRadius * 0.5} 0
+      L ${-signRadius * 0.3} ${-signRadius / 2}
+      L ${-signRadius * 0.3} ${signRadius / 2}
+      Z
+      `
+        : `
+      M ${signRadius * 0.5} 0
+      L ${-signRadius * 0.3} 0
+      L 0 ${-signRadius * 0.5}
+      M ${signRadius * 0.5} 0
+      L ${-signRadius * 0.3} 0
+      L 0 ${+signRadius * 0.5}
+      `
+    );
+    this.#signEl.setAttribute("stroke", !this.node.functional ? Theme.current.NODE_SIGN_COLOR : Theme.current.NODE_FUNCTIONAL_SIGN_COLOR);
+    this.#signEl.setAttribute("stroke-width", !this.node.functional ? 1 : 3);
+    this.#signEl.setAttribute("fill", !this.node.functional ? Theme.current.NODE_SIGN_COLOR : "transparent");
+    this.#signEl.setAttribute("stroke-linejoin", "null");
+    this.#signEl.setAttribute("x", "0");
+    this.#signEl.setAttribute("y", "0");
 
     nodeEl.setAttribute("x", "0");
     nodeEl.setAttribute("y", "0");

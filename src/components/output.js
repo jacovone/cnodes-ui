@@ -8,7 +8,7 @@
  */
 
 import { Theme } from "./theme";
-import { InputSocket } from "@marco.jacovone/cnodes/core/socket";
+import { InputSocket } from "@marco.jacovone/cnodes";
 import { Position } from "../canvas/position";
 import { IOConnection } from "../connections/io_connection";
 import { CnodesSocketComponent } from "./cnodessocket";

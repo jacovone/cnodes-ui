@@ -7,7 +7,7 @@
  * Year: 2020
  */
 
-import { Socket } from "@marco.jacovone/cnodes/core/socket";
+import { Socket } from "@marco.jacovone/cnodes";
 import { Component } from "./component";
 import { Connection } from "./connection";
 import { SocketComponent } from "./socket";

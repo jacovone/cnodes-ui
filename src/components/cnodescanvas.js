@@ -7,8 +7,8 @@
  * Year: 2020
  */
 
-import { Env } from "@marco.jacovone/cnodes/core/env";
-import { Program } from "@marco.jacovone/cnodes/core/program";
+import { Env } from "@marco.jacovone/cnodes";
+import { Program } from "@marco.jacovone/cnodes";
 import { Canvas } from "../canvas/canvas";
 import { Component } from "../canvas/component";
 import { Position } from "../canvas/position";

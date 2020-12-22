@@ -88,21 +88,23 @@ export class SocketComponent extends Component {
    * @param {Event} e The pointerdown event
    */
   onPointerDown(e) {
-    if (!this.hasSingleConnection || !this.isConnected) {
-      this.#connecting = true;
-      this.dragElement.setPointerCapture(e.pointerId);
-      e.stopPropagation();
+    if (e.button === 0) {
+      if (!this.hasSingleConnection || !this.isConnected) {
+        this.#connecting = true;
+        this.dragElement.setPointerCapture(e.pointerId);
+        e.stopPropagation();
 
-      // Connect action is started
-      this.connectionStarted();
-    } else {
-      let peerComponent = this.getSinglePeerComponent();
-      peerComponent.onPointerDown(e);
+        // Connect action is started
+        this.connectionStarted();
+      } else {
+        let peerComponent = this.getSinglePeerComponent();
+        peerComponent.onPointerDown(e);
 
-      let con = this.canvas.getConnectionsFor(this)[0];
-      this.canvas.removeConnection(con);
+        let con = this.canvas.getConnectionsFor(this)[0];
+        this.canvas.removeConnection(con);
 
-      e.stopPropagation();
+        e.stopPropagation();
+      }
     }
   }
 
@@ -116,16 +118,18 @@ export class SocketComponent extends Component {
    * @param {Event} e The pointerup event
    */
   onPointerUp(e) {
-    this.#connecting = false;
-    this.dragElement.releasePointerCapture(e.pointerId);
-    e.stopPropagation();
+    if (e.button === 0) {
+      this.#connecting = false;
+      this.dragElement.releasePointerCapture(e.pointerId);
+      e.stopPropagation();
 
-    if (this.#currentPeerSocketComponent) {
-      let connectingSocketComponent = this.#currentPeerSocketComponent;
-      this.#currentPeerSocketComponent = null;
-      this.connectionDone(connectingSocketComponent);
-    } else {
-      this.connectionCancelled();
+      if (this.#currentPeerSocketComponent) {
+        let connectingSocketComponent = this.#currentPeerSocketComponent;
+        this.#currentPeerSocketComponent = null;
+        this.connectionDone(connectingSocketComponent);
+      } else {
+        this.connectionCancelled();
+      }
     }
   }
 
@@ -159,6 +163,14 @@ export class SocketComponent extends Component {
 
       e.stopPropagation();
     }
+  }
+
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
+  getContextMenuItems() {
+    return null;
   }
 
   /**

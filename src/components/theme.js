@@ -151,5 +151,29 @@ export class Theme {
     return "#31A200";
   }
 
+  // Menu
+
+  get MENU_MIN_WIDTH() {
+    return 200;
+  }
+  get MENU_BORDER_RADIUS() {
+    return 10;
+  }
+  get MENU_FILL_COLOR() {
+    return "#F3F3F3";
+  }
+  get MENU_STROKE_COLOR() {
+    return "#EEEEEE";
+  }
+  get MENU_STROKE_WIDTH() {
+    return 2;
+  }
+  get MENU_ITEM_HEIGHT() {
+    return 33;
+  }
+  get MENU_ITEM_FONT() {
+    return "font: bold 14px sans-serif";
+  }
+
   static current = new Theme();
 }

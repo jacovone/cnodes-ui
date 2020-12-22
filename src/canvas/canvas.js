@@ -7,9 +7,9 @@
  * Year: 2020
  */
 
-import { Socket } from "@marco.jacovone/cnodes";
 import { Component } from "./component";
 import { Connection } from "./connection";
+import { Menu, MenuItem } from "./menu";
 import { SocketComponent } from "./socket";
 
 /**
@@ -45,6 +45,9 @@ export class Canvas {
 
   /** The point in which the drag was started */
   #startDragPos;
+
+  /** The component for the contextual menu */
+  #contextMenuComponent = null;
 
   /** The list of components in the canvas */
   #components = [];
@@ -89,6 +92,9 @@ export class Canvas {
     this.#svgEl.addEventListener("pointermove", (e) => {
       self.#onPointerMove(e);
     });
+    this.#svgEl.addEventListener("contextmenu", (e) => {
+      self.#onContextMenu(e);
+    });
   }
 
   get components() {
@@ -102,6 +108,12 @@ export class Canvas {
   }
   set connections(val) {
     this.#connections = val;
+  }
+  get contextMenuComponent() {
+    return this.#contextMenuComponent;
+  }
+  set contextMenuComponent(val) {
+    this.#contextMenuComponent = val;
   }
 
   /**
@@ -193,9 +205,11 @@ export class Canvas {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
-    this.#dragging = true;
-    this.#startDragPos = this.clientToSvgPoint(e.clientX, e.clientY);
-    this.#svgEl.setPointerCapture(e.pointerId);
+    if (e.button === 0) {
+      this.#dragging = true;
+      this.#startDragPos = this.clientToSvgPoint(e.clientX, e.clientY);
+      this.#svgEl.setPointerCapture(e.pointerId);
+    }
   }
 
   /**
@@ -203,8 +217,10 @@ export class Canvas {
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
-    this.#dragging = false;
-    this.#svgEl.releasePointerCapture(e.pointerId);
+    if (e.button === 0) {
+      this.#dragging = false;
+      this.#svgEl.releasePointerCapture(e.pointerId);
+    }
   }
 
   /**
@@ -221,6 +237,19 @@ export class Canvas {
     this.#vbX -= xDiff;
     this.#vbY -= yDiff;
     this.#updateSVGViewBox();
+  }
+
+  /**
+   * Manages the contextmenu event to implement custom menu
+   * @param {Event} e The contextmenu event
+   */
+  #onContextMenu(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let component = this.componentFromPosition(e.clientX, e.clientY);
+    let p = this.clientToSvgPoint(e.clientX, e.clientY);
+    this.showContextMenu(component, p.x, p.y);
   }
 
   /**
@@ -359,4 +388,20 @@ export class Canvas {
     this.removeAllConnections();
     this.removeAllComponents();
   }
+
+  /**
+   * Return a list of MenuItem for the context menu
+   */
+  getCanvasContextMenuItems() {
+    return null;
+  }
+
+  /**
+   * Shows the context menu retated to the component "component" if it
+   * is passed, otherwise, the contextual menu is related to this canvas
+   * @param {Component} component The component for which display the contextual menu
+   * @param {number} x The x coordinate for the menu
+   * @param {number} y The y coordinate for the menu
+   */
+  showContextMenu(component, x, y) {}
 }

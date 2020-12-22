@@ -13,10 +13,10 @@ import { Position } from "./canvas/position";
 import { CnodeComponent } from "./components/cnode";
 import { Theme } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
-import { Env } from "@marco.jacovone/cnodes";
+import { Env } from "@marco.jacovone/cnodes/cnodes";
 
 export { Canvas, Component, CnodeComponent, Position, Theme, CnodesCanvas };
-export * from "@marco.jacovone/cnodes";
+export * from "@marco.jacovone/cnodes/cnodes";
 
 /**
  * This is the main entrypoint function. You can pass an ID of a

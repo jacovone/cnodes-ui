@@ -123,14 +123,16 @@ export class Component {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
-    if (this.#moveable) {
-      this.#moving = true;
-      this.#startMovePos = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
-      this.#startMovePointerPos = this.#canvas.svgEl.createSVGPoint();
-      this.#startMovePointerPos.x = this.#pos.x;
-      this.#startMovePointerPos.y = this.#pos.y;
-      this.#componentEl.setPointerCapture(e.pointerId);
-      e.stopPropagation();
+    if (e.button === 0) {
+      if (this.#moveable) {
+        this.#moving = true;
+        this.#startMovePos = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
+        this.#startMovePointerPos = this.#canvas.svgEl.createSVGPoint();
+        this.#startMovePointerPos.x = this.#pos.x;
+        this.#startMovePointerPos.y = this.#pos.y;
+        this.#componentEl.setPointerCapture(e.pointerId);
+        e.stopPropagation();
+      }
     }
   }
 
@@ -139,7 +141,7 @@ export class Component {
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
-    if (this.#moveable) {
+    if (this.#moveable && e.button === 0) {
       this.#moving = false;
       this.#componentEl.releasePointerCapture(e.pointerId);
       e.stopPropagation();
@@ -165,6 +167,14 @@ export class Component {
       this.updateSVGElement();
       e.stopPropagation();
     }
+  }
+
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
+  getContextMenuItems() {
+    return null;
   }
 
   /**

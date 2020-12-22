@@ -140,12 +140,12 @@ export class CnodeComponent extends Component {
       Z
       `
         : `
-      M ${signRadius * 0.5} 0
-      L ${-signRadius * 0.3} 0
-      L 0 ${-signRadius * 0.5}
-      M ${signRadius * 0.5} 0
-      L ${-signRadius * 0.3} 0
-      L 0 ${+signRadius * 0.5}
+      M ${signRadius * 0.6} 0
+      L ${-signRadius * 0.5} 0
+
+      M 0 ${-signRadius * 0.6}
+      L ${-signRadius * 0.5} 0
+      L 0 ${+signRadius * 0.6}
       `
     );
     this.#signEl.setAttribute("stroke", !this.node.functional ? Theme.current.NODE_SIGN_COLOR : Theme.current.NODE_FUNCTIONAL_SIGN_COLOR);

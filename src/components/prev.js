@@ -7,7 +7,7 @@
  * Year: 2020
  */
 
-import { NextSocket } from "@marco.jacovone/cnodes";
+import { NextSocket } from "@marco.jacovone/cnodes/cnodes";
 import { Theme } from "./theme";
 import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnext_connection";

@@ -7,14 +7,16 @@
  * Year: 2020
  */
 
-import { Env } from "@marco.jacovone/cnodes";
-import { Program } from "@marco.jacovone/cnodes";
+import { Env } from "@marco.jacovone/cnodes/cnodes";
+import { Program } from "@marco.jacovone/cnodes/cnodes";
 import { Canvas } from "../canvas/canvas";
 import { Component } from "../canvas/component";
+import { MenuItem } from "../canvas/menu";
 import { Position } from "../canvas/position";
 import { IOConnection } from "../connections/io_connection";
 import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodeComponent } from "./cnode";
+import { CnodesMenu } from "./cnodesmenu";
 import { Theme } from "./theme";
 
 /**
@@ -103,6 +105,48 @@ export class CnodesCanvas extends Canvas {
     if (component instanceof CnodeComponent && this.program) {
       // Add the node to the program
       this.program.removeNode(component.node);
+    }
+  }
+
+  /**
+   * Return a list of MenuItem for the context menu
+   */
+  getCanvasContextMenuItems() {
+    return [
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+      new MenuItem("prima opzione", () => {}),
+    ];
+  }
+
+  /**
+   * Shows the context menu retated to the component "component" if it
+   * is passed, otherwise, the contextual menu is related to this canvas
+   * @param {Component} component The component for which display the contextual menu
+   * @param {number} x The x coordinate for the menu
+   * @param {number} y The y coordinate for the menu
+   */
+  showContextMenu(component, x, y) {
+    console.log(component);
+
+    let items;
+    if (!component) {
+      items = this.getCanvasContextMenuItems();
+    } else {
+      items = component.getContextMenuItems();
+    }
+
+    if (items) {
+      if (!x || !y) {
+        x = 0;
+        y = 0;
+      }
+      this.contextMenuComponent = new CnodesMenu(this, items, x, y);
     }
   }
 

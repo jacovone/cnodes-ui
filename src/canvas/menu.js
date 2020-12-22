@@ -39,6 +39,12 @@ export class MenuItem {
   set text(val) {
     this.#text = val;
   }
+  get callback() {
+    return this.#callback;
+  }
+  set callback(val) {
+    this.#callback = val;
+  }
 }
 
 /**
@@ -57,6 +63,7 @@ export class Menu extends Component {
    */
   constructor(canvas, items, x, y) {
     super();
+    this.moveable = false;
     this.canvas = canvas;
     this.#items = items;
     this.setup();

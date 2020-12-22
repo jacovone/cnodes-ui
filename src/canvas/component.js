@@ -65,6 +65,11 @@ export class Component {
     // Register a reference of this component inside the HTML element
     this.#componentEl.componentRef = this;
 
+    // Cancel context menu on any pointerdown event
+    this.#componentEl.addEventListener("pointerdown", (e) => {
+      self.canvas.cancelContextMenu();
+    });
+
     if (this.moveable) {
       this.#componentEl.addEventListener("pointerdown", (e) => {
         self.#onPointerDown(e);

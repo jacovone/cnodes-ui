@@ -174,6 +174,9 @@ export class Theme {
   get MENU_ITEM_FONT() {
     return "font: bold 14px sans-serif";
   }
+  get MENU_ITEM_HIGHLIGHT() {
+    return "white";
+  }
 
   static current = new Theme();
 }

@@ -9,7 +9,6 @@
 
 import { Component } from "./component";
 import { Connection } from "./connection";
-import { Menu, MenuItem } from "./menu";
 import { SocketComponent } from "./socket";
 
 /**
@@ -84,6 +83,7 @@ export class Canvas {
       self.#onWheel(e);
     });
     this.#svgEl.addEventListener("pointerdown", (e) => {
+      this.cancelContextMenu();
       self.#onPointerDown(e);
     });
     this.#svgEl.addEventListener("pointerup", (e) => {
@@ -404,4 +404,11 @@ export class Canvas {
    * @param {number} y The y coordinate for the menu
    */
   showContextMenu(component, x, y) {}
+
+  cancelContextMenu() {
+    if (this.#contextMenuComponent) {
+      this.removeComponent(this.#contextMenuComponent);
+      this.contextMenuComponent = null;
+    }
+  }
 }

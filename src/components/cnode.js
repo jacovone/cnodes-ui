@@ -14,6 +14,8 @@ import { NextSocketComponent } from "./next";
 import { Theme } from "./theme";
 import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
+import { MenuItem } from "../canvas/menu";
+import { SocketComponent } from "../canvas/socket";
 
 /**
  * This is the main class for managing a single CNode
@@ -226,5 +228,29 @@ export class CnodeComponent extends Component {
       x: this.pos.x,
       y: this.pos.y,
     };
+  }
+
+  getContextMenuItems() {
+    let items = [
+      new MenuItem("Disconnect all", () => {
+        for (let comp of this.components) {
+          if (comp instanceof SocketComponent && comp.isConnected) {
+            for (let conn of this.canvas.getConnectionsFor(comp)) {
+              this.canvas.removeConnection(conn);
+            }
+          }
+        }
+      }),
+    ];
+
+    if (this.node.removable) {
+      items.unshift(
+        new MenuItem("Delete", () => {
+          this.canvas.removeComponent(this);
+        })
+      );
+    }
+
+    return items;
   }
 }

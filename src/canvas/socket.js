@@ -58,6 +58,7 @@ export class SocketComponent extends Component {
     this.dragElement.style["pointer-events"] = "auto";
 
     let self = this;
+
     this.dragElement.addEventListener("pointerdown", (e) => {
       self.onPointerDown(e);
     });

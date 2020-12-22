@@ -37,7 +37,7 @@ export class CnodesCanvas extends Canvas {
         <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
         <feOffset dx="0" dy="0" result="offsetblur"/> 
         <feComponentTransfer>
-          <feFuncA type="linear" slope="0.7"/>
+          <feFuncA type="linear" slope="0.3"/>
         </feComponentTransfer>
         <feMerge> 
           <feMergeNode/>
@@ -112,16 +112,7 @@ export class CnodesCanvas extends Canvas {
    * Return a list of MenuItem for the context menu
    */
   getCanvasContextMenuItems() {
-    return [
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-      new MenuItem("prima opzione", () => {}),
-    ];
+    return [new MenuItem("prima opzione", () => {}), new MenuItem("prima opzione", () => {})];
   }
 
   /**
@@ -132,8 +123,6 @@ export class CnodesCanvas extends Canvas {
    * @param {number} y The y coordinate for the menu
    */
   showContextMenu(component, x, y) {
-    console.log(component);
-
     let items;
     if (!component) {
       items = this.getCanvasContextMenuItems();

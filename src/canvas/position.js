@@ -19,8 +19,8 @@ export class Position {
 
   /**
    * Construct a new Position
-   * @param {*} x The x coordinate
-   * @param {*} y The y coordinate
+   * @param {number} x The x coordinate
+   * @param {number} y The y coordinate
    */
   constructor(x, y) {
     this.#x = x;
@@ -43,7 +43,7 @@ export class Position {
   /**
    * Return a new position by adding another instance of
    * position coordinate by coordinate
-   * @param {*} pos
+   * @param {Position} pos
    */
   add(pos) {
     return new Position(this.#x + pos.x, this.#y + pos.y);
@@ -52,7 +52,7 @@ export class Position {
   /**
    * Return a new position by subtracting another instance of
    * position coordinate by coordinate
-   * @param {*} pos
+   * @param {Position} pos
    */
   sub(pos) {
     return new Position(this.#x - pos.x, this.#y - pos.y);

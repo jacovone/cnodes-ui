@@ -7,6 +7,7 @@
  * Year: 2020
  */
 
+import { Socket } from "@marco.jacovone/cnodes/core/socket";
 import { SocketComponent } from "../canvas/socket";
 
 /**
@@ -21,7 +22,7 @@ export class CnodesSocketComponent extends SocketComponent {
 
   /**
    * Construct a new CnodesSocket object
-   * @param {*} socket The internal cnodes socket object
+   * @param {Socket} socket The internal cnodes socket object
    */
   constructor(socket) {
     super();

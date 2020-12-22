@@ -120,7 +120,7 @@ export class Component {
 
   /**
    * Manages the mousedown event to implement moving
-   * @param {*} e The mousedown event
+   * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
     if (this.#moveable) {
@@ -136,7 +136,7 @@ export class Component {
 
   /**
    * Manages the mouseup event to implement pan
-   * @param {*} e The mouseup event
+   * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
     if (this.#moveable) {
@@ -148,7 +148,7 @@ export class Component {
 
   /**
    * Manages the mousemove event to implement pan
-   * @param {*} e The mousemove event
+   * @param {Event} e The mousemove event
    */
   #onPointerMove(e) {
     if (this.#moveable) {
@@ -214,7 +214,7 @@ export class Component {
    * WARNING: before attach child components, this component
    * must to be attached to the canvas itself, otherwise the method
    * fails
-   * @param {*} component Component to add
+   * @param {Component} component Component to add
    */
   addComponent(component) {
     this.#components.push(component);
@@ -226,7 +226,7 @@ export class Component {
 
   /**
    * Remove a child subcomponent
-   * @param {*} component The component to remove
+   * @param {Component} component The component to remove
    */
   removeComponent(component) {
     this.components = this.#components.filter((c) => c !== component);

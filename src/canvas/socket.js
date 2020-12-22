@@ -85,7 +85,7 @@ export class SocketComponent extends Component {
    * the user the chance to connect the peer socket to another one.
    * If the socket was not already connected, call the connectionStarted()
    * method that will be overridden in subclasses
-   * @param {*} e The pointerdown event
+   * @param {Event} e The pointerdown event
    */
   onPointerDown(e) {
     if (!this.hasSingleConnection || !this.isConnected) {
@@ -113,7 +113,7 @@ export class SocketComponent extends Component {
    * connectionDone() method can be calles. Otherwise the
    * connectionCancelled() is called. Both methods must be overridden
    * in subclasses.
-   * @param {*} e The pointerup event
+   * @param {Event} e The pointerup event
    */
   onPointerUp(e) {
     this.#connecting = false;
@@ -136,7 +136,7 @@ export class SocketComponent extends Component {
    * if true, show the temprary link in a "valid state", such as a special color
    * of the stroke stroke, and store the peer component in the currentPeerSocketComponent
    * for future use.
-   * @param {*} e The pointermove event
+   * @param {Event} e The pointermove event
    */
   onPointerMove(e) {
     if (this.#connecting) {
@@ -179,9 +179,9 @@ export class SocketComponent extends Component {
 
   /**
    * The user is moving the pointer around, with a connection pending
-   * @param {*} x The x coordinate in SVG space
-   * @param {*} y The y coordinate in SVG space
-   * @param {*} invalid true if the pointer is overing a unacceptable socket
+   * @param {number} x The x coordinate in SVG space
+   * @param {number} y The y coordinate in SVG space
+   * @param {boolean} invalid true if the pointer is overing a unacceptable socket
    */
   connectionMoving(x, y, invalid) {
     let sourcePoint = new Position(this.absPos.x, this.absPos.y);
@@ -205,7 +205,7 @@ export class SocketComponent extends Component {
 
   /**
    * The user has completed a valid connection
-   * @param {*} socketComp Peer socket to connect
+   * @param {SocketComponent} socketComp Peer socket to connect
    */
   connectionDone(socketComp) {
     this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
@@ -221,7 +221,7 @@ export class SocketComponent extends Component {
   /**
    * Query if this socket could accept a connection with
    * a peer socket passed as parmeter
-   * @param {*} socketComp Peer socket to connect
+   * @param {SocketComponent} socketComp Peer socket to connect
    */
   canAcceptPeerSocket(socketComp) {
     throw new Error("This method must be overridden in a subclass!");

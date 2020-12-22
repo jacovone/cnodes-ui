@@ -7,6 +7,9 @@
  * Year: 2020
  */
 
+import { Socket } from "@marco.jacovone/cnodes/core/socket";
+import { Component } from "./component";
+import { Connection } from "./connection";
 import { SocketComponent } from "./socket";
 
 /**
@@ -52,7 +55,7 @@ export class Canvas {
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
    * set up all listeners to manage panning, zooming and selection.
-   * @param {*} el The parent element in which create the SVG element
+   * @param {HTMLElement} el The parent element in which create the SVG element
    */
   constructor(el) {
     // Create the main SVG element
@@ -135,7 +138,7 @@ export class Canvas {
 
   /**
    * Manages the wheel event to imlement zooming
-   * @param {*} e Wheel event
+   * @param {Event} e Wheel event
    */
   #onWheel(e) {
     let p = this.clientToSvgPoint(e.clientX, e.clientY);
@@ -166,8 +169,8 @@ export class Canvas {
   /**
    * This method is responsible for translate client (browser) coordinates
    * to SVG space coordinates
-   * @param {*} clientX The client x coordinate
-   * @param {*} clientY The client y coordinate
+   * @param {number} clientX The client x coordinate
+   * @param {number} clientY The client y coordinate
    */
   clientToSvgPoint(clientX, clientY) {
     // Subtract the SVG's origin
@@ -187,7 +190,7 @@ export class Canvas {
 
   /**
    * Manage the mousedown event to implement pan
-   * @param {*} e The mousedown event
+   * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
     this.#dragging = true;
@@ -197,7 +200,7 @@ export class Canvas {
 
   /**
    * Manages the mouseup event to implement pan
-   * @param {*} e The mouseup event
+   * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
     this.#dragging = false;
@@ -206,7 +209,7 @@ export class Canvas {
 
   /**
    * Manages the mousemove event to implement pan
-   * @param {*} e The mousemove event
+   * @param {Event} e The mousemove event
    */
   #onPointerMove(e) {
     if (!this.#dragging) {
@@ -225,9 +228,9 @@ export class Canvas {
    * at specified location (x,y). Optionally the user can request
    * only sockets component, this is useful when you want to search
    * a possible connection peer during the link process
-   * @param {*} x The x coordinate in the canvas
-   * @param {*} y Te y coordinate in the canvas
-   * @param {*} onlySockets If true, this method search only for socket components
+   * @param {number} x The x coordinate in the canvas
+   * @param {number} y Te y coordinate in the canvas
+   * @param {boolean} onlySockets If true, this method search only for socket components
    */
   componentFromPosition(x, y, onlySockets = false) {
     // Get the DOM element at x,y in client space
@@ -248,7 +251,7 @@ export class Canvas {
   /**
    * Add a new connection to the canvas, also add the related element to
    * the main SVG group of connections
-   * @param {*} connection The connection to add
+   * @param {Connection} connection The connection to add
    */
   addConnection(connection) {
     this.#connections.push(connection);
@@ -258,7 +261,7 @@ export class Canvas {
 
   /**
    * Remove a connection from the canvas, also remove the related SVG element
-   * @param {*} connection The connection to remove
+   * @param {Connection} connection The connection to remove
    */
   removeConnection(connection) {
     // Signal the connection that will be destroyed
@@ -269,8 +272,8 @@ export class Canvas {
 
   /**
    * Checks if there is a connection between sockets already
-   * @param {*} socket1 First socket component
-   * @param {*} socket2 Second socket component
+   * @param {SocketComponent} socket1 First socket component
+   * @param {SocketComponent} socket2 Second socket component
    */
   alreadyConnected(socket1, socket2) {
     return (
@@ -280,7 +283,7 @@ export class Canvas {
 
   /**
    * Add a new component to the canvas
-   * @param {*} component Component to add
+   * @param {Component} component Component to add
    */
   addComponent(component) {
     this.#components.push(component);
@@ -290,7 +293,7 @@ export class Canvas {
 
   /**
    * Remove a component from the canvas
-   * @param {*} component Component to remove
+   * @param {Component} component Component to remove
    */
   removeComponent(component) {
     // Signal component that will be removed
@@ -325,7 +328,7 @@ export class Canvas {
   /**
    * This method extract all connections in the canvas, that have
    * the source or the target SocketComponent as endpoint
-   * @param {*} socket The socket component for which search the connection
+   * @param {SocketComponent} socket The socket component for which search the connection
    */
   getConnectionsFor(socket) {
     return this.#connections.filter((c) => c.source === socket || c.target === socket);

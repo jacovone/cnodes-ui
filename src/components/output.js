@@ -76,9 +76,9 @@ export class OutputSocketComponent extends CnodesSocketComponent {
 
   /**
    * The user is moving the pointer around, with a connection pending
-   * @param {*} x The x coordinate in SVG space
-   * @param {*} y The y coordinate in SVG space
-   * @param {*} invalid true if the pointer is overing a unacceptable socket
+   * @param {number} x The x coordinate in SVG space
+   * @param {number} y The y coordinate in SVG space
+   * @param {boolean} invalid true if the pointer is overing a unacceptable socket
    */
   connectionMoving(x, y, invalid) {
     let sourcePoint = new Position(this.absPos.x, this.absPos.y);
@@ -113,7 +113,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
 
   /**
    * The user has completed a valid connection
-   * @param {*} socketComp Peer socket to connect
+   * @param {SocketComponent} socketComp Peer socket to connect
    */
   connectionDone(socketComp) {
     super.connectionDone(socketComp);
@@ -131,7 +131,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
   /**
    * Query if this socket could accept a connection with
    * a peer socket passed as parmeter
-   * @param {*} socketComp Peer socket to connect
+   * @param {SocketComponent} socketComp Peer socket to connect
    */
   canAcceptPeerSocket(socketComp) {
     return socketComp.socket instanceof InputSocket;

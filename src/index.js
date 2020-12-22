@@ -33,7 +33,7 @@ export * from "@marco.jacovone/cnodes/cnodes.js";
  *  canvas.program = prg;
  * </script>
  *
- * @param {*} elId The id of the DOM element you want to become a CNODES-UI canvas
+ * @param {string} elId The id of the DOM element you want to become a CNODES-UI canvas
  */
 export function canvas(elId) {
   let el = document.getElementById(elId);

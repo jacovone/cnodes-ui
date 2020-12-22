@@ -8,7 +8,9 @@
  */
 
 import { Env } from "@marco.jacovone/cnodes/core/env";
+import { Program } from "@marco.jacovone/cnodes/core/program";
 import { Canvas } from "../canvas/canvas";
+import { Component } from "../canvas/component";
 import { Position } from "../canvas/position";
 import { IOConnection } from "../connections/io_connection";
 import { PrevNextConnection } from "../connections/prevnext_connection";
@@ -80,7 +82,7 @@ export class CnodesCanvas extends Canvas {
 
   /**
    * Add a new component to the canvas
-   * @param {*} component Component to add
+   * @param {Component} component Component to add
    */
   addComponent(component) {
     super.addComponent(component);
@@ -93,7 +95,7 @@ export class CnodesCanvas extends Canvas {
 
   /**
    * Remove a component from the canvas
-   * @param {*} component Component to remove
+   * @param {Component} component Component to remove
    */
   removeComponent(component) {
     super.removeComponent(component);
@@ -106,7 +108,7 @@ export class CnodesCanvas extends Canvas {
 
   /**
    * This method imports an entire cnodes program
-   * @param {*} program Program to import
+   * @param {Program} program Program to import
    */
   #importCnodesProgram(program) {
     this.#program = null;

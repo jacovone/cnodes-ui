@@ -7,7 +7,6 @@
  * Year: 2020
  */
 
-import { Theme } from "../components/theme";
 import { Canvas } from "./canvas";
 import { Component } from "./component";
 import { Position } from "./position";
@@ -58,18 +57,12 @@ export class Menu extends Component {
    * Construct a new Menu for the canvas
    * @param {Canvas} canvas The canvas
    * @param {MenuItem[]} items The menu items
-   * @param {number} x The x coordinate
-   * @param {number} y The y coordinate
    */
-  constructor(canvas, items, x, y) {
+  constructor(canvas, items) {
     super();
     this.moveable = false;
     this.canvas = canvas;
     this.#items = items;
-    this.setup();
-
-    canvas.addComponent(this);
-    this.pos = new Position(x, y);
   }
 
   get items() {
@@ -77,6 +70,18 @@ export class Menu extends Component {
   }
   set items(val) {
     this.#items = val;
+  }
+
+  /**
+   * Show the menu
+   * @param {number} x The x coordinate
+   * @param {number} y The y coordinate
+   */
+  show(x, y) {
+    this.setup();
+
+    canvas.addComponent(this);
+    this.pos = new Position(x, y);
   }
 
   /**

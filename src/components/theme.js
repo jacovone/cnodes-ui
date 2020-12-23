@@ -177,6 +177,9 @@ export class Theme {
   get MENU_ITEM_HIGHLIGHT() {
     return "white";
   }
+  get MENU_SEARCH_FONT() {
+    return "bold 11px verdana";
+  }
 
   static current = new Theme();
 }

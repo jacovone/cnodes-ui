@@ -112,7 +112,26 @@ export class CnodesCanvas extends Canvas {
    * Return a list of MenuItem for the context menu
    */
   getCanvasContextMenuItems() {
-    return [new MenuItem("prima opzione", () => {}), new MenuItem("prima opzione", () => {})];
+    let items = [];
+    for (let cat of Env.getCategories()) {
+      for (let nodeDef of Env.getCategoryNodes(cat)) {
+        let n = Env.getInstance(nodeDef.name);
+        if (n.creatable) {
+          items.push(
+            new MenuItem(`${nodeDef.name} (${nodeDef.category})`, (x, y) => {
+              let node = new CnodeComponent(n, this);
+              node.pos = new Position(x, y);
+            })
+          );
+        }
+      }
+    }
+
+    if (items.length === 0) {
+      return null;
+    } else {
+      return items;
+    }
   }
 
   /**
@@ -135,7 +154,8 @@ export class CnodesCanvas extends Canvas {
         x = 0;
         y = 0;
       }
-      this.contextMenuComponent = new CnodesMenu(this, items, x, y);
+      this.contextMenuComponent = new CnodesMenu(this, items);
+      this.contextMenuComponent.show(x, y);
     }
   }
 

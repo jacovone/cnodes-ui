@@ -103,7 +103,7 @@ export class CnodesCanvas extends Canvas {
     super.removeComponent(component);
 
     if (component instanceof CnodeComponent && this.program) {
-      // Add the node to the program
+      // Remove the node from the program
       this.program.removeNode(component.node);
     }
   }

@@ -7,6 +7,7 @@
  * Year: 2020
  */
 
+import { Socket } from "@marco.jacovone/cnodes/src/core/socket";
 import { Component } from "./component";
 import { Connection } from "./connection";
 import { SocketComponent } from "./socket";
@@ -325,22 +326,21 @@ export class Canvas {
    * @param {Component} component Component to remove
    */
   removeComponent(component) {
+    // Remove related connections
+    for (let s of component.components) {
+      if (s instanceof SocketComponent) {
+        for (let c of this.getConnectionsFor(s)) {
+          this.removeConnection(c);
+        }
+      }
+    }
+
     // Signal component that will be removed
     component.destroy();
 
     // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
     this.#svgEl.removeChild(component.componentEl);
-
-    // Signal related connections that will be removed
-    this.#connections.forEach((c) => {
-      if (c.source === component || c.target === component) {
-        c.destroy();
-      }
-    });
-
-    // Remove related connections
-    this.#connections = this.#connections.filter((c) => c.source !== component && c.target !== component);
   }
 
   /**
@@ -364,7 +364,7 @@ export class Canvas {
   }
 
   /**
-   * Remoives all connections from the canvas
+   * Removes all connections from the canvas
    */
   removeAllConnections() {
     while (this.#connections.length > 0) {

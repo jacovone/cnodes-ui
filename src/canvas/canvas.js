@@ -186,10 +186,6 @@ export class Canvas {
    * @param {number} clientY The client y coordinate
    */
   clientToSvgPoint(clientX, clientY) {
-    // Subtract the SVG's origin
-    clientX -= this.#svgEl.getBoundingClientRect().left;
-    clientY -= this.#svgEl.getBoundingClientRect().top;
-
     // Create a point in SVG space
     let p = this.#svgEl.createSVGPoint();
 
@@ -197,7 +193,7 @@ export class Canvas {
     p.y = clientY;
 
     // Translate coordinates using the SVG transofrmation matrix
-    let pSVG = p.matrixTransform(this.#svgEl.getCTM().inverse());
+    let pSVG = p.matrixTransform(this.#svgEl.getScreenCTM().inverse());
     return pSVG;
   }
 

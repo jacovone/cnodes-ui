@@ -139,13 +139,15 @@ export class CnodesMenu extends Menu {
 
           // Items can return a result to inform the menu client about the item selection
           let itemResult = self.filteredElements[0].callback(p.x, p.y);
-          self.canvas.cancelContextMenu();
 
           // If there is client of the menu interested to user selection or abort
           if (self.menuCallback) {
             self.menuCallback(itemResult);
             self.menuCallback = null;
           }
+
+          self.canvas.cancelContextMenu();
+
           return;
         }
       }

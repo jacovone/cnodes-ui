@@ -9,9 +9,12 @@
 
 import { NextSocket } from "@marco.jacovone/cnodes/cnodes";
 import { Theme } from "./theme";
-import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
+import { Env } from "@marco.jacovone/cnodes/src/core/env";
+import { MenuItem } from "../canvas/menu";
+import { CnodeComponent } from "./cnode";
+import { Position } from "../canvas/position";
 
 /**
  * This class implements a socket that represents a Prev object
@@ -108,10 +111,62 @@ export class PrevSocketComponent extends CnodesSocketComponent {
   }
 
   /**
+   * Returns the direction of the source point for this socket component:
+   * -1 = Left
+   * 1 = Right
+   */
+  getSourcePointDirection() {
+    return -1;
+  }
+
+  /**
    * This socket is a multi-connection socket. This means that
    * many sockets can be connected to it
    */
   get hasSingleConnection() {
     return false;
+  }
+
+  /**
+   * This method is responsible to enumerate all socket of registered nodes
+   * that can enstabilish a valid connection with this socket and construct
+   * a menu items array thst define callback to create the related node and
+   * return the particular socket. It is used by the smart connection process
+   * via the context menu
+   */
+  getRegisteredPossiblePeers() {
+    let items = [];
+    for (let cat of Env.getCategories()) {
+      for (let nodeDef of Env.getCategoryNodes(cat)) {
+        // Instantiate the node to enumerate its sockets
+        let n = Env.getInstance(nodeDef.name);
+        if (n.creatable) {
+          for (let next of n.nexts) {
+            items.push(
+              new MenuItem(
+                `
+                <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}">
+                  ${next.name}
+                </tspan>
+                <tspan alignment-baseline="middle">
+                  ${nodeDef.name}
+                </tspan>
+                <tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="lightgray">
+                  ${nodeDef.category}
+                </tspan>
+                `,
+                (x, y) => {
+                  let node = new CnodeComponent(n, this.canvas);
+                  node.pos = new Position(x, y);
+                  // Return the connected component instead
+                  return next.__comp;
+                }
+              )
+            );
+          }
+        }
+      }
+    }
+    return items;
   }
 }

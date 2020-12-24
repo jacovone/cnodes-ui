@@ -119,10 +119,20 @@ export class CnodesCanvas extends Canvas {
         let n = Env.getInstance(nodeDef.name);
         if (n.creatable) {
           items.push(
-            new MenuItem(`${nodeDef.name} (${nodeDef.category})`, (x, y) => {
-              let node = new CnodeComponent(n, this);
-              node.pos = new Position(x, y);
-            })
+            new MenuItem(
+              `
+              <tspan alignment-baseline="middle">
+                ${nodeDef.name}
+              </tspan>
+              <tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="lightgray">
+                ${nodeDef.category}
+              </tspan>
+              `,
+              (x, y) => {
+                let node = new CnodeComponent(n, this);
+                node.pos = new Position(x, y);
+              }
+            )
           );
         }
       }

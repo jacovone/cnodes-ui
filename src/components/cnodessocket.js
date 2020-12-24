@@ -8,11 +8,8 @@
  */
 
 import { Socket } from "@marco.jacovone/cnodes/cnodes";
-import { Env } from "@marco.jacovone/cnodes/src/core/env";
-import { MenuItem } from "../canvas/menu";
 import { Position } from "../canvas/position";
 import { SocketComponent } from "../canvas/socket";
-import { CnodeComponent } from "./cnode";
 import { Theme } from "./theme";
 
 /**
@@ -72,8 +69,8 @@ export class CnodesSocketComponent extends SocketComponent {
     );
 
     let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-    let cp1 = sourcePoint.add(new Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-    let cp2 = targetPoint.add(new Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+    let cp1 = sourcePoint.add(new Position(cpXDistance * this.getSourcePointDirection(), -0.1 * (sourcePoint.y - targetPoint.y)));
+    let cp2 = targetPoint.add(new Position(-cpXDistance * this.getSourcePointDirection(), 0.1 * (sourcePoint.y - targetPoint.y)));
 
     this.tempConnectionEl.setAttribute(
       "d",

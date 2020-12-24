@@ -12,6 +12,10 @@ import { OutputSocket } from "@marco.jacovone/cnodes/cnodes";
 import { IOConnection } from "../connections/io_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { SocketComponent } from "../canvas/socket";
+import { Env } from "@marco.jacovone/cnodes/src/core/env";
+import { MenuItem } from "../canvas/menu";
+import { CnodeComponent } from "./cnode";
+import { Position } from "../canvas/position";
 
 /**
  * This class implement a socket to draw a Input element
@@ -143,6 +147,15 @@ export class InputSocketComponent extends CnodesSocketComponent {
   }
 
   /**
+   * Returns the direction of the source point for this socket component:
+   * -1 = Left
+   * 1 = Right
+   */
+  getSourcePointDirection() {
+    return -1;
+  }
+
+  /**
    * This method is called from connection when the connection status
    * of the socket chenged
    */
@@ -150,5 +163,48 @@ export class InputSocketComponent extends CnodesSocketComponent {
     // Show/Hide the imput component
     this.#inputElement.style["display"] = this.isConnected ? "block" : "none";
     this.socket.value = this.#inputElement.value;
+  }
+
+  /**
+   * This method is responsible to enumerate all socket of registered nodes
+   * that can enstabilish a valid connection with this socket and construct
+   * a menu items array thst define callback to create the related node and
+   * return the particular socket. It is used by the smart connection process
+   * via the context menu
+   */
+  getRegisteredPossiblePeers() {
+    let items = [];
+    for (let cat of Env.getCategories()) {
+      for (let nodeDef of Env.getCategoryNodes(cat)) {
+        // Instantiate the node to enumerate its sockets
+        let n = Env.getInstance(nodeDef.name);
+        if (n.creatable) {
+          for (let out of n.outputs) {
+            items.push(
+              new MenuItem(
+                `
+                <tspan alignment-baseline="middle" fill="${Theme.current.NODE_IO_FILL_COLOR}">
+                  ${out.name}
+                </tspan>
+                <tspan alignment-baseline="middle">
+                  ${nodeDef.name}
+                </tspan>
+                <tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="lightgray">
+                  ${nodeDef.category}
+                </tspan>
+                `,
+                (x, y) => {
+                  let node = new CnodeComponent(n, this.canvas);
+                  node.pos = new Position(x, y);
+                  // Return the connected component instead
+                  return out.__comp;
+                }
+              )
+            );
+          }
+        }
+      }
+    }
+    return items;
   }
 }

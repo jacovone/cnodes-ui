@@ -100,8 +100,6 @@ export class NextSocketComponent extends CnodesSocketComponent {
    * @param {SocketComponent} socketComp Peer socket to connect
    */
   connectionDone(socketComp) {
-    console.log(this);
-    console.log(socketComp);
     super.connectionDone(socketComp);
 
     // This creates the connection and connects sockets
@@ -126,6 +124,15 @@ export class NextSocketComponent extends CnodesSocketComponent {
   }
 
   /**
+   * Returns the direction of the source point for this socket component:
+   * -1 = Left
+   * 1 = Right
+   */
+  getSourcePointDirection() {
+    return 1;
+  }
+
+  /**
    * This method is responsible to enumerate all socket of registered nodes
    * that can enstabilish a valid connection with this socket and construct
    * a menu items array thst define callback to create the related node and
@@ -141,12 +148,17 @@ export class NextSocketComponent extends CnodesSocketComponent {
         if (n.creatable && n.prev) {
           items.push(
             new MenuItem(
-              `<tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="green">
-                ${nodeDef.category}
-              </tspan> 
-              <tspan alignment-baseline="middle">&nbsp;
+              `
+              <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}">
+                ${n.prev.name}
+              </tspan>
+              <tspan alignment-baseline="middle">
                 ${nodeDef.name}
-              </tspan>`,
+              </tspan>
+              <tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="lightgray">
+                ${nodeDef.category}
+              </tspan>
+              `,
               (x, y) => {
                 let node = new CnodeComponent(n, this.canvas);
                 node.pos = new Position(x, y);

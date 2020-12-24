@@ -250,7 +250,15 @@ export class Canvas {
 
     let component = this.componentFromPosition(e.clientX, e.clientY);
     let p = this.clientToSvgPoint(e.clientX, e.clientY);
-    this.showContextMenu(component, p.x, p.y);
+
+    let items;
+    if (!component) {
+      items = this.getCanvasContextMenuItems();
+    } else {
+      items = component.getContextMenuItems();
+    }
+
+    this.showContextMenu(items, p.x, p.y);
   }
 
   /**
@@ -397,14 +405,18 @@ export class Canvas {
   }
 
   /**
-   * Shows the context menu retated to the component "component" if it
-   * is passed, otherwise, the contextual menu is related to this canvas
-   * @param {Component} component The component for which display the contextual menu
+   * Shows the context menu retated to the component or the canvas
+   * @param {MenuItem[]} items Items that compose the menu
    * @param {number} x The x coordinate for the menu
    * @param {number} y The y coordinate for the menu
    */
-  showContextMenu(component, x, y) {}
+  showContextMenu(items, x, y) {
+    throw new Error("You must override this method in a subclass!");
+  }
 
+  /**
+   * Cancels the current open context menu, and closes it
+   */
   cancelContextMenu() {
     if (this.#contextMenuComponent) {
       this.removeComponent(this.#contextMenuComponent);

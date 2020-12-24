@@ -25,7 +25,10 @@ export class CnodesMenu extends Menu {
   #itemsEls = [];
 
   /** The search filter (value of the search input) */
-  #serachFilter = "";
+  #searchFilter = "";
+
+  /** The result of the selection of the user. If who request the menu is interested */
+  #menuCallback = null;
 
   /**
    * Construct a new Menu for the canvas
@@ -37,10 +40,16 @@ export class CnodesMenu extends Menu {
   }
 
   get searchFilter() {
-    return this.#serachFilter;
+    return this.#searchFilter;
   }
   set searchFilter(val) {
-    this.#serachFilter = val;
+    this.#searchFilter = val;
+  }
+  get menuCallback() {
+    return this.#menuCallback;
+  }
+  set menuCallback(val) {
+    this.#menuCallback = val;
   }
 
   /** Returns the filtered items of the menu */
@@ -109,22 +118,34 @@ export class CnodesMenu extends Menu {
 
     let self = this;
     this.#inputElement.addEventListener("input", (e) => {
-      self.#serachFilter = this.#inputElement.value;
+      self.#searchFilter = this.#inputElement.value;
       self.createMenuItemsElements();
     });
     this.#inputElement.addEventListener("keydown", (e) => {
       if (e.keyCode === 27) {
         self.canvas.cancelContextMenu();
+
+        // If there is client of the menu interested to user selection or abort
+        if (self.menuCallback) {
+          self.menuCallback(null);
+          self.menuCallback = null;
+        }
         return;
       }
       if (e.keyCode === 13) {
         if (self.filteredElements.length > 0) {
           let menuEl = this.canvas.contextMenuComponent.componentEl.getBoundingClientRect();
-
           let p = this.canvas.clientToSvgPoint(menuEl.left, menuEl.top);
 
-          self.filteredElements[0].callback(p.x, p.y);
+          // Items can return a result to inform the menu client about the item selection
+          let itemResult = self.filteredElements[0].callback(p.x, p.y);
           self.canvas.cancelContextMenu();
+
+          // If there is client of the menu interested to user selection or abort
+          if (self.menuCallback) {
+            self.menuCallback(itemResult);
+            self.menuCallback = null;
+          }
           return;
         }
       }
@@ -198,7 +219,7 @@ export class CnodesMenu extends Menu {
       itemTextEl.setAttribute("width", itemWidth - 10);
       itemTextEl.setAttribute("height", itemHeight - 10);
       itemTextEl.setAttribute("style", Theme.current.MENU_ITEM_FONT);
-      itemTextEl.setAttribute("alignment-baseline", "middle");
+      // itemTextEl.setAttribute("alignment-baseline", "middle");
       itemTextEl.style["pointer-events"] = "none";
       itemTextEl.style["user-select"] = "none";
       itemTextEl.innerHTML = item.text;
@@ -210,9 +231,16 @@ export class CnodesMenu extends Menu {
         itemEl.setAttribute("fill", "transparent");
       });
       itemEl.addEventListener("pointerdown", (e) => {
-        let p = this.canvas.clientToSvgPoint(e.clientX, e.clientY);
+        let menuEl = this.canvas.contextMenuComponent.componentEl.getBoundingClientRect();
+        let p = this.canvas.clientToSvgPoint(menuEl.left, menuEl.top);
 
-        item.callback(p.x, p.y);
+        let result = item.callback(p.x, p.y);
+
+        // If there is client of the menu interested to user selection or abort
+        if (this.menuCallback) {
+          this.menuCallback(result);
+          this.menuCallback = null;
+        }
         this.canvas.cancelContextMenu();
       });
 

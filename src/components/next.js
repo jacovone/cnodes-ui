@@ -13,6 +13,9 @@ import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { SocketComponent } from "../canvas/socket";
+import { Env } from "@marco.jacovone/cnodes/src/core/env";
+import { MenuItem } from "../canvas/menu";
+import { CnodeComponent } from "./cnode";
 
 /**
  * This class implements a socket representing the Next socket in the
@@ -93,47 +96,12 @@ export class NextSocketComponent extends CnodesSocketComponent {
   }
 
   /**
-   * The user is moving the pointer around, with a connection pending
-   * @param {number} x The x coordinate in SVG space
-   * @param {number} y The y coordinate in SVG space
-   * @param {number} invalid true if the pointer is overing a unacceptable socket
-   */
-  connectionMoving(x, y, invalid) {
-    let sourcePoint = new Position(this.absPos.x, this.absPos.y);
-    let targetPoint = new Position(
-      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x,
-      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y
-    );
-
-    let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-    let cp1 = sourcePoint.add(new Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-    let cp2 = targetPoint.add(new Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
-
-    this.tempConnectionEl.setAttribute(
-      "d",
-      `
-      M ${this.absPos.x} ${this.absPos.y}
-      C ${cp1.x} ${cp1.y} ${cp2.x} ${cp2.y} ${targetPoint.x} ${targetPoint.y}
-    `
-    );
-
-    this.tempConnectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_PREV_NEXT_WIDTH);
-    this.tempConnectionEl.setAttribute(
-      "stroke",
-      invalid
-        ? Theme.current.CONNECTION_PREV_NEXT_INVALID_COLOR
-        : this.currentPeerSocketComponent
-        ? Theme.current.CONNECTION_PREV_NEXT_VALID_COLOR
-        : Theme.current.CONNECTION_PREV_NEXT_COLOR
-    );
-    this.tempConnectionEl.setAttribute("fill", "transparent");
-  }
-
-  /**
    * The user has completed a valid connection
    * @param {SocketComponent} socketComp Peer socket to connect
    */
   connectionDone(socketComp) {
+    console.log(this);
+    console.log(socketComp);
     super.connectionDone(socketComp);
 
     // This creates the connection and connects sockets
@@ -155,5 +123,41 @@ export class NextSocketComponent extends CnodesSocketComponent {
    */
   get hasSingleConnection() {
     return true;
+  }
+
+  /**
+   * This method is responsible to enumerate all socket of registered nodes
+   * that can enstabilish a valid connection with this socket and construct
+   * a menu items array thst define callback to create the related node and
+   * return the particular socket. It is used by the smart connection process
+   * via the context menu
+   */
+  getRegisteredPossiblePeers() {
+    let items = [];
+    for (let cat of Env.getCategories()) {
+      for (let nodeDef of Env.getCategoryNodes(cat)) {
+        // Instantiate the node to enumerate its sockets
+        let n = Env.getInstance(nodeDef.name);
+        if (n.creatable && n.prev) {
+          items.push(
+            new MenuItem(
+              `<tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="green">
+                ${nodeDef.category}
+              </tspan> 
+              <tspan alignment-baseline="middle">&nbsp;
+                ${nodeDef.name}
+              </tspan>`,
+              (x, y) => {
+                let node = new CnodeComponent(n, this.canvas);
+                node.pos = new Position(x, y);
+                // Return the connected component instead
+                return n.prev.__comp;
+              }
+            )
+          );
+        }
+      }
+    }
+    return items;
   }
 }

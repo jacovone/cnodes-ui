@@ -123,6 +123,18 @@ export class Theme {
 
   // IO Connections
 
+  get CONNECTION_TEMP_WIDTH() {
+    return 4;
+  }
+  get CONNECTION_TEMP_INVALID_COLOR() {
+    return "red";
+  }
+  get CONNECTION_TEMP_VALID_COLOR() {
+    return "#EEEEEE";
+  }
+  get CONNECTION_TEMP_COLOR() {
+    return "#DDDDDD";
+  }
   get CONNECTION_IO_WIDTH() {
     return 4;
   }

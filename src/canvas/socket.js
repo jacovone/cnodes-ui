@@ -113,9 +113,8 @@ export class SocketComponent extends Component {
    * This method manages the pointerup event to implement
    * the final part of the connection. If the pointer is overing a
    * valid peer socket, then the connection ca be done, and the
-   * connectionDone() method can be calles. Otherwise the
-   * connectionCancelled() is called. Both methods must be overridden
-   * in subclasses.
+   * connectionDone() method can be call. Otherwise the
+   * connectionEndedOutOfSocket() is called.
    * @param {Event} e The pointerup event
    */
   onPointerUp(e) {
@@ -129,7 +128,7 @@ export class SocketComponent extends Component {
         this.#currentPeerSocketComponent = null;
         this.connectionDone(connectingSocketComponent);
       } else {
-        this.connectionCancelled();
+        this.connectionEndedOutOfSocket(e);
       }
     }
   }
@@ -225,9 +224,11 @@ export class SocketComponent extends Component {
   }
 
   /**
-   * The user has aborted the connection
+   * The user has released the pointer button out of a valid socket,
+   * so by default, cancel the connection
+   * @param {Event} e The event pointerup
    */
-  connectionCancelled() {
+  connectionEndedOutOfSocket(e) {
     this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
   }
 

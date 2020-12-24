@@ -60,6 +60,7 @@ export class CnodesCanvas extends Canvas {
   get program() {
     return this.#program;
   }
+
   /**
    * This setter is a trigger for the import procedure
    */
@@ -135,26 +136,32 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
-   * Shows the context menu retated to the component "component" if it
-   * is passed, otherwise, the contextual menu is related to this canvas
-   * @param {Component} component The component for which display the contextual menu
+   * Cancels the current open context menu, and closes it.
+   * Override this to ensure cancel menu inform menu callback clients
+   */
+  cancelContextMenu() {
+    if (this.contextMenuComponent && this.contextMenuComponent.menuCallback) {
+      this.contextMenuComponent.menuCallback(null);
+      this.contextMenuComponent.menuCallback = null;
+    }
+    super.cancelContextMenu();
+  }
+
+  /**
+   * Shows the context menu retated to the component or to the canvas
+   * @param {MenuItem[]} items Items that compose the menu
    * @param {number} x The x coordinate for the menu
    * @param {number} y The y coordinate for the menu
+   * @param {Function} menuCallback If the client is interested to the user selection or cancel
    */
-  showContextMenu(component, x, y) {
-    let items;
-    if (!component) {
-      items = this.getCanvasContextMenuItems();
-    } else {
-      items = component.getContextMenuItems();
-    }
-
+  showContextMenu(items, x, y, menuCallback) {
     if (items) {
-      if (!x || !y) {
-        x = 0;
-        y = 0;
+      if (this.contextMenuComponent) {
+        this.cancelContextMenu();
       }
+
       this.contextMenuComponent = new CnodesMenu(this, items);
+      this.contextMenuComponent.menuCallback = menuCallback;
       this.contextMenuComponent.show(x, y);
     }
   }

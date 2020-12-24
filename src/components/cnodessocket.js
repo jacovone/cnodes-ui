@@ -16,7 +16,10 @@ import { Theme } from "./theme";
  * This class is the base class for all sockets components
  * of cnodes. The class introduces the socket field that is
  * a "cnodes" socket the internal structure to store links
- * between cnodes nodes
+ * between cnodes nodes. In addition implements the base functionality
+ * of the "smart" connection flow, in case the user drag out
+ * of a socket component and release the pointer outside of
+ * a destination socket
  */
 export class CnodesSocketComponent extends SocketComponent {
   /** The cnodes socket object */
@@ -39,6 +42,10 @@ export class CnodesSocketComponent extends SocketComponent {
    * The user has released the pointer button out of a valid socket,
    * display a context menu that presents all valid possible nodes
    * and relative sockets to connect...
+   * Possible nodes items are returned by subclasses; this method display the
+   * context menu via canvas.showContextMenu(...) and specifying a menuCallback
+   * that inform this client about the final selection of the user, so
+   * complete the connection or abort that
    * @param {Event} e The event pointerup
    */
   connectionEndedOutOfSocket(e) {

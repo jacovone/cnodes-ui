@@ -160,6 +160,8 @@ export class NextSocketComponent extends CnodesSocketComponent {
               </tspan>
               `,
               (x, y) => {
+                // create the node and return the specific socket component to
+                // the context menu client
                 let node = new CnodeComponent(n, this.canvas);
                 node.pos = new Position(x, y);
                 // Return the connected component instead

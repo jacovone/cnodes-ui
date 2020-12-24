@@ -27,7 +27,15 @@ export class CnodesMenu extends Menu {
   /** The search filter (value of the search input) */
   #searchFilter = "";
 
-  /** The result of the selection of the user. If who request the menu is interested */
+  /**
+   * The result of the selection of the user. If who request the menu is interested.
+   * Some components, like sockets, can open a context menu to select items, instead of
+   * the canvas. In such case, the originating component have to know the final
+   * result of the menu selection. In this case, tho variable contains a callback to
+   * the menu "client", and the menu, upon a user selection, calls this callback passing
+   * the result value of the context menu item callback, as parameter.
+   * Please see the class CnodesSocket component to check this behavior.
+   */
   #menuCallback = null;
 
   /**

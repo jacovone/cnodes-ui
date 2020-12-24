@@ -230,6 +230,10 @@ export class CnodeComponent extends Component {
     };
   }
 
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
   getContextMenuItems() {
     let items = [
       new MenuItem("Disconnect all", () => {

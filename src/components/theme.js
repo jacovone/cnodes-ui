@@ -28,6 +28,12 @@
 export class Theme {
   constructor() {}
 
+  // Canvas
+
+  get CANVAS_BACKGROUND_COLOR() {
+    return "white";
+  }
+
   // Node container
 
   get NODE_WIDTH() {
@@ -57,7 +63,7 @@ export class Theme {
     return "brown";
   }
   get NODE_FUNCTIONAL_TITLE_COLOR() {
-    return "069DD1";
+    return "#069DD1";
   }
   get NODE_TITLE_FONT() {
     return "bold 18px verdana";
@@ -186,6 +192,15 @@ export class Theme {
   get MENU_ITEM_FONT() {
     return "font: bold 14px sans-serif";
   }
+  get MENU_ITEM_CATEGORY_FONT() {
+    return "font: bold 10px sans-serif";
+  }
+  get MENU_ITEM_COLOR() {
+    return "black";
+  }
+  get MENU_ITEM_CATEGORY_COLOR() {
+    return "lightgray";
+  }
   get MENU_ITEM_HIGHLIGHT() {
     return "white";
   }
@@ -195,3 +210,6 @@ export class Theme {
 
   static current = new Theme();
 }
+
+/** Default Light Theme */
+export const defaultLight = new Theme();

@@ -236,7 +236,7 @@ export class CnodeComponent extends Component {
    */
   getContextMenuItems() {
     let items = [
-      new MenuItem("Disconnect all", () => {
+      new MenuItem(`<tspan alignment-baseline="middle">Disconnect all</tspan>`, () => {
         for (let comp of this.components) {
           if (comp instanceof SocketComponent && comp.isConnected) {
             for (let conn of this.canvas.getConnectionsFor(comp)) {
@@ -249,7 +249,7 @@ export class CnodeComponent extends Component {
 
     if (this.node.removable) {
       items.unshift(
-        new MenuItem("Delete", () => {
+        new MenuItem(`<tspan alignment-baseline="middle">Delete</tspan>`, () => {
           this.canvas.removeComponent(this);
         })
       );

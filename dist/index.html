@@ -21,23 +21,6 @@
   <button class="action" onclick="newCanvas()">New</button>
   <button class="action" onclick="canvas.run()">Run</button>
   <button class="action" onclick="canvas.dump()">DUMP</button>
-  <button class="action" onclick="addNode('Setvar');">Setvar</button>
-  <button class="action" onclick="addNode('Getvar');">Getvar</button>
-  <button class="action" onclick="addNode('FGetvar');">FGetvar</button>
-  <button class="action" onclick="addNode('Call');">Call</button>
-  <button class="action" onclick="addNode('Console');">Console</button>
-  <button class="action" onclick="addNode('If');">If</button>
-  <button class="action" onclick="addNode('While');">While</button>
-  <button class="action" onclick="addNode('For');">For</button>
-  <button class="action" onclick="addNode('FDiv');">FDiv</button>
-  <button class="action" onclick="addNode('FMul');">FMul</button>
-  <button class="action" onclick="addNode('FAdd');">FAdd</button>
-  <button class="action" onclick="addNode('FNotEqual');">FNotEqual</button>
-  <button class="action" onclick="addNode('FLTE');">FLTE</button>
-  <button class="action" onclick="addNode('FLT');">FLT</button>
-  <button class="action" onclick="addNode('FGTE');">FGTE</button>
-  <button class="action" onclick="addNode('FGT');">FGT</button>
-  <button class="action" onclick="addNode('FEqual');">FEqual</button>
   <button class="action" onclick="exampleCanvas()">Example</button>
   <div id="cnodes"
     style="margin: 10px; border: 10px solid lightgray; background-color: white; position: absolute; top:20px; left:0; right:0; bottom:0">
@@ -55,12 +38,6 @@
 
     function newCanvas() {
       canvas.program = new cnui.Program();
-    }
-
-    function addNode(name) {
-      let node = cnui.Env.getInstance(name);
-      let comp = new cnui.CnodeComponent(node, canvas);
-      comp.pos = new cnui.Position(100, 100);
     }
 
     newCanvas();

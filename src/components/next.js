@@ -152,11 +152,11 @@ export class NextSocketComponent extends CnodesSocketComponent {
               <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}">
                 ${n.prev.name}
               </tspan>
-              <tspan alignment-baseline="middle">
-                ${nodeDef.name}
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+              ${nodeDef.name}
               </tspan>
-              <tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="lightgray">
-                ${nodeDef.category}
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
+              ${nodeDef.category}
               </tspan>
               `,
               (x, y) => {

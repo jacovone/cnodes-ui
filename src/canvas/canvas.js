@@ -8,6 +8,7 @@
  */
 
 import { Socket } from "@marco.jacovone/cnodes/src/core/socket";
+import { Theme } from "../components/theme";
 import { Component } from "./component";
 import { Connection } from "./connection";
 import { SocketComponent } from "./socket";
@@ -67,6 +68,9 @@ export class Canvas {
     this.#svgEl.style.width = "100%";
     this.#svgEl.style.height = "100%";
     el.appendChild(this.#svgEl);
+
+    // Background color
+    this.#svgEl.style["background-color"] = Theme.current.CANVAS_BACKGROUND_COLOR;
 
     // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components

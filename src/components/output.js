@@ -141,10 +141,10 @@ export class OutputSocketComponent extends CnodesSocketComponent {
                 <tspan alignment-baseline="middle" fill="${Theme.current.NODE_IO_FILL_COLOR}">
                   ${inp.name}
                 </tspan>
-                <tspan alignment-baseline="middle">
+                <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
                   ${nodeDef.name}
                 </tspan>
-                <tspan alignment-baseline="middle" style="font: bold 10px sans-serif" fill="lightgray">
+                <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
                   ${nodeDef.category}
                 </tspan>
                 `,

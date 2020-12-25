@@ -11,11 +11,12 @@ import { Canvas } from "./canvas/canvas";
 import { Component } from "./canvas/component";
 import { Position } from "./canvas/position";
 import { CnodeComponent } from "./components/cnode";
-import { Theme } from "./components/theme";
+import { Theme, defaultLight } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
 import { Env } from "@marco.jacovone/cnodes/cnodes";
 
-export { Canvas, Component, CnodeComponent, Position, Theme, CnodesCanvas };
+export { Canvas, Component, CnodeComponent, Position, Theme, defaultLight, CnodesCanvas };
+
 export * from "@marco.jacovone/cnodes/cnodes";
 
 /**

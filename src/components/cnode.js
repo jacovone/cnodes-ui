@@ -47,7 +47,7 @@ export class CnodeComponent extends Component {
     super.setup();
     canvas.addComponent(this);
 
-    this.#attachSubcomponents();
+    this.updateSubcomponents();
   }
 
   get node() {
@@ -84,25 +84,6 @@ export class CnodeComponent extends Component {
     nodeEl.appendChild(this.#titleEl);
     nodeEl.appendChild(this.#symbolEl);
     nodeEl.appendChild(this.#signEl);
-
-    this.#containerEl.setAttribute(
-      "d",
-      `
-      M 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 
-      A ${Theme.current.NODE_BORDER_RADIUS * 1.3} ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 0 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 
-      L ${Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS} 0 
-      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${Theme.current.NODE_WIDTH} ${
-        Theme.current.NODE_BORDER_RADIUS
-      } 
-      L ${Theme.current.NODE_WIDTH} ${this.height - Theme.current.NODE_BORDER_RADIUS} 
-      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${
-        Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS
-      } ${this.height} 
-      L ${Theme.current.NODE_BORDER_RADIUS} ${this.height} 
-      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 0 ${this.height - Theme.current.NODE_BORDER_RADIUS} 
-      Z
-      `
-    );
 
     this.#titleEl.innerHTML = this.node.name;
     this.#titleEl.style = `
@@ -159,57 +140,79 @@ export class CnodeComponent extends Component {
 
     nodeEl.setAttribute("x", "0");
     nodeEl.setAttribute("y", "0");
+
     return nodeEl;
   }
 
   /**
-   * This method construct all sub components. They are all sockets
+   * This method construct and/or update all sub components. They are all sockets
    * representing input, outputs, prev and nexts.
    */
-  #attachSubcomponents() {
+  updateSubcomponents() {
     let posY = 40 + 0.5 * Theme.current.NODE_BORDER_RADIUS;
 
     // Prev
     if (this.node.prev) {
-      let nComp = new PrevSocketComponent(this.node.prev);
-      nComp.pos = new Position(0, posY);
-      this.addComponent(nComp);
+      let nComp = this.node.prev.__comp;
+      if (!nComp) {
+        nComp = new PrevSocketComponent(this.node.prev);
+        this.addComponent(nComp);
 
-      // write a back_reference
-      this.node.prev.__comp = nComp;
+        // write a back_reference
+        this.node.prev.__comp = nComp;
+      }
+
+      // Update position
+      nComp.pos = new Position(0, posY);
     }
 
     // Nexts
     for (const next of this.node.nexts) {
-      let nComp = new NextSocketComponent(next);
-      nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
-      this.addComponent(nComp);
-      posY += 30;
+      let nComp = next.__comp;
+      if (!nComp) {
+        nComp = new NextSocketComponent(next);
+        this.addComponent(nComp);
 
-      // write a back-reference
-      next.__comp = nComp;
+        // write a back-reference
+        next.__comp = nComp;
+      }
+
+      // Update position
+      nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
+      posY += 30;
     }
 
     // Output
     for (const output of this.node.outputs) {
-      let nComp = new OutputSocketComponent(output);
-      nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
-      this.addComponent(nComp);
-      posY += 30;
+      let nComp = output.__comp;
+      if (!nComp) {
+        nComp = new OutputSocketComponent(output);
+        this.addComponent(nComp);
 
-      // write a back-reference
-      output.__comp = nComp;
+        // write a back-reference
+        output.__comp = nComp;
+      }
+
+      // Update position
+      nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
+      posY += 30;
     }
 
     // Input
     for (const input of this.node.inputs) {
-      let nComp = new InputSocketComponent(input);
-      nComp.pos = new Position(0, posY);
-      this.addComponent(nComp);
-      posY += 30;
+      let nComp = input.__comp;
+      if (!nComp) {
+        nComp = new InputSocketComponent(input);
+        this.addComponent(nComp);
 
-      // write a back-reference
-      input.__comp = nComp;
+        // write a back-reference
+        input.__comp = nComp;
+      }
+
+      // Update position
+      nComp.updateStatus();
+      nComp.pos = new Position(0, posY);
+      posY += 30;
     }
   }
 
@@ -219,6 +222,27 @@ export class CnodeComponent extends Component {
    */
   updateSVGElement() {
     super.updateSVGElement();
+
+    this.#containerEl.setAttribute(
+      "d",
+      `
+      M 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 
+      A ${Theme.current.NODE_BORDER_RADIUS * 1.3} ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 0 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 
+      L ${Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS} 0 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${Theme.current.NODE_WIDTH} ${
+        Theme.current.NODE_BORDER_RADIUS
+      } 
+      L ${Theme.current.NODE_WIDTH} ${this.height - Theme.current.NODE_BORDER_RADIUS} 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${
+        Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS
+      } ${this.height} 
+      L ${Theme.current.NODE_BORDER_RADIUS} ${this.height} 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 0 ${this.height - Theme.current.NODE_BORDER_RADIUS} 
+      Z
+      `
+    );
+
+    this.updateSubcomponents();
 
     // Update UI data in meta info
     if (!this.#node.meta) {
@@ -247,10 +271,21 @@ export class CnodeComponent extends Component {
       }),
     ];
 
+    // The node can be removed?
     if (this.node.removable) {
       items.unshift(
         new MenuItem(`<tspan alignment-baseline="middle">Delete</tspan>`, () => {
           this.canvas.removeComponent(this);
+        })
+      );
+    }
+
+    // The node can add inputs?
+    if (this.node.canAddInput) {
+      items.unshift(
+        new MenuItem(`<tspan alignment-baseline="middle">Add input</tspan>`, () => {
+          this.node.addInput();
+          this.updateSVGElement();
         })
       );
     }

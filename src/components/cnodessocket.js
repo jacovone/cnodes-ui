@@ -96,6 +96,13 @@ export class CnodesSocketComponent extends SocketComponent {
         ? Theme.current.CONNECTION_TEMP_VALID_COLOR
         : Theme.current.CONNECTION_TEMP_COLOR
     );
+    this.tempConnectionEl.setAttribute("stroke-dasharray", "5 5");
     this.tempConnectionEl.setAttribute("fill", "transparent");
   }
+
+  /**
+   * This method is called from connection when the connection status
+   * of the socket chenged, or ehwn the name of the socket changes
+   */
+  updateStatus() {}
 }

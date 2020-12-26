@@ -136,7 +136,7 @@ export class Theme {
     return "red";
   }
   get CONNECTION_TEMP_VALID_COLOR() {
-    return "#EEEEEE";
+    return "gray";
   }
   get CONNECTION_TEMP_COLOR() {
     return "#DDDDDD";
@@ -144,26 +144,11 @@ export class Theme {
   get CONNECTION_IO_WIDTH() {
     return 4;
   }
-  get CONNECTION_IO_INVALID_COLOR() {
-    return "red";
-  }
-  get CONNECTION_IO_VALID_COLOR() {
-    return "lightblue";
-  }
   get CONNECTION_IO_COLOR() {
     return "#008EBF";
   }
   get CONNECTION_PREV_NEXT_WIDTH() {
     return 4;
-  }
-  get CONNECTION_PREV_NEXT_INVALID_COLOR() {
-    return "red";
-  }
-  get CONNECTION_PREV_NEXT_VALID_COLOR() {
-    return "lightgreen";
-  }
-  get CONNECTION_PREV_NEXT_COLOR() {
-    return "#069DD1";
   }
   get CONNECTION_PREV_NEXT_COLOR() {
     return "#31A200";

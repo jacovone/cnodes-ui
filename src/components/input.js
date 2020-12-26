@@ -25,6 +25,9 @@ export class InputSocketComponent extends CnodesSocketComponent {
   /** A reference to the imput element */
   #inputElement = null;
 
+  /** A reference to the label element */
+  #labelElement = null;
+
   /** The symbol element */
   #socketSymbol = null;
 
@@ -53,8 +56,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
     this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
     this.#socketSymbol.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
 
-    let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-    labelElem.style = `
+    this.#labelElement = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+    this.#labelElement.style = `
       font: ${Theme.current.NODE_IO_NAME_FONT}; 
       color: ${Theme.current.NODE_IO_NAME_COLOR}; 
       text-align: left;
@@ -64,13 +67,13 @@ export class InputSocketComponent extends CnodesSocketComponent {
       user-select: none;
     `;
 
-    labelElem.innerHTML = `${this.socket.name}`;
+    this.#labelElement.innerHTML = `${this.socket.name}`;
 
-    labelElem.setAttribute("x", 0);
-    labelElem.setAttribute("y", 0);
-    labelElem.setAttribute("transform", `translate(${15}, ${-15})`);
-    labelElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
-    labelElem.setAttribute("height", 30);
+    this.#labelElement.setAttribute("x", 0);
+    this.#labelElement.setAttribute("y", 0);
+    this.#labelElement.setAttribute("transform", `translate(${15}, ${-15})`);
+    this.#labelElement.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
+    this.#labelElement.setAttribute("height", 30);
 
     let textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
     textInputElem.style = `
@@ -112,7 +115,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     inputElem.setAttribute("x", 0);
     inputElem.setAttribute("y", 0);
     inputElem.appendChild(this.#socketSymbol);
-    inputElem.appendChild(labelElem);
+    inputElem.appendChild(this.#labelElement);
     inputElem.appendChild(textInputElem);
 
     return inputElem;
@@ -156,12 +159,13 @@ export class InputSocketComponent extends CnodesSocketComponent {
   }
 
   /**
-   * This method is called from connection when the connection status
-   * of the socket chenged
+   * This method is called when the internal status of the socket changes,
+   * to reflect changes to the graphic component
    */
   updateStatus() {
     // Show/Hide the imput component
     this.#inputElement.style["display"] = this.isConnected ? "block" : "none";
+    this.#labelElement.innerHTML = `${this.socket.name}`;
     this.socket.value = this.#inputElement.value;
   }
 
@@ -208,5 +212,41 @@ export class InputSocketComponent extends CnodesSocketComponent {
       }
     }
     return items;
+  }
+
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
+  getContextMenuItems() {
+    let items = [];
+
+    let conn = this.canvas.getConnectionsFor(this)[0];
+    if (conn) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Disconnect</tspan>`, () => {
+          // Disconnect this socket
+          this.canvas.removeConnection(conn);
+          this.socket.disconnect();
+        })
+      );
+    }
+    if (this.socket.node.canRemoveInput(this.socket)) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Delete</tspan>`, () => {
+          // First, disconnect if connected
+          let conn = this.canvas.getConnectionsFor(this)[0];
+          if (conn) {
+            this.canvas.removeConnection(conn);
+            this.socket.disconnect();
+          }
+          this.socket.node.removeInput(this.socket);
+          this.parent.removeComponent(this);
+          this.parent.updateSVGElement();
+        })
+      );
+    }
+
+    return items.length > 0 ? items : null;
   }
 }

@@ -168,7 +168,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     super.updateSVGElement();
 
     // Show/Hide the imput component
-    this.#inputElement.style["display"] = this.isConnected ? "none" : "block";
+    this.#inputElement.style["display"] = this.isConnected ? "none" : "table-cell";
     this.#labelElement.innerHTML = `${this.socket.name}`;
     this.socket.value = this.#inputElement.value;
   }

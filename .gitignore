@@ -2,3 +2,6 @@
 /node_modules
 doc/.DS_Store
 doc/images/.DS_Store
+
+# doc/docs generated documentation
+doc/docs

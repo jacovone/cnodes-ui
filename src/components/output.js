@@ -164,4 +164,27 @@ export class OutputSocketComponent extends CnodesSocketComponent {
     }
     return items;
   }
+
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
+  getContextMenuItems() {
+    let items = [];
+
+    let conns = this.canvas.getConnectionsFor(this);
+    if (conns.length > 0) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Disconnect all</tspan>`, () => {
+          for (let c of conns) {
+            // Disconnect this socket
+            this.canvas.removeConnection(c);
+            this.socket.disconnect(c.target);
+          }
+        })
+      );
+    }
+
+    return items.length > 0 ? items : null;
+  }
 }

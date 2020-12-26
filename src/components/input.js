@@ -237,7 +237,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     }
     if (this.socket.node.canRemoveInput(this.socket)) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Delete</tspan>`, () => {
+        new MenuItem(`<tspan alignment-baseline="middle">Delete input</tspan>`, () => {
           // First, disconnect if connected
           let conn = this.canvas.getConnectionsFor(this)[0];
           if (conn) {

@@ -159,12 +159,16 @@ export class InputSocketComponent extends CnodesSocketComponent {
   }
 
   /**
-   * This method is called when the internal status of the socket changes,
-   * to reflect changes to the graphic component
+   * Update the component element according to x and y local coordinates,
+   * if this component is a child component, coordinates in canvas space
+   * are computed. In addition, this override will reflect the status of the
+   * socket by hiding/showing the text field related to the input socket
    */
-  updateStatus() {
+  updateSVGElement() {
+    super.updateSVGElement();
+
     // Show/Hide the imput component
-    this.#inputElement.style["display"] = this.isConnected ? "block" : "none";
+    this.#inputElement.style["display"] = this.isConnected ? "none" : "block";
     this.#labelElement.innerHTML = `${this.socket.name}`;
     this.socket.value = this.#inputElement.value;
   }

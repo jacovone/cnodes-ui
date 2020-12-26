@@ -209,8 +209,8 @@ export class CnodeComponent extends Component {
         input.__comp = nComp;
       }
 
-      // Update position
-      nComp.updateStatus();
+      // Update status
+      nComp.updateSVGElement();
       nComp.pos = new Position(0, posY);
       posY += 30;
     }

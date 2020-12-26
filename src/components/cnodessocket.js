@@ -99,10 +99,4 @@ export class CnodesSocketComponent extends SocketComponent {
     this.tempConnectionEl.setAttribute("stroke-dasharray", "5 5");
     this.tempConnectionEl.setAttribute("fill", "transparent");
   }
-
-  /**
-   * This method is called from connection when the connection status
-   * of the socket chenged, or ehwn the name of the socket changes
-   */
-  updateStatus() {}
 }

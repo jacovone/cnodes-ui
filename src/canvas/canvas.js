@@ -295,6 +295,10 @@ export class Canvas {
     this.#connections.push(connection);
     connection.canvas = this;
     this.#connectionsEl.appendChild(connection.connectionEl);
+
+    // Update connected sockets
+    connection.source.updateSVGElement();
+    connection.target.updateSVGElement();
   }
 
   /**
@@ -306,6 +310,10 @@ export class Canvas {
     connection.destroy();
     this.#connections = this.#connections.filter((c) => c !== connection);
     this.#connectionsEl.removeChild(connection.connectionEl);
+
+    // Update connected sockets
+    connection.source.updateSVGElement();
+    connection.target.updateSVGElement();
   }
 
   /**

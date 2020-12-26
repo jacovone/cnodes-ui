@@ -271,10 +271,4 @@ export class SocketComponent extends Component {
       }
     }
   }
-
-  /**
-   * This method was called from the connections each time the
-   * socket is connected and disconnected
-   */
-  updateStatus() {}
 }

@@ -31,8 +31,8 @@ export class Connection {
   constructor(source, target) {
     this.#source = source;
     this.#target = target;
-    this.source.updateStatus();
-    this.target.updateStatus();
+    this.source.updateSVGElement();
+    this.target.updateSVGElement();
   }
 
   /**
@@ -87,10 +87,6 @@ export class Connection {
 
   /**
    * This method is called when the connection is removed from the canvas
-   * Ny default notify sockets the change of the connected status
    */
-  destroy() {
-    this.source.updateStatus();
-    this.target.updateStatus();
-  }
+  destroy() {}
 }

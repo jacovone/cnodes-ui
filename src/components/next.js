@@ -8,12 +8,12 @@
  */
 
 import { PrevSocket } from "@marco.jacovone/cnodes/cnodes";
+import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { Theme } from "./theme";
 import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnext_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { SocketComponent } from "../canvas/socket";
-import { Env } from "@marco.jacovone/cnodes/src/core/env";
 import { MenuItem } from "../canvas/menu";
 import { CnodeComponent } from "./cnode";
 

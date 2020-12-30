@@ -257,6 +257,11 @@ export class CnodesCanvas extends Canvas {
     this.#program = program;
   }
 
+  /**
+   * Push a subprogram on the canvas. The current program
+   * is pushed on to the stack and the new one is placed on the canvas
+   * @param {*} program The new program to edit
+   */
   pushProgram(program) {
     setTimeout(() => {
       // Push this current program to the stack
@@ -267,12 +272,20 @@ export class CnodesCanvas extends Canvas {
     });
   }
 
+  /**
+   * Pops the last program and place it on the canvas. The actual
+   * program (that is a subprogram of the popped) is abandoned
+   */
   popProgram() {
     setTimeout(() => {
       this.program = this.#stack.shift();
     });
   }
 
+  /**
+   * Can this canvas pop a program from the stack, that is:
+   * there is at least one program on the stack?
+   */
   canPopProgram() {
     return this.#stack.length > 0;
   }

@@ -10,7 +10,6 @@
 import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { Program } from "@marco.jacovone/cnodes/cnodes";
 import { Canvas } from "../canvas/canvas";
-import { Component } from "../canvas/component";
 import { MenuItem } from "../canvas/menu";
 import { Position } from "../canvas/position";
 import { IOConnection } from "../connections/io_connection";
@@ -26,6 +25,9 @@ import { Theme } from "./theme";
 export class CnodesCanvas extends Canvas {
   /** The edited program */
   #program = null;
+
+  /** The stack of edited programs */
+  #stack = [];
 
   constructor(el) {
     super(el);
@@ -84,36 +86,26 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
-   * Add a new component to the canvas
-   * @param {Component} component Component to add
-   */
-  addComponent(component) {
-    super.addComponent(component);
-
-    if (component instanceof CnodeComponent && this.program) {
-      // Add the node to the program
-      this.program.addNode(component.node);
-    }
-  }
-
-  /**
-   * Remove a component from the canvas
-   * @param {Component} component Component to remove
-   */
-  removeComponent(component) {
-    super.removeComponent(component);
-
-    if (component instanceof CnodeComponent && this.program) {
-      // Remove the node from the program
-      this.program.removeNode(component.node);
-    }
-  }
-
-  /**
    * Return a list of MenuItem for the context menu
    */
   getCanvasContextMenuItems() {
     let items = [];
+
+    if (this.canPopProgram()) {
+      items.push(
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+            Return to parent...
+          </tspan>
+          `,
+          () => {
+            this.popProgram();
+          }
+        )
+      );
+    }
+
     for (let cat of Env.getCategories()) {
       for (let nodeDef of Env.getCategoryNodes(cat)) {
         let n = Env.getInstance(nodeDef.name);
@@ -121,6 +113,9 @@ export class CnodesCanvas extends Canvas {
           items.push(
             new MenuItem(
               `
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+                New
+              </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
                 ${nodeDef.name}
               </tspan>
@@ -181,7 +176,11 @@ export class CnodesCanvas extends Canvas {
    * @param {Program} program Program to import
    */
   #importCnodesProgram(program) {
+    // By temporary clearing the instance of the program, we inform
+    // components that all creation/destruction will not have effect
+    // on the program instance
     this.#program = null;
+
     this.removeAll();
 
     // Import the program
@@ -209,8 +208,8 @@ export class CnodesCanvas extends Canvas {
           let otherSocketComponent = peer.__comp;
 
           if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
-            // Create connection component without creating the connection on cnodes sockets
-            new PrevNextConnection(otherSocketComponent, thisSocketComponent, this, false);
+            // Create connection component
+            new PrevNextConnection(otherSocketComponent, thisSocketComponent, this);
           }
         }
       }
@@ -221,8 +220,8 @@ export class CnodesCanvas extends Canvas {
           let otherSocketComponent = next.peer.__comp;
 
           if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
-            // Create connection component without creating the connection on cnodes sockets
-            new PrevNextConnection(thisSocketComponent, otherSocketComponent, this, false);
+            // Create connection component
+            new PrevNextConnection(thisSocketComponent, otherSocketComponent, this);
           }
         }
       }
@@ -233,8 +232,8 @@ export class CnodesCanvas extends Canvas {
           let otherSocketComponent = inp.peer.__comp;
 
           if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
-            // Create connection component without creating the connection on cnodes sockets
-            new IOConnection(otherSocketComponent, thisSocketComponent, this, false);
+            // Create connection component
+            new IOConnection(otherSocketComponent, thisSocketComponent, this);
           }
         }
       }
@@ -247,11 +246,34 @@ export class CnodesCanvas extends Canvas {
 
             if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
               // Create connection component without creating the connection on cnodes sockets
-              new IOConnection(thisSocketComponent, otherSocketComponent, this, false);
+              new IOConnection(thisSocketComponent, otherSocketComponent, this);
             }
           }
         }
       }
     }
+
+    // Restore the program instance
+    this.#program = program;
+  }
+
+  pushProgram(program) {
+    setTimeout(() => {
+      // Push this current program to the stack
+      this.#stack.unshift(this.program);
+
+      // Set the new Program
+      this.program = program;
+    });
+  }
+
+  popProgram() {
+    setTimeout(() => {
+      this.program = this.#stack.shift();
+    });
+  }
+
+  canPopProgram() {
+    return this.#stack.length > 0;
   }
 }

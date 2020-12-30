@@ -99,4 +99,13 @@ export class CnodesSocketComponent extends SocketComponent {
     this.tempConnectionEl.setAttribute("stroke-dasharray", "5 5");
     this.tempConnectionEl.setAttribute("fill", "transparent");
   }
+
+  /**
+   * Remove the internal socket reference to the component
+   * upon destroy
+   */
+  destroy() {
+    this.socket.__comp = null;
+    super.destroy();
+  }
 }

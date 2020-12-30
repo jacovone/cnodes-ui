@@ -16,6 +16,7 @@ import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
 import { MenuItem } from "../canvas/menu";
 import { SocketComponent } from "../canvas/socket";
+import { Program } from "@marco.jacovone/cnodes/lib/core/program";
 
 /**
  * This is the main class for managing a single CNode
@@ -46,6 +47,11 @@ export class CnodeComponent extends Component {
 
     super.setup();
     canvas.addComponent(this);
+
+    // If there is an active program, add this node to it
+    if (this.canvas.program) {
+      this.canvas.program.addNode(this.#node);
+    }
 
     this.updateSubcomponents();
   }
@@ -259,7 +265,27 @@ export class CnodeComponent extends Component {
    * returns null, no contextual menu is shown
    */
   getContextMenuItems() {
-    let items = [
+    let items = [];
+
+    if (this.node instanceof Program) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Edit...</tspan>`, () => {
+          this.canvas.pushProgram(this.node);
+        })
+      );
+    }
+
+    // The node can add inputs?
+    if (this.node.canAddInput) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Add input</tspan>`, () => {
+          this.node.addInput();
+          this.updateSVGElement();
+        })
+      );
+    }
+
+    items.push(
       new MenuItem(`<tspan alignment-baseline="middle">Disconnect all</tspan>`, () => {
         for (let comp of this.components) {
           if (comp instanceof SocketComponent && comp.isConnected) {
@@ -268,28 +294,33 @@ export class CnodeComponent extends Component {
             }
           }
         }
-      }),
-    ];
+      })
+    );
 
     // The node can be removed?
     if (this.node.removable) {
-      items.unshift(
+      items.push(
         new MenuItem(`<tspan alignment-baseline="middle">Delete</tspan>`, () => {
           this.canvas.removeComponent(this);
         })
       );
     }
 
-    // The node can add inputs?
-    if (this.node.canAddInput) {
-      items.unshift(
-        new MenuItem(`<tspan alignment-baseline="middle">Add input</tspan>`, () => {
-          this.node.addInput();
-          this.updateSVGElement();
-        })
-      );
+    return items;
+  }
+
+  /**
+   * Remove the internal node reference to the component
+   * upon destroy
+   */
+  destroy() {
+    this.node.__comp = null;
+
+    // If there is acrive program, remove the node from it
+    if (this.canvas.program) {
+      this.canvas.program.removeNode(this.node);
     }
 
-    return items;
+    super.destroy();
   }
 }

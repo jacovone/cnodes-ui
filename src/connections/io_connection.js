@@ -18,13 +18,13 @@ import { Theme } from "../components/theme";
  * the connection status of the embedded cnodes's socket
  */
 export class IOConnection extends Connection {
-  constructor(source, target, canvas, connect = true) {
+  constructor(source, target, canvas) {
     super(source, target);
     super.setup();
     canvas.addConnection(this);
     this.updateSVGElement();
 
-    if (connect) {
+    if (canvas.program) {
       // Connect cnodes sockets
       this.source.socket.connect(this.target.socket);
     }
@@ -68,7 +68,10 @@ export class IOConnection extends Connection {
    * Diconnect the internal cnodes sockets
    */
   destroy() {
-    this.source.socket.disconnect(this.target.socket);
+    // If there is an active program, remove the connection
+    if (this.canvas.program) {
+      this.source.socket.disconnect(this.target.socket);
+    }
     super.destroy();
   }
 }

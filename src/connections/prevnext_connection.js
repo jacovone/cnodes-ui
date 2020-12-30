@@ -67,7 +67,10 @@ export class PrevNextConnection extends Connection {
    * Diconnect the internal cnodes sockets
    */
   destroy() {
-    this.source.socket.disconnect(this.target.socket);
+    // If there is an active program, remove the connection
+    if (this.canvas.program) {
+      this.source.socket.disconnect(this.target.socket);
+    }
     super.destroy();
   }
 }

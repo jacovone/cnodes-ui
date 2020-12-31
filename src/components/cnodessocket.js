@@ -56,6 +56,7 @@ export class CnodesSocketComponent extends SocketComponent {
     this.canvas.showContextMenu(items, p.x, p.y, (socketComp) => {
       if (!socketComp) {
         this.canvas.connectionsEl.removeChild(this.tempConnectionEl);
+        this.tempConnectionEl = null;
       } else {
         this.connectionDone(socketComp);
       }

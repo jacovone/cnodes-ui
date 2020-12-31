@@ -5998,6 +5998,14 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
      */
     value: function onPointerDown(e) {
       if (e.button === 0) {
+        // Cancel previous context menu
+        if (_classPrivateFieldGet(this, _tempConnectionEl)) {
+          this.canvas.cancelContextMenu();
+          this.canvas.connectionsEl.removeChild(_classPrivateFieldGet(this, _tempConnectionEl));
+
+          _classPrivateFieldSet(this, _tempConnectionEl, null);
+        }
+
         if (!this.hasSingleConnection || !this.isConnected) {
           _classPrivateFieldSet(this, _connecting, true);
 
@@ -6133,6 +6141,8 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
     key: "connectionDone",
     value: function connectionDone(socketComp) {
       this.canvas.connectionsEl.removeChild(_classPrivateFieldGet(this, _tempConnectionEl));
+
+      _classPrivateFieldSet(this, _tempConnectionEl, null);
     }
     /**
      * The user has released the pointer button out of a valid socket,
@@ -6144,6 +6154,8 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
     key: "connectionEndedOutOfSocket",
     value: function connectionEndedOutOfSocket(e) {
       this.canvas.connectionsEl.removeChild(_classPrivateFieldGet(this, _tempConnectionEl));
+
+      _classPrivateFieldSet(this, _tempConnectionEl, null);
     }
     /**
      * Query if this socket could accept a connection with
@@ -6197,6 +6209,9 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
     key: "tempConnectionEl",
     get: function get() {
       return _classPrivateFieldGet(this, _tempConnectionEl);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _tempConnectionEl, val);
     }
   }, {
     key: "dragElement",
@@ -7639,9 +7654,9 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
       var p = this.canvas.clientToSvgPoint(e.clientX, e.clientY);
       this.canvas.showContextMenu(items, p.x, p.y, function (socketComp) {
         if (!socketComp) {
-          if (_this2.tempConnectionEl) {
-            _this2.canvas.connectionsEl.removeChild(_this2.tempConnectionEl);
-          }
+          _this2.canvas.connectionsEl.removeChild(_this2.tempConnectionEl);
+
+          _this2.tempConnectionEl = null;
         } else {
           _this2.connectionDone(socketComp);
         }

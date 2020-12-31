@@ -42,6 +42,9 @@ export class SocketComponent extends Component {
   get tempConnectionEl() {
     return this.#tempConnectionEl;
   }
+  set tempConnectionEl(val) {
+    this.#tempConnectionEl = val;
+  }
 
   /**
    * Sets up a socket. A socket is not movable by default and
@@ -90,6 +93,13 @@ export class SocketComponent extends Component {
    */
   onPointerDown(e) {
     if (e.button === 0) {
+      // Cancel previous context menu
+      if (this.#tempConnectionEl) {
+        this.canvas.cancelContextMenu();
+        this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
+        this.#tempConnectionEl = null;
+      }
+
       if (!this.hasSingleConnection || !this.isConnected) {
         this.#connecting = true;
         this.dragElement.setPointerCapture(e.pointerId);
@@ -221,6 +231,7 @@ export class SocketComponent extends Component {
    */
   connectionDone(socketComp) {
     this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
+    this.#tempConnectionEl = null;
   }
 
   /**
@@ -230,6 +241,7 @@ export class SocketComponent extends Component {
    */
   connectionEndedOutOfSocket(e) {
     this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
+    this.#tempConnectionEl = null;
   }
 
   /**

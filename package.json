@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "jsdoc": "jsdoc -r -p -d ./doc/docs ./src/*",
-    "all": "npm run build && npm run jsdoc && npm version patch && npm publish"
+    "start:dev": "webpack serve  --open Chrome"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,12 @@
     "@babel/plugin-proposal-private-methods": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "babel-loader": "^8.2.2",
-    "webpack": "^5.11.0",
-    "webpack-cli": "^4.2.0",
-    "jdoc": "^0.2.0"
+    "jdoc": "^0.2.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^4.0.0-beta.0"
   },
   "dependencies": {
-    "@marco.jacovone/cnodes": "^0.4.0"
+    "@marco.jacovone/cnodes": "^0.5.1"
   }
 }

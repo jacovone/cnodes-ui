@@ -16,7 +16,7 @@ import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
 import { MenuItem } from "../canvas/menu";
 import { SocketComponent } from "../canvas/socket";
-import { Program } from "@marco.jacovone/cnodes/lib/core/program";
+import { Program } from "@marco.jacovone/cnodes/cnodes";
 
 /**
  * This is the main class for managing a single CNode
@@ -100,7 +100,7 @@ export class CnodeComponent extends Component {
     this.#titleEl.setAttribute("x", Theme.current.NODE_BORDER_RADIUS * 0.5);
     this.#titleEl.setAttribute("y", Theme.current.NODE_BORDER_RADIUS * 0.5);
     this.#titleEl.setAttribute("width", Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS * 0.5 * 2);
-    this.#titleEl.setAttribute("height", 20);
+    this.#titleEl.setAttribute("height", 30);
 
     this.#containerEl.setAttribute(
       "stroke",

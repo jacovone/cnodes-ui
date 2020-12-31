@@ -67,7 +67,7 @@ export class CnodesCanvas extends Canvas {
    * This setter is a trigger for the import procedure
    */
   set program(val) {
-    this.#importCnodesProgram(val);
+    this.importCnodesProgram(val);
     this.#program = val;
   }
 
@@ -175,7 +175,7 @@ export class CnodesCanvas extends Canvas {
    * This method imports an entire cnodes program
    * @param {Program} program Program to import
    */
-  #importCnodesProgram(program) {
+  importCnodesProgram(program) {
     // By temporary clearing the instance of the program, we inform
     // components that all creation/destruction will not have effect
     // on the program instance
@@ -204,36 +204,27 @@ export class CnodesCanvas extends Canvas {
       // Setup prev
       if (n.prev && n.prev.peers.length > 0) {
         for (let peer of n.prev.peers) {
-          let thisSocketComponent = n.prev.__comp;
-          let otherSocketComponent = peer.__comp;
-
-          if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
+          if (!this.alreadyConnected(peer.__comp, n.prev.__comp)) {
             // Create connection component
-            new PrevNextConnection(otherSocketComponent, thisSocketComponent, this);
+            new PrevNextConnection(peer.__comp, n.prev.__comp, this);
           }
         }
       }
       // Setup nexts
       for (let next of n.nexts) {
         if (next.peer) {
-          let thisSocketComponent = next.__comp;
-          let otherSocketComponent = next.peer.__comp;
-
-          if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
+          if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
             // Create connection component
-            new PrevNextConnection(thisSocketComponent, otherSocketComponent, this);
+            new PrevNextConnection(next.__comp, next.peer.__comp, this);
           }
         }
       }
       // Setup inputs
       for (let inp of n.inputs) {
         if (inp.peer) {
-          let thisSocketComponent = inp.__comp;
-          let otherSocketComponent = inp.peer.__comp;
-
-          if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
+          if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
             // Create connection component
-            new IOConnection(otherSocketComponent, thisSocketComponent, this);
+            new IOConnection(inp.peer.__comp, inp.__comp, this);
           }
         }
       }
@@ -241,12 +232,9 @@ export class CnodesCanvas extends Canvas {
       for (let outp of n.outputs) {
         if (outp.peers.length > 0) {
           for (let peer of outp.peers) {
-            let thisSocketComponent = outp.__comp;
-            let otherSocketComponent = peer.__comp;
-
-            if (!this.alreadyConnected(otherSocketComponent, thisSocketComponent)) {
-              // Create connection component without creating the connection on cnodes sockets
-              new IOConnection(thisSocketComponent, otherSocketComponent, this);
+            if (!this.alreadyConnected(outp.__comp, peer.__comp)) {
+              // Create connection component
+              new IOConnection(outp.__comp, peer.__comp, this);
             }
           }
         }

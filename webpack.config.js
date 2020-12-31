@@ -1,12 +1,18 @@
 const path = require("path");
 
 module.exports = {
+  devtool: "inline-source-map",
   mode: "development",
   entry: "./src/index.js",
   output: {
     library: "cnui",
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
+  },
+  devServer: {
+    compress: true,
+    // hot: true,
+    port: 9000,
   },
   module: {
     rules: [

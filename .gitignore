@@ -5,3 +5,4 @@ doc/images/.DS_Store
 
 # doc/docs generated documentation
 doc/docs
+dist/.DS_Store

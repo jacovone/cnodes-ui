@@ -14,12 +14,12 @@ import { SocketComponent } from "./socket";
 
 /**
  * This is the main Canvas class. This class implement a general purpose canvas
- * that can manage nodes, sockets (a special subset of components) and connections
+ * that can manage nodes, components, sockets (a special subset of components) and connections
  * between sockets. The canvas is able to zoom and pan itself as well as to move
  * components. Components are organized in a hierarchical way, so that moving a component
  * will move all its subcomponents, including sockets. Sockets are (sub)components
  * that can be connected through connections to other sockets.
- * The class use SVG to render all elements.
+ * The class use SVG elements to render all elements.
  */
 export class Canvas {
   /** The main svg element */
@@ -39,6 +39,18 @@ export class Canvas {
 
   /** The current SVG box view height */
   #vbHeight = 100;
+
+  /**
+   * Define the minimum SVG View Box size, actually means
+   * the max level of zoom (in)
+   */
+  #minVBSize = 10;
+
+  /**
+   * Define the minimum SVG View Box size, actually means
+   * the max level of zoom (out)
+   */
+  #maxVBSize = 50000;
 
   /** The user is dragging the canvas backgorund? */
   #dragging = false;
@@ -101,6 +113,34 @@ export class Canvas {
     });
   }
 
+  /**
+   * Returns the minimum SVG View Box size, actually means
+   * the max level of zoom (in)
+   */
+  get minVBSize() {
+    return this.#minVBSize;
+  }
+  /**
+   * Sets the minimum SVG View Box size, actually means
+   * the max level of zoom (in)
+   */
+  set minVBSize(val) {
+    this.#minVBSize = val;
+  }
+  /**
+   * Returns the minimum SVG View Box size, actually means
+   * the max level of zoom (out)
+   */
+  get maxVBSize() {
+    return this.#maxVBSize;
+  }
+  /**
+   * Sets the minimum SVG View Box size, actually means
+   * the max level of zoom (out)
+   */
+  set maxVBSize(val) {
+    this.#maxVBSize = val;
+  }
   get components() {
     return this.#components;
   }
@@ -165,10 +205,10 @@ export class Canvas {
     let newWidth = this.#vbWidth * zoom;
     let newHeight = this.#vbHeight * zoom;
 
-    if (newHeight < 10) return;
-    if (newWidth < 10) return;
-    if (newHeight > 50000) return;
-    if (newWidth > 50000) return;
+    if (newHeight < this.#minVBSize) return;
+    if (newWidth < this.#minVBSize) return;
+    if (newHeight > this.#maxVBSize) return;
+    if (newWidth > this.#maxVBSize) return;
 
     let newLeft = this.#vbX - (newWidth - this.#vbWidth) * ((p.x - this.#vbX) / this.#vbWidth);
     let newTop = this.#vbY - (newHeight - this.#vbHeight) * ((p.y - this.#vbY) / this.#vbHeight);

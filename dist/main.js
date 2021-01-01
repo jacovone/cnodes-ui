@@ -4353,12 +4353,12 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
 
 /**
  * This is the main Canvas class. This class implement a general purpose canvas
- * that can manage nodes, sockets (a special subset of components) and connections
+ * that can manage nodes, components, sockets (a special subset of components) and connections
  * between sockets. The canvas is able to zoom and pan itself as well as to move
  * components. Components are organized in a hierarchical way, so that moving a component
  * will move all its subcomponents, including sockets. Sockets are (sub)components
  * that can be connected through connections to other sockets.
- * The class use SVG to render all elements.
+ * The class use SVG elements to render all elements.
  */
 
 var _svgEl = new WeakMap();
@@ -4372,6 +4372,10 @@ var _vbY = new WeakMap();
 var _vbWidth = new WeakMap();
 
 var _vbHeight = new WeakMap();
+
+var _minVBSize = new WeakMap();
+
+var _maxVBSize = new WeakMap();
 
 var _dragging = new WeakMap();
 
@@ -4409,6 +4413,16 @@ var Canvas = /*#__PURE__*/function () {
   /** The current SVG box view width */
 
   /** The current SVG box view height */
+
+  /**
+   * Define the minimum SVG View Box size, actually means
+   * the max level of zoom (in)
+   */
+
+  /**
+   * Define the minimum SVG View Box size, actually means
+   * the max level of zoom (out)
+   */
 
   /** The user is dragging the canvas backgorund? */
 
@@ -4472,6 +4486,16 @@ var Canvas = /*#__PURE__*/function () {
     _vbHeight.set(this, {
       writable: true,
       value: 100
+    });
+
+    _minVBSize.set(this, {
+      writable: true,
+      value: 10
+    });
+
+    _maxVBSize.set(this, {
+      writable: true,
+      value: 50000
     });
 
     _dragging.set(this, {
@@ -4813,6 +4837,22 @@ var Canvas = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "minVBSize",
+    get: function get() {
+      return _classPrivateFieldGet(this, _minVBSize);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _minVBSize, val);
+    }
+  }, {
+    key: "maxVBSize",
+    get: function get() {
+      return _classPrivateFieldGet(this, _maxVBSize);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _maxVBSize, val);
+    }
+  }, {
     key: "components",
     get: function get() {
       return _classPrivateFieldGet(this, _components);
@@ -4882,10 +4922,10 @@ var _onWheel2 = function _onWheel2(e) {
   var zoom = 1 + e.deltaY * zoomFactor;
   var newWidth = _classPrivateFieldGet(this, _vbWidth) * zoom;
   var newHeight = _classPrivateFieldGet(this, _vbHeight) * zoom;
-  if (newHeight < 10) return;
-  if (newWidth < 10) return;
-  if (newHeight > 50000) return;
-  if (newWidth > 50000) return;
+  if (newHeight < _classPrivateFieldGet(this, _minVBSize)) return;
+  if (newWidth < _classPrivateFieldGet(this, _minVBSize)) return;
+  if (newHeight > _classPrivateFieldGet(this, _maxVBSize)) return;
+  if (newWidth > _classPrivateFieldGet(this, _maxVBSize)) return;
 
   var newLeft = _classPrivateFieldGet(this, _vbX) - (newWidth - _classPrivateFieldGet(this, _vbWidth)) * ((p.x - _classPrivateFieldGet(this, _vbX)) / _classPrivateFieldGet(this, _vbWidth));
 
@@ -5002,8 +5042,8 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * yet the class for the cnodes nodes, is more abstract so that the user can
  * derive from that to implement components that are not explicitly connected
  * to the cnodes library, such as decorators, comments, etc.
- * In general component can have sumcomponents. Special examples of subcomponents are
- * a sockets. The socket is the a component that can be connected through connections,
+ * In general component can have subcomponents. Special examples of subcomponents are
+ * sockets. The socket is a component that can be connected through connections,
  * in the canvas-ui class model.
  */
 
@@ -6107,7 +6147,7 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
     value: function connectionStarted() {
       _classPrivateFieldSet(this, _tempConnectionEl, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldGet(this, _tempConnectionEl).setAttribute("d", "\n      M ".concat(this.absPos.x, " ").concat(this.absPos.y, "\n    "));
+      _classPrivateFieldGet(this, _tempConnectionEl).setAttribute("d", "\n      M ".concat(this.absPos.x, " ").concat(this.absPos.y, "\n      "));
 
       this.canvas.connectionsEl.appendChild(_classPrivateFieldGet(this, _tempConnectionEl));
     }

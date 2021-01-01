@@ -193,7 +193,7 @@ export class SocketComponent extends Component {
       "d",
       `
       M ${this.absPos.x} ${this.absPos.y}
-    `
+      `
     );
 
     this.canvas.connectionsEl.appendChild(this.#tempConnectionEl);

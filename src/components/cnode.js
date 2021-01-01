@@ -66,12 +66,16 @@ export class CnodeComponent extends Component {
    * and nexts. It takes account of the current theme
    */
   get height() {
+    let leftSocketsHeight = this.node.inputs.length;
+    if (this.node.prev && this.node.nexts.length === 0 && this.node.outputs.length === 0) {
+      leftSocketsHeight++;
+    }
+    let rightSocketsHeight = this.node.outputs.length + this.node.nexts.length;
+
     return (
       Theme.current.NODE_BORDER_RADIUS * 0.5 +
       40 + // Title
-      30 * Math.max(this.node.functional ? 0 : 1, this.node.nexts.length) + // Nexts/prevs, at least 1 prev
-      30 * Math.max(0, this.node.outputs.length) + // Outputs
-      30 * Math.max(0, this.node.inputs.length) + // Inputs
+      30 * (leftSocketsHeight + rightSocketsHeight) +
       15 // Padding
     );
   }

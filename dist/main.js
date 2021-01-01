@@ -3,4310 +3,6 @@ var cnui;cnui =
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@marco.jacovone/cnodes/cnodes.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/cnodes.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Env": () => /* reexport safe */ _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__.Env,
-/* harmony export */   "Node": () => /* reexport safe */ _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Node,
-/* harmony export */   "Result": () => /* reexport safe */ _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Result,
-/* harmony export */   "Program": () => /* reexport safe */ _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__.Program,
-/* harmony export */   "program": () => /* reexport safe */ _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__.program,
-/* harmony export */   "FlowSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.FlowSocket,
-/* harmony export */   "InputSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket,
-/* harmony export */   "OutputSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket,
-/* harmony export */   "PrevSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket,
-/* harmony export */   "Socket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.Socket,
-/* harmony export */   "ValueSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.ValueSocket,
-/* harmony export */   "Type": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Type,
-/* harmony export */   "Types": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Types,
-/* harmony export */   "type": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.type,
-/* harmony export */   "Call": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.Call,
-/* harmony export */   "callNode": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.callNode,
-/* harmony export */   "Console": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.Console,
-/* harmony export */   "consoleNode": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__.FGetvar,
-/* harmony export */   "fgetvarNode": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__.fgetvarNode,
-/* harmony export */   "For": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__.For,
-/* harmony export */   "forNode": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__.forNode,
-/* harmony export */   "Getvar": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__.Getvar,
-/* harmony export */   "getvarNode": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__.getvarNode,
-/* harmony export */   "If": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.If,
-/* harmony export */   "ifNode": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode,
-/* harmony export */   "Setvar": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.Setvar,
-/* harmony export */   "setvarNode": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.setvarNode,
-/* harmony export */   "While": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.While,
-/* harmony export */   "whileNode": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.whileNode,
-/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.Comparision,
-/* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.FCompare,
-/* harmony export */   "fcompareNode": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.fcompareNode,
-/* harmony export */   "FAdd": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_14__.FAdd,
-/* harmony export */   "faddNode": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_14__.faddNode,
-/* harmony export */   "FDiv": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_15__.FDiv,
-/* harmony export */   "fdivNode": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_15__.fdivNode,
-/* harmony export */   "FMul": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_16__.FMul,
-/* harmony export */   "fmulNode": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_16__.fmulNode,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_17__.FSqrt,
-/* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_17__.fsqrtNode
-/* harmony export */ });
-/* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/env.js");
-/* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/core/program.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/program.js");
-/* harmony import */ var _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-/* harmony import */ var _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/nodes/call.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/call.js");
-/* harmony import */ var _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/nodes/console.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/console.js");
-/* harmony import */ var _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/nodes/fgetvar.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/fgetvar.js");
-/* harmony import */ var _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/nodes/for.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/for.js");
-/* harmony import */ var _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lib/nodes/getvar.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/getvar.js");
-/* harmony import */ var _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/nodes/if.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/if.js");
-/* harmony import */ var _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./lib/nodes/setvar.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/setvar.js");
-/* harmony import */ var _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/nodes/while.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/while.js");
-/* harmony import */ var _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./lib/nodes/bool/fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-/* harmony import */ var _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./lib/nodes/math/fadd.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fadd.js");
-/* harmony import */ var _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./lib/nodes/math/fdiv.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fdiv.js");
-/* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fmul.js");
-/* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fsqrt.js");
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-// Export core nodes
-
-
-
-
-
-
-
-
-
-
-
-
- // Export boolean nodes
-
- // Export math nodes
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/enter.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/enter.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Enter": () => /* binding */ Enter,
-/* harmony export */   "enterNode": () => /* binding */ enterNode
-/* harmony export */ });
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a cnode that is the starting point for a
- * program. The program can be top-level or not
- */
-
-var Enter = /*#__PURE__*/function (_Node) {
-  _inherits(Enter, _Node);
-
-  var _super = _createSuper(Enter);
-
-  function Enter() {
-    var _this;
-
-    _classCallCheck(this, Enter);
-
-    _this = _super.call(this, "Enter");
-    _this.removable = false;
-    _this.creatable = false;
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Begin", _assertThisInitialized(_this))];
-    _this.prev = null;
-    return _this;
-  }
-  /**
-   * The process method
-   */
-
-
-  _createClass(Enter, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      this.output("Val").value = this.input("Val").value;
-      this.output("Val").type = this.input("Val").type;
-      return this.getFlowResult(this.next("Begin"));
-    }
-  }]);
-
-  return Enter;
-}(_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function enterNode() {
-  return new Enter();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/env.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/env.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Env": () => /* binding */ Env
-/* harmony export */ });
-/* harmony import */ var _program_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./program.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/program.js");
-/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/enter.js");
-/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/exit.js");
-/* harmony import */ var _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../nodes/call.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/call.js");
-/* harmony import */ var _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../nodes/console.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/console.js");
-/* harmony import */ var _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../nodes/fgetvar.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/fgetvar.js");
-/* harmony import */ var _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../nodes/for.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/for.js");
-/* harmony import */ var _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../nodes/getvar.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/getvar.js");
-/* harmony import */ var _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../nodes/setvar.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/setvar.js");
-/* harmony import */ var _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../nodes/while.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/while.js");
-/* harmony import */ var _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../nodes/if.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/if.js");
-/* harmony import */ var _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../nodes/math/fadd.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fadd.js");
-/* harmony import */ var _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../nodes/math/fdiv.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fdiv.js");
-/* harmony import */ var _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../nodes/math/fmul.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fmul.js");
-/* harmony import */ var _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../nodes/math/fsqrt.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fsqrt.js");
-/* harmony import */ var _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../nodes/bool/fequal.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fequal.js");
-/* harmony import */ var _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../nodes/bool/fgt.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fgt.js");
-/* harmony import */ var _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../nodes/bool/fgte.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fgte.js");
-/* harmony import */ var _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../nodes/bool/flt.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/flt.js");
-/* harmony import */ var _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../nodes/bool/flte.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/flte.js");
-/* harmony import */ var _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nodes/bool/fnotequal.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fnotequal.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor, value) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * This class represents a main global environment for cnodes.
- * The class is a "static" class that is responible for maintaining a global
- * registry of registered nodes. A node registration is a object with three fields: a node name,
- * a category name and a factory, that returns a new instance for that node.
- * The global Env instance must be initialized one-time by calling the Env.init() method,
- * this method register all built-in nodes. Eventual custom nodes must be registered manually
- * via Env.registerNode(name, category, factory).
- */
-
-var Env = /*#__PURE__*/function () {
-  function Env() {
-    _classCallCheck(this, Env);
-  }
-
-  _createClass(Env, null, [{
-    key: "init",
-
-    /**
-     * Initialize the CNodes global environment
-     */
-    value: function init() {
-      _classStaticPrivateFieldSpecSet(Env, Env, _nodeRegistry, new Map()); // Core nodes
-
-
-      Env.registerNode("Program", "Core", _program_js__WEBPACK_IMPORTED_MODULE_0__.program);
-      Env.registerNode("Call", "Core", _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__.callNode);
-      Env.registerNode("Console", "Core", _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__.consoleNode);
-      Env.registerNode("FGetvar", "Core", _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__.fgetvarNode);
-      Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
-      Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
-      Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode);
-      Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.setvarNode);
-      Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.whileNode);
-      Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.enterNode);
-      Env.registerNode("Exit", "Core", _exit_js__WEBPACK_IMPORTED_MODULE_2__.exitNode); // Math nodes
-
-      Env.registerNode("FAdd", "Math", _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__.faddNode);
-      Env.registerNode("FDiv", "Math", _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__.fdivNode);
-      Env.registerNode("FMul", "Math", _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__.fmulNode);
-      Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__.fsqrtNode); // Boolean Nodes
-
-      Env.registerNode("FEqual", "Boolean", _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_15__.fequalNode);
-      Env.registerNode("FGT", "Boolean", _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_16__.fgtNode);
-      Env.registerNode("FGTE", "Boolean", _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_17__.fgteNode);
-      Env.registerNode("FLT", "Boolean", _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_18__.fltNode);
-      Env.registerNode("FLTE", "Boolean", _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_19__.flteNode);
-      Env.registerNode("FNotEqual", "Boolean", _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_20__.fnotequalNode);
-    }
-    /**
-     * Register a node type
-     * @param {string} name The name of the node
-     * @param {string} category The category of the node
-     * @param {any} factory A class that instantiate the node
-     */
-
-  }, {
-    key: "registerNode",
-    value: function registerNode(name, category, factory) {
-      _classStaticPrivateFieldSpecGet(Env, Env, _nodeRegistry).set(name, {
-        category: category,
-        factory: factory
-      });
-    }
-    /**
-     * Return the list of unique registered categories
-     */
-
-  }, {
-    key: "getCategories",
-    value: function getCategories() {
-      var categoryMap = new Map();
-      Array.from(_classStaticPrivateFieldSpecGet(this, Env, _nodeRegistry).values()).forEach(function (element) {
-        categoryMap.set(element.category, 0);
-      });
-      return Array.from(categoryMap.keys());
-    }
-    /**
-     * Return an array of registrations for nodes.
-     * Registrations have the sign: {name, category, factory}
-     * @param {string} category The category for which seacrh registrations
-     */
-
-  }, {
-    key: "getCategoryNodes",
-    value: function getCategoryNodes(category) {
-      var registrations = [];
-      Array.from(_classStaticPrivateFieldSpecGet(this, Env, _nodeRegistry).entries()).forEach(function (entry) {
-        if (entry[1].category === category) {
-          registrations.push({
-            name: entry[0],
-            category: entry[1].category,
-            factory: entry[1].factory
-          });
-        }
-      });
-      return registrations;
-    }
-    /**
-     * Instantiate a node by name
-     * @param {string} name The name of the node
-     */
-
-  }, {
-    key: "getInstance",
-    value: function getInstance(name) {
-      var reg = _classStaticPrivateFieldSpecGet(this, Env, _nodeRegistry).get(name);
-
-      if (reg) {
-        return reg.factory();
-      } else {
-        return null;
-      }
-    }
-    /**
-     * Creates and returns a JSON representation of the entire program
-     * @param {Program} program The program to export
-     */
-
-  }, {
-    key: "export",
-    value: function _export(program) {
-      var exp = {
-        id: program.id,
-        version: _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version,
-        lastNodeIndex: _node_js__WEBPACK_IMPORTED_MODULE_22__.Node.lastNodeIdIndex,
-        lastSocketIndex: _socket_js__WEBPACK_IMPORTED_MODULE_21__.Socket.lastSocketIdIndex,
-        enter: program.enter.id,
-        exit: program.exit.id,
-        nodes: [],
-        connections: []
-      };
-
-      var _iterator = _createForOfIteratorHelper(program.nodes),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var node = _step.value;
-          var nodeExp = {
-            id: node.id,
-            name: node.name,
-            functional: node.functional,
-            meta: node.meta,
-            program: node instanceof _program_js__WEBPACK_IMPORTED_MODULE_0__.Program ? Env["export"](node) : undefined,
-            inputs: node.inputs.map(function (inp) {
-              return {
-                id: inp.id,
-                name: inp.name,
-                node: null,
-                type: {
-                  type: inp.type.type,
-                  isArray: inp.type.isArray
-                },
-                value: inp.value,
-                peer: null
-              };
-            }),
-            outputs: node.outputs.map(function (outp) {
-              return {
-                id: outp.id,
-                name: outp.name,
-                node: null,
-                type: {
-                  type: outp.type.type,
-                  isArray: outp.type.isArray
-                },
-                value: outp.value,
-                peers: []
-              };
-            }),
-            prev: !node.prev ? null : {
-              id: node.prev.id,
-              name: node.prev.name,
-              node: null,
-              peers: []
-            },
-            nexts: node.nexts.map(function (next) {
-              return {
-                id: next.id,
-                name: next.name,
-                node: null,
-                peer: null
-              };
-            })
-          };
-          exp.nodes.push(nodeExp);
-        }
-        /**
-         * Define a inner-function that prevent duplicates connections
-         * @param {any} connection The connection to push
-         */
-
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      function pushConnection(connection) {
-        if (exp.connections.findIndex(function (c) {
-          return c.type === connection.type && c.sourceNode === connection.sourceNode && c.sourceSocket === connection.sourceSocket && c.targetNode === connection.targetNode && c.targetSocket === connection.targetSocket;
-        }) === -1) {
-          exp.connections.push(connection);
-        }
-      }
-
-      var _iterator2 = _createForOfIteratorHelper(program.nodes),
-          _step2;
-
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var _node = _step2.value;
-
-          if (_node.prev && _node.prev.peers && _node.prev.peers.length > 0) {
-            var _iterator3 = _createForOfIteratorHelper(_node.prev.peers),
-                _step3;
-
-            try {
-              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-                var peer = _step3.value;
-                var connectionExp = {
-                  type: "pn",
-                  sourceNode: peer.node.id,
-                  sourceSocket: peer.id,
-                  targetNode: _node.id,
-                  targetSocket: _node.prev.id
-                };
-                pushConnection(connectionExp);
-              }
-            } catch (err) {
-              _iterator3.e(err);
-            } finally {
-              _iterator3.f();
-            }
-          }
-
-          var _iterator4 = _createForOfIteratorHelper(_node.inputs),
-              _step4;
-
-          try {
-            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-              var inp = _step4.value;
-
-              if (inp.peer) {
-                var _connectionExp = {
-                  type: "io",
-                  sourceNode: inp.peer.node.id,
-                  sourceSocket: inp.peer.id,
-                  targetNode: _node.id,
-                  targetSocket: inp.id
-                };
-                pushConnection(_connectionExp);
-              }
-            }
-          } catch (err) {
-            _iterator4.e(err);
-          } finally {
-            _iterator4.f();
-          }
-
-          var _iterator5 = _createForOfIteratorHelper(_node.outputs),
-              _step5;
-
-          try {
-            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-              var outp = _step5.value;
-
-              var _iterator7 = _createForOfIteratorHelper(outp.peers),
-                  _step7;
-
-              try {
-                for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                  var _peer = _step7.value;
-
-                  if (_peer) {
-                    var _connectionExp2 = {
-                      type: "io",
-                      sourceNode: _node.id,
-                      sourceSocket: outp.id,
-                      targetNode: _peer.node.id,
-                      targetSocket: _peer.id
-                    };
-                    pushConnection(_connectionExp2);
-                  }
-                }
-              } catch (err) {
-                _iterator7.e(err);
-              } finally {
-                _iterator7.f();
-              }
-            }
-          } catch (err) {
-            _iterator5.e(err);
-          } finally {
-            _iterator5.f();
-          }
-
-          var _iterator6 = _createForOfIteratorHelper(_node.nexts),
-              _step6;
-
-          try {
-            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-              var next = _step6.value;
-
-              if (next.peer) {
-                var _connectionExp3 = {
-                  type: "pn",
-                  sourceNode: _node.id,
-                  sourceSocket: next.id,
-                  targetNode: next.peer.node.id,
-                  targetSocket: next.peer.id
-                };
-                pushConnection(_connectionExp3);
-              }
-            }
-          } catch (err) {
-            _iterator6.e(err);
-          } finally {
-            _iterator6.f();
-          }
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-
-      return exp;
-    }
-    /**
-     * Create a program instance based on export data created with export() method
-     * @param {any} data A object with the export data format
-     */
-
-  }, {
-    key: "import",
-    value: function _import(data) {
-      if (data.version !== 1) {
-        throw new Error("Imported data must have version 1");
-      }
-
-      var p = new _program_js__WEBPACK_IMPORTED_MODULE_0__.Program(); // Removes enter and exit auto-nodes, these
-      // will be re-created by import procedure
-
-      p.removeNode(p.enter);
-      p.removeNode(p.exit);
-      _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version = data.version; // Now import nodes without connections
-
-      var _iterator8 = _createForOfIteratorHelper(data.nodes),
-          _step8;
-
-      try {
-        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          var nodeData = _step8.value;
-          var node = void 0; // If this node is a program node, let the import
-          // procedure to create the node
-
-          if (nodeData.program) {
-            node = Env["import"](nodeData.program);
-          } else {
-            // Otherwise import the node
-            node = Env.getInstance(nodeData.name);
-          } // Delete default sockets (created by getInstance())
-
-
-          node.inputs = [];
-          node.outputs = [];
-          node.prev = null;
-          node.nexts = [];
-
-          if (!node) {
-            throw new Error("Node type '".concat(nodeData.name, "' is not registered"));
-          }
-
-          node.id = nodeData.id;
-          node.functional = nodeData.functional;
-          node.meta = nodeData.meta;
-
-          var _iterator10 = _createForOfIteratorHelper(nodeData.inputs),
-              _step10;
-
-          try {
-            for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-              var inpData = _step10.value;
-              var inp = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.InputSocket(inpData.name, node, new _type_js__WEBPACK_IMPORTED_MODULE_23__.Type(inpData.type.type, inpData.type.isArray), inpData.value);
-              inp.id = inpData.id;
-              node.inputs.push(inp);
-            }
-          } catch (err) {
-            _iterator10.e(err);
-          } finally {
-            _iterator10.f();
-          }
-
-          var _iterator11 = _createForOfIteratorHelper(nodeData.outputs),
-              _step11;
-
-          try {
-            for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-              var outpData = _step11.value;
-              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.OutputSocket(outpData.name, node, new _type_js__WEBPACK_IMPORTED_MODULE_23__.Type(outpData.type.type, outpData.type.isArray), outpData.value);
-              outp.id = outpData.id;
-              node.outputs.push(outp);
-            }
-          } catch (err) {
-            _iterator11.e(err);
-          } finally {
-            _iterator11.f();
-          }
-
-          if (nodeData.prev) {
-            var prev = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.PrevSocket(nodeData.prev.name, node);
-            prev.id = nodeData.prev.id;
-            node.prev = prev;
-          }
-
-          var _iterator12 = _createForOfIteratorHelper(nodeData.nexts),
-              _step12;
-
-          try {
-            for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-              var nextData = _step12.value;
-              var next = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.NextSocket(nextData.name, node);
-              next.id = nextData.id;
-              node.nexts.push(next);
-            }
-          } catch (err) {
-            _iterator12.e(err);
-          } finally {
-            _iterator12.f();
-          }
-
-          p.addNode(node);
-        }
-      } catch (err) {
-        _iterator8.e(err);
-      } finally {
-        _iterator8.f();
-      }
-
-      p.enter = p.nodes.find(function (n) {
-        return n.id === data.enter;
-      });
-      p.exit = p.nodes.find(function (n) {
-        return n.id === data.exit;
-      }); // Now import connections
-
-      var _iterator9 = _createForOfIteratorHelper(data.connections),
-          _step9;
-
-      try {
-        var _loop = function _loop() {
-          var connectionData = _step9.value;
-          var sourceNode = p.nodes.find(function (n) {
-            return n.id === connectionData.sourceNode;
-          });
-          var targetNode = p.nodes.find(function (n) {
-            return n.id === connectionData.targetNode;
-          });
-          var sourceSocket = connectionData.type === "pn" ? sourceNode.nexts.find(function (n) {
-            return n.id === connectionData.sourceSocket;
-          }) : sourceNode.outputs.find(function (o) {
-            return o.id === connectionData.sourceSocket;
-          });
-          var targetSocket = connectionData.type === "pn" ? targetNode.prev : targetNode.inputs.find(function (i) {
-            return i.id === connectionData.targetSocket;
-          });
-          sourceSocket.connect(targetSocket);
-        };
-
-        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-          _loop();
-        } // These two static variable must be assigned at the end because
-        // the new InputSocket(), new OutputSocket(), ... increment it during
-        // the import phase
-
-      } catch (err) {
-        _iterator9.e(err);
-      } finally {
-        _iterator9.f();
-      }
-
-      _node_js__WEBPACK_IMPORTED_MODULE_22__.Node.lastNodeIdIndex = data.lastNodeIndex;
-      _socket_js__WEBPACK_IMPORTED_MODULE_21__.Socket.lastSocketIdIndex = data.lastSocketIndex;
-      return p;
-    }
-  }]);
-
-  return Env;
-}();
-var _nodeRegistry = {
-  writable: true,
-  value: new Map()
-};
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/exit.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/exit.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Exit": () => /* binding */ Exit,
-/* harmony export */   "exitNode": () => /* binding */ exitNode
-/* harmony export */ });
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a cnode that is the starting point for a
- * program. The program can be top-level or not
- */
-
-var Exit = /*#__PURE__*/function (_Node) {
-  _inherits(Exit, _Node);
-
-  var _super = _createSuper(Exit);
-
-  function Exit() {
-    var _this;
-
-    _classCallCheck(this, Exit);
-
-    _this = _super.call(this, "Exit");
-    _this.removable = false;
-    _this.creatable = false;
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.nexts = [];
-    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("End", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process method
-   */
-
-
-  _createClass(Exit, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      this.output("Val").value = this.input("Val").value;
-      this.output("Val").type = this.input("Val").type;
-      return new _node_js__WEBPACK_IMPORTED_MODULE_0__.Result(); // End process
-    }
-  }]);
-
-  return Exit;
-}(_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function exitNode() {
-  return new Exit();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/node.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Node": () => /* binding */ Node,
-/* harmony export */   "Result": () => /* binding */ Result
-/* harmony export */ });
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-/**
- * This is the base node class. A node have some input and output
- * to exchange data with other nodes, some nexts to determine next
- * execution nodes, and a prev to identify the entry point.
- * A node can be functional or iterative. If the node is funcitonal
- * the execution of the process method is repeated each time other
- * nodes read the output values, otherwise output nodes reports
- * the last computed value. Each node has a unique id to identify it
- */
-
-var _id = new WeakMap();
-
-var _name = new WeakMap();
-
-var _functional = new WeakMap();
-
-var _inputs = new WeakMap();
-
-var _outputs = new WeakMap();
-
-var _nexts = new WeakMap();
-
-var _prev = new WeakMap();
-
-var _program = new WeakMap();
-
-var _meta = new WeakMap();
-
-var _removable = new WeakMap();
-
-var _creatable = new WeakMap();
-
-var _canAddInput = new WeakMap();
-
-var _canAddOutput = new WeakMap();
-
-var _canAddNext = new WeakMap();
-
-var Node = /*#__PURE__*/function () {
-  /** An incremental index to generate unique node IDs */
-
-  /** The internal unique identifier */
-
-  /** The internal name of the node */
-
-  /** Is this node a functional node? */
-
-  /** List of node's inputs */
-
-  /** List of node's outputs */
-
-  /** List of node's nexts in execution */
-
-  /** The execution entry point */
-
-  /** Reference to the enclosing program */
-
-  /** Additional info (UIs can write anything to store graphical behaviors) */
-
-  /** Can the node be removed by the user? */
-
-  /** Can the node be created by the user? */
-
-  /** Can the user add an input? */
-
-  /** Can the user add an output? */
-
-  /** Can the user add a next? */
-  function Node(name) {
-    _classCallCheck(this, Node);
-
-    _id.set(this, {
-      writable: true,
-      value: null
-    });
-
-    _name.set(this, {
-      writable: true,
-      value: ""
-    });
-
-    _functional.set(this, {
-      writable: true,
-      value: false
-    });
-
-    _inputs.set(this, {
-      writable: true,
-      value: []
-    });
-
-    _outputs.set(this, {
-      writable: true,
-      value: []
-    });
-
-    _nexts.set(this, {
-      writable: true,
-      value: []
-    });
-
-    _prev.set(this, {
-      writable: true,
-      value: null
-    });
-
-    _program.set(this, {
-      writable: true,
-      value: null
-    });
-
-    _meta.set(this, {
-      writable: true,
-      value: null
-    });
-
-    _removable.set(this, {
-      writable: true,
-      value: true
-    });
-
-    _creatable.set(this, {
-      writable: true,
-      value: true
-    });
-
-    _canAddInput.set(this, {
-      writable: true,
-      value: false
-    });
-
-    _canAddOutput.set(this, {
-      writable: true,
-      value: false
-    });
-
-    _canAddNext.set(this, {
-      writable: true,
-      value: false
-    });
-
-    _classPrivateFieldSet(this, _name, name);
-
-    _classPrivateFieldSet(this, _id, "NID_" + Node.lastNodeIdIndex++);
-  }
-
-  _createClass(Node, [{
-    key: "input",
-
-    /**
-     * Returns the input by name
-     * @param {string} name Name of the input
-     */
-    value: function input(name) {
-      return this.inputs.find(function (i) {
-        return i.name === name;
-      });
-    }
-    /**
-     * Returns the output by name
-     * @param {string} name The name of the output
-     */
-
-  }, {
-    key: "output",
-    value: function output(name) {
-      return this.outputs.find(function (o) {
-        return o.name === name;
-      });
-    }
-    /**
-     * Returns the next by name
-     * @param {string} name The name of the next
-     */
-
-  }, {
-    key: "next",
-    value: function next(name) {
-      if (!name) {
-        return this.nexts[0];
-      }
-
-      return this.nexts.find(function (n) {
-        return n.name === name;
-      });
-    }
-    /**
-     * Evaluate all imputs of this node. Inputs are sockets.
-     * If the socket is connected the evaluation will search
-     * for the socket's peer and evaluate the output counterpart
-     * eventually reprocess the output's nod, if the node is
-     * functional
-     */
-
-  }, {
-    key: "evaluateInputs",
-    value: function evaluateInputs() {
-      var _iterator = _createForOfIteratorHelper(this.inputs),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var inp = _step.value;
-          inp.evaluate();
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-    /**
-     * This is an helper method to construct a Result instance
-     * by name
-     * @param {Socket} socket The Socket on which construct the Result instance
-     */
-
-  }, {
-    key: "getFlowResult",
-    value: function getFlowResult(socket) {
-      if (socket.peer) {
-        return new Result(socket.peer.node);
-      } else {
-        return new Result();
-      }
-    }
-    /**
-     * This method disconnect all sockets from the node
-     */
-
-  }, {
-    key: "disconnectAllSockets",
-    value: function disconnectAllSockets() {
-      if (_classPrivateFieldGet(this, _prev)) {
-        while (_classPrivateFieldGet(this, _prev).peers.length > 0) {
-          _classPrivateFieldGet(this, _prev).disconnect(_classPrivateFieldGet(this, _prev).peers[0]);
-        }
-      }
-
-      var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs)),
-          _step2;
-
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var i = _step2.value;
-
-          if (i.peer) {
-            i.disconnect();
-          }
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-
-      var _iterator3 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _outputs)),
-          _step3;
-
-      try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var o = _step3.value;
-
-          while (o.peers.length > 0) {
-            o.peers[0].disconnect();
-          }
-        }
-      } catch (err) {
-        _iterator3.e(err);
-      } finally {
-        _iterator3.f();
-      }
-
-      var _iterator4 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _nexts)),
-          _step4;
-
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var n = _step4.value;
-
-          if (n.peer) {
-            n.disconnect();
-          }
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
-    }
-    /**
-     * If this.#canAddInput is true, the user can add an input
-     * equal to the (at least one) input that already exists
-     */
-
-  }, {
-    key: "addInput",
-    value: function addInput() {
-      if (this.canAddInput && _classPrivateFieldGet(this, _inputs).length > 0) {
-        _classPrivateFieldGet(this, _inputs).push(new _socket_js__WEBPACK_IMPORTED_MODULE_0__.InputSocket("", this, _classPrivateFieldGet(this, _inputs)[0].type, _classPrivateFieldGet(this, _inputs)[0].value)); // Rename all inputs to its ordinal number in the inputs array
-
-
-        var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
-            _step5;
-
-        try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var _step5$value = _slicedToArray(_step5.value, 2),
-                idx = _step5$value[0],
-                i = _step5$value[1];
-
-            i.name = "" + idx;
-          }
-        } catch (err) {
-          _iterator5.e(err);
-        } finally {
-          _iterator5.f();
-        }
-      } else {
-        throw new Error("Can't add input!");
-      }
-    }
-    /**
-     * This method removes a specific input from the node, if
-     * this is possible whit this instance
-     * @param {*} input The input to remove
-     */
-
-  }, {
-    key: "removeInput",
-    value: function removeInput(input) {
-      if (this.canRemoveInput(input)) {
-        _classPrivateFieldSet(this, _inputs, _classPrivateFieldGet(this, _inputs).filter(function (i) {
-          return i !== input;
-        })); // Rename all inputs to its ordinal number in the inputs array
-
-
-        var _iterator6 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
-            _step6;
-
-        try {
-          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-            var _step6$value = _slicedToArray(_step6.value, 2),
-                idx = _step6$value[0],
-                i = _step6$value[1];
-
-            i.name = "" + idx;
-          }
-        } catch (err) {
-          _iterator6.e(err);
-        } finally {
-          _iterator6.f();
-        }
-      } else {
-        throw new Error("Can't remove input");
-      }
-    }
-    /**
-     * Can this node remove a specific input?
-     * Subclass with variable number of input should override this method
-     * @param {InputsSocket} input The input to remove
-     */
-
-  }, {
-    key: "canRemoveInput",
-    value: function canRemoveInput(input) {
-      return false;
-    }
-    /** The base version of the node does nothing */
-
-  }, {
-    key: "process",
-    value: function process() {
-      return new Result();
-    }
-  }, {
-    key: "id",
-    get: function get() {
-      return _classPrivateFieldGet(this, _id);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _id, val);
-    }
-  }, {
-    key: "name",
-    get: function get() {
-      return _classPrivateFieldGet(this, _name);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _name, val);
-    }
-  }, {
-    key: "functional",
-    get: function get() {
-      return _classPrivateFieldGet(this, _functional);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _functional, val);
-    }
-  }, {
-    key: "inputs",
-    get: function get() {
-      return _classPrivateFieldGet(this, _inputs);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _inputs, val);
-    }
-  }, {
-    key: "outputs",
-    get: function get() {
-      return _classPrivateFieldGet(this, _outputs);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _outputs, val);
-    }
-  }, {
-    key: "nexts",
-    get: function get() {
-      return _classPrivateFieldGet(this, _nexts);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _nexts, val);
-    }
-  }, {
-    key: "prev",
-    get: function get() {
-      return _classPrivateFieldGet(this, _prev);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _prev, val);
-    }
-  }, {
-    key: "program",
-    get: function get() {
-      return _classPrivateFieldGet(this, _program);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _program, val);
-    }
-  }, {
-    key: "removable",
-    get: function get() {
-      return _classPrivateFieldGet(this, _removable);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _removable, val);
-    }
-  }, {
-    key: "creatable",
-    get: function get() {
-      return _classPrivateFieldGet(this, _creatable);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _creatable, val);
-    }
-  }, {
-    key: "canAddInput",
-    get: function get() {
-      return _classPrivateFieldGet(this, _canAddInput);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _canAddInput, val);
-    }
-  }, {
-    key: "canAddOutput",
-    get: function get() {
-      return _classPrivateFieldGet(this, _canAddOutput);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _canAddOutput, val);
-    }
-  }, {
-    key: "canAddNext",
-    get: function get() {
-      return _classPrivateFieldGet(this, _canAddNext);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _canAddNext, val);
-    }
-  }, {
-    key: "meta",
-    get: function get() {
-      return _classPrivateFieldGet(this, _meta);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _meta, val);
-    }
-  }]);
-
-  return Node;
-}();
-/**
- * The result class used by programs to receive
- * the next "next" in the flow
- */
-
-_defineProperty(Node, "lastNodeIdIndex", 0);
-
-var _next = new WeakMap();
-
-var Result = /*#__PURE__*/function () {
-  /** The next node */
-  function Result() {
-    var next = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-    _classCallCheck(this, Result);
-
-    _next.set(this, {
-      writable: true,
-      value: null
-    });
-
-    _classPrivateFieldSet(this, _next, next);
-  }
-
-  _createClass(Result, [{
-    key: "next",
-    get: function get() {
-      return _classPrivateFieldGet(this, _next);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _next, val);
-    }
-  }]);
-
-  return Result;
-}();
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/program.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/program.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Program": () => /* binding */ Program,
-/* harmony export */   "program": () => /* binding */ program
-/* harmony export */ });
-/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enter.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/enter.js");
-/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exit.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/exit.js");
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-
-
-/**
- * A program is a special node that contains nodes. The program
- * manages the flow of the global execution by starting from the
- * "Enter" default, autocreated node, call its process() method and receive the next
- * "next". A program also store a global variable space
- */
-
-var _nodes = new WeakMap();
-
-var _enter = new WeakMap();
-
-var _exit = new WeakMap();
-
-var _currentNode = new WeakMap();
-
-var _vars = new WeakMap();
-
-var Program = /*#__PURE__*/function (_Node) {
-  _inherits(Program, _Node);
-
-  var _super = _createSuper(Program);
-
-  /** Engine version */
-
-  /** The nodes in this program */
-
-  /** The Enter node */
-
-  /** The Exit node */
-
-  /** The instruction pointer equivalent :) */
-
-  /** The variable global space */
-  function Program() {
-    var _this;
-
-    _classCallCheck(this, Program);
-
-    _this = _super.call(this, "Program");
-
-    _nodes.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: []
-    });
-
-    _enter.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: null
-    });
-
-    _exit.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: null
-    });
-
-    _currentNode.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: null
-    });
-
-    _vars.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: new Map()
-    });
-
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_4__.type)(_type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, false), 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_4__.type)(_type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, false), 0)];
-    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
-
-    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit()));
-
-    return _this;
-  }
-
-  _createClass(Program, [{
-    key: "addNode",
-
-    /**
-     * Add a new node to this program
-     * @param {Node} node The node to add
-     */
-    value: function addNode(node) {
-      _classPrivateFieldGet(this, _nodes).push(node); // Set this program to the node
-
-
-      node.program = this;
-      return this;
-    }
-    /**
-     * Removes a node from this program, disconnect all sockets
-     * @param {Node} node The node to remove
-     */
-
-  }, {
-    key: "removeNode",
-    value: function removeNode(node) {
-      // Disconnect its sockets
-      node.disconnectAllSockets();
-
-      _classPrivateFieldSet(this, _nodes, _classPrivateFieldGet(this, _nodes).filter(function (n) {
-        return n.id !== node.id;
-      }));
-
-      node.program = null;
-      return this;
-    }
-    /**
-     * The process method will start from the Enter node and
-     * cycle over nexts returned by the process functions of nodes.
-     * The Program node couldn't be a top-level program, but a sub-nod
-     * of another program. For that reason, the process() method copy the
-     * value of the only input in the Program node to the only one
-     * input of the "Enter" forst node.
-     * This is a limitation: The Program node can be actually only 1 input
-     * and only 1 output. At the same, Enter and Exit nodes will have only
-     * 1 input and output respectively.
-     * At the end, the process() methos of the Program node, will copy the
-     * value of the Exit's output to the unique output of the Program node
-     */
-
-  }, {
-    key: "process",
-    value: function process() {
-      this.evaluateInputs(); // Copy input to enter's input
-
-      _classPrivateFieldGet(this, _enter).input("Val").value = this.input("Val").value;
-      _classPrivateFieldGet(this, _enter).input("Val").type = this.input("Val").type;
-      this.processFrom(_classPrivateFieldGet(this, _enter)); // Copy output to exit's output
-
-      this.output("Val").value = _classPrivateFieldGet(this, _exit).output("Val").value;
-      this.output("Val").type = _classPrivateFieldGet(this, _exit).output("Val").type;
-      return this.getFlowResult(this.next("Out"));
-    }
-    /**
-     * Execute a program useng node as starting point
-     * @param {Node} node Starting point node
-     */
-
-  }, {
-    key: "processFrom",
-    value: function processFrom(node) {
-      this.currentNode = node;
-
-      while (this.currentNode !== null) {
-        var result = this.currentNode.process();
-        this.currentNode = result.next;
-      }
-    }
-  }, {
-    key: "vars",
-    get: function get() {
-      return _classPrivateFieldGet(this, _vars);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _vars, val);
-    }
-  }, {
-    key: "enter",
-    get: function get() {
-      return _classPrivateFieldGet(this, _enter);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _enter, val);
-    }
-  }, {
-    key: "exit",
-    get: function get() {
-      return _classPrivateFieldGet(this, _exit);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _exit, val);
-    }
-  }, {
-    key: "currentNode",
-    get: function get() {
-      return _classPrivateFieldGet(this, _currentNode);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _currentNode, val);
-    }
-  }, {
-    key: "nodes",
-    get: function get() {
-      return _classPrivateFieldGet(this, _nodes);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _nodes, val);
-    }
-  }]);
-
-  return Program;
-}(_node_js__WEBPACK_IMPORTED_MODULE_2__.Node);
-/**
- * A helper function to create the program
- * @param {string} name The name of the program
- */
-
-_defineProperty(Program, "version", 1);
-
-function program() {
-  return new Program();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/socket.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Socket": () => /* binding */ Socket,
-/* harmony export */   "ValueSocket": () => /* binding */ ValueSocket,
-/* harmony export */   "InputSocket": () => /* binding */ InputSocket,
-/* harmony export */   "OutputSocket": () => /* binding */ OutputSocket,
-/* harmony export */   "FlowSocket": () => /* binding */ FlowSocket,
-/* harmony export */   "PrevSocket": () => /* binding */ PrevSocket,
-/* harmony export */   "NextSocket": () => /* binding */ NextSocket
-/* harmony export */ });
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-/**
- * A socket is an object that represent an input,
- * output, next or prev for the node
- */
-
-var _id = new WeakMap();
-
-var _name = new WeakMap();
-
-var _node = new WeakMap();
-
-var Socket = /*#__PURE__*/function () {
-  /** An incremental index to generate unique socket IDs */
-
-  /** The internal id of the socket */
-
-  /** The name of this socket */
-
-  /** The parent node */
-
-  /**
-   * Construct a new socket on a node with a given name
-   * @param {string} name The name of the socket
-   * @param {Node} node The parent node of the socket
-   */
-  function Socket(name, node) {
-    _classCallCheck(this, Socket);
-
-    _id.set(this, {
-      writable: true,
-      value: ""
-    });
-
-    _name.set(this, {
-      writable: true,
-      value: ""
-    });
-
-    _node.set(this, {
-      writable: true,
-      value: null
-    });
-
-    _classPrivateFieldSet(this, _id, "SID_" + Socket.lastSocketIdIndex++);
-
-    _classPrivateFieldSet(this, _name, name);
-
-    _classPrivateFieldSet(this, _node, node);
-  }
-
-  _createClass(Socket, [{
-    key: "id",
-    get: function get() {
-      return _classPrivateFieldGet(this, _id);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _id, val);
-    }
-  }, {
-    key: "name",
-    get: function get() {
-      return _classPrivateFieldGet(this, _name);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _name, val);
-    }
-  }, {
-    key: "node",
-    get: function get() {
-      return _classPrivateFieldGet(this, _node);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _node, val);
-    }
-  }]);
-
-  return Socket;
-}();
-/**
- * The value socket represent a input or a output value
- * for the node, so it has a value and a type
- */
-
-_defineProperty(Socket, "lastSocketIdIndex", 0);
-
-var _type = new WeakMap();
-
-var _value = new WeakMap();
-
-var ValueSocket = /*#__PURE__*/function (_Socket) {
-  _inherits(ValueSocket, _Socket);
-
-  var _super = _createSuper(ValueSocket);
-
-  /** The type for the socket's value */
-
-  /** The stored value */
-
-  /**
-   * Construct a new ValueSocket
-   * @param {string} name Name of the socket
-   * @param {Node} node The parent node
-   * @param {Type} type The type of this socket
-   * @param {any} value The default value of the socket
-   */
-  function ValueSocket(name, node) {
-    var _this;
-
-    var _type2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type2(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
-
-    var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
-    _classCallCheck(this, ValueSocket);
-
-    _this = _super.call(this, name, node);
-
-    _type.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: (0,_type_js__WEBPACK_IMPORTED_MODULE_0__.type)(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false)
-    });
-
-    _value.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: 0
-    });
-
-    _this.type = _type2;
-    _this.value = value;
-    return _this;
-  }
-
-  _createClass(ValueSocket, [{
-    key: "type",
-    get: function get() {
-      return _classPrivateFieldGet(this, _type);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _type, val);
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      return _classPrivateFieldGet(this, _value);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _value, val);
-    }
-  }]);
-
-  return ValueSocket;
-}(Socket);
-/**
- * This is an input socket value for the node, it
- * can have only a peer socket, because its value
- * have to be defined in a deterministic way
- */
-
-var _peer = new WeakMap();
-
-var InputSocket = /*#__PURE__*/function (_ValueSocket) {
-  _inherits(InputSocket, _ValueSocket);
-
-  var _super2 = _createSuper(InputSocket);
-
-  /** The only peer socket */
-
-  /**
-   * Construct a new InputSocket
-   * @param {string} name The name of the socket
-   * @param {Node} node The parent node
-   * @param {Type} type The type of the socket
-   * @param {any} value The default value of the socket
-   */
-  function InputSocket(name, node) {
-    var _this2;
-
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : type(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
-    var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
-    _classCallCheck(this, InputSocket);
-
-    _this2 = _super2.call(this, name, node, type, value);
-
-    _peer.set(_assertThisInitialized(_this2), {
-      writable: true,
-      value: null
-    });
-
-    return _this2;
-  }
-
-  _createClass(InputSocket, [{
-    key: "evaluate",
-
-    /**
-     * Evaluate the socket value. If the socket is connected,
-     * this method goes to the peer socket and take the value.
-     * If the peer socket is part of a functional node, the process()
-     * method is executed before taking the value
-     */
-    value: function evaluate() {
-      if (this.peer !== null) {
-        if (this.peer.node && this.peer.node.functional) {
-          this.peer.node.process();
-        }
-
-        this.type = this.peer.type;
-        this.value = this.peer.value;
-      }
-    }
-    /**
-     * Connect this socket to another (output) socket
-     * @param {Socket} socket The output socket to connect
-     */
-
-  }, {
-    key: "connect",
-    value: function connect(socket) {
-      var _this3 = this;
-
-      this.peer = socket;
-
-      if (socket.peers.find(function (s) {
-        return s === _this3;
-      }) === undefined) {
-        socket.peers.push(this);
-      }
-    }
-    /**
-     * Disconnects this socket from its peer
-     */
-
-  }, {
-    key: "disconnect",
-    value: function disconnect() {
-      var _this4 = this;
-
-      if (this.peer) {
-        var index = this.peer.peers.findIndex(function (s) {
-          return s === _this4;
-        });
-
-        if (index !== -1) {
-          this.peer.peers.splice(index, 1);
-        }
-      }
-
-      this.peer = null;
-    }
-  }, {
-    key: "peer",
-    get: function get() {
-      return _classPrivateFieldGet(this, _peer);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _peer, val);
-    }
-  }]);
-
-  return InputSocket;
-}(ValueSocket);
-/**
- * This is a output value socket and represent an output
- * value for the node. Output value socket can be connected to
- * many peer input value sockets, because many socket would like
- * to take the value from this.
- */
-
-var _peers = new WeakMap();
-
-var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
-  _inherits(OutputSocket, _ValueSocket2);
-
-  var _super3 = _createSuper(OutputSocket);
-
-  /** A list of input value connected sockets */
-
-  /**
-   * Construct a new OutputSocket
-   * @param {string} name The name of the socket
-   * @param {Node} node The parent node
-   * @param {Type} type The type of the socket
-   * @param {any} value The default value of the socket
-   */
-  function OutputSocket(name, node) {
-    var _this5;
-
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : type(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
-    var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
-    _classCallCheck(this, OutputSocket);
-
-    _this5 = _super3.call(this, name, node, type, value);
-
-    _peers.set(_assertThisInitialized(_this5), {
-      writable: true,
-      value: []
-    });
-
-    return _this5;
-  }
-
-  _createClass(OutputSocket, [{
-    key: "connect",
-
-    /**
-     * Connects this socket to a input socket
-     * @param {Socket} socket Socket to connect to
-     */
-    value: function connect(socket) {
-      if (this.peers.find(function (s) {
-        return s === socket;
-      }) === undefined) {
-        this.peers.push(socket);
-      }
-
-      socket.peer = this;
-    }
-    /**
-     * Disconnect this socket from a specific input peer
-     * @param {Socket} socket The socket to disconnect
-     */
-
-  }, {
-    key: "disconnect",
-    value: function disconnect(socket) {
-      var index = this.peers.findIndex(function (s) {
-        return s === socket;
-      });
-
-      if (index !== undefined) {
-        this.peers.splice(index, 1);
-        socket.peer = null;
-      }
-    }
-  }, {
-    key: "peers",
-    get: function get() {
-      return _classPrivateFieldGet(this, _peers);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _peers, val);
-    }
-  }]);
-
-  return OutputSocket;
-}(ValueSocket);
-/**
- * A flow socket is a socket to connect two nodes in
- * terms of execution flow
- */
-
-var FlowSocket = /*#__PURE__*/function (_Socket2) {
-  _inherits(FlowSocket, _Socket2);
-
-  var _super4 = _createSuper(FlowSocket);
-
-  /**
-   * Construct a new FlowSocket
-   * @param {sring} name Name of the socket
-   * @param {Node} node The parent node
-   */
-  function FlowSocket(name, node) {
-    _classCallCheck(this, FlowSocket);
-
-    return _super4.call(this, name, node);
-  }
-
-  return FlowSocket;
-}(Socket);
-/**
- * This class representa a prev socket, a socket that
- * can be connected to other nexts sockets. The prev socket
- * cab have many peer (next) socket because the execution
- * can come from anywhere in the program
- */
-
-var _peers2 = new WeakMap();
-
-var PrevSocket = /*#__PURE__*/function (_FlowSocket) {
-  _inherits(PrevSocket, _FlowSocket);
-
-  var _super5 = _createSuper(PrevSocket);
-
-  /** List of (next) peer sockets */
-
-  /**
-   * Construct a new PrevSocket
-   * @param {string} name Name of the socket
-   * @param {Node} node Parent node
-   */
-  function PrevSocket(name, node) {
-    var _this6;
-
-    _classCallCheck(this, PrevSocket);
-
-    _this6 = _super5.call(this, name, node);
-
-    _peers2.set(_assertThisInitialized(_this6), {
-      writable: true,
-      value: []
-    });
-
-    return _this6;
-  }
-
-  _createClass(PrevSocket, [{
-    key: "connect",
-
-    /**
-     * Connect this socket to a next socket
-     * @param {Socket} socket The next socket to connect
-     */
-    value: function connect(socket) {
-      if (this.peers.find(function (s) {
-        return s === socket;
-      }) === undefined) {
-        this.peers.push(socket);
-      }
-
-      socket.peer = this;
-    }
-    /**
-     * Disconnect this socket from a next socket
-     * @param {Socket} socket The next socket to disconnect
-     */
-
-  }, {
-    key: "disconnect",
-    value: function disconnect(socket) {
-      var index = this.peers.findIndex(function (s) {
-        return s === socket;
-      });
-
-      if (index !== undefined) {
-        this.peers.splice(index, 1);
-        socket.peer = null;
-      }
-    }
-  }, {
-    key: "peers",
-    get: function get() {
-      return _classPrivateFieldGet(this, _peers2);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _peers2, val);
-    }
-  }]);
-
-  return PrevSocket;
-}(FlowSocket);
-/**
- * This class represents a socket to redirect the flow
- * to another node via a node's prev socket. This socket can
- * be connected to only one (prev) socket, because the program
- * flow have to be well defined
- */
-
-var _peer2 = new WeakMap();
-
-var NextSocket = /*#__PURE__*/function (_FlowSocket2) {
-  _inherits(NextSocket, _FlowSocket2);
-
-  var _super6 = _createSuper(NextSocket);
-
-  /** The peer (prev) socket */
-
-  /**
-   * Construct a new NextSocket
-   * @param {string} name Name of the socket
-   * @param {Node} node The parent node of the socket
-   */
-  function NextSocket(name, node) {
-    var _this7;
-
-    _classCallCheck(this, NextSocket);
-
-    _this7 = _super6.call(this, name, node);
-
-    _peer2.set(_assertThisInitialized(_this7), {
-      writable: true,
-      value: null
-    });
-
-    return _this7;
-  }
-
-  _createClass(NextSocket, [{
-    key: "connect",
-
-    /**
-     * Connect this socket to another (prev) socket
-     * @param {Socket} socket The prev socket to connect to
-     */
-    value: function connect(socket) {
-      var _this8 = this;
-
-      this.peer = socket;
-
-      if (socket.peers.find(function (s) {
-        return s === _this8;
-      }) === undefined) {
-        socket.peers.push(this);
-      }
-    }
-    /**
-     * Disconnect this socket from the peer
-     */
-
-  }, {
-    key: "disconnect",
-    value: function disconnect() {
-      var _this9 = this;
-
-      if (this.peer) {
-        var index = this.peer.peers.findIndex(function (s) {
-          return s === _this9;
-        });
-
-        if (index !== -1) {
-          this.peer.peers.splice(index, 1);
-        }
-
-        this.peer = null;
-      }
-    }
-  }, {
-    key: "peer",
-    get: function get() {
-      return _classPrivateFieldGet(this, _peer2);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _peer2, val);
-    }
-  }]);
-
-  return NextSocket;
-}(FlowSocket);
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/core/type.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Types": () => /* binding */ Types,
-/* harmony export */   "Type": () => /* binding */ Type,
-/* harmony export */   "type": () => /* binding */ type
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-/**
- * Possible types for values
- */
-var Types = {
-  NUMBER: "number",
-  STRING: "string",
-  BOOLEAN: "boolean",
-  OBJECT: "object",
-  ANY: "any"
-};
-/**
- * A type is a type and a flag indicating that the
- * type is a array of that base type
- */
-
-var _type = new WeakMap();
-
-var _isArray = new WeakMap();
-
-var Type = /*#__PURE__*/function () {
-  /** The base type */
-
-  /** Is this type an array of base type? */
-
-  /**
-   * Construct a new Type
-   * @param {string} type The type
-   * @param {boolean} isArray Is array of this type?
-   */
-  function Type(type, isArray) {
-    _classCallCheck(this, Type);
-
-    _type.set(this, {
-      writable: true,
-      value: Types.NUMBER
-    });
-
-    _isArray.set(this, {
-      writable: true,
-      value: false
-    });
-
-    _classPrivateFieldSet(this, _type, type);
-
-    _classPrivateFieldSet(this, _isArray, isArray);
-  }
-
-  _createClass(Type, [{
-    key: "type",
-    get: function get() {
-      return _classPrivateFieldGet(this, _type);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _type, val);
-    }
-  }, {
-    key: "isArray",
-    get: function get() {
-      return _classPrivateFieldGet(this, _isArray);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _isArray, val);
-    }
-  }]);
-
-  return Type;
-}();
-/**
- * A helper function to create the type
- * @param {Type} type The base type
- * @param {boolean} isArray The array flag
- */
-
-function type(type, isArray) {
-  return new Type(type, isArray);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js ***!
-  \************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Comparision": () => /* binding */ Comparision,
-/* harmony export */   "FCompare": () => /* binding */ FCompare,
-/* harmony export */   "fcompareNode": () => /* binding */ fcompareNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * Supported comparision types
- */
-
-var Comparision = {
-  EQUAL: "equal",
-  GT: "gt",
-  GTE: "gte",
-  LT: "lt",
-  LTE: "lte",
-  NOT_EQUAL: "not_equal"
-};
-/**
- * This class implements a functional node for compairing numeric values.
- */
-
-var _comparision = new WeakMap();
-
-var FCompare = /*#__PURE__*/function (_Node) {
-  _inherits(FCompare, _Node);
-
-  var _super = _createSuper(FCompare);
-
-  /** Configured comparision for this node */
-  function FCompare() {
-    var _this;
-
-    var comparision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Comparision.EQUAL;
-
-    _classCallCheck(this, FCompare);
-
-    _this = _super.call(this, "FCompare");
-
-    _comparision.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: Comparision.EQUAL
-    });
-
-    _classPrivateFieldSet(_assertThisInitialized(_this), _comparision, comparision); // The node is pure functional
-
-
-    _this.functional = true; // Default to two numeric inputs
-
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), 0)];
-    _this.prev = null;
-    _this.nexts = [];
-    return _this;
-  }
-
-  _createClass(FCompare, [{
-    key: "process",
-
-    /**
-     * The process override
-     */
-    value: function process() {
-      this.evaluateInputs();
-      var val1 = this.input("Val1").value;
-      var val2 = this.input("Val2").value;
-      var ret;
-
-      switch (this.comparision) {
-        case Comparision.EQUAL:
-          {
-            ret = val1 === val2;
-            break;
-          }
-
-        case Comparision.NOT_EQUAL:
-          {
-            ret = val1 !== val2;
-            break;
-          }
-
-        case Comparision.GT:
-          {
-            ret = val1 > val2;
-            break;
-          }
-
-        case Comparision.GTE:
-          {
-            ret = val1 >= val2;
-            break;
-          }
-
-        case Comparision.LT:
-          {
-            ret = val1 < val2;
-            break;
-          }
-
-        case Comparision.LTE:
-          {
-            ret = val1 <= val2;
-            break;
-          }
-
-        default:
-          {
-            throw "Comparision type not valid";
-          }
-      }
-
-      this.output("Val").value = ret;
-    }
-  }, {
-    key: "comparision",
-    get: function get() {
-      return _classPrivateFieldGet(this, _comparision);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _comparision, val);
-    }
-  }]);
-
-  return FCompare;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function fcompareNode() {
-  return new FCompare();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fequal.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fequal.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FEqual": () => /* binding */ FEqual,
-/* harmony export */   "fequalNode": () => /* binding */ fequalNode
-/* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class override the FCompare node with a comparision of EQUAL
- */
-
-var FEqual = /*#__PURE__*/function (_FCompare) {
-  _inherits(FEqual, _FCompare);
-
-  var _super = _createSuper(FEqual);
-
-  function FEqual() {
-    var _this;
-
-    _classCallCheck(this, FEqual);
-
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.EQUAL);
-    _this.name = "FEqual";
-    return _this;
-  }
-
-  return FEqual;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
-/**
- * Helper fuction to create the node
- */
-
-function fequalNode() {
-  return new FEqual();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fgt.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fgt.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FGT": () => /* binding */ FGT,
-/* harmony export */   "fgtNode": () => /* binding */ fgtNode
-/* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class override the FCompare node with a comparision of GT
- */
-
-var FGT = /*#__PURE__*/function (_FCompare) {
-  _inherits(FGT, _FCompare);
-
-  var _super = _createSuper(FGT);
-
-  function FGT() {
-    var _this;
-
-    _classCallCheck(this, FGT);
-
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GT);
-    _this.name = "FGT";
-    return _this;
-  }
-
-  return FGT;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
-/**
- * Helper fuction to create the node
- */
-
-function fgtNode() {
-  return new FGT();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fgte.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fgte.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FGTE": () => /* binding */ FGTE,
-/* harmony export */   "fgteNode": () => /* binding */ fgteNode
-/* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class override the FCompare node with a comparision of GTE
- */
-
-var FGTE = /*#__PURE__*/function (_FCompare) {
-  _inherits(FGTE, _FCompare);
-
-  var _super = _createSuper(FGTE);
-
-  function FGTE() {
-    var _this;
-
-    _classCallCheck(this, FGTE);
-
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GTE);
-    _this.name = "FGTE";
-    return _this;
-  }
-
-  return FGTE;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
-/**
- * Helper fuction to create the node
- */
-
-function fgteNode() {
-  return new FGTE();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/flt.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/flt.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FLT": () => /* binding */ FLT,
-/* harmony export */   "fltNode": () => /* binding */ fltNode
-/* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class override the FCompare node with a comparision of FLT
- */
-
-var FLT = /*#__PURE__*/function (_FCompare) {
-  _inherits(FLT, _FCompare);
-
-  var _super = _createSuper(FLT);
-
-  function FLT() {
-    var _this;
-
-    _classCallCheck(this, FLT);
-
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LT);
-    _this.name = "FLT";
-    return _this;
-  }
-
-  return FLT;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
-/**
- * Helper fuction to create the node
- */
-
-function fltNode() {
-  return new FLT();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/flte.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/flte.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FLTE": () => /* binding */ FLTE,
-/* harmony export */   "flteNode": () => /* binding */ flteNode
-/* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class override the FCompare node with a comparision of FLTE
- */
-
-var FLTE = /*#__PURE__*/function (_FCompare) {
-  _inherits(FLTE, _FCompare);
-
-  var _super = _createSuper(FLTE);
-
-  function FLTE() {
-    var _this;
-
-    _classCallCheck(this, FLTE);
-
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LTE);
-    _this.name = "FLTE";
-    return _this;
-  }
-
-  return FLTE;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
-/**
- * Helper fuction to create the node
- */
-
-function flteNode() {
-  return new FLTE();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fnotequal.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fnotequal.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FNotEqual": () => /* binding */ FNotEqual,
-/* harmony export */   "fnotequalNode": () => /* binding */ fnotequalNode
-/* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class override the FCompare node with a comparision of NOT_EQUAL
- */
-
-var FNotEqual = /*#__PURE__*/function (_FCompare) {
-  _inherits(FNotEqual, _FCompare);
-
-  var _super = _createSuper(FNotEqual);
-
-  function FNotEqual() {
-    var _this;
-
-    _classCallCheck(this, FNotEqual);
-
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.NOT_EQUAL);
-    _this.name = "FNotEqual";
-    return _this;
-  }
-
-  return FNotEqual;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
-/**
- * Helper fuction to create the node
- */
-
-function fnotequalNode() {
-  return new FNotEqual();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/call.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/call.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Call": () => /* binding */ Call,
-/* harmony export */   "callNode": () => /* binding */ callNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-/**
- * This class implements a subroutine/function call
- */
-
-var Call = /*#__PURE__*/function (_Node) {
-  _inherits(Call, _Node);
-
-  var _super = _createSuper(Call);
-
-  function Call() {
-    var _this;
-
-    _classCallCheck(this, Call);
-
-    _this = _super.call(this, "Call");
-    _this.inputs = [];
-    _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Call", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process function
-   */
-
-
-  _createClass(Call, [{
-    key: "process",
-    value: function process() {
-      // Save the current program's node
-      var prevCurrentNode = this.program.currentNode; // Execute a sub program beginning on that node
-
-      this.program.processFrom(this.next("Call").peer.node); // Restore the current program's node
-
-      this.program.currentNode = prevCurrentNode;
-      return this.getFlowResult(this.next("Out"));
-    }
-  }]);
-
-  return Call;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * A helper function to create the node
- */
-
-function callNode() {
-  return new Call();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/console.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/console.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Console": () => /* binding */ Console,
-/* harmony export */   "consoleNode": () => /* binding */ consoleNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a cnode that print to the
- * console the input value
- */
-
-var Console = /*#__PURE__*/function (_Node) {
-  _inherits(Console, _Node);
-
-  var _super = _createSuper(Console);
-
-  function Console() {
-    var _this;
-
-    _classCallCheck(this, Console);
-
-    _this = _super.call(this, "Console");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process method
-   */
-
-
-  _createClass(Console, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      console.log(this.input("Val").value);
-      return this.getFlowResult(this.next("Out"));
-    }
-  }]);
-
-  return Console;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper function to create the node
- */
-
-function consoleNode() {
-  return new Console();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/fgetvar.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/fgetvar.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FGetvar": () => /* binding */ FGetvar,
-/* harmony export */   "fgetvarNode": () => /* binding */ fgetvarNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a functional GetVar node,
- * a node to read a variable's value from the global
- * program's space
- */
-
-var FGetvar = /*#__PURE__*/function (_Node) {
-  _inherits(FGetvar, _Node);
-
-  var _super = _createSuper(FGetvar);
-
-  function FGetvar() {
-    var _this;
-
-    _classCallCheck(this, FGetvar);
-
-    _this = _super.call(this, "FGetvar");
-    _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
-    _this.nexts = [];
-    _this.prev = null;
-    return _this;
-  }
-  /**
-   * The process method
-   */
-
-
-  _createClass(FGetvar, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      var varName = this.input("Name").value;
-      this.output("Val").value = this.program.vars.get(varName);
-    }
-  }]);
-
-  return FGetvar;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper function to create the node
- */
-
-function fgetvarNode() {
-  return new FGetvar();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/for.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/for.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "For": () => /* binding */ For,
-/* harmony export */   "forNode": () => /* binding */ forNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a node that is able to
- * iterate over a range of integers, like the form
- * for(let i=start; i<end; i++) do();
- */
-
-var For = /*#__PURE__*/function (_Node) {
-  _inherits(For, _Node);
-
-  var _super = _createSuper(For);
-
-  function For() {
-    var _this;
-
-    _classCallCheck(this, For);
-
-    _this = _super.call(this, "For");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("From", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("To", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process function
-   */
-
-
-  _createClass(For, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs(); // Save the current program's node
-
-      var prevCurrentNode = this.program.currentNode; // Set the "Index" output value to Index
-
-      this.output("Index").value = this.input("From").value; // Re evaluate inputs in case of Condition depends on Index output
-
-      this.evaluateInputs(); // Let's cycle from "From" to "To" values
-
-      for (var index = this.input("From").value; index < this.input("To").value; index++) {
-        // If there's a node connected to the "Do" next socket...
-        if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
-          // Set the "Index" output value to Index
-          this.output("Index").value = index; // Execute a sub program beginning on that node
-
-          this.program.processFrom(this.next("Do").peer.node);
-        }
-      } // Restore the current program's node
-
-
-      this.program.currentNode = prevCurrentNode;
-      return this.getFlowResult(this.next("Out"));
-    }
-  }]);
-
-  return For;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * A helper function to create the node
- */
-
-function forNode() {
-  return new For();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/getvar.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/getvar.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Getvar": () => /* binding */ Getvar,
-/* harmony export */   "getvarNode": () => /* binding */ getvarNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a node to get a variable's value
- * in the program's global space. This node has a functional
- * counterpart naamed FGetvar
- */
-
-var Getvar = /*#__PURE__*/function (_Node) {
-  _inherits(Getvar, _Node);
-
-  var _super = _createSuper(Getvar);
-
-  function Getvar() {
-    var _this;
-
-    _classCallCheck(this, Getvar);
-
-    _this = _super.call(this, "Getvar");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process function
-   */
-
-
-  _createClass(Getvar, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      var varName = this.input("Name").value;
-      this.output("Val").value = this.program.vars.get(varName);
-      return this.getFlowResult(this.next("Out"));
-    }
-  }]);
-
-  return Getvar;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * A helper function to create the node
- */
-
-function getvarNode() {
-  return new Getvar();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/if.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/if.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "If": () => /* binding */ If,
-/* harmony export */   "ifNode": () => /* binding */ ifNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a node that is able to
- * redirect the flow of execution based on the
- * "condition" input value
- */
-
-var If = /*#__PURE__*/function (_Node) {
-  _inherits(If, _Node);
-
-  var _super = _createSuper(If);
-
-  function If() {
-    var _this;
-
-    _classCallCheck(this, If);
-
-    _this = _super.call(this, "If");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false)];
-    _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Then", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Else", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process function
-   */
-
-
-  _createClass(If, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      var flow = null;
-
-      if (this.input("Condition").value) {
-        flow = this.next("Then");
-      } else {
-        flow = this.next("Else");
-      }
-
-      return this.getFlowResult(flow);
-    }
-  }]);
-
-  return If;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * A helper function to create the node
- */
-
-function ifNode() {
-  return new If();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fadd.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fadd.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FAdd": () => /* binding */ FAdd,
-/* harmony export */   "faddNode": () => /* binding */ faddNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a functional node for adding numeric values.
- * Supports a indefinite number of value inputs and one single output
- */
-
-var FAdd = /*#__PURE__*/function (_Node) {
-  _inherits(FAdd, _Node);
-
-  var _super = _createSuper(FAdd);
-
-  function FAdd() {
-    var _this;
-
-    _classCallCheck(this, FAdd);
-
-    _this = _super.call(this, "FAdd"); // The node is pure functional
-
-    _this.functional = true; // This node has a variable number of inputs
-
-    _this.canAddInput = true; // Default to two numeric inputs
-
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.prev = null;
-    _this.nexts = [];
-    return _this;
-  }
-  /**
-   * The process override
-   */
-
-
-  _createClass(FAdd, [{
-    key: "process",
-    value: function process() {
-      var sum = 0;
-      this.evaluateInputs();
-
-      var _iterator = _createForOfIteratorHelper(this.inputs),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var inp = _step.value;
-          sum += parseFloat(inp.value);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      this.output("Val").value = sum;
-    }
-    /**
-     * Can this node remove a specific input?
-     * In this case, there must be at least 2 inputs
-     * @param {InputsSocket} input The input to remove
-     */
-
-  }, {
-    key: "canRemoveInput",
-    value: function canRemoveInput(input) {
-      return this.inputs.length > 2;
-    }
-  }]);
-
-  return FAdd;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function faddNode() {
-  return new FAdd();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fdiv.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fdiv.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FDiv": () => /* binding */ FDiv,
-/* harmony export */   "fdivNode": () => /* binding */ fdivNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a functional node for divide numeric values.
- */
-
-var FDiv = /*#__PURE__*/function (_Node) {
-  _inherits(FDiv, _Node);
-
-  var _super = _createSuper(FDiv);
-
-  function FDiv() {
-    var _this;
-
-    _classCallCheck(this, FDiv);
-
-    _this = _super.call(this, "FDiv"); // The node is pure functional
-
-    _this.functional = true; // Default to two numeric inputs
-
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.prev = null;
-    _this.nexts = [];
-    return _this;
-  }
-  /**
-   * The process override
-   */
-
-
-  _createClass(FDiv, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      this.output("Val").value = parseFloat(this.input("Val1").value) / parseFloat(this.input("Val2").value);
-    }
-  }]);
-
-  return FDiv;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function fdivNode() {
-  return new FDiv();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fmul.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fmul.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FMul": () => /* binding */ FMul,
-/* harmony export */   "fmulNode": () => /* binding */ fmulNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a functional node for multiply numeric values.
- * Supports a indefinite number of value inputs and one single output
- */
-
-var FMul = /*#__PURE__*/function (_Node) {
-  _inherits(FMul, _Node);
-
-  var _super = _createSuper(FMul);
-
-  function FMul() {
-    var _this;
-
-    _classCallCheck(this, FMul);
-
-    _this = _super.call(this, "FMul"); // The node is pure functional
-
-    _this.functional = true; // This node has a variable number of inputs
-
-    _this.canAddInput = true; // Default to two numeric inputs
-
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.prev = null;
-    _this.nexts = [];
-    return _this;
-  }
-  /**
-   * The process override
-   */
-
-
-  _createClass(FMul, [{
-    key: "process",
-    value: function process() {
-      var mul = 1;
-      this.evaluateInputs();
-
-      var _iterator = _createForOfIteratorHelper(this.inputs),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var inp = _step.value;
-          mul *= parseFloat(inp.value);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      this.output("Val").value = mul;
-    }
-    /**
-     * Can this node remove a specific input?
-     * In this case, there must be at least 2 inputs
-     * @param {InputsSocket} input The input to remove
-     */
-
-  }, {
-    key: "canRemoveInput",
-    value: function canRemoveInput(input) {
-      return this.inputs.length > 2;
-    }
-  }]);
-
-  return FMul;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function fmulNode() {
-  return new FMul();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fsqrt.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fsqrt.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FSqrt": () => /* binding */ FSqrt,
-/* harmony export */   "fsqrtNode": () => /* binding */ fsqrtNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a functional node for Square Root.
- */
-
-var FSqrt = /*#__PURE__*/function (_Node) {
-  _inherits(FSqrt, _Node);
-
-  var _super = _createSuper(FSqrt);
-
-  function FSqrt() {
-    var _this;
-
-    _classCallCheck(this, FSqrt);
-
-    _this = _super.call(this, "FSqrt"); // The node is pure functional
-
-    _this.functional = true; // Default to one numeric inputs
-
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.prev = null;
-    _this.nexts = [];
-    return _this;
-  }
-  /**
-   * The process override
-   */
-
-
-  _createClass(FSqrt, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      this.output("Val").value = Math.sqrt(parseFloat(this.input("Val").value));
-    }
-  }]);
-
-  return FSqrt;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * Helper fuction to create the node
- */
-
-function fsqrtNode() {
-  return new FSqrt();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/setvar.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/setvar.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Setvar": () => /* binding */ Setvar,
-/* harmony export */   "setvarNode": () => /* binding */ setvarNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a node to set a variable
- * value in the program's global space. If the variable
- * don't exists, the processo function will create it
- */
-
-var Setvar = /*#__PURE__*/function (_Node) {
-  _inherits(Setvar, _Node);
-
-  var _super = _createSuper(Setvar);
-
-  function Setvar() {
-    var _this;
-
-    _classCallCheck(this, Setvar);
-
-    _this = _super.call(this, "Setvar");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _typeof(""), "")];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process fmethod
-   */
-
-
-  _createClass(Setvar, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs();
-      var varName = this.input("Name").value;
-      var varVal = this.input("Val").value;
-      this.program.vars.set(varName, varVal);
-      this.output("Val").value = varVal;
-      return this.getFlowResult(this.next("Out"));
-    }
-  }]);
-
-  return Setvar;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * A helper function to create the node
- */
-
-function setvarNode() {
-  return new Setvar();
-}
-
-/***/ }),
-
-/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/while.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/while.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "While": () => /* binding */ While,
-/* harmony export */   "whileNode": () => /* binding */ whileNode
-/* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes
- *
- * A representation-agnostic library to define and execute nodes based processes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-
-
-/**
- * This class implements a node that is able to
- * iterate until a condition become false, like
- * while(condition) do();
- */
-
-var While = /*#__PURE__*/function (_Node) {
-  _inherits(While, _Node);
-
-  var _super = _createSuper(While);
-
-  function While() {
-    var _this;
-
-    _classCallCheck(this, While);
-
-    _this = _super.call(this, "While");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
-    return _this;
-  }
-  /**
-   * The process function
-   */
-
-
-  _createClass(While, [{
-    key: "process",
-    value: function process() {
-      this.evaluateInputs(); // Save the current program's node
-
-      var prevCurrentNode = this.program.currentNode; // A bouns index variable ;-)
-
-      var index = parseFloat(this.input("Index").value); // Set the "Index" output value to Index
-
-      this.output("Index").value = index; // Re evaluate inputs in case of Condition depends on Index output
-
-      this.evaluateInputs(); // Let's cycle while condition is true
-
-      while (this.input("Condition").value) {
-        // If there's a node connected to the "Do" next socket...
-        if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
-          // Set the "Index" output value to Index
-          this.output("Index").value = index++; // Execute a sub program beginning on that node
-
-          this.program.processFrom(this.next("Do").peer.node); // Re-compute the guard...
-
-          this.evaluateInputs();
-        }
-      } // Restore the currentprogram's node
-
-
-      this.program.currentNode = prevCurrentNode;
-      return this.getFlowResult(this.next("Out"));
-    }
-  }]);
-
-  return While;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
-/**
- * A helper function to create the node
- */
-
-function whileNode() {
-  return new While();
-}
-
-/***/ }),
-
 /***/ "./src/canvas/canvas.js":
 /*!******************************!*\
   !*** ./src/canvas/canvas.js ***!
@@ -4567,6 +263,11 @@ var Canvas = /*#__PURE__*/function () {
       _classPrivateMethodGet(self, _onContextMenu, _onContextMenu2).call(self, e);
     });
   }
+  /**
+   * Returns the minimum SVG View Box size, actually means
+   * the max level of zoom (in)
+   */
+
 
   _createClass(Canvas, [{
     key: "clientToSvgPoint",
@@ -4840,15 +541,30 @@ var Canvas = /*#__PURE__*/function () {
     key: "minVBSize",
     get: function get() {
       return _classPrivateFieldGet(this, _minVBSize);
-    },
+    }
+    /**
+     * Sets the minimum SVG View Box size, actually means
+     * the max level of zoom (in)
+     */
+    ,
     set: function set(val) {
       _classPrivateFieldSet(this, _minVBSize, val);
     }
+    /**
+     * Returns the minimum SVG View Box size, actually means
+     * the max level of zoom (out)
+     */
+
   }, {
     key: "maxVBSize",
     get: function get() {
       return _classPrivateFieldGet(this, _maxVBSize);
-    },
+    }
+    /**
+     * Sets the minimum SVG View Box size, actually means
+     * the max level of zoom (out)
+     */
+    ,
     set: function set(val) {
       _classPrivateFieldSet(this, _maxVBSize, val);
     }
@@ -6298,7 +2014,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -6730,11 +2446,15 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "height",
     get: function get() {
+      var leftSocketsHeight = this.node.inputs.length;
+
+      if (this.node.prev && this.node.nexts.length === 0 && this.node.outputs.length === 0) {
+        leftSocketsHeight++;
+      }
+
+      var rightSocketsHeight = this.node.outputs.length + this.node.nexts.length;
       return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5 + 40 + // Title
-      30 * Math.max(this.node.functional ? 0 : 1, this.node.nexts.length) + // Nexts/prevs, at least 1 prev
-      30 * Math.max(0, this.node.outputs.length) + // Outputs
-      30 * Math.max(0, this.node.inputs.length) + // Inputs
-      15 // Padding
+      30 * (leftSocketsHeight + rightSocketsHeight) + 15 // Padding
       ;
     }
   }]);
@@ -6754,7 +2474,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesCanvas": () => /* binding */ CnodesCanvas
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
@@ -7587,7 +3307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesSocketComponent": () => /* binding */ CnodesSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
@@ -7758,7 +3478,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "InputSocketComponent": () => /* binding */ InputSocketComponent
 /* harmony export */ });
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
@@ -8140,7 +3860,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NextSocketComponent": () => /* binding */ NextSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
@@ -8430,7 +4150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "OutputSocketComponent": () => /* binding */ OutputSocketComponent
 /* harmony export */ });
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
@@ -8744,7 +4464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PrevSocketComponent": () => /* binding */ PrevSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
@@ -9640,9 +5360,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Env,
 /* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAdd,
 /* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FCompare,
+/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FConcat,
 /* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FDiv,
 /* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FGetvar,
 /* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMul,
+/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSConst,
 /* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSqrt,
 /* harmony export */   "FlowSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FlowSocket,
 /* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.For,
@@ -9665,10 +5387,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "consoleNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
 /* harmony export */   "faddNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.faddNode,
 /* harmony export */   "fcompareNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fcompareNode,
+/* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fconcatNode,
 /* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fdivNode,
 /* harmony export */   "fgetvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fgetvarNode,
 /* harmony export */   "fmulNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmulNode,
 /* harmony export */   "forNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.forNode,
+/* harmony export */   "fsconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsconstNode,
 /* harmony export */   "fsqrtNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsqrtNode,
 /* harmony export */   "getvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.getvarNode,
 /* harmony export */   "ifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.ifNode,
@@ -9684,7 +5408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_cnode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/cnode */ "./src/components/cnode.js");
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
 /* harmony import */ var _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "./node_modules/@marco.jacovone/cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /**
  * cnodes-ui
  *
@@ -9730,6 +5454,4552 @@ function canvas(elId) {
 
   _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Env.init();
   return new _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__.CnodesCanvas(el);
+}
+
+/***/ }),
+
+/***/ "../cnodes/cnodes.js":
+/*!***************************!*\
+  !*** ../cnodes/cnodes.js ***!
+  \***************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Env": () => /* reexport safe */ _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__.Env,
+/* harmony export */   "Node": () => /* reexport safe */ _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Node,
+/* harmony export */   "Result": () => /* reexport safe */ _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Result,
+/* harmony export */   "Program": () => /* reexport safe */ _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__.Program,
+/* harmony export */   "program": () => /* reexport safe */ _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__.program,
+/* harmony export */   "FlowSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.FlowSocket,
+/* harmony export */   "InputSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket,
+/* harmony export */   "OutputSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket,
+/* harmony export */   "PrevSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket,
+/* harmony export */   "Socket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.Socket,
+/* harmony export */   "ValueSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.ValueSocket,
+/* harmony export */   "Type": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Type,
+/* harmony export */   "Types": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Types,
+/* harmony export */   "type": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.type,
+/* harmony export */   "Call": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.Call,
+/* harmony export */   "callNode": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.callNode,
+/* harmony export */   "Console": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.Console,
+/* harmony export */   "consoleNode": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__.FGetvar,
+/* harmony export */   "fgetvarNode": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__.fgetvarNode,
+/* harmony export */   "For": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__.For,
+/* harmony export */   "forNode": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__.forNode,
+/* harmony export */   "Getvar": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__.Getvar,
+/* harmony export */   "getvarNode": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__.getvarNode,
+/* harmony export */   "If": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.If,
+/* harmony export */   "ifNode": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode,
+/* harmony export */   "Setvar": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.Setvar,
+/* harmony export */   "setvarNode": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.setvarNode,
+/* harmony export */   "While": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.While,
+/* harmony export */   "whileNode": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.whileNode,
+/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.Comparision,
+/* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.FCompare,
+/* harmony export */   "fcompareNode": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.fcompareNode,
+/* harmony export */   "FSConst": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_14__.FSConst,
+/* harmony export */   "fsconstNode": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_14__.fsconstNode,
+/* harmony export */   "FConcat": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_15__.FConcat,
+/* harmony export */   "fconcatNode": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_15__.fconcatNode,
+/* harmony export */   "FAdd": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__.FAdd,
+/* harmony export */   "faddNode": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__.faddNode,
+/* harmony export */   "FDiv": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__.FDiv,
+/* harmony export */   "fdivNode": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__.fdivNode,
+/* harmony export */   "FMul": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__.FMul,
+/* harmony export */   "fmulNode": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__.fmulNode,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__.FSqrt,
+/* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__.fsqrtNode
+/* harmony export */ });
+/* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
+/* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/core/program.js */ "../cnodes/lib/core/program.js");
+/* harmony import */ var _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/core/type.js */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/nodes/call.js */ "../cnodes/lib/nodes/call.js");
+/* harmony import */ var _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/nodes/console.js */ "../cnodes/lib/nodes/console.js");
+/* harmony import */ var _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/nodes/fgetvar.js */ "../cnodes/lib/nodes/fgetvar.js");
+/* harmony import */ var _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/nodes/for.js */ "../cnodes/lib/nodes/for.js");
+/* harmony import */ var _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lib/nodes/getvar.js */ "../cnodes/lib/nodes/getvar.js");
+/* harmony import */ var _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/nodes/if.js */ "../cnodes/lib/nodes/if.js");
+/* harmony import */ var _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./lib/nodes/setvar.js */ "../cnodes/lib/nodes/setvar.js");
+/* harmony import */ var _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/nodes/while.js */ "../cnodes/lib/nodes/while.js");
+/* harmony import */ var _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./lib/nodes/bool/fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+/* harmony import */ var _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./lib/nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
+/* harmony import */ var _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./lib/nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
+/* harmony import */ var _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lib/nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
+/* harmony import */ var _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
+/* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
+/* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+// Export core nodes
+
+
+
+
+
+
+
+
+
+
+
+
+ // Export boolean nodes
+
+ // Export string nodes
+
+
+ // Export math nodes
+
+
+
+
+
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/enter.js":
+/*!***********************************!*\
+  !*** ../cnodes/lib/core/enter.js ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Enter": () => /* binding */ Enter,
+/* harmony export */   "enterNode": () => /* binding */ enterNode
+/* harmony export */ });
+/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a cnode that is the starting point for a
+ * program. The program can be top-level or not
+ */
+
+var Enter = /*#__PURE__*/function (_Node) {
+  _inherits(Enter, _Node);
+
+  var _super = _createSuper(Enter);
+
+  function Enter() {
+    var _this;
+
+    _classCallCheck(this, Enter);
+
+    _this = _super.call(this, "Enter");
+    _this.removable = false;
+    _this.creatable = false;
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Begin", _assertThisInitialized(_this))];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process method
+   */
+
+
+  _createClass(Enter, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      this.output("Val").value = this.input("Val").value;
+      this.output("Val").type = this.input("Val").type;
+      return this.getFlowResult(this.next("Begin"));
+    }
+  }]);
+
+  return Enter;
+}(_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function enterNode() {
+  return new Enter();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/env.js":
+/*!*********************************!*\
+  !*** ../cnodes/lib/core/env.js ***!
+  \*********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Env": () => /* binding */ Env
+/* harmony export */ });
+/* harmony import */ var _program_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./program.js */ "../cnodes/lib/core/program.js");
+/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.js */ "../cnodes/lib/core/enter.js");
+/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.js */ "../cnodes/lib/core/exit.js");
+/* harmony import */ var _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../nodes/call.js */ "../cnodes/lib/nodes/call.js");
+/* harmony import */ var _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../nodes/console.js */ "../cnodes/lib/nodes/console.js");
+/* harmony import */ var _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../nodes/fgetvar.js */ "../cnodes/lib/nodes/fgetvar.js");
+/* harmony import */ var _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../nodes/for.js */ "../cnodes/lib/nodes/for.js");
+/* harmony import */ var _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../nodes/getvar.js */ "../cnodes/lib/nodes/getvar.js");
+/* harmony import */ var _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../nodes/setvar.js */ "../cnodes/lib/nodes/setvar.js");
+/* harmony import */ var _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../nodes/while.js */ "../cnodes/lib/nodes/while.js");
+/* harmony import */ var _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../nodes/if.js */ "../cnodes/lib/nodes/if.js");
+/* harmony import */ var _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
+/* harmony import */ var _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
+/* harmony import */ var _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
+/* harmony import */ var _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
+/* harmony import */ var _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../nodes/bool/fequal.js */ "../cnodes/lib/nodes/bool/fequal.js");
+/* harmony import */ var _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../nodes/bool/fgt.js */ "../cnodes/lib/nodes/bool/fgt.js");
+/* harmony import */ var _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../nodes/bool/fgte.js */ "../cnodes/lib/nodes/bool/fgte.js");
+/* harmony import */ var _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../nodes/bool/flt.js */ "../cnodes/lib/nodes/bool/flt.js");
+/* harmony import */ var _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../nodes/bool/flte.js */ "../cnodes/lib/nodes/bool/flte.js");
+/* harmony import */ var _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nodes/bool/fnotequal.js */ "../cnodes/lib/nodes/bool/fnotequal.js");
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
+/* harmony import */ var _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor, value) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * This class represents a main global environment for cnodes.
+ * The class is a "static" class that is responible for maintaining a global
+ * registry of registered nodes. A node registration is a object with three fields: a node name,
+ * a category name and a factory, that returns a new instance for that node.
+ * The global Env instance must be initialized one-time by calling the Env.init() method,
+ * this method register all built-in nodes. Eventual custom nodes must be registered manually
+ * via Env.registerNode(name, category, factory).
+ */
+
+var Env = /*#__PURE__*/function () {
+  function Env() {
+    _classCallCheck(this, Env);
+  }
+
+  _createClass(Env, null, [{
+    key: "init",
+
+    /**
+     * Initialize the CNodes global environment
+     */
+    value: function init() {
+      _classStaticPrivateFieldSpecSet(Env, Env, _nodeRegistry, new Map()); // Core nodes
+
+
+      Env.registerNode("Program", "Core", _program_js__WEBPACK_IMPORTED_MODULE_0__.program);
+      Env.registerNode("Call", "Core", _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__.callNode);
+      Env.registerNode("Console", "Core", _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__.consoleNode);
+      Env.registerNode("FGetvar", "Core", _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__.fgetvarNode);
+      Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
+      Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
+      Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode);
+      Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.setvarNode);
+      Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.whileNode);
+      Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.enterNode);
+      Env.registerNode("Exit", "Core", _exit_js__WEBPACK_IMPORTED_MODULE_2__.exitNode); // String nodes
+
+      Env.registerNode("FSConst", "String", _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_24__.fsconstNode);
+      Env.registerNode("FConcat", "String", _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_25__.fconcatNode); // Math nodes
+
+      Env.registerNode("FAdd", "Math", _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__.faddNode);
+      Env.registerNode("FDiv", "Math", _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__.fdivNode);
+      Env.registerNode("FMul", "Math", _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__.fmulNode);
+      Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__.fsqrtNode); // Boolean Nodes
+
+      Env.registerNode("FEqual", "Boolean", _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_15__.fequalNode);
+      Env.registerNode("FGT", "Boolean", _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_16__.fgtNode);
+      Env.registerNode("FGTE", "Boolean", _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_17__.fgteNode);
+      Env.registerNode("FLT", "Boolean", _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_18__.fltNode);
+      Env.registerNode("FLTE", "Boolean", _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_19__.flteNode);
+      Env.registerNode("FNotEqual", "Boolean", _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_20__.fnotequalNode);
+    }
+    /**
+     * Register a node type
+     * @param {string} name The name of the node
+     * @param {string} category The category of the node
+     * @param {any} factory A class that instantiate the node
+     */
+
+  }, {
+    key: "registerNode",
+    value: function registerNode(name, category, factory) {
+      _classStaticPrivateFieldSpecGet(Env, Env, _nodeRegistry).set(name, {
+        category: category,
+        factory: factory
+      });
+    }
+    /**
+     * Return the list of unique registered categories
+     */
+
+  }, {
+    key: "getCategories",
+    value: function getCategories() {
+      var categoryMap = new Map();
+      Array.from(_classStaticPrivateFieldSpecGet(this, Env, _nodeRegistry).values()).forEach(function (element) {
+        categoryMap.set(element.category, 0);
+      });
+      return Array.from(categoryMap.keys());
+    }
+    /**
+     * Return an array of registrations for nodes.
+     * Registrations have the sign: {name, category, factory}
+     * @param {string} category The category for which seacrh registrations
+     */
+
+  }, {
+    key: "getCategoryNodes",
+    value: function getCategoryNodes(category) {
+      var registrations = [];
+      Array.from(_classStaticPrivateFieldSpecGet(this, Env, _nodeRegistry).entries()).forEach(function (entry) {
+        if (entry[1].category === category) {
+          registrations.push({
+            name: entry[0],
+            category: entry[1].category,
+            factory: entry[1].factory
+          });
+        }
+      });
+      return registrations;
+    }
+    /**
+     * Instantiate a node by name
+     * @param {string} name The name of the node
+     */
+
+  }, {
+    key: "getInstance",
+    value: function getInstance(name) {
+      var reg = _classStaticPrivateFieldSpecGet(this, Env, _nodeRegistry).get(name);
+
+      if (reg) {
+        return reg.factory();
+      } else {
+        return null;
+      }
+    }
+    /**
+     * Creates and returns a JSON representation of the entire program
+     * @param {Program} program The program to export
+     */
+
+  }, {
+    key: "export",
+    value: function _export(program) {
+      var exp = {
+        id: program.id,
+        version: _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version,
+        lastNodeIndex: _node_js__WEBPACK_IMPORTED_MODULE_22__.Node.lastNodeIdIndex,
+        lastSocketIndex: _socket_js__WEBPACK_IMPORTED_MODULE_21__.Socket.lastSocketIdIndex,
+        enter: program.enter.id,
+        exit: program.exit.id,
+        nodes: [],
+        connections: []
+      };
+
+      var _iterator = _createForOfIteratorHelper(program.nodes),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var node = _step.value;
+          var nodeExp = {
+            id: node.id,
+            name: node.name,
+            functional: node.functional,
+            meta: node.meta,
+            program: node instanceof _program_js__WEBPACK_IMPORTED_MODULE_0__.Program ? Env["export"](node) : undefined,
+            inputs: node.inputs.map(function (inp) {
+              return {
+                id: inp.id,
+                name: inp.name,
+                node: null,
+                type: {
+                  type: inp.type.type,
+                  isArray: inp.type.isArray
+                },
+                value: inp.value,
+                peer: null
+              };
+            }),
+            outputs: node.outputs.map(function (outp) {
+              return {
+                id: outp.id,
+                name: outp.name,
+                node: null,
+                type: {
+                  type: outp.type.type,
+                  isArray: outp.type.isArray
+                },
+                value: outp.value,
+                peers: []
+              };
+            }),
+            prev: !node.prev ? null : {
+              id: node.prev.id,
+              name: node.prev.name,
+              node: null,
+              peers: []
+            },
+            nexts: node.nexts.map(function (next) {
+              return {
+                id: next.id,
+                name: next.name,
+                node: null,
+                peer: null
+              };
+            })
+          };
+          exp.nodes.push(nodeExp);
+        }
+        /**
+         * Define a inner-function that prevent duplicates connections
+         * @param {any} connection The connection to push
+         */
+
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      function pushConnection(connection) {
+        if (exp.connections.findIndex(function (c) {
+          return c.type === connection.type && c.sourceNode === connection.sourceNode && c.sourceSocket === connection.sourceSocket && c.targetNode === connection.targetNode && c.targetSocket === connection.targetSocket;
+        }) === -1) {
+          exp.connections.push(connection);
+        }
+      }
+
+      var _iterator2 = _createForOfIteratorHelper(program.nodes),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _node = _step2.value;
+
+          if (_node.prev && _node.prev.peers && _node.prev.peers.length > 0) {
+            var _iterator3 = _createForOfIteratorHelper(_node.prev.peers),
+                _step3;
+
+            try {
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                var peer = _step3.value;
+                var connectionExp = {
+                  type: "pn",
+                  sourceNode: peer.node.id,
+                  sourceSocket: peer.id,
+                  targetNode: _node.id,
+                  targetSocket: _node.prev.id
+                };
+                pushConnection(connectionExp);
+              }
+            } catch (err) {
+              _iterator3.e(err);
+            } finally {
+              _iterator3.f();
+            }
+          }
+
+          var _iterator4 = _createForOfIteratorHelper(_node.inputs),
+              _step4;
+
+          try {
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+              var inp = _step4.value;
+
+              if (inp.peer) {
+                var _connectionExp = {
+                  type: "io",
+                  sourceNode: inp.peer.node.id,
+                  sourceSocket: inp.peer.id,
+                  targetNode: _node.id,
+                  targetSocket: inp.id
+                };
+                pushConnection(_connectionExp);
+              }
+            }
+          } catch (err) {
+            _iterator4.e(err);
+          } finally {
+            _iterator4.f();
+          }
+
+          var _iterator5 = _createForOfIteratorHelper(_node.outputs),
+              _step5;
+
+          try {
+            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+              var outp = _step5.value;
+
+              var _iterator7 = _createForOfIteratorHelper(outp.peers),
+                  _step7;
+
+              try {
+                for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                  var _peer = _step7.value;
+
+                  if (_peer) {
+                    var _connectionExp2 = {
+                      type: "io",
+                      sourceNode: _node.id,
+                      sourceSocket: outp.id,
+                      targetNode: _peer.node.id,
+                      targetSocket: _peer.id
+                    };
+                    pushConnection(_connectionExp2);
+                  }
+                }
+              } catch (err) {
+                _iterator7.e(err);
+              } finally {
+                _iterator7.f();
+              }
+            }
+          } catch (err) {
+            _iterator5.e(err);
+          } finally {
+            _iterator5.f();
+          }
+
+          var _iterator6 = _createForOfIteratorHelper(_node.nexts),
+              _step6;
+
+          try {
+            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+              var next = _step6.value;
+
+              if (next.peer) {
+                var _connectionExp3 = {
+                  type: "pn",
+                  sourceNode: _node.id,
+                  sourceSocket: next.id,
+                  targetNode: next.peer.node.id,
+                  targetSocket: next.peer.id
+                };
+                pushConnection(_connectionExp3);
+              }
+            }
+          } catch (err) {
+            _iterator6.e(err);
+          } finally {
+            _iterator6.f();
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      return exp;
+    }
+    /**
+     * Create a program instance based on export data created with export() method
+     * @param {any} data A object with the export data format
+     */
+
+  }, {
+    key: "import",
+    value: function _import(data) {
+      if (data.version !== 1) {
+        throw new Error("Imported data must have version 1");
+      }
+
+      var p = new _program_js__WEBPACK_IMPORTED_MODULE_0__.Program(); // Removes enter and exit auto-nodes, these
+      // will be re-created by import procedure
+
+      p.removeNode(p.enter);
+      p.removeNode(p.exit);
+      _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version = data.version; // Now import nodes without connections
+
+      var _iterator8 = _createForOfIteratorHelper(data.nodes),
+          _step8;
+
+      try {
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var nodeData = _step8.value;
+          var node = void 0; // If this node is a program node, let the import
+          // procedure to create the node
+
+          if (nodeData.program) {
+            node = Env["import"](nodeData.program);
+          } else {
+            // Otherwise import the node
+            node = Env.getInstance(nodeData.name);
+          } // Delete default sockets (created by getInstance())
+
+
+          node.inputs = [];
+          node.outputs = [];
+          node.prev = null;
+          node.nexts = [];
+
+          if (!node) {
+            throw new Error("Node type '".concat(nodeData.name, "' is not registered"));
+          }
+
+          node.id = nodeData.id;
+          node.functional = nodeData.functional;
+          node.meta = nodeData.meta;
+
+          var _iterator10 = _createForOfIteratorHelper(nodeData.inputs),
+              _step10;
+
+          try {
+            for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+              var inpData = _step10.value;
+              var inp = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.InputSocket(inpData.name, node, new _type_js__WEBPACK_IMPORTED_MODULE_23__.Type(inpData.type.type, inpData.type.isArray), inpData.value);
+              inp.id = inpData.id;
+              node.inputs.push(inp);
+            }
+          } catch (err) {
+            _iterator10.e(err);
+          } finally {
+            _iterator10.f();
+          }
+
+          var _iterator11 = _createForOfIteratorHelper(nodeData.outputs),
+              _step11;
+
+          try {
+            for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+              var outpData = _step11.value;
+              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.OutputSocket(outpData.name, node, new _type_js__WEBPACK_IMPORTED_MODULE_23__.Type(outpData.type.type, outpData.type.isArray), outpData.value);
+              outp.id = outpData.id;
+              node.outputs.push(outp);
+            }
+          } catch (err) {
+            _iterator11.e(err);
+          } finally {
+            _iterator11.f();
+          }
+
+          if (nodeData.prev) {
+            var prev = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.PrevSocket(nodeData.prev.name, node);
+            prev.id = nodeData.prev.id;
+            node.prev = prev;
+          }
+
+          var _iterator12 = _createForOfIteratorHelper(nodeData.nexts),
+              _step12;
+
+          try {
+            for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+              var nextData = _step12.value;
+              var next = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.NextSocket(nextData.name, node);
+              next.id = nextData.id;
+              node.nexts.push(next);
+            }
+          } catch (err) {
+            _iterator12.e(err);
+          } finally {
+            _iterator12.f();
+          }
+
+          p.addNode(node);
+        }
+      } catch (err) {
+        _iterator8.e(err);
+      } finally {
+        _iterator8.f();
+      }
+
+      p.enter = p.nodes.find(function (n) {
+        return n.id === data.enter;
+      });
+      p.exit = p.nodes.find(function (n) {
+        return n.id === data.exit;
+      }); // Now import connections
+
+      var _iterator9 = _createForOfIteratorHelper(data.connections),
+          _step9;
+
+      try {
+        var _loop = function _loop() {
+          var connectionData = _step9.value;
+          var sourceNode = p.nodes.find(function (n) {
+            return n.id === connectionData.sourceNode;
+          });
+          var targetNode = p.nodes.find(function (n) {
+            return n.id === connectionData.targetNode;
+          });
+          var sourceSocket = connectionData.type === "pn" ? sourceNode.nexts.find(function (n) {
+            return n.id === connectionData.sourceSocket;
+          }) : sourceNode.outputs.find(function (o) {
+            return o.id === connectionData.sourceSocket;
+          });
+          var targetSocket = connectionData.type === "pn" ? targetNode.prev : targetNode.inputs.find(function (i) {
+            return i.id === connectionData.targetSocket;
+          });
+          sourceSocket.connect(targetSocket);
+        };
+
+        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+          _loop();
+        } // These two static variable must be assigned at the end because
+        // the new InputSocket(), new OutputSocket(), ... increment it during
+        // the import phase
+
+      } catch (err) {
+        _iterator9.e(err);
+      } finally {
+        _iterator9.f();
+      }
+
+      _node_js__WEBPACK_IMPORTED_MODULE_22__.Node.lastNodeIdIndex = data.lastNodeIndex;
+      _socket_js__WEBPACK_IMPORTED_MODULE_21__.Socket.lastSocketIdIndex = data.lastSocketIndex;
+      return p;
+    }
+  }]);
+
+  return Env;
+}();
+var _nodeRegistry = {
+  writable: true,
+  value: new Map()
+};
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/exit.js":
+/*!**********************************!*\
+  !*** ../cnodes/lib/core/exit.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Exit": () => /* binding */ Exit,
+/* harmony export */   "exitNode": () => /* binding */ exitNode
+/* harmony export */ });
+/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a cnode that is the starting point for a
+ * program. The program can be top-level or not
+ */
+
+var Exit = /*#__PURE__*/function (_Node) {
+  _inherits(Exit, _Node);
+
+  var _super = _createSuper(Exit);
+
+  function Exit() {
+    var _this;
+
+    _classCallCheck(this, Exit);
+
+    _this = _super.call(this, "Exit");
+    _this.removable = false;
+    _this.creatable = false;
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.nexts = [];
+    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("End", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process method
+   */
+
+
+  _createClass(Exit, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      this.output("Val").value = this.input("Val").value;
+      this.output("Val").type = this.input("Val").type;
+      return new _node_js__WEBPACK_IMPORTED_MODULE_0__.Result(); // End process
+    }
+  }]);
+
+  return Exit;
+}(_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function exitNode() {
+  return new Exit();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/node.js":
+/*!**********************************!*\
+  !*** ../cnodes/lib/core/node.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Node": () => /* binding */ Node,
+/* harmony export */   "Result": () => /* binding */ Result
+/* harmony export */ });
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+/**
+ * This is the base node class. A node have some input and output
+ * to exchange data with other nodes, some nexts to determine next
+ * execution nodes, and a prev to identify the entry point.
+ * A node can be functional or iterative. If the node is funcitonal
+ * the execution of the process method is repeated each time other
+ * nodes read the output values, otherwise output nodes reports
+ * the last computed value. Each node has a unique id to identify it
+ */
+
+var _id = new WeakMap();
+
+var _name = new WeakMap();
+
+var _functional = new WeakMap();
+
+var _inputs = new WeakMap();
+
+var _outputs = new WeakMap();
+
+var _nexts = new WeakMap();
+
+var _prev = new WeakMap();
+
+var _program = new WeakMap();
+
+var _meta = new WeakMap();
+
+var _removable = new WeakMap();
+
+var _creatable = new WeakMap();
+
+var _canAddInput = new WeakMap();
+
+var _canAddOutput = new WeakMap();
+
+var _canAddNext = new WeakMap();
+
+var Node = /*#__PURE__*/function () {
+  /** An incremental index to generate unique node IDs */
+
+  /** The internal unique identifier */
+
+  /** The internal name of the node */
+
+  /** Is this node a functional node? */
+
+  /** List of node's inputs */
+
+  /** List of node's outputs */
+
+  /** List of node's nexts in execution */
+
+  /** The execution entry point */
+
+  /** Reference to the enclosing program */
+
+  /** Additional info (UIs can write anything to store graphical behaviors) */
+
+  /** Can the node be removed by the user? */
+
+  /** Can the node be created by the user? */
+
+  /** Can the user add an input? */
+
+  /** Can the user add an output? */
+
+  /** Can the user add a next? */
+  function Node(name) {
+    _classCallCheck(this, Node);
+
+    _id.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _name.set(this, {
+      writable: true,
+      value: ""
+    });
+
+    _functional.set(this, {
+      writable: true,
+      value: false
+    });
+
+    _inputs.set(this, {
+      writable: true,
+      value: []
+    });
+
+    _outputs.set(this, {
+      writable: true,
+      value: []
+    });
+
+    _nexts.set(this, {
+      writable: true,
+      value: []
+    });
+
+    _prev.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _program.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _meta.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _removable.set(this, {
+      writable: true,
+      value: true
+    });
+
+    _creatable.set(this, {
+      writable: true,
+      value: true
+    });
+
+    _canAddInput.set(this, {
+      writable: true,
+      value: false
+    });
+
+    _canAddOutput.set(this, {
+      writable: true,
+      value: false
+    });
+
+    _canAddNext.set(this, {
+      writable: true,
+      value: false
+    });
+
+    _classPrivateFieldSet(this, _name, name);
+
+    _classPrivateFieldSet(this, _id, "NID_" + Node.lastNodeIdIndex++);
+  }
+
+  _createClass(Node, [{
+    key: "input",
+
+    /**
+     * Returns the input by name
+     * @param {string} name Name of the input
+     */
+    value: function input(name) {
+      return this.inputs.find(function (i) {
+        return i.name === name;
+      });
+    }
+    /**
+     * Returns the output by name
+     * @param {string} name The name of the output
+     */
+
+  }, {
+    key: "output",
+    value: function output(name) {
+      return this.outputs.find(function (o) {
+        return o.name === name;
+      });
+    }
+    /**
+     * Returns the next by name
+     * @param {string} name The name of the next
+     */
+
+  }, {
+    key: "next",
+    value: function next(name) {
+      if (!name) {
+        return this.nexts[0];
+      }
+
+      return this.nexts.find(function (n) {
+        return n.name === name;
+      });
+    }
+    /**
+     * Evaluate all imputs of this node. Inputs are sockets.
+     * If the socket is connected the evaluation will search
+     * for the socket's peer and evaluate the output counterpart
+     * eventually reprocess the output's nod, if the node is
+     * functional
+     */
+
+  }, {
+    key: "evaluateInputs",
+    value: function evaluateInputs() {
+      var _iterator = _createForOfIteratorHelper(this.inputs),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var inp = _step.value;
+          inp.evaluate();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+    /**
+     * This is an helper method to construct a Result instance
+     * by name
+     * @param {Socket} socket The Socket on which construct the Result instance
+     */
+
+  }, {
+    key: "getFlowResult",
+    value: function getFlowResult(socket) {
+      if (socket.peer) {
+        return new Result(socket.peer.node);
+      } else {
+        return new Result();
+      }
+    }
+    /**
+     * This method disconnect all sockets from the node
+     */
+
+  }, {
+    key: "disconnectAllSockets",
+    value: function disconnectAllSockets() {
+      if (_classPrivateFieldGet(this, _prev)) {
+        while (_classPrivateFieldGet(this, _prev).peers.length > 0) {
+          _classPrivateFieldGet(this, _prev).disconnect(_classPrivateFieldGet(this, _prev).peers[0]);
+        }
+      }
+
+      var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs)),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var i = _step2.value;
+
+          if (i.peer) {
+            i.disconnect();
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      var _iterator3 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _outputs)),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var o = _step3.value;
+
+          while (o.peers.length > 0) {
+            o.peers[0].disconnect();
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      var _iterator4 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _nexts)),
+          _step4;
+
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var n = _step4.value;
+
+          if (n.peer) {
+            n.disconnect();
+          }
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+    }
+    /**
+     * If this.#canAddInput is true, the user can add an input
+     * equal to the (at least one) input that already exists
+     */
+
+  }, {
+    key: "addInput",
+    value: function addInput() {
+      if (this.canAddInput && _classPrivateFieldGet(this, _inputs).length > 0) {
+        _classPrivateFieldGet(this, _inputs).push(new _socket_js__WEBPACK_IMPORTED_MODULE_0__.InputSocket("", this, _classPrivateFieldGet(this, _inputs)[0].type, _classPrivateFieldGet(this, _inputs)[0].value)); // Rename all inputs to its ordinal number in the inputs array
+
+
+        var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
+            _step5;
+
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var _step5$value = _slicedToArray(_step5.value, 2),
+                idx = _step5$value[0],
+                i = _step5$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
+        }
+      } else {
+        throw new Error("Can't add input!");
+      }
+    }
+    /**
+     * This method removes a specific input from the node, if
+     * this is possible whit this instance
+     * @param {*} input The input to remove
+     */
+
+  }, {
+    key: "removeInput",
+    value: function removeInput(input) {
+      if (this.canRemoveInput(input)) {
+        _classPrivateFieldSet(this, _inputs, _classPrivateFieldGet(this, _inputs).filter(function (i) {
+          return i !== input;
+        })); // Rename all inputs to its ordinal number in the inputs array
+
+
+        var _iterator6 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
+            _step6;
+
+        try {
+          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+            var _step6$value = _slicedToArray(_step6.value, 2),
+                idx = _step6$value[0],
+                i = _step6$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator6.e(err);
+        } finally {
+          _iterator6.f();
+        }
+      } else {
+        throw new Error("Can't remove input");
+      }
+    }
+    /**
+     * Can this node remove a specific input?
+     * Subclass with variable number of input should override this method
+     * @param {InputsSocket} input The input to remove
+     */
+
+  }, {
+    key: "canRemoveInput",
+    value: function canRemoveInput(input) {
+      return false;
+    }
+    /** The base version of the node does nothing */
+
+  }, {
+    key: "process",
+    value: function process() {
+      return new Result();
+    }
+  }, {
+    key: "id",
+    get: function get() {
+      return _classPrivateFieldGet(this, _id);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _id, val);
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return _classPrivateFieldGet(this, _name);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _name, val);
+    }
+  }, {
+    key: "functional",
+    get: function get() {
+      return _classPrivateFieldGet(this, _functional);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _functional, val);
+    }
+  }, {
+    key: "inputs",
+    get: function get() {
+      return _classPrivateFieldGet(this, _inputs);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _inputs, val);
+    }
+  }, {
+    key: "outputs",
+    get: function get() {
+      return _classPrivateFieldGet(this, _outputs);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _outputs, val);
+    }
+  }, {
+    key: "nexts",
+    get: function get() {
+      return _classPrivateFieldGet(this, _nexts);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _nexts, val);
+    }
+  }, {
+    key: "prev",
+    get: function get() {
+      return _classPrivateFieldGet(this, _prev);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _prev, val);
+    }
+  }, {
+    key: "program",
+    get: function get() {
+      return _classPrivateFieldGet(this, _program);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _program, val);
+    }
+  }, {
+    key: "removable",
+    get: function get() {
+      return _classPrivateFieldGet(this, _removable);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _removable, val);
+    }
+  }, {
+    key: "creatable",
+    get: function get() {
+      return _classPrivateFieldGet(this, _creatable);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _creatable, val);
+    }
+  }, {
+    key: "canAddInput",
+    get: function get() {
+      return _classPrivateFieldGet(this, _canAddInput);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _canAddInput, val);
+    }
+  }, {
+    key: "canAddOutput",
+    get: function get() {
+      return _classPrivateFieldGet(this, _canAddOutput);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _canAddOutput, val);
+    }
+  }, {
+    key: "canAddNext",
+    get: function get() {
+      return _classPrivateFieldGet(this, _canAddNext);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _canAddNext, val);
+    }
+  }, {
+    key: "meta",
+    get: function get() {
+      return _classPrivateFieldGet(this, _meta);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _meta, val);
+    }
+  }]);
+
+  return Node;
+}();
+/**
+ * The result class used by programs to receive
+ * the next "next" in the flow
+ */
+
+_defineProperty(Node, "lastNodeIdIndex", 0);
+
+var _next = new WeakMap();
+
+var Result = /*#__PURE__*/function () {
+  /** The next node */
+  function Result() {
+    var next = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    _classCallCheck(this, Result);
+
+    _next.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _classPrivateFieldSet(this, _next, next);
+  }
+
+  _createClass(Result, [{
+    key: "next",
+    get: function get() {
+      return _classPrivateFieldGet(this, _next);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _next, val);
+    }
+  }]);
+
+  return Result;
+}();
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/program.js":
+/*!*************************************!*\
+  !*** ../cnodes/lib/core/program.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Program": () => /* binding */ Program,
+/* harmony export */   "program": () => /* binding */ program
+/* harmony export */ });
+/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enter.js */ "../cnodes/lib/core/enter.js");
+/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exit.js */ "../cnodes/lib/core/exit.js");
+/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+
+
+/**
+ * A program is a special node that contains nodes. The program
+ * manages the flow of the global execution by starting from the
+ * "Enter" default, autocreated node, call its process() method and receive the next
+ * "next". A program also store a global variable space
+ */
+
+var _nodes = new WeakMap();
+
+var _enter = new WeakMap();
+
+var _exit = new WeakMap();
+
+var _currentNode = new WeakMap();
+
+var _vars = new WeakMap();
+
+var Program = /*#__PURE__*/function (_Node) {
+  _inherits(Program, _Node);
+
+  var _super = _createSuper(Program);
+
+  /** Engine version */
+
+  /** The nodes in this program */
+
+  /** The Enter node */
+
+  /** The Exit node */
+
+  /** The instruction pointer equivalent :) */
+
+  /** The variable global space */
+  function Program() {
+    var _this;
+
+    _classCallCheck(this, Program);
+
+    _this = _super.call(this, "Program");
+
+    _nodes.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: []
+    });
+
+    _enter.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _exit.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _currentNode.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _vars.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: new Map()
+    });
+
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_4__.type)(_type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, false), 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_4__.type)(_type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, false), 0)];
+    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
+
+    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit()));
+
+    return _this;
+  }
+
+  _createClass(Program, [{
+    key: "addNode",
+
+    /**
+     * Add a new node to this program
+     * @param {Node} node The node to add
+     */
+    value: function addNode(node) {
+      _classPrivateFieldGet(this, _nodes).push(node); // Set this program to the node
+
+
+      node.program = this;
+      return this;
+    }
+    /**
+     * Removes a node from this program, disconnect all sockets
+     * @param {Node} node The node to remove
+     */
+
+  }, {
+    key: "removeNode",
+    value: function removeNode(node) {
+      // Disconnect its sockets
+      node.disconnectAllSockets();
+
+      _classPrivateFieldSet(this, _nodes, _classPrivateFieldGet(this, _nodes).filter(function (n) {
+        return n.id !== node.id;
+      }));
+
+      node.program = null;
+      return this;
+    }
+    /**
+     * The process method will start from the Enter node and
+     * cycle over nexts returned by the process functions of nodes.
+     * The Program node couldn't be a top-level program, but a sub-nod
+     * of another program. For that reason, the process() method copy the
+     * value of the only input in the Program node to the only one
+     * input of the "Enter" forst node.
+     * This is a limitation: The Program node can be actually only 1 input
+     * and only 1 output. At the same, Enter and Exit nodes will have only
+     * 1 input and output respectively.
+     * At the end, the process() methos of the Program node, will copy the
+     * value of the Exit's output to the unique output of the Program node
+     */
+
+  }, {
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Copy input to enter's input
+
+      _classPrivateFieldGet(this, _enter).input("Val").value = this.input("Val").value;
+      _classPrivateFieldGet(this, _enter).input("Val").type = this.input("Val").type;
+      this.processFrom(_classPrivateFieldGet(this, _enter)); // Copy output to exit's output
+
+      this.output("Val").value = _classPrivateFieldGet(this, _exit).output("Val").value;
+      this.output("Val").type = _classPrivateFieldGet(this, _exit).output("Val").type;
+      return this.getFlowResult(this.next("Out"));
+    }
+    /**
+     * Execute a program useng node as starting point
+     * @param {Node} node Starting point node
+     */
+
+  }, {
+    key: "processFrom",
+    value: function processFrom(node) {
+      this.currentNode = node;
+
+      while (this.currentNode !== null) {
+        var result = this.currentNode.process();
+        this.currentNode = result.next;
+      }
+    }
+  }, {
+    key: "vars",
+    get: function get() {
+      return _classPrivateFieldGet(this, _vars);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _vars, val);
+    }
+  }, {
+    key: "enter",
+    get: function get() {
+      return _classPrivateFieldGet(this, _enter);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _enter, val);
+    }
+  }, {
+    key: "exit",
+    get: function get() {
+      return _classPrivateFieldGet(this, _exit);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _exit, val);
+    }
+  }, {
+    key: "currentNode",
+    get: function get() {
+      return _classPrivateFieldGet(this, _currentNode);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _currentNode, val);
+    }
+  }, {
+    key: "nodes",
+    get: function get() {
+      return _classPrivateFieldGet(this, _nodes);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _nodes, val);
+    }
+  }]);
+
+  return Program;
+}(_node_js__WEBPACK_IMPORTED_MODULE_2__.Node);
+/**
+ * A helper function to create the program
+ * @param {string} name The name of the program
+ */
+
+_defineProperty(Program, "version", 1);
+
+function program() {
+  return new Program();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/socket.js":
+/*!************************************!*\
+  !*** ../cnodes/lib/core/socket.js ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Socket": () => /* binding */ Socket,
+/* harmony export */   "ValueSocket": () => /* binding */ ValueSocket,
+/* harmony export */   "InputSocket": () => /* binding */ InputSocket,
+/* harmony export */   "OutputSocket": () => /* binding */ OutputSocket,
+/* harmony export */   "FlowSocket": () => /* binding */ FlowSocket,
+/* harmony export */   "PrevSocket": () => /* binding */ PrevSocket,
+/* harmony export */   "NextSocket": () => /* binding */ NextSocket
+/* harmony export */ });
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+/**
+ * A socket is an object that represent an input,
+ * output, next or prev for the node
+ */
+
+var _id = new WeakMap();
+
+var _name = new WeakMap();
+
+var _node = new WeakMap();
+
+var Socket = /*#__PURE__*/function () {
+  /** An incremental index to generate unique socket IDs */
+
+  /** The internal id of the socket */
+
+  /** The name of this socket */
+
+  /** The parent node */
+
+  /**
+   * Construct a new socket on a node with a given name
+   * @param {string} name The name of the socket
+   * @param {Node} node The parent node of the socket
+   */
+  function Socket(name, node) {
+    _classCallCheck(this, Socket);
+
+    _id.set(this, {
+      writable: true,
+      value: ""
+    });
+
+    _name.set(this, {
+      writable: true,
+      value: ""
+    });
+
+    _node.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _classPrivateFieldSet(this, _id, "SID_" + Socket.lastSocketIdIndex++);
+
+    _classPrivateFieldSet(this, _name, name);
+
+    _classPrivateFieldSet(this, _node, node);
+  }
+
+  _createClass(Socket, [{
+    key: "id",
+    get: function get() {
+      return _classPrivateFieldGet(this, _id);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _id, val);
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return _classPrivateFieldGet(this, _name);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _name, val);
+    }
+  }, {
+    key: "node",
+    get: function get() {
+      return _classPrivateFieldGet(this, _node);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _node, val);
+    }
+  }]);
+
+  return Socket;
+}();
+/**
+ * The value socket represent a input or a output value
+ * for the node, so it has a value and a type
+ */
+
+_defineProperty(Socket, "lastSocketIdIndex", 0);
+
+var _type = new WeakMap();
+
+var _value = new WeakMap();
+
+var ValueSocket = /*#__PURE__*/function (_Socket) {
+  _inherits(ValueSocket, _Socket);
+
+  var _super = _createSuper(ValueSocket);
+
+  /** The type for the socket's value */
+
+  /** The stored value */
+
+  /**
+   * Construct a new ValueSocket
+   * @param {string} name Name of the socket
+   * @param {Node} node The parent node
+   * @param {Type} type The type of this socket
+   * @param {any} value The default value of the socket
+   */
+  function ValueSocket(name, node) {
+    var _this;
+
+    var _type2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type2(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
+
+    var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+    _classCallCheck(this, ValueSocket);
+
+    _this = _super.call(this, name, node);
+
+    _type.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: (0,_type_js__WEBPACK_IMPORTED_MODULE_0__.type)(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false)
+    });
+
+    _value.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: 0
+    });
+
+    _this.type = _type2;
+    _this.value = value;
+    return _this;
+  }
+
+  _createClass(ValueSocket, [{
+    key: "type",
+    get: function get() {
+      return _classPrivateFieldGet(this, _type);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _type, val);
+    }
+  }, {
+    key: "value",
+    get: function get() {
+      return _classPrivateFieldGet(this, _value);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _value, val);
+    }
+  }]);
+
+  return ValueSocket;
+}(Socket);
+/**
+ * This is an input socket value for the node, it
+ * can have only a peer socket, because its value
+ * have to be defined in a deterministic way
+ */
+
+var _peer = new WeakMap();
+
+var InputSocket = /*#__PURE__*/function (_ValueSocket) {
+  _inherits(InputSocket, _ValueSocket);
+
+  var _super2 = _createSuper(InputSocket);
+
+  /** The only peer socket */
+
+  /**
+   * Construct a new InputSocket
+   * @param {string} name The name of the socket
+   * @param {Node} node The parent node
+   * @param {Type} type The type of the socket
+   * @param {any} value The default value of the socket
+   */
+  function InputSocket(name, node) {
+    var _this2;
+
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : type(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
+    var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+    _classCallCheck(this, InputSocket);
+
+    _this2 = _super2.call(this, name, node, type, value);
+
+    _peer.set(_assertThisInitialized(_this2), {
+      writable: true,
+      value: null
+    });
+
+    return _this2;
+  }
+
+  _createClass(InputSocket, [{
+    key: "evaluate",
+
+    /**
+     * Evaluate the socket value. If the socket is connected,
+     * this method goes to the peer socket and take the value.
+     * If the peer socket is part of a functional node, the process()
+     * method is executed before taking the value
+     */
+    value: function evaluate() {
+      if (this.peer !== null) {
+        if (this.peer.node && this.peer.node.functional) {
+          this.peer.node.process();
+        }
+
+        this.type = this.peer.type;
+        this.value = this.peer.value;
+      }
+    }
+    /**
+     * Connect this socket to another (output) socket
+     * @param {Socket} socket The output socket to connect
+     */
+
+  }, {
+    key: "connect",
+    value: function connect(socket) {
+      var _this3 = this;
+
+      this.peer = socket;
+
+      if (socket.peers.find(function (s) {
+        return s === _this3;
+      }) === undefined) {
+        socket.peers.push(this);
+      }
+    }
+    /**
+     * Disconnects this socket from its peer
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      var _this4 = this;
+
+      if (this.peer) {
+        var index = this.peer.peers.findIndex(function (s) {
+          return s === _this4;
+        });
+
+        if (index !== -1) {
+          this.peer.peers.splice(index, 1);
+        }
+      }
+
+      this.peer = null;
+    }
+  }, {
+    key: "peer",
+    get: function get() {
+      return _classPrivateFieldGet(this, _peer);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _peer, val);
+    }
+  }]);
+
+  return InputSocket;
+}(ValueSocket);
+/**
+ * This is a output value socket and represent an output
+ * value for the node. Output value socket can be connected to
+ * many peer input value sockets, because many socket would like
+ * to take the value from this.
+ */
+
+var _peers = new WeakMap();
+
+var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
+  _inherits(OutputSocket, _ValueSocket2);
+
+  var _super3 = _createSuper(OutputSocket);
+
+  /** A list of input value connected sockets */
+
+  /**
+   * Construct a new OutputSocket
+   * @param {string} name The name of the socket
+   * @param {Node} node The parent node
+   * @param {Type} type The type of the socket
+   * @param {any} value The default value of the socket
+   */
+  function OutputSocket(name, node) {
+    var _this5;
+
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : type(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
+    var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+    _classCallCheck(this, OutputSocket);
+
+    _this5 = _super3.call(this, name, node, type, value);
+
+    _peers.set(_assertThisInitialized(_this5), {
+      writable: true,
+      value: []
+    });
+
+    return _this5;
+  }
+
+  _createClass(OutputSocket, [{
+    key: "connect",
+
+    /**
+     * Connects this socket to a input socket
+     * @param {Socket} socket Socket to connect to
+     */
+    value: function connect(socket) {
+      if (this.peers.find(function (s) {
+        return s === socket;
+      }) === undefined) {
+        this.peers.push(socket);
+      }
+
+      socket.peer = this;
+    }
+    /**
+     * Disconnect this socket from a specific input peer
+     * @param {Socket} socket The socket to disconnect
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect(socket) {
+      var index = this.peers.findIndex(function (s) {
+        return s === socket;
+      });
+
+      if (index !== undefined) {
+        this.peers.splice(index, 1);
+        socket.peer = null;
+      }
+    }
+  }, {
+    key: "peers",
+    get: function get() {
+      return _classPrivateFieldGet(this, _peers);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _peers, val);
+    }
+  }]);
+
+  return OutputSocket;
+}(ValueSocket);
+/**
+ * A flow socket is a socket to connect two nodes in
+ * terms of execution flow
+ */
+
+var FlowSocket = /*#__PURE__*/function (_Socket2) {
+  _inherits(FlowSocket, _Socket2);
+
+  var _super4 = _createSuper(FlowSocket);
+
+  /**
+   * Construct a new FlowSocket
+   * @param {sring} name Name of the socket
+   * @param {Node} node The parent node
+   */
+  function FlowSocket(name, node) {
+    _classCallCheck(this, FlowSocket);
+
+    return _super4.call(this, name, node);
+  }
+
+  return FlowSocket;
+}(Socket);
+/**
+ * This class representa a prev socket, a socket that
+ * can be connected to other nexts sockets. The prev socket
+ * cab have many peer (next) socket because the execution
+ * can come from anywhere in the program
+ */
+
+var _peers2 = new WeakMap();
+
+var PrevSocket = /*#__PURE__*/function (_FlowSocket) {
+  _inherits(PrevSocket, _FlowSocket);
+
+  var _super5 = _createSuper(PrevSocket);
+
+  /** List of (next) peer sockets */
+
+  /**
+   * Construct a new PrevSocket
+   * @param {string} name Name of the socket
+   * @param {Node} node Parent node
+   */
+  function PrevSocket(name, node) {
+    var _this6;
+
+    _classCallCheck(this, PrevSocket);
+
+    _this6 = _super5.call(this, name, node);
+
+    _peers2.set(_assertThisInitialized(_this6), {
+      writable: true,
+      value: []
+    });
+
+    return _this6;
+  }
+
+  _createClass(PrevSocket, [{
+    key: "connect",
+
+    /**
+     * Connect this socket to a next socket
+     * @param {Socket} socket The next socket to connect
+     */
+    value: function connect(socket) {
+      if (this.peers.find(function (s) {
+        return s === socket;
+      }) === undefined) {
+        this.peers.push(socket);
+      }
+
+      socket.peer = this;
+    }
+    /**
+     * Disconnect this socket from a next socket
+     * @param {Socket} socket The next socket to disconnect
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect(socket) {
+      var index = this.peers.findIndex(function (s) {
+        return s === socket;
+      });
+
+      if (index !== undefined) {
+        this.peers.splice(index, 1);
+        socket.peer = null;
+      }
+    }
+  }, {
+    key: "peers",
+    get: function get() {
+      return _classPrivateFieldGet(this, _peers2);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _peers2, val);
+    }
+  }]);
+
+  return PrevSocket;
+}(FlowSocket);
+/**
+ * This class represents a socket to redirect the flow
+ * to another node via a node's prev socket. This socket can
+ * be connected to only one (prev) socket, because the program
+ * flow have to be well defined
+ */
+
+var _peer2 = new WeakMap();
+
+var NextSocket = /*#__PURE__*/function (_FlowSocket2) {
+  _inherits(NextSocket, _FlowSocket2);
+
+  var _super6 = _createSuper(NextSocket);
+
+  /** The peer (prev) socket */
+
+  /**
+   * Construct a new NextSocket
+   * @param {string} name Name of the socket
+   * @param {Node} node The parent node of the socket
+   */
+  function NextSocket(name, node) {
+    var _this7;
+
+    _classCallCheck(this, NextSocket);
+
+    _this7 = _super6.call(this, name, node);
+
+    _peer2.set(_assertThisInitialized(_this7), {
+      writable: true,
+      value: null
+    });
+
+    return _this7;
+  }
+
+  _createClass(NextSocket, [{
+    key: "connect",
+
+    /**
+     * Connect this socket to another (prev) socket
+     * @param {Socket} socket The prev socket to connect to
+     */
+    value: function connect(socket) {
+      var _this8 = this;
+
+      this.peer = socket;
+
+      if (socket.peers.find(function (s) {
+        return s === _this8;
+      }) === undefined) {
+        socket.peers.push(this);
+      }
+    }
+    /**
+     * Disconnect this socket from the peer
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      var _this9 = this;
+
+      if (this.peer) {
+        var index = this.peer.peers.findIndex(function (s) {
+          return s === _this9;
+        });
+
+        if (index !== -1) {
+          this.peer.peers.splice(index, 1);
+        }
+
+        this.peer = null;
+      }
+    }
+  }, {
+    key: "peer",
+    get: function get() {
+      return _classPrivateFieldGet(this, _peer2);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _peer2, val);
+    }
+  }]);
+
+  return NextSocket;
+}(FlowSocket);
+
+/***/ }),
+
+/***/ "../cnodes/lib/core/type.js":
+/*!**********************************!*\
+  !*** ../cnodes/lib/core/type.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Types": () => /* binding */ Types,
+/* harmony export */   "Type": () => /* binding */ Type,
+/* harmony export */   "type": () => /* binding */ type
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+/**
+ * Possible types for values
+ */
+var Types = {
+  NUMBER: "number",
+  STRING: "string",
+  BOOLEAN: "boolean",
+  OBJECT: "object",
+  ANY: "any"
+};
+/**
+ * A type is a type and a flag indicating that the
+ * type is a array of that base type
+ */
+
+var _type = new WeakMap();
+
+var _isArray = new WeakMap();
+
+var Type = /*#__PURE__*/function () {
+  /** The base type */
+
+  /** Is this type an array of base type? */
+
+  /**
+   * Construct a new Type
+   * @param {string} type The type
+   * @param {boolean} isArray Is array of this type?
+   */
+  function Type(type, isArray) {
+    _classCallCheck(this, Type);
+
+    _type.set(this, {
+      writable: true,
+      value: Types.NUMBER
+    });
+
+    _isArray.set(this, {
+      writable: true,
+      value: false
+    });
+
+    _classPrivateFieldSet(this, _type, type);
+
+    _classPrivateFieldSet(this, _isArray, isArray);
+  }
+
+  _createClass(Type, [{
+    key: "type",
+    get: function get() {
+      return _classPrivateFieldGet(this, _type);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _type, val);
+    }
+  }, {
+    key: "isArray",
+    get: function get() {
+      return _classPrivateFieldGet(this, _isArray);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _isArray, val);
+    }
+  }]);
+
+  return Type;
+}();
+/**
+ * A helper function to create the type
+ * @param {Type} type The base type
+ * @param {boolean} isArray The array flag
+ */
+
+function type(type, isArray) {
+  return new Type(type, isArray);
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/fcompare.js":
+/*!********************************************!*\
+  !*** ../cnodes/lib/nodes/bool/fcompare.js ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Comparision": () => /* binding */ Comparision,
+/* harmony export */   "FCompare": () => /* binding */ FCompare,
+/* harmony export */   "fcompareNode": () => /* binding */ fcompareNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * Supported comparision types
+ */
+
+var Comparision = {
+  EQUAL: "equal",
+  GT: "gt",
+  GTE: "gte",
+  LT: "lt",
+  LTE: "lte",
+  NOT_EQUAL: "not_equal"
+};
+/**
+ * This class implements a functional node for compairing numeric values.
+ */
+
+var _comparision = new WeakMap();
+
+var FCompare = /*#__PURE__*/function (_Node) {
+  _inherits(FCompare, _Node);
+
+  var _super = _createSuper(FCompare);
+
+  /** Configured comparision for this node */
+  function FCompare() {
+    var _this;
+
+    var comparision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Comparision.EQUAL;
+
+    _classCallCheck(this, FCompare);
+
+    _this = _super.call(this, "FCompare");
+
+    _comparision.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: Comparision.EQUAL
+    });
+
+    _classPrivateFieldSet(_assertThisInitialized(_this), _comparision, comparision); // The node is pure functional
+
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+
+  _createClass(FCompare, [{
+    key: "process",
+
+    /**
+     * The process override
+     */
+    value: function process() {
+      this.evaluateInputs();
+      var val1 = this.input("Val1").value;
+      var val2 = this.input("Val2").value;
+      var ret;
+
+      switch (this.comparision) {
+        case Comparision.EQUAL:
+          {
+            ret = val1 === val2;
+            break;
+          }
+
+        case Comparision.NOT_EQUAL:
+          {
+            ret = val1 !== val2;
+            break;
+          }
+
+        case Comparision.GT:
+          {
+            ret = val1 > val2;
+            break;
+          }
+
+        case Comparision.GTE:
+          {
+            ret = val1 >= val2;
+            break;
+          }
+
+        case Comparision.LT:
+          {
+            ret = val1 < val2;
+            break;
+          }
+
+        case Comparision.LTE:
+          {
+            ret = val1 <= val2;
+            break;
+          }
+
+        default:
+          {
+            throw "Comparision type not valid";
+          }
+      }
+
+      this.output("Val").value = ret;
+    }
+  }, {
+    key: "comparision",
+    get: function get() {
+      return _classPrivateFieldGet(this, _comparision);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _comparision, val);
+    }
+  }]);
+
+  return FCompare;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fcompareNode() {
+  return new FCompare();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/fequal.js":
+/*!******************************************!*\
+  !*** ../cnodes/lib/nodes/bool/fequal.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FEqual": () => /* binding */ FEqual,
+/* harmony export */   "fequalNode": () => /* binding */ fequalNode
+/* harmony export */ });
+/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class override the FCompare node with a comparision of EQUAL
+ */
+
+var FEqual = /*#__PURE__*/function (_FCompare) {
+  _inherits(FEqual, _FCompare);
+
+  var _super = _createSuper(FEqual);
+
+  function FEqual() {
+    var _this;
+
+    _classCallCheck(this, FEqual);
+
+    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.EQUAL);
+    _this.name = "FEqual";
+    return _this;
+  }
+
+  return FEqual;
+}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+/**
+ * Helper fuction to create the node
+ */
+
+function fequalNode() {
+  return new FEqual();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/fgt.js":
+/*!***************************************!*\
+  !*** ../cnodes/lib/nodes/bool/fgt.js ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FGT": () => /* binding */ FGT,
+/* harmony export */   "fgtNode": () => /* binding */ fgtNode
+/* harmony export */ });
+/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class override the FCompare node with a comparision of GT
+ */
+
+var FGT = /*#__PURE__*/function (_FCompare) {
+  _inherits(FGT, _FCompare);
+
+  var _super = _createSuper(FGT);
+
+  function FGT() {
+    var _this;
+
+    _classCallCheck(this, FGT);
+
+    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GT);
+    _this.name = "FGT";
+    return _this;
+  }
+
+  return FGT;
+}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+/**
+ * Helper fuction to create the node
+ */
+
+function fgtNode() {
+  return new FGT();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/fgte.js":
+/*!****************************************!*\
+  !*** ../cnodes/lib/nodes/bool/fgte.js ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FGTE": () => /* binding */ FGTE,
+/* harmony export */   "fgteNode": () => /* binding */ fgteNode
+/* harmony export */ });
+/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class override the FCompare node with a comparision of GTE
+ */
+
+var FGTE = /*#__PURE__*/function (_FCompare) {
+  _inherits(FGTE, _FCompare);
+
+  var _super = _createSuper(FGTE);
+
+  function FGTE() {
+    var _this;
+
+    _classCallCheck(this, FGTE);
+
+    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GTE);
+    _this.name = "FGTE";
+    return _this;
+  }
+
+  return FGTE;
+}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+/**
+ * Helper fuction to create the node
+ */
+
+function fgteNode() {
+  return new FGTE();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/flt.js":
+/*!***************************************!*\
+  !*** ../cnodes/lib/nodes/bool/flt.js ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FLT": () => /* binding */ FLT,
+/* harmony export */   "fltNode": () => /* binding */ fltNode
+/* harmony export */ });
+/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class override the FCompare node with a comparision of FLT
+ */
+
+var FLT = /*#__PURE__*/function (_FCompare) {
+  _inherits(FLT, _FCompare);
+
+  var _super = _createSuper(FLT);
+
+  function FLT() {
+    var _this;
+
+    _classCallCheck(this, FLT);
+
+    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LT);
+    _this.name = "FLT";
+    return _this;
+  }
+
+  return FLT;
+}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+/**
+ * Helper fuction to create the node
+ */
+
+function fltNode() {
+  return new FLT();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/flte.js":
+/*!****************************************!*\
+  !*** ../cnodes/lib/nodes/bool/flte.js ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FLTE": () => /* binding */ FLTE,
+/* harmony export */   "flteNode": () => /* binding */ flteNode
+/* harmony export */ });
+/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class override the FCompare node with a comparision of FLTE
+ */
+
+var FLTE = /*#__PURE__*/function (_FCompare) {
+  _inherits(FLTE, _FCompare);
+
+  var _super = _createSuper(FLTE);
+
+  function FLTE() {
+    var _this;
+
+    _classCallCheck(this, FLTE);
+
+    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LTE);
+    _this.name = "FLTE";
+    return _this;
+  }
+
+  return FLTE;
+}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+/**
+ * Helper fuction to create the node
+ */
+
+function flteNode() {
+  return new FLTE();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/bool/fnotequal.js":
+/*!*********************************************!*\
+  !*** ../cnodes/lib/nodes/bool/fnotequal.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FNotEqual": () => /* binding */ FNotEqual,
+/* harmony export */   "fnotequalNode": () => /* binding */ fnotequalNode
+/* harmony export */ });
+/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class override the FCompare node with a comparision of NOT_EQUAL
+ */
+
+var FNotEqual = /*#__PURE__*/function (_FCompare) {
+  _inherits(FNotEqual, _FCompare);
+
+  var _super = _createSuper(FNotEqual);
+
+  function FNotEqual() {
+    var _this;
+
+    _classCallCheck(this, FNotEqual);
+
+    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.NOT_EQUAL);
+    _this.name = "FNotEqual";
+    return _this;
+  }
+
+  return FNotEqual;
+}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+/**
+ * Helper fuction to create the node
+ */
+
+function fnotequalNode() {
+  return new FNotEqual();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/call.js":
+/*!***********************************!*\
+  !*** ../cnodes/lib/nodes/call.js ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Call": () => /* binding */ Call,
+/* harmony export */   "callNode": () => /* binding */ callNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This class implements a subroutine/function call
+ */
+
+var Call = /*#__PURE__*/function (_Node) {
+  _inherits(Call, _Node);
+
+  var _super = _createSuper(Call);
+
+  function Call() {
+    var _this;
+
+    _classCallCheck(this, Call);
+
+    _this = _super.call(this, "Call");
+    _this.inputs = [];
+    _this.outputs = [];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Call", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(Call, [{
+    key: "process",
+    value: function process() {
+      // Save the current program's node
+      var prevCurrentNode = this.program.currentNode; // Execute a sub program beginning on that node
+
+      this.program.processFrom(this.next("Call").peer.node); // Restore the current program's node
+
+      this.program.currentNode = prevCurrentNode;
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return Call;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function callNode() {
+  return new Call();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/console.js":
+/*!**************************************!*\
+  !*** ../cnodes/lib/nodes/console.js ***!
+  \**************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Console": () => /* binding */ Console,
+/* harmony export */   "consoleNode": () => /* binding */ consoleNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a cnode that print to the
+ * console the input value
+ */
+
+var Console = /*#__PURE__*/function (_Node) {
+  _inherits(Console, _Node);
+
+  var _super = _createSuper(Console);
+
+  function Console() {
+    var _this;
+
+    _classCallCheck(this, Console);
+
+    _this = _super.call(this, "Console");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.outputs = [];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process method
+   */
+
+
+  _createClass(Console, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      console.log(this.input("Val").value);
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return Console;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper function to create the node
+ */
+
+function consoleNode() {
+  return new Console();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/fgetvar.js":
+/*!**************************************!*\
+  !*** ../cnodes/lib/nodes/fgetvar.js ***!
+  \**************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FGetvar": () => /* binding */ FGetvar,
+/* harmony export */   "fgetvarNode": () => /* binding */ fgetvarNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional GetVar node,
+ * a node to read a variable's value from the global
+ * program's space
+ */
+
+var FGetvar = /*#__PURE__*/function (_Node) {
+  _inherits(FGetvar, _Node);
+
+  var _super = _createSuper(FGetvar);
+
+  function FGetvar() {
+    var _this;
+
+    _classCallCheck(this, FGetvar);
+
+    _this = _super.call(this, "FGetvar");
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process method
+   */
+
+
+  _createClass(FGetvar, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var varName = this.input("Name").value;
+      this.output("Val").value = this.program.vars.get(varName);
+    }
+  }]);
+
+  return FGetvar;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper function to create the node
+ */
+
+function fgetvarNode() {
+  return new FGetvar();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/for.js":
+/*!**********************************!*\
+  !*** ../cnodes/lib/nodes/for.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "For": () => /* binding */ For,
+/* harmony export */   "forNode": () => /* binding */ forNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node that is able to
+ * iterate over a range of integers, like the form
+ * for(let i=start; i<end; i++) do();
+ */
+
+var For = /*#__PURE__*/function (_Node) {
+  _inherits(For, _Node);
+
+  var _super = _createSuper(For);
+
+  function For() {
+    var _this;
+
+    _classCallCheck(this, For);
+
+    _this = _super.call(this, "For");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("From", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("To", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(For, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Save the current program's node
+
+      var prevCurrentNode = this.program.currentNode; // Set the "Index" output value to Index
+
+      this.output("Index").value = this.input("From").value; // Re evaluate inputs in case of Condition depends on Index output
+
+      this.evaluateInputs(); // Let's cycle from "From" to "To" values
+
+      for (var index = this.input("From").value; index < this.input("To").value; index++) {
+        // If there's a node connected to the "Do" next socket...
+        if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
+          // Set the "Index" output value to Index
+          this.output("Index").value = index; // Execute a sub program beginning on that node
+
+          this.program.processFrom(this.next("Do").peer.node);
+        }
+      } // Restore the current program's node
+
+
+      this.program.currentNode = prevCurrentNode;
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return For;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function forNode() {
+  return new For();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/getvar.js":
+/*!*************************************!*\
+  !*** ../cnodes/lib/nodes/getvar.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Getvar": () => /* binding */ Getvar,
+/* harmony export */   "getvarNode": () => /* binding */ getvarNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to get a variable's value
+ * in the program's global space. This node has a functional
+ * counterpart naamed FGetvar
+ */
+
+var Getvar = /*#__PURE__*/function (_Node) {
+  _inherits(Getvar, _Node);
+
+  var _super = _createSuper(Getvar);
+
+  function Getvar() {
+    var _this;
+
+    _classCallCheck(this, Getvar);
+
+    _this = _super.call(this, "Getvar");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(Getvar, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var varName = this.input("Name").value;
+      this.output("Val").value = this.program.vars.get(varName);
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return Getvar;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function getvarNode() {
+  return new Getvar();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/if.js":
+/*!*********************************!*\
+  !*** ../cnodes/lib/nodes/if.js ***!
+  \*********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "If": () => /* binding */ If,
+/* harmony export */   "ifNode": () => /* binding */ ifNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node that is able to
+ * redirect the flow of execution based on the
+ * "condition" input value
+ */
+
+var If = /*#__PURE__*/function (_Node) {
+  _inherits(If, _Node);
+
+  var _super = _createSuper(If);
+
+  function If() {
+    var _this;
+
+    _classCallCheck(this, If);
+
+    _this = _super.call(this, "If");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false)];
+    _this.outputs = [];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Then", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Else", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(If, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var flow = null;
+
+      if (this.input("Condition").value) {
+        flow = this.next("Then");
+      } else {
+        flow = this.next("Else");
+      }
+
+      return this.getFlowResult(flow);
+    }
+  }]);
+
+  return If;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function ifNode() {
+  return new If();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/math/fadd.js":
+/*!****************************************!*\
+  !*** ../cnodes/lib/nodes/math/fadd.js ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FAdd": () => /* binding */ FAdd,
+/* harmony export */   "faddNode": () => /* binding */ faddNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for adding numeric values.
+ * Supports a indefinite number of value inputs and one single output
+ */
+
+var FAdd = /*#__PURE__*/function (_Node) {
+  _inherits(FAdd, _Node);
+
+  var _super = _createSuper(FAdd);
+
+  function FAdd() {
+    var _this;
+
+    _classCallCheck(this, FAdd);
+
+    _this = _super.call(this, "FAdd"); // The node is pure functional
+
+    _this.functional = true; // This node has a variable number of inputs
+
+    _this.canAddInput = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FAdd, [{
+    key: "process",
+    value: function process() {
+      var sum = 0;
+      this.evaluateInputs();
+
+      var _iterator = _createForOfIteratorHelper(this.inputs),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var inp = _step.value;
+          sum += parseFloat(inp.value);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.output("Val").value = sum;
+    }
+    /**
+     * Can this node remove a specific input?
+     * In this case, there must be at least 2 inputs
+     * @param {InputsSocket} input The input to remove
+     */
+
+  }, {
+    key: "canRemoveInput",
+    value: function canRemoveInput(input) {
+      return this.inputs.length > 2;
+    }
+  }]);
+
+  return FAdd;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function faddNode() {
+  return new FAdd();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/math/fdiv.js":
+/*!****************************************!*\
+  !*** ../cnodes/lib/nodes/math/fdiv.js ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FDiv": () => /* binding */ FDiv,
+/* harmony export */   "fdivNode": () => /* binding */ fdivNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for divide numeric values.
+ */
+
+var FDiv = /*#__PURE__*/function (_Node) {
+  _inherits(FDiv, _Node);
+
+  var _super = _createSuper(FDiv);
+
+  function FDiv() {
+    var _this;
+
+    _classCallCheck(this, FDiv);
+
+    _this = _super.call(this, "FDiv"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FDiv, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      this.output("Val").value = parseFloat(this.input("Val1").value) / parseFloat(this.input("Val2").value);
+    }
+  }]);
+
+  return FDiv;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fdivNode() {
+  return new FDiv();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/math/fmul.js":
+/*!****************************************!*\
+  !*** ../cnodes/lib/nodes/math/fmul.js ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FMul": () => /* binding */ FMul,
+/* harmony export */   "fmulNode": () => /* binding */ fmulNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for multiply numeric values.
+ * Supports a indefinite number of value inputs and one single output
+ */
+
+var FMul = /*#__PURE__*/function (_Node) {
+  _inherits(FMul, _Node);
+
+  var _super = _createSuper(FMul);
+
+  function FMul() {
+    var _this;
+
+    _classCallCheck(this, FMul);
+
+    _this = _super.call(this, "FMul"); // The node is pure functional
+
+    _this.functional = true; // This node has a variable number of inputs
+
+    _this.canAddInput = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FMul, [{
+    key: "process",
+    value: function process() {
+      var mul = 1;
+      this.evaluateInputs();
+
+      var _iterator = _createForOfIteratorHelper(this.inputs),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var inp = _step.value;
+          mul *= parseFloat(inp.value);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.output("Val").value = mul;
+    }
+    /**
+     * Can this node remove a specific input?
+     * In this case, there must be at least 2 inputs
+     * @param {InputsSocket} input The input to remove
+     */
+
+  }, {
+    key: "canRemoveInput",
+    value: function canRemoveInput(input) {
+      return this.inputs.length > 2;
+    }
+  }]);
+
+  return FMul;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fmulNode() {
+  return new FMul();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/math/fsqrt.js":
+/*!*****************************************!*\
+  !*** ../cnodes/lib/nodes/math/fsqrt.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FSqrt": () => /* binding */ FSqrt,
+/* harmony export */   "fsqrtNode": () => /* binding */ fsqrtNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for Square Root.
+ */
+
+var FSqrt = /*#__PURE__*/function (_Node) {
+  _inherits(FSqrt, _Node);
+
+  var _super = _createSuper(FSqrt);
+
+  function FSqrt() {
+    var _this;
+
+    _classCallCheck(this, FSqrt);
+
+    _this = _super.call(this, "FSqrt"); // The node is pure functional
+
+    _this.functional = true; // Default to one numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FSqrt, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      this.output("Val").value = Math.sqrt(parseFloat(this.input("Val").value));
+    }
+  }]);
+
+  return FSqrt;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fsqrtNode() {
+  return new FSqrt();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/setvar.js":
+/*!*************************************!*\
+  !*** ../cnodes/lib/nodes/setvar.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Setvar": () => /* binding */ Setvar,
+/* harmony export */   "setvarNode": () => /* binding */ setvarNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to set a variable
+ * value in the program's global space. If the variable
+ * don't exists, the processo function will create it
+ */
+
+var Setvar = /*#__PURE__*/function (_Node) {
+  _inherits(Setvar, _Node);
+
+  var _super = _createSuper(Setvar);
+
+  function Setvar() {
+    var _this;
+
+    _classCallCheck(this, Setvar);
+
+    _this = _super.call(this, "Setvar");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _typeof(""), "")];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process fmethod
+   */
+
+
+  _createClass(Setvar, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var varName = this.input("Name").value;
+      var varVal = this.input("Val").value;
+      this.program.vars.set(varName, varVal);
+      this.output("Val").value = varVal;
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return Setvar;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function setvarNode() {
+  return new Setvar();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/string/fconcat.js":
+/*!*********************************************!*\
+  !*** ../cnodes/lib/nodes/string/fconcat.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FConcat": () => /* binding */ FConcat,
+/* harmony export */   "fconcatNode": () => /* binding */ fconcatNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node that conctas two strings.
+ * If other type are passed, these are converted to strings
+ */
+
+var FConcat = /*#__PURE__*/function (_Node) {
+  _inherits(FConcat, _Node);
+
+  var _super = _createSuper(FConcat);
+
+  function FConcat() {
+    var _this;
+
+    _classCallCheck(this, FConcat);
+
+    _this = _super.call(this, "FConcat");
+    _this.functional = true;
+    _this.canAddInput = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FConcat, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var res = "";
+
+      var _iterator = _createForOfIteratorHelper(this.inputs),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var i = _step.value;
+          res += i.value.toString();
+        } // Convert the constant/input value to a string
+
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.output("Val").value = res;
+    }
+    /**
+     * Can this node remove a specific input?
+     * In this case, there must be at least 2 inputs
+     * @param {InputsSocket} input The input to remove
+     */
+
+  }, {
+    key: "canRemoveInput",
+    value: function canRemoveInput(input) {
+      return this.inputs.length > 2;
+    }
+  }]);
+
+  return FConcat;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function fconcatNode() {
+  return new FConcat();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/string/fsconst.js":
+/*!*********************************************!*\
+  !*** ../cnodes/lib/nodes/string/fsconst.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FSConst": () => /* binding */ FSConst,
+/* harmony export */   "fsconstNode": () => /* binding */ fsconstNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to get return a simple
+ * string constant. This is a functional node.
+ */
+
+var FSConst = /*#__PURE__*/function (_Node) {
+  _inherits(FSConst, _Node);
+
+  var _super = _createSuper(FSConst);
+
+  function FSConst() {
+    var _this;
+
+    _classCallCheck(this, FSConst);
+
+    _this = _super.call(this, "FSConst");
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FSConst, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Convert the constant/input value to a string
+
+      this.output("Val").value = this.input("Val").value.toString();
+    }
+  }]);
+
+  return FSConst;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function fsconstNode() {
+  return new FSConst();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/while.js":
+/*!************************************!*\
+  !*** ../cnodes/lib/nodes/while.js ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "While": () => /* binding */ While,
+/* harmony export */   "whileNode": () => /* binding */ whileNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node that is able to
+ * iterate until a condition become false, like
+ * while(condition) do();
+ */
+
+var While = /*#__PURE__*/function (_Node) {
+  _inherits(While, _Node);
+
+  var _super = _createSuper(While);
+
+  function While() {
+    var _this;
+
+    _classCallCheck(this, While);
+
+    _this = _super.call(this, "While");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(While, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Save the current program's node
+
+      var prevCurrentNode = this.program.currentNode; // A bouns index variable ;-)
+
+      var index = parseFloat(this.input("Index").value); // Set the "Index" output value to Index
+
+      this.output("Index").value = index; // Re evaluate inputs in case of Condition depends on Index output
+
+      this.evaluateInputs(); // Let's cycle while condition is true
+
+      while (this.input("Condition").value) {
+        // If there's a node connected to the "Do" next socket...
+        if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
+          // Set the "Index" output value to Index
+          this.output("Index").value = index++; // Execute a sub program beginning on that node
+
+          this.program.processFrom(this.next("Do").peer.node); // Re-compute the guard...
+
+          this.evaluateInputs();
+        }
+      } // Restore the currentprogram's node
+
+
+      this.program.currentNode = prevCurrentNode;
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return While;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function whileNode() {
+  return new While();
 }
 
 /***/ })

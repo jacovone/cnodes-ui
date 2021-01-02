@@ -5363,7 +5363,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FConcat,
 /* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FDiv,
 /* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FGetvar,
+/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FIf,
+/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMod,
 /* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMul,
+/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FNConst,
 /* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSConst,
 /* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSqrt,
 /* harmony export */   "FlowSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FlowSocket,
@@ -5390,7 +5393,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fconcatNode,
 /* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fdivNode,
 /* harmony export */   "fgetvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fgetvarNode,
+/* harmony export */   "fifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fifNode,
+/* harmony export */   "fmodNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmodNode,
 /* harmony export */   "fmulNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmulNode,
+/* harmony export */   "fnconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fnconstNode,
 /* harmony export */   "forNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.forNode,
 /* harmony export */   "fsconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsconstNode,
 /* harmony export */   "fsqrtNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsqrtNode,
@@ -5497,21 +5503,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "setvarNode": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.setvarNode,
 /* harmony export */   "While": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.While,
 /* harmony export */   "whileNode": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.whileNode,
-/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.Comparision,
-/* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.FCompare,
-/* harmony export */   "fcompareNode": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__.fcompareNode,
-/* harmony export */   "FSConst": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_14__.FSConst,
-/* harmony export */   "fsconstNode": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_14__.fsconstNode,
-/* harmony export */   "FConcat": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_15__.FConcat,
-/* harmony export */   "fconcatNode": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_15__.fconcatNode,
-/* harmony export */   "FAdd": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__.FAdd,
-/* harmony export */   "faddNode": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__.faddNode,
-/* harmony export */   "FDiv": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__.FDiv,
-/* harmony export */   "fdivNode": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__.fdivNode,
-/* harmony export */   "FMul": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__.FMul,
-/* harmony export */   "fmulNode": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__.fmulNode,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__.FSqrt,
-/* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__.fsqrtNode
+/* harmony export */   "FIf": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_13__.FIf,
+/* harmony export */   "fifNode": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_13__.fifNode,
+/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__.Comparision,
+/* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__.FCompare,
+/* harmony export */   "fcompareNode": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__.fcompareNode,
+/* harmony export */   "FSConst": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_15__.FSConst,
+/* harmony export */   "fsconstNode": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_15__.fsconstNode,
+/* harmony export */   "FConcat": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_16__.FConcat,
+/* harmony export */   "fconcatNode": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_16__.fconcatNode,
+/* harmony export */   "FNConst": () => /* reexport safe */ _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_17__.FNConst,
+/* harmony export */   "fnconstNode": () => /* reexport safe */ _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_17__.fnconstNode,
+/* harmony export */   "FAdd": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_18__.FAdd,
+/* harmony export */   "faddNode": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_18__.faddNode,
+/* harmony export */   "FDiv": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_19__.FDiv,
+/* harmony export */   "fdivNode": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_19__.fdivNode,
+/* harmony export */   "FMul": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__.FMul,
+/* harmony export */   "fmulNode": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__.fmulNode,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__.FSqrt,
+/* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__.fsqrtNode,
+/* harmony export */   "FMod": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.FMod,
+/* harmony export */   "fmodNode": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.fmodNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -5526,13 +5538,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/nodes/if.js */ "../cnodes/lib/nodes/if.js");
 /* harmony import */ var _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./lib/nodes/setvar.js */ "../cnodes/lib/nodes/setvar.js");
 /* harmony import */ var _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/nodes/while.js */ "../cnodes/lib/nodes/while.js");
-/* harmony import */ var _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./lib/nodes/bool/fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
-/* harmony import */ var _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./lib/nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
-/* harmony import */ var _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./lib/nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
-/* harmony import */ var _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lib/nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
-/* harmony import */ var _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
-/* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
-/* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
+/* harmony import */ var _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./lib/nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
+/* harmony import */ var _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./lib/nodes/bool/fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+/* harmony import */ var _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./lib/nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
+/* harmony import */ var _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lib/nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
+/* harmony import */ var _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
+/* harmony import */ var _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
+/* harmony import */ var _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
+/* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
+/* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
+/* harmony import */ var _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./lib/nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
 /**
  * cnodes
  *
@@ -5554,12 +5569,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // Export boolean nodes
 
  // Export string nodes
 
 
  // Export math nodes
+
+
 
 
 
@@ -5702,6 +5720,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
 /* harmony import */ var _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
 /* harmony import */ var _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
+/* harmony import */ var _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
+/* harmony import */ var _nodes_fif_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
+/* harmony import */ var _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -5726,6 +5747,9 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
+
+
 
 
 
@@ -5784,6 +5808,7 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
       Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
       Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode);
+      Env.registerNode("FIf", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_27__.fifNode);
       Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.setvarNode);
       Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.whileNode);
       Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.enterNode);
@@ -5792,8 +5817,10 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("FSConst", "String", _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_24__.fsconstNode);
       Env.registerNode("FConcat", "String", _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_25__.fconcatNode); // Math nodes
 
+      Env.registerNode("FNConst", "Math", _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_28__.fnconstNode);
       Env.registerNode("FAdd", "Math", _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__.faddNode);
       Env.registerNode("FDiv", "Math", _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__.fdivNode);
+      Env.registerNode("FMod", "Math", _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_26__.fmodNode);
       Env.registerNode("FMul", "Math", _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__.fmulNode);
       Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__.fsqrtNode); // Boolean Nodes
 
@@ -8791,6 +8818,102 @@ function fgetvarNode() {
 
 /***/ }),
 
+/***/ "../cnodes/lib/nodes/fif.js":
+/*!**********************************!*\
+  !*** ../cnodes/lib/nodes/fif.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FIf": () => /* binding */ FIf,
+/* harmony export */   "fifNode": () => /* binding */ fifNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional conditional node
+ */
+
+var FIf = /*#__PURE__*/function (_Node) {
+  _inherits(FIf, _Node);
+
+  var _super = _createSuper(FIf);
+
+  function FIf() {
+    var _this;
+
+    _classCallCheck(this, FIf);
+
+    _this = _super.call(this, "FIf"); // The node is pure functional
+
+    _this.functional = true; // Default to two any inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("True", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("False", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FIf, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      this.output("Val").value = this.input("Condition").value ? this.input("True").value : this.input("False").value;
+    }
+  }]);
+
+  return FIf;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fifNode() {
+  return new FIf();
+}
+
+/***/ }),
+
 /***/ "../cnodes/lib/nodes/for.js":
 /*!**********************************!*\
   !*** ../cnodes/lib/nodes/for.js ***!
@@ -9333,6 +9456,102 @@ function fdivNode() {
 
 /***/ }),
 
+/***/ "../cnodes/lib/nodes/math/fmod.js":
+/*!****************************************!*\
+  !*** ../cnodes/lib/nodes/math/fmod.js ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FMod": () => /* binding */ FMod,
+/* harmony export */   "fmodNode": () => /* binding */ fmodNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for modulus (%)
+ */
+
+var FMod = /*#__PURE__*/function (_Node) {
+  _inherits(FMod, _Node);
+
+  var _super = _createSuper(FMod);
+
+  function FMod() {
+    var _this;
+
+    _classCallCheck(this, FMod);
+
+    _this = _super.call(this, "FMod"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FMod, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      this.output("Val").value = parseFloat(this.input("Val1").value) % parseFloat(this.input("Val2").value);
+    }
+  }]);
+
+  return FMod;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fmodNode() {
+  return new FMod();
+}
+
+/***/ }),
+
 /***/ "../cnodes/lib/nodes/math/fmul.js":
 /*!****************************************!*\
   !*** ../cnodes/lib/nodes/math/fmul.js ***!
@@ -9461,6 +9680,102 @@ var FMul = /*#__PURE__*/function (_Node) {
 
 function fmulNode() {
   return new FMul();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/math/fnconst.js":
+/*!*******************************************!*\
+  !*** ../cnodes/lib/nodes/math/fnconst.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FNConst": () => /* binding */ FNConst,
+/* harmony export */   "fnconstNode": () => /* binding */ fnconstNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to get return a simple
+ * number constant. This is a functional node.
+ */
+
+var FNConst = /*#__PURE__*/function (_Node) {
+  _inherits(FNConst, _Node);
+
+  var _super = _createSuper(FNConst);
+
+  function FNConst() {
+    var _this;
+
+    _classCallCheck(this, FNConst);
+
+    _this = _super.call(this, "FNConst");
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), "")];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FNConst, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Convert the constant/input value to a string
+
+      this.output("Val").value = parseFloat(this.input("Val").value);
+    }
+  }]);
+
+  return FNConst;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function fnconstNode() {
+  return new FNConst();
 }
 
 /***/ }),
@@ -9855,7 +10170,7 @@ var FSConst = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FSConst");
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
     _this.nexts = [];
     _this.prev = null;
     return _this;

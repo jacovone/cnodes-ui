@@ -5354,10 +5354,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_4__.Theme,
 /* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_4__.defaultLight,
 /* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__.CnodesCanvas,
+/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.APush,
 /* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Call,
 /* harmony export */   "Comparision": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Comparision,
 /* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Console,
 /* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Env,
+/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAConst,
+/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAGet,
+/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FALength,
+/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAMake,
 /* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAdd,
 /* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FCompare,
 /* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FConcat,
@@ -5382,13 +5387,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Result": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Result,
 /* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Setvar,
 /* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Socket,
-/* harmony export */   "Type": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Type,
 /* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Types,
 /* harmony export */   "ValueSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.ValueSocket,
 /* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.While,
+/* harmony export */   "apushNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.apushNode,
 /* harmony export */   "callNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.callNode,
 /* harmony export */   "consoleNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
+/* harmony export */   "faconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.faconstNode,
 /* harmony export */   "faddNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.faddNode,
+/* harmony export */   "fagetNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fagetNode,
+/* harmony export */   "falengthNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.falengthNode,
+/* harmony export */   "famakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.famakeNode,
 /* harmony export */   "fcompareNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fcompareNode,
 /* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fconcatNode,
 /* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fdivNode,
@@ -5404,7 +5413,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.ifNode,
 /* harmony export */   "program": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.program,
 /* harmony export */   "setvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.setvarNode,
-/* harmony export */   "type": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.type,
 /* harmony export */   "whileNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.whileNode,
 /* harmony export */   "canvas": () => /* binding */ canvas
 /* harmony export */ });
@@ -5484,9 +5492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PrevSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket,
 /* harmony export */   "Socket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.Socket,
 /* harmony export */   "ValueSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.ValueSocket,
-/* harmony export */   "Type": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Type,
 /* harmony export */   "Types": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Types,
-/* harmony export */   "type": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.type,
 /* harmony export */   "Call": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.Call,
 /* harmony export */   "callNode": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.callNode,
 /* harmony export */   "Console": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.Console,
@@ -5523,7 +5529,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__.FSqrt,
 /* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__.fsqrtNode,
 /* harmony export */   "FMod": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.FMod,
-/* harmony export */   "fmodNode": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.fmodNode
+/* harmony export */   "fmodNode": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.fmodNode,
+/* harmony export */   "APush": () => /* reexport safe */ _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_23__.APush,
+/* harmony export */   "apushNode": () => /* reexport safe */ _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_23__.apushNode,
+/* harmony export */   "FAConst": () => /* reexport safe */ _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_24__.FAConst,
+/* harmony export */   "faconstNode": () => /* reexport safe */ _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_24__.faconstNode,
+/* harmony export */   "FAMake": () => /* reexport safe */ _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__.FAMake,
+/* harmony export */   "famakeNode": () => /* reexport safe */ _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__.famakeNode,
+/* harmony export */   "FAGet": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.FAGet,
+/* harmony export */   "fagetNode": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.fagetNode,
+/* harmony export */   "FALength": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.FALength,
+/* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.falengthNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -5548,6 +5564,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
 /* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
 /* harmony import */ var _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./lib/nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
+/* harmony import */ var _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./lib/nodes/array/apush.js */ "../cnodes/lib/nodes/array/apush.js");
+/* harmony import */ var _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./lib/nodes/array/faconst.js */ "../cnodes/lib/nodes/array/faconst.js");
+/* harmony import */ var _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/nodes/array/famake.js */ "../cnodes/lib/nodes/array/famake.js");
+/* harmony import */ var _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
+/* harmony import */ var _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
 /**
  * cnodes
  *
@@ -5577,6 +5598,12 @@ __webpack_require__.r(__webpack_exports__);
 
  // Export math nodes
 
+
+
+
+
+
+ // Export arrays nodes
 
 
 
@@ -5651,8 +5678,8 @@ var Enter = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "Enter");
     _this.removable = false;
     _this.creatable = false;
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
     _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Begin", _assertThisInitialized(_this))];
     _this.prev = null;
     return _this;
@@ -5705,24 +5732,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../nodes/setvar.js */ "../cnodes/lib/nodes/setvar.js");
 /* harmony import */ var _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../nodes/while.js */ "../cnodes/lib/nodes/while.js");
 /* harmony import */ var _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../nodes/if.js */ "../cnodes/lib/nodes/if.js");
-/* harmony import */ var _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
-/* harmony import */ var _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
-/* harmony import */ var _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
-/* harmony import */ var _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
-/* harmony import */ var _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../nodes/bool/fequal.js */ "../cnodes/lib/nodes/bool/fequal.js");
-/* harmony import */ var _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../nodes/bool/fgt.js */ "../cnodes/lib/nodes/bool/fgt.js");
-/* harmony import */ var _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../nodes/bool/fgte.js */ "../cnodes/lib/nodes/bool/fgte.js");
-/* harmony import */ var _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../nodes/bool/flt.js */ "../cnodes/lib/nodes/bool/flt.js");
-/* harmony import */ var _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../nodes/bool/flte.js */ "../cnodes/lib/nodes/bool/flte.js");
-/* harmony import */ var _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nodes/bool/fnotequal.js */ "../cnodes/lib/nodes/bool/fnotequal.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
-/* harmony import */ var _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
-/* harmony import */ var _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
-/* harmony import */ var _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
-/* harmony import */ var _nodes_fif_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
-/* harmony import */ var _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
+/* harmony import */ var _nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../nodes/array/apush.js */ "../cnodes/lib/nodes/array/apush.js");
+/* harmony import */ var _nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../nodes/array/faconst.js */ "../cnodes/lib/nodes/array/faconst.js");
+/* harmony import */ var _nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../nodes/array/famake.js */ "../cnodes/lib/nodes/array/famake.js");
+/* harmony import */ var _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
+/* harmony import */ var _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
+/* harmony import */ var _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
+/* harmony import */ var _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
+/* harmony import */ var _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
+/* harmony import */ var _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
+/* harmony import */ var _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nodes/bool/fequal.js */ "../cnodes/lib/nodes/bool/fequal.js");
+/* harmony import */ var _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../nodes/bool/fgt.js */ "../cnodes/lib/nodes/bool/fgt.js");
+/* harmony import */ var _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../nodes/bool/fgte.js */ "../cnodes/lib/nodes/bool/fgte.js");
+/* harmony import */ var _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../nodes/bool/flt.js */ "../cnodes/lib/nodes/bool/flt.js");
+/* harmony import */ var _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../nodes/bool/flte.js */ "../cnodes/lib/nodes/bool/flte.js");
+/* harmony import */ var _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../nodes/bool/fnotequal.js */ "../cnodes/lib/nodes/bool/fnotequal.js");
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
+/* harmony import */ var _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
+/* harmony import */ var _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
+/* harmony import */ var _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
+/* harmony import */ var _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -5747,6 +5778,10 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
+
+
+
 
 
 
@@ -5808,28 +5843,34 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
       Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
       Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode);
-      Env.registerNode("FIf", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_27__.fifNode);
+      Env.registerNode("FIf", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__.fifNode);
       Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.setvarNode);
       Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.whileNode);
       Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.enterNode);
       Env.registerNode("Exit", "Core", _exit_js__WEBPACK_IMPORTED_MODULE_2__.exitNode); // String nodes
 
-      Env.registerNode("FSConst", "String", _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_24__.fsconstNode);
-      Env.registerNode("FConcat", "String", _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_25__.fconcatNode); // Math nodes
+      Env.registerNode("FSConst", "String", _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_28__.fsconstNode);
+      Env.registerNode("FConcat", "String", _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_29__.fconcatNode); // Math nodes
 
-      Env.registerNode("FNConst", "Math", _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_28__.fnconstNode);
-      Env.registerNode("FAdd", "Math", _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_11__.faddNode);
-      Env.registerNode("FDiv", "Math", _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_12__.fdivNode);
-      Env.registerNode("FMod", "Math", _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_26__.fmodNode);
-      Env.registerNode("FMul", "Math", _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_13__.fmulNode);
-      Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_14__.fsqrtNode); // Boolean Nodes
+      Env.registerNode("FNConst", "Math", _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_32__.fnconstNode);
+      Env.registerNode("FAdd", "Math", _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__.faddNode);
+      Env.registerNode("FDiv", "Math", _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__.fdivNode);
+      Env.registerNode("FMod", "Math", _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_30__.fmodNode);
+      Env.registerNode("FMul", "Math", _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__.fmulNode);
+      Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__.fsqrtNode); // Boolean Nodes
 
-      Env.registerNode("FEqual", "Boolean", _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_15__.fequalNode);
-      Env.registerNode("FGT", "Boolean", _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_16__.fgtNode);
-      Env.registerNode("FGTE", "Boolean", _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_17__.fgteNode);
-      Env.registerNode("FLT", "Boolean", _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_18__.fltNode);
-      Env.registerNode("FLTE", "Boolean", _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_19__.flteNode);
-      Env.registerNode("FNotEqual", "Boolean", _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_20__.fnotequalNode);
+      Env.registerNode("FEqual", "Boolean", _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_20__.fequalNode);
+      Env.registerNode("FGT", "Boolean", _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_21__.fgtNode);
+      Env.registerNode("FGTE", "Boolean", _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_22__.fgteNode);
+      Env.registerNode("FLT", "Boolean", _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_23__.fltNode);
+      Env.registerNode("FLTE", "Boolean", _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_24__.flteNode);
+      Env.registerNode("FNotEqual", "Boolean", _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_25__.fnotequalNode); // Arrays Nodes
+
+      Env.registerNode("APush", "Arrays", _nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_11__.apushNode);
+      Env.registerNode("FAConst", "Arrays", _nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_12__.faconstNode);
+      Env.registerNode("FAMake", "Arrays", _nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_13__.famakeNode);
+      Env.registerNode("FAGet", "Arrays", _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__.fagetNode);
+      Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode);
     }
     /**
      * Register a node type
@@ -5907,8 +5948,8 @@ var Env = /*#__PURE__*/function () {
       var exp = {
         id: program.id,
         version: _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version,
-        lastNodeIndex: _node_js__WEBPACK_IMPORTED_MODULE_22__.Node.lastNodeIdIndex,
-        lastSocketIndex: _socket_js__WEBPACK_IMPORTED_MODULE_21__.Socket.lastSocketIdIndex,
+        lastNodeIndex: _node_js__WEBPACK_IMPORTED_MODULE_27__.Node.lastNodeIdIndex,
+        lastSocketIndex: _socket_js__WEBPACK_IMPORTED_MODULE_26__.Socket.lastSocketIdIndex,
         enter: program.enter.id,
         exit: program.exit.id,
         nodes: [],
@@ -5932,10 +5973,7 @@ var Env = /*#__PURE__*/function () {
                 id: inp.id,
                 name: inp.name,
                 node: null,
-                type: {
-                  type: inp.type.type,
-                  isArray: inp.type.isArray
-                },
+                type: inp.type,
                 value: inp.value,
                 peer: null
               };
@@ -5945,10 +5983,7 @@ var Env = /*#__PURE__*/function () {
                 id: outp.id,
                 name: outp.name,
                 node: null,
-                type: {
-                  type: outp.type.type,
-                  isArray: outp.type.isArray
-                },
+                type: outp.type,
                 value: outp.value,
                 peers: []
               };
@@ -6167,7 +6202,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
               var inpData = _step10.value;
-              var inp = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.InputSocket(inpData.name, node, new _type_js__WEBPACK_IMPORTED_MODULE_23__.Type(inpData.type.type, inpData.type.isArray), inpData.value);
+              var inp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.InputSocket(inpData.name, node, inpData.type, inpData.value);
               inp.id = inpData.id;
               node.inputs.push(inp);
             }
@@ -6183,7 +6218,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
               var outpData = _step11.value;
-              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.OutputSocket(outpData.name, node, new _type_js__WEBPACK_IMPORTED_MODULE_23__.Type(outpData.type.type, outpData.type.isArray), outpData.value);
+              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(outpData.name, node, outpData.type, outpData.value);
               outp.id = outpData.id;
               node.outputs.push(outp);
             }
@@ -6194,7 +6229,7 @@ var Env = /*#__PURE__*/function () {
           }
 
           if (nodeData.prev) {
-            var prev = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.PrevSocket(nodeData.prev.name, node);
+            var prev = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.PrevSocket(nodeData.prev.name, node);
             prev.id = nodeData.prev.id;
             node.prev = prev;
           }
@@ -6205,7 +6240,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
               var nextData = _step12.value;
-              var next = new _socket_js__WEBPACK_IMPORTED_MODULE_21__.NextSocket(nextData.name, node);
+              var next = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.NextSocket(nextData.name, node);
               next.id = nextData.id;
               node.nexts.push(next);
             }
@@ -6265,8 +6300,8 @@ var Env = /*#__PURE__*/function () {
         _iterator9.f();
       }
 
-      _node_js__WEBPACK_IMPORTED_MODULE_22__.Node.lastNodeIdIndex = data.lastNodeIndex;
-      _socket_js__WEBPACK_IMPORTED_MODULE_21__.Socket.lastSocketIdIndex = data.lastSocketIndex;
+      _node_js__WEBPACK_IMPORTED_MODULE_27__.Node.lastNodeIdIndex = data.lastNodeIndex;
+      _socket_js__WEBPACK_IMPORTED_MODULE_26__.Socket.lastSocketIdIndex = data.lastSocketIndex;
       return p;
     }
   }]);
@@ -6345,8 +6380,8 @@ var Exit = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "Exit");
     _this.removable = false;
     _this.creatable = false;
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
     _this.nexts = [];
     _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("End", _assertThisInitialized(_this));
     return _this;
@@ -6390,6 +6425,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Result": () => /* binding */ Result
 /* harmony export */ });
 /* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -6424,6 +6460,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 /**
  * This is the base node class. A node have some input and output
@@ -6723,8 +6760,8 @@ var Node = /*#__PURE__*/function () {
   }, {
     key: "addInput",
     value: function addInput() {
-      if (this.canAddInput && _classPrivateFieldGet(this, _inputs).length > 0) {
-        _classPrivateFieldGet(this, _inputs).push(new _socket_js__WEBPACK_IMPORTED_MODULE_0__.InputSocket("", this, _classPrivateFieldGet(this, _inputs)[0].type, _classPrivateFieldGet(this, _inputs)[0].value)); // Rename all inputs to its ordinal number in the inputs array
+      if (this.canAddInput) {
+        _classPrivateFieldGet(this, _inputs).push(new _socket_js__WEBPACK_IMPORTED_MODULE_0__.InputSocket("", this, _type_js__WEBPACK_IMPORTED_MODULE_1__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
 
 
         var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
@@ -7077,8 +7114,8 @@ var Program = /*#__PURE__*/function (_Node) {
       value: new Map()
     });
 
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_4__.type)(_type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, false), 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket("Val", _assertThisInitialized(_this), (0,_type_js__WEBPACK_IMPORTED_MODULE_4__.type)(_type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, false), 0)];
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, 0)];
     _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket("Out", _assertThisInitialized(_this))];
     _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
 
@@ -7380,8 +7417,7 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
   function ValueSocket(name, node) {
     var _this;
 
-    var _type2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type2(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
-
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
     _classCallCheck(this, ValueSocket);
@@ -7390,7 +7426,7 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
 
     _type.set(_assertThisInitialized(_this), {
       writable: true,
-      value: (0,_type_js__WEBPACK_IMPORTED_MODULE_0__.type)(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false)
+      value: _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER
     });
 
     _value.set(_assertThisInitialized(_this), {
@@ -7398,7 +7434,7 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
       value: 0
     });
 
-    _this.type = _type2;
+    _this.type = type;
     _this.value = value;
     return _this;
   }
@@ -7448,7 +7484,7 @@ var InputSocket = /*#__PURE__*/function (_ValueSocket) {
   function InputSocket(name, node) {
     var _this2;
 
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : type(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
     _classCallCheck(this, InputSocket);
@@ -7559,7 +7595,7 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
   function OutputSocket(name, node) {
     var _this5;
 
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : type(_type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER, false);
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
     _classCallCheck(this, OutputSocket);
@@ -7821,20 +7857,8 @@ var NextSocket = /*#__PURE__*/function (_FlowSocket2) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Types": () => /* binding */ Types,
-/* harmony export */   "Type": () => /* binding */ Type,
-/* harmony export */   "type": () => /* binding */ type
+/* harmony export */   "Types": () => /* binding */ Types
 /* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
 /**
  * cnodes
  *
@@ -7852,73 +7876,544 @@ var Types = {
   STRING: "string",
   BOOLEAN: "boolean",
   OBJECT: "object",
+  ARRAY: "array",
   ANY: "any"
 };
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/apush.js":
+/*!******************************************!*\
+  !*** ../cnodes/lib/nodes/array/apush.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "APush": () => /* binding */ APush,
+/* harmony export */   "apushNode": () => /* binding */ apushNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 /**
- * A type is a type and a flag indicating that the
- * type is a array of that base type
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
  */
 
-var _type = new WeakMap();
 
-var _isArray = new WeakMap();
 
-var Type = /*#__PURE__*/function () {
-  /** The base type */
+/**
+ * This class implements a cnode that pushes a value
+ * into an array
+ */
 
-  /** Is this type an array of base type? */
+var APush = /*#__PURE__*/function (_Node) {
+  _inherits(APush, _Node);
 
-  /**
-   * Construct a new Type
-   * @param {string} type The type
-   * @param {boolean} isArray Is array of this type?
-   */
-  function Type(type, isArray) {
-    _classCallCheck(this, Type);
+  var _super = _createSuper(APush);
 
-    _type.set(this, {
-      writable: true,
-      value: Types.NUMBER
-    });
+  function APush() {
+    var _this;
 
-    _isArray.set(this, {
-      writable: true,
-      value: false
-    });
+    _classCallCheck(this, APush);
 
-    _classPrivateFieldSet(this, _type, type);
-
-    _classPrivateFieldSet(this, _isArray, isArray);
+    _this = _super.call(this, "APush");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
   }
+  /**
+   * The process method
+   */
 
-  _createClass(Type, [{
-    key: "type",
-    get: function get() {
-      return _classPrivateFieldGet(this, _type);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _type, val);
-    }
-  }, {
-    key: "isArray",
-    get: function get() {
-      return _classPrivateFieldGet(this, _isArray);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _isArray, val);
+
+  _createClass(APush, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var arr = this.input("Array").value;
+      var val = this.input("Val").value;
+
+      if (!Array.isArray(arr)) {// TODO: Manage error
+      } else {
+        arr.push(val);
+        this.output("Val").value = arr;
+      }
+
+      return this.getFlowResult(this.next("Out"));
     }
   }]);
 
-  return Type;
-}();
+  return APush;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
 /**
- * A helper function to create the type
- * @param {Type} type The base type
- * @param {boolean} isArray The array flag
+ * Helper function to create the node
  */
 
-function type(type, isArray) {
-  return new Type(type, isArray);
+function apushNode() {
+  return new APush();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/faconst.js":
+/*!********************************************!*\
+  !*** ../cnodes/lib/nodes/array/faconst.js ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FAConst": () => /* binding */ FAConst,
+/* harmony export */   "faconstNode": () => /* binding */ faconstNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to get an array
+ * as a string constant by JSON.parse() the input string.
+ */
+
+var FAConst = /*#__PURE__*/function (_Node) {
+  _inherits(FAConst, _Node);
+
+  var _super = _createSuper(FAConst);
+
+  function FAConst() {
+    var _this;
+
+    _classCallCheck(this, FAConst);
+
+    _this = _super.call(this, "FAConst");
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "[0, 1, 2]")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [])];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FAConst, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Convert the constant/input value to an array
+
+      try {
+        this.output("Val").value = JSON.parse(this.input("Val").value);
+
+        if (!Array.isArray(this.output("Val").value)) {
+          throw new Error("The input value (".concat(this.output("Val").value, ") is not an array"));
+        }
+      } catch (error) {
+        // TODO: Manage error
+        console.log(error);
+      }
+    }
+  }]);
+
+  return FAConst;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function faconstNode() {
+  return new FAConst();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/faget.js":
+/*!******************************************!*\
+  !*** ../cnodes/lib/nodes/array/faget.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FAGet": () => /* binding */ FAGet,
+/* harmony export */   "fagetNode": () => /* binding */ fagetNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for pick
+ * a single value from an array
+ */
+
+var FAGet = /*#__PURE__*/function (_Node) {
+  _inherits(FAGet, _Node);
+
+  var _super = _createSuper(FAGet);
+
+  function FAGet() {
+    var _this;
+
+    _classCallCheck(this, FAGet);
+
+    _this = _super.call(this, "FAGet"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FAGet, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var arr = this.input("Array").value;
+      var index = parseInt(this.input("Index").value, 10);
+
+      if (!Array.isArray(arr)) {// TODO: Manage error
+      } else {
+        this.output("Val").value = arr[index];
+      }
+    }
+  }]);
+
+  return FAGet;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function fagetNode() {
+  return new FAGet();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/falength.js":
+/*!*********************************************!*\
+  !*** ../cnodes/lib/nodes/array/falength.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FALength": () => /* binding */ FALength,
+/* harmony export */   "falengthNode": () => /* binding */ falengthNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a functional node for get
+ * the length of an array
+ */
+
+var FALength = /*#__PURE__*/function (_Node) {
+  _inherits(FALength, _Node);
+
+  var _super = _createSuper(FALength);
+
+  function FALength() {
+    var _this;
+
+    _classCallCheck(this, FALength);
+
+    _this = _super.call(this, "FALength"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * The process override
+   */
+
+
+  _createClass(FALength, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var arr = this.input("Array").value;
+
+      if (!Array.isArray(arr)) {// TODO: Manage error
+      } else {
+        this.output("Val").value = arr.length;
+      }
+    }
+  }]);
+
+  return FALength;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper fuction to create the node
+ */
+
+function falengthNode() {
+  return new FALength();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/famake.js":
+/*!*******************************************!*\
+  !*** ../cnodes/lib/nodes/array/famake.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FAMake": () => /* binding */ FAMake,
+/* harmony export */   "famakeNode": () => /* binding */ famakeNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to get an array
+ * from a list of inputs
+ */
+
+var FAMake = /*#__PURE__*/function (_Node) {
+  _inherits(FAMake, _Node);
+
+  var _super = _createSuper(FAMake);
+
+  function FAMake() {
+    var _this;
+
+    _classCallCheck(this, FAMake);
+
+    _this = _super.call(this, "FAMake");
+    _this.canAddInput = true;
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [])];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FAMake, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var arr = [];
+      arr.push.apply(arr, _toConsumableArray(this.inputs.map(function (i) {
+        return i.value;
+      })));
+      this.output("Val").value = arr;
+    }
+    /**
+     * Can this node remove a specific input?
+     * In this case, there must be at least 1 input
+     * @param {InputsSocket} input The input to remove
+     */
+
+  }, {
+    key: "canRemoveInput",
+    value: function canRemoveInput(input) {
+      return this.inputs.length > 0;
+    }
+  }]);
+
+  return FAMake;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function famakeNode() {
+  return new FAMake();
 }
 
 /***/ }),
@@ -8018,8 +8513,8 @@ var FCompare = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -8689,7 +9184,7 @@ var Console = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Console);
 
     _this = _super.call(this, "Console");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
     _this.outputs = [];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
@@ -8786,8 +9281,8 @@ var FGetvar = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FGetvar");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -8883,8 +9378,8 @@ var FIf = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two any inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("True", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("False", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("True", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("False", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -8978,8 +9473,8 @@ var For = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, For);
 
     _this = _super.call(this, "For");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("From", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("To", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("From", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("To", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
@@ -8996,11 +9491,11 @@ var For = /*#__PURE__*/function (_Node) {
 
       var prevCurrentNode = this.program.currentNode; // Set the "Index" output value to Index
 
-      this.output("Index").value = this.input("From").value; // Re evaluate inputs in case of Condition depends on Index output
+      this.output("Index").value = parseInt(this.input("From").value); // Re evaluate inputs in case of Condition depends on Index output
 
       this.evaluateInputs(); // Let's cycle from "From" to "To" values
 
-      for (var index = this.input("From").value; index < this.input("To").value; index++) {
+      for (var index = parseInt(this.input("From").value); index < parseInt(this.input("To").value); index++) {
         // If there's a node connected to the "Do" next socket...
         if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
           // Set the "Index" output value to Index
@@ -9092,8 +9587,8 @@ var Getvar = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Getvar);
 
     _this = _super.call(this, "Getvar");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
@@ -9189,7 +9684,7 @@ var If = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, If);
 
     _this = _super.call(this, "If");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
     _this.outputs = [];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Then", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Else", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
@@ -9302,8 +9797,8 @@ var FAdd = /*#__PURE__*/function (_Node) {
 
     _this.canAddInput = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -9425,8 +9920,8 @@ var FDiv = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -9521,8 +10016,8 @@ var FMod = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -9626,8 +10121,8 @@ var FMul = /*#__PURE__*/function (_Node) {
 
     _this.canAddInput = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -9748,8 +10243,8 @@ var FNConst = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FNConst");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), "")];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -9845,8 +10340,8 @@ var FSqrt = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to one numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), (0,_core_type_js__WEBPACK_IMPORTED_MODULE_2__.type)(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -9940,8 +10435,8 @@ var Setvar = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Setvar);
 
     _this = _super.call(this, "Setvar");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _typeof(""), "")];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
@@ -10046,8 +10541,8 @@ var FConcat = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FConcat");
     _this.functional = true;
     _this.canAddInput = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false), "")];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -10169,8 +10664,8 @@ var FSConst = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FSConst");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, false), "")];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -10265,8 +10760,8 @@ var While = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, While);
 
     _this = _super.call(this, "While");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), false)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), new _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Type(_core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, false), 0)];
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;

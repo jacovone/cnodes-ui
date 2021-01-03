@@ -1,4 +1,18 @@
-{
-    "editor.formatOnSave": true,
-    "prettier.printWidth": 144
-}
+    {
+        "workbench.iconTheme": "vscode-icons",
+        "editor.fontFamily": "Dank Mono, Menlo, Monaco, 'Courier New', monospace",
+        "editor.lineHeight": 20,
+        "editor.fontLigatures": true,
+        "explorer.decorations.badges": false,
+        "editor.fontSize": 16,
+        "editor.letterSpacing": 0.0,
+        "editor.fontWeight": "400",
+        "editor.renderWhitespace": "none",
+        "editor.rulers": [
+            144,
+        ],
+        "editor.occurrencesHighlight": true,
+        "editor.cursorStyle": "line-thin",
+        "editor.showFoldingControls": "always",
+        "editor.matchBrackets": "near"
+    }

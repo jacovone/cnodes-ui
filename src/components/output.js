@@ -24,6 +24,12 @@ export class OutputSocketComponent extends CnodesSocketComponent {
   /** The socket symbol element */
   #socketSymbol = null;
 
+  /** A reference to the output name element, if there is one */
+  #outputNameElement = null;
+
+  /** A reference to the label element, if there is one */
+  #labelElement = null;
+
   constructor(socket) {
     super(socket);
     super.setup();
@@ -48,31 +54,82 @@ export class OutputSocketComponent extends CnodesSocketComponent {
     this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
     this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
     this.#socketSymbol.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
+    
+    let textOutputNameElem = null;
 
-    let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-    labelElem.style = `
-      font: ${Theme.current.NODE_IO_NAME_FONT}; 
-      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
-      text-align: right;
-      width: ${Theme.current.NODE_WIDTH - 30}px;
-      height: 30px;
-      line-height: 30px;
-      user-select: none;
+    /*
+     * If this socket can edit name, we create an output element for
+     * this name, otherwise, we create a label
+     */
+    if(this.socket.canEditName) {
+      textOutputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+      textOutputNameElem.style = `
+        font: ${Theme.current.NODE_IO_NAME_FONT}; 
+        color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+        text-align: left;
+        line-height: 30px;
+        user-select: none;
+        pointer-events: auto;
       `;
-
-    labelElem.innerHTML = `${this.socket.name}`;
-
-    labelElem.setAttribute("x", 0);
-    labelElem.setAttribute("y", 0);
-    labelElem.setAttribute("transform", `translate(${-Theme.current.NODE_WIDTH + 15}, ${-15})`);
-    labelElem.setAttribute("width", Theme.current.NODE_WIDTH - 30);
-    labelElem.setAttribute("height", 30);
+  
+      textOutputNameElem.setAttribute("x", 0);
+      textOutputNameElem.setAttribute("y", 0);
+      textOutputNameElem.setAttribute("transform", `translate(${-Theme.current.NODE_WIDTH / 2}, ${-15})`);
+      textOutputNameElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
+      textOutputNameElem.setAttribute("height", 30);
+  
+      this.#outputNameElement = document.createElement("input");
+      this.#outputNameElement.style = `
+        font: ${Theme.current.NODE_IO_NAME_FONT}; 
+        color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+        width: ${Theme.current.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
+        height: ${20}px;
+        border: 0;
+        padding: 2px;
+        margin: 2px;
+        text-align: right
+      `;
+  
+      this.#outputNameElement.addEventListener("keyup", (e) => {
+        this.socket.name = e.target.value;
+      });
+  
+      this.#outputNameElement.setAttribute("value", this.socket.name);
+      this.#outputNameElement.setAttribute("type", "text");
+  
+      textOutputNameElem.appendChild(this.#outputNameElement);
+  
+    } else {
+      this.#labelElement = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+      this.#labelElement.style = `
+        font: ${Theme.current.NODE_IO_NAME_FONT}; 
+        color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+        text-align: right;
+        width: ${Theme.current.NODE_WIDTH - 30}px;
+        height: 30px;
+        line-height: 30px;
+        user-select: none;
+        `;
+  
+      this.#labelElement.innerHTML = `${this.socket.name}`;
+  
+      this.#labelElement.setAttribute("x", 0);
+      this.#labelElement.setAttribute("y", 0);
+      this.#labelElement.setAttribute("transform", `translate(${-Theme.current.NODE_WIDTH + 15}, ${-15})`);
+      this.#labelElement.setAttribute("width", Theme.current.NODE_WIDTH - 30);
+      this.#labelElement.setAttribute("height", 30);
+      }
 
     let outputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
     outputElem.setAttribute("x", 0);
     outputElem.setAttribute("y", 0);
     outputElem.appendChild(this.#socketSymbol);
-    outputElem.appendChild(labelElem);
+
+    if(this.socket.canEditName) {
+      outputElem.appendChild(textOutputNameElem);
+    } else {
+      outputElem.appendChild(this.#labelElement);
+    }
 
     return outputElem;
   }
@@ -181,6 +238,23 @@ export class OutputSocketComponent extends CnodesSocketComponent {
             this.canvas.removeConnection(c);
             this.socket.disconnect(c.target);
           }
+        })
+      );
+    }
+    if (this.socket.node.canRemoveOutput(this.socket)) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Delete output</tspan>`, () => {
+          // First, disconnect all peers
+          let conns = this.canvas.getConnectionsFor(this);
+          if (conns.length > 0) {
+            for(let c of conns) {
+              this.canvas.removeConnection(c);
+              this.socket.disconnect(c.target);
+            }
+          }
+          this.socket.node.removeOutput(this.socket);
+          this.parent.removeComponent(this);
+          this.parent.updateSVGElement();
         })
       );
     }

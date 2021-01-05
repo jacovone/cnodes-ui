@@ -2374,6 +2374,15 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
           _this2.updateSVGElement();
         }));
+      } // The node can add inputs?
+
+
+      if (this.node.canAddOutput) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add output</tspan>", function () {
+          _this2.node.addOutput();
+
+          _this2.updateSVGElement();
+        }));
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
@@ -3621,13 +3630,12 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR);
-      /**
+
+      var textInputNameElem = null;
+      /*
        * If this socket can edit name, we create an input element for
        * this name, otherwise, we create a label
        */
-
-
-      var textInputNameElem = null;
 
       if (this.socket.canEditName) {
         textInputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
@@ -4267,12 +4275,20 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
 
 var _socketSymbol = new WeakMap();
 
+var _outputNameElement = new WeakMap();
+
+var _labelElement = new WeakMap();
+
 var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   _inherits(OutputSocketComponent, _CnodesSocketComponen);
 
   var _super = _createSuper(OutputSocketComponent);
 
   /** The socket symbol element */
+
+  /** A reference to the output name element, if there is one */
+
+  /** A reference to the label element, if there is one */
   function OutputSocketComponent(socket) {
     var _thisSuper, _this;
 
@@ -4281,6 +4297,16 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     _this = _super.call(this, socket);
 
     _socketSymbol.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _outputNameElement.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _labelElement.set(_assertThisInitialized(_this), {
       writable: true,
       value: null
     });
@@ -4301,6 +4327,8 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
      * Lets create the element
      */
     value: function createElement() {
+      var _this2 = this;
+
       _classPrivateFieldSet(this, _socketSymbol, document.createElementNS("http://www.w3.org/2000/svg", "circle"));
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("cx", 0);
@@ -4315,19 +4343,62 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR);
 
-      var labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      labelElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: right;\n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30, "px;\n      height: 30px;\n      line-height: 30px;\n      user-select: none;\n      ");
-      labelElem.innerHTML = "".concat(this.socket.name);
-      labelElem.setAttribute("x", 0);
-      labelElem.setAttribute("y", 0);
-      labelElem.setAttribute("transform", "translate(".concat(-_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH + 15, ", ").concat(-15, ")"));
-      labelElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30);
-      labelElem.setAttribute("height", 30);
+      var textOutputNameElem = null;
+      /*
+       * If this socket can edit name, we create an output element for
+       * this name, otherwise, we create a label
+       */
+
+      if (this.socket.canEditName) {
+        textOutputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+        textOutputNameElem.style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        line-height: 30px;\n        user-select: none;\n        pointer-events: auto;\n      ");
+        textOutputNameElem.setAttribute("x", 0);
+        textOutputNameElem.setAttribute("y", 0);
+        textOutputNameElem.setAttribute("transform", "translate(".concat(-_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
+        textOutputNameElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+        textOutputNameElem.setAttribute("height", 30);
+
+        _classPrivateFieldSet(this, _outputNameElement, document.createElement("input"));
+
+        _classPrivateFieldGet(this, _outputNameElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n        text-align: right\n      ");
+
+        _classPrivateFieldGet(this, _outputNameElement).addEventListener("keyup", function (e) {
+          _this2.socket.name = e.target.value;
+        });
+
+        _classPrivateFieldGet(this, _outputNameElement).setAttribute("value", this.socket.name);
+
+        _classPrivateFieldGet(this, _outputNameElement).setAttribute("type", "text");
+
+        textOutputNameElem.appendChild(_classPrivateFieldGet(this, _outputNameElement));
+      } else {
+        _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
+
+        _classPrivateFieldGet(this, _labelElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: right;\n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30, "px;\n        height: 30px;\n        line-height: 30px;\n        user-select: none;\n        ");
+        _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("x", 0);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("y", 0);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("transform", "translate(".concat(-_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH + 15, ", ").concat(-15, ")"));
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("height", 30);
+      }
+
       var outputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
       outputElem.setAttribute("x", 0);
       outputElem.setAttribute("y", 0);
       outputElem.appendChild(_classPrivateFieldGet(this, _socketSymbol));
-      outputElem.appendChild(labelElem);
+
+      if (this.socket.canEditName) {
+        outputElem.appendChild(textOutputNameElem);
+      } else {
+        outputElem.appendChild(_classPrivateFieldGet(this, _labelElement));
+      }
+
       return outputElem;
     }
     /**
@@ -4387,7 +4458,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
      * via the context menu
      */
     value: function getRegisteredPossiblePeers() {
-      var _this2 = this;
+      var _this3 = this;
 
       var items = [];
 
@@ -4417,7 +4488,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                     items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR, "\">\n                  ").concat(inp.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
                       // create the node and return the specific socket component to
                       // the context menu client
-                      var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this2.canvas);
+                      var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this3.canvas);
                       node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
                       return inp.__comp;
@@ -4460,7 +4531,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
-      var _this3 = this;
+      var _this4 = this;
 
       var items = [];
       var conns = this.canvas.getConnectionsFor(this);
@@ -4475,15 +4546,47 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
               var c = _step4.value;
 
               // Disconnect this socket
-              _this3.canvas.removeConnection(c);
+              _this4.canvas.removeConnection(c);
 
-              _this3.socket.disconnect(c.target);
+              _this4.socket.disconnect(c.target);
             }
           } catch (err) {
             _iterator4.e(err);
           } finally {
             _iterator4.f();
           }
+        }));
+      }
+
+      if (this.socket.node.canRemoveOutput(this.socket)) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Delete output</tspan>", function () {
+          // First, disconnect all peers
+          var conns = _this4.canvas.getConnectionsFor(_this4);
+
+          if (conns.length > 0) {
+            var _iterator5 = _createForOfIteratorHelper(conns),
+                _step5;
+
+            try {
+              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                var c = _step5.value;
+
+                _this4.canvas.removeConnection(c);
+
+                _this4.socket.disconnect(c.target);
+              }
+            } catch (err) {
+              _iterator5.e(err);
+            } finally {
+              _iterator5.f();
+            }
+          }
+
+          _this4.socket.node.removeOutput(_this4.socket);
+
+          _this4.parent.removeComponent(_this4);
+
+          _this4.parent.updateSVGElement();
         }));
       }
 
@@ -10829,7 +10932,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
   }, {
     key: "canRemoveOutput",
     value: function canRemoveOutput(output) {
-      return this.outputs.length > 0;
+      return this.outputs.length > 1;
     }
   }]);
 

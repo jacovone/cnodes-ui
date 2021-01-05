@@ -58,12 +58,13 @@ export class InputSocketComponent extends CnodesSocketComponent {
     this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
     this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
     this.#socketSymbol.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
+    
+    let textInputNameElem = null;
 
-    /**
+    /*
      * If this socket can edit name, we create an input element for
      * this name, otherwise, we create a label
      */
-    let textInputNameElem = null;
     if(this.socket.canEditName) {
       textInputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
       textInputNameElem.style = `

@@ -289,6 +289,16 @@ export class CnodeComponent extends Component {
       );
     }
 
+    // The node can add inputs?
+    if (this.node.canAddOutput) {
+      items.push(
+        new MenuItem(`<tspan alignment-baseline="middle">Add output</tspan>`, () => {
+          this.node.addOutput();
+          this.updateSVGElement();
+        })
+      );
+    }
+
     items.push(
       new MenuItem(`<tspan alignment-baseline="middle">Disconnect all</tspan>`, () => {
         for (let comp of this.components) {

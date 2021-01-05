@@ -9753,11 +9753,11 @@ var For = /*#__PURE__*/function (_Node) {
       this.evaluateInputs(); // Let's cycle from "From" to "To" values
 
       for (var index = parseInt(this.input("From").value); index < parseInt(this.input("To").value); index++) {
-        // If there's a node connected to the "Do" next socket...
-        if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
-          // Set the "Index" output value to Index
-          this.output("Index").value = index; // Execute a sub program beginning on that node
+        // Set the "Index" output value to Index
+        this.output("Index").value = index; // If there's a node connected to the "Do" next socket...
 
+        if (this.next("Do").peer !== null && this.next("Do").peer.node !== null) {
+          // Execute a sub program beginning on that node
           this.program.processFrom(this.next("Do").peer.node);
         }
       } // Restore the current program's node

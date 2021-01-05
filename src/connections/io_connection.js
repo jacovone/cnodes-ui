@@ -7,8 +7,9 @@
  * Year: 2020
  */
 
-import { Connection } from "../canvas/connection";
 import { Position } from "../canvas/position";
+import { CnodesConnection } from "../components/cnodesconnection";
+import { CnodesSocketComponent } from "../components/cnodessocket";
 import { Theme } from "../components/theme";
 
 /**
@@ -17,26 +18,9 @@ import { Theme } from "../components/theme";
  * must be of type InputSocketComponent and OutputSocketComponent, and manages
  * the connection status of the embedded cnodes's socket
  */
-export class IOConnection extends Connection {
+export class IOConnection extends CnodesConnection {
   constructor(source, target, canvas) {
-    super(source, target);
-    super.setup();
-    canvas.addConnection(this);
-    this.updateSVGElement();
-
-    if (canvas.program) {
-      // Connect cnodes sockets
-      this.source.socket.connect(this.target.socket);
-    }
-  }
-
-  /**
-   * Lets create the element
-   */
-  createElement() {
-    let el = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-    return el;
+    super(source, target, canvas);
   }
 
   /**
@@ -59,19 +43,8 @@ export class IOConnection extends Connection {
     );
 
     this.connectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_IO_WIDTH);
-    this.connectionEl.setAttribute("stroke", Theme.current.CONNECTION_IO_COLOR);
-    this.connectionEl.setAttribute("marker-end", "url(#io-arrow)");
+    this.connectionEl.setAttribute("stroke", CnodesSocketComponent.getColorForType(this.getRelevantType(this.source.socket.type, this.target.socket.type)));
+    this.connectionEl.setAttribute("marker-end", `url(#io-arrow-${this.getRelevantType(this.source.socket.type, this.target.socket.type)})`);
     this.connectionEl.setAttribute("fill", "transparent");
-  }
-
-  /**
-   * Diconnect the internal cnodes sockets
-   */
-  destroy() {
-    // If there is an active program, remove the connection
-    if (this.canvas.program) {
-      this.source.socket.disconnect(this.target.socket);
-    }
-    super.destroy();
   }
 }

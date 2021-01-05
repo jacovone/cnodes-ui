@@ -193,6 +193,25 @@ export class Theme {
     return "bold 11px verdana";
   }
 
+  get TYPE_ARRAY_COLOR() {
+    return "orange";
+  }
+  get TYPE_OBJECT_COLOR() {
+    return "purple";
+  }
+  get TYPE_NUMBER_COLOR() {
+    return "green";
+  }
+  get TYPE_STRING_COLOR() {
+    return "red";
+  }
+  get TYPE_BOOLEAN_COLOR() {
+    return "brown";
+  }
+  get TYPE_ANY_COLOR() {
+    return "#008EBF";
+  }
+
   static current = new Theme();
 }
 

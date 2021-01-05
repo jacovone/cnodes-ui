@@ -7,8 +7,8 @@
  * Year: 2020
  */
 
-import { Connection } from "../canvas/connection";
 import { Position } from "../canvas/position";
+import { CnodesConnection } from "../components/cnodesconnection";
 import { Theme } from "../components/theme";
 
 /**
@@ -17,25 +17,9 @@ import { Theme } from "../components/theme";
  * must be of type InputSocketComponent and OutputSocketComponent, and manages
  * the connection status of the embedded cnodes's socket
  */
-export class PrevNextConnection extends Connection {
+export class PrevNextConnection extends CnodesConnection {
   constructor(source, target, canvas, connect = true) {
-    super(source, target);
-    super.setup();
-    canvas.addConnection(this);
-    this.updateSVGElement();
-
-    if (connect) {
-      // Connect cnodes sockets
-      this.source.socket.connect(this.target.socket);
-    }
-  }
-
-  /**
-   * Lets create the element
-   */
-  createElement() {
-    let el = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    return el;
+    super(source, target, canvas);
   }
 
   /**
@@ -61,16 +45,5 @@ export class PrevNextConnection extends Connection {
     this.connectionEl.setAttribute("stroke", Theme.current.CONNECTION_PREV_NEXT_COLOR);
     this.connectionEl.setAttribute("marker-end", "url(#prevnext-arrow)");
     this.connectionEl.setAttribute("fill", "transparent");
-  }
-
-  /**
-   * Diconnect the internal cnodes sockets
-   */
-  destroy() {
-    // If there is an active program, remove the connection
-    if (this.canvas.program) {
-      this.source.socket.disconnect(this.target.socket);
-    }
-    super.destroy();
   }
 }

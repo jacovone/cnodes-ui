@@ -2581,7 +2581,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     });
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.CONNECTION_IO_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"7\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 5 L 0 10 Z\">\n        </path>\n      </marker>      \n    ");
 
     _this.svgEl.appendChild(defsEl);
 
@@ -2918,6 +2918,137 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
   return CnodesCanvas;
 }(_canvas_canvas__WEBPACK_IMPORTED_MODULE_1__.Canvas);
+
+/***/ }),
+
+/***/ "./src/components/cnodesconnection.js":
+/*!********************************************!*\
+  !*** ./src/components/cnodesconnection.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CnodesConnection": () => /* binding */ CnodesConnection
+/* harmony export */ });
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _canvas_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/connection */ "./src/canvas/connection.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+
+/**
+ * This class implements a connection for the cnodes system
+ * It embed both source and target sockets
+ */
+
+var CnodesConnection = /*#__PURE__*/function (_Connection) {
+  _inherits(CnodesConnection, _Connection);
+
+  var _super = _createSuper(CnodesConnection);
+
+  function CnodesConnection(source, target, canvas) {
+    var _thisSuper, _this;
+
+    _classCallCheck(this, CnodesConnection);
+
+    _this = _super.call(this, source, target);
+
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(CnodesConnection.prototype)), "setup", _thisSuper).call(_thisSuper);
+
+    canvas.addConnection(_assertThisInitialized(_this));
+
+    _this.updateSVGElement();
+
+    if (canvas.program) {
+      // Connect cnodes sockets
+      _this.source.socket.connect(_this.target.socket);
+    }
+
+    return _this;
+  }
+  /**
+   * Lets create the element
+   */
+
+
+  _createClass(CnodesConnection, [{
+    key: "createElement",
+    value: function createElement() {
+      var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      return el;
+    }
+    /**
+     * Diconnect the internal cnodes sockets
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      // If there is an active program, remove the connection
+      if (this.canvas.program) {
+        this.source.socket.disconnect(this.target.socket);
+      }
+
+      _get(_getPrototypeOf(CnodesConnection.prototype), "destroy", this).call(this);
+    }
+    /**
+     * Return a relevant type between two types passed as parameter
+     * @param {string} type1 CNODES source type
+     * @param {string} type2 CNODES target type
+     */
+
+  }, {
+    key: "getRelevantType",
+    value: function getRelevantType(type1, type2) {
+      if (type1 === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_0__.Types.ANY) {
+        return type2;
+      } else if (type2 === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_0__.Types.ANY) {
+        return type1;
+      } else {
+        return type1;
+      }
+    }
+  }]);
+
+  return CnodesConnection;
+}(_canvas_connection__WEBPACK_IMPORTED_MODULE_1__.Connection);
 
 /***/ }),
 
@@ -3317,9 +3448,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CnodesSocketComponent": () => /* binding */ CnodesSocketComponent
 /* harmony export */ });
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3358,6 +3490,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -3441,14 +3574,14 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
   }, {
     key: "connectionMoving",
     value: function connectionMoving(x, y, invalid) {
-      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.absPos.x, this.absPos.y);
-      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
+      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(this.absPos.x, this.absPos.y);
+      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
       var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(cpXDistance * this.getSourcePointDirection(), -0.1 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(-cpXDistance * this.getSourcePointDirection(), 0.1 * (sourcePoint.y - targetPoint.y)));
+      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(cpXDistance * this.getSourcePointDirection(), -0.1 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(-cpXDistance * this.getSourcePointDirection(), 0.1 * (sourcePoint.y - targetPoint.y)));
       this.tempConnectionEl.setAttribute("d", "\n      M ".concat(this.absPos.x, " ").concat(this.absPos.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
-      this.tempConnectionEl.setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_TEMP_WIDTH);
-      this.tempConnectionEl.setAttribute("stroke", invalid ? _theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_TEMP_INVALID_COLOR : this.currentPeerSocketComponent ? _theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_TEMP_VALID_COLOR : _theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_TEMP_COLOR);
+      this.tempConnectionEl.setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_WIDTH);
+      this.tempConnectionEl.setAttribute("stroke", invalid ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_INVALID_COLOR : this.currentPeerSocketComponent ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_VALID_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_COLOR);
       this.tempConnectionEl.setAttribute("stroke-dasharray", "5 5");
       this.tempConnectionEl.setAttribute("fill", "transparent");
     }
@@ -3464,15 +3597,46 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
 
       _get(_getPrototypeOf(CnodesSocketComponent.prototype), "destroy", this).call(this);
     }
+    /**
+     * Return a color code in CSS for a given cndoes data type
+     * @param {string} type CNODES data type
+     */
+
   }, {
     key: "socket",
     get: function get() {
       return _classPrivateFieldGet(this, _socket);
     }
+  }], [{
+    key: "getColorForType",
+    value: function getColorForType(type) {
+      switch (type) {
+        case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.ARRAY:
+          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_ARRAY_COLOR;
+
+        case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.NUMBER:
+          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_NUMBER_COLOR;
+
+        case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.STRING:
+          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_STRING_COLOR;
+
+        case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.OBJECT:
+          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_OBJECT_COLOR;
+
+        case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.BOOLEAN:
+          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_BOOLEAN_COLOR;
+
+        case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.ANY:
+          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_ANY_COLOR;
+
+        default:
+          return "black";
+      }
+    }
   }]);
 
   return CnodesSocketComponent;
-}(_canvas_socket__WEBPACK_IMPORTED_MODULE_2__.SocketComponent);
+}(_canvas_socket__WEBPACK_IMPORTED_MODULE_3__.SocketComponent);
 
 /***/ }),
 
@@ -3494,6 +3658,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -3538,6 +3703,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -3627,9 +3793,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
       var textInputNameElem = null;
       /*
@@ -3733,7 +3899,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.OutputSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.OutputSocket && (socketComp.socket.type === this.socket.type || socketComp.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY);
     }
     /**
      * This socket supports single connection, so if the user
@@ -4216,6 +4382,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -4260,6 +4427,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -4339,9 +4507,9 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
       var textOutputNameElem = null;
       /*
@@ -4429,7 +4597,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.InputSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.InputSocket && (socketComp.socket.type === this.socket.type || socketComp.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_7__.Types.ANY);
     }
     /**
      * Returns the direction of the source point for this socket component:
@@ -5216,6 +5384,36 @@ var Theme = /*#__PURE__*/function () {
     get: function get() {
       return "bold 11px verdana";
     }
+  }, {
+    key: "TYPE_ARRAY_COLOR",
+    get: function get() {
+      return "orange";
+    }
+  }, {
+    key: "TYPE_OBJECT_COLOR",
+    get: function get() {
+      return "purple";
+    }
+  }, {
+    key: "TYPE_NUMBER_COLOR",
+    get: function get() {
+      return "green";
+    }
+  }, {
+    key: "TYPE_STRING_COLOR",
+    get: function get() {
+      return "red";
+    }
+  }, {
+    key: "TYPE_BOOLEAN_COLOR",
+    get: function get() {
+      return "brown";
+    }
+  }, {
+    key: "TYPE_ANY_COLOR",
+    get: function get() {
+      return "#008EBF";
+    }
   }]);
 
   return Theme;
@@ -5238,9 +5436,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "IOConnection": () => /* binding */ IOConnection
 /* harmony export */ });
-/* harmony import */ var _canvas_connection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/connection */ "./src/canvas/connection.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cnodesconnection */ "./src/components/cnodesconnection.js");
+/* harmony import */ var _components_cnodessocket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/cnodessocket */ "./src/components/cnodessocket.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5261,10 +5460,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /**
@@ -5278,6 +5473,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 /**
  * This class implements a connection for Input->Output connection
  * in the cnodes world. It embed both source and target sockets that
@@ -5285,78 +5481,39 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * the connection status of the embedded cnodes's socket
  */
 
-var IOConnection = /*#__PURE__*/function (_Connection) {
-  _inherits(IOConnection, _Connection);
+var IOConnection = /*#__PURE__*/function (_CnodesConnection) {
+  _inherits(IOConnection, _CnodesConnection);
 
   var _super = _createSuper(IOConnection);
 
   function IOConnection(source, target, canvas) {
-    var _thisSuper, _this;
-
     _classCallCheck(this, IOConnection);
 
-    _this = _super.call(this, source, target);
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(IOConnection.prototype)), "setup", _thisSuper).call(_thisSuper);
-
-    canvas.addConnection(_assertThisInitialized(_this));
-
-    _this.updateSVGElement();
-
-    if (canvas.program) {
-      // Connect cnodes sockets
-      _this.source.socket.connect(_this.target.socket);
-    }
-
-    return _this;
+    return _super.call(this, source, target, canvas);
   }
   /**
-   * Lets create the element
+   * Update the aspect of the connection
    */
 
 
   _createClass(IOConnection, [{
-    key: "createElement",
-    value: function createElement() {
-      var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      return el;
-    }
-    /**
-     * Update the aspect of the connection
-     */
-
-  }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.source.absPos.x, this.source.absPos.y);
-      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
+      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
+      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
       var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
       this.connectionEl.setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
-      this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_IO_WIDTH);
-      this.connectionEl.setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_IO_COLOR);
-      this.connectionEl.setAttribute("marker-end", "url(#io-arrow)");
+      this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_IO_WIDTH);
+      this.connectionEl.setAttribute("stroke", _components_cnodessocket__WEBPACK_IMPORTED_MODULE_2__.CnodesSocketComponent.getColorForType(this.getRelevantType(this.source.socket.type, this.target.socket.type)));
+      this.connectionEl.setAttribute("marker-end", "url(#io-arrow-".concat(this.getRelevantType(this.source.socket.type, this.target.socket.type), ")"));
       this.connectionEl.setAttribute("fill", "transparent");
-    }
-    /**
-     * Diconnect the internal cnodes sockets
-     */
-
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      // If there is an active program, remove the connection
-      if (this.canvas.program) {
-        this.source.socket.disconnect(this.target.socket);
-      }
-
-      _get(_getPrototypeOf(IOConnection.prototype), "destroy", this).call(this);
     }
   }]);
 
   return IOConnection;
-}(_canvas_connection__WEBPACK_IMPORTED_MODULE_0__.Connection);
+}(_components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__.CnodesConnection);
 
 /***/ }),
 
@@ -5370,8 +5527,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PrevNextConnection": () => /* binding */ PrevNextConnection
 /* harmony export */ });
-/* harmony import */ var _canvas_connection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/connection */ "./src/canvas/connection.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cnodesconnection */ "./src/components/cnodesconnection.js");
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -5393,10 +5550,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /**
@@ -5417,80 +5570,41 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * the connection status of the embedded cnodes's socket
  */
 
-var PrevNextConnection = /*#__PURE__*/function (_Connection) {
-  _inherits(PrevNextConnection, _Connection);
+var PrevNextConnection = /*#__PURE__*/function (_CnodesConnection) {
+  _inherits(PrevNextConnection, _CnodesConnection);
 
   var _super = _createSuper(PrevNextConnection);
 
   function PrevNextConnection(source, target, canvas) {
-    var _thisSuper, _this;
-
     var connect = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
     _classCallCheck(this, PrevNextConnection);
 
-    _this = _super.call(this, source, target);
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(PrevNextConnection.prototype)), "setup", _thisSuper).call(_thisSuper);
-
-    canvas.addConnection(_assertThisInitialized(_this));
-
-    _this.updateSVGElement();
-
-    if (connect) {
-      // Connect cnodes sockets
-      _this.source.socket.connect(_this.target.socket);
-    }
-
-    return _this;
+    return _super.call(this, source, target, canvas);
   }
   /**
-   * Lets create the element
+   * Update the aspect of the connection
    */
 
 
   _createClass(PrevNextConnection, [{
-    key: "createElement",
-    value: function createElement() {
-      var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      return el;
-    }
-    /**
-     * Update the aspect of the connection
-     */
-
-  }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.source.absPos.x, this.source.absPos.y);
-      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, this.target.absPos.y);
+      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
+      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, this.target.absPos.y);
       var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
       this.connectionEl.setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
       this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_WIDTH);
       this.connectionEl.setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_COLOR);
       this.connectionEl.setAttribute("marker-end", "url(#prevnext-arrow)");
       this.connectionEl.setAttribute("fill", "transparent");
     }
-    /**
-     * Diconnect the internal cnodes sockets
-     */
-
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      // If there is an active program, remove the connection
-      if (this.canvas.program) {
-        this.source.socket.disconnect(this.target.socket);
-      }
-
-      _get(_getPrototypeOf(PrevNextConnection.prototype), "destroy", this).call(this);
-    }
   }]);
 
   return PrevNextConnection;
-}(_canvas_connection__WEBPACK_IMPORTED_MODULE_0__.Connection);
+}(_components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__.CnodesConnection);
 
 /***/ }),
 

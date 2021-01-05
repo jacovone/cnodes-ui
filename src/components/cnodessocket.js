@@ -8,6 +8,7 @@
  */
 
 import { Socket } from "@marco.jacovone/cnodes/cnodes";
+import { Types } from "@marco.jacovone/cnodes/lib/core/type";
 import { Position } from "../canvas/position";
 import { SocketComponent } from "../canvas/socket";
 import { Theme } from "./theme";
@@ -108,5 +109,28 @@ export class CnodesSocketComponent extends SocketComponent {
   destroy() {
     this.socket.__comp = null;
     super.destroy();
+  }
+
+  /**
+   * Return a color code in CSS for a given cndoes data type
+   * @param {string} type CNODES data type
+   */
+  static getColorForType(type) {
+    switch (type) {
+      case Types.ARRAY:
+        return Theme.current.TYPE_ARRAY_COLOR;
+      case Types.NUMBER:
+        return Theme.current.TYPE_NUMBER_COLOR;
+      case Types.STRING:
+        return Theme.current.TYPE_STRING_COLOR;
+      case Types.OBJECT:
+        return Theme.current.TYPE_OBJECT_COLOR;
+      case Types.BOOLEAN:
+        return Theme.current.TYPE_BOOLEAN_COLOR;
+      case Types.ANY:
+        return Theme.current.TYPE_ANY_COLOR;
+      default:
+        return "black";
+    }
   }
 }

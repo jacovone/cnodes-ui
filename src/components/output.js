@@ -15,6 +15,7 @@ import { CnodesSocketComponent } from "./cnodessocket";
 import { MenuItem } from "../canvas/menu";
 import { CnodeComponent } from "./cnode";
 import { Position } from "../canvas/position";
+import { Types } from "@marco.jacovone/cnodes/lib/core/type";
 
 /**
  * This class implements a socket representing a Output in the
@@ -52,8 +53,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
     this.#socketSymbol.setAttribute("cy", 0);
     this.#socketSymbol.setAttribute("r", Theme.current.NODE_IO_POINT_RADIUS);
     this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_IO_STROKE_WIDTH);
-    this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
-    this.#socketSymbol.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
+    this.#socketSymbol.setAttribute("stroke", CnodesSocketComponent.getColorForType(this.socket.type));
+    this.#socketSymbol.setAttribute("fill", CnodesSocketComponent.getColorForType(this.socket.type));
     
     let textOutputNameElem = null;
 
@@ -157,7 +158,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
    * @param {SocketComponent} socketComp Peer socket to connect
    */
   canAcceptPeerSocket(socketComp) {
-    return socketComp.socket instanceof InputSocket;
+    return (socketComp.socket instanceof InputSocket && (socketComp.socket.type === this.socket.type || socketComp.socket.type === Types.ANY));
   }
 
   /**

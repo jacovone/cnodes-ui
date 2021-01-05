@@ -3543,7 +3543,9 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * in the cnodes world
  */
 
-var _inputElement = new WeakMap();
+var _inputValueElement = new WeakMap();
+
+var _inputNameElement = new WeakMap();
 
 var _labelElement = new WeakMap();
 
@@ -3554,9 +3556,11 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
   var _super = _createSuper(InputSocketComponent);
 
-  /** A reference to the imput element */
+  /** A reference to the imput value element */
 
-  /** A reference to the label element */
+  /** A reference to the imput name element, if there is one */
+
+  /** A reference to the label element, if there is one */
 
   /** The symbol element */
   function InputSocketComponent(socket) {
@@ -3566,7 +3570,12 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
     _this = _super.call(this, socket);
 
-    _inputElement.set(_assertThisInitialized(_this), {
+    _inputValueElement.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _inputNameElement.set(_assertThisInitialized(_this), {
       writable: true,
       value: null
     });
@@ -3612,49 +3621,86 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR);
+      /**
+       * If this socket can edit name, we create an input element for
+       * this name, otherwise, we create a label
+       */
 
-      _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
 
-      _classPrivateFieldGet(this, _labelElement).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: left;\n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n      height: 30px;\n      line-height: 30px;\n      user-select: none;\n    ");
-      _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
+      var textInputNameElem = null;
 
-      _classPrivateFieldGet(this, _labelElement).setAttribute("x", 0);
+      if (this.socket.canEditName) {
+        textInputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+        textInputNameElem.style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        line-height: 30px;\n        user-select: none;\n        pointer-events: auto;\n      ");
+        textInputNameElem.setAttribute("x", 0);
+        textInputNameElem.setAttribute("y", 0);
+        textInputNameElem.setAttribute("transform", "translate(".concat(15, ", ", -15, ")"));
+        textInputNameElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+        textInputNameElem.setAttribute("height", 30);
 
-      _classPrivateFieldGet(this, _labelElement).setAttribute("y", 0);
+        _classPrivateFieldSet(this, _inputNameElement, document.createElement("input"));
 
-      _classPrivateFieldGet(this, _labelElement).setAttribute("transform", "translate(".concat(15, ", ", -15, ")"));
+        _classPrivateFieldGet(this, _inputNameElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n      ");
 
-      _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+        _classPrivateFieldGet(this, _inputNameElement).addEventListener("keyup", function (e) {
+          _this2.socket.name = e.target.value;
+        });
 
-      _classPrivateFieldGet(this, _labelElement).setAttribute("height", 30);
+        _classPrivateFieldGet(this, _inputNameElement).setAttribute("value", this.socket.name);
 
-      var textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      textInputElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
-      textInputElem.setAttribute("x", 0);
-      textInputElem.setAttribute("y", 0);
-      textInputElem.setAttribute("transform", "translate(".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
-      textInputElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
-      textInputElem.setAttribute("height", 30);
+        _classPrivateFieldGet(this, _inputNameElement).setAttribute("type", "text");
 
-      _classPrivateFieldSet(this, _inputElement, document.createElement("input"));
+        textInputNameElem.appendChild(_classPrivateFieldGet(this, _inputNameElement));
+      } else {
+        _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
 
-      _classPrivateFieldGet(this, _inputElement).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
+        _classPrivateFieldGet(this, _labelElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n        height: 30px;\n        line-height: 30px;\n        user-select: none;\n      ");
+        _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
 
-      _classPrivateFieldGet(this, _inputElement).addEventListener("keyup", function (e) {
+        _classPrivateFieldGet(this, _labelElement).setAttribute("x", 0);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("y", 0);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("transform", "translate(".concat(15, ", ", -15, ")"));
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+
+        _classPrivateFieldGet(this, _labelElement).setAttribute("height", 30);
+      }
+
+      var textInputValueElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+      textInputValueElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
+      textInputValueElem.setAttribute("x", 0);
+      textInputValueElem.setAttribute("y", 0);
+      textInputValueElem.setAttribute("transform", "translate(".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
+      textInputValueElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+      textInputValueElem.setAttribute("height", 30);
+
+      _classPrivateFieldSet(this, _inputValueElement, document.createElement("input"));
+
+      _classPrivateFieldGet(this, _inputValueElement).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
+
+      _classPrivateFieldGet(this, _inputValueElement).addEventListener("keyup", function (e) {
         _this2.socket.value = e.target.value;
       });
 
-      _classPrivateFieldGet(this, _inputElement).setAttribute("value", this.socket.value);
+      _classPrivateFieldGet(this, _inputValueElement).setAttribute("value", this.socket.value);
 
-      _classPrivateFieldGet(this, _inputElement).setAttribute("type", "text");
+      _classPrivateFieldGet(this, _inputValueElement).setAttribute("type", "text");
 
-      textInputElem.appendChild(_classPrivateFieldGet(this, _inputElement));
+      textInputValueElem.appendChild(_classPrivateFieldGet(this, _inputValueElement));
       var inputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
       inputElem.setAttribute("x", 0);
       inputElem.setAttribute("y", 0);
       inputElem.appendChild(_classPrivateFieldGet(this, _socketSymbol));
-      inputElem.appendChild(_classPrivateFieldGet(this, _labelElement));
-      inputElem.appendChild(textInputElem);
+
+      if (this.socket.canEditName) {
+        inputElem.appendChild(textInputNameElem);
+      } else {
+        inputElem.appendChild(_classPrivateFieldGet(this, _labelElement));
+      }
+
+      inputElem.appendChild(textInputValueElem);
       return inputElem;
     }
     /**
@@ -3710,9 +3756,15 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(InputSocketComponent.prototype), "updateSVGElement", this).call(this); // Show/Hide the imput component
 
 
-      _classPrivateFieldGet(this, _inputElement).style["display"] = this.isConnected ? "none" : "table-cell";
-      _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
-      this.socket.value = _classPrivateFieldGet(this, _inputElement).value;
+      _classPrivateFieldGet(this, _inputValueElement).style["display"] = this.isConnected ? "none" : "table-cell";
+
+      if (this.socket.canEditName) {
+        _classPrivateFieldGet(this, _inputNameElement).value = "".concat(this.socket.name);
+      } else {
+        _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
+      }
+
+      this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
     }
     /**
      * This method is responsible to enumerate all socket of registered nodes
@@ -5372,6 +5424,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMod,
 /* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMul,
 /* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FNConst,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FOBreak,
+/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FOMake,
 /* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSConst,
 /* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSqrt,
 /* harmony export */   "FlowSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FlowSocket,
@@ -5406,6 +5460,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fmodNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmodNode,
 /* harmony export */   "fmulNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmulNode,
 /* harmony export */   "fnconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fnconstNode,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fobreakNode,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fomakeNode,
 /* harmony export */   "forNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.forNode,
 /* harmony export */   "fsconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsconstNode,
 /* harmony export */   "fsqrtNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsqrtNode,
@@ -5539,7 +5595,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FAGet": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.FAGet,
 /* harmony export */   "fagetNode": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.fagetNode,
 /* harmony export */   "FALength": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.FALength,
-/* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.falengthNode
+/* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.falengthNode,
+/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_28__.FOMake,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_28__.fomakeNode,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_29__.FOBreak,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_29__.fobreakNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -5569,6 +5629,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/nodes/array/famake.js */ "../cnodes/lib/nodes/array/famake.js");
 /* harmony import */ var _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
 /* harmony import */ var _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
+/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
+/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 /**
  * cnodes
  *
@@ -5607,6 +5669,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+ // Export objects nodes
 
 
 
@@ -5754,6 +5819,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
 /* harmony import */ var _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
 /* harmony import */ var _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
+/* harmony import */ var _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
+/* harmony import */ var _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -5778,6 +5845,8 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
+
 
 
 
@@ -5870,7 +5939,10 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("FAConst", "Arrays", _nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_12__.faconstNode);
       Env.registerNode("FAMake", "Arrays", _nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_13__.famakeNode);
       Env.registerNode("FAGet", "Arrays", _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__.fagetNode);
-      Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode);
+      Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode); // Object Nodes
+
+      Env.registerNode("FOMake", "Objects", _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.fomakeNode);
+      Env.registerNode("FOBreak", "Objects", _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.fobreakNode);
     }
     /**
      * Register a node type
@@ -6426,15 +6498,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
 /* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -6754,70 +6818,25 @@ var Node = /*#__PURE__*/function () {
     }
     /**
      * If this.#canAddInput is true, the user can add an input
-     * equal to the (at least one) input that already exists
+     * Subclass with variable number of input should override this method
      */
 
   }, {
     key: "addInput",
     value: function addInput() {
-      if (this.canAddInput) {
-        _classPrivateFieldGet(this, _inputs).push(new _socket_js__WEBPACK_IMPORTED_MODULE_0__.InputSocket("", this, _type_js__WEBPACK_IMPORTED_MODULE_1__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
-
-
-        var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
-            _step5;
-
-        try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var _step5$value = _slicedToArray(_step5.value, 2),
-                idx = _step5$value[0],
-                i = _step5$value[1];
-
-            i.name = "" + idx;
-          }
-        } catch (err) {
-          _iterator5.e(err);
-        } finally {
-          _iterator5.f();
-        }
-      } else {
-        throw new Error("Can't add input!");
-      }
+      throw new Error("Can't add input!");
     }
     /**
      * This method removes a specific input from the node, if
      * this is possible whit this instance
+     * Subclass with variable number of input should override this method
      * @param {*} input The input to remove
      */
 
   }, {
     key: "removeInput",
     value: function removeInput(input) {
-      if (this.canRemoveInput(input)) {
-        _classPrivateFieldSet(this, _inputs, _classPrivateFieldGet(this, _inputs).filter(function (i) {
-          return i !== input;
-        })); // Rename all inputs to its ordinal number in the inputs array
-
-
-        var _iterator6 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _inputs).entries()),
-            _step6;
-
-        try {
-          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-            var _step6$value = _slicedToArray(_step6.value, 2),
-                idx = _step6$value[0],
-                i = _step6$value[1];
-
-            i.name = "" + idx;
-          }
-        } catch (err) {
-          _iterator6.e(err);
-        } finally {
-          _iterator6.f();
-        }
-      } else {
-        throw new Error("Can't remove input");
-      }
+      throw new Error("Can't remove input");
     }
     /**
      * Can this node remove a specific input?
@@ -6828,6 +6847,39 @@ var Node = /*#__PURE__*/function () {
   }, {
     key: "canRemoveInput",
     value: function canRemoveInput(input) {
+      return false;
+    }
+    /**
+     * If this.#canAddOutput is true, the user can add an output
+     * Subclass with variable number of output should override this method
+     */
+
+  }, {
+    key: "addOutput",
+    value: function addOutput() {
+      throw new Error("Can't add output!");
+    }
+    /**
+     * This method removes a specific output from the node, if
+     * this is possible whit this instance
+     * Subclass with variable number of output should override this method
+     * @param {OutputSocket} output The output to remove
+     */
+
+  }, {
+    key: "removeOutput",
+    value: function removeOutput(output) {
+      throw new Error("Can't remove output");
+    }
+    /**
+     * Can this node remove a specific output?
+     * Subclass with variable number of output should override this method
+     * @param {OutputSocket} output The output to remove
+     */
+
+  }, {
+    key: "canRemoveOutput",
+    value: function canRemoveOutput(input) {
       return false;
     }
     /** The base version of the node does nothing */
@@ -7398,6 +7450,8 @@ var _type = new WeakMap();
 
 var _value = new WeakMap();
 
+var _canEditName = new WeakMap();
+
 var ValueSocket = /*#__PURE__*/function (_Socket) {
   _inherits(ValueSocket, _Socket);
 
@@ -7406,6 +7460,18 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
   /** The type for the socket's value */
 
   /** The stored value */
+
+  /**
+   * Some input/output sockets needs to have a name that users can change.
+   * That's because the name of the socket is part of what the user can
+   * choose. Think for example at a node that can make a data structure,
+   * the user will want configure each field of the structure, in terms of
+   * data value and name. The node will have a single output with the structure
+   * as output. In this case the user can select a variable number of input
+   * sockets, and can configure values (or connection) for each input as well
+   * as the name of each socket, that whill be the name of the field in the structure.
+   * This type of socket should be represented as a text field in a UI library.
+   */
 
   /**
    * Construct a new ValueSocket
@@ -7434,6 +7500,11 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
       value: 0
     });
 
+    _canEditName.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: false
+    });
+
     _this.type = type;
     _this.value = value;
     return _this;
@@ -7454,6 +7525,14 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _value, val);
+    }
+  }, {
+    key: "canEditName",
+    get: function get() {
+      return _classPrivateFieldGet(this, _canEditName);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _canEditName, val);
     }
   }]);
 
@@ -8311,6 +8390,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8403,6 +8492,71 @@ var FAMake = /*#__PURE__*/function (_Node) {
     key: "canRemoveInput",
     value: function canRemoveInput(input) {
       return this.inputs.length > 0;
+    }
+    /**
+     * If this.#canAddInput is true, the user can add an input
+     * equal to the (at least one) input that already exists
+     */
+
+  }, {
+    key: "addInput",
+    value: function addInput() {
+      if (this.canAddInput) {
+        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator = _createForOfIteratorHelper(this.inputs.entries()),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var _step$value = _slicedToArray(_step.value, 2),
+                idx = _step$value[0],
+                i = _step$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      } else {
+        throw new Error("Can't add input!");
+      }
+    }
+    /**
+     * This method removes a specific input from the node, if
+     * this is possible whit this instance
+     * @param {InputSocket} input The input to remove
+     */
+
+  }, {
+    key: "removeInput",
+    value: function removeInput(input) {
+      if (this.canRemoveInput(input)) {
+        this.inputs = this.inputs.filter(function (i) {
+          return i !== input;
+        }); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _step2$value = _slicedToArray(_step2.value, 2),
+                idx = _step2$value[0],
+                i = _step2$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      } else {
+        throw new Error("Can't remove input");
+      }
     }
   }]);
 
@@ -9739,7 +9893,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -9829,6 +9991,71 @@ var FAdd = /*#__PURE__*/function (_Node) {
       }
 
       this.output("Val").value = sum;
+    }
+    /**
+     * If this.#canAddInput is true, the user can add an input
+     * equal to the (at least one) input that already exists
+     */
+
+  }, {
+    key: "addInput",
+    value: function addInput() {
+      if (this.canAddInput) {
+        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _step2$value = _slicedToArray(_step2.value, 2),
+                idx = _step2$value[0],
+                i = _step2$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      } else {
+        throw new Error("Can't add input!");
+      }
+    }
+    /**
+     * This method removes a specific input from the node, if
+     * this is possible whit this instance
+     * @param {InputSocket} input The input to remove
+     */
+
+  }, {
+    key: "removeInput",
+    value: function removeInput(input) {
+      if (this.canRemoveInput(input)) {
+        this.inputs = this.inputs.filter(function (i) {
+          return i !== input;
+        }); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator3 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step3;
+
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var _step3$value = _slicedToArray(_step3.value, 2),
+                idx = _step3$value[0],
+                i = _step3$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      } else {
+        throw new Error("Can't remove input");
+      }
     }
     /**
      * Can this node remove a specific input?
@@ -10063,7 +10290,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -10153,6 +10388,71 @@ var FMul = /*#__PURE__*/function (_Node) {
       }
 
       this.output("Val").value = mul;
+    }
+    /**
+     * If this.#canAddInput is true, the user can add an input
+     * equal to the (at least one) input that already exists
+     */
+
+  }, {
+    key: "addInput",
+    value: function addInput() {
+      if (this.canAddInput) {
+        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _step2$value = _slicedToArray(_step2.value, 2),
+                idx = _step2$value[0],
+                i = _step2$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      } else {
+        throw new Error("Can't add input!");
+      }
+    }
+    /**
+     * This method removes a specific input from the node, if
+     * this is possible whit this instance
+     * @param {InputSocket} input The input to remove
+     */
+
+  }, {
+    key: "removeInput",
+    value: function removeInput(input) {
+      if (this.canRemoveInput(input)) {
+        this.inputs = this.inputs.filter(function (i) {
+          return i !== input;
+        }); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator3 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step3;
+
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var _step3$value = _slicedToArray(_step3.value, 2),
+                idx = _step3$value[0],
+                i = _step3$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      } else {
+        throw new Error("Can't remove input");
+      }
     }
     /**
      * Can this node remove a specific input?
@@ -10371,6 +10671,347 @@ function fsqrtNode() {
 
 /***/ }),
 
+/***/ "../cnodes/lib/nodes/object/fobreak.js":
+/*!*********************************************!*\
+  !*** ../cnodes/lib/nodes/object/fobreak.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FOBreak": () => /* binding */ FOBreak,
+/* harmony export */   "fobreakNode": () => /* binding */ fobreakNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to break down
+ * an object to its fields, or part of them
+ */
+
+var FOBreak = /*#__PURE__*/function (_Node) {
+  _inherits(FOBreak, _Node);
+
+  var _super = _createSuper(FOBreak);
+
+  function FOBreak() {
+    var _this;
+
+    _classCallCheck(this, FOBreak);
+
+    _this = _super.call(this, "FOBreak");
+    _this.canAddOutput = true;
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")]; // Sets all output as changeable in terms of name
+
+    var _iterator = _createForOfIteratorHelper(_this.outputs),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var o = _step.value;
+        o.canEditName = true;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FOBreak, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+
+      var _iterator2 = _createForOfIteratorHelper(this.outputs),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var o = _step2.value;
+          o.value = this.input("Val").value[o.name];
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    }
+    /**
+     * If this.#canAddOutput is true, the user can add an output
+     * equal to the (at least one) output that already exists
+     * Subclass with variable number of input should override this method
+     */
+
+  }, {
+    key: "addOutput",
+    value: function addOutput() {
+      if (this.canAddOutput) {
+        var o = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
+        o.canEditName = true;
+        this.outputs.push(o);
+      } else {
+        throw new Error("Can't add output!");
+      }
+    }
+    /**
+     * This method removes a specific output from the node
+     * @param {OutputSocket} output The output to remove
+     */
+
+  }, {
+    key: "removeOutput",
+    value: function removeOutput(output) {
+      if (this.canRemoveOutput(output)) {
+        this.outputs = this.outputs.filter(function (o) {
+          return o !== output;
+        });
+      } else {
+        throw new Error("Can't remove input");
+      }
+    }
+    /**
+     * Can this node remove a specific output?
+     * There must be at least 1 output
+     * @param {OutputSocket} output The output to remove
+     */
+
+  }, {
+    key: "canRemoveOutput",
+    value: function canRemoveOutput(output) {
+      return this.outputs.length > 0;
+    }
+  }]);
+
+  return FOBreak;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function fobreakNode() {
+  return new FOBreak();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/object/fomake.js":
+/*!********************************************!*\
+  !*** ../cnodes/lib/nodes/object/fomake.js ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FOMake": () => /* binding */ FOMake,
+/* harmony export */   "fomakeNode": () => /* binding */ fomakeNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a node to get an object
+ * from a list of fields
+ */
+
+var FOMake = /*#__PURE__*/function (_Node) {
+  _inherits(FOMake, _Node);
+
+  var _super = _createSuper(FOMake);
+
+  function FOMake() {
+    var _this;
+
+    _classCallCheck(this, FOMake);
+
+    _this = _super.call(this, "FOMake");
+    _this.canAddInput = true;
+    _this.functional = true;
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")]; // Sets all input as changeable in terms of name
+
+    var _iterator = _createForOfIteratorHelper(_this.inputs),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var i = _step.value;
+        i.canEditName = true;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
+    _this.nexts = [];
+    _this.prev = null;
+    return _this;
+  }
+  /**
+   * The process function
+   */
+
+
+  _createClass(FOMake, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs();
+      var obj = this.inputs.reduce(function (acc, val) {
+        return _objectSpread(_objectSpread({}, acc), {}, _defineProperty({}, val.name, val.value));
+      }, {});
+      this.output("Val").value = obj;
+    }
+    /**
+     * Can this node remove a specific input?
+     * In this case, there must be at least 1 input
+     * @param {InputsSocket} input The input to remove
+     */
+
+  }, {
+    key: "canRemoveInput",
+    value: function canRemoveInput(input) {
+      return this.inputs.length > 0;
+    }
+    /**
+     * If this.#canAddInput is true, the user can add an input
+     * the new input must have this.#canEditName === true.
+     * in this particular case the name is editable, so let the user
+     * to choose and left it blank
+     */
+
+  }, {
+    key: "addInput",
+    value: function addInput() {
+      var is = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
+      is.canEditName = true;
+      this.inputs.push(is);
+    }
+    /**
+     * This method removes a specific input from the node
+     * @param {InputSocket} input The input to remove
+     */
+
+  }, {
+    key: "removeInput",
+    value: function removeInput(input) {
+      if (this.canRemoveInput(input)) {
+        this.inputs = this.inputs.filter(function (i) {
+          return i !== input;
+        });
+      } else {
+        throw new Error("Can't remove input");
+      }
+    }
+  }]);
+
+  return FOMake;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * A helper function to create the node
+ */
+
+function fomakeNode() {
+  return new FOMake();
+}
+
+/***/ }),
+
 /***/ "../cnodes/lib/nodes/setvar.js":
 /*!*************************************!*\
   !*** ../cnodes/lib/nodes/setvar.js ***!
@@ -10486,7 +11127,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -10574,6 +11223,71 @@ var FConcat = /*#__PURE__*/function (_Node) {
       }
 
       this.output("Val").value = res;
+    }
+    /**
+     * If this.#canAddInput is true, the user can add an input
+     * equal to the (at least one) input that already exists
+     */
+
+  }, {
+    key: "addInput",
+    value: function addInput() {
+      if (this.canAddInput) {
+        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _step2$value = _slicedToArray(_step2.value, 2),
+                idx = _step2$value[0],
+                i = _step2$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      } else {
+        throw new Error("Can't add input!");
+      }
+    }
+    /**
+     * This method removes a specific input from the node, if
+     * this is possible whit this instance
+     * @param {InputSocket} input The input to remove
+     */
+
+  }, {
+    key: "removeInput",
+    value: function removeInput(input) {
+      if (this.canRemoveInput(input)) {
+        this.inputs = this.inputs.filter(function (i) {
+          return i !== input;
+        }); // Rename all inputs to its ordinal number in the inputs array
+
+        var _iterator3 = _createForOfIteratorHelper(this.inputs.entries()),
+            _step3;
+
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var _step3$value = _slicedToArray(_step3.value, 2),
+                idx = _step3$value[0],
+                i = _step3$value[1];
+
+            i.name = "" + idx;
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      } else {
+        throw new Error("Can't remove input");
+      }
     }
     /**
      * Can this node remove a specific input?

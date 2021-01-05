@@ -22,10 +22,13 @@ import { Position } from "../canvas/position";
  * in the cnodes world
  */
 export class InputSocketComponent extends CnodesSocketComponent {
-  /** A reference to the imput element */
-  #inputElement = null;
+  /** A reference to the imput value element */
+  #inputValueElement = null;
 
-  /** A reference to the label element */
+  /** A reference to the imput name element, if there is one */
+  #inputNameElement = null;
+
+  /** A reference to the label element, if there is one */
   #labelElement = null;
 
   /** The symbol element */
@@ -56,27 +59,71 @@ export class InputSocketComponent extends CnodesSocketComponent {
     this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_IO_STROKE_COLOR);
     this.#socketSymbol.setAttribute("fill", Theme.current.NODE_IO_FILL_COLOR);
 
-    this.#labelElement = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-    this.#labelElement.style = `
-      font: ${Theme.current.NODE_IO_NAME_FONT}; 
-      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
-      text-align: left;
-      width: ${Theme.current.NODE_WIDTH / 2 - 15}px;
-      height: 30px;
-      line-height: 30px;
-      user-select: none;
-    `;
+    /**
+     * If this socket can edit name, we create an input element for
+     * this name, otherwise, we create a label
+     */
+    let textInputNameElem = null;
+    if(this.socket.canEditName) {
+      textInputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+      textInputNameElem.style = `
+        font: ${Theme.current.NODE_IO_NAME_FONT}; 
+        color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+        text-align: left;
+        line-height: 30px;
+        user-select: none;
+        pointer-events: auto;
+      `;
+  
+      textInputNameElem.setAttribute("x", 0);
+      textInputNameElem.setAttribute("y", 0);
+      textInputNameElem.setAttribute("transform", `translate(${15}, ${-15})`);
+      textInputNameElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
+      textInputNameElem.setAttribute("height", 30);
+  
+      this.#inputNameElement = document.createElement("input");
+      this.#inputNameElement.style = `
+        font: ${Theme.current.NODE_IO_NAME_FONT}; 
+        color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+        width: ${Theme.current.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
+        height: ${20}px;
+        border: 0;
+        padding: 2px;
+        margin: 2px;
+      `;
+  
+      this.#inputNameElement.addEventListener("keyup", (e) => {
+        this.socket.name = e.target.value;
+      });
+  
+      this.#inputNameElement.setAttribute("value", this.socket.name);
+      this.#inputNameElement.setAttribute("type", "text");
+  
+      textInputNameElem.appendChild(this.#inputNameElement);
+  
+    } else {
+      this.#labelElement = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+      this.#labelElement.style = `
+        font: ${Theme.current.NODE_IO_NAME_FONT}; 
+        color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+        text-align: left;
+        width: ${Theme.current.NODE_WIDTH / 2 - 15}px;
+        height: 30px;
+        line-height: 30px;
+        user-select: none;
+      `;
+  
+      this.#labelElement.innerHTML = `${this.socket.name}`;
+  
+      this.#labelElement.setAttribute("x", 0);
+      this.#labelElement.setAttribute("y", 0);
+      this.#labelElement.setAttribute("transform", `translate(${15}, ${-15})`);
+      this.#labelElement.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
+      this.#labelElement.setAttribute("height", 30);
+    }
 
-    this.#labelElement.innerHTML = `${this.socket.name}`;
-
-    this.#labelElement.setAttribute("x", 0);
-    this.#labelElement.setAttribute("y", 0);
-    this.#labelElement.setAttribute("transform", `translate(${15}, ${-15})`);
-    this.#labelElement.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
-    this.#labelElement.setAttribute("height", 30);
-
-    let textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-    textInputElem.style = `
+    let textInputValueElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+    textInputValueElem.style = `
       font: ${Theme.current.NODE_IO_NAME_FONT}; 
       color: ${Theme.current.NODE_IO_NAME_COLOR}; 
       text-align: left;
@@ -85,14 +132,14 @@ export class InputSocketComponent extends CnodesSocketComponent {
       pointer-events: auto;
     `;
 
-    textInputElem.setAttribute("x", 0);
-    textInputElem.setAttribute("y", 0);
-    textInputElem.setAttribute("transform", `translate(${Theme.current.NODE_WIDTH / 2}, ${-15})`);
-    textInputElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
-    textInputElem.setAttribute("height", 30);
+    textInputValueElem.setAttribute("x", 0);
+    textInputValueElem.setAttribute("y", 0);
+    textInputValueElem.setAttribute("transform", `translate(${Theme.current.NODE_WIDTH / 2}, ${-15})`);
+    textInputValueElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
+    textInputValueElem.setAttribute("height", 30);
 
-    this.#inputElement = document.createElement("input");
-    this.#inputElement.style = `
+    this.#inputValueElement = document.createElement("input");
+    this.#inputValueElement.style = `
       font: ${Theme.current.NODE_IO_NAME_FONT}; 
       color: ${Theme.current.NODE_IO_NAME_COLOR}; 
       width: ${Theme.current.NODE_WIDTH / 2 - 25}px; // 5px less than foreignObject
@@ -102,21 +149,27 @@ export class InputSocketComponent extends CnodesSocketComponent {
       margin: 2px;
     `;
 
-    this.#inputElement.addEventListener("keyup", (e) => {
+    this.#inputValueElement.addEventListener("keyup", (e) => {
       this.socket.value = e.target.value;
     });
 
-    this.#inputElement.setAttribute("value", this.socket.value);
-    this.#inputElement.setAttribute("type", "text");
+    this.#inputValueElement.setAttribute("value", this.socket.value);
+    this.#inputValueElement.setAttribute("type", "text");
 
-    textInputElem.appendChild(this.#inputElement);
+    textInputValueElem.appendChild(this.#inputValueElement);
 
     let inputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
     inputElem.setAttribute("x", 0);
     inputElem.setAttribute("y", 0);
     inputElem.appendChild(this.#socketSymbol);
-    inputElem.appendChild(this.#labelElement);
-    inputElem.appendChild(textInputElem);
+
+    if(this.socket.canEditName) {
+      inputElem.appendChild(textInputNameElem);
+    } else {
+      inputElem.appendChild(this.#labelElement);
+    }
+    
+    inputElem.appendChild(textInputValueElem);
 
     return inputElem;
   }
@@ -168,9 +221,14 @@ export class InputSocketComponent extends CnodesSocketComponent {
     super.updateSVGElement();
 
     // Show/Hide the imput component
-    this.#inputElement.style["display"] = this.isConnected ? "none" : "table-cell";
-    this.#labelElement.innerHTML = `${this.socket.name}`;
-    this.socket.value = this.#inputElement.value;
+    this.#inputValueElement.style["display"] = this.isConnected ? "none" : "table-cell";
+
+    if(this.socket.canEditName) {
+      this.#inputNameElement.value = `${this.socket.name}`;
+    } else {
+      this.#labelElement.innerHTML = `${this.socket.name}`;
+    }
+    this.socket.value = this.#inputValueElement.value;
   }
 
   /**

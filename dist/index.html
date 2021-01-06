@@ -5,6 +5,14 @@
   <meta charset="utf-8" />
   <title>CANVAS-UI test board</title>
   <style>
+    svg {
+      background-color: #ffffff;
+      opacity: 1;
+      background-image: linear-gradient(#fafafa 8px, transparent 8px), linear-gradient(90deg, #fafafa 8px, transparent 8px), linear-gradient(#fafafa 4px, transparent 4px), linear-gradient(90deg, #fafafa 4px, #ffffff 4px);
+      background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
+      background-position: -8px -8px, -8px -8px, -4px -4px, -4px -4px;
+    }
+
     .action {
       border: none;
       border-radius: 5px;
@@ -28,7 +36,7 @@
   <button class="action" onclick="exampleCanvas3()">Example3</button>
   <button class="action" onclick="exampleCanvas4()">Example4</button>
   <div id="cnodes"
-    style="margin: 10px; border: 10px solid lightgray; background-color: white; position: absolute; top:20px; left:0; right:0; bottom:0">
+    style="margin: 10px; border: 10px solid lightgray; position: absolute; top:20px; left:0; right:0; bottom:0">
   </div>
 
   <script type="text/javascript" src="main.js"></script>

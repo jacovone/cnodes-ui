@@ -46,32 +46,32 @@ export class CnodesCanvas extends Canvas {
           <feMergeNode in="SourceGraphic"/> 
         </feMerge>
       </filter>
-      <marker id="io-arrow-any" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_ANY_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="io-arrow-any" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_ANY_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>
-      <marker id="io-arrow-boolean" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_BOOLEAN_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="io-arrow-boolean" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_BOOLEAN_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>
-      <marker id="io-arrow-number" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_NUMBER_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="io-arrow-number" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_NUMBER_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>
-      <marker id="io-arrow-string" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_STRING_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="io-arrow-string" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_STRING_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>
-      <marker id="io-arrow-object" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_OBJECT_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="io-arrow-object" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_OBJECT_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>
-      <marker id="io-arrow-array" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_ARRAY_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="io-arrow-array" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.TYPE_ARRAY_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>
-      <marker id="prevnext-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.CONNECTION_PREV_NEXT_COLOR}" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 Z">
+      <marker id="prevnext-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" fill="${Theme.current.CONNECTION_PREV_NEXT_COLOR}" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 4 L 10 6 L 0 10 Z">
         </path>
       </marker>      
     `;

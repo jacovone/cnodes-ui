@@ -28,11 +28,21 @@ export class IOConnection extends CnodesConnection {
    */
   updateSVGElement() {
     let sourcePoint = new Position(this.source.absPos.x, this.source.absPos.y);
-    let targetPoint = new Position(this.target.absPos.x - Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
+    let targetPoint = new Position(
+      this.target.absPos.x - Theme.current.NODE_IO_POINT_RADIUS,
+      this.target.absPos.y
+    );
 
-    let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-    let cp1 = sourcePoint.add(new Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-    let cp2 = targetPoint.add(new Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+    let cpXDistance = Math.max(
+      0.8 * Math.abs(sourcePoint.x - targetPoint.x),
+      100
+    );
+    let cp1 = sourcePoint.add(
+      new Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y))
+    );
+    let cp2 = targetPoint.add(
+      new Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y))
+    );
 
     this.connectionEl.setAttribute(
       "d",
@@ -42,9 +52,23 @@ export class IOConnection extends CnodesConnection {
     `
     );
 
-    this.connectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_IO_WIDTH);
-    this.connectionEl.setAttribute("stroke", CnodesSocketComponent.getColorForType(this.getRelevantType(this.source.socket.type, this.target.socket.type)));
-    this.connectionEl.setAttribute("marker-end", `url(#io-arrow-${this.getRelevantType(this.source.socket.type, this.target.socket.type)})`);
+    this.connectionEl.setAttribute(
+      "stroke-width",
+      Theme.current.CONNECTION_IO_WIDTH
+    );
+    this.connectionEl.setAttribute(
+      "stroke",
+      CnodesSocketComponent.getColorForType(
+        this.getRelevantType(this.source.socket.type, this.target.socket.type)
+      )
+    );
+    this.connectionEl.setAttribute(
+      "marker-end",
+      `url(#io-arrow-${this.getRelevantType(
+        this.source.socket.type,
+        this.target.socket.type
+      )})`
+    );
     this.connectionEl.setAttribute("fill", "transparent");
   }
 }

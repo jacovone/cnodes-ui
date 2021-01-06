@@ -40,23 +40,44 @@ export class PrevSocketComponent extends CnodesSocketComponent {
    * Lets create the element
    */
   createElement() {
-    this.#socketSymbol = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    this.#socketSymbol = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
 
     this.#socketSymbol.setAttribute(
       "d",
       `
-      M ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS}
-      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS}
-      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS}
-      L ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS}
+      M ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current
+        .NODE_PREV_NEXT_POINT_RADIUS}
+      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current
+        .NODE_PREV_NEXT_POINT_RADIUS}
+      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${
+        Theme.current.NODE_PREV_NEXT_POINT_RADIUS
+      }
+      L ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${
+        Theme.current.NODE_PREV_NEXT_POINT_RADIUS
+      }
       Z
       `
     );
-    this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
-    this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
-    this.#socketSymbol.setAttribute("fill", Theme.current.NODE_PREV_NEXT_FILL_COLOR);
+    this.#socketSymbol.setAttribute(
+      "stroke",
+      Theme.current.NODE_PREV_NEXT_STROKE_COLOR
+    );
+    this.#socketSymbol.setAttribute(
+      "stroke-width",
+      Theme.current.NODE_PREV_NEXT_STROKE_WIDTH
+    );
+    this.#socketSymbol.setAttribute(
+      "fill",
+      Theme.current.NODE_PREV_NEXT_FILL_COLOR
+    );
 
-    let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+    let labelElem = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "foreignObject"
+    );
     labelElem.style = `
       font: ${Theme.current.NODE_PREV_NEXT_NAME_FONT}; 
       color: ${Theme.current.NODE_PREV_NEXT_NAME_COLOR}; 
@@ -94,7 +115,9 @@ export class PrevSocketComponent extends CnodesSocketComponent {
     // if there is another connection for the target component,
     // delete the oldest one
     if (socketComp.isConnected) {
-      this.canvas.removeConnection(this.canvas.getConnectionsFor(socketComp)[0]);
+      this.canvas.removeConnection(
+        this.canvas.getConnectionsFor(socketComp)[0]
+      );
     }
 
     // This creates the connection and connects sockets
@@ -145,7 +168,7 @@ export class PrevSocketComponent extends CnodesSocketComponent {
             items.push(
               new MenuItem(
                 `
-                <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}">
+                <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}">
                   ${next.name}
                 </tspan>
                 <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
@@ -182,13 +205,16 @@ export class PrevSocketComponent extends CnodesSocketComponent {
     let conns = this.canvas.getConnectionsFor(this);
     if (conns.length > 0) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Disconnect all</tspan>`, () => {
-          for (let c of conns) {
-            // Disconnect this socket
-            this.canvas.removeConnection(c);
-            this.socket.disconnect(c.source);
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
+          () => {
+            for (let c of conns) {
+              // Disconnect this socket
+              this.canvas.removeConnection(c);
+              this.socket.disconnect(c.source);
+            }
           }
-        })
+        )
       );
     }
 

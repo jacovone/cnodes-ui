@@ -4,7 +4,7 @@
         "editor.lineHeight": 20,
         "editor.fontLigatures": true,
         "explorer.decorations.badges": false,
-        "editor.fontSize": 16,
+        "editor.fontSize": 14,
         "editor.letterSpacing": 0.0,
         "editor.fontWeight": "400",
         "editor.renderWhitespace": "none",
@@ -14,5 +14,6 @@
         "editor.occurrencesHighlight": true,
         "editor.cursorStyle": "line-thin",
         "editor.showFoldingControls": "always",
-        "editor.matchBrackets": "near"
+        "editor.matchBrackets": "near",
+        "editor.formatOnSave": true,
     }

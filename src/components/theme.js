@@ -109,14 +109,15 @@ export class Theme {
   }
 
   get NODE_IO_STROKE_WIDTH() {
-    return 2;
+    return 4;
   }
   get NODE_IO_STROKE_COLOR() {
-    return "#008EBF";
+    return "white";
   }
-  get NODE_IO_FILL_COLOR() {
-    return "#008EBF";
-  }
+  // The color fill is based on socket type
+  // get NODE_IO_FILL_COLOR() {
+  //   return "#008EBF";
+  // }
   get NODE_IO_NAME_FONT() {
     return "bold 11px verdana";
   }
@@ -197,16 +198,16 @@ export class Theme {
     return "orange";
   }
   get TYPE_OBJECT_COLOR() {
-    return "purple";
+    return "#5D6D7E";
   }
   get TYPE_NUMBER_COLOR() {
     return "green";
   }
   get TYPE_STRING_COLOR() {
-    return "red";
+    return "#CB4335";
   }
   get TYPE_BOOLEAN_COLOR() {
-    return "brown";
+    return "#F5B7B1";
   }
   get TYPE_ANY_COLOR() {
     return "#008EBF";

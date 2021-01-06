@@ -3659,6 +3659,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -3703,6 +3704,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -3793,7 +3795,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
@@ -3899,7 +3901,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.OutputSocket && (socketComp.socket.type === this.socket.type || socketComp.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY);
+      return socketComp instanceof _output__WEBPACK_IMPORTED_MODULE_9__.OutputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
     }
     /**
      * This socket supports single connection, so if the user
@@ -3978,14 +3980,18 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 try {
                   var _loop2 = function _loop2() {
                     var out = _step3.value;
-                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR, "\">\n                  ").concat(out.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
-                      // create the node and return the specific socket component to
-                      // the context menu client
-                      var node = new _cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent(n, _this3.canvas);
-                      node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_7__.Position(x, y); // Return the connected component instead
 
-                      return out.__comp;
-                    }));
+                    // Create an item only if the input in "compatible" with this output
+                    if (_this3.socket.node.canBeConnected(_this3.socket, out)) {
+                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" fill=\"".concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
+                        // create the node and return the specific socket component to
+                        // the context menu client
+                        var node = new _cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent(n, _this3.canvas);
+                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_7__.Position(x, y); // Return the connected component instead
+
+                        return out.__comp;
+                      }));
+                    }
                   };
 
                   for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -4296,7 +4302,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable && n.prev) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
                   // create the node and return the specific socket component to
                   // the context menu client
                   var node = new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(n, _this2.canvas);
@@ -4383,6 +4389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -4427,6 +4434,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -4507,7 +4515,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
@@ -4597,7 +4605,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.InputSocket && (socketComp.socket.type === this.socket.type || socketComp.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_7__.Types.ANY);
+      return socketComp instanceof _input__WEBPACK_IMPORTED_MODULE_8__.InputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
     }
     /**
      * Returns the direction of the source point for this socket component:
@@ -4653,14 +4661,18 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 try {
                   var _loop2 = function _loop2() {
                     var inp = _step3.value;
-                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_FILL_COLOR, "\">\n                  ").concat(inp.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
-                      // create the node and return the specific socket component to
-                      // the context menu client
-                      var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this3.canvas);
-                      node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
-                      return inp.__comp;
-                    }));
+                    // Create an item only if the input in "compatible" with this output
+                    if (_this3.socket.node.canBeConnected(_this3.socket, inp)) {
+                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" fill=\"".concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
+                        // create the node and return the specific socket component to
+                        // the context menu client
+                        var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this3.canvas);
+                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
+
+                        return inp.__comp;
+                      }));
+                    }
                   };
 
                   for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -4996,7 +5008,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 try {
                   var _loop2 = function _loop2() {
                     var next = _step3.value;
-                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
+                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
                       // create the node and return the specific socket component to
                       // the context menu client
                       var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this2.canvas);
@@ -5255,18 +5267,17 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_IO_STROKE_WIDTH",
     get: function get() {
-      return 2;
+      return 4;
     }
   }, {
     key: "NODE_IO_STROKE_COLOR",
     get: function get() {
-      return "#008EBF";
-    }
-  }, {
-    key: "NODE_IO_FILL_COLOR",
-    get: function get() {
-      return "#008EBF";
-    }
+      return "white";
+    } // The color fill is based on socket type
+    // get NODE_IO_FILL_COLOR() {
+    //   return "#008EBF";
+    // }
+
   }, {
     key: "NODE_IO_NAME_FONT",
     get: function get() {
@@ -5392,7 +5403,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "TYPE_OBJECT_COLOR",
     get: function get() {
-      return "purple";
+      return "#5D6D7E";
     }
   }, {
     key: "TYPE_NUMBER_COLOR",
@@ -5402,12 +5413,12 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "TYPE_STRING_COLOR",
     get: function get() {
-      return "red";
+      return "#CB4335";
     }
   }, {
     key: "TYPE_BOOLEAN_COLOR",
     get: function get() {
-      return "brown";
+      return "#F5B7B1";
     }
   }, {
     key: "TYPE_ANY_COLOR",
@@ -6264,6 +6275,7 @@ var Env = /*#__PURE__*/function () {
                 node: null,
                 type: inp.type,
                 value: inp.value,
+                canEditName: inp.canEditName,
                 peer: null
               };
             }),
@@ -6274,6 +6286,7 @@ var Env = /*#__PURE__*/function () {
                 node: null,
                 type: outp.type,
                 value: outp.value,
+                canEditName: outp.canEditName,
                 peers: []
               };
             }),
@@ -6493,6 +6506,7 @@ var Env = /*#__PURE__*/function () {
               var inpData = _step10.value;
               var inp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.InputSocket(inpData.name, node, inpData.type, inpData.value);
               inp.id = inpData.id;
+              inp.canEditName = inpData.canEditName;
               node.inputs.push(inp);
             }
           } catch (err) {
@@ -6508,6 +6522,7 @@ var Env = /*#__PURE__*/function () {
             for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
               var outpData = _step11.value;
               var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(outpData.name, node, outpData.type, outpData.value);
+              outp.canEditName = outpData.canEditName;
               outp.id = outpData.id;
               node.outputs.push(outp);
             }
@@ -7097,6 +7112,43 @@ var Node = /*#__PURE__*/function () {
   }, {
     key: "canRemoveOutput",
     value: function canRemoveOutput(input) {
+      return false;
+    }
+    /**
+     * This method defines if a particular socket of this node can
+     * be connected to another one, based on sockets type.
+     * Default implementation checks for types of sockets, following the rule:
+     * - if sockets are FlowSockets, return true
+     * - Otherwise if the type of one socket is Types.ANY, return true
+     * - Otherwise if the two types are the same, return true
+     * - Otherwise return false
+     * @param {Socket} thisSocket The instance of socket of this node
+     * @param {Socket} otherSocket The other socket
+     */
+
+  }, {
+    key: "canBeConnected",
+    value: function canBeConnected(thisSocket, otherSocket) {
+      if (thisSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket && !(otherSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket)) {
+        return false;
+      }
+
+      if (otherSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket && !(thisSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket)) {
+        return false;
+      }
+
+      if (thisSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket || otherSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket) {
+        return true;
+      }
+
+      if (thisSocket.type === _type_js__WEBPACK_IMPORTED_MODULE_1__.Types.ANY || otherSocket.type === _type_js__WEBPACK_IMPORTED_MODULE_1__.Types.ANY) {
+        return true;
+      }
+
+      if (thisSocket.type === otherSocket.type) {
+        return true;
+      }
+
       return false;
     }
     /** The base version of the node does nothing */
@@ -11408,7 +11460,7 @@ var FConcat = /*#__PURE__*/function (_Node) {
     _this.functional = true;
     _this.canAddInput = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -11692,7 +11744,7 @@ var While = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "While");
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;

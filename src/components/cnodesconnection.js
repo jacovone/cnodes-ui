@@ -9,8 +9,6 @@
 
 import { Types } from "@marco.jacovone/cnodes/lib/core/type";
 import { Connection } from "../canvas/connection";
-import { Theme } from "../components/theme";
-import { CnodesSocketComponent } from "./cnodessocket";
 
 /**
  * This class implements a connection for the cnodes system
@@ -55,11 +53,11 @@ export class CnodesConnection extends Connection {
    */
   getRelevantType(type1, type2) {
     if (type1 === Types.ANY) {
-        return type2;
+      return type2;
     } else if (type2 === Types.ANY) {
-        return type1;
+      return type1;
     } else {
-        return type1;
+      return type1;
     }
   }
 }

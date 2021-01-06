@@ -41,7 +41,10 @@ export class NextSocketComponent extends CnodesSocketComponent {
    * Lets create the element
    */
   createElement() {
-    this.#socketSymbol = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    this.#socketSymbol = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
 
     this.#socketSymbol.setAttribute(
       "d",
@@ -54,11 +57,23 @@ export class NextSocketComponent extends CnodesSocketComponent {
       Z
       `
     );
-    this.#socketSymbol.setAttribute("stroke", Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
-    this.#socketSymbol.setAttribute("stroke-width", Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
-    this.#socketSymbol.setAttribute("fill", Theme.current.NODE_PREV_NEXT_FILL_COLOR);
+    this.#socketSymbol.setAttribute(
+      "stroke",
+      Theme.current.NODE_PREV_NEXT_STROKE_COLOR
+    );
+    this.#socketSymbol.setAttribute(
+      "stroke-width",
+      Theme.current.NODE_PREV_NEXT_STROKE_WIDTH
+    );
+    this.#socketSymbol.setAttribute(
+      "fill",
+      Theme.current.NODE_PREV_NEXT_FILL_COLOR
+    );
 
-    let labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+    let labelElem = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "foreignObject"
+    );
     labelElem.style = `
       font: ${Theme.current.NODE_PREV_NEXT_NAME_FONT}; 
       color: ${Theme.current.NODE_PREV_NEXT_NAME_COLOR}; 
@@ -73,7 +88,10 @@ export class NextSocketComponent extends CnodesSocketComponent {
 
     labelElem.setAttribute("x", 0);
     labelElem.setAttribute("y", 0);
-    labelElem.setAttribute("transform", `translate(${-Theme.current.NODE_WIDTH / 2}, ${-15})`);
+    labelElem.setAttribute(
+      "transform",
+      `translate(${-Theme.current.NODE_WIDTH / 2}, ${-15})`
+    );
     labelElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
     labelElem.setAttribute("height", 30);
 
@@ -149,7 +167,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
           items.push(
             new MenuItem(
               `
-              <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}">
+              <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}">
                 ${n.prev.name}
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
@@ -185,11 +203,14 @@ export class NextSocketComponent extends CnodesSocketComponent {
     let conn = this.canvas.getConnectionsFor(this)[0];
     if (conn) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Disconnect</tspan>`, () => {
-          // Disconnect this socket
-          this.canvas.removeConnection(conn);
-          this.socket.disconnect();
-        })
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Disconnect</tspan>`,
+          () => {
+            // Disconnect this socket
+            this.canvas.removeConnection(conn);
+            this.socket.disconnect();
+          }
+        )
       );
     }
 

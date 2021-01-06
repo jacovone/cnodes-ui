@@ -7852,7 +7852,6 @@ var InputSocket = /*#__PURE__*/function (_ValueSocket) {
           this.peer.node.process();
         }
 
-        this.type = this.peer.type;
         this.value = this.peer.value;
       }
     }

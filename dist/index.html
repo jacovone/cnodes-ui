@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>CANVAS-UI test board</title>
+  <title>cnodes-ui test board</title>
   <style>
     svg {
       background-color: #ffffff;
@@ -16,19 +16,22 @@
     .action {
       border: none;
       border-radius: 5px;
-      padding: 6px;
-      margin: 2px;
+      padding: 4px;
+      margin-left: 10px;
+      margin-top: 3px;
       font-weight: bold;
       font-size: 12px;
       font: sans-serif;
+      background-color: rgb(247, 247, 247)
     }
   </style>
 </head>
 
-<body style="margin: 0; overflow: hidden; background-color: gray;position: absolute; top:0;left:0;right:0;bottom:0">
+<body
+  style="margin: 0; overflow: hidden; background-color: lightgray;position: absolute; top:0;left:0;right:0;bottom:0">
   <button class="action" onclick="newCanvas()">New</button>
   <button class="action" onclick="canvas.run()">Run</button>
-  <button class="action" onclick="canvas.dump()">DUMP</button>
+  <button class="action" onclick="canvas.dump()">Dump</button>
   <button class="action" onclick="loadProgram()">Load</button>
   <button class="action" onclick="saveProgram()">Save</button>
   <button class="action" onclick="exampleCanvas()">Example1</button>
@@ -36,7 +39,7 @@
   <button class="action" onclick="exampleCanvas3()">Example3</button>
   <button class="action" onclick="exampleCanvas4()">Example4</button>
   <div id="cnodes"
-    style="margin: 10px; border: 10px solid lightgray; position: absolute; top:20px; left:0; right:0; bottom:0">
+    style="margin: 10px; border: 10px solid gray; position: absolute; top:20px; left:0; right:0; bottom:0">
   </div>
 
   <script type="text/javascript" src="main.js"></script>

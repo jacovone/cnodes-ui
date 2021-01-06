@@ -5624,6 +5624,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_4__.Theme,
 /* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_4__.defaultLight,
 /* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__.CnodesCanvas,
+/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.AMap,
 /* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.APush,
 /* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Call,
 /* harmony export */   "Comparision": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Comparision,
@@ -5662,6 +5663,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Types,
 /* harmony export */   "ValueSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.ValueSocket,
 /* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.While,
+/* harmony export */   "amapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.amapNode,
 /* harmony export */   "apushNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.apushNode,
 /* harmony export */   "callNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.callNode,
 /* harmony export */   "consoleNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
@@ -5814,10 +5816,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fagetNode": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.fagetNode,
 /* harmony export */   "FALength": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.FALength,
 /* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.falengthNode,
-/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_28__.FOMake,
-/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_28__.fomakeNode,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_29__.FOBreak,
-/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_29__.fobreakNode
+/* harmony export */   "AMap": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__.AMap,
+/* harmony export */   "amapNode": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__.amapNode,
+/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_29__.FOMake,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_29__.fomakeNode,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_30__.FOBreak,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_30__.fobreakNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -5847,8 +5851,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/nodes/array/famake.js */ "../cnodes/lib/nodes/array/famake.js");
 /* harmony import */ var _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
 /* harmony import */ var _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
-/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
-/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
+/* harmony import */ var _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
+/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
+/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 /**
  * cnodes
  *
@@ -5884,6 +5889,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Export arrays nodes
+
 
 
 
@@ -6039,6 +6045,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
 /* harmony import */ var _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
 /* harmony import */ var _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
+/* harmony import */ var _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -6063,6 +6070,7 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -6157,7 +6165,8 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("FAConst", "Arrays", _nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_12__.faconstNode);
       Env.registerNode("FAMake", "Arrays", _nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_13__.famakeNode);
       Env.registerNode("FAGet", "Arrays", _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__.fagetNode);
-      Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode); // Object Nodes
+      Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode);
+      Env.registerNode("AMap", "Arrays", _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__.amapNode); // Object Nodes
 
       Env.registerNode("FOMake", "Objects", _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.fomakeNode);
       Env.registerNode("FOBreak", "Objects", _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.fobreakNode);
@@ -8216,6 +8225,140 @@ var Types = {
   ARRAY: "array",
   ANY: "any"
 };
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/amap.js":
+/*!*****************************************!*\
+  !*** ../cnodes/lib/nodes/array/amap.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AMap": () => /* binding */ AMap,
+/* harmony export */   "amapNode": () => /* binding */ amapNode
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a cnode that map an array to another
+ * by passing all items in sequence
+ */
+
+var AMap = /*#__PURE__*/function (_Node) {
+  _inherits(AMap, _Node);
+
+  var _super = _createSuper(AMap);
+
+  function AMap() {
+    var _this;
+
+    _classCallCheck(this, AMap);
+
+    _this = _super.call(this, "AMap");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Mapped", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER)];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process method
+   */
+
+
+  _createClass(AMap, [{
+    key: "process",
+    value: function process() {
+      var _this2 = this;
+
+      this.input("Array").evaluate();
+      var arr = this.input("Array").value;
+
+      var outArr = _toConsumableArray(arr);
+
+      if (!Array.isArray(arr)) {// TODO: Manage error
+      } else {
+        outArr = arr.map(function (val, index) {
+          // Set the "Index" output
+          _this2.output("Index").value = index; // Set the "Item" output
+
+          _this2.output("Item").value = val; // If there's a node connected to the "Item" next socket...
+
+          if (_this2.next("Do").peer !== null && _this2.next("Do").peer.node !== null) {
+            // Execute a sub program beginning on that node
+            _this2.program.processFrom(_this2.next("Do").peer.node);
+          } // Now evaluate the "Mapped" input
+
+
+          _this2.input("Mapped").evaluate();
+
+          return _this2.input("Mapped").value;
+        });
+      } // Set the "Array" output
+
+
+      this.output("Array").value = outArr;
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return AMap;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+/**
+ * Helper function to create the node
+ */
+
+function amapNode() {
+  return new AMap();
+}
 
 /***/ }),
 

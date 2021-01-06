@@ -198,7 +198,7 @@ export class Theme {
     return "orange";
   }
   get TYPE_OBJECT_COLOR() {
-    return "#5D6D7E";
+    return "#008EBF";
   }
   get TYPE_NUMBER_COLOR() {
     return "green";
@@ -210,7 +210,7 @@ export class Theme {
     return "#F5B7B1";
   }
   get TYPE_ANY_COLOR() {
-    return "#008EBF";
+    return "#d9d9d9";
   }
 
   static current = new Theme();

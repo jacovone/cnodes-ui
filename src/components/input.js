@@ -183,8 +183,14 @@ export class InputSocketComponent extends CnodesSocketComponent {
       margin: 2px;
     `;
 
+    /** Register value modifications */
     this.#inputValueElement.addEventListener("keyup", (e) => {
       this.socket.value = e.target.value;
+    });
+
+    /** Prevent descendants management of the click (pan) and allow selection */
+    this.#inputValueElement.addEventListener("pointerdown", (e) => {
+      e.stopPropagation();
     });
 
     this.#inputValueElement.setAttribute("value", this.socket.value);

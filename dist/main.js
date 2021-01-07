@@ -3853,6 +3853,10 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         _this2.socket.value = e.target.value;
       });
 
+      _classPrivateFieldGet(this, _inputValueElement).addEventListener("pointerdown", function (e) {
+        e.stopPropagation();
+      });
+
       _classPrivateFieldGet(this, _inputValueElement).setAttribute("value", this.socket.value);
 
       _classPrivateFieldGet(this, _inputValueElement).setAttribute("type", "text");

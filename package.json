@@ -25,7 +25,5 @@
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
   },
-  "dependencies": {
-    "@marco.jacovone/cnodes": "^0.5.1"
-  }
+  "dependencies": {}
 }

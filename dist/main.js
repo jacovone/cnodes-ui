@@ -5635,6 +5635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAGet,
 /* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FALength,
 /* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAMake,
+/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAMap,
 /* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAdd,
 /* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FCompare,
 /* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FConcat,
@@ -5674,6 +5675,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fagetNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fagetNode,
 /* harmony export */   "falengthNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.falengthNode,
 /* harmony export */   "famakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.famakeNode,
+/* harmony export */   "famapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.famapNode,
 /* harmony export */   "fcompareNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fcompareNode,
 /* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fconcatNode,
 /* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fdivNode,
@@ -5820,12 +5822,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.falengthNode,
 /* harmony export */   "AMap": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__.AMap,
 /* harmony export */   "amapNode": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__.amapNode,
-/* harmony export */   "AReduce": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_29__.AReduce,
-/* harmony export */   "areduceNode": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_29__.areduceNode,
-/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_30__.FOMake,
-/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_30__.fomakeNode,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_31__.FOBreak,
-/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_31__.fobreakNode
+/* harmony export */   "FAMap": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__.FAMap,
+/* harmony export */   "famapNode": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__.famapNode,
+/* harmony export */   "AReduce": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__.AReduce,
+/* harmony export */   "areduceNode": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__.areduceNode,
+/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_31__.FOMake,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_31__.fomakeNode,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_32__.FOBreak,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_32__.fobreakNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -5856,9 +5860,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
 /* harmony import */ var _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
 /* harmony import */ var _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
-/* harmony import */ var _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
-/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
-/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
+/* harmony import */ var _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
+/* harmony import */ var _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./lib/nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
+/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
+/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 /**
  * cnodes
  *
@@ -5894,6 +5899,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Export arrays nodes
+
 
 
 
@@ -6053,6 +6059,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 /* harmony import */ var _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
 /* harmony import */ var _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
+/* harmony import */ var _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -6077,6 +6084,7 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -6175,6 +6183,7 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("FAGet", "Arrays", _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__.fagetNode);
       Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode);
       Env.registerNode("AMap", "Arrays", _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__.amapNode);
+      Env.registerNode("FAMap", "Arrays", _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__.famapNode);
       Env.registerNode("AReduce", "Arrays", _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__.areduceNode); // Object Nodes
 
       Env.registerNode("FOMake", "Objects", _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.fomakeNode);
@@ -6294,6 +6303,7 @@ var Env = /*#__PURE__*/function () {
                 node: null,
                 type: outp.type,
                 value: outp.value,
+                cached: outp.cached,
                 canEditName: outp.canEditName,
                 peers: []
               };
@@ -6529,7 +6539,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
               var outpData = _step11.value;
-              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(outpData.name, node, outpData.type, outpData.value);
+              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(outpData.name, node, outpData.type, outpData.value, outpData.cached);
               outp.canEditName = outpData.canEditName;
               outp.id = outpData.id;
               node.outputs.push(outp);
@@ -7788,6 +7798,17 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
   }
 
   _createClass(ValueSocket, [{
+    key: "evaluate",
+
+    /**
+     * This method evaluates a socket in terms of the real value
+     * that is staying inside. The meaning is different in case of
+     * InputSocket and OutputSocket, that re-defines this method
+     */
+    value: function evaluate() {
+      throw new Error("This method must be redefined in a subclass!");
+    }
+  }, {
     key: "type",
     get: function get() {
       return _classPrivateFieldGet(this, _type);
@@ -7861,14 +7882,11 @@ var InputSocket = /*#__PURE__*/function (_ValueSocket) {
     /**
      * Evaluate the socket value. If the socket is connected,
      * this method goes to the peer socket and take the value.
-     * If the peer socket is part of a functional node, the process()
-     * method is executed before taking the value
+     * Else the current socket value remains unchanged
      */
     value: function evaluate() {
       if (this.peer !== null) {
-        if (this.peer.node && this.peer.node.functional) {
-          this.peer.node.process();
-        }
+        this.peer.evaluate(); // OutputSocket
 
         this.value = this.peer.value;
       }
@@ -7933,12 +7951,22 @@ var InputSocket = /*#__PURE__*/function (_ValueSocket) {
 
 var _peers = new WeakMap();
 
+var _cached = new WeakMap();
+
 var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
   _inherits(OutputSocket, _ValueSocket2);
 
   var _super3 = _createSuper(OutputSocket);
 
   /** A list of input value connected sockets */
+
+  /**
+   * This flag indicates that the socket don't try to
+   * cal the process() method of its node upon the
+   * evaluation. Normally, functional nodes have output
+   * sockets not cached, so an evaluation of its values
+   * will result in a call of process() method
+   */
 
   /**
    * Construct a new OutputSocket
@@ -7952,26 +7980,57 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
 
     var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var cached = arguments.length > 4 ? arguments[4] : undefined;
 
     _classCallCheck(this, OutputSocket);
 
-    _this5 = _super3.call(this, name, node, type, value);
+    _this5 = _super3.call(this, name, node, type, value); // default to true if the node is not functional and false
+    // if the node is functional
 
     _peers.set(_assertThisInitialized(_this5), {
       writable: true,
       value: []
     });
 
+    _cached.set(_assertThisInitialized(_this5), {
+      writable: true,
+      value: true
+    });
+
+    _classPrivateFieldSet(_assertThisInitialized(_this5), _cached, cached !== null && cached !== void 0 ? cached : !node.functional);
+
     return _this5;
   }
 
   _createClass(OutputSocket, [{
-    key: "connect",
+    key: "evaluate",
 
+    /**
+     * The evaluation of a OutputSocket depends from two factors:
+     * - The node of the socket is functional
+     * - The socket is market to be "cached"
+     *
+     * If the parent node is not functional, simply does nothing, because
+     * the value of this socket have to be unchanged from mthe last process
+     * call
+     * Otherwise, if the node is functional, we have to check if this particular
+     * socket is marked to be "cached", in that case, the value have to remain unchanged,
+     * otherwise the process() method have to be called again
+     */
+    value: function evaluate() {
+      var _this$node;
+
+      if ((_this$node = this.node) !== null && _this$node !== void 0 && _this$node.functional && !this.cached) {
+        this.node.process();
+      }
+    }
     /**
      * Connects this socket to a input socket
      * @param {Socket} socket Socket to connect to
      */
+
+  }, {
+    key: "connect",
     value: function connect(socket) {
       if (this.peers.find(function (s) {
         return s === socket;
@@ -8005,6 +8064,14 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _peers, val);
+    }
+  }, {
+    key: "cached",
+    get: function get() {
+      return _classPrivateFieldGet(this, _cached);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _cached, val);
     }
   }]);
 
@@ -8313,7 +8380,9 @@ var AMap = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "AMap");
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Mapped", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), // cached
+    new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true) // cached
+    ];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
@@ -8351,11 +8420,15 @@ var AMap = /*#__PURE__*/function (_Node) {
 
           return _this2.input("Mapped").value;
         });
-      } // Set the "Array" output
+      } // Compute result
 
 
       this.output("Array").value = outArr;
-      return this.getFlowResult(this.next("Out"));
+
+      if (!this.functional) {
+        // Set the "Array" output
+        return this.getFlowResult(this.next("Out"));
+      }
     }
   }]);
 
@@ -8663,7 +8736,7 @@ var FAConst = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FAConst");
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "[0, 1, 2]")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [])];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -8770,7 +8843,7 @@ var FAGet = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -8873,7 +8946,7 @@ var FALength = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -8996,7 +9069,7 @@ var FAMake = /*#__PURE__*/function (_Node) {
     _this.canAddInput = true;
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [])];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -9106,6 +9179,81 @@ function famakeNode() {
 
 /***/ }),
 
+/***/ "../cnodes/lib/nodes/array/famap.js":
+/*!******************************************!*\
+  !*** ../cnodes/lib/nodes/array/famap.js ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FAMap": () => /* binding */ FAMap,
+/* harmony export */   "famapNode": () => /* binding */ famapNode
+/* harmony export */ });
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _amap_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./amap.js */ "../cnodes/lib/nodes/array/amap.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This is the functional version of the AMap node
+ */
+
+var FAMap = /*#__PURE__*/function (_AMap) {
+  _inherits(FAMap, _AMap);
+
+  var _super = _createSuper(FAMap);
+
+  function FAMap(name) {
+    var _this;
+
+    _classCallCheck(this, FAMap);
+
+    _this = _super.call(this);
+    _this.name = "FAMap";
+    _this.functional = true;
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = null;
+    return _this;
+  }
+
+  return FAMap;
+}(_amap_js__WEBPACK_IMPORTED_MODULE_1__.AMap);
+/**
+ * Helper function to create the node
+ */
+
+function famapNode() {
+  return new FAMap();
+}
+
+/***/ }),
+
 /***/ "../cnodes/lib/nodes/bool/fcompare.js":
 /*!********************************************!*\
   !*** ../cnodes/lib/nodes/bool/fcompare.js ***!
@@ -9202,7 +9350,7 @@ var FCompare = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -9970,7 +10118,7 @@ var FGetvar = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FGetvar");
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -10067,7 +10215,7 @@ var FIf = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to two any inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("True", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("False", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -10494,7 +10642,7 @@ var FAdd = /*#__PURE__*/function (_Node) {
     _this.canAddInput = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -10682,7 +10830,7 @@ var FDiv = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -10778,7 +10926,7 @@ var FMod = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -10891,7 +11039,7 @@ var FMul = /*#__PURE__*/function (_Node) {
     _this.canAddInput = true; // Default to two numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -11078,7 +11226,7 @@ var FNConst = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FNConst");
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -11175,7 +11323,7 @@ var FSqrt = /*#__PURE__*/function (_Node) {
     _this.functional = true; // Default to one numeric inputs
 
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -11277,7 +11425,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
     _this.canAddOutput = true;
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")]; // Sets all output as changeable in terms of name
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)]; // Sets all output as changeable in terms of name
 
     var _iterator = _createForOfIteratorHelper(_this.outputs),
         _step;
@@ -11472,7 +11620,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
       _iterator.f();
     }
 
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {}, false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -11725,7 +11873,7 @@ var FConcat = /*#__PURE__*/function (_Node) {
     _this.functional = true;
     _this.canAddInput = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "", false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -11913,7 +12061,7 @@ var FSConst = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FSConst");
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "", false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;

@@ -82,8 +82,15 @@
     }
 
     function newCanvas() {
-      canvas.program = new cnui.Program();
-    }
+      let prg = new cnui.Program();
+      prg.exit.meta = {
+        pos: {
+          x: 700,
+          y: 100
+        }
+      }
+      canvas.program = prg;
+    };
 
     newCanvas();
 

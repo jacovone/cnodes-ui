@@ -1896,7 +1896,9 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "connectionDone",
     value: function connectionDone(socketComp) {
-      this.canvas.connectionsEl.removeChild(_classPrivateFieldGet(this, _tempConnectionEl));
+      if (_classPrivateFieldGet(this, _tempConnectionEl)) {
+        this.canvas.connectionsEl.removeChild(_classPrivateFieldGet(this, _tempConnectionEl));
+      }
 
       _classPrivateFieldSet(this, _tempConnectionEl, null);
     }
@@ -3552,7 +3554,9 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
       var p = this.canvas.clientToSvgPoint(e.clientX, e.clientY);
       this.canvas.showContextMenu(items, p.x, p.y, function (socketComp) {
         if (!socketComp) {
-          _this2.canvas.connectionsEl.removeChild(_this2.tempConnectionEl);
+          if (_this2.tempConnectionEl) {
+            _this2.canvas.connectionsEl.removeChild(_this2.tempConnectionEl);
+          }
 
           _this2.tempConnectionEl = null;
         } else {
@@ -3848,10 +3852,13 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _classPrivateFieldSet(this, _inputValueElement, document.createElement("input"));
 
       _classPrivateFieldGet(this, _inputValueElement).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
+      /** Register value modifications */
 
       _classPrivateFieldGet(this, _inputValueElement).addEventListener("keyup", function (e) {
         _this2.socket.value = e.target.value;
       });
+      /** Prevent descendants management of the click (pan) and allow selection */
+
 
       _classPrivateFieldGet(this, _inputValueElement).addEventListener("pointerdown", function (e) {
         e.stopPropagation();

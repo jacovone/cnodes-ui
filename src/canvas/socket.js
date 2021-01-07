@@ -155,7 +155,11 @@ export class SocketComponent extends Component {
   onPointerMove(e) {
     if (this.#connecting) {
       // Test if a socket is pointed
-      let pointedComponent = this.canvas.componentFromPosition(e.clientX, e.clientY, true);
+      let pointedComponent = this.canvas.componentFromPosition(
+        e.clientX,
+        e.clientY,
+        true
+      );
 
       let p = this.canvas.clientToSvgPoint(e.clientX, e.clientY);
       if (pointedComponent) {
@@ -187,7 +191,10 @@ export class SocketComponent extends Component {
    * The user has began dragging the socket to create a connection
    */
   connectionStarted() {
-    this.#tempConnectionEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    this.#tempConnectionEl = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
 
     this.#tempConnectionEl.setAttribute(
       "d",
@@ -208,8 +215,12 @@ export class SocketComponent extends Component {
   connectionMoving(x, y, invalid) {
     let sourcePoint = new Position(this.absPos.x, this.absPos.y);
     let targetPoint = new Position(
-      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x,
-      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y
+      this.currentPeerSocketComponent
+        ? this.currentPeerSocketComponent.absPos.x
+        : x,
+      this.currentPeerSocketComponent
+        ? this.currentPeerSocketComponent.absPos.y
+        : y
     );
 
     this.#tempConnectionEl.setAttribute(
@@ -230,7 +241,9 @@ export class SocketComponent extends Component {
    * @param {SocketComponent} socketComp Peer socket to connect
    */
   connectionDone(socketComp) {
-    this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
+    if (this.#tempConnectionEl) {
+      this.canvas.connectionsEl.removeChild(this.#tempConnectionEl);
+    }
     this.#tempConnectionEl = null;
   }
 

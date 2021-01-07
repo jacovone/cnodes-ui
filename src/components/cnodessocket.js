@@ -56,7 +56,9 @@ export class CnodesSocketComponent extends SocketComponent {
     let p = this.canvas.clientToSvgPoint(e.clientX, e.clientY);
     this.canvas.showContextMenu(items, p.x, p.y, (socketComp) => {
       if (!socketComp) {
-        this.canvas.connectionsEl.removeChild(this.tempConnectionEl);
+        if (this.tempConnectionEl) {
+          this.canvas.connectionsEl.removeChild(this.tempConnectionEl);
+        }
         this.tempConnectionEl = null;
       } else {
         this.connectionDone(socketComp);
@@ -73,13 +75,30 @@ export class CnodesSocketComponent extends SocketComponent {
   connectionMoving(x, y, invalid) {
     let sourcePoint = new Position(this.absPos.x, this.absPos.y);
     let targetPoint = new Position(
-      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x,
-      this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y
+      this.currentPeerSocketComponent
+        ? this.currentPeerSocketComponent.absPos.x
+        : x,
+      this.currentPeerSocketComponent
+        ? this.currentPeerSocketComponent.absPos.y
+        : y
     );
 
-    let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-    let cp1 = sourcePoint.add(new Position(cpXDistance * this.getSourcePointDirection(), -0.1 * (sourcePoint.y - targetPoint.y)));
-    let cp2 = targetPoint.add(new Position(-cpXDistance * this.getSourcePointDirection(), 0.1 * (sourcePoint.y - targetPoint.y)));
+    let cpXDistance = Math.max(
+      0.8 * Math.abs(sourcePoint.x - targetPoint.x),
+      100
+    );
+    let cp1 = sourcePoint.add(
+      new Position(
+        cpXDistance * this.getSourcePointDirection(),
+        -0.1 * (sourcePoint.y - targetPoint.y)
+      )
+    );
+    let cp2 = targetPoint.add(
+      new Position(
+        -cpXDistance * this.getSourcePointDirection(),
+        0.1 * (sourcePoint.y - targetPoint.y)
+      )
+    );
 
     this.tempConnectionEl.setAttribute(
       "d",
@@ -89,7 +108,10 @@ export class CnodesSocketComponent extends SocketComponent {
     `
     );
 
-    this.tempConnectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_TEMP_WIDTH);
+    this.tempConnectionEl.setAttribute(
+      "stroke-width",
+      Theme.current.CONNECTION_TEMP_WIDTH
+    );
     this.tempConnectionEl.setAttribute(
       "stroke",
       invalid

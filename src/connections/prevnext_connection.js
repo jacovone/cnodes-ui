@@ -27,11 +27,21 @@ export class PrevNextConnection extends CnodesConnection {
    */
   updateSVGElement() {
     let sourcePoint = new Position(this.source.absPos.x, this.source.absPos.y);
-    let targetPoint = new Position(this.target.absPos.x - Theme.current.NODE_PREV_NEXT_POINT_RADIUS, this.target.absPos.y);
+    let targetPoint = new Position(
+      this.target.absPos.x - Theme.current.NODE_PREV_NEXT_POINT_RADIUS,
+      this.target.absPos.y
+    );
 
-    let cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-    let cp1 = sourcePoint.add(new Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-    let cp2 = targetPoint.add(new Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+    let cpXDistance = Math.max(
+      0.8 * Math.abs(sourcePoint.x - targetPoint.x),
+      Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100)
+    );
+    let cp1 = sourcePoint.add(
+      new Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y))
+    );
+    let cp2 = targetPoint.add(
+      new Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y))
+    );
 
     this.connectionEl.setAttribute(
       "d",
@@ -41,8 +51,14 @@ export class PrevNextConnection extends CnodesConnection {
     `
     );
 
-    this.connectionEl.setAttribute("stroke-width", Theme.current.CONNECTION_PREV_NEXT_WIDTH);
-    this.connectionEl.setAttribute("stroke", Theme.current.CONNECTION_PREV_NEXT_COLOR);
+    this.connectionEl.setAttribute(
+      "stroke-width",
+      Theme.current.CONNECTION_PREV_NEXT_WIDTH
+    );
+    this.connectionEl.setAttribute(
+      "stroke",
+      Theme.current.CONNECTION_PREV_NEXT_COLOR
+    );
     this.connectionEl.setAttribute("marker-end", "url(#prevnext-arrow)");
     this.connectionEl.setAttribute("fill", "transparent");
   }

@@ -49,11 +49,16 @@ export class NextSocketComponent extends CnodesSocketComponent {
     this.#socketSymbol.setAttribute(
       "d",
       `
-      M -7 -8
-      L 7 -8
-      L 12 0
-      L 7 8
-      L -7 8
+      M ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current
+        .NODE_PREV_NEXT_POINT_RADIUS}
+      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current
+        .NODE_PREV_NEXT_POINT_RADIUS}
+      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${
+        Theme.current.NODE_PREV_NEXT_POINT_RADIUS
+      }
+      L ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${
+        Theme.current.NODE_PREV_NEXT_POINT_RADIUS
+      }
       Z
       `
     );

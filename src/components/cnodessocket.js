@@ -85,18 +85,18 @@ export class CnodesSocketComponent extends SocketComponent {
 
     let cpXDistance = Math.max(
       0.8 * Math.abs(sourcePoint.x - targetPoint.x),
-      100
+      Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100)
     );
     let cp1 = sourcePoint.add(
       new Position(
         cpXDistance * this.getSourcePointDirection(),
-        -0.1 * (sourcePoint.y - targetPoint.y)
+        -0.3 * (sourcePoint.y - targetPoint.y)
       )
     );
     let cp2 = targetPoint.add(
       new Position(
         -cpXDistance * this.getSourcePointDirection(),
-        0.1 * (sourcePoint.y - targetPoint.y)
+        0.3 * (sourcePoint.y - targetPoint.y)
       )
     );
 

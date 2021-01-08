@@ -3576,9 +3576,9 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
     value: function connectionMoving(x, y, invalid) {
       var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(this.absPos.x, this.absPos.y);
       var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
-      var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(cpXDistance * this.getSourcePointDirection(), -0.1 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(-cpXDistance * this.getSourcePointDirection(), 0.1 * (sourcePoint.y - targetPoint.y)));
+      var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100));
+      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(cpXDistance * this.getSourcePointDirection(), -0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(-cpXDistance * this.getSourcePointDirection(), 0.3 * (sourcePoint.y - targetPoint.y)));
       this.tempConnectionEl.setAttribute("d", "\n      M ".concat(this.absPos.x, " ").concat(this.absPos.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
       this.tempConnectionEl.setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_WIDTH);
       this.tempConnectionEl.setAttribute("stroke", invalid ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_INVALID_COLOR : this.currentPeerSocketComponent ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_VALID_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_COLOR);
@@ -4200,7 +4200,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     value: function createElement() {
       _classPrivateFieldSet(this, _socketSymbol, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("d", "\n      M -7 -8\n      L 7 -8\n      L 12 0\n      L 7 8\n      L -7 8\n      Z\n      ");
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("d", "\n      M ".concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      Z\n      "));
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
 
@@ -5513,9 +5513,9 @@ var IOConnection = /*#__PURE__*/function (_CnodesConnection) {
     value: function updateSVGElement() {
       var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
       var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
-      var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+      var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100));
+      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y)));
       this.connectionEl.setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
       this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_IO_WIDTH);
       this.connectionEl.setAttribute("stroke", _components_cnodessocket__WEBPACK_IMPORTED_MODULE_2__.CnodesSocketComponent.getColorForType(this.getRelevantType(this.source.socket.type, this.target.socket.type)));
@@ -5604,9 +5604,9 @@ var PrevNextConnection = /*#__PURE__*/function (_CnodesConnection) {
     value: function updateSVGElement() {
       var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
       var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, this.target.absPos.y);
-      var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), 100);
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.1 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.1 * (sourcePoint.y - targetPoint.y)));
+      var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100));
+      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y)));
       this.connectionEl.setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
       this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_WIDTH);
       this.connectionEl.setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_COLOR);

@@ -67,7 +67,11 @@ export class CnodeComponent extends Component {
    */
   get height() {
     let leftSocketsHeight = this.node.inputs.length;
-    if (this.node.prev && this.node.nexts.length === 0 && this.node.outputs.length === 0) {
+    if (
+      this.node.prev &&
+      this.node.nexts.length === 0 &&
+      this.node.outputs.length === 0
+    ) {
       leftSocketsHeight++;
     }
     let rightSocketsHeight = this.node.outputs.length + this.node.nexts.length;
@@ -85,41 +89,76 @@ export class CnodeComponent extends Component {
    */
   createElement() {
     let nodeEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    this.#containerEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    this.#titleEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-    this.#symbolEl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    this.#signEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    this.#containerEl = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    this.#titleEl = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "foreignObject"
+    );
+    this.#symbolEl = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle"
+    );
+    this.#signEl = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
 
     nodeEl.appendChild(this.#containerEl);
     nodeEl.appendChild(this.#titleEl);
     nodeEl.appendChild(this.#symbolEl);
     nodeEl.appendChild(this.#signEl);
 
-    this.#titleEl.innerHTML = this.node.name;
+    this.#titleEl.innerHTML = this.node.title;
     this.#titleEl.style = `
       font: ${Theme.current.NODE_TITLE_FONT}; 
-      color: ${!this.node.functional ? Theme.current.NODE_TITLE_COLOR : Theme.current.NODE_FUNCTIONAL_TITLE_COLOR}; 
+      color: ${
+        !this.node.functional
+          ? Theme.current.NODE_TITLE_COLOR
+          : Theme.current.NODE_FUNCTIONAL_TITLE_COLOR
+      }; 
       text-align: center; 
       user-select: none`;
     this.#titleEl.setAttribute("x", Theme.current.NODE_BORDER_RADIUS * 0.5);
     this.#titleEl.setAttribute("y", Theme.current.NODE_BORDER_RADIUS * 0.5);
-    this.#titleEl.setAttribute("width", Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS * 0.5 * 2);
+    this.#titleEl.setAttribute(
+      "width",
+      Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS * 0.5 * 2
+    );
     this.#titleEl.setAttribute("height", 30);
 
     this.#containerEl.setAttribute(
       "stroke",
-      !this.node.functional ? Theme.current.NODE_STROKE_COLOR : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
+      !this.node.functional
+        ? Theme.current.NODE_STROKE_COLOR
+        : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
     );
-    this.#containerEl.setAttribute("stroke-width", Theme.current.NODE_STROKE_WIDTH);
-    this.#containerEl.setAttribute("fill", this.node.functional ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR : Theme.current.NODE_FILL_COLOR);
+    this.#containerEl.setAttribute(
+      "stroke-width",
+      Theme.current.NODE_STROKE_WIDTH
+    );
+    this.#containerEl.setAttribute(
+      "fill",
+      this.node.functional
+        ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
+        : Theme.current.NODE_FILL_COLOR
+    );
     this.#containerEl.setAttribute("x", "0");
     this.#containerEl.setAttribute("y", "0");
 
     this.#symbolEl.setAttribute("cx", 0);
     this.#symbolEl.setAttribute("cy", 0);
     this.#symbolEl.setAttribute("r", Theme.current.NODE_BORDER_RADIUS * 0.9);
-    this.#symbolEl.setAttribute("stroke", Theme.current.NODE_SYMBOL_STROKE_COLOR);
-    this.#symbolEl.setAttribute("stroke-width", Theme.current.NODE_SYMBOL_STROKE_WIDTH);
+    this.#symbolEl.setAttribute(
+      "stroke",
+      Theme.current.NODE_SYMBOL_STROKE_COLOR
+    );
+    this.#symbolEl.setAttribute(
+      "stroke-width",
+      Theme.current.NODE_SYMBOL_STROKE_WIDTH
+    );
     this.#symbolEl.setAttribute("fill", Theme.current.NODE_SYMBOL_FILL_COLOR);
 
     let signRadius = Theme.current.NODE_BORDER_RADIUS * 0.7;
@@ -141,9 +180,17 @@ export class CnodeComponent extends Component {
       L 0 ${+signRadius * 0.6}
       `
     );
-    this.#signEl.setAttribute("stroke", !this.node.functional ? Theme.current.NODE_SIGN_COLOR : Theme.current.NODE_FUNCTIONAL_SIGN_COLOR);
+    this.#signEl.setAttribute(
+      "stroke",
+      !this.node.functional
+        ? Theme.current.NODE_SIGN_COLOR
+        : Theme.current.NODE_FUNCTIONAL_SIGN_COLOR
+    );
     this.#signEl.setAttribute("stroke-width", !this.node.functional ? 1 : 3);
-    this.#signEl.setAttribute("fill", !this.node.functional ? Theme.current.NODE_SIGN_COLOR : "transparent");
+    this.#signEl.setAttribute(
+      "fill",
+      !this.node.functional ? Theme.current.NODE_SIGN_COLOR : "transparent"
+    );
     this.#signEl.setAttribute("stroke-linejoin", "null");
     this.#signEl.setAttribute("x", "0");
     this.#signEl.setAttribute("y", "0");
@@ -237,17 +284,25 @@ export class CnodeComponent extends Component {
       "d",
       `
       M 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 
-      A ${Theme.current.NODE_BORDER_RADIUS * 1.3} ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 0 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 
+      A ${Theme.current.NODE_BORDER_RADIUS * 1.3} ${
+        Theme.current.NODE_BORDER_RADIUS * 1.3
+      } 0 0 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 0 
       L ${Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS} 0 
-      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${Theme.current.NODE_WIDTH} ${
+      A ${Theme.current.NODE_BORDER_RADIUS} ${
         Theme.current.NODE_BORDER_RADIUS
+      } 0 0 1 ${Theme.current.NODE_WIDTH} ${Theme.current.NODE_BORDER_RADIUS} 
+      L ${Theme.current.NODE_WIDTH} ${
+        this.height - Theme.current.NODE_BORDER_RADIUS
       } 
-      L ${Theme.current.NODE_WIDTH} ${this.height - Theme.current.NODE_BORDER_RADIUS} 
-      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 ${
-        Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS
-      } ${this.height} 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${
+        Theme.current.NODE_BORDER_RADIUS
+      } 0 0 1 ${Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS} ${
+        this.height
+      } 
       L ${Theme.current.NODE_BORDER_RADIUS} ${this.height} 
-      A ${Theme.current.NODE_BORDER_RADIUS} ${Theme.current.NODE_BORDER_RADIUS} 0 0 1 0 ${this.height - Theme.current.NODE_BORDER_RADIUS} 
+      A ${Theme.current.NODE_BORDER_RADIUS} ${
+        Theme.current.NODE_BORDER_RADIUS
+      } 0 0 1 0 ${this.height - Theme.current.NODE_BORDER_RADIUS} 
       Z
       `
     );
@@ -273,50 +328,65 @@ export class CnodeComponent extends Component {
 
     if (this.node instanceof Program) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Edit...</tspan>`, () => {
-          this.canvas.pushProgram(this.node);
-        })
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Edit...</tspan>`,
+          () => {
+            this.canvas.pushProgram(this.node);
+          }
+        )
       );
     }
 
     // The node can add inputs?
     if (this.node.canAddInput) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Add input</tspan>`, () => {
-          this.node.addInput();
-          this.updateSVGElement();
-        })
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Add input</tspan>`,
+          () => {
+            this.node.addInput();
+            this.updateSVGElement();
+          }
+        )
       );
     }
 
     // The node can add inputs?
     if (this.node.canAddOutput) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Add output</tspan>`, () => {
-          this.node.addOutput();
-          this.updateSVGElement();
-        })
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Add output</tspan>`,
+          () => {
+            this.node.addOutput();
+            this.updateSVGElement();
+          }
+        )
       );
     }
 
     items.push(
-      new MenuItem(`<tspan alignment-baseline="middle">Disconnect all</tspan>`, () => {
-        for (let comp of this.components) {
-          if (comp instanceof SocketComponent && comp.isConnected) {
-            for (let conn of this.canvas.getConnectionsFor(comp)) {
-              this.canvas.removeConnection(conn);
+      new MenuItem(
+        `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
+        () => {
+          for (let comp of this.components) {
+            if (comp instanceof SocketComponent && comp.isConnected) {
+              for (let conn of this.canvas.getConnectionsFor(comp)) {
+                this.canvas.removeConnection(conn);
+              }
             }
           }
         }
-      })
+      )
     );
 
     // The node can be removed?
     if (this.node.removable) {
       items.push(
-        new MenuItem(`<tspan alignment-baseline="middle">Delete</tspan>`, () => {
-          this.canvas.removeComponent(this);
-        })
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Delete</tspan>`,
+          () => {
+            this.canvas.removeComponent(this);
+          }
+        )
       );
     }
 

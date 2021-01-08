@@ -2171,7 +2171,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       nodeEl.appendChild(_classPrivateFieldGet(this, _titleEl));
       nodeEl.appendChild(_classPrivateFieldGet(this, _symbolEl));
       nodeEl.appendChild(_classPrivateFieldGet(this, _signEl));
-      _classPrivateFieldGet(this, _titleEl).innerHTML = this.node.name;
+      _classPrivateFieldGet(this, _titleEl).innerHTML = this.node.title;
       _classPrivateFieldGet(this, _titleEl).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT, "; \n      color: ").concat(!this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR, "; \n      text-align: center; \n      user-select: none");
 
       _classPrivateFieldGet(this, _titleEl).setAttribute("x", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5);
@@ -2583,7 +2583,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     });
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 0 0 L 10 4 L 10 6 L 0 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
     _this.svgEl.appendChild(defsEl);
 
@@ -3659,6 +3659,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -3703,6 +3704,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -3942,9 +3944,35 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         _classPrivateFieldGet(this, _inputNameElement).value = "".concat(this.socket.name);
       } else {
         _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
-      }
+      } // Only boolean, strings, anys and numbers can be modidied via the
+      // input textbox
 
-      this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
+
+      if (this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.ANY || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.STRING || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.NUMBER) {
+        _classPrivateFieldGet(this, _inputValueElement).removeAttribute("disabled"); // Now update the internal socket value according to the
+        // text input box by parsing the text
+
+
+        switch (this.socket.type) {
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.NUMBER:
+            this.socket.value = parseFloat(_classPrivateFieldGet(this, _inputValueElement).value);
+            break;
+
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.STRING:
+            this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
+            break;
+
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.ANY:
+            this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
+            break;
+
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.BOOLEAN:
+            this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value === "true" ? true : false;
+            break;
+        }
+      } else {
+        _classPrivateFieldGet(this, _inputValueElement).setAttribute("disabled", "1");
+      }
     }
     /**
      * This method is responsible to enumerate all socket of registered nodes
@@ -6071,11 +6099,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
 /* harmony import */ var _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
 /* harmony import */ var _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6095,6 +6126,7 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -6266,6 +6298,88 @@ var Env = /*#__PURE__*/function () {
       }
     }
     /**
+     * Create helper maker nodes to support user with dealing with
+     * specific object structures. This method accepts optional
+     * options that let you specify what exactly create:
+     * {
+     *   recursive: true,
+     *   fillValues: true,
+     *   forceTypes: true
+     * }
+     *
+     * @param {any} obj The object structure to consider whiel create nodes
+     * @param {any} opts The options on create nodes
+     */
+
+  }, {
+    key: "registerMaker",
+    value: function registerMaker(name, obj) {
+      var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      /**
+       * This function will be registered as creator for
+       * instances of the OMake node for the user object
+       */
+      var createMake = function createMake() {
+        var makeNode = new _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.FOMake();
+        makeNode.title = name;
+        makeNode.inputs = [];
+
+        for (var field in obj) {
+          var is = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.InputSocket(field, makeNode, _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
+          is.canEditName = true;
+
+          switch (_typeof(obj[field])) {
+            case "string":
+              is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.STRING : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              is.value = opts.fillValues ? obj[field] : "";
+              break;
+
+            case "number":
+              is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.NUMBER : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              is.value = opts.fillValues ? obj[field] : opts.forceTypes ? 0 : "";
+              break;
+
+            case "boolean":
+              is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.BOOLEAN : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              is.value = opts.fillValues ? obj[field] : opts.forceTypes ? false : "";
+              break;
+
+            case "object":
+              if (obj[field] instanceof Array) {
+                is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ARRAY : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+                is.value = opts.fillValues ? obj[field] : opts.forceTypes ? [] : "";
+              } else if (obj[field] instanceof Object) {
+                is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.OBJECT : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+                is.value = opts.fillValues ? obj[field] : opts.forceTypes ? {} : "";
+              } else {
+                throw new Error("Unknown field type: " + field);
+              }
+
+              break;
+
+            default:
+              throw new Error("Unknown field type: " + field);
+          }
+
+          makeNode.inputs.push(is);
+        }
+
+        return makeNode;
+      }; // Reigister factory objects
+
+
+      Env.registerNode(name, "Custom", createMake);
+
+      if (opts.recursive) {
+        for (var field in obj) {
+          if (_typeof(obj[field]) === "object" && !(obj[field] instanceof Array)) {
+            Env.registerMaker(name + "." + field, obj[field], opts);
+          }
+        }
+      }
+    }
+    /**
      * Creates and returns a JSON representation of the entire program
      * @param {Program} program The program to export
      */
@@ -6293,6 +6407,7 @@ var Env = /*#__PURE__*/function () {
           var nodeExp = {
             id: node.id,
             name: node.name,
+            title: node.title,
             functional: node.functional,
             meta: node.meta,
             program: node instanceof _program_js__WEBPACK_IMPORTED_MODULE_0__.Program ? Env["export"](node) : undefined,
@@ -6523,6 +6638,7 @@ var Env = /*#__PURE__*/function () {
             throw new Error("Node type '".concat(nodeData.name, "' is not registered"));
           }
 
+          node.title = nodeData.title;
           node.id = nodeData.id;
           node.functional = nodeData.functional;
           node.meta = nodeData.meta;
@@ -6801,6 +6917,8 @@ var _id = new WeakMap();
 
 var _name = new WeakMap();
 
+var _title = new WeakMap();
+
 var _functional = new WeakMap();
 
 var _inputs = new WeakMap();
@@ -6832,6 +6950,8 @@ var Node = /*#__PURE__*/function () {
 
   /** The internal name of the node */
 
+  /** The external name of the node */
+
   /** Is this node a functional node? */
 
   /** List of node's inputs */
@@ -6856,6 +6976,8 @@ var Node = /*#__PURE__*/function () {
 
   /** Can the user add a next? */
   function Node(name) {
+    var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : name;
+
     _classCallCheck(this, Node);
 
     _id.set(this, {
@@ -6864,6 +6986,11 @@ var Node = /*#__PURE__*/function () {
     });
 
     _name.set(this, {
+      writable: true,
+      value: ""
+    });
+
+    _title.set(this, {
       writable: true,
       value: ""
     });
@@ -6929,6 +7056,8 @@ var Node = /*#__PURE__*/function () {
     });
 
     _classPrivateFieldSet(this, _name, name);
+
+    _classPrivateFieldSet(this, _title, title);
 
     _classPrivateFieldSet(this, _id, "NID_" + Node.lastNodeIdIndex++);
   }
@@ -7202,6 +7331,14 @@ var Node = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _name, val);
+    }
+  }, {
+    key: "title",
+    get: function get() {
+      return _classPrivateFieldGet(this, _title);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _title, val);
     }
   }, {
     key: "functional",

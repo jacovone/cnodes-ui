@@ -16,6 +16,7 @@ import { MenuItem } from "../canvas/menu";
 import { CnodeComponent } from "./cnode";
 import { Position } from "../canvas/position";
 import { OutputSocketComponent } from "./output";
+import { Types } from "@marco.jacovone/cnodes/lib/core/type";
 
 /**
  * This class implement a socket to draw a Input element
@@ -273,7 +274,37 @@ export class InputSocketComponent extends CnodesSocketComponent {
     } else {
       this.#labelElement.innerHTML = `${this.socket.name}`;
     }
-    this.socket.value = this.#inputValueElement.value;
+
+    // Only boolean, strings, anys and numbers can be modidied via the
+    // input textbox
+    if (
+      this.socket.type === Types.ANY ||
+      this.socket.type === Types.BOOLEAN ||
+      this.socket.type === Types.STRING ||
+      this.socket.type === Types.NUMBER
+    ) {
+      this.#inputValueElement.removeAttribute("disabled");
+
+      // Now update the internal socket value according to the
+      // text input box by parsing the text
+      switch (this.socket.type) {
+        case Types.NUMBER:
+          this.socket.value = parseFloat(this.#inputValueElement.value);
+          break;
+        case Types.STRING:
+          this.socket.value = this.#inputValueElement.value;
+          break;
+        case Types.ANY:
+          this.socket.value = this.#inputValueElement.value;
+          break;
+        case Types.BOOLEAN:
+          this.socket.value =
+            this.#inputValueElement.value === "true" ? true : false;
+          break;
+      }
+    } else {
+      this.#inputValueElement.setAttribute("disabled", "1");
+    }
   }
 
   /**
@@ -285,9 +316,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
    */
   getRegisteredPossiblePeers() {
     let items = [];
+
     for (let cat of Env.getCategories()) {
       for (let nodeDef of Env.getCategoryNodes(cat)) {
         // Instantiate the node to enumerate its sockets
+
         let n = Env.getInstance(nodeDef.name);
         if (n.creatable) {
           for (let out of n.outputs) {

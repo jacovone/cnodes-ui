@@ -16,6 +16,8 @@ import { Theme, defaultLight } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
 import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { Program } from "@marco.jacovone/cnodes/lib/core/program";
+import { FOBreak } from "@marco.jacovone/cnodes/lib/nodes/object/fobreak";
+import { CnodeBreakComponent } from "./components/nodes/cnodebreak";
 
 export {
   Canvas,
@@ -59,3 +61,4 @@ export function canvas(elId) {
 
 // register core custom nodes
 CnodesCanvas.registerNodeUI(new Program(), CnodeProgramComponent.instance);
+CnodesCanvas.registerNodeUI(new FOBreak(), CnodeBreakComponent.instance);

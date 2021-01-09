@@ -176,10 +176,13 @@ export class Theme {
     return 33;
   }
   get MENU_ITEM_FONT() {
-    return "font: bold 14px sans-serif";
+    return "font: 14px sans-serif";
+  }
+  get MENU_SPECIAL_ITEM_FONT() {
+    return "bold 14px sans-serif";
   }
   get MENU_ITEM_CATEGORY_FONT() {
-    return "font: bold 10px sans-serif";
+    return "bold 10px sans-serif";
   }
   get MENU_ITEM_COLOR() {
     return "black";

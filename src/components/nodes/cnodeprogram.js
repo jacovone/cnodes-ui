@@ -8,6 +8,7 @@
  */
 
 import { Program } from "@marco.jacovone/cnodes/lib/core/program";
+import { Theme } from "../..";
 import { MenuItem } from "../../canvas/menu";
 import { CnodeComponent } from "../cnode";
 
@@ -26,16 +27,14 @@ export class CnodeProgramComponent extends CnodeComponent {
   getContextMenuItems() {
     let items = super.getContextMenuItems() ?? [];
 
-    if (this.node instanceof Program) {
-      items.unshift(
-        new MenuItem(
-          `<tspan alignment-baseline="middle">Edit...</tspan>`,
-          () => {
-            this.canvas.pushProgram(this.node);
-          }
-        )
-      );
-    }
+    items.unshift(
+      new MenuItem(
+        `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_FONT}">Edit...</tspan>`,
+        () => {
+          this.canvas.pushProgram(this.node);
+        }
+      )
+    );
 
     return items.length ? items : null;
   }

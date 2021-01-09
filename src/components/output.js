@@ -215,6 +215,21 @@ export class OutputSocketComponent extends CnodesSocketComponent {
   }
 
   /**
+   * Update the component element according to x and y local coordinates,
+   * if this component is a child component, coordinates in canvas space
+   * are computed. In addition, this override will reflect the status of the
+   * socket by change the socket symbol according to the type
+   */
+  updateSVGElement() {
+    super.updateSVGElement();
+
+    this.#socketSymbol.setAttribute(
+      "fill",
+      CnodesSocketComponent.getColorForType(this.socket.type)
+    );
+  }
+
+  /**
    * This method is responsible to enumerate all socket of registered nodes
    * that can enstabilish a valid connection with this socket and construct
    * a menu items array thst define callback to create the related node and

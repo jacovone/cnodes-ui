@@ -5113,8 +5113,19 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
      */
 
   }, {
-    key: "getRegisteredPossiblePeers",
+    key: "updateSVGElement",
 
+    /**
+     * Update the component element according to x and y local coordinates,
+     * if this component is a child component, coordinates in canvas space
+     * are computed. In addition, this override will reflect the status of the
+     * socket by change the socket symbol according to the type
+     */
+    value: function updateSVGElement() {
+      _get(_getPrototypeOf(OutputSocketComponent.prototype), "updateSVGElement", this).call(this);
+
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+    }
     /**
      * This method is responsible to enumerate all socket of registered nodes
      * that can enstabilish a valid connection with this socket and construct
@@ -5122,6 +5133,9 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
      * return the particular socket. It is used by the smart connection process
      * via the context menu
      */
+
+  }, {
+    key: "getRegisteredPossiblePeers",
     value: function getRegisteredPossiblePeers() {
       var _this3 = this;
 
@@ -6690,7 +6704,7 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
       Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
       Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode);
-      Env.registerNode("FIf", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__.fifNode);
+      Env.registerNode("If (functional)", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__.fifNode);
       Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.setvarNode);
       Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.whileNode);
       Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.enterNode);
@@ -6798,6 +6812,7 @@ var Env = /*#__PURE__*/function () {
      *   recursive: true,
      *   fillValues: true,
      *   forceTypes: true
+     *   editableInputs: true
      * }
      *
      * @param {any} obj The object structure to consider whiel create nodes
@@ -6820,7 +6835,11 @@ var Env = /*#__PURE__*/function () {
 
         for (var field in obj) {
           var is = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.InputSocket(field, makeNode, _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
-          is.canEditName = true;
+
+          if (opts.editableInputs) {
+            is.canEditName = true;
+            is.canEditType = true;
+          }
 
           switch (_typeof(obj[field])) {
             case "string":
@@ -6905,6 +6924,7 @@ var Env = /*#__PURE__*/function () {
 
           if (opts.editableOutputs) {
             os.canEditName = true;
+            os.canEditType = true;
           }
 
           switch (_typeof(obj[field])) {
@@ -6960,6 +6980,7 @@ var Env = /*#__PURE__*/function () {
      *   recursive: true,
      *   fillValues: true,
      *   forceTypes: true,
+     *   editableInputs: true
      *   editableOutputs: true
      * }
      *

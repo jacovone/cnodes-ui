@@ -88,18 +88,21 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
-   * TODO
-   * @param {Node} node
-   * @param {Function} factory
+   * Register a UI class, that extends CnodeComponent for managing
+   * a specific node passed as parameter, by registering the instance
+   * in the canvas registry
+   * @param {Node} node The node instance (cnodes)
+   * @param {Function} factory The factory, that is a function that creates the UI component
    */
   static registerNodeUI(node, factory) {
     CnodesCanvas.#nodesUIRegistry.set(node.constructor.name, factory);
   }
 
   /**
-   * TODO
-   * @param {Node} node
-   * @param {CnodesCanvas} canvas
+   * Returns the instance of the UI component registered in the canvas registry
+   * that is able to manage a cnode specific instance passed as parameter
+   * @param {Node} node The node instance (cnodes)
+   * @param {CnodesCanvas} canvas The canvas instance, to create the node UI component
    */
   static getNodeUIInstance(node, canvas) {
     let factory = CnodesCanvas.#nodesUIRegistry.get(node.constructor.name);

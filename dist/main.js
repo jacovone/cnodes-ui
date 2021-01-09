@@ -3089,9 +3089,11 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       return _classPrivateFieldGet(this, _program);
     }
     /**
-     * TODO
-     * @param {Node} node
-     * @param {Function} factory
+     * Register a UI class, that extends CnodeComponent for managing
+     * a specific node passed as parameter, by registering the instance
+     * in the canvas registry
+     * @param {Node} node The node instance (cnodes)
+     * @param {Function} factory The factory, that is a function that creates the UI component
      */
     ,
 
@@ -3109,9 +3111,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       _classStaticPrivateFieldSpecGet(CnodesCanvas, CnodesCanvas, _nodesUIRegistry).set(node.constructor.name, factory);
     }
     /**
-     * TODO
-     * @param {Node} node
-     * @param {CnodesCanvas} canvas
+     * Returns the instance of the UI component registered in the canvas registry
+     * that is able to manage a cnode specific instance passed as parameter
+     * @param {Node} node The node instance (cnodes)
+     * @param {CnodesCanvas} canvas The canvas instance, to create the node UI component
      */
 
   }, {
@@ -6176,6 +6179,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FALength,
 /* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAMake,
 /* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAMap,
+/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAReduce,
 /* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAdd,
 /* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FCompare,
 /* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FConcat,
@@ -6216,6 +6220,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "falengthNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.falengthNode,
 /* harmony export */   "famakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.famakeNode,
 /* harmony export */   "famapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.famapNode,
+/* harmony export */   "fareduceNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fareduceNode,
 /* harmony export */   "fcompareNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fcompareNode,
 /* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fconcatNode,
 /* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fdivNode,
@@ -6372,10 +6377,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "famapNode": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__.famapNode,
 /* harmony export */   "AReduce": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__.AReduce,
 /* harmony export */   "areduceNode": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__.areduceNode,
-/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_31__.FOMake,
-/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_31__.fomakeNode,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_32__.FOBreak,
-/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_32__.fobreakNode
+/* harmony export */   "FAReduce": () => /* reexport safe */ _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_31__.FAReduce,
+/* harmony export */   "fareduceNode": () => /* reexport safe */ _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_31__.fareduceNode,
+/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_32__.FOMake,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_32__.fomakeNode,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_33__.FOBreak,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_33__.fobreakNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -6408,8 +6415,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
 /* harmony import */ var _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
 /* harmony import */ var _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./lib/nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
-/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
-/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
+/* harmony import */ var _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./lib/nodes/array/fareduce.js */ "../cnodes/lib/nodes/array/fareduce.js");
+/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
+/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 /**
  * cnodes
  *
@@ -6445,6 +6453,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Export arrays nodes
+
 
 
 
@@ -6607,6 +6616,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
 /* harmony import */ var _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
 /* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../nodes/array/fareduce.js */ "../cnodes/lib/nodes/array/fareduce.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -6633,6 +6643,7 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -6704,7 +6715,7 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
       Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
       Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode);
-      Env.registerNode("If (functional)", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__.fifNode);
+      Env.registerNode("FIf", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__.fifNode);
       Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.setvarNode);
       Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.whileNode);
       Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.enterNode);
@@ -6734,7 +6745,8 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.falengthNode);
       Env.registerNode("AMap", "Arrays", _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__.amapNode);
       Env.registerNode("FAMap", "Arrays", _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__.famapNode);
-      Env.registerNode("AReduce", "Arrays", _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__.areduceNode); // Object Nodes
+      Env.registerNode("AReduce", "Arrays", _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__.areduceNode);
+      Env.registerNode("FAReduce", "Arrays", _nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_39__.fareduceNode); // Object Nodes
 
       Env.registerNode("FOMake", "Objects", _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.fomakeNode);
       Env.registerNode("FOBreak", "Objects", _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.fobreakNode);
@@ -9396,7 +9408,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "AReduce");
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false, true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true)];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
@@ -9429,7 +9441,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
           if (_this2.next("Do").peer !== null && _this2.next("Do").peer.node !== null) {
             // Execute a sub program beginning on that node
             _this2.program.processFrom(_this2.next("Do").peer.node);
-          } // Now evaluate the "Mapped" input
+          } // Now evaluate the "Acc" input
 
 
           _this2.input("Acc").evaluate();
@@ -9439,8 +9451,12 @@ var AReduce = /*#__PURE__*/function (_Node) {
       } // Set the "Array" output
 
 
-      this.output("Val").value = reduced;
-      return this.getFlowResult(this.next("Out"));
+      this.output("Array").value = reduced;
+
+      if (!this.functional) {
+        // Set the "Array" output
+        return this.getFlowResult(this.next("Out"));
+      }
     }
   }]);
 
@@ -10006,7 +10022,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 /**
- * This is the functional version of the AMap node
+ * This is the functional version of the FAMap node
  */
 
 var FAMap = /*#__PURE__*/function (_AMap) {
@@ -10014,13 +10030,14 @@ var FAMap = /*#__PURE__*/function (_AMap) {
 
   var _super = _createSuper(FAMap);
 
-  function FAMap(name) {
+  function FAMap() {
     var _this;
 
     _classCallCheck(this, FAMap);
 
     _this = _super.call(this);
     _this.name = "FAMap";
+    _this.title = "FAMap";
     _this.functional = true;
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = null;
@@ -10035,6 +10052,82 @@ var FAMap = /*#__PURE__*/function (_AMap) {
 
 function famapNode() {
   return new FAMap();
+}
+
+/***/ }),
+
+/***/ "../cnodes/lib/nodes/array/fareduce.js":
+/*!*********************************************!*\
+  !*** ../cnodes/lib/nodes/array/fareduce.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FAReduce": () => /* binding */ FAReduce,
+/* harmony export */   "fareduceNode": () => /* binding */ fareduceNode
+/* harmony export */ });
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _areduce_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+/**
+ * This is the functional version of the FAReduce node
+ */
+
+var FAReduce = /*#__PURE__*/function (_AReduce) {
+  _inherits(FAReduce, _AReduce);
+
+  var _super = _createSuper(FAReduce);
+
+  function FAReduce() {
+    var _this;
+
+    _classCallCheck(this, FAReduce);
+
+    _this = _super.call(this);
+    _this.name = "FAReduce";
+    _this.title = "FAReduce";
+    _this.functional = true;
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = null;
+    return _this;
+  }
+
+  return FAReduce;
+}(_areduce_js__WEBPACK_IMPORTED_MODULE_1__.AReduce);
+/**
+ * Helper function to create the node
+ */
+
+function fareduceNode() {
+  return new FAReduce();
 }
 
 /***/ }),

@@ -233,15 +233,15 @@ export class OutputSocketComponent extends CnodesSocketComponent {
               items.push(
                 new MenuItem(
                   `
-                  <tspan alignment-baseline="middle" fill="${CnodesSocketComponent.getColorForType(
-                    inp.type
-                  )}" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}">
-                    ${inp.name}
-                  </tspan>
                   <tspan alignment-baseline="middle" style="${
                     Theme.current.MENU_ITEM_FONT
                   }" fill="${Theme.current.MENU_ITEM_COLOR}">
-                    ${nodeDef.name}
+                    ${nodeDef.name}.
+                  </tspan>
+                  <tspan alignment-baseline="middle" fill="${CnodesSocketComponent.getColorForType(
+                    inp.type
+                  )}" style="${Theme.current.MENU_ITEM_FONT}">
+                    ${inp.name}
                   </tspan>
                   <tspan alignment-baseline="middle" style="${
                     Theme.current.MENU_ITEM_CATEGORY_FONT
@@ -256,7 +256,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
                     node.pos = new Position(x, y);
                     // Return the connected component instead
                     return inp.__comp;
-                  }
+                  },
+                  `${nodeDef.name}.${inp.name} ${nodeDef.category}`
                 )
               );
             }

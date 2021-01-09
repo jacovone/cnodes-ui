@@ -17,6 +17,8 @@ import { InputSocketComponent } from "./input";
 import { MenuItem } from "../canvas/menu";
 import { SocketComponent } from "../canvas/socket";
 import { Program } from "@marco.jacovone/cnodes/cnodes";
+import { TextComponent } from "../canvas/text";
+import { CnodesTitleComponent } from "./cnodestitle";
 
 /**
  * This is the main class for managing a single CNode
@@ -29,14 +31,14 @@ export class CnodeComponent extends Component {
   /** An SVG element to draw the container of the node */
   #containerEl;
 
-  /** An SVG element to draw the title of the node */
-  #titleEl;
-
   /** An SVG element to draw the top-left symbol for the node */
   #symbolEl;
 
   /** An SVG element to draw the top-left sign for the node */
   #signEl;
+
+  /** A subcomponent for title */
+  #titleComp = null;
 
   constructor(node, canvas) {
     super();
@@ -59,6 +61,9 @@ export class CnodeComponent extends Component {
   get node() {
     return this.#node;
   }
+  get titleComp() {
+    return this.#titleComp;
+  }
 
   /**
    * Computes the node vertical size, based on node
@@ -78,7 +83,7 @@ export class CnodeComponent extends Component {
 
     return (
       Theme.current.NODE_BORDER_RADIUS * 0.5 +
-      40 + // Title
+      20 + // padding
       30 * (leftSocketsHeight + rightSocketsHeight) +
       15 // Padding
     );
@@ -93,10 +98,6 @@ export class CnodeComponent extends Component {
       "http://www.w3.org/2000/svg",
       "path"
     );
-    this.#titleEl = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "foreignObject"
-    );
     this.#symbolEl = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "circle"
@@ -105,29 +106,6 @@ export class CnodeComponent extends Component {
       "http://www.w3.org/2000/svg",
       "path"
     );
-
-    nodeEl.appendChild(this.#containerEl);
-    nodeEl.appendChild(this.#titleEl);
-    nodeEl.appendChild(this.#symbolEl);
-    nodeEl.appendChild(this.#signEl);
-
-    this.#titleEl.innerHTML = this.node.title;
-    this.#titleEl.style = `
-      font: ${Theme.current.NODE_TITLE_FONT}; 
-      color: ${
-        !this.node.functional
-          ? Theme.current.NODE_TITLE_COLOR
-          : Theme.current.NODE_FUNCTIONAL_TITLE_COLOR
-      }; 
-      text-align: center; 
-      user-select: none`;
-    this.#titleEl.setAttribute("x", Theme.current.NODE_BORDER_RADIUS * 0.5);
-    this.#titleEl.setAttribute("y", Theme.current.NODE_BORDER_RADIUS * 0.5);
-    this.#titleEl.setAttribute(
-      "width",
-      Theme.current.NODE_WIDTH - Theme.current.NODE_BORDER_RADIUS * 0.5 * 2
-    );
-    this.#titleEl.setAttribute("height", 30);
 
     this.#containerEl.setAttribute(
       "stroke",
@@ -198,6 +176,10 @@ export class CnodeComponent extends Component {
     nodeEl.setAttribute("x", "0");
     nodeEl.setAttribute("y", "0");
 
+    nodeEl.appendChild(this.#containerEl);
+    nodeEl.appendChild(this.#symbolEl);
+    nodeEl.appendChild(this.#signEl);
+
     return nodeEl;
   }
 
@@ -206,7 +188,21 @@ export class CnodeComponent extends Component {
    * representing input, outputs, prev and nexts.
    */
   updateSubcomponents() {
-    let posY = 40 + 0.5 * Theme.current.NODE_BORDER_RADIUS;
+    let posY = 30 + 0.5 * Theme.current.NODE_BORDER_RADIUS;
+
+    // Title
+    if (!this.#titleComp) {
+      this.#titleComp = new CnodesTitleComponent(this.node.title);
+      this.#titleComp.font = Theme.current.NODE_TITLE_FONT;
+
+      this.#titleComp.color = this.node.functional
+        ? Theme.current.NODE_FUNCTIONAL_TITLE_COLOR
+        : Theme.current.NODE_TITLE_COLOR;
+      this.#titleComp.pos = this.node.meta?.titlePos
+        ? new Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y)
+        : new Position(10 + Theme.current.NODE_BORDER_RADIUS, -8);
+      this.addComponent(this.#titleComp);
+    }
 
     // Prev
     if (this.node.prev) {

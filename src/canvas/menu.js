@@ -22,14 +22,18 @@ export class MenuItem {
   /** The text for the item */
   #text = "";
 
+  /** The text to consider during the search */
+  #searchText = "";
+
   /**
    * Constructs a menu item
    * @param {string} text Title of the menu item
    * @param {function} callback The callback function to call on click event
    */
-  constructor(text, callback) {
+  constructor(text, callback, searchText = text) {
     this.#text = text;
     this.#callback = callback;
+    this.#searchText = searchText;
   }
 
   get text() {
@@ -43,6 +47,12 @@ export class MenuItem {
   }
   set callback(val) {
     this.#callback = val;
+  }
+  get searchText() {
+    return this.#searchText;
+  }
+  set searchText(val) {
+    this.#searchText = val;
   }
 }
 

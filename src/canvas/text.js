@@ -12,8 +12,8 @@ import { Component } from "./component";
  * This is a sample component to draw a simple SVG Text
  */
 export class TextComponent extends Component {
-  /** Style of the text component */
-  #style = "style: 24px sans-serif;";
+  /** Font of the text component */
+  #font = "24px sans-serif;";
 
   /** Content of the component */
   #text = "";
@@ -23,15 +23,13 @@ export class TextComponent extends Component {
 
   constructor(text) {
     super();
+    super.setup();
     this.text = text;
-    this.#style = "24px sans-serif;";
-    this.componentEl.style = this.#style;
+    this.componentEl.style = "user-select: none; cursor: move";
     this.componentEl.setAttribute("fill", this.#color);
     this.componentEl.setAttribute("x", "0");
     this.componentEl.setAttribute("y", "0");
     this.componentEl.innerHTML = this.text;
-
-    super.setup();
   }
 
   get text() {
@@ -46,14 +44,14 @@ export class TextComponent extends Component {
   }
   set color(val) {
     this.#color = val;
-    this.componentEl.setAttribute("color", this.#color);
+    this.componentEl.setAttribute("fill", this.#color);
   }
-  get style() {
-    return this.#style;
+  get font() {
+    return this.#font;
   }
-  set style(val) {
-    this.#style = val;
-    this.componentEl.setAttribute("style", this.#style);
+  set font(val) {
+    this.#font = val;
+    this.componentEl.style["font"] = this.#font;
   }
 
   /**

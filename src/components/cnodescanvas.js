@@ -217,6 +217,9 @@ export class CnodesCanvas extends Canvas {
       } else {
         comp.pos = new Position(100, 100);
       }
+      if (n.meta.titlePos) {
+        comp.titleComp.pos = new Position(n.meta.titlePos.x, n.meta.titlePos.y);
+      }
     }
 
     // Setup connections

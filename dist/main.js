@@ -1356,10 +1356,14 @@ var _callback = new WeakMap();
 
 var _text = new WeakMap();
 
+var _searchText = new WeakMap();
+
 var MenuItem = /*#__PURE__*/function () {
   /** The "click" callback */
 
   /** The text for the item */
+
+  /** The text to consider during the search */
 
   /**
    * Constructs a menu item
@@ -1367,6 +1371,8 @@ var MenuItem = /*#__PURE__*/function () {
    * @param {function} callback The callback function to call on click event
    */
   function MenuItem(text, callback) {
+    var searchText = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : text;
+
     _classCallCheck(this, MenuItem);
 
     _callback.set(this, {
@@ -1379,9 +1385,16 @@ var MenuItem = /*#__PURE__*/function () {
       value: ""
     });
 
+    _searchText.set(this, {
+      writable: true,
+      value: ""
+    });
+
     _classPrivateFieldSet(this, _text, text);
 
     _classPrivateFieldSet(this, _callback, callback);
+
+    _classPrivateFieldSet(this, _searchText, searchText);
   }
 
   _createClass(MenuItem, [{
@@ -1399,6 +1412,14 @@ var MenuItem = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _callback, val);
+    }
+  }, {
+    key: "searchText",
+    get: function get() {
+      return _classPrivateFieldGet(this, _searchText);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _searchText, val);
     }
   }]);
 
@@ -1997,6 +2018,160 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/canvas/text.js":
+/*!****************************!*\
+  !*** ./src/canvas/text.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextComponent": () => /* binding */ TextComponent
+/* harmony export */ });
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+/**
+ * This is a sample component to draw a simple SVG Text
+ */
+
+var _font = new WeakMap();
+
+var _text = new WeakMap();
+
+var _color = new WeakMap();
+
+var TextComponent = /*#__PURE__*/function (_Component) {
+  _inherits(TextComponent, _Component);
+
+  var _super = _createSuper(TextComponent);
+
+  /** Font of the text component */
+
+  /** Content of the component */
+
+  /** Color of the text */
+  function TextComponent(text) {
+    var _thisSuper, _this;
+
+    _classCallCheck(this, TextComponent);
+
+    _this = _super.call(this);
+
+    _font.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: "24px sans-serif;"
+    });
+
+    _text.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: ""
+    });
+
+    _color.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: "black"
+    });
+
+    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(TextComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
+
+    _this.text = text;
+    _this.componentEl.style = "user-select: none; cursor: move";
+
+    _this.componentEl.setAttribute("fill", _classPrivateFieldGet(_assertThisInitialized(_this), _color));
+
+    _this.componentEl.setAttribute("x", "0");
+
+    _this.componentEl.setAttribute("y", "0");
+
+    _this.componentEl.innerHTML = _this.text;
+    return _this;
+  }
+
+  _createClass(TextComponent, [{
+    key: "createElement",
+
+    /**
+     * Lets create the element
+     */
+    value: function createElement() {
+      var textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      return textEl;
+    }
+  }, {
+    key: "text",
+    get: function get() {
+      return _classPrivateFieldGet(this, _text);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _text, val);
+
+      this.componentEl.innerHTML = _classPrivateFieldGet(this, _text);
+    }
+  }, {
+    key: "color",
+    get: function get() {
+      return _classPrivateFieldGet(this, _color);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _color, val);
+
+      this.componentEl.setAttribute("fill", _classPrivateFieldGet(this, _color));
+    }
+  }, {
+    key: "font",
+    get: function get() {
+      return _classPrivateFieldGet(this, _font);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _font, val);
+
+      this.componentEl.style["font"] = _classPrivateFieldGet(this, _font);
+    }
+  }]);
+
+  return TextComponent;
+}(_component__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/***/ }),
+
 /***/ "./src/components/cnode.js":
 /*!*********************************!*\
   !*** ./src/components/cnode.js ***!
@@ -2017,6 +2192,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _canvas_text__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../canvas/text */ "./src/canvas/text.js");
+/* harmony import */ var _cnodestitle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cnodestitle */ "./src/components/cnodestitle.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2071,6 +2248,8 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
 
 
 
+
+
 /**
  * This is the main class for managing a single CNode
  * inside the cnodes-ui canvas. It embed a cnodes node instance
@@ -2080,11 +2259,11 @@ var _node = new WeakMap();
 
 var _containerEl = new WeakMap();
 
-var _titleEl = new WeakMap();
-
 var _symbolEl = new WeakMap();
 
 var _signEl = new WeakMap();
+
+var _titleComp = new WeakMap();
 
 var CnodeComponent = /*#__PURE__*/function (_Component) {
   _inherits(CnodeComponent, _Component);
@@ -2095,11 +2274,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
   /** An SVG element to draw the container of the node */
 
-  /** An SVG element to draw the title of the node */
-
   /** An SVG element to draw the top-left symbol for the node */
 
   /** An SVG element to draw the top-left sign for the node */
+
+  /** A subcomponent for title */
   function CnodeComponent(node, canvas) {
     var _thisSuper, _this;
 
@@ -2117,11 +2296,6 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       value: void 0
     });
 
-    _titleEl.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: void 0
-    });
-
     _symbolEl.set(_assertThisInitialized(_this), {
       writable: true,
       value: void 0
@@ -2130,6 +2304,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     _signEl.set(_assertThisInitialized(_this), {
       writable: true,
       value: void 0
+    });
+
+    _titleComp.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
     });
 
     _classPrivateFieldSet(_assertThisInitialized(_this), _node, node); // write a back-reference
@@ -2161,26 +2340,9 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       _classPrivateFieldSet(this, _containerEl, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldSet(this, _titleEl, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
-
       _classPrivateFieldSet(this, _symbolEl, document.createElementNS("http://www.w3.org/2000/svg", "circle"));
 
       _classPrivateFieldSet(this, _signEl, document.createElementNS("http://www.w3.org/2000/svg", "path"));
-
-      nodeEl.appendChild(_classPrivateFieldGet(this, _containerEl));
-      nodeEl.appendChild(_classPrivateFieldGet(this, _titleEl));
-      nodeEl.appendChild(_classPrivateFieldGet(this, _symbolEl));
-      nodeEl.appendChild(_classPrivateFieldGet(this, _signEl));
-      _classPrivateFieldGet(this, _titleEl).innerHTML = this.node.title;
-      _classPrivateFieldGet(this, _titleEl).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT, "; \n      color: ").concat(!this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR, "; \n      text-align: center; \n      user-select: none");
-
-      _classPrivateFieldGet(this, _titleEl).setAttribute("x", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5);
-
-      _classPrivateFieldGet(this, _titleEl).setAttribute("y", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5);
-
-      _classPrivateFieldGet(this, _titleEl).setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5 * 2);
-
-      _classPrivateFieldGet(this, _titleEl).setAttribute("height", 30);
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
 
@@ -2222,6 +2384,9 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       nodeEl.setAttribute("x", "0");
       nodeEl.setAttribute("y", "0");
+      nodeEl.appendChild(_classPrivateFieldGet(this, _containerEl));
+      nodeEl.appendChild(_classPrivateFieldGet(this, _symbolEl));
+      nodeEl.appendChild(_classPrivateFieldGet(this, _signEl));
       return nodeEl;
     }
     /**
@@ -2232,7 +2397,19 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "updateSubcomponents",
     value: function updateSubcomponents() {
-      var posY = 40 + 0.5 * _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Prev
+      var posY = 30 + 0.5 * _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Title
+
+      if (!_classPrivateFieldGet(this, _titleComp)) {
+        var _this$node$meta;
+
+        _classPrivateFieldSet(this, _titleComp, new _cnodestitle__WEBPACK_IMPORTED_MODULE_11__.CnodesTitleComponent(this.node.title));
+
+        _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
+        _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
+        _classPrivateFieldGet(this, _titleComp).pos = (_this$node$meta = this.node.meta) !== null && _this$node$meta !== void 0 && _this$node$meta.titlePos ? new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y) : new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, -8);
+        this.addComponent(_classPrivateFieldGet(this, _titleComp));
+      } // Prev
+
 
       if (this.node.prev) {
         var nComp = this.node.prev.__comp;
@@ -2448,6 +2625,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     get: function get() {
       return _classPrivateFieldGet(this, _node);
     }
+  }, {
+    key: "titleComp",
+    get: function get() {
+      return _classPrivateFieldGet(this, _titleComp);
+    }
     /**
      * Computes the node vertical size, based on node
      * characteristics in terms of number of input, output,
@@ -2464,7 +2646,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       }
 
       var rightSocketsHeight = this.node.outputs.length + this.node.nexts.length;
-      return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5 + 40 + // Title
+      return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5 + 20 + // padding
       30 * (leftSocketsHeight + rightSocketsHeight) + 15 // Padding
       ;
     }
@@ -2737,6 +2919,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
             comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(n.meta.pos.x, n.meta.pos.y);
           } else {
             comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(100, 100);
+          }
+
+          if (n.meta.titlePos) {
+            comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
           }
         } // Setup connections
 
@@ -3302,15 +3488,14 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
     value: function createMenuItemsElements() {
       var _this3 = this;
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      Z\n      "));
-
       while (_classPrivateFieldGet(this, _itemsEls).length > 0) {
         this.componentEl.removeChild(_classPrivateFieldGet(this, _itemsEls)[0].itemEl);
         this.componentEl.removeChild(_classPrivateFieldGet(this, _itemsEls)[0].itemTextEl);
 
         _classPrivateFieldGet(this, _itemsEls).splice(0, 1);
-      } // Create menu items
+      }
 
+      var maxWidth = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH; // Create menu items
 
       var _iterator = _createForOfIteratorHelper(this.filteredElements.entries()),
           _step;
@@ -3321,29 +3506,25 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
               i = _step$value[0],
               item = _step$value[1];
 
+          var itemEl = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          var itemTextEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
           var itemX = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
           var itemY = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS + _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT * (i + 1);
-          var itemWidth = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH - 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
-          var itemHeight = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT;
-          var itemEl = document.createElementNS("http://www.w3.org/2000/svg", "rect");
           itemEl.setAttribute("x", itemX);
           itemEl.setAttribute("y", itemY);
-          itemEl.setAttribute("width", itemWidth);
-          itemEl.setAttribute("height", itemHeight);
-          itemEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT);
-          itemEl.setAttribute("stroke", "transparent");
-          itemEl.setAttribute("stroke-width", 0);
-          itemEl.setAttribute("fill", "transparent");
-          var itemTextEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
           itemTextEl.setAttribute("x", itemX + 5);
           itemTextEl.setAttribute("y", itemY + _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT / 2);
-          itemTextEl.setAttribute("width", itemWidth - 10);
-          itemTextEl.setAttribute("height", itemHeight - 10);
           itemTextEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT); // itemTextEl.setAttribute("alignment-baseline", "middle");
 
           itemTextEl.style["pointer-events"] = "none";
           itemTextEl.style["user-select"] = "none";
           itemTextEl.innerHTML = item.text;
+
+          _this3.componentEl.appendChild(itemEl);
+
+          _this3.componentEl.appendChild(itemTextEl); // Set event listeners
+
+
           itemEl.addEventListener("pointerenter", function (e) {
             itemEl.setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HIGHLIGHT);
           });
@@ -3364,11 +3545,9 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
             }
 
             _this3.canvas.cancelContextMenu();
-          });
+          }); // Compute text sizes
 
-          _this3.componentEl.appendChild(itemEl);
-
-          _this3.componentEl.appendChild(itemTextEl);
+          maxWidth = Math.max(itemTextEl.getBBox().width + 10 + 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, maxWidth); // register items
 
           _classPrivateFieldGet(_this3, _itemsEls).push({
             itemEl: itemEl,
@@ -3378,12 +3557,44 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           _loop();
-        }
+        } // Now adjust geometry to size
+
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
+
+      var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _itemsEls).entries()),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _step2$value = _slicedToArray(_step2.value, 2),
+              i = _step2$value[0],
+              item = _step2$value[1];
+
+          var itemEl = item.itemEl;
+          var itemTextEl = item.itemTextEl;
+          var itemWidth = maxWidth - 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
+          var itemHeight = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT;
+          itemTextEl.setAttribute("width", itemWidth - 10);
+          itemTextEl.setAttribute("height", itemHeight - 10);
+          itemEl.setAttribute("width", itemWidth);
+          itemEl.setAttribute("height", itemHeight);
+          itemEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT);
+          itemEl.setAttribute("stroke", "transparent");
+          itemEl.setAttribute("stroke-width", 0);
+          itemEl.setAttribute("fill", "transparent");
+        } // Update container geometry
+
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(maxWidth - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(maxWidth, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      L ").concat(maxWidth, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(maxWidth - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      Z\n      "));
     }
   }, {
     key: "searchFilter",
@@ -3409,7 +3620,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
       var _this4 = this;
 
       var filterElems = this.items.filter(function (i, idx) {
-        return i.text.toUpperCase().includes(_this4.searchFilter.toUpperCase());
+        return i.searchText.toUpperCase().includes(_this4.searchFilter.toUpperCase());
       });
       return filterElems.filter(function (i, idx) {
         return idx <= 10;
@@ -3637,6 +3848,96 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
 
   return CnodesSocketComponent;
 }(_canvas_socket__WEBPACK_IMPORTED_MODULE_3__.SocketComponent);
+
+/***/ }),
+
+/***/ "./src/components/cnodestitle.js":
+/*!***************************************!*\
+  !*** ./src/components/cnodestitle.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CnodesTitleComponent": () => /* binding */ CnodesTitleComponent
+/* harmony export */ });
+/* harmony import */ var _canvas_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/text */ "./src/canvas/text.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+/**
+ * This is a sample component to draw a simple SVG Text
+ */
+
+var CnodesTitleComponent = /*#__PURE__*/function (_TextComponent) {
+  _inherits(CnodesTitleComponent, _TextComponent);
+
+  var _super = _createSuper(CnodesTitleComponent);
+
+  function CnodesTitleComponent(text) {
+    _classCallCheck(this, CnodesTitleComponent);
+
+    return _super.call(this, text);
+  }
+  /**
+   * Update the component element according to x and y local coordinates,
+   * This method was overridden in order to register meta info
+   */
+
+
+  _createClass(CnodesTitleComponent, [{
+    key: "updateSVGElement",
+    value: function updateSVGElement() {
+      _get(_getPrototypeOf(CnodesTitleComponent.prototype), "updateSVGElement", this).call(this); // Update UI data in meta info
+
+
+      if (this.parent) {
+        if (!this.parent.node.meta) {
+          this.parent.node.meta = {};
+        }
+
+        this.parent.node.meta.titlePos = {
+          x: this.pos.x,
+          y: this.pos.y
+        };
+      }
+    }
+  }]);
+
+  return CnodesTitleComponent;
+}(_canvas_text__WEBPACK_IMPORTED_MODULE_0__.TextComponent);
 
 /***/ }),
 
@@ -4015,14 +4316,14 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
                     // Create an item only if the input in "compatible" with this output
                     if (_this3.socket.node.canBeConnected(_this3.socket, out)) {
-                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" fill=\"".concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
+                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
                         var node = new _cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent(n, _this3.canvas);
                         node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_7__.Position(x, y); // Return the connected component instead
 
                         return out.__comp;
-                      }));
+                      }, "".concat(nodeDef.name, ".").concat(out.name, " ").concat(nodeDef.category)));
                     }
                   };
 
@@ -4334,14 +4635,14 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable && n.prev) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
                   // create the node and return the specific socket component to
                   // the context menu client
                   var node = new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(n, _this2.canvas);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(x, y); // Return the connected component instead
 
                   return n.prev.__comp;
-                }));
+                }, "".concat(nodeDef.name, ".").concat(n.prev.name, " ").concat(nodeDef.category)));
               }
             };
 
@@ -4693,14 +4994,14 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
                     // Create an item only if the input in "compatible" with this output
                     if (_this3.socket.node.canBeConnected(_this3.socket, inp)) {
-                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" fill=\"".concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
+                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
                         var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this3.canvas);
                         node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
                         return inp.__comp;
-                      }));
+                      }, "".concat(nodeDef.name, ".").concat(inp.name, " ").concat(nodeDef.category)));
                     }
                   };
 
@@ -5037,14 +5338,14 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 try {
                   var _loop2 = function _loop2() {
                     var next = _step3.value;
-                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
+                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, ".\n                </tspan>\n                <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
                       // create the node and return the specific socket component to
                       // the context menu client
                       var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this2.canvas);
                       node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
                       return next.__comp;
-                    }));
+                    }, "".concat(nodeDef.name, ".").concat(next.name, " ").concat(nodeDef.category)));
                   };
 
                   for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -6378,6 +6679,103 @@ var Env = /*#__PURE__*/function () {
           }
         }
       }
+    }
+    /**
+     * Create helper breaker nodes to support user with dealing with
+     * specific object structures. This method accepts optional
+     * options that let you specify what exactly create:
+     * {
+     *   recursive: true,
+     *   forceTypes: true
+     * }
+     *
+     * @param {any} obj The object structure to consider whiel create nodes
+     * @param {any} opts The options on create nodes
+     */
+
+  }, {
+    key: "registerBreaker",
+    value: function registerBreaker(name, obj) {
+      var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      /**
+       * This function will be registered as creator for
+       * instances of the OBreak node for the user object
+       */
+      var createBreak = function createBreak() {
+        var breakNode = new _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.FOBreak();
+        breakNode.title = name;
+        breakNode.outputs = [];
+
+        for (var field in obj) {
+          var os = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(field, breakNode, _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
+          os.canEditName = true;
+
+          switch (_typeof(obj[field])) {
+            case "string":
+              os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.STRING : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              break;
+
+            case "number":
+              os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.NUMBER : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              break;
+
+            case "boolean":
+              os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.BOOLEAN : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              break;
+
+            case "object":
+              if (obj[field] instanceof Array) {
+                os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ARRAY : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              } else if (obj[field] instanceof Object) {
+                os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.OBJECT : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              } else {
+                throw new Error("Unknown field type: " + field);
+              }
+
+              break;
+
+            default:
+              throw new Error("Unknown field type: " + field);
+          }
+
+          breakNode.outputs.push(os);
+        }
+
+        return breakNode;
+      }; // Reigister factory objects
+
+
+      Env.registerNode(name, "Custom", createBreak);
+
+      if (opts.recursive) {
+        for (var field in obj) {
+          if (_typeof(obj[field]) === "object" && !(obj[field] instanceof Array)) {
+            Env.registerBreaker(name + "." + field, obj[field], opts);
+          }
+        }
+      }
+    }
+    /**
+     * Create both helper maker and breaker nodes to support user with dealing with
+     * specific object structures. This method accepts optional
+     * options that let you specify what exactly create:
+     * {
+     *   recursive: true,
+     *   fillValues: true,
+     *   forceTypes: true
+     * }
+     *
+     * @param {any} obj The object structure to consider whiel create nodes
+     * @param {any} opts The options on create nodes
+     */
+
+  }, {
+    key: "registerObject",
+    value: function registerObject(name, obj) {
+      var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      Env.registerMaker("Make " + name, obj, opts);
+      Env.registerBreaker("Break " + name, obj, opts);
     }
     /**
      * Creates and returns a JSON representation of the entire program

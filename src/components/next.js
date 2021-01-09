@@ -172,11 +172,11 @@ export class NextSocketComponent extends CnodesSocketComponent {
           items.push(
             new MenuItem(
               `
-              <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}">
-                ${n.prev.name}
-              </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
-              ${nodeDef.name}
+              ${nodeDef.name}.
+              </tspan>
+              <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}" style="${Theme.current.MENU_ITEM_FONT}">
+                ${n.prev.name}
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
               ${nodeDef.category}
@@ -189,7 +189,8 @@ export class NextSocketComponent extends CnodesSocketComponent {
                 node.pos = new Position(x, y);
                 // Return the connected component instead
                 return n.prev.__comp;
-              }
+              },
+              `${nodeDef.name}.${n.prev.name} ${nodeDef.category}`
             )
           );
         }

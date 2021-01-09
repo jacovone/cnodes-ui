@@ -9,6 +9,7 @@
 
 import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { Program } from "@marco.jacovone/cnodes/cnodes";
+import { Node } from "@marco.jacovone/cnodes/lib/core/node";
 import { Canvas } from "../canvas/canvas";
 import { MenuItem } from "../canvas/menu";
 import { Position } from "../canvas/position";
@@ -23,6 +24,9 @@ import { Theme } from "./theme";
  * relative to a cnodes program.
  */
 export class CnodesCanvas extends Canvas {
+  /** The static registry of (cnodes NDOE) <--> (CnodeComponent) map */
+  static #nodesUIRegistry = new Map();
+
   /** The edited program */
   #program = null;
 
@@ -81,6 +85,29 @@ export class CnodesCanvas extends Canvas {
 
   get program() {
     return this.#program;
+  }
+
+  /**
+   * TODO
+   * @param {Node} node
+   * @param {Function} factory
+   */
+  static registerNodeUI(node, factory) {
+    CnodesCanvas.#nodesUIRegistry.set(node.constructor.name, factory);
+  }
+
+  /**
+   * TODO
+   * @param {Node} node
+   * @param {CnodesCanvas} canvas
+   */
+  static getNodeUIInstance(node, canvas) {
+    let factory = CnodesCanvas.#nodesUIRegistry.get(node.constructor.name);
+    if (factory) {
+      return factory(node, canvas);
+    } else {
+      return new CnodeComponent(node, canvas);
+    }
   }
 
   /**
@@ -144,7 +171,7 @@ export class CnodesCanvas extends Canvas {
               </tspan>
               `,
               (x, y) => {
-                let node = new CnodeComponent(n, this);
+                let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
               }
             )
@@ -205,7 +232,7 @@ export class CnodesCanvas extends Canvas {
 
     // Import the program
     for (let n of program.nodes) {
-      let comp = new CnodeComponent(n, this);
+      let comp = CnodesCanvas.getNodeUIInstance(n, this);
       comp.moveable = true;
 
       // Extract meta info

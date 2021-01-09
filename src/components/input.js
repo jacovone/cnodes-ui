@@ -13,10 +13,10 @@ import { IOConnection } from "../connections/io_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { SocketComponent } from "../canvas/socket";
 import { MenuItem } from "../canvas/menu";
-import { CnodeComponent } from "./cnode";
 import { Position } from "../canvas/position";
 import { OutputSocketComponent } from "./output";
 import { Types } from "@marco.jacovone/cnodes/lib/core/type";
+import { CnodesCanvas } from "./cnodescanvas";
 
 /**
  * This class implement a socket to draw a Input element
@@ -116,6 +116,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
       this.#inputNameElement.addEventListener("keyup", (e) => {
         this.socket.name = e.target.value;
+      });
+
+      /** Prevent descendants management of the click (pan) and allow selection */
+      this.#inputNameElement.addEventListener("pointerdown", (e) => {
+        e.stopPropagation();
       });
 
       this.#inputNameElement.setAttribute("value", this.socket.name);
@@ -264,6 +269,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
   updateSVGElement() {
     super.updateSVGElement();
 
+    this.#socketSymbol.setAttribute(
+      "fill",
+      CnodesSocketComponent.getColorForType(this.socket.type)
+    );
+
     // Show/Hide the imput component
     this.#inputValueElement.style["display"] = this.isConnected
       ? "none"
@@ -348,7 +358,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
                   (x, y) => {
                     // create the node and return the specific socket component to
                     // the context menu client
-                    let node = new CnodeComponent(n, this.canvas);
+                    let node = CnodesCanvas.getNodeUIInstance(n, this.canvas);
                     node.pos = new Position(x, y);
                     // Return the connected component instead
                     return out.__comp;
@@ -398,6 +408,60 @@ export class InputSocketComponent extends CnodesSocketComponent {
             this.socket.node.removeInput(this.socket);
             this.parent.removeComponent(this);
             this.parent.updateSVGElement();
+          }
+        )
+      );
+    }
+    if (this.socket.canEditType) {
+      items.push(
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_NUMBER_COLOR}">NUMBER</tspan>
+          `,
+          () => {
+            this.socket.type = Types.NUMBER;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_STRING_COLOR}">STRING</tspan>
+          `,
+          () => {
+            this.socket.type = Types.STRING;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_BOOLEAN_COLOR}">BOOLEAN</tspan>
+          `,
+          () => {
+            this.socket.type = Types.BOOLEAN;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_ARRAY_COLOR}">ARRAY</tspan>
+          `,
+          () => {
+            this.socket.type = Types.ARRAY;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_OBJECT_COLOR}">OBJECT</tspan>
+          `,
+          () => {
+            this.socket.type = Types.OBJECT;
+            this.updateSVGElement();
           }
         )
       );

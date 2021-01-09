@@ -2191,9 +2191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
-/* harmony import */ var _canvas_text__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../canvas/text */ "./src/canvas/text.js");
-/* harmony import */ var _cnodestitle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cnodestitle */ "./src/components/cnodestitle.js");
+/* harmony import */ var _cnodestitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodestitle */ "./src/components/cnodestitle.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2238,8 +2236,6 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020
  */
-
-
 
 
 
@@ -2402,7 +2398,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       if (!_classPrivateFieldGet(this, _titleComp)) {
         var _this$node$meta;
 
-        _classPrivateFieldSet(this, _titleComp, new _cnodestitle__WEBPACK_IMPORTED_MODULE_11__.CnodesTitleComponent(this.node.title));
+        _classPrivateFieldSet(this, _titleComp, new _cnodestitle__WEBPACK_IMPORTED_MODULE_9__.CnodesTitleComponent(this.node.title));
 
         _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
         _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
@@ -2538,14 +2534,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     value: function getContextMenuItems() {
       var _this2 = this;
 
-      var items = [];
-
-      if (this.node instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_9__.Program) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Edit...</tspan>", function () {
-          _this2.canvas.pushProgram(_this2.node);
-        }));
-      } // The node can add inputs?
-
+      var items = []; // The node can add inputs?
 
       if (this.node.canAddInput) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add input</tspan>", function () {
@@ -2668,14 +2657,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CnodesCanvas": () => /* binding */ CnodesCanvas
 /* harmony export */ });
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
-/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
-/* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_node__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/node */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
+/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
+/* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
+/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
+/* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2710,6 +2700,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
 
+function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
 function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
 
 /**
@@ -2720,6 +2712,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -2744,6 +2737,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
   var _super = _createSuper(CnodesCanvas);
 
+  /** The static registry of (cnodes NDOE) <--> (CnodeComponent) map */
+
   /** The edited program */
 
   /** The stack of edited programs */
@@ -2765,7 +2760,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     });
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
     _this.svgEl.appendChild(defsEl);
 
@@ -2802,7 +2797,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var items = [];
 
       if (this.canPopProgram()) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_COLOR, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this2.popProgram();
         }));
       }
@@ -2823,9 +2818,9 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_8__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
-                  var node = new _cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent(n, _this2);
-                  node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(x, y);
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
+                  var node = CnodesCanvas.getNodeUIInstance(n, _this2);
+                  node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(x, y);
                 }));
               }
             };
@@ -2882,7 +2877,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           this.cancelContextMenu();
         }
 
-        this.contextMenuComponent = new _cnodesmenu__WEBPACK_IMPORTED_MODULE_7__.CnodesMenu(this, items);
+        this.contextMenuComponent = new _cnodesmenu__WEBPACK_IMPORTED_MODULE_8__.CnodesMenu(this, items);
         this.contextMenuComponent.menuCallback = menuCallback;
         this.contextMenuComponent.show(x, y);
       }
@@ -2908,7 +2903,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           var n = _step3.value;
-          var comp = new _cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent(n, this);
+          var comp = CnodesCanvas.getNodeUIInstance(n, this);
           comp.moveable = true; // Extract meta info
 
           if (!n.meta) {
@@ -2916,13 +2911,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           }
 
           if (n.meta.pos) {
-            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(n.meta.pos.x, n.meta.pos.y);
+            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(n.meta.pos.x, n.meta.pos.y);
           } else {
-            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(100, 100);
+            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(100, 100);
           }
 
           if (n.meta.titlePos) {
-            comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_3__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
+            comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
           }
         } // Setup connections
 
@@ -2950,7 +2945,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                 if (!this.alreadyConnected(peer.__comp, _n.prev.__comp)) {
                   // Create connection component
-                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_5__.PrevNextConnection(peer.__comp, _n.prev.__comp, this);
+                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(peer.__comp, _n.prev.__comp, this);
                 }
               }
             } catch (err) {
@@ -2971,7 +2966,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (next.peer) {
                 if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
                   // Create connection component
-                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_5__.PrevNextConnection(next.__comp, next.peer.__comp, this);
+                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(next.__comp, next.peer.__comp, this);
                 }
               }
             } // Setup inputs
@@ -2992,7 +2987,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (inp.peer) {
                 if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
                   // Create connection component
-                  new _connections_io_connection__WEBPACK_IMPORTED_MODULE_4__.IOConnection(inp.peer.__comp, inp.__comp, this);
+                  new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(inp.peer.__comp, inp.__comp, this);
                 }
               }
             } // Setup outputs
@@ -3020,7 +3015,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                     if (!this.alreadyConnected(outp.__comp, _peer.__comp)) {
                       // Create connection component
-                      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_4__.IOConnection(outp.__comp, _peer.__comp, this);
+                      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(outp.__comp, _peer.__comp, this);
                     }
                   }
                 } catch (err) {
@@ -3094,18 +3089,50 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       return _classPrivateFieldGet(this, _program);
     }
     /**
-     * This setter is a trigger for the import procedure
+     * TODO
+     * @param {Node} node
+     * @param {Function} factory
      */
     ,
+
+    /**
+     * This setter is a trigger for the import procedure
+     */
     set: function set(val) {
       this.importCnodesProgram(val);
 
       _classPrivateFieldSet(this, _program, val);
     }
+  }], [{
+    key: "registerNodeUI",
+    value: function registerNodeUI(node, factory) {
+      _classStaticPrivateFieldSpecGet(CnodesCanvas, CnodesCanvas, _nodesUIRegistry).set(node.constructor.name, factory);
+    }
+    /**
+     * TODO
+     * @param {Node} node
+     * @param {CnodesCanvas} canvas
+     */
+
+  }, {
+    key: "getNodeUIInstance",
+    value: function getNodeUIInstance(node, canvas) {
+      var factory = _classStaticPrivateFieldSpecGet(CnodesCanvas, CnodesCanvas, _nodesUIRegistry).get(node.constructor.name);
+
+      if (factory) {
+        return factory(node, canvas);
+      } else {
+        return new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(node, canvas);
+      }
+    }
   }]);
 
   return CnodesCanvas;
-}(_canvas_canvas__WEBPACK_IMPORTED_MODULE_1__.Canvas);
+}(_canvas_canvas__WEBPACK_IMPORTED_MODULE_2__.Canvas);
+var _nodesUIRegistry = {
+  writable: true,
+  value: new Map()
+};
 
 /***/ }),
 
@@ -3957,10 +3984,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
-/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
+/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -4121,6 +4148,12 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         _classPrivateFieldGet(this, _inputNameElement).addEventListener("keyup", function (e) {
           _this2.socket.name = e.target.value;
         });
+        /** Prevent descendants management of the click (pan) and allow selection */
+
+
+        _classPrivateFieldGet(this, _inputNameElement).addEventListener("pointerdown", function (e) {
+          e.stopPropagation();
+        });
 
         _classPrivateFieldGet(this, _inputNameElement).setAttribute("value", this.socket.name);
 
@@ -4208,7 +4241,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp instanceof _output__WEBPACK_IMPORTED_MODULE_8__.OutputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
+      return socketComp instanceof _output__WEBPACK_IMPORTED_MODULE_7__.OutputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
     }
     /**
      * This socket supports single connection, so if the user
@@ -4236,7 +4269,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      _get(_getPrototypeOf(InputSocketComponent.prototype), "updateSVGElement", this).call(this); // Show/Hide the imput component
+      _get(_getPrototypeOf(InputSocketComponent.prototype), "updateSVGElement", this).call(this);
+
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type)); // Show/Hide the imput component
 
 
       _classPrivateFieldGet(this, _inputValueElement).style["display"] = this.isConnected ? "none" : "table-cell";
@@ -4249,25 +4284,25 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       // input textbox
 
 
-      if (this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.ANY || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.STRING || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.NUMBER) {
+      if (this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING || this.socket.type === _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER) {
         _classPrivateFieldGet(this, _inputValueElement).removeAttribute("disabled"); // Now update the internal socket value according to the
         // text input box by parsing the text
 
 
         switch (this.socket.type) {
-          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.NUMBER:
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER:
             this.socket.value = parseFloat(_classPrivateFieldGet(this, _inputValueElement).value);
             break;
 
-          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.STRING:
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING:
             this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
             break;
 
-          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.ANY:
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY:
             this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
             break;
 
-          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_9__.Types.BOOLEAN:
+          case _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN:
             this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value === "true" ? true : false;
             break;
         }
@@ -4319,8 +4354,8 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
-                        var node = new _cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent(n, _this3.canvas);
-                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_7__.Position(x, y); // Return the connected component instead
+                        var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_9__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
+                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
                         return out.__comp;
                       }, "".concat(nodeDef.name, ".").concat(out.name, " ").concat(nodeDef.category)));
@@ -4396,6 +4431,30 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         }));
       }
 
+      if (this.socket.canEditType) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
+
+          _this4.updateSVGElement();
+        }));
+      }
+
       return items.length > 0 ? items : null;
     }
   }, {
@@ -4433,6 +4492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
+/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -4477,6 +4537,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -4638,7 +4699,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
                   // create the node and return the specific socket component to
                   // the context menu client
-                  var node = new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(n, _this2.canvas);
+                  var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_8__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(x, y); // Return the connected component instead
 
                   return n.prev.__comp;
@@ -4704,6 +4765,102 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 /***/ }),
 
+/***/ "./src/components/nodes/cnodeprogram.js":
+/*!**********************************************!*\
+  !*** ./src/components/nodes/cnodeprogram.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CnodeProgramComponent": () => /* binding */ CnodeProgramComponent
+/* harmony export */ });
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/program */ "../cnodes/lib/core/program.js");
+/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
+/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
+  _inherits(CnodeProgramComponent, _CnodeComponent);
+
+  var _super = _createSuper(CnodeProgramComponent);
+
+  // Factory function
+  function CnodeProgramComponent(node, canvas) {
+    _classCallCheck(this, CnodeProgramComponent);
+
+    return _super.call(this, node, canvas);
+  }
+  /**
+   * Returns the array of context menu items. This node gets
+   * the base node items, and add the action of edit internal program
+   */
+
+
+  _createClass(CnodeProgramComponent, [{
+    key: "getContextMenuItems",
+    value: function getContextMenuItems() {
+      var _get$call,
+          _this = this;
+
+      var items = (_get$call = _get(_getPrototypeOf(CnodeProgramComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
+
+      if (this.node instanceof _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_0__.Program) {
+        items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\">Edit...</tspan>", function () {
+          _this.canvas.pushProgram(_this.node);
+        }));
+      }
+
+      return items.length ? items : null;
+    }
+  }]);
+
+  return CnodeProgramComponent;
+}(_cnode__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
+
+_defineProperty(CnodeProgramComponent, "instance", function (node, canvas) {
+  return new CnodeProgramComponent(node, canvas);
+});
+
+/***/ }),
+
 /***/ "./src/components/output.js":
 /*!**********************************!*\
   !*** ./src/components/output.js ***!
@@ -4719,9 +4876,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
+/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -4766,6 +4924,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -4935,7 +5094,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp instanceof _input__WEBPACK_IMPORTED_MODULE_7__.InputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
+      return socketComp instanceof _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
     }
     /**
      * Returns the direction of the source point for this socket component:
@@ -4997,8 +5156,8 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
-                        var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this3.canvas);
-                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
+                        var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
+                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y); // Return the connected component instead
 
                         return inp.__comp;
                       }, "".concat(nodeDef.name, ".").concat(inp.name, " ").concat(nodeDef.category)));
@@ -5100,6 +5259,30 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         }));
       }
 
+      if (this.socket.canEditType) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
+
+          _this4.updateSVGElement();
+        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
+
+          _this4.updateSVGElement();
+        }));
+      }
+
       return items.length > 0 ? items : null;
     }
   }, {
@@ -5136,6 +5319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -5180,6 +5364,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 
 
@@ -5341,7 +5526,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                     items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, ".\n                </tspan>\n                <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
                       // create the node and return the specific socket component to
                       // the context menu client
-                      var node = new _cnode__WEBPACK_IMPORTED_MODULE_5__.CnodeComponent(n, _this2.canvas);
+                      var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
                       node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
                       return next.__comp;
@@ -5961,88 +6146,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Component": () => /* reexport safe */ _canvas_component__WEBPACK_IMPORTED_MODULE_1__.Component,
 /* harmony export */   "CnodeComponent": () => /* reexport safe */ _components_cnode__WEBPACK_IMPORTED_MODULE_3__.CnodeComponent,
 /* harmony export */   "Position": () => /* reexport safe */ _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position,
-/* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_4__.Theme,
-/* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_4__.defaultLight,
-/* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__.CnodesCanvas,
-/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.AMap,
-/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.APush,
-/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.AReduce,
-/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Call,
-/* harmony export */   "Comparision": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Comparision,
-/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Console,
-/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Env,
-/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAConst,
-/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAGet,
-/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FALength,
-/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAMake,
-/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAMap,
-/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FAdd,
-/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FCompare,
-/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FConcat,
-/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FDiv,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FGetvar,
-/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FIf,
-/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMod,
-/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FMul,
-/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FNConst,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FOBreak,
-/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FOMake,
-/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSConst,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FSqrt,
-/* harmony export */   "FlowSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.FlowSocket,
-/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.For,
-/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Getvar,
-/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.If,
-/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.InputSocket,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.NextSocket,
-/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Node,
-/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.OutputSocket,
-/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.PrevSocket,
-/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Program,
-/* harmony export */   "Result": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Result,
-/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Setvar,
-/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Socket,
-/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Types,
-/* harmony export */   "ValueSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.ValueSocket,
-/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.While,
-/* harmony export */   "amapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.amapNode,
-/* harmony export */   "apushNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.apushNode,
-/* harmony export */   "areduceNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.areduceNode,
-/* harmony export */   "callNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.callNode,
-/* harmony export */   "consoleNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
-/* harmony export */   "faconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.faconstNode,
-/* harmony export */   "faddNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.faddNode,
-/* harmony export */   "fagetNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fagetNode,
-/* harmony export */   "falengthNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.falengthNode,
-/* harmony export */   "famakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.famakeNode,
-/* harmony export */   "famapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.famapNode,
-/* harmony export */   "fcompareNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fcompareNode,
-/* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fconcatNode,
-/* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fdivNode,
-/* harmony export */   "fgetvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fgetvarNode,
-/* harmony export */   "fifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fifNode,
-/* harmony export */   "fmodNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmodNode,
-/* harmony export */   "fmulNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fmulNode,
-/* harmony export */   "fnconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fnconstNode,
-/* harmony export */   "fobreakNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fobreakNode,
-/* harmony export */   "fomakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fomakeNode,
-/* harmony export */   "forNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.forNode,
-/* harmony export */   "fsconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsconstNode,
-/* harmony export */   "fsqrtNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.fsqrtNode,
-/* harmony export */   "getvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.getvarNode,
-/* harmony export */   "ifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.ifNode,
-/* harmony export */   "program": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.program,
-/* harmony export */   "setvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.setvarNode,
-/* harmony export */   "whileNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.whileNode,
+/* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_5__.Theme,
+/* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_5__.defaultLight,
+/* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_6__.CnodesCanvas,
+/* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_4__.CnodeProgramComponent,
+/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.AMap,
+/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.APush,
+/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.AReduce,
+/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Call,
+/* harmony export */   "Comparision": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Comparision,
+/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Console,
+/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Env,
+/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAConst,
+/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAGet,
+/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FALength,
+/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAMake,
+/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAMap,
+/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FAdd,
+/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FCompare,
+/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FConcat,
+/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FDiv,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FGetvar,
+/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FIf,
+/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FMod,
+/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FMul,
+/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FNConst,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FOBreak,
+/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FOMake,
+/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FSConst,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FSqrt,
+/* harmony export */   "FlowSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.FlowSocket,
+/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.For,
+/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Getvar,
+/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.If,
+/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.InputSocket,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.NextSocket,
+/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Node,
+/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.OutputSocket,
+/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.PrevSocket,
+/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Program,
+/* harmony export */   "Result": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Result,
+/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Setvar,
+/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Socket,
+/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Types,
+/* harmony export */   "ValueSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.ValueSocket,
+/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.While,
+/* harmony export */   "amapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.amapNode,
+/* harmony export */   "apushNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.apushNode,
+/* harmony export */   "areduceNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.areduceNode,
+/* harmony export */   "callNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.callNode,
+/* harmony export */   "consoleNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.consoleNode,
+/* harmony export */   "faconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.faconstNode,
+/* harmony export */   "faddNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.faddNode,
+/* harmony export */   "fagetNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fagetNode,
+/* harmony export */   "falengthNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.falengthNode,
+/* harmony export */   "famakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.famakeNode,
+/* harmony export */   "famapNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.famapNode,
+/* harmony export */   "fcompareNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fcompareNode,
+/* harmony export */   "fconcatNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fconcatNode,
+/* harmony export */   "fdivNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fdivNode,
+/* harmony export */   "fgetvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fgetvarNode,
+/* harmony export */   "fifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fifNode,
+/* harmony export */   "fmodNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fmodNode,
+/* harmony export */   "fmulNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fmulNode,
+/* harmony export */   "fnconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fnconstNode,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fobreakNode,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fomakeNode,
+/* harmony export */   "forNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.forNode,
+/* harmony export */   "fsconstNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fsconstNode,
+/* harmony export */   "fsqrtNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.fsqrtNode,
+/* harmony export */   "getvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.getvarNode,
+/* harmony export */   "ifNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.ifNode,
+/* harmony export */   "program": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.program,
+/* harmony export */   "setvarNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.setvarNode,
+/* harmony export */   "whileNode": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.whileNode,
 /* harmony export */   "canvas": () => /* binding */ canvas
 /* harmony export */ });
 /* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas/canvas */ "./src/canvas/canvas.js");
 /* harmony import */ var _canvas_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canvas/component */ "./src/canvas/component.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _components_cnode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/cnode */ "./src/components/cnode.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
-/* harmony import */ var _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/nodes/cnodeprogram */ "./src/components/nodes/cnodeprogram.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
+/* harmony import */ var _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/cnodescanvas */ "./src/components/cnodescanvas.js");
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/program */ "../cnodes/lib/core/program.js");
 /**
  * cnodes-ui
  *
@@ -6051,6 +6239,8 @@ __webpack_require__.r(__webpack_exports__);
  * Author: Marco Jacovone
  * Year: 2020
  */
+
+
 
 
 
@@ -6086,9 +6276,11 @@ function canvas(elId) {
     return null;
   }
 
-  _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_6__.Env.init();
-  return new _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_5__.CnodesCanvas(el);
-}
+  _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Env.init();
+  return new _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_6__.CnodesCanvas(el);
+} // register core custom nodes
+
+_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_6__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_8__.Program(), _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_4__.CnodeProgramComponent.instance);
 
 /***/ }),
 
@@ -6686,7 +6878,8 @@ var Env = /*#__PURE__*/function () {
      * options that let you specify what exactly create:
      * {
      *   recursive: true,
-     *   forceTypes: true
+     *   forceTypes: true,
+     *   editableOutputs: true
      * }
      *
      * @param {any} obj The object structure to consider whiel create nodes
@@ -6709,7 +6902,10 @@ var Env = /*#__PURE__*/function () {
 
         for (var field in obj) {
           var os = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(field, breakNode, _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
-          os.canEditName = true;
+
+          if (opts.editableOutputs) {
+            os.canEditName = true;
+          }
 
           switch (_typeof(obj[field])) {
             case "string":
@@ -6763,7 +6959,8 @@ var Env = /*#__PURE__*/function () {
      * {
      *   recursive: true,
      *   fillValues: true,
-     *   forceTypes: true
+     *   forceTypes: true,
+     *   editableOutputs: true
      * }
      *
      * @param {any} obj The object structure to consider whiel create nodes
@@ -8285,6 +8482,8 @@ var _value = new WeakMap();
 
 var _canEditName = new WeakMap();
 
+var _canEditType = new WeakMap();
+
 var ValueSocket = /*#__PURE__*/function (_Socket) {
   _inherits(ValueSocket, _Socket);
 
@@ -8304,6 +8503,12 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
    * sockets, and can configure values (or connection) for each input as well
    * as the name of each socket, that whill be the name of the field in the structure.
    * This type of socket should be represented as a text field in a UI library.
+   */
+
+  /**
+   * Some input/output sockets needs to change their type.
+   * Nodes are responsible to configure this behavior of
+   * sockets during the construction
    */
 
   /**
@@ -8334,6 +8539,11 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
     });
 
     _canEditName.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: false
+    });
+
+    _canEditType.set(_assertThisInitialized(_this), {
       writable: true,
       value: false
     });
@@ -8377,6 +8587,14 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _canEditName, val);
+    }
+  }, {
+    key: "canEditType",
+    get: function get() {
+      return _classPrivateFieldGet(this, _canEditType);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _canEditType, val);
     }
   }]);
 
@@ -11980,6 +12198,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var o = _step.value;
         o.canEditName = true;
+        o.canEditType = true;
       }
     } catch (err) {
       _iterator.e(err);
@@ -12027,6 +12246,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
       if (this.canAddOutput) {
         var o = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
         o.canEditName = true;
+        o.canEditType = true;
         this.outputs.push(o);
       } else {
         throw new Error("Can't add output!");
@@ -12159,6 +12379,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var i = _step.value;
         i.canEditName = true;
+        i.canEditType = true;
       }
     } catch (err) {
       _iterator.e(err);
@@ -12208,6 +12429,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
     value: function addInput() {
       var is = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
       is.canEditName = true;
+      is.canEditType = true;
       this.inputs.push(is);
     }
     /**

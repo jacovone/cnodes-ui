@@ -12,9 +12,10 @@ import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { IOConnection } from "../connections/io_connection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { MenuItem } from "../canvas/menu";
-import { CnodeComponent } from "./cnode";
 import { Position } from "../canvas/position";
 import { InputSocketComponent } from "./input";
+import { CnodesCanvas } from "./cnodescanvas";
+import { Types } from "@marco.jacovone/cnodes/lib/core/type";
 
 /**
  * This class implements a socket representing a Output in the
@@ -252,7 +253,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
                   (x, y) => {
                     // create the node and return the specific socket component to
                     // the context menu client
-                    let node = new CnodeComponent(n, this.canvas);
+                    let node = CnodesCanvas.getNodeUIInstance(n, this.canvas);
                     node.pos = new Position(x, y);
                     // Return the connected component instead
                     return inp.__comp;
@@ -306,6 +307,61 @@ export class OutputSocketComponent extends CnodesSocketComponent {
             this.socket.node.removeOutput(this.socket);
             this.parent.removeComponent(this);
             this.parent.updateSVGElement();
+          }
+        )
+      );
+    }
+
+    if (this.socket.canEditType) {
+      items.push(
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_NUMBER_COLOR}">NUMBER</tspan>
+          `,
+          () => {
+            this.socket.type = Types.NUMBER;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_STRING_COLOR}">STRING</tspan>
+          `,
+          () => {
+            this.socket.type = Types.STRING;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_BOOLEAN_COLOR}">BOOLEAN</tspan>
+          `,
+          () => {
+            this.socket.type = Types.BOOLEAN;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_ARRAY_COLOR}">ARRAY</tspan>
+          `,
+          () => {
+            this.socket.type = Types.ARRAY;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_OBJECT_COLOR}">OBJECT</tspan>
+          `,
+          () => {
+            this.socket.type = Types.OBJECT;
+            this.updateSVGElement();
           }
         )
       );

@@ -16,6 +16,7 @@ import { CnodesSocketComponent } from "./cnodessocket";
 import { SocketComponent } from "../canvas/socket";
 import { MenuItem } from "../canvas/menu";
 import { CnodeComponent } from "./cnode";
+import { CnodesCanvas } from "./cnodescanvas";
 
 /**
  * This class implements a socket representing the Next socket in the
@@ -185,7 +186,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
               (x, y) => {
                 // create the node and return the specific socket component to
                 // the context menu client
-                let node = new CnodeComponent(n, this.canvas);
+                let node = CnodesCanvas.getNodeUIInstance(n, this.canvas);
                 node.pos = new Position(x, y);
                 // Return the connected component instead
                 return n.prev.__comp;

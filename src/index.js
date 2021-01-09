@@ -11,11 +11,22 @@ import { Canvas } from "./canvas/canvas";
 import { Component } from "./canvas/component";
 import { Position } from "./canvas/position";
 import { CnodeComponent } from "./components/cnode";
+import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
 import { Theme, defaultLight } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
 import { Env } from "@marco.jacovone/cnodes/cnodes";
+import { Program } from "@marco.jacovone/cnodes/lib/core/program";
 
-export { Canvas, Component, CnodeComponent, Position, Theme, defaultLight, CnodesCanvas };
+export {
+  Canvas,
+  Component,
+  CnodeComponent,
+  Position,
+  Theme,
+  defaultLight,
+  CnodesCanvas,
+  CnodeProgramComponent,
+};
 
 export * from "@marco.jacovone/cnodes/cnodes";
 
@@ -45,3 +56,6 @@ export function canvas(elId) {
   Env.init();
   return new CnodesCanvas(el);
 }
+
+// register core custom nodes
+CnodesCanvas.registerNodeUI(new Program(), CnodeProgramComponent.instance);

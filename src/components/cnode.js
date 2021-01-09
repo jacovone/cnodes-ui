@@ -16,8 +16,6 @@ import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
 import { MenuItem } from "../canvas/menu";
 import { SocketComponent } from "../canvas/socket";
-import { Program } from "@marco.jacovone/cnodes/cnodes";
-import { TextComponent } from "../canvas/text";
 import { CnodesTitleComponent } from "./cnodestitle";
 
 /**
@@ -321,17 +319,6 @@ export class CnodeComponent extends Component {
    */
   getContextMenuItems() {
     let items = [];
-
-    if (this.node instanceof Program) {
-      items.push(
-        new MenuItem(
-          `<tspan alignment-baseline="middle">Edit...</tspan>`,
-          () => {
-            this.canvas.pushProgram(this.node);
-          }
-        )
-      );
-    }
 
     // The node can add inputs?
     if (this.node.canAddInput) {

@@ -11168,6 +11168,7 @@ var FEqual = /*#__PURE__*/function (_FCompare) {
 
     _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.EQUAL);
     _this.name = "FEqual";
+    _this.title = "==";
     return _this;
   }
 
@@ -11239,6 +11240,7 @@ var FGT = /*#__PURE__*/function (_FCompare) {
 
     _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GT);
     _this.name = "FGT";
+    _this.title = ">";
     return _this;
   }
 
@@ -11310,6 +11312,7 @@ var FGTE = /*#__PURE__*/function (_FCompare) {
 
     _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GTE);
     _this.name = "FGTE";
+    _this.title = ">=";
     return _this;
   }
 
@@ -11381,6 +11384,7 @@ var FLT = /*#__PURE__*/function (_FCompare) {
 
     _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LT);
     _this.name = "FLT";
+    _this.title = "<";
     return _this;
   }
 
@@ -11452,6 +11456,7 @@ var FLTE = /*#__PURE__*/function (_FCompare) {
 
     _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LTE);
     _this.name = "FLTE";
+    _this.title = "<=";
     return _this;
   }
 
@@ -11523,6 +11528,7 @@ var FNotEqual = /*#__PURE__*/function (_FCompare) {
 
     _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.NOT_EQUAL);
     _this.name = "FNotEqual";
+    _this.title = "!=";
     return _this;
   }
 

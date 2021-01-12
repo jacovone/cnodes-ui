@@ -1270,7 +1270,17 @@ var Component = /*#__PURE__*/function () {
   /** The list of eventual child components */
 
   /**
-   * Events connected to the component
+   * Events connected to the component:
+   *
+   * This attribute emits following events:
+   *
+   * - cnui:change(comp), when something changes inside component, comp
+   *   is the entire component passed as event parameter
+   * - cnui:componentAdded(comp, subComp), when a component is added as a child,
+   *   comp is this component, while subComp is the component being added
+   * - cnui:componentRemoved(comp, subComp), when a component is from children,
+   *   comp is this component, while subComp is the component being removed
+   * - cnui:destroy(comp), when the component is destroyed. comp is this component
    */
   function Component() {
     _classCallCheck(this, Component);
@@ -1448,6 +1458,7 @@ var Component = /*#__PURE__*/function () {
       component.canvas = this.canvas;
       this.svgEl.appendChild(component.componentEl);
       component.updateSVGElement();
+      this.events.emit("cnui:componentAdded", this, component);
     }
     /**
      * Remove a child subcomponent
@@ -1462,6 +1473,7 @@ var Component = /*#__PURE__*/function () {
       });
       component.destroy();
       this.svgEl.removeChild(component.componentEl);
+      this.events.emit("cnui:componentRemoved", this, component);
     }
     /**
      * This method is called when this component is removed
@@ -1477,6 +1489,7 @@ var Component = /*#__PURE__*/function () {
       this.components.forEach(function (c) {
         return _this.removeComponent(c);
       });
+      this.events.emit("cnui:destroy", this);
     }
   }, {
     key: "pos",

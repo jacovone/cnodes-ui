@@ -9,7 +9,7 @@
 
 import { Theme } from "./theme";
 import { Env } from "@marco.jacovone/cnodes/cnodes";
-import { IOConnection } from "../connections/io_connection";
+import { IOConnection } from "../connections/ioconnection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { SocketComponent } from "../canvas/socket";
 import { MenuItem } from "../canvas/menu";

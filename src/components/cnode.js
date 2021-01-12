@@ -38,6 +38,9 @@ export class CnodeComponent extends Component {
   /** A subcomponent for title */
   #titleComp = null;
 
+  /** A subcomponent for comment */
+  #commentComp = null;
+
   constructor(node, canvas) {
     super();
     this.#node = node;
@@ -390,6 +393,33 @@ export class CnodeComponent extends Component {
           `<tspan alignment-baseline="middle">Delete</tspan>`,
           () => {
             this.canvas.removeComponent(this);
+          }
+        )
+      );
+    }
+
+    if (!this.#commentComp) {
+      items.push(
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Add comment</tspan>`,
+          () => {
+            this.#commentComp = new CnodesEditableTextComponent(
+              "comment"
+            ).setup();
+            this.#commentComp.font = Theme.current.NODE_COMMENT_FONT;
+            this.#commentComp.color = Theme.current.NODE_COMMENT_COLOR;
+            this.#commentComp.pos = new Position(0, this.height + 30);
+            this.addComponent(this.#commentComp);
+          }
+        )
+      );
+    } else {
+      items.push(
+        new MenuItem(
+          `<tspan alignment-baseline="middle">Remove comment</tspan>`,
+          () => {
+            this.removeComponent(this.#commentComp);
+            this.#commentComp = null;
           }
         )
       );

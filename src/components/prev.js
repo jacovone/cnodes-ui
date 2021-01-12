@@ -10,7 +10,7 @@
 import { NextSocket } from "@marco.jacovone/cnodes/cnodes";
 import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { Theme } from "./theme";
-import { PrevNextConnection } from "../connections/prevnext_connection";
+import { PrevNextConnection } from "../connections/prevnextconnection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { MenuItem } from "../canvas/menu";
 import { CnodeComponent } from "./cnode";

@@ -2589,6 +2589,8 @@ var _signEl = new WeakMap();
 
 var _titleComp = new WeakMap();
 
+var _commentComp = new WeakMap();
+
 var CnodeComponent = /*#__PURE__*/function (_Component) {
   _inherits(CnodeComponent, _Component);
 
@@ -2603,6 +2605,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   /** An SVG element to draw the top-left sign for the node */
 
   /** A subcomponent for title */
+
+  /** A subcomponent for comment */
   function CnodeComponent(node, canvas) {
     var _this;
 
@@ -2631,6 +2635,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     });
 
     _titleComp.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _commentComp.set(_assertThisInitialized(_this), {
       writable: true,
       value: null
     });
@@ -2949,6 +2958,24 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         }));
       }
 
+      if (!_classPrivateFieldGet(this, _commentComp)) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
+          _classPrivateFieldSet(_this3, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent("comment").setup());
+
+          _classPrivateFieldGet(_this3, _commentComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
+          _classPrivateFieldGet(_this3, _commentComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
+          _classPrivateFieldGet(_this3, _commentComp).pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(0, _this3.height + 30);
+
+          _this3.addComponent(_classPrivateFieldGet(_this3, _commentComp));
+        }));
+      } else {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
+          _this3.removeComponent(_classPrivateFieldGet(_this3, _commentComp));
+
+          _classPrivateFieldSet(_this3, _commentComp, null);
+        }));
+      }
+
       return items;
     }
     /**
@@ -3013,8 +3040,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
-/* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
+/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
+/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
@@ -3297,7 +3324,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                 if (!this.alreadyConnected(peer.__comp, _n.prev.__comp)) {
                   // Create connection component
-                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
+                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
                 }
               }
             } catch (err) {
@@ -3318,7 +3345,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (next.peer) {
                 if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
                   // Create connection component
-                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
+                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
                 }
               }
             } // Setup inputs
@@ -3339,7 +3366,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (inp.peer) {
                 if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
                   // Create connection component
-                  new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
+                  new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
                 }
               }
             } // Setup outputs
@@ -3367,7 +3394,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                     if (!this.alreadyConnected(outp.__comp, _peer.__comp)) {
                       // Create connection component
-                      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(outp.__comp, _peer.__comp, this).setup();
+                      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(outp.__comp, _peer.__comp, this).setup();
                     }
                   }
                 } catch (err) {
@@ -4612,7 +4639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
-/* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
+/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
@@ -4860,7 +4887,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(InputSocketComponent.prototype), "connectionDone", this).call(this, socketComp); // This creates the connection and connects sockets
 
 
-      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas).setup();
+      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas).setup();
     }
     /**
      * Query if this socket could accept a connection with
@@ -5117,7 +5144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
+/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
@@ -5263,7 +5290,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(NextSocketComponent.prototype), "connectionDone", this).call(this, socketComp); // This creates the connection and connects sockets
 
 
-      new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas).setup();
+      new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas).setup();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -5669,7 +5696,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
-/* harmony import */ var _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/io_connection */ "./src/connections/io_connection.js");
+/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
@@ -5877,7 +5904,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } // This creates the connection and connects sockets
 
 
-      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas).setup();
+      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas).setup();
     }
     /**
      * Query if this socket could accept a connection with
@@ -6122,7 +6149,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/prevnext_connection */ "./src/connections/prevnext_connection.js");
+/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
@@ -6262,7 +6289,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } // This creates the connection and connects sockets
 
 
-      new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas).setup();
+      new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas).setup();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -6594,11 +6621,7 @@ var Theme = /*#__PURE__*/function () {
     key: "NODE_IO_STROKE_COLOR",
     get: function get() {
       return "white";
-    } // The color fill is based on socket type
-    // get NODE_IO_FILL_COLOR() {
-    //   return "#008EBF";
-    // }
-
+    }
   }, {
     key: "NODE_IO_NAME_FONT",
     get: function get() {
@@ -6613,6 +6636,17 @@ var Theme = /*#__PURE__*/function () {
     key: "NODE_IO_POINT_RADIUS",
     get: function get() {
       return 10;
+    } // Comments
+
+  }, {
+    key: "NODE_COMMENT_FONT",
+    get: function get() {
+      return "italic 18px sans-serif";
+    }
+  }, {
+    key: "NODE_COMMENT_COLOR",
+    get: function get() {
+      return "lightgray";
     } // IO Connections
 
   }, {
@@ -6720,7 +6754,8 @@ var Theme = /*#__PURE__*/function () {
     key: "MENU_SEARCH_FONT",
     get: function get() {
       return "bold 11px verdana";
-    }
+    } // Types
+
   }, {
     key: "TYPE_ARRAY_COLOR",
     get: function get() {
@@ -6763,10 +6798,10 @@ var defaultLight = new Theme();
 
 /***/ }),
 
-/***/ "./src/connections/io_connection.js":
-/*!******************************************!*\
-  !*** ./src/connections/io_connection.js ***!
-  \******************************************/
+/***/ "./src/connections/ioconnection.js":
+/*!*****************************************!*\
+  !*** ./src/connections/ioconnection.js ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -6854,10 +6889,10 @@ var IOConnection = /*#__PURE__*/function (_CnodesConnection) {
 
 /***/ }),
 
-/***/ "./src/connections/prevnext_connection.js":
-/*!************************************************!*\
-  !*** ./src/connections/prevnext_connection.js ***!
-  \************************************************/
+/***/ "./src/connections/prevnextconnection.js":
+/*!***********************************************!*\
+  !*** ./src/connections/prevnextconnection.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

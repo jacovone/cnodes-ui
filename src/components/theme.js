@@ -114,10 +114,6 @@ export class Theme {
   get NODE_IO_STROKE_COLOR() {
     return "white";
   }
-  // The color fill is based on socket type
-  // get NODE_IO_FILL_COLOR() {
-  //   return "#008EBF";
-  // }
   get NODE_IO_NAME_FONT() {
     return "bold 11px verdana";
   }
@@ -126,6 +122,15 @@ export class Theme {
   }
   get NODE_IO_POINT_RADIUS() {
     return 10;
+  }
+
+  // Comments
+
+  get NODE_COMMENT_FONT() {
+    return "italic 18px sans-serif";
+  }
+  get NODE_COMMENT_COLOR() {
+    return "lightgray";
   }
 
   // IO Connections
@@ -196,6 +201,8 @@ export class Theme {
   get MENU_SEARCH_FONT() {
     return "bold 11px verdana";
   }
+
+  // Types
 
   get TYPE_ARRAY_COLOR() {
     return "orange";

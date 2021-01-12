@@ -49,7 +49,17 @@ export class Component {
   #components = [];
 
   /**
-   * Events connected to the component
+   * Events connected to the component:
+   *
+   * This attribute emits following events:
+   *
+   * - cnui:change(comp), when something changes inside component, comp
+   *   is the entire component passed as event parameter
+   * - cnui:componentAdded(comp, subComp), when a component is added as a child,
+   *   comp is this component, while subComp is the component being added
+   * - cnui:componentRemoved(comp, subComp), when a component is from children,
+   *   comp is this component, while subComp is the component being removed
+   * - cnui:destroy(comp), when the component is destroyed. comp is this component
    */
   events = new EventEmitter();
 
@@ -253,6 +263,8 @@ export class Component {
     component.canvas = this.canvas;
     this.svgEl.appendChild(component.componentEl);
     component.updateSVGElement();
+
+    this.events.emit("cnui:componentAdded", this, component);
   }
 
   /**
@@ -263,6 +275,8 @@ export class Component {
     this.components = this.#components.filter((c) => c !== component);
     component.destroy();
     this.svgEl.removeChild(component.componentEl);
+
+    this.events.emit("cnui:componentRemoved", this, component);
   }
 
   /**
@@ -272,5 +286,6 @@ export class Component {
   destroy() {
     // Removes all subcomponents
     this.components.forEach((c) => this.removeComponent(c));
+    this.events.emit("cnui:destroy", this);
   }
 }

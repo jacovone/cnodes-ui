@@ -41,6 +41,7 @@ export class Connection {
    */
   setup() {
     this.#connectionEl = this.createElement();
+    return this;
   }
 
   get canvas() {

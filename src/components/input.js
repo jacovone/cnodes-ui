@@ -37,7 +37,6 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
   constructor(socket) {
     super(socket);
-    super.setup();
   }
 
   /**
@@ -228,7 +227,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     super.connectionDone(socketComp);
 
     // This creates the connection and connects sockets
-    new IOConnection(socketComp, this, this.canvas);
+    new IOConnection(socketComp, this, this.canvas).setup();
   }
 
   /**

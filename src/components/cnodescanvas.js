@@ -107,9 +107,9 @@ export class CnodesCanvas extends Canvas {
   static getNodeUIInstance(node, canvas) {
     let factory = CnodesCanvas.#nodesUIRegistry.get(node.constructor.name);
     if (factory) {
-      return factory(node, canvas);
+      return factory(node, canvas).setup();
     } else {
-      return new CnodeComponent(node, canvas);
+      return new CnodeComponent(node, canvas).setup();
     }
   }
 
@@ -259,7 +259,7 @@ export class CnodesCanvas extends Canvas {
         for (let peer of n.prev.peers) {
           if (!this.alreadyConnected(peer.__comp, n.prev.__comp)) {
             // Create connection component
-            new PrevNextConnection(peer.__comp, n.prev.__comp, this);
+            new PrevNextConnection(peer.__comp, n.prev.__comp, this).setup();
           }
         }
       }
@@ -268,7 +268,7 @@ export class CnodesCanvas extends Canvas {
         if (next.peer) {
           if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
             // Create connection component
-            new PrevNextConnection(next.__comp, next.peer.__comp, this);
+            new PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
           }
         }
       }
@@ -277,7 +277,7 @@ export class CnodesCanvas extends Canvas {
         if (inp.peer) {
           if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
             // Create connection component
-            new IOConnection(inp.peer.__comp, inp.__comp, this);
+            new IOConnection(inp.peer.__comp, inp.__comp, this).setup();
           }
         }
       }
@@ -287,7 +287,7 @@ export class CnodesCanvas extends Canvas {
           for (let peer of outp.peers) {
             if (!this.alreadyConnected(outp.__comp, peer.__comp)) {
               // Create connection component
-              new IOConnection(outp.__comp, peer.__comp, this);
+              new IOConnection(outp.__comp, peer.__comp, this).setup();
             }
           }
         }

@@ -16,7 +16,7 @@ import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
 import { MenuItem } from "../canvas/menu";
 import { SocketComponent } from "../canvas/socket";
-import { CnodesTitleComponent } from "./cnodestitle";
+import { CnodesEditableTextComponent } from "./cnodeseditabletext";
 
 /**
  * This is the main class for managing a single CNode
@@ -44,7 +44,19 @@ export class CnodeComponent extends Component {
 
     // write a back-reference
     this.#node.__comp = this;
+  }
 
+  get node() {
+    return this.#node;
+  }
+  get titleComp() {
+    return this.#titleComp;
+  }
+
+  /**
+   * Sets up the component
+   */
+  setup() {
     super.setup();
     canvas.addComponent(this);
 
@@ -54,13 +66,7 @@ export class CnodeComponent extends Component {
     }
 
     this.updateSubcomponents();
-  }
-
-  get node() {
-    return this.#node;
-  }
-  get titleComp() {
-    return this.#titleComp;
+    return this;
   }
 
   /**
@@ -190,7 +196,23 @@ export class CnodeComponent extends Component {
 
     // Title
     if (!this.#titleComp) {
-      this.#titleComp = new CnodesTitleComponent(this.node.title);
+      this.#titleComp = new CnodesEditableTextComponent(
+        this.node.title
+      ).setup();
+
+      // Register to "cnui:change" to update title and meta info about it
+      this.#titleComp.events.on("cnui:change", (component) => {
+        // Update UI data in meta info
+        this.node.title = component.text;
+        if (!this.node.meta) {
+          this.node.meta = {};
+        }
+        this.node.meta.titlePos = {
+          x: component.pos.x,
+          y: component.pos.y,
+        };
+      });
+
       this.#titleComp.font = Theme.current.NODE_TITLE_FONT;
 
       this.#titleComp.color = this.node.functional
@@ -206,7 +228,7 @@ export class CnodeComponent extends Component {
     if (this.node.prev) {
       let nComp = this.node.prev.__comp;
       if (!nComp) {
-        nComp = new PrevSocketComponent(this.node.prev);
+        nComp = new PrevSocketComponent(this.node.prev).setup();
         this.addComponent(nComp);
 
         // write a back_reference
@@ -221,7 +243,7 @@ export class CnodeComponent extends Component {
     for (const next of this.node.nexts) {
       let nComp = next.__comp;
       if (!nComp) {
-        nComp = new NextSocketComponent(next);
+        nComp = new NextSocketComponent(next).setup();
         this.addComponent(nComp);
 
         // write a back-reference
@@ -237,7 +259,7 @@ export class CnodeComponent extends Component {
     for (const output of this.node.outputs) {
       let nComp = output.__comp;
       if (!nComp) {
-        nComp = new OutputSocketComponent(output);
+        nComp = new OutputSocketComponent(output).setup();
         this.addComponent(nComp);
 
         // write a back-reference
@@ -253,7 +275,7 @@ export class CnodeComponent extends Component {
     for (const input of this.node.inputs) {
       let nComp = input.__comp;
       if (!nComp) {
-        nComp = new InputSocketComponent(input);
+        nComp = new InputSocketComponent(input).setup();
         this.addComponent(nComp);
 
         // write a back-reference

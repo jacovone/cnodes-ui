@@ -51,6 +51,9 @@ export class SocketComponent extends Component {
    * calls the createElement() method to prepare the SVG element
    */
   setup() {
+    // Set as non-movable befor calling super.setip() so
+    // no pointer event handler will be added by the base
+    // component to manage drag to move functionality
     this.moveable = false;
     super.setup();
 
@@ -71,6 +74,8 @@ export class SocketComponent extends Component {
     this.dragElement.addEventListener("pointermove", (e) => {
       self.onPointerMove(e);
     });
+
+    return this;
   }
 
   /**

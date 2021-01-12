@@ -8,6 +8,7 @@
  */
 
 import { Position } from "./position";
+import { EventEmitter } from "events";
 
 /**
  * This class is the base class for all components in the cnodes-ui canvas.
@@ -47,6 +48,11 @@ export class Component {
   /** The list of eventual child components */
   #components = [];
 
+  /**
+   * Events connected to the component
+   */
+  events = new EventEmitter();
+
   constructor() {}
 
   /**
@@ -54,6 +60,8 @@ export class Component {
    * The user that creates the component have to call this method after, to
    * initializes the internal SVG component and optionally installs pointer
    * event listeners to manage moving.
+   * By default setup() return this, so you can concatenate construction such as
+   * new Component(...).setup();
    */
   setup() {
     // Create the SVG element. A subclass must override this method
@@ -81,6 +89,8 @@ export class Component {
         self.#onPointerMove(e);
       });
     }
+
+    return this;
   }
 
   get pos() {
@@ -131,7 +141,10 @@ export class Component {
     if (e.button === 0) {
       if (this.#moveable) {
         this.#moving = true;
-        this.#startMovePos = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
+        this.#startMovePos = this.#canvas.clientToSvgPoint(
+          e.clientX,
+          e.clientY
+        );
         this.#startMovePointerPos = this.#canvas.svgEl.createSVGPoint();
         this.#startMovePointerPos.x = this.#pos.x;
         this.#startMovePointerPos.y = this.#pos.y;
@@ -222,6 +235,9 @@ export class Component {
     if (this.canvas) {
       this.canvas.updateAllConnections();
     }
+
+    // emits a cnui:change event passing the entire object
+    this.events.emit("cnui:change", this);
   }
 
   /**

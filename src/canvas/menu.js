@@ -95,13 +95,6 @@ export class Menu extends Component {
   }
 
   /**
-   * Set up the container
-   */
-  setup() {
-    super.setup();
-  }
-
-  /**
    * Computes the menu vertical size, based on menu items
    */
   get height() {

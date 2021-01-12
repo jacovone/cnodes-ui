@@ -17,6 +17,12 @@ import { Connection } from "../canvas/connection";
 export class CnodesConnection extends Connection {
   constructor(source, target, canvas) {
     super(source, target);
+  }
+
+  /**
+   * Sets up the component
+   */
+  setup() {
     super.setup();
     canvas.addConnection(this);
     this.updateSVGElement();
@@ -25,6 +31,7 @@ export class CnodesConnection extends Connection {
       // Connect cnodes sockets
       this.source.socket.connect(this.target.socket);
     }
+    return this;
   }
 
   /**

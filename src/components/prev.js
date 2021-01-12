@@ -27,7 +27,6 @@ export class PrevSocketComponent extends CnodesSocketComponent {
 
   constructor(socket) {
     super(socket);
-    super.setup();
   }
 
   /**
@@ -122,7 +121,7 @@ export class PrevSocketComponent extends CnodesSocketComponent {
     }
 
     // This creates the connection and connects sockets
-    new PrevNextConnection(socketComp, this, this.canvas);
+    new PrevNextConnection(socketComp, this, this.canvas).setup();
   }
 
   /**

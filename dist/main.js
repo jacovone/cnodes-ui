@@ -3,6 +3,464 @@ var cnui;cnui =
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/events/events.js":
+/*!***************************************!*\
+  !*** ./node_modules/events/events.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var R = (typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === 'object' ? Reflect : null;
+var ReflectApply = R && typeof R.apply === 'function' ? R.apply : function ReflectApply(target, receiver, args) {
+  return Function.prototype.apply.call(target, receiver, args);
+};
+var ReflectOwnKeys;
+
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys;
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target).concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+};
+
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+
+module.exports = EventEmitter;
+module.exports.once = once; // Backwards-compat with node 0.10.x
+
+EventEmitter.EventEmitter = EventEmitter;
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
+EventEmitter.prototype._maxListeners = undefined; // By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+
+var defaultMaxListeners = 10;
+
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + _typeof(listener));
+  }
+}
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function get() {
+    return defaultMaxListeners;
+  },
+  set: function set(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function () {
+  if (this._events === undefined || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}; // Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+
+
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
+
+  this._maxListeners = n;
+  return this;
+};
+
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined) return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
+
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return _getMaxListeners(this);
+};
+
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+
+  for (var i = 1; i < arguments.length; i++) {
+    args.push(arguments[i]);
+  }
+
+  var doError = type === 'error';
+  var events = this._events;
+  if (events !== undefined) doError = doError && events.error === undefined;else if (!doError) return false; // If there is no 'error' event listener then throw.
+
+  if (doError) {
+    var er;
+    if (args.length > 0) er = args[0];
+
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
+    } // At least give some kind of context to the user
+
+
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+  if (handler === undefined) return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+
+    for (var i = 0; i < len; ++i) {
+      ReflectApply(listeners[i], this, args);
+    }
+  }
+
+  return true;
+};
+
+function _addListener(target, type, listener, prepend) {
+  var m;
+  var events;
+  var existing;
+  checkListener(listener);
+  events = target._events;
+
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type, listener.listener ? listener.listener : listener); // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+
+      events = target._events;
+    }
+
+    existing = events[type];
+  }
+
+  if (existing === undefined) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] = prepend ? [listener, existing] : [existing, listener]; // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
+    } // Check for listener leak
+
+
+    m = _getMaxListeners(target);
+
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true; // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+
+      var w = new Error('Possible EventEmitter memory leak detected. ' + existing.length + ' ' + String(type) + ' listeners ' + 'added. Use emitter.setMaxListeners() to ' + 'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
+    }
+  }
+
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.prependListener = function prependListener(type, listener) {
+  return _addListener(this, type, listener, true);
+};
+
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    if (arguments.length === 0) return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
+  }
+}
+
+function _onceWrap(target, type, listener) {
+  var state = {
+    fired: false,
+    wrapFn: undefined,
+    target: target,
+    type: type,
+    listener: listener
+  };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  checkListener(listener);
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener = function prependOnceListener(type, listener) {
+  checkListener(listener);
+  this.prependListener(type, _onceWrap(this, type, listener));
+  return this;
+}; // Emits a 'removeListener' event if and only if the listener was removed.
+
+
+EventEmitter.prototype.removeListener = function removeListener(type, listener) {
+  var list, events, position, i, originalListener;
+  checkListener(listener);
+  events = this._events;
+  if (events === undefined) return this;
+  list = events[type];
+  if (list === undefined) return this;
+
+  if (list === listener || list.listener === listener) {
+    if (--this._eventsCount === 0) this._events = Object.create(null);else {
+      delete events[type];
+      if (events.removeListener) this.emit('removeListener', type, list.listener || listener);
+    }
+  } else if (typeof list !== 'function') {
+    position = -1;
+
+    for (i = list.length - 1; i >= 0; i--) {
+      if (list[i] === listener || list[i].listener === listener) {
+        originalListener = list[i].listener;
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0) return this;
+    if (position === 0) list.shift();else {
+      spliceOne(list, position);
+    }
+    if (list.length === 1) events[type] = list[0];
+    if (events.removeListener !== undefined) this.emit('removeListener', type, originalListener || listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners = function removeAllListeners(type) {
+  var listeners, events, i;
+  events = this._events;
+  if (events === undefined) return this; // not listening for removeListener, no need to emit
+
+  if (events.removeListener === undefined) {
+    if (arguments.length === 0) {
+      this._events = Object.create(null);
+      this._eventsCount = 0;
+    } else if (events[type] !== undefined) {
+      if (--this._eventsCount === 0) this._events = Object.create(null);else delete events[type];
+    }
+
+    return this;
+  } // emit removeListener for all listeners on all events
+
+
+  if (arguments.length === 0) {
+    var keys = Object.keys(events);
+    var key;
+
+    for (i = 0; i < keys.length; ++i) {
+      key = keys[i];
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+
+    this.removeAllListeners('removeListener');
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+    return this;
+  }
+
+  listeners = events[type];
+
+  if (typeof listeners === 'function') {
+    this.removeListener(type, listeners);
+  } else if (listeners !== undefined) {
+    // LIFO order
+    for (i = listeners.length - 1; i >= 0; i--) {
+      this.removeListener(type, listeners[i]);
+    }
+  }
+
+  return this;
+};
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+  if (events === undefined) return [];
+  var evlistener = events[type];
+  if (evlistener === undefined) return [];
+  if (typeof evlistener === 'function') return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+  return unwrap ? unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+
+EventEmitter.listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+};
+
+EventEmitter.prototype.listenerCount = listenerCount;
+
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
+}
+
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+
+  for (var i = 0; i < n; ++i) {
+    copy[i] = arr[i];
+  }
+
+  return copy;
+}
+
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++) {
+    list[index] = list[index + 1];
+  }
+
+  list.pop();
+}
+
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+
+  return ret;
+}
+
+function once(emitter, name) {
+  return new Promise(function (resolve, reject) {
+    function eventListener() {
+      if (errorListener !== undefined) {
+        emitter.removeListener('error', errorListener);
+      }
+
+      resolve([].slice.call(arguments));
+    }
+
+    ;
+    var errorListener; // Adding an error listener is not optional because
+    // if an error is thrown on an event emitter we cannot
+    // guarantee that the actual event we are waiting will
+    // be fired. The result could be a silent way to create
+    // memory or file descriptor leaks, which is something
+    // we should avoid.
+
+    if (name !== 'error') {
+      errorListener = function errorListener(err) {
+        emitter.removeListener(name, eventListener);
+        reject(err);
+      };
+
+      emitter.once('error', errorListener);
+    }
+
+    emitter.once(name, eventListener);
+  });
+}
+
+/***/ }),
+
 /***/ "./src/canvas/canvas.js":
 /*!******************************!*\
   !*** ./src/canvas/canvas.js ***!
@@ -725,6 +1183,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Component": () => /* binding */ Component
 /* harmony export */ });
 /* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_1__);
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -736,6 +1196,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
@@ -751,6 +1213,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020
  */
+
 
 /**
  * This class is the base class for all components in the cnodes-ui canvas.
@@ -805,6 +1268,10 @@ var Component = /*#__PURE__*/function () {
   /** The pointer position at the time in which the component starts moving */
 
   /** The list of eventual child components */
+
+  /**
+   * Events connected to the component
+   */
   function Component() {
     _classCallCheck(this, Component);
 
@@ -858,12 +1325,16 @@ var Component = /*#__PURE__*/function () {
       writable: true,
       value: []
     });
+
+    _defineProperty(this, "events", new events__WEBPACK_IMPORTED_MODULE_1__.EventEmitter());
   }
   /**
    * Sets up the component. The component creation follow a specific flow.
    * The user that creates the component have to call this method after, to
    * initializes the internal SVG component and optionally installs pointer
    * event listeners to manage moving.
+   * By default setup() return this, so you can concatenate construction such as
+   * new Component(...).setup();
    */
 
 
@@ -895,6 +1366,8 @@ var Component = /*#__PURE__*/function () {
           _classPrivateMethodGet(self, _onPointerMove, _onPointerMove2).call(self, e);
         });
       }
+
+      return this;
     }
   }, {
     key: "getContextMenuItems",
@@ -953,7 +1426,10 @@ var Component = /*#__PURE__*/function () {
 
       if (this.canvas) {
         this.canvas.updateAllConnections();
-      }
+      } // emits a cnui:change event passing the entire object
+
+
+      this.events.emit("cnui:change", this);
     }
     /**
      * Add a new component as child component.
@@ -1222,6 +1698,8 @@ var Connection = /*#__PURE__*/function () {
     key: "setup",
     value: function setup() {
       _classPrivateFieldSet(this, _connectionEl, this.createElement());
+
+      return this;
     }
   }, {
     key: "createElement",
@@ -1307,10 +1785,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
 /* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1475,15 +1949,6 @@ var Menu = /*#__PURE__*/function (_Component) {
       this.setup();
       canvas.addComponent(this);
       this.pos = new _position__WEBPACK_IMPORTED_MODULE_2__.Position(x, y);
-    }
-    /**
-     * Set up the container
-     */
-
-  }, {
-    key: "setup",
-    value: function setup() {
-      _get(_getPrototypeOf(Menu.prototype), "setup", this).call(this);
     }
     /**
      * Computes the menu vertical size, based on menu items
@@ -1735,6 +2200,9 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
      * calls the createElement() method to prepare the SVG element
      */
     value: function setup() {
+      // Set as non-movable befor calling super.setip() so
+      // no pointer event handler will be added by the base
+      // component to manage drag to move functionality
       this.moveable = false;
 
       _get(_getPrototypeOf(SocketComponent.prototype), "setup", this).call(this); // All sockets does not manage pointer events so events
@@ -1754,6 +2222,7 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
       this.dragElement.addEventListener("pointermove", function (e) {
         self.onPointerMove(e);
       });
+      return this;
     }
     /**
      * Returns the element that responds to pointer events. By
@@ -2018,160 +2487,6 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/canvas/text.js":
-/*!****************************!*\
-  !*** ./src/canvas/text.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TextComponent": () => /* binding */ TextComponent
-/* harmony export */ });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-/**
- * cnodes-ui
- *
- * A GUI for cnodes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-/**
- * This is a sample component to draw a simple SVG Text
- */
-
-var _font = new WeakMap();
-
-var _text = new WeakMap();
-
-var _color = new WeakMap();
-
-var TextComponent = /*#__PURE__*/function (_Component) {
-  _inherits(TextComponent, _Component);
-
-  var _super = _createSuper(TextComponent);
-
-  /** Font of the text component */
-
-  /** Content of the component */
-
-  /** Color of the text */
-  function TextComponent(text) {
-    var _thisSuper, _this;
-
-    _classCallCheck(this, TextComponent);
-
-    _this = _super.call(this);
-
-    _font.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: "24px sans-serif;"
-    });
-
-    _text.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: ""
-    });
-
-    _color.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: "black"
-    });
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(TextComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
-
-    _this.text = text;
-    _this.componentEl.style = "user-select: none; cursor: move";
-
-    _this.componentEl.setAttribute("fill", _classPrivateFieldGet(_assertThisInitialized(_this), _color));
-
-    _this.componentEl.setAttribute("x", "0");
-
-    _this.componentEl.setAttribute("y", "0");
-
-    _this.componentEl.innerHTML = _this.text;
-    return _this;
-  }
-
-  _createClass(TextComponent, [{
-    key: "createElement",
-
-    /**
-     * Lets create the element
-     */
-    value: function createElement() {
-      var textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      return textEl;
-    }
-  }, {
-    key: "text",
-    get: function get() {
-      return _classPrivateFieldGet(this, _text);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _text, val);
-
-      this.componentEl.innerHTML = _classPrivateFieldGet(this, _text);
-    }
-  }, {
-    key: "color",
-    get: function get() {
-      return _classPrivateFieldGet(this, _color);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _color, val);
-
-      this.componentEl.setAttribute("fill", _classPrivateFieldGet(this, _color));
-    }
-  }, {
-    key: "font",
-    get: function get() {
-      return _classPrivateFieldGet(this, _font);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _font, val);
-
-      this.componentEl.style["font"] = _classPrivateFieldGet(this, _font);
-    }
-  }]);
-
-  return TextComponent;
-}(_component__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/***/ }),
-
 /***/ "./src/components/cnode.js":
 /*!*********************************!*\
   !*** ./src/components/cnode.js ***!
@@ -2191,7 +2506,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _cnodestitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodestitle */ "./src/components/cnodestitle.js");
+/* harmony import */ var _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2206,6 +2521,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -2217,10 +2536,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -2276,7 +2591,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
   /** A subcomponent for title */
   function CnodeComponent(node, canvas) {
-    var _thisSuper, _this;
+    var _this;
 
     _classCallCheck(this, CnodeComponent);
 
@@ -2311,21 +2626,34 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
 
     _classPrivateFieldGet(_assertThisInitialized(_this), _node).__comp = _assertThisInitialized(_this);
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(CnodeComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
-
-    canvas.addComponent(_assertThisInitialized(_this)); // If there is an active program, add this node to it
-
-    if (_this.canvas.program) {
-      _this.canvas.program.addNode(_classPrivateFieldGet(_assertThisInitialized(_this), _node));
-    }
-
-    _this.updateSubcomponents();
-
     return _this;
   }
 
   _createClass(CnodeComponent, [{
+    key: "setup",
+
+    /**
+     * Sets up the component
+     */
+    value: function setup() {
+      _get(_getPrototypeOf(CnodeComponent.prototype), "setup", this).call(this);
+
+      canvas.addComponent(this); // If there is an active program, add this node to it
+
+      if (this.canvas.program) {
+        this.canvas.program.addNode(_classPrivateFieldGet(this, _node));
+      }
+
+      this.updateSubcomponents();
+      return this;
+    }
+    /**
+     * Computes the node vertical size, based on node
+     * characteristics in terms of number of input, output,
+     * and nexts. It takes account of the current theme
+     */
+
+  }, {
     key: "createElement",
 
     /**
@@ -2393,12 +2721,29 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "updateSubcomponents",
     value: function updateSubcomponents() {
+      var _this2 = this;
+
       var posY = 30 + 0.5 * _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Title
 
       if (!_classPrivateFieldGet(this, _titleComp)) {
         var _this$node$meta;
 
-        _classPrivateFieldSet(this, _titleComp, new _cnodestitle__WEBPACK_IMPORTED_MODULE_9__.CnodesTitleComponent(this.node.title));
+        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(this.node.title).setup()); // Register to "cnui:change" to update title and meta info about it
+
+
+        _classPrivateFieldGet(this, _titleComp).events.on("cnui:change", function (component) {
+          // Update UI data in meta info
+          _this2.node.title = component.text;
+
+          if (!_this2.node.meta) {
+            _this2.node.meta = {};
+          }
+
+          _this2.node.meta.titlePos = {
+            x: component.pos.x,
+            y: component.pos.y
+          };
+        });
 
         _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
         _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
@@ -2411,7 +2756,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         var nComp = this.node.prev.__comp;
 
         if (!nComp) {
-          nComp = new _prev__WEBPACK_IMPORTED_MODULE_2__.PrevSocketComponent(this.node.prev);
+          nComp = new _prev__WEBPACK_IMPORTED_MODULE_2__.PrevSocketComponent(this.node.prev).setup();
           this.addComponent(nComp); // write a back_reference
 
           this.node.prev.__comp = nComp;
@@ -2431,7 +2776,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp = next.__comp;
 
           if (!_nComp) {
-            _nComp = new _next__WEBPACK_IMPORTED_MODULE_3__.NextSocketComponent(next);
+            _nComp = new _next__WEBPACK_IMPORTED_MODULE_3__.NextSocketComponent(next).setup();
             this.addComponent(_nComp); // write a back-reference
 
             next.__comp = _nComp;
@@ -2457,7 +2802,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp2 = output.__comp;
 
           if (!_nComp2) {
-            _nComp2 = new _output__WEBPACK_IMPORTED_MODULE_5__.OutputSocketComponent(output);
+            _nComp2 = new _output__WEBPACK_IMPORTED_MODULE_5__.OutputSocketComponent(output).setup();
             this.addComponent(_nComp2); // write a back-reference
 
             output.__comp = _nComp2;
@@ -2483,7 +2828,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp3 = input.__comp;
 
           if (!_nComp3) {
-            _nComp3 = new _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent(input);
+            _nComp3 = new _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent(input).setup();
             this.addComponent(_nComp3); // write a back-reference
 
             input.__comp = _nComp3;
@@ -2532,29 +2877,29 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
-      var _this2 = this;
+      var _this3 = this;
 
       var items = []; // The node can add inputs?
 
       if (this.node.canAddInput) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add input</tspan>", function () {
-          _this2.node.addInput();
+          _this3.node.addInput();
 
-          _this2.updateSVGElement();
+          _this3.updateSVGElement();
         }));
       } // The node can add inputs?
 
 
       if (this.node.canAddOutput) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add output</tspan>", function () {
-          _this2.node.addOutput();
+          _this3.node.addOutput();
 
-          _this2.updateSVGElement();
+          _this3.updateSVGElement();
         }));
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
-        var _iterator4 = _createForOfIteratorHelper(_this2.components),
+        var _iterator4 = _createForOfIteratorHelper(_this3.components),
             _step4;
 
         try {
@@ -2562,14 +2907,14 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
             var comp = _step4.value;
 
             if (comp instanceof _canvas_socket__WEBPACK_IMPORTED_MODULE_8__.SocketComponent && comp.isConnected) {
-              var _iterator5 = _createForOfIteratorHelper(_this2.canvas.getConnectionsFor(comp)),
+              var _iterator5 = _createForOfIteratorHelper(_this3.canvas.getConnectionsFor(comp)),
                   _step5;
 
               try {
                 for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
                   var conn = _step5.value;
 
-                  _this2.canvas.removeConnection(conn);
+                  _this3.canvas.removeConnection(conn);
                 }
               } catch (err) {
                 _iterator5.e(err);
@@ -2587,7 +2932,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       if (this.node.removable) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Delete</tspan>", function () {
-          _this2.canvas.removeComponent(_this2);
+          _this3.canvas.removeComponent(_this3);
         }));
       }
 
@@ -2619,12 +2964,6 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     get: function get() {
       return _classPrivateFieldGet(this, _titleComp);
     }
-    /**
-     * Computes the node vertical size, based on node
-     * characteristics in terms of number of input, output,
-     * and nexts. It takes account of the current theme
-     */
-
   }, {
     key: "height",
     get: function get() {
@@ -2945,7 +3284,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                 if (!this.alreadyConnected(peer.__comp, _n.prev.__comp)) {
                   // Create connection component
-                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(peer.__comp, _n.prev.__comp, this);
+                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
                 }
               }
             } catch (err) {
@@ -2966,7 +3305,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (next.peer) {
                 if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
                   // Create connection component
-                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(next.__comp, next.peer.__comp, this);
+                  new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
                 }
               }
             } // Setup inputs
@@ -2987,7 +3326,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (inp.peer) {
                 if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
                   // Create connection component
-                  new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(inp.peer.__comp, inp.__comp, this);
+                  new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
                 }
               }
             } // Setup outputs
@@ -3015,7 +3354,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                     if (!this.alreadyConnected(outp.__comp, _peer.__comp)) {
                       // Create connection component
-                      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(outp.__comp, _peer.__comp, this);
+                      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(outp.__comp, _peer.__comp, this).setup();
                     }
                   }
                 } catch (err) {
@@ -3123,9 +3462,9 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var factory = _classStaticPrivateFieldSpecGet(CnodesCanvas, CnodesCanvas, _nodesUIRegistry).get(node.constructor.name);
 
       if (factory) {
-        return factory(node, canvas);
+        return factory(node, canvas).setup();
       } else {
-        return new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(node, canvas);
+        return new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(node, canvas).setup();
       }
     }
   }]);
@@ -3159,6 +3498,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -3170,10 +3513,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -3198,31 +3537,35 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
   var _super = _createSuper(CnodesConnection);
 
   function CnodesConnection(source, target, canvas) {
-    var _thisSuper, _this;
-
     _classCallCheck(this, CnodesConnection);
 
-    _this = _super.call(this, source, target);
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(CnodesConnection.prototype)), "setup", _thisSuper).call(_thisSuper);
-
-    canvas.addConnection(_assertThisInitialized(_this));
-
-    _this.updateSVGElement();
-
-    if (canvas.program) {
-      // Connect cnodes sockets
-      _this.source.socket.connect(_this.target.socket);
-    }
-
-    return _this;
+    return _super.call(this, source, target);
   }
   /**
-   * Lets create the element
+   * Sets up the component
    */
 
 
   _createClass(CnodesConnection, [{
+    key: "setup",
+    value: function setup() {
+      _get(_getPrototypeOf(CnodesConnection.prototype), "setup", this).call(this);
+
+      canvas.addConnection(this);
+      this.updateSVGElement();
+
+      if (canvas.program) {
+        // Connect cnodes sockets
+        this.source.socket.connect(this.target.socket);
+      }
+
+      return this;
+    }
+    /**
+     * Lets create the element
+     */
+
+  }, {
     key: "createElement",
     value: function createElement() {
       var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -3263,6 +3606,369 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
 
   return CnodesConnection;
 }(_canvas_connection__WEBPACK_IMPORTED_MODULE_1__.Connection);
+
+/***/ }),
+
+/***/ "./src/components/cnodeseditabletext.js":
+/*!**********************************************!*\
+  !*** ./src/components/cnodeseditabletext.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CnodesEditableTextComponent": () => /* binding */ CnodesEditableTextComponent
+/* harmony export */ });
+/* harmony import */ var _canvas_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/component */ "./src/canvas/component.js");
+/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This is component to draw a simple SVG Text that let the user
+ * to change the text by implementing an "edit" action via context
+ * menu item
+ */
+
+var _font = new WeakMap();
+
+var _text = new WeakMap();
+
+var _color = new WeakMap();
+
+var _textEl = new WeakMap();
+
+var _state = new WeakMap();
+
+var _multiLine = new WeakMap();
+
+var _textInputEl = new WeakMap();
+
+var _inputEl = new WeakMap();
+
+var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
+  _inherits(CnodesEditableTextComponent, _Component);
+
+  var _super = _createSuper(CnodesEditableTextComponent);
+
+  /** Font of the text component */
+
+  /** Content of the component */
+
+  /** Color of the text */
+
+  /**
+   * The text component
+   */
+
+  /**
+   * The state of the text:
+   *  0: View - The text is rendered as HTML
+   *  1: Edit - The text is editing within a INPUT/TEXTAREA
+   */
+
+  /**
+   * If the component is moultiLine will present a TEXTAREA
+   * during EDIT and generate a <pre> HTML tag to preserve
+   * carriage returns
+   */
+
+  /**
+   * The text input element container
+   */
+
+  /**
+   * The text input element
+   */
+  function CnodesEditableTextComponent(text) {
+    var _this;
+
+    _classCallCheck(this, CnodesEditableTextComponent);
+
+    _this = _super.call(this);
+
+    _font.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: "24px sans-serif;"
+    });
+
+    _text.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: ""
+    });
+
+    _color.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: "black"
+    });
+
+    _textEl.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _state.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: 0
+    });
+
+    _multiLine.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: false
+    });
+
+    _textInputEl.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _inputEl.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
+    _this.text = text;
+    return _this;
+  }
+
+  _createClass(CnodesEditableTextComponent, [{
+    key: "setup",
+
+    /**
+     * Sets up this component
+     */
+    value: function setup() {
+      _get(_getPrototypeOf(CnodesEditableTextComponent.prototype), "setup", this).call(this);
+
+      this.textEl.style = "user-select: none; cursor: move";
+      this.textEl.setAttribute("fill", _classPrivateFieldGet(this, _color));
+      this.textEl.setAttribute("x", "0");
+      this.textEl.setAttribute("y", "0");
+      this.textEl.innerHTML = this.text;
+      return this;
+    }
+    /**
+     * Returns the array of context menu items. If the component
+     * returns null, no contextual menu is shown
+     */
+
+  }, {
+    key: "getContextMenuItems",
+    value: function getContextMenuItems() {
+      var _this2 = this;
+
+      return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
+        setTimeout(function () {
+          _this2.state = 1;
+
+          _this2.updateSVGElement();
+
+          _classPrivateFieldGet(_this2, _inputEl).focus();
+
+          _classPrivateFieldGet(_this2, _inputEl).select();
+
+          _this2.events.emit("cnui:edit");
+        });
+      })];
+    }
+    /**
+     * Lets create the element
+     */
+
+  }, {
+    key: "createElement",
+    value: function createElement() {
+      var _this3 = this;
+
+      var groupEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      this.textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      this.textInputEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+
+      _classPrivateFieldSet(this, _inputEl, document.createElement("input"));
+
+      _classPrivateFieldGet(this, _inputEl).setAttribute("type", "text");
+
+      _classPrivateFieldGet(this, _inputEl).setAttribute("value", this.text);
+
+      _classPrivateFieldGet(this, _inputEl).addEventListener("blur", function () {
+        _this3.state = 0;
+        _this3.text = _classPrivateFieldGet(_this3, _inputEl).value;
+
+        _this3.updateSVGElement();
+      });
+
+      _classPrivateFieldGet(this, _inputEl).addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          _this3.state = 0;
+          _this3.text = _classPrivateFieldGet(_this3, _inputEl).value;
+
+          _this3.updateSVGElement();
+        }
+      });
+
+      this.textInputEl.appendChild(_classPrivateFieldGet(this, _inputEl));
+      this.textEl.setAttribute("x", 0);
+      this.textEl.setAttribute("y", 0);
+      this.textEl.setAttribute("width", 300);
+      this.textEl.setAttribute("height", 30);
+      this.textEl.style["display"] = "block";
+      groupEl.addEventListener("dblclick", function () {
+        _this3.state = 1;
+
+        _this3.updateSVGElement();
+
+        _classPrivateFieldGet(_this3, _inputEl).focus();
+
+        _classPrivateFieldGet(_this3, _inputEl).select();
+
+        _this3.events.emit("cnui:edit");
+      });
+      this.textInputEl.setAttribute("x", 0);
+      this.textInputEl.setAttribute("y", -20);
+      this.textInputEl.setAttribute("width", 300);
+      this.textInputEl.setAttribute("height", 30);
+      this.textInputEl.style["display"] = "none";
+      groupEl.appendChild(this.textEl);
+      groupEl.appendChild(this.textInputEl);
+      return groupEl;
+    }
+    /**
+     * Update the component element according to x and y local coordinates,
+     * if this component is a child component, coordinates in canvas space
+     * are computed. This particular ovverride is made to manage the "edit"
+     * phase
+     */
+
+  }, {
+    key: "updateSVGElement",
+    value: function updateSVGElement() {
+      _get(_getPrototypeOf(CnodesEditableTextComponent.prototype), "updateSVGElement", this).call(this);
+
+      if (this.state === 0) {
+        // View state
+        this.textEl.style["display"] = "block";
+        this.textInputEl.style["display"] = "none";
+      } else {
+        // Edit state
+        this.textEl.style["display"] = "none";
+        this.textInputEl.style["display"] = "block";
+      }
+    }
+  }, {
+    key: "textEl",
+    get: function get() {
+      return _classPrivateFieldGet(this, _textEl);
+    },
+    set: function set(val) {
+      return _classPrivateFieldSet(this, _textEl, val);
+    }
+  }, {
+    key: "text",
+    get: function get() {
+      return _classPrivateFieldGet(this, _text);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _text, val);
+
+      if (this.textEl) {
+        this.textEl.innerHTML = _classPrivateFieldGet(this, _text);
+      }
+    }
+  }, {
+    key: "color",
+    get: function get() {
+      return _classPrivateFieldGet(this, _color);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _color, val);
+
+      this.textEl.setAttribute("fill", _classPrivateFieldGet(this, _color));
+    }
+  }, {
+    key: "font",
+    get: function get() {
+      return _classPrivateFieldGet(this, _font);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _font, val);
+
+      this.textEl.style["font"] = _classPrivateFieldGet(this, _font);
+    }
+  }, {
+    key: "textInputEl",
+    get: function get() {
+      return _classPrivateFieldGet(this, _textInputEl);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _textInputEl, val);
+    }
+  }, {
+    key: "inputEl",
+    get: function get() {
+      return _classPrivateFieldGet(this, _inputEl);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _inputEl, val);
+    }
+  }, {
+    key: "state",
+    get: function get() {
+      return _classPrivateFieldGet(this, _state);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _state, val);
+    }
+  }, {
+    key: "multiLine",
+    get: function get() {
+      return _classPrivateFieldGet(this, _multiLine);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _multiLine, val);
+    }
+  }]);
+
+  return CnodesEditableTextComponent;
+}(_canvas_component__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /***/ }),
 
@@ -3881,96 +4587,6 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
 
 /***/ }),
 
-/***/ "./src/components/cnodestitle.js":
-/*!***************************************!*\
-  !*** ./src/components/cnodestitle.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CnodesTitleComponent": () => /* binding */ CnodesTitleComponent
-/* harmony export */ });
-/* harmony import */ var _canvas_text__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/text */ "./src/canvas/text.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * cnodes-ui
- *
- * A GUI for cnodes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020
- */
-
-/**
- * This is a sample component to draw a simple SVG Text
- */
-
-var CnodesTitleComponent = /*#__PURE__*/function (_TextComponent) {
-  _inherits(CnodesTitleComponent, _TextComponent);
-
-  var _super = _createSuper(CnodesTitleComponent);
-
-  function CnodesTitleComponent(text) {
-    _classCallCheck(this, CnodesTitleComponent);
-
-    return _super.call(this, text);
-  }
-  /**
-   * Update the component element according to x and y local coordinates,
-   * This method was overridden in order to register meta info
-   */
-
-
-  _createClass(CnodesTitleComponent, [{
-    key: "updateSVGElement",
-    value: function updateSVGElement() {
-      _get(_getPrototypeOf(CnodesTitleComponent.prototype), "updateSVGElement", this).call(this); // Update UI data in meta info
-
-
-      if (this.parent) {
-        if (!this.parent.node.meta) {
-          this.parent.node.meta = {};
-        }
-
-        this.parent.node.meta.titlePos = {
-          x: this.pos.x,
-          y: this.pos.y
-        };
-      }
-    }
-  }]);
-
-  return CnodesTitleComponent;
-}(_canvas_text__WEBPACK_IMPORTED_MODULE_0__.TextComponent);
-
-/***/ }),
-
 /***/ "./src/components/input.js":
 /*!*********************************!*\
   !*** ./src/components/input.js ***!
@@ -4005,6 +4621,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -4016,10 +4636,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -4071,7 +4687,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
   /** The symbol element */
   function InputSocketComponent(socket) {
-    var _thisSuper, _this;
+    var _this;
 
     _classCallCheck(this, InputSocketComponent);
 
@@ -4096,8 +4712,6 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       writable: true,
       value: null
     });
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(InputSocketComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
 
     return _this;
   }
@@ -4233,7 +4847,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(InputSocketComponent.prototype), "connectionDone", this).call(this, socketComp); // This creates the connection and connects sockets
 
 
-      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas);
+      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas).setup();
     }
     /**
      * Query if this socket could accept a connection with
@@ -4510,6 +5124,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -4521,10 +5139,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -4564,7 +5178,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
   /** The socket symbol element */
   function NextSocketComponent(socket) {
-    var _thisSuper, _this;
+    var _this;
 
     _classCallCheck(this, NextSocketComponent);
 
@@ -4574,8 +5188,6 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       writable: true,
       value: null
     });
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(NextSocketComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
 
     return _this;
   }
@@ -4638,7 +5250,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(NextSocketComponent.prototype), "connectionDone", this).call(this, socketComp); // This creates the connection and connects sockets
 
 
-      new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas);
+      new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas).setup();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -5065,6 +5677,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -5076,10 +5692,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -5126,7 +5738,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
   /** A reference to the label element, if there is one */
   function OutputSocketComponent(socket) {
-    var _thisSuper, _this;
+    var _this;
 
     _classCallCheck(this, OutputSocketComponent);
 
@@ -5146,8 +5758,6 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       writable: true,
       value: null
     });
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(OutputSocketComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
 
     return _this;
   }
@@ -5254,7 +5864,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } // This creates the connection and connects sockets
 
 
-      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas);
+      new _connections_io_connection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas).setup();
     }
     /**
      * Query if this socket could accept a connection with
@@ -5519,6 +6129,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -5530,10 +6144,6 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -5572,7 +6182,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
   /** The socket symbol element */
   function PrevSocketComponent(socket) {
-    var _thisSuper, _this;
+    var _this;
 
     _classCallCheck(this, PrevSocketComponent);
 
@@ -5582,8 +6192,6 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       writable: true,
       value: null
     });
-
-    _get((_thisSuper = _assertThisInitialized(_this), _getPrototypeOf(PrevSocketComponent.prototype)), "setup", _thisSuper).call(_thisSuper);
 
     return _this;
   }
@@ -5641,7 +6249,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } // This creates the connection and connects sockets
 
 
-      new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas);
+      new _connections_prevnext_connection__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas).setup();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -13299,6 +13907,18 @@ function whileNode() {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => module['default'] :
+/******/ 				() => module;
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

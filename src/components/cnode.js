@@ -426,6 +426,7 @@ export class CnodeComponent extends Component {
           `<tspan alignment-baseline="middle">Remove comment</tspan>`,
           () => {
             this.removeComponent(this.#commentComp);
+            this.node.meta.comment = undefined;
             this.#commentComp = null;
           }
         )

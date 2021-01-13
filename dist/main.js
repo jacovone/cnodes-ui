@@ -1608,6 +1608,7 @@ var _onPointerMove2 = function _onPointerMove2(e) {
     _classPrivateFieldGet(this, _pos).x = xDiff + _classPrivateFieldGet(this, _startMovePointerPos).x;
     _classPrivateFieldGet(this, _pos).y = yDiff + _classPrivateFieldGet(this, _startMovePointerPos).y;
     this.updateSVGElement();
+    this.events.emit("cnui:change", this);
     e.stopPropagation();
   }
 };
@@ -2970,6 +2971,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       } else {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
           _this3.removeComponent(_classPrivateFieldGet(_this3, _commentComp));
+
+          _this3.node.meta.comment = undefined;
 
           _classPrivateFieldSet(_this3, _commentComp, null);
         }));

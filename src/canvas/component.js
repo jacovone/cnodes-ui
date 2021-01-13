@@ -193,6 +193,9 @@ export class Component {
       this.#pos.x = xDiff + this.#startMovePointerPos.x;
       this.#pos.y = yDiff + this.#startMovePointerPos.y;
       this.updateSVGElement();
+
+      this.events.emit("cnui:change", this);
+
       e.stopPropagation();
     }
   }

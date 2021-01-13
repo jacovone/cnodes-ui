@@ -55,73 +55,52 @@ export class CnodesEditableTextComponent extends Component {
    * Construct a new Text object with  particular text, and an
    * option for multiline
    * @param {string} text The text to show
-   * @param {initialEdit} initialEdit The editor in initially in edit mode?
    */
   constructor(text, initialEdit = false) {
     super();
     this.#text = text;
-
-    if (initialEdit) {
-      this.#setEditing(true);
-    }
   }
 
   get textEl() {
     return this.#textEl;
-  }
-  set textEl(val) {
-    return (this.#textEl = val);
   }
   get text() {
     return this.#text;
   }
   set text(val) {
     this.#text = val;
-    if (this.textEl) {
-      this.textEl.innerHTML = this.#text;
-    }
+    this.#inputEl.value = val;
+    this.updateSVGElement();
   }
   get width() {
     return this.#width;
   }
   set width(val) {
     this.#width = val;
-    this.textEl.setAttribute("width", val);
-    this.textInputEl.setAttribute("width", val);
-    this.inputEl.style["width"] = val + "px";
+    this.updateSVGElement();
   }
   get color() {
     return this.#color;
   }
   set color(val) {
     this.#color = val;
-    this.textEl.style["color"] = this.#color;
+    this.updateSVGElement();
   }
   get font() {
     return this.#font;
   }
   set font(val) {
     this.#font = val;
-    this.textEl.style["font"] = this.#font;
-    this.inputEl.style["font"] = this.#font;
+    this.updateSVGElement();
   }
   get textInputEl() {
     return this.#textInputEl;
   }
-  set textInputEl(val) {
-    this.#textInputEl = val;
-  }
   get inputEl() {
     return this.#inputEl;
   }
-  set inputEl(val) {
-    this.#inputEl = val;
-  }
   get state() {
     return this.#state;
-  }
-  set state(val) {
-    this.#state = val;
   }
 
   /**
@@ -137,7 +116,7 @@ export class CnodesEditableTextComponent extends Component {
       </tspan>
       `,
         () => {
-          this.#setEditing(true);
+          this.setEditing(true);
         }
       ),
     ];
@@ -147,23 +126,30 @@ export class CnodesEditableTextComponent extends Component {
    * Sets the editing mode
    * @param {boolean} editMode true = Edit Mode, false = View Mode
    */
-  #setEditing(editMode) {
+  setEditing(editMode) {
     if (editMode) {
+      this.#state = 1;
+      this.#inputEl.value = this.#text;
+
+      this.#textEl.style["display"] = "none";
+      this.#textInputEl.style["display"] = "block";
+
       setTimeout(() => {
-        this.state = 1;
-        this.updateSVGElement();
-        this.#inputEl.value = this.#text;
         this.#inputEl.focus();
         this.#inputEl.select();
-        this.events.emit("cnui:edit");
       });
+
+      this.events.emit("cnui:edit");
     } else {
-      setTimeout(() => {
-        this.state = 0;
-        this.updateSVGElement();
-        this.text = this.#inputEl.value;
-      });
+      this.#state = 0;
+      this.#text = this.#inputEl.value;
+      this.#textEl.style["display"] = "block";
+      this.#textInputEl.style["display"] = "none";
+
+      this.events.emit("cnui:change", this);
     }
+
+    this.updateSVGElement();
   }
 
   /**
@@ -172,17 +158,17 @@ export class CnodesEditableTextComponent extends Component {
   createElement() {
     let groupEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-    this.textEl = document.createElementNS(
+    this.#textEl = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "foreignObject"
     );
-    this.textInputEl = document.createElementNS(
+    this.#textInputEl = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "foreignObject"
     );
 
     this.#inputEl = document.createElement("textarea");
-    this.#inputEl.setAttribute("value", this.text);
+    this.#inputEl.value = this.#text;
     this.#inputEl.style["resize"] = "none";
     this.#inputEl.style["height"] = "100px";
     this.#inputEl.style["width"] = this.#width + "px";
@@ -194,7 +180,6 @@ export class CnodesEditableTextComponent extends Component {
       Theme.current.NODE_EDITORS_BACKGROUND;
     this.#inputEl.style["overflow"] = "hidden";
     this.#inputEl.style["color"] = Theme.current.NODE_EDITORS_COLOR;
-    this.#inputEl.style["z-index"] = 1000;
 
     /** Simply disable pointer events */
     this.#inputEl.addEventListener("pointerdown", (e) => {
@@ -205,13 +190,11 @@ export class CnodesEditableTextComponent extends Component {
       e.stopPropagation();
     });
     this.#inputEl.addEventListener("blur", () => {
-      this.#setEditing(false);
+      this.setEditing(false);
     });
     this.#inputEl.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
-        this.state = 0;
-        this.text = this.#inputEl.value;
-        this.updateSVGElement();
+        this.setEditing(false);
       }
     });
 
@@ -232,13 +215,14 @@ export class CnodesEditableTextComponent extends Component {
     this.textInputEl.setAttribute("height", 100);
     this.textInputEl.style["overflow"] = "visible";
     this.textInputEl.style["display"] = "none";
+    this.textInputEl.setAttribute("hidden", "1");
 
     this.textInputEl.appendChild(this.#inputEl);
 
     groupEl.setAttribute("x", 0);
     groupEl.setAttribute("y", 0);
     groupEl.addEventListener("dblclick", () => {
-      this.#setEditing(true);
+      this.setEditing(true);
     });
     groupEl.appendChild(this.textEl);
     groupEl.appendChild(this.textInputEl);
@@ -248,20 +232,17 @@ export class CnodesEditableTextComponent extends Component {
   /**
    * Update the component element according to x and y local coordinates,
    * if this component is a child component, coordinates in canvas space
-   * are computed. This particular ovverride is made to manage the "edit"
-   * phase
+   * are computed. Also update svg attributes
    */
   updateSVGElement() {
     super.updateSVGElement();
 
-    if (this.state === 0) {
-      // View state
-      this.textEl.style["display"] = "block";
-      this.textInputEl.style["display"] = "none";
-    } else {
-      // Edit state
-      this.textEl.style["display"] = "none";
-      this.textInputEl.style["display"] = "block";
-    }
+    this.textEl.setAttribute("width", this.#width);
+    this.textEl.innerHTML = this.#text;
+    this.textEl.style["font"] = this.#font;
+    this.textEl.style["color"] = this.#color;
+    this.inputEl.style["width"] = this.#width + "px";
+    this.inputEl.style["font"] = this.#font;
+    this.textInputEl.setAttribute("width", this.#width);
   }
 }

@@ -1436,10 +1436,7 @@ var Component = /*#__PURE__*/function () {
 
       if (this.canvas) {
         this.canvas.updateAllConnections();
-      } // emits a cnui:change event passing the entire object
-
-
-      this.events.emit("cnui:change", this);
+      }
     }
     /**
      * Add a new component as child component.
@@ -2968,7 +2965,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       if (!_classPrivateFieldGet(this, _commentComp)) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
-          _this3.createCommentComponent();
+          _this3.createCommentComponent("write a comment", 0, _this3.height + 10, true);
         }));
       } else {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
@@ -2998,15 +2995,18 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       var comment = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "write a comment";
       var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.height + 10;
-      var initialEdit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+      var initialEdit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
-      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(comment, initialEdit).setup());
+      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(comment).setup());
 
       _classPrivateFieldGet(this, _commentComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
       _classPrivateFieldGet(this, _commentComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
       _classPrivateFieldGet(this, _commentComp).pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(x, y);
       _classPrivateFieldGet(this, _commentComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
-      this.addComponent(_classPrivateFieldGet(this, _commentComp)); // Register to "cnui:change" to update title and meta info about it
+      this.addComponent(_classPrivateFieldGet(this, _commentComp));
+
+      _classPrivateFieldGet(this, _commentComp).setEditing(initialEdit); // Register to "cnui:change" to update title and meta info about it
+
 
       _classPrivateFieldGet(this, _commentComp).events.on("cnui:change", function (component) {
         // Prevent empty title
@@ -3744,8 +3744,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
 
-function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
-
 function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
 
 /**
@@ -3780,8 +3778,6 @@ var _state = new WeakMap();
 var _textInputEl = new WeakMap();
 
 var _inputEl = new WeakMap();
-
-var _setEditing = new WeakSet();
 
 var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
   _inherits(CnodesEditableTextComponent, _Component);
@@ -3818,7 +3814,6 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
    * Construct a new Text object with  particular text, and an
    * option for multiline
    * @param {string} text The text to show
-   * @param {initialEdit} initialEdit The editor in initially in edit mode?
    */
   function CnodesEditableTextComponent(text) {
     var _this;
@@ -3828,8 +3823,6 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, CnodesEditableTextComponent);
 
     _this = _super.call(this);
-
-    _setEditing.add(_assertThisInitialized(_this));
 
     _font.set(_assertThisInitialized(_this), {
       writable: true,
@@ -3873,10 +3866,6 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
 
     _classPrivateFieldSet(_assertThisInitialized(_this), _text, text);
 
-    if (initialEdit) {
-      _classPrivateMethodGet(_assertThisInitialized(_this), _setEditing, _setEditing2).call(_assertThisInitialized(_this), true);
-    }
-
     return _this;
   }
 
@@ -3891,7 +3880,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
-        _classPrivateMethodGet(_this2, _setEditing, _setEditing2).call(_this2, true);
+        _this2.setEditing(true);
       })];
     }
     /**
@@ -3900,22 +3889,52 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
      */
 
   }, {
-    key: "createElement",
+    key: "setEditing",
+    value: function setEditing(editMode) {
+      var _this3 = this;
 
+      if (editMode) {
+        _classPrivateFieldSet(this, _state, 1);
+
+        _classPrivateFieldGet(this, _inputEl).value = _classPrivateFieldGet(this, _text);
+        _classPrivateFieldGet(this, _textEl).style["display"] = "none";
+        _classPrivateFieldGet(this, _textInputEl).style["display"] = "block";
+        setTimeout(function () {
+          _classPrivateFieldGet(_this3, _inputEl).focus();
+
+          _classPrivateFieldGet(_this3, _inputEl).select();
+        });
+        this.events.emit("cnui:edit");
+      } else {
+        _classPrivateFieldSet(this, _state, 0);
+
+        _classPrivateFieldSet(this, _text, _classPrivateFieldGet(this, _inputEl).value);
+
+        _classPrivateFieldGet(this, _textEl).style["display"] = "block";
+        _classPrivateFieldGet(this, _textInputEl).style["display"] = "none";
+        this.events.emit("cnui:change", this);
+      }
+
+      this.updateSVGElement();
+    }
     /**
      * Lets create the element
      */
+
+  }, {
+    key: "createElement",
     value: function createElement() {
-      var _this3 = this;
+      var _this4 = this;
 
       var groupEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      this.textEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      this.textInputEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+
+      _classPrivateFieldSet(this, _textEl, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
+
+      _classPrivateFieldSet(this, _textInputEl, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
 
       _classPrivateFieldSet(this, _inputEl, document.createElement("textarea"));
 
-      _classPrivateFieldGet(this, _inputEl).setAttribute("value", this.text);
-
+      _classPrivateFieldGet(this, _inputEl).value = _classPrivateFieldGet(this, _text);
       _classPrivateFieldGet(this, _inputEl).style["resize"] = "none";
       _classPrivateFieldGet(this, _inputEl).style["height"] = "100px";
       _classPrivateFieldGet(this, _inputEl).style["width"] = _classPrivateFieldGet(this, _width) + "px";
@@ -3926,7 +3945,6 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       _classPrivateFieldGet(this, _inputEl).style["background-color"] = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_BACKGROUND;
       _classPrivateFieldGet(this, _inputEl).style["overflow"] = "hidden";
       _classPrivateFieldGet(this, _inputEl).style["color"] = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_COLOR;
-      _classPrivateFieldGet(this, _inputEl).style["z-index"] = 1000;
       /** Simply disable pointer events */
 
       _classPrivateFieldGet(this, _inputEl).addEventListener("pointerdown", function (e) {
@@ -3940,15 +3958,12 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       });
 
       _classPrivateFieldGet(this, _inputEl).addEventListener("blur", function () {
-        _classPrivateMethodGet(_this3, _setEditing, _setEditing2).call(_this3, false);
+        _this4.setEditing(false);
       });
 
       _classPrivateFieldGet(this, _inputEl).addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
-          _this3.state = 0;
-          _this3.text = _classPrivateFieldGet(_this3, _inputEl).value;
-
-          _this3.updateSVGElement();
+          _this4.setEditing(false);
         }
       });
 
@@ -3968,11 +3983,12 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       this.textInputEl.setAttribute("height", 100);
       this.textInputEl.style["overflow"] = "visible";
       this.textInputEl.style["display"] = "none";
+      this.textInputEl.setAttribute("hidden", "1");
       this.textInputEl.appendChild(_classPrivateFieldGet(this, _inputEl));
       groupEl.setAttribute("x", 0);
       groupEl.setAttribute("y", 0);
       groupEl.addEventListener("dblclick", function () {
-        _classPrivateMethodGet(_this3, _setEditing, _setEditing2).call(_this3, true);
+        _this4.setEditing(true);
       });
       groupEl.appendChild(this.textEl);
       groupEl.appendChild(this.textInputEl);
@@ -3981,8 +3997,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     /**
      * Update the component element according to x and y local coordinates,
      * if this component is a child component, coordinates in canvas space
-     * are computed. This particular ovverride is made to manage the "edit"
-     * phase
+     * are computed. Also update svg attributes
      */
 
   }, {
@@ -3990,23 +4005,18 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     value: function updateSVGElement() {
       _get(_getPrototypeOf(CnodesEditableTextComponent.prototype), "updateSVGElement", this).call(this);
 
-      if (this.state === 0) {
-        // View state
-        this.textEl.style["display"] = "block";
-        this.textInputEl.style["display"] = "none";
-      } else {
-        // Edit state
-        this.textEl.style["display"] = "none";
-        this.textInputEl.style["display"] = "block";
-      }
+      this.textEl.setAttribute("width", _classPrivateFieldGet(this, _width));
+      this.textEl.innerHTML = _classPrivateFieldGet(this, _text);
+      this.textEl.style["font"] = _classPrivateFieldGet(this, _font);
+      this.textEl.style["color"] = _classPrivateFieldGet(this, _color);
+      this.inputEl.style["width"] = _classPrivateFieldGet(this, _width) + "px";
+      this.inputEl.style["font"] = _classPrivateFieldGet(this, _font);
+      this.textInputEl.setAttribute("width", _classPrivateFieldGet(this, _width));
     }
   }, {
     key: "textEl",
     get: function get() {
       return _classPrivateFieldGet(this, _textEl);
-    },
-    set: function set(val) {
-      return _classPrivateFieldSet(this, _textEl, val);
     }
   }, {
     key: "text",
@@ -4016,9 +4026,8 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     set: function set(val) {
       _classPrivateFieldSet(this, _text, val);
 
-      if (this.textEl) {
-        this.textEl.innerHTML = _classPrivateFieldGet(this, _text);
-      }
+      _classPrivateFieldGet(this, _inputEl).value = val;
+      this.updateSVGElement();
     }
   }, {
     key: "width",
@@ -4028,9 +4037,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     set: function set(val) {
       _classPrivateFieldSet(this, _width, val);
 
-      this.textEl.setAttribute("width", val);
-      this.textInputEl.setAttribute("width", val);
-      this.inputEl.style["width"] = val + "px";
+      this.updateSVGElement();
     }
   }, {
     key: "color",
@@ -4040,7 +4047,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     set: function set(val) {
       _classPrivateFieldSet(this, _color, val);
 
-      this.textEl.style["color"] = _classPrivateFieldGet(this, _color);
+      this.updateSVGElement();
     }
   }, {
     key: "font",
@@ -4050,65 +4057,27 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     set: function set(val) {
       _classPrivateFieldSet(this, _font, val);
 
-      this.textEl.style["font"] = _classPrivateFieldGet(this, _font);
-      this.inputEl.style["font"] = _classPrivateFieldGet(this, _font);
+      this.updateSVGElement();
     }
   }, {
     key: "textInputEl",
     get: function get() {
       return _classPrivateFieldGet(this, _textInputEl);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _textInputEl, val);
     }
   }, {
     key: "inputEl",
     get: function get() {
       return _classPrivateFieldGet(this, _inputEl);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _inputEl, val);
     }
   }, {
     key: "state",
     get: function get() {
       return _classPrivateFieldGet(this, _state);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _state, val);
     }
   }]);
 
   return CnodesEditableTextComponent;
 }(_canvas_component__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-var _setEditing2 = function _setEditing2(editMode) {
-  var _this4 = this;
-
-  if (editMode) {
-    setTimeout(function () {
-      _this4.state = 1;
-
-      _this4.updateSVGElement();
-
-      _classPrivateFieldGet(_this4, _inputEl).value = _classPrivateFieldGet(_this4, _text);
-
-      _classPrivateFieldGet(_this4, _inputEl).focus();
-
-      _classPrivateFieldGet(_this4, _inputEl).select();
-
-      _this4.events.emit("cnui:edit");
-    });
-  } else {
-    setTimeout(function () {
-      _this4.state = 0;
-
-      _this4.updateSVGElement();
-
-      _this4.text = _classPrivateFieldGet(_this4, _inputEl).value;
-    });
-  }
-};
 
 /***/ }),
 

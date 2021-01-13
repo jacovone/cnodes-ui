@@ -245,9 +245,6 @@ export class Component {
     if (this.canvas) {
       this.canvas.updateAllConnections();
     }
-
-    // emits a cnui:change event passing the entire object
-    this.events.emit("cnui:change", this);
   }
 
   /**

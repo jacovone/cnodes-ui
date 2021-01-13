@@ -411,7 +411,12 @@ export class CnodeComponent extends Component {
         new MenuItem(
           `<tspan alignment-baseline="middle">Add comment</tspan>`,
           () => {
-            this.createCommentComponent();
+            this.createCommentComponent(
+              "write a comment",
+              0,
+              this.height + 10,
+              true
+            );
           }
         )
       );
@@ -443,17 +448,16 @@ export class CnodeComponent extends Component {
     comment = "write a comment",
     x = 0,
     y = this.height + 10,
-    initialEdit = true
+    initialEdit = false
   ) {
-    this.#commentComp = new CnodesEditableTextComponent(
-      comment,
-      initialEdit
-    ).setup();
+    this.#commentComp = new CnodesEditableTextComponent(comment).setup();
     this.#commentComp.font = Theme.current.NODE_COMMENT_FONT;
     this.#commentComp.color = Theme.current.NODE_COMMENT_COLOR;
     this.#commentComp.pos = new Position(x, y);
     this.#commentComp.width = Theme.current.NODE_WIDTH;
     this.addComponent(this.#commentComp);
+
+    this.#commentComp.setEditing(initialEdit);
 
     // Register to "cnui:change" to update title and meta info about it
     this.#commentComp.events.on("cnui:change", (component) => {

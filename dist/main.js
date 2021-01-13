@@ -7963,6 +7963,7 @@ var Env = /*#__PURE__*/function () {
                 type: inp.type,
                 value: inp.value,
                 canEditName: inp.canEditName,
+                canEditType: inp.canEditType,
                 peer: null
               };
             }),
@@ -7975,6 +7976,7 @@ var Env = /*#__PURE__*/function () {
                 value: outp.value,
                 cached: outp.cached,
                 canEditName: outp.canEditName,
+                canEditType: outp.canEditType,
                 peers: []
               };
             }),
@@ -13225,7 +13227,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
     _this.canAddOutput = true;
     _this.functional = true;
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)]; // Sets all output as changeable in terms of name
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)]; // Sets all output as changeable in terms of name and type
 
     var _iterator = _createForOfIteratorHelper(_this.outputs),
         _step;

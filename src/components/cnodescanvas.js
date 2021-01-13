@@ -250,6 +250,14 @@ export class CnodesCanvas extends Canvas {
       if (n.meta.titlePos) {
         comp.titleComp.pos = new Position(n.meta.titlePos.x, n.meta.titlePos.y);
       }
+      if (n.meta.comment) {
+        comp.createCommentComponent(
+          n.meta.comment.text,
+          n.meta.comment.pos.x,
+          n.meta.comment.pos.y,
+          false
+        );
+      }
     }
 
     // Setup connections

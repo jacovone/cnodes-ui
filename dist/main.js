@@ -2745,34 +2745,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     value: function updateSubcomponents() {
       var _this2 = this;
 
-      var posY = 30 + 0.5 * _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Title
-
-      if (!_classPrivateFieldGet(this, _titleComp)) {
-        var _this$node$meta;
-
-        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(this.node.title).setup()); // Register to "cnui:change" to update title and meta info about it
-
-
-        _classPrivateFieldGet(this, _titleComp).events.on("cnui:change", function (component) {
-          // Update UI data in meta info
-          _this2.node.title = component.text;
-
-          if (!_this2.node.meta) {
-            _this2.node.meta = {};
-          }
-
-          _this2.node.meta.titlePos = {
-            x: component.pos.x,
-            y: component.pos.y
-          };
-        });
-
-        _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
-        _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
-        _classPrivateFieldGet(this, _titleComp).pos = (_this$node$meta = this.node.meta) !== null && _this$node$meta !== void 0 && _this$node$meta.titlePos ? new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y) : new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, -8);
-        this.addComponent(_classPrivateFieldGet(this, _titleComp));
-      } // Prev
-
+      var posY = 30 + 0.5 * _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Prev
 
       if (this.node.prev) {
         var nComp = this.node.prev.__comp;
@@ -2861,11 +2834,46 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
           _nComp3.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(0, posY);
           posY += 30;
-        }
+        } // Title
+
       } catch (err) {
         _iterator3.e(err);
       } finally {
         _iterator3.f();
+      }
+
+      if (!_classPrivateFieldGet(this, _titleComp)) {
+        var _this$node$meta;
+
+        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(this.node.title).setup());
+
+        _classPrivateFieldGet(this, _titleComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
+        _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT; // Register to "cnui:change" to update title and meta info about it
+
+        _classPrivateFieldGet(this, _titleComp).events.on("cnui:change", function (component) {
+          // Prevent empty title
+          if (component.text === "") {
+            component.text = "title";
+          } // Update UI data in meta info
+
+
+          _this2.node.title = component.text;
+
+          if (!_this2.node.meta) {
+            _this2.node.meta = {};
+          }
+
+          _this2.node.meta.titlePos = {
+            x: component.pos.x,
+            y: component.pos.y
+          };
+        });
+
+        _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
+        _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
+        _classPrivateFieldGet(this, _titleComp).pos = (_this$node$meta = this.node.meta) !== null && _this$node$meta !== void 0 && _this$node$meta.titlePos ? new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y) : new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, -25);
+        _classPrivateFieldGet(this, _titleComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - (10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS);
+        this.addComponent(_classPrivateFieldGet(this, _titleComp));
       }
     }
     /**
@@ -2960,13 +2968,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       if (!_classPrivateFieldGet(this, _commentComp)) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
-          _classPrivateFieldSet(_this3, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent("comment").setup());
-
-          _classPrivateFieldGet(_this3, _commentComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
-          _classPrivateFieldGet(_this3, _commentComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
-          _classPrivateFieldGet(_this3, _commentComp).pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(0, _this3.height + 30);
-
-          _this3.addComponent(_classPrivateFieldGet(_this3, _commentComp));
+          _this3.createCommentComponent();
         }));
       } else {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
@@ -2977,6 +2979,54 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       }
 
       return items;
+    }
+    /**
+     * This method creates a comment component and attach it to the
+     * node component. Take the x,y coordinates in input to place this
+     * component, by default at the bottom of the node
+     * @param {string} comment The text for the comment
+     * @param {number} x The x coordinate for the comment component
+     * @param {number} y The y coordinate for the comment component
+     * @param {boolean} initialEdit The comment starts in edit mode?
+     */
+
+  }, {
+    key: "createCommentComponent",
+    value: function createCommentComponent() {
+      var _this4 = this;
+
+      var comment = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "write a comment";
+      var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.height + 10;
+      var initialEdit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(comment, initialEdit).setup());
+
+      _classPrivateFieldGet(this, _commentComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
+      _classPrivateFieldGet(this, _commentComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
+      _classPrivateFieldGet(this, _commentComp).pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(x, y);
+      _classPrivateFieldGet(this, _commentComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
+      this.addComponent(_classPrivateFieldGet(this, _commentComp)); // Register to "cnui:change" to update title and meta info about it
+
+      _classPrivateFieldGet(this, _commentComp).events.on("cnui:change", function (component) {
+        // Prevent empty title
+        if (component.text === "") {
+          component.text = "comment";
+        } // Update UI data in meta info
+
+
+        if (!_this4.node.meta) {
+          _this4.node.meta = {};
+        }
+
+        _this4.node.meta.comment = {
+          text: component.text,
+          pos: {
+            x: component.pos.x,
+            y: component.pos.y
+          }
+        };
+      });
     }
     /**
      * Remove the internal node reference to the component
@@ -3297,6 +3347,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
           if (n.meta.titlePos) {
             comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
+          }
+
+          if (n.meta.comment) {
+            comp.createCommentComponent(n.meta.comment.text, n.meta.comment.pos.x, n.meta.comment.pos.y, false);
           }
         } // Setup connections
 
@@ -3688,9 +3742,11 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
 function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
 
 /**
  * cnodes-ui
@@ -3715,15 +3771,17 @@ var _text = new WeakMap();
 
 var _color = new WeakMap();
 
+var _width = new WeakMap();
+
 var _textEl = new WeakMap();
 
 var _state = new WeakMap();
 
-var _multiLine = new WeakMap();
-
 var _textInputEl = new WeakMap();
 
 var _inputEl = new WeakMap();
+
+var _setEditing = new WeakSet();
 
 var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
   _inherits(CnodesEditableTextComponent, _Component);
@@ -3736,6 +3794,8 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
 
   /** Color of the text */
 
+  /** The width of the text / editor */
+
   /**
    * The text component
    */
@@ -3747,24 +3807,29 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
    */
 
   /**
-   * If the component is moultiLine will present a TEXTAREA
-   * during EDIT and generate a <pre> HTML tag to preserve
-   * carriage returns
-   */
-
-  /**
    * The text input element container
    */
 
   /**
    * The text input element
    */
+
+  /**
+   * Construct a new Text object with  particular text, and an
+   * option for multiline
+   * @param {string} text The text to show
+   * @param {initialEdit} initialEdit The editor in initially in edit mode?
+   */
   function CnodesEditableTextComponent(text) {
     var _this;
+
+    var initialEdit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     _classCallCheck(this, CnodesEditableTextComponent);
 
     _this = _super.call(this);
+
+    _setEditing.add(_assertThisInitialized(_this));
 
     _font.set(_assertThisInitialized(_this), {
       writable: true,
@@ -3781,6 +3846,11 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       value: "black"
     });
 
+    _width.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: 100
+    });
+
     _textEl.set(_assertThisInitialized(_this), {
       writable: true,
       value: null
@@ -3789,11 +3859,6 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     _state.set(_assertThisInitialized(_this), {
       writable: true,
       value: 0
-    });
-
-    _multiLine.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: false
     });
 
     _textInputEl.set(_assertThisInitialized(_this), {
@@ -3806,74 +3871,76 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       value: null
     });
 
-    _this.text = text;
+    _classPrivateFieldSet(_assertThisInitialized(_this), _text, text);
+
+    if (initialEdit) {
+      _classPrivateMethodGet(_assertThisInitialized(_this), _setEditing, _setEditing2).call(_assertThisInitialized(_this), true);
+    }
+
     return _this;
   }
 
   _createClass(CnodesEditableTextComponent, [{
-    key: "setup",
+    key: "getContextMenuItems",
 
-    /**
-     * Sets up this component
-     */
-    value: function setup() {
-      _get(_getPrototypeOf(CnodesEditableTextComponent.prototype), "setup", this).call(this);
-
-      this.textEl.style = "user-select: none; cursor: move";
-      this.textEl.setAttribute("fill", _classPrivateFieldGet(this, _color));
-      this.textEl.setAttribute("x", "0");
-      this.textEl.setAttribute("y", "0");
-      this.textEl.innerHTML = this.text;
-      return this;
-    }
     /**
      * Returns the array of context menu items. If the component
      * returns null, no contextual menu is shown
      */
-
-  }, {
-    key: "getContextMenuItems",
     value: function getContextMenuItems() {
       var _this2 = this;
 
       return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
-        setTimeout(function () {
-          _this2.state = 1;
-
-          _this2.updateSVGElement();
-
-          _classPrivateFieldGet(_this2, _inputEl).focus();
-
-          _classPrivateFieldGet(_this2, _inputEl).select();
-
-          _this2.events.emit("cnui:edit");
-        });
+        _classPrivateMethodGet(_this2, _setEditing, _setEditing2).call(_this2, true);
       })];
     }
     /**
-     * Lets create the element
+     * Sets the editing mode
+     * @param {boolean} editMode true = Edit Mode, false = View Mode
      */
 
   }, {
     key: "createElement",
+
+    /**
+     * Lets create the element
+     */
     value: function createElement() {
       var _this3 = this;
 
       var groupEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      this.textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      this.textEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
       this.textInputEl = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
 
-      _classPrivateFieldSet(this, _inputEl, document.createElement("input"));
-
-      _classPrivateFieldGet(this, _inputEl).setAttribute("type", "text");
+      _classPrivateFieldSet(this, _inputEl, document.createElement("textarea"));
 
       _classPrivateFieldGet(this, _inputEl).setAttribute("value", this.text);
 
-      _classPrivateFieldGet(this, _inputEl).addEventListener("blur", function () {
-        _this3.state = 0;
-        _this3.text = _classPrivateFieldGet(_this3, _inputEl).value;
+      _classPrivateFieldGet(this, _inputEl).style["resize"] = "none";
+      _classPrivateFieldGet(this, _inputEl).style["height"] = "100px";
+      _classPrivateFieldGet(this, _inputEl).style["width"] = _classPrivateFieldGet(this, _width) + "px";
+      _classPrivateFieldGet(this, _inputEl).style["outline-width"] = "0";
+      _classPrivateFieldGet(this, _inputEl).style["border"] = "1px dashed lightgray";
+      _classPrivateFieldGet(this, _inputEl).style["padding"] = "0";
+      _classPrivateFieldGet(this, _inputEl).style["margin"] = "-1px";
+      _classPrivateFieldGet(this, _inputEl).style["background-color"] = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_BACKGROUND;
+      _classPrivateFieldGet(this, _inputEl).style["overflow"] = "hidden";
+      _classPrivateFieldGet(this, _inputEl).style["color"] = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_COLOR;
+      _classPrivateFieldGet(this, _inputEl).style["z-index"] = 1000;
+      /** Simply disable pointer events */
 
-        _this3.updateSVGElement();
+      _classPrivateFieldGet(this, _inputEl).addEventListener("pointerdown", function (e) {
+        e.stopPropagation();
+      });
+      /** Simply disable wheel events */
+
+
+      _classPrivateFieldGet(this, _inputEl).addEventListener("wheel", function (e) {
+        e.stopPropagation();
+      });
+
+      _classPrivateFieldGet(this, _inputEl).addEventListener("blur", function () {
+        _classPrivateMethodGet(_this3, _setEditing, _setEditing2).call(_this3, false);
       });
 
       _classPrivateFieldGet(this, _inputEl).addEventListener("keydown", function (e) {
@@ -3885,28 +3952,28 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
         }
       });
 
-      this.textInputEl.appendChild(_classPrivateFieldGet(this, _inputEl));
       this.textEl.setAttribute("x", 0);
       this.textEl.setAttribute("y", 0);
-      this.textEl.setAttribute("width", 300);
-      this.textEl.setAttribute("height", 30);
+      this.textEl.setAttribute("height", 1);
+      this.textEl.setAttribute("width", _classPrivateFieldGet(this, _width));
+      this.textEl.style["overflow"] = "visible";
+      this.textEl.style["color"] = _classPrivateFieldGet(this, _color);
       this.textEl.style["display"] = "block";
-      groupEl.addEventListener("dblclick", function () {
-        _this3.state = 1;
-
-        _this3.updateSVGElement();
-
-        _classPrivateFieldGet(_this3, _inputEl).focus();
-
-        _classPrivateFieldGet(_this3, _inputEl).select();
-
-        _this3.events.emit("cnui:edit");
-      });
+      this.textEl.style["user-select"] = "none";
+      this.textEl.style["cursor"] = "move";
+      this.textEl.innerHTML = this.text;
       this.textInputEl.setAttribute("x", 0);
-      this.textInputEl.setAttribute("y", -20);
-      this.textInputEl.setAttribute("width", 300);
-      this.textInputEl.setAttribute("height", 30);
+      this.textInputEl.setAttribute("y", 0);
+      this.textInputEl.setAttribute("width", _classPrivateFieldGet(this, _width));
+      this.textInputEl.setAttribute("height", 100);
+      this.textInputEl.style["overflow"] = "visible";
       this.textInputEl.style["display"] = "none";
+      this.textInputEl.appendChild(_classPrivateFieldGet(this, _inputEl));
+      groupEl.setAttribute("x", 0);
+      groupEl.setAttribute("y", 0);
+      groupEl.addEventListener("dblclick", function () {
+        _classPrivateMethodGet(_this3, _setEditing, _setEditing2).call(_this3, true);
+      });
       groupEl.appendChild(this.textEl);
       groupEl.appendChild(this.textInputEl);
       return groupEl;
@@ -3954,6 +4021,18 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
+    key: "width",
+    get: function get() {
+      return _classPrivateFieldGet(this, _width);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _width, val);
+
+      this.textEl.setAttribute("width", val);
+      this.textInputEl.setAttribute("width", val);
+      this.inputEl.style["width"] = val + "px";
+    }
+  }, {
     key: "color",
     get: function get() {
       return _classPrivateFieldGet(this, _color);
@@ -3961,7 +4040,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     set: function set(val) {
       _classPrivateFieldSet(this, _color, val);
 
-      this.textEl.setAttribute("fill", _classPrivateFieldGet(this, _color));
+      this.textEl.style["color"] = _classPrivateFieldGet(this, _color);
     }
   }, {
     key: "font",
@@ -3972,6 +4051,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       _classPrivateFieldSet(this, _font, val);
 
       this.textEl.style["font"] = _classPrivateFieldGet(this, _font);
+      this.inputEl.style["font"] = _classPrivateFieldGet(this, _font);
     }
   }, {
     key: "textInputEl",
@@ -3997,18 +4077,38 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     set: function set(val) {
       _classPrivateFieldSet(this, _state, val);
     }
-  }, {
-    key: "multiLine",
-    get: function get() {
-      return _classPrivateFieldGet(this, _multiLine);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _multiLine, val);
-    }
   }]);
 
   return CnodesEditableTextComponent;
 }(_canvas_component__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+var _setEditing2 = function _setEditing2(editMode) {
+  var _this4 = this;
+
+  if (editMode) {
+    setTimeout(function () {
+      _this4.state = 1;
+
+      _this4.updateSVGElement();
+
+      _classPrivateFieldGet(_this4, _inputEl).value = _classPrivateFieldGet(_this4, _text);
+
+      _classPrivateFieldGet(_this4, _inputEl).focus();
+
+      _classPrivateFieldGet(_this4, _inputEl).select();
+
+      _this4.events.emit("cnui:edit");
+    });
+  } else {
+    setTimeout(function () {
+      _this4.state = 0;
+
+      _this4.updateSVGElement();
+
+      _this4.text = _classPrivateFieldGet(_this4, _inputEl).value;
+    });
+  }
+};
 
 /***/ }),
 
@@ -6554,7 +6654,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_TITLE_FONT",
     get: function get() {
-      return "bold 18px verdana";
+      return "bold 16px verdana";
     }
   }, {
     key: "NODE_SYMBOL_STROKE_WIDTH",
@@ -6580,6 +6680,16 @@ var Theme = /*#__PURE__*/function () {
     key: "NODE_FUNCTIONAL_SIGN_COLOR",
     get: function get() {
       return "#008EBF";
+    }
+  }, {
+    key: "NODE_EDITORS_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_EDITORS_BACKGROUND",
+    get: function get() {
+      return "rgba(250,250,250,0.7)";
     } // Sockets
 
   }, {
@@ -6641,7 +6751,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_COMMENT_FONT",
     get: function get() {
-      return "italic 18px sans-serif";
+      return "italic 16px sans-serif";
     }
   }, {
     key: "NODE_COMMENT_COLOR",

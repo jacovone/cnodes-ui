@@ -197,36 +197,6 @@ export class CnodeComponent extends Component {
   updateSubcomponents() {
     let posY = 30 + 0.5 * Theme.current.NODE_BORDER_RADIUS;
 
-    // Title
-    if (!this.#titleComp) {
-      this.#titleComp = new CnodesEditableTextComponent(
-        this.node.title
-      ).setup();
-
-      // Register to "cnui:change" to update title and meta info about it
-      this.#titleComp.events.on("cnui:change", (component) => {
-        // Update UI data in meta info
-        this.node.title = component.text;
-        if (!this.node.meta) {
-          this.node.meta = {};
-        }
-        this.node.meta.titlePos = {
-          x: component.pos.x,
-          y: component.pos.y,
-        };
-      });
-
-      this.#titleComp.font = Theme.current.NODE_TITLE_FONT;
-
-      this.#titleComp.color = this.node.functional
-        ? Theme.current.NODE_FUNCTIONAL_TITLE_COLOR
-        : Theme.current.NODE_TITLE_COLOR;
-      this.#titleComp.pos = this.node.meta?.titlePos
-        ? new Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y)
-        : new Position(10 + Theme.current.NODE_BORDER_RADIUS, -8);
-      this.addComponent(this.#titleComp);
-    }
-
     // Prev
     if (this.node.prev) {
       let nComp = this.node.prev.__comp;
@@ -289,6 +259,44 @@ export class CnodeComponent extends Component {
       nComp.updateSVGElement();
       nComp.pos = new Position(0, posY);
       posY += 30;
+    }
+
+    // Title
+    if (!this.#titleComp) {
+      this.#titleComp = new CnodesEditableTextComponent(
+        this.node.title
+      ).setup();
+      this.#titleComp.color = Theme.current.NODE_TITLE_COLOR;
+      this.#titleComp.font = Theme.current.NODE_TITLE_FONT;
+
+      // Register to "cnui:change" to update title and meta info about it
+      this.#titleComp.events.on("cnui:change", (component) => {
+        // Prevent empty title
+        if (component.text === "") {
+          component.text = "title";
+        }
+        // Update UI data in meta info
+        this.node.title = component.text;
+        if (!this.node.meta) {
+          this.node.meta = {};
+        }
+        this.node.meta.titlePos = {
+          x: component.pos.x,
+          y: component.pos.y,
+        };
+      });
+
+      this.#titleComp.font = Theme.current.NODE_TITLE_FONT;
+
+      this.#titleComp.color = this.node.functional
+        ? Theme.current.NODE_FUNCTIONAL_TITLE_COLOR
+        : Theme.current.NODE_TITLE_COLOR;
+      this.#titleComp.pos = this.node.meta?.titlePos
+        ? new Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y)
+        : new Position(10 + Theme.current.NODE_BORDER_RADIUS, -25);
+      this.#titleComp.width =
+        Theme.current.NODE_WIDTH - (10 + Theme.current.NODE_BORDER_RADIUS);
+      this.addComponent(this.#titleComp);
     }
   }
 
@@ -403,13 +411,7 @@ export class CnodeComponent extends Component {
         new MenuItem(
           `<tspan alignment-baseline="middle">Add comment</tspan>`,
           () => {
-            this.#commentComp = new CnodesEditableTextComponent(
-              "comment"
-            ).setup();
-            this.#commentComp.font = Theme.current.NODE_COMMENT_FONT;
-            this.#commentComp.color = Theme.current.NODE_COMMENT_COLOR;
-            this.#commentComp.pos = new Position(0, this.height + 30);
-            this.addComponent(this.#commentComp);
+            this.createCommentComponent();
           }
         )
       );
@@ -426,6 +428,51 @@ export class CnodeComponent extends Component {
     }
 
     return items;
+  }
+
+  /**
+   * This method creates a comment component and attach it to the
+   * node component. Take the x,y coordinates in input to place this
+   * component, by default at the bottom of the node
+   * @param {string} comment The text for the comment
+   * @param {number} x The x coordinate for the comment component
+   * @param {number} y The y coordinate for the comment component
+   * @param {boolean} initialEdit The comment starts in edit mode?
+   */
+  createCommentComponent(
+    comment = "write a comment",
+    x = 0,
+    y = this.height + 10,
+    initialEdit = true
+  ) {
+    this.#commentComp = new CnodesEditableTextComponent(
+      comment,
+      initialEdit
+    ).setup();
+    this.#commentComp.font = Theme.current.NODE_COMMENT_FONT;
+    this.#commentComp.color = Theme.current.NODE_COMMENT_COLOR;
+    this.#commentComp.pos = new Position(x, y);
+    this.#commentComp.width = Theme.current.NODE_WIDTH;
+    this.addComponent(this.#commentComp);
+
+    // Register to "cnui:change" to update title and meta info about it
+    this.#commentComp.events.on("cnui:change", (component) => {
+      // Prevent empty title
+      if (component.text === "") {
+        component.text = "comment";
+      }
+      // Update UI data in meta info
+      if (!this.node.meta) {
+        this.node.meta = {};
+      }
+      this.node.meta.comment = {
+        text: component.text,
+        pos: {
+          x: component.pos.x,
+          y: component.pos.y,
+        },
+      };
+    });
   }
 
   /**

@@ -66,7 +66,7 @@ export class Theme {
     return "#069DD1";
   }
   get NODE_TITLE_FONT() {
-    return "bold 18px verdana";
+    return "bold 16px verdana";
   }
 
   get NODE_SYMBOL_STROKE_WIDTH() {
@@ -85,6 +85,14 @@ export class Theme {
 
   get NODE_FUNCTIONAL_SIGN_COLOR() {
     return "#008EBF";
+  }
+
+  get NODE_EDITORS_COLOR() {
+    return "black";
+  }
+
+  get NODE_EDITORS_BACKGROUND() {
+    return "rgba(250,250,250,0.7)";
   }
 
   // Sockets
@@ -127,7 +135,7 @@ export class Theme {
   // Comments
 
   get NODE_COMMENT_FONT() {
-    return "italic 18px sans-serif";
+    return "italic 16px sans-serif";
   }
   get NODE_COMMENT_COLOR() {
     return "lightgray";

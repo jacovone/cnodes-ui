@@ -918,6 +918,32 @@ var Canvas = /*#__PURE__*/function () {
       }
     }
     /**
+     * Update all connections for a component in terms of SVG properties. This is
+     * important because when components are moved, this ensures that
+     * connections will follow them
+     * @param {Component} component The component for which update connections
+     */
+
+  }, {
+    key: "updateAllConnectionsFor",
+    value: function updateAllConnectionsFor(component) {
+      var conns = this.getConnectionsFor(component);
+
+      var _iterator4 = _createForOfIteratorHelper(conns),
+          _step4;
+
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var connection = _step4.value;
+          connection.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+    }
+    /**
      * This method extract all connections in the canvas, that have
      * the source or the target SocketComponent as endpoint
      * @param {SocketComponent} socket The socket component for which search the connection
@@ -1416,7 +1442,7 @@ var Component = /*#__PURE__*/function () {
     value: function updateSVGElement() {
       var pos = this.absPos;
 
-      _classPrivateFieldGet(this, _componentEl).setAttribute("transform", "translate(".concat(pos.x, ",").concat(pos.y, ")")); // Also update all children
+      _classPrivateFieldGet(this, _componentEl).setAttribute("transform", "translate(".concat(pos.x, ",").concat(pos.y, ")")); // Also update all children and its connections
 
 
       var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components)),
@@ -1426,16 +1452,12 @@ var Component = /*#__PURE__*/function () {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var c = _step.value;
           c.updateSVGElement();
-        } // Update all connections
-
+          this.canvas.updateAllConnectionsFor(c);
+        }
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
-      }
-
-      if (this.canvas) {
-        this.canvas.updateAllConnections();
       }
     }
     /**
@@ -10326,7 +10348,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "AReduce");
     _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false, true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true)];
+    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false, true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true)];
     _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
@@ -10369,7 +10391,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
       } // Set the "Array" output
 
 
-      this.output("Array").value = reduced;
+      this.output("Val").value = reduced;
 
       if (!this.functional) {
         // Set the "Array" output

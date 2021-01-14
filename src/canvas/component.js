@@ -239,14 +239,10 @@ export class Component {
     let pos = this.absPos;
     this.#componentEl.setAttribute("transform", `translate(${pos.x},${pos.y})`);
 
-    // Also update all children
+    // Also update all children and its connections
     for (let c of this.#components) {
       c.updateSVGElement();
-    }
-
-    // Update all connections
-    if (this.canvas) {
-      this.canvas.updateAllConnections();
+      this.canvas.updateAllConnectionsFor(c);
     }
   }
 

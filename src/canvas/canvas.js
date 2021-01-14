@@ -81,11 +81,15 @@ export class Canvas {
     el.appendChild(this.#svgEl);
 
     // Background color
-    this.#svgEl.style["background-color"] = Theme.current.CANVAS_BACKGROUND_COLOR;
+    this.#svgEl.style["background-color"] =
+      Theme.current.CANVAS_BACKGROUND_COLOR;
 
     // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components
-    this.#connectionsEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    this.#connectionsEl = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "g"
+    );
     this.#svgEl.appendChild(this.#connectionsEl);
 
     this.#adaptSVGSize();
@@ -179,7 +183,10 @@ export class Canvas {
    * stored in private fields #vbX, #vbY, #vbWidth and #vbHeight
    */
   #updateSVGViewBox() {
-    this.#svgEl.setAttribute("viewBox", `${this.#vbX} ${this.#vbY} ${this.#vbWidth} ${this.#vbHeight}`);
+    this.#svgEl.setAttribute(
+      "viewBox",
+      `${this.#vbX} ${this.#vbY} ${this.#vbWidth} ${this.#vbHeight}`
+    );
   }
 
   /**
@@ -210,8 +217,12 @@ export class Canvas {
     if (newHeight > this.#maxVBSize) return;
     if (newWidth > this.#maxVBSize) return;
 
-    let newLeft = this.#vbX - (newWidth - this.#vbWidth) * ((p.x - this.#vbX) / this.#vbWidth);
-    let newTop = this.#vbY - (newHeight - this.#vbHeight) * ((p.y - this.#vbY) / this.#vbHeight);
+    let newLeft =
+      this.#vbX -
+      (newWidth - this.#vbWidth) * ((p.x - this.#vbX) / this.#vbWidth);
+    let newTop =
+      this.#vbY -
+      (newHeight - this.#vbHeight) * ((p.y - this.#vbY) / this.#vbHeight);
 
     this.#vbHeight = newHeight;
     this.#vbWidth = newWidth;
@@ -317,7 +328,10 @@ export class Canvas {
     // add a component, insert this property inside the SVG root element of the component
     while (pointedEl) {
       // Traverse the DOM tree
-      if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof SocketComponent)) {
+      if (
+        pointedEl.componentRef &&
+        (!onlySockets || pointedEl.componentRef instanceof SocketComponent)
+      ) {
         return pointedEl.componentRef;
       }
       pointedEl = pointedEl.parentElement;
@@ -362,7 +376,11 @@ export class Canvas {
    */
   alreadyConnected(socket1, socket2) {
     return (
-      this.connections.findIndex((c) => (c.source === socket1 && c.target === socket2) || (c.source === socket2 && c.target === socket1)) !== -1
+      this.connections.findIndex(
+        (c) =>
+          (c.source === socket1 && c.target === socket2) ||
+          (c.source === socket2 && c.target === socket1)
+      ) !== -1
     );
   }
 
@@ -410,12 +428,27 @@ export class Canvas {
   }
 
   /**
+   * Update all connections for a component in terms of SVG properties. This is
+   * important because when components are moved, this ensures that
+   * connections will follow them
+   * @param {Component} component The component for which update connections
+   */
+  updateAllConnectionsFor(component) {
+    let conns = this.getConnectionsFor(component);
+    for (let connection of conns) {
+      connection.updateSVGElement();
+    }
+  }
+
+  /**
    * This method extract all connections in the canvas, that have
    * the source or the target SocketComponent as endpoint
    * @param {SocketComponent} socket The socket component for which search the connection
    */
   getConnectionsFor(socket) {
-    return this.#connections.filter((c) => c.source === socket || c.target === socket);
+    return this.#connections.filter(
+      (c) => c.source === socket || c.target === socket
+    );
   }
 
   /**

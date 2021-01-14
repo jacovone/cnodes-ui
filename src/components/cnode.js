@@ -305,8 +305,6 @@ export class CnodeComponent extends Component {
    * graphical cooordinates in the program structure
    */
   updateSVGElement() {
-    super.updateSVGElement();
-
     this.#containerEl.setAttribute(
       "d",
       `
@@ -334,7 +332,12 @@ export class CnodeComponent extends Component {
       `
     );
 
+    // Update sub-sockets
     this.updateSubcomponents();
+
+    // The base version updates all connections, so we have to
+    // do this only after sub-socket update
+    super.updateSVGElement();
 
     // Update UI data in meta info
     if (!this.#node.meta) {

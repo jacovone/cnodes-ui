@@ -2904,11 +2904,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this);
-
       _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      "));
 
-      this.updateSubcomponents(); // Update UI data in meta info
+      this.updateSubcomponents();
+
+      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this); // Update UI data in meta info
+
 
       if (!_classPrivateFieldGet(this, _node).meta) {
         this.node.meta = {};

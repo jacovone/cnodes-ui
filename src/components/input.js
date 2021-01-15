@@ -387,8 +387,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `<tspan alignment-baseline="middle">Disconnect</tspan>`,
           () => {
             // Disconnect this socket
-            this.canvas.removeConnection(conn);
-            this.socket.disconnect();
+            conn.destroy();
           }
         )
       );
@@ -398,14 +397,10 @@ export class InputSocketComponent extends CnodesSocketComponent {
         new MenuItem(
           `<tspan alignment-baseline="middle">Delete input</tspan>`,
           () => {
-            // First, disconnect if connected
-            let conn = this.canvas.getConnectionsFor(this)[0];
-            if (conn) {
-              this.canvas.removeConnection(conn);
-              this.socket.disconnect();
-            }
             this.socket.node.removeInput(this.socket);
-            this.parent.removeComponent(this);
+            this.destroy();
+
+            // Ensure that node parent redraw itself
             this.parent.updateSVGElement();
           }
         )

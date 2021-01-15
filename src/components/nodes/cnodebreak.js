@@ -7,7 +7,6 @@
  * Year: 2020
  */
 
-import { Program } from "@marco.jacovone/cnodes/lib/core/program";
 import { Theme } from "../..";
 import { MenuItem } from "../../canvas/menu";
 import { CnodeComponent } from "../cnode";
@@ -48,7 +47,7 @@ export class CnodeBreakComponent extends CnodeComponent {
               o.peers.length === 0
             ) {
               this.node.removeOutput(o);
-              this.removeComponent(o.__comp);
+              o.__comp.destroy();
             }
           }
           this.updateSVGElement();

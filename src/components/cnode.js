@@ -15,7 +15,6 @@ import { Theme } from "./theme";
 import { OutputSocketComponent } from "./output";
 import { InputSocketComponent } from "./input";
 import { MenuItem } from "../canvas/menu";
-import { SocketComponent } from "../canvas/socket";
 import { CnodesEditableTextComponent } from "./cnodeseditabletext";
 
 /**
@@ -201,13 +200,11 @@ export class CnodeComponent extends Component {
     if (this.node.prev) {
       let nComp = this.node.prev.__comp;
       if (!nComp) {
-        nComp = new PrevSocketComponent(this.node.prev).setup();
-        this.addComponent(nComp);
+        nComp = new PrevSocketComponent(this.node.prev).setup().addTo(this);
 
         // write a back_reference
         this.node.prev.__comp = nComp;
       }
-
       // Update position
       nComp.pos = new Position(0, posY);
     }
@@ -216,13 +213,11 @@ export class CnodeComponent extends Component {
     for (const next of this.node.nexts) {
       let nComp = next.__comp;
       if (!nComp) {
-        nComp = new NextSocketComponent(next).setup();
-        this.addComponent(nComp);
+        nComp = new NextSocketComponent(next).setup().addTo(this);
 
         // write a back-reference
         next.__comp = nComp;
       }
-
       // Update position
       nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
       posY += 30;
@@ -232,13 +227,11 @@ export class CnodeComponent extends Component {
     for (const output of this.node.outputs) {
       let nComp = output.__comp;
       if (!nComp) {
-        nComp = new OutputSocketComponent(output).setup();
-        this.addComponent(nComp);
+        nComp = new OutputSocketComponent(output).setup().addTo(this);
 
         // write a back-reference
         output.__comp = nComp;
       }
-
       // Update position
       nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
       posY += 30;
@@ -248,15 +241,12 @@ export class CnodeComponent extends Component {
     for (const input of this.node.inputs) {
       let nComp = input.__comp;
       if (!nComp) {
-        nComp = new InputSocketComponent(input).setup();
-        this.addComponent(nComp);
+        nComp = new InputSocketComponent(input).setup().addTo(this);
 
         // write a back-reference
         input.__comp = nComp;
       }
-
-      // Update status
-      nComp.updateSVGElement();
+      // Update position
       nComp.pos = new Position(0, posY);
       posY += 30;
     }
@@ -275,6 +265,9 @@ export class CnodeComponent extends Component {
         if (component.text === "") {
           component.text = "title";
         }
+      });
+
+      this.#titleComp.events.on("cnui:move", (component) => {
         // Update UI data in meta info
         this.node.title = component.text;
         if (!this.node.meta) {
@@ -296,7 +289,7 @@ export class CnodeComponent extends Component {
         : new Position(10 + Theme.current.NODE_BORDER_RADIUS, -25);
       this.#titleComp.width =
         Theme.current.NODE_WIDTH - (10 + Theme.current.NODE_BORDER_RADIUS);
-      this.addComponent(this.#titleComp);
+      this.#titleComp.addTo(this);
     }
   }
 
@@ -305,6 +298,8 @@ export class CnodeComponent extends Component {
    * graphical cooordinates in the program structure
    */
   updateSVGElement() {
+    super.updateSVGElement();
+
     this.#containerEl.setAttribute(
       "d",
       `
@@ -334,10 +329,6 @@ export class CnodeComponent extends Component {
 
     // Update sub-sockets
     this.updateSubcomponents();
-
-    // The base version updates all connections, so we have to
-    // do this only after sub-socket update
-    super.updateSVGElement();
 
     // Update UI data in meta info
     if (!this.#node.meta) {
@@ -386,13 +377,7 @@ export class CnodeComponent extends Component {
       new MenuItem(
         `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
         () => {
-          for (let comp of this.components) {
-            if (comp instanceof SocketComponent && comp.isConnected) {
-              for (let conn of this.canvas.getConnectionsFor(comp)) {
-                this.canvas.removeConnection(conn);
-              }
-            }
-          }
+          this.events.emit("cnui:disconnectAll");
         }
       )
     );
@@ -403,7 +388,7 @@ export class CnodeComponent extends Component {
         new MenuItem(
           `<tspan alignment-baseline="middle">Delete</tspan>`,
           () => {
-            this.canvas.removeComponent(this);
+            this.destroy();
           }
         )
       );
@@ -428,7 +413,9 @@ export class CnodeComponent extends Component {
         new MenuItem(
           `<tspan alignment-baseline="middle">Remove comment</tspan>`,
           () => {
-            this.removeComponent(this.#commentComp);
+            this.#commentComp.events.removeAllListeners("cnui:change");
+            this.#commentComp.events.removeAllListeners("cnui:move");
+            this.#commentComp.destroy();
             this.node.meta.comment = undefined;
             this.#commentComp = null;
           }
@@ -459,16 +446,19 @@ export class CnodeComponent extends Component {
     this.#commentComp.color = Theme.current.NODE_COMMENT_COLOR;
     this.#commentComp.pos = new Position(x, y);
     this.#commentComp.width = Theme.current.NODE_WIDTH;
-    this.addComponent(this.#commentComp);
+    this.#commentComp.addTo(this);
 
     this.#commentComp.setEditing(initialEdit);
 
-    // Register to "cnui:change" to update title and meta info about it
+    // Register to "cnui:change" to update title
     this.#commentComp.events.on("cnui:change", (component) => {
       // Prevent empty title
       if (component.text === "") {
         component.text = "comment";
       }
+    });
+    // Register "cnui:move" to update meta info
+    this.#commentComp.events.on("cnui:move", (component) => {
       // Update UI data in meta info
       if (!this.node.meta) {
         this.node.meta = {};
@@ -493,6 +483,13 @@ export class CnodeComponent extends Component {
     // If there is acrive program, remove the node from it
     if (this.canvas.program) {
       this.canvas.program.removeNode(this.node);
+    }
+
+    this.#titleComp.events.removeAllListeners("cnui:change");
+    this.#titleComp.events.removeAllListeners("cnui:move");
+    if (this.#commentComp) {
+      this.#commentComp.events.removeAllListeners("cnui:change");
+      this.#commentComp.events.removeAllListeners("cnui:move");
     }
 
     super.destroy();

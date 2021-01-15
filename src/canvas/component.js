@@ -45,23 +45,10 @@ export class Component {
   /** The pointer position at the time in which the component starts moving */
   #startMovePointerPos = null;
 
-  /** The list of eventual child components */
-  #components = [];
-
   /**
    * Events connected to the component:
-   *
-   * This attribute emits following events:
-   *
-   * - cnui:change(comp), when something changes inside component, comp
-   *   is the entire component passed as event parameter
-   * - cnui:componentAdded(comp, subComp), when a component is added as a child,
-   *   comp is this component, while subComp is the component being added
-   * - cnui:componentRemoved(comp, subComp), when a component is from children,
-   *   comp is this component, while subComp is the component being removed
-   * - cnui:destroy(comp), when the component is destroyed. comp is this component
    */
-  events = new EventEmitter();
+  events = new EventEmitter().setMaxListeners(30);
 
   constructor() {}
 
@@ -109,6 +96,7 @@ export class Component {
   set pos(val) {
     this.#pos = val;
     this.updateSVGElement();
+    this.events.emit("cnui:move", this);
   }
   get canvas() {
     return this.#canvas;
@@ -118,12 +106,6 @@ export class Component {
   }
   get componentEl() {
     return this.#componentEl;
-  }
-  get components() {
-    return this.#components;
-  }
-  set components(val) {
-    this.#components = val;
   }
 
   get svgEl() {
@@ -194,7 +176,7 @@ export class Component {
       this.#pos.y = yDiff + this.#startMovePointerPos.y;
       this.updateSVGElement();
 
-      this.events.emit("cnui:change", this);
+      this.events.emit("cnui:move", this);
 
       e.stopPropagation();
     }
@@ -238,41 +220,48 @@ export class Component {
   updateSVGElement() {
     let pos = this.absPos;
     this.#componentEl.setAttribute("transform", `translate(${pos.x},${pos.y})`);
+  }
 
-    // Also update all children and its connections
-    for (let c of this.#components) {
-      c.updateSVGElement();
-      this.canvas.updateAllConnectionsFor(c);
+  /**
+   * A listener to the parent's move event
+   */
+  #cbMove = () => {
+    this.updateSVGElement();
+    this.events.emit("cnui:move", this);
+  };
+
+  /**
+   * A listener to the parent's destroy event
+   */
+  #cbDestroy = () => {
+    this.destroy();
+  };
+
+  /**
+   * A listener to the parent's disconnectAll event
+   */
+  #cbDisconnectAll = () => {
+    for (let c of this.canvas.getConnectionsFor(this)) {
+      c.destroy();
     }
-  }
+  };
 
   /**
-   * Add a new component as child component.
-   * WARNING: before attach child components, this component
-   * must to be attached to the canvas itself, otherwise the method
-   * fails
-   * @param {Component} component Component to add
+   * This method add this component as a child of another component. This means
+   * tht this component register itself for receive parent component events, to
+   * react on them. The addTo() method return this, to allow user to chain calls
+   * during creation process
+   * @param {Component} component
    */
-  addComponent(component) {
-    this.#components.push(component);
-    component.parent = this;
-    component.canvas = this.canvas;
-    this.svgEl.appendChild(component.componentEl);
-    component.updateSVGElement();
+  addTo(component) {
+    this.#parent = component;
+    component.canvas.addComponent(this);
 
-    this.events.emit("cnui:componentAdded", this, component);
-  }
+    component.events.on("cnui:move", this.#cbMove);
+    component.events.on("cnui:disconnectAll", this.#cbDisconnectAll);
+    component.events.on("cnui:destroy", this.#cbDestroy);
 
-  /**
-   * Remove a child subcomponent
-   * @param {Component} component The component to remove
-   */
-  removeComponent(component) {
-    this.components = this.#components.filter((c) => c !== component);
-    component.destroy();
-    this.svgEl.removeChild(component.componentEl);
-
-    this.events.emit("cnui:componentRemoved", this, component);
+    return this;
   }
 
   /**
@@ -280,8 +269,13 @@ export class Component {
    * from the canvas of from its parent component
    */
   destroy() {
-    // Removes all subcomponents
-    this.components.forEach((c) => this.removeComponent(c));
+    this.canvas.removeComponent(this);
     this.events.emit("cnui:destroy", this);
+
+    // If this component is a child for another component
+    // we must unregister listeners
+    this.#parent?.events.off("cnui:move", this.#cbMove);
+    this.#parent?.events.off("cnui:disconnectAll", this.#cbDisconnectAll);
+    this.#parent?.events.off("cnui:destroy", this.#cbDestroy);
   }
 }

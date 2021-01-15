@@ -7,6 +7,8 @@
  * Year: 2020
  */
 
+import { EventEmitter } from "events";
+
 /**
  * This is tha base class of all connections. A Connection is always a
  * link from two sockets. Sockets are special subclass of components, tipically
@@ -26,13 +28,38 @@ export class Connection {
   #target = null;
 
   /**
-   * Construct a connection instance by setting its source and target
+   * Events connected to the component:
+   */
+  events = new EventEmitter();
+
+  /**
+   * A listener for parent's move event
+   */
+  #cbMove = () => {
+    this.updateSVGElement();
+    this.events.emit("cnui:move", this);
+  };
+
+  /**
+   * A listener for parent's destroy event
+   */
+  #cbDestroy = () => {
+    this.destroy();
+  };
+
+  /**
+   * Construct a connection instance by setting its source and target.
+   * This method takes also the opportunity to register itself to
+   * source and target events, and react accordingly
    */
   constructor(source, target) {
     this.#source = source;
     this.#target = target;
-    this.source.updateSVGElement();
-    this.target.updateSVGElement();
+
+    this.#source.events.on("cnui:move", this.#cbMove);
+    this.#source.events.on("cnui:destroy", this.#cbDestroy);
+    this.#target.events.on("cnui:move", this.#cbMove);
+    this.#target.events.on("cnui:destroy", this.#cbDestroy);
   }
 
   /**
@@ -41,6 +68,10 @@ export class Connection {
    */
   setup() {
     this.#connectionEl = this.createElement();
+    canvas.addConnection(this);
+    this.#source.updateSVGElement();
+    this.#target.updateSVGElement();
+
     return this;
   }
 
@@ -89,5 +120,14 @@ export class Connection {
   /**
    * This method is called when the connection is removed from the canvas
    */
-  destroy() {}
+  destroy() {
+    this.canvas.removeConnection(this);
+    this.#source.events.off("cnui:move", this.#cbMove);
+    this.#target.events.off("cnui:move", this.#cbMove);
+    this.#source.events.off("cnui:destroy", this.#cbDestroy);
+    this.#target.events.off("cnui:destroy", this.#cbDestroy);
+
+    this.#source.updateSVGElement();
+    this.#target.updateSVGElement();
+  }
 }

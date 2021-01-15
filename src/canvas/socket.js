@@ -117,7 +117,7 @@ export class SocketComponent extends Component {
         peerComponent.onPointerDown(e);
 
         let con = this.canvas.getConnectionsFor(this)[0];
-        this.canvas.removeConnection(con);
+        con.destroy();
 
         e.stopPropagation();
       }

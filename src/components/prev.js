@@ -115,9 +115,7 @@ export class PrevSocketComponent extends CnodesSocketComponent {
     // if there is another connection for the target component,
     // delete the oldest one
     if (socketComp.isConnected) {
-      this.canvas.removeConnection(
-        this.canvas.getConnectionsFor(socketComp)[0]
-      );
+      this.canvas.getConnectionsFor(socketComp)[0].destroy();
     }
 
     // This creates the connection and connects sockets
@@ -210,9 +208,7 @@ export class PrevSocketComponent extends CnodesSocketComponent {
           `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
           () => {
             for (let c of conns) {
-              // Disconnect this socket
-              this.canvas.removeConnection(c);
-              this.socket.disconnect(c.source);
+              c.destroy();
             }
           }
         )

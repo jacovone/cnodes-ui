@@ -212,9 +212,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
         new MenuItem(
           `<tspan alignment-baseline="middle">Disconnect</tspan>`,
           () => {
-            // Disconnect this socket
-            this.canvas.removeConnection(conn);
-            this.socket.disconnect();
+            conn.destroy();
           }
         )
       );

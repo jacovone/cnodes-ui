@@ -231,7 +231,7 @@ export class CnodesCanvas extends Canvas {
     // on the program instance
     this.#program = null;
 
-    this.removeAll();
+    this.destroyAll();
 
     // Import the program
     for (let n of program.nodes) {

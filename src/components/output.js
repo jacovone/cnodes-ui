@@ -175,9 +175,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
     // if there is another connection for the target component,
     // delete the oldest one
     if (socketComp.isConnected) {
-      this.canvas.removeConnection(
-        this.canvas.getConnectionsFor(socketComp)[0]
-      );
+      this.canvas.getConnectionsFor(socketComp)[0].destroy();
     }
 
     // This creates the connection and connects sockets
@@ -297,9 +295,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
           `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
           () => {
             for (let c of conns) {
-              // Disconnect this socket
-              this.canvas.removeConnection(c);
-              this.socket.disconnect(c.target);
+              c.destroy();
             }
           }
         )
@@ -310,16 +306,10 @@ export class OutputSocketComponent extends CnodesSocketComponent {
         new MenuItem(
           `<tspan alignment-baseline="middle">Delete output</tspan>`,
           () => {
-            // First, disconnect all peers
-            let conns = this.canvas.getConnectionsFor(this);
-            if (conns.length > 0) {
-              for (let c of conns) {
-                this.canvas.removeConnection(c);
-                this.socket.disconnect(c.target);
-              }
-            }
             this.socket.node.removeOutput(this.socket);
-            this.parent.removeComponent(this);
+            this.destroy();
+
+            // Ensure that node parent redraw itself
             this.parent.updateSVGElement();
           }
         )

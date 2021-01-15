@@ -24,7 +24,6 @@ export class CnodesConnection extends Connection {
    */
   setup() {
     super.setup();
-    canvas.addConnection(this);
     this.updateSVGElement();
 
     if (canvas.program) {

@@ -21,6 +21,21 @@ export class CnodeProgramComponent extends CnodeComponent {
   }
 
   /**
+   * This override register a "dblclick" event listener to
+   * edit the program
+   */
+  setup() {
+    super.setup();
+
+    // Register a "dblclick" listener to edit the internal program
+    this.componentEl.addEventListener("dblclick", (e) => {
+      this.canvas.pushProgram(this.node);
+    });
+
+    return this;
+  }
+
+  /**
    * Returns the array of context menu items. This node gets
    * the base node items, and add the action of edit internal program
    */

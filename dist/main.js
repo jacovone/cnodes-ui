@@ -475,12 +475,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
 /* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
 /* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -793,11 +787,7 @@ var Canvas = /*#__PURE__*/function () {
 
       connection.canvas = this;
 
-      _classPrivateFieldGet(this, _connectionsEl).appendChild(connection.connectionEl); // Update connected sockets
-
-
-      connection.source.updateSVGElement();
-      connection.target.updateSVGElement();
+      _classPrivateFieldGet(this, _connectionsEl).appendChild(connection.connectionEl);
     }
     /**
      * Remove a connection from the canvas, also remove the related SVG element
@@ -807,18 +797,11 @@ var Canvas = /*#__PURE__*/function () {
   }, {
     key: "removeConnection",
     value: function removeConnection(connection) {
-      // Signal the connection that will be destroyed
-      connection.destroy();
-
       _classPrivateFieldSet(this, _connections, _classPrivateFieldGet(this, _connections).filter(function (c) {
         return c !== connection;
       }));
 
-      _classPrivateFieldGet(this, _connectionsEl).removeChild(connection.connectionEl); // Update connected sockets
-
-
-      connection.source.updateSVGElement();
-      connection.target.updateSVGElement();
+      if (connection.connectionEl.parentElement === _classPrivateFieldGet(this, _connectionsEl)) _classPrivateFieldGet(this, _connectionsEl).removeChild(connection.connectionEl);
     }
     /**
      * Checks if there is a connection between sockets already
@@ -855,93 +838,11 @@ var Canvas = /*#__PURE__*/function () {
   }, {
     key: "removeComponent",
     value: function removeComponent(component) {
-      // Remove related connections
-      var _iterator = _createForOfIteratorHelper(component.components),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var s = _step.value;
-
-          if (s instanceof _socket__WEBPACK_IMPORTED_MODULE_3__.SocketComponent) {
-            var _iterator2 = _createForOfIteratorHelper(this.getConnectionsFor(s)),
-                _step2;
-
-            try {
-              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                var c = _step2.value;
-                this.removeConnection(c);
-              }
-            } catch (err) {
-              _iterator2.e(err);
-            } finally {
-              _iterator2.f();
-            }
-          }
-        } // Signal component that will be removed
-
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      component.destroy(); // Remove the component from the SVG space
-
+      // Remove the component from the SVG space
       this.components = _classPrivateFieldGet(this, _components).filter(function (c) {
         return c !== component;
       });
-
-      _classPrivateFieldGet(this, _svgEl).removeChild(component.componentEl);
-    }
-    /**
-     * Update all connections in terms of SVG properties. This is
-     * important because when components are moved, this ensures that
-     * connections will follow them
-     */
-
-  }, {
-    key: "updateAllConnections",
-    value: function updateAllConnections() {
-      var _iterator3 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _connections)),
-          _step3;
-
-      try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var connection = _step3.value;
-          connection.updateSVGElement();
-        }
-      } catch (err) {
-        _iterator3.e(err);
-      } finally {
-        _iterator3.f();
-      }
-    }
-    /**
-     * Update all connections for a component in terms of SVG properties. This is
-     * important because when components are moved, this ensures that
-     * connections will follow them
-     * @param {Component} component The component for which update connections
-     */
-
-  }, {
-    key: "updateAllConnectionsFor",
-    value: function updateAllConnectionsFor(component) {
-      var conns = this.getConnectionsFor(component);
-
-      var _iterator4 = _createForOfIteratorHelper(conns),
-          _step4;
-
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var connection = _step4.value;
-          connection.updateSVGElement();
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
+      if (component.componentEl.parentElement === _classPrivateFieldGet(this, _svgEl)) _classPrivateFieldGet(this, _svgEl).removeChild(component.componentEl);
     }
     /**
      * This method extract all connections in the canvas, that have
@@ -957,36 +858,36 @@ var Canvas = /*#__PURE__*/function () {
       });
     }
     /**
-     * Removes all connections from the canvas
+     * Destroy all connections from the canvas
      */
 
   }, {
-    key: "removeAllConnections",
-    value: function removeAllConnections() {
+    key: "destroyAllConnections",
+    value: function destroyAllConnections() {
       while (_classPrivateFieldGet(this, _connections).length > 0) {
-        this.removeConnection(_classPrivateFieldGet(this, _connections)[0]);
+        _classPrivateFieldGet(this, _connections)[0].destroy();
       }
     }
     /**
-     * Removes all components from the canvas
+     * Destroy all components from the canvas
      */
 
   }, {
-    key: "removeAllComponents",
-    value: function removeAllComponents() {
+    key: "destroyAllComponents",
+    value: function destroyAllComponents() {
       while (_classPrivateFieldGet(this, _components).length > 0) {
-        this.removeComponent(_classPrivateFieldGet(this, _components)[0]);
+        _classPrivateFieldGet(this, _components)[0].destroy();
       }
     }
     /**
-     * Remoives all connections and all components from the canvas
+     * Destroy all connections and all components from the canvas
      */
 
   }, {
-    key: "removeAll",
-    value: function removeAll() {
-      this.removeAllConnections();
-      this.removeAllComponents();
+    key: "destroyAll",
+    value: function destroyAll() {
+      this.destroyAllConnections();
+      this.destroyAllComponents();
     }
     /**
      * Return a list of MenuItem for the context menu
@@ -1268,13 +1169,17 @@ var _startMovePos = new WeakMap();
 
 var _startMovePointerPos = new WeakMap();
 
-var _components = new WeakMap();
-
 var _onPointerDown = new WeakSet();
 
 var _onPointerUp = new WeakSet();
 
 var _onPointerMove = new WeakSet();
+
+var _cbMove = new WeakMap();
+
+var _cbDestroy = new WeakMap();
+
+var _cbDisconnectAll = new WeakMap();
 
 var Component = /*#__PURE__*/function () {
   /** A reference to the enclosing canvas */
@@ -1293,22 +1198,12 @@ var Component = /*#__PURE__*/function () {
 
   /** The pointer position at the time in which the component starts moving */
 
-  /** The list of eventual child components */
-
   /**
    * Events connected to the component:
-   *
-   * This attribute emits following events:
-   *
-   * - cnui:change(comp), when something changes inside component, comp
-   *   is the entire component passed as event parameter
-   * - cnui:componentAdded(comp, subComp), when a component is added as a child,
-   *   comp is this component, while subComp is the component being added
-   * - cnui:componentRemoved(comp, subComp), when a component is from children,
-   *   comp is this component, while subComp is the component being removed
-   * - cnui:destroy(comp), when the component is destroyed. comp is this component
    */
   function Component() {
+    var _this = this;
+
     _classCallCheck(this, Component);
 
     _onPointerMove.add(this);
@@ -1357,12 +1252,42 @@ var Component = /*#__PURE__*/function () {
       value: null
     });
 
-    _components.set(this, {
+    _defineProperty(this, "events", new events__WEBPACK_IMPORTED_MODULE_1__.EventEmitter().setMaxListeners(30));
+
+    _cbMove.set(this, {
       writable: true,
-      value: []
+      value: function value() {
+        _this.updateSVGElement();
+
+        _this.events.emit("cnui:move", _this);
+      }
     });
 
-    _defineProperty(this, "events", new events__WEBPACK_IMPORTED_MODULE_1__.EventEmitter());
+    _cbDestroy.set(this, {
+      writable: true,
+      value: function value() {
+        _this.destroy();
+      }
+    });
+
+    _cbDisconnectAll.set(this, {
+      writable: true,
+      value: function value() {
+        var _iterator = _createForOfIteratorHelper(_this.canvas.getConnectionsFor(_this)),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var c = _step.value;
+            c.destroy();
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    });
   }
   /**
    * Sets up the component. The component creation follow a specific flow.
@@ -1442,57 +1367,30 @@ var Component = /*#__PURE__*/function () {
     value: function updateSVGElement() {
       var pos = this.absPos;
 
-      _classPrivateFieldGet(this, _componentEl).setAttribute("transform", "translate(".concat(pos.x, ",").concat(pos.y, ")")); // Also update all children and its connections
-
-
-      var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components)),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var c = _step.value;
-          c.updateSVGElement();
-          this.canvas.updateAllConnectionsFor(c);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
+      _classPrivateFieldGet(this, _componentEl).setAttribute("transform", "translate(".concat(pos.x, ",").concat(pos.y, ")"));
     }
     /**
-     * Add a new component as child component.
-     * WARNING: before attach child components, this component
-     * must to be attached to the canvas itself, otherwise the method
-     * fails
-     * @param {Component} component Component to add
+     * A listener to the parent's move event
      */
 
   }, {
-    key: "addComponent",
-    value: function addComponent(component) {
-      _classPrivateFieldGet(this, _components).push(component);
+    key: "addTo",
 
-      component.parent = this;
-      component.canvas = this.canvas;
-      this.svgEl.appendChild(component.componentEl);
-      component.updateSVGElement();
-      this.events.emit("cnui:componentAdded", this, component);
-    }
     /**
-     * Remove a child subcomponent
-     * @param {Component} component The component to remove
+     * This method add this component as a child of another component. This means
+     * tht this component register itself for receive parent component events, to
+     * react on them. The addTo() method return this, to allow user to chain calls
+     * during creation process
+     * @param {Component} component
      */
+    value: function addTo(component) {
+      _classPrivateFieldSet(this, _parent, component);
 
-  }, {
-    key: "removeComponent",
-    value: function removeComponent(component) {
-      this.components = _classPrivateFieldGet(this, _components).filter(function (c) {
-        return c !== component;
-      });
-      component.destroy();
-      this.svgEl.removeChild(component.componentEl);
-      this.events.emit("cnui:componentRemoved", this, component);
+      component.canvas.addComponent(this);
+      component.events.on("cnui:move", _classPrivateFieldGet(this, _cbMove));
+      component.events.on("cnui:disconnectAll", _classPrivateFieldGet(this, _cbDisconnectAll));
+      component.events.on("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+      return this;
     }
     /**
      * This method is called when this component is removed
@@ -1502,13 +1400,15 @@ var Component = /*#__PURE__*/function () {
   }, {
     key: "destroy",
     value: function destroy() {
-      var _this = this;
+      var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
 
-      // Removes all subcomponents
-      this.components.forEach(function (c) {
-        return _this.removeComponent(c);
-      });
-      this.events.emit("cnui:destroy", this);
+      this.canvas.removeComponent(this);
+      this.events.emit("cnui:destroy", this); // If this component is a child for another component
+      // we must unregister listeners
+
+      (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.events.off("cnui:move", _classPrivateFieldGet(this, _cbMove));
+      (_classPrivateFieldGet3 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.events.off("cnui:disconnectAll", _classPrivateFieldGet(this, _cbDisconnectAll));
+      (_classPrivateFieldGet4 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.events.off("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
     }
   }, {
     key: "pos",
@@ -1519,6 +1419,7 @@ var Component = /*#__PURE__*/function () {
       _classPrivateFieldSet(this, _pos, val);
 
       this.updateSVGElement();
+      this.events.emit("cnui:move", this);
     }
   }, {
     key: "canvas",
@@ -1532,14 +1433,6 @@ var Component = /*#__PURE__*/function () {
     key: "componentEl",
     get: function get() {
       return _classPrivateFieldGet(this, _componentEl);
-    }
-  }, {
-    key: "components",
-    get: function get() {
-      return _classPrivateFieldGet(this, _components);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _components, val);
     }
   }, {
     key: "svgEl",
@@ -1630,7 +1523,7 @@ var _onPointerMove2 = function _onPointerMove2(e) {
     _classPrivateFieldGet(this, _pos).x = xDiff + _classPrivateFieldGet(this, _startMovePointerPos).x;
     _classPrivateFieldGet(this, _pos).y = yDiff + _classPrivateFieldGet(this, _startMovePointerPos).y;
     this.updateSVGElement();
-    this.events.emit("cnui:change", this);
+    this.events.emit("cnui:move", this);
     e.stopPropagation();
   }
 };
@@ -1647,23 +1540,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Connection": () => /* binding */ Connection
 /* harmony export */ });
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
 
 function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
-
-var _canvas = new WeakMap();
-
-var _connectionEl = new WeakMap();
-
-var _source = new WeakMap();
-
-var _target = new WeakMap();
 
 /**
  * cnodes-ui
@@ -1679,6 +1568,19 @@ var _target = new WeakMap();
  * link from two sockets. Sockets are special subclass of components, tipically
  * child of base components
  */
+
+var _canvas = new WeakMap();
+
+var _connectionEl = new WeakMap();
+
+var _source = new WeakMap();
+
+var _target = new WeakMap();
+
+var _cbMove = new WeakMap();
+
+var _cbDestroy = new WeakMap();
+
 var Connection = /*#__PURE__*/function () {
   /** A reference to the enclosing canvas */
 
@@ -1689,9 +1591,25 @@ var Connection = /*#__PURE__*/function () {
   /** Yhe destination socket component for the link */
 
   /**
-   * Construct a connection instance by setting its source and target
+   * Events connected to the component:
+   */
+
+  /**
+   * A listener for parent's move event
+   */
+
+  /**
+   * A listener for parent's destroy event
+   */
+
+  /**
+   * Construct a connection instance by setting its source and target.
+   * This method takes also the opportunity to register itself to
+   * source and target events, and react accordingly
    */
   function Connection(source, target) {
+    var _this = this;
+
     _classCallCheck(this, Connection);
 
     _canvas.set(this, {
@@ -1714,12 +1632,35 @@ var Connection = /*#__PURE__*/function () {
       value: null
     });
 
+    _defineProperty(this, "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
+
+    _cbMove.set(this, {
+      writable: true,
+      value: function value() {
+        _this.updateSVGElement();
+
+        _this.events.emit("cnui:move", _this);
+      }
+    });
+
+    _cbDestroy.set(this, {
+      writable: true,
+      value: function value() {
+        _this.destroy();
+      }
+    });
+
     _classPrivateFieldSet(this, _source, source);
 
     _classPrivateFieldSet(this, _target, target);
 
-    this.source.updateSVGElement();
-    this.target.updateSVGElement();
+    _classPrivateFieldGet(this, _source).events.on("cnui:move", _classPrivateFieldGet(this, _cbMove));
+
+    _classPrivateFieldGet(this, _source).events.on("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+
+    _classPrivateFieldGet(this, _target).events.on("cnui:move", _classPrivateFieldGet(this, _cbMove));
+
+    _classPrivateFieldGet(this, _target).events.on("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
   }
   /**
    * Sets up this connection. In terms of construction flow
@@ -1731,6 +1672,12 @@ var Connection = /*#__PURE__*/function () {
     key: "setup",
     value: function setup() {
       _classPrivateFieldSet(this, _connectionEl, this.createElement());
+
+      canvas.addConnection(this);
+
+      _classPrivateFieldGet(this, _source).updateSVGElement();
+
+      _classPrivateFieldGet(this, _target).updateSVGElement();
 
       return this;
     }
@@ -1761,7 +1708,21 @@ var Connection = /*#__PURE__*/function () {
 
   }, {
     key: "destroy",
-    value: function destroy() {}
+    value: function destroy() {
+      this.canvas.removeConnection(this);
+
+      _classPrivateFieldGet(this, _source).events.off("cnui:move", _classPrivateFieldGet(this, _cbMove));
+
+      _classPrivateFieldGet(this, _target).events.off("cnui:move", _classPrivateFieldGet(this, _cbMove));
+
+      _classPrivateFieldGet(this, _source).events.off("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+
+      _classPrivateFieldGet(this, _target).events.off("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+
+      _classPrivateFieldGet(this, _source).updateSVGElement();
+
+      _classPrivateFieldGet(this, _target).updateSVGElement();
+    }
   }, {
     key: "canvas",
     get: function get() {
@@ -2296,7 +2257,7 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
           var peerComponent = this.getSinglePeerComponent();
           peerComponent.onPointerDown(e);
           var con = this.canvas.getConnectionsFor(this)[0];
-          this.canvas.removeConnection(con);
+          con.destroy();
           e.stopPropagation();
         }
       }
@@ -2538,8 +2499,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
 /* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
+/* harmony import */ var _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2584,7 +2544,6 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020
  */
-
 
 
 
@@ -2771,8 +2730,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         var nComp = this.node.prev.__comp;
 
         if (!nComp) {
-          nComp = new _prev__WEBPACK_IMPORTED_MODULE_2__.PrevSocketComponent(this.node.prev).setup();
-          this.addComponent(nComp); // write a back_reference
+          nComp = new _prev__WEBPACK_IMPORTED_MODULE_2__.PrevSocketComponent(this.node.prev).setup().addTo(this); // write a back_reference
 
           this.node.prev.__comp = nComp;
         } // Update position
@@ -2791,8 +2749,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp = next.__comp;
 
           if (!_nComp) {
-            _nComp = new _next__WEBPACK_IMPORTED_MODULE_3__.NextSocketComponent(next).setup();
-            this.addComponent(_nComp); // write a back-reference
+            _nComp = new _next__WEBPACK_IMPORTED_MODULE_3__.NextSocketComponent(next).setup().addTo(this); // write a back-reference
 
             next.__comp = _nComp;
           } // Update position
@@ -2817,8 +2774,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp2 = output.__comp;
 
           if (!_nComp2) {
-            _nComp2 = new _output__WEBPACK_IMPORTED_MODULE_5__.OutputSocketComponent(output).setup();
-            this.addComponent(_nComp2); // write a back-reference
+            _nComp2 = new _output__WEBPACK_IMPORTED_MODULE_5__.OutputSocketComponent(output).setup().addTo(this); // write a back-reference
 
             output.__comp = _nComp2;
           } // Update position
@@ -2843,14 +2799,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp3 = input.__comp;
 
           if (!_nComp3) {
-            _nComp3 = new _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent(input).setup();
-            this.addComponent(_nComp3); // write a back-reference
+            _nComp3 = new _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent(input).setup().addTo(this); // write a back-reference
 
             input.__comp = _nComp3;
-          } // Update status
+          } // Update position
 
-
-          _nComp3.updateSVGElement();
 
           _nComp3.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(0, posY);
           posY += 30;
@@ -2865,7 +2818,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       if (!_classPrivateFieldGet(this, _titleComp)) {
         var _this$node$meta;
 
-        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(this.node.title).setup());
+        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(this.node.title).setup());
 
         _classPrivateFieldGet(this, _titleComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
         _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT; // Register to "cnui:change" to update title and meta info about it
@@ -2874,9 +2827,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           // Prevent empty title
           if (component.text === "") {
             component.text = "title";
-          } // Update UI data in meta info
+          }
+        });
 
-
+        _classPrivateFieldGet(this, _titleComp).events.on("cnui:move", function (component) {
+          // Update UI data in meta info
           _this2.node.title = component.text;
 
           if (!_this2.node.meta) {
@@ -2893,7 +2848,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
         _classPrivateFieldGet(this, _titleComp).pos = (_this$node$meta = this.node.meta) !== null && _this$node$meta !== void 0 && _this$node$meta.titlePos ? new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y) : new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, -25);
         _classPrivateFieldGet(this, _titleComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - (10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS);
-        this.addComponent(_classPrivateFieldGet(this, _titleComp));
+
+        _classPrivateFieldGet(this, _titleComp).addTo(this);
       }
     }
     /**
@@ -2904,12 +2860,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      "));
+      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this);
 
-      this.updateSubcomponents();
+      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      ")); // Update sub-sockets
 
-      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this); // Update UI data in meta info
 
+      this.updateSubcomponents(); // Update UI data in meta info
 
       if (!_classPrivateFieldGet(this, _node).meta) {
         this.node.meta = {};
@@ -2950,40 +2906,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
-        var _iterator4 = _createForOfIteratorHelper(_this3.components),
-            _step4;
-
-        try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var comp = _step4.value;
-
-            if (comp instanceof _canvas_socket__WEBPACK_IMPORTED_MODULE_8__.SocketComponent && comp.isConnected) {
-              var _iterator5 = _createForOfIteratorHelper(_this3.canvas.getConnectionsFor(comp)),
-                  _step5;
-
-              try {
-                for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                  var conn = _step5.value;
-
-                  _this3.canvas.removeConnection(conn);
-                }
-              } catch (err) {
-                _iterator5.e(err);
-              } finally {
-                _iterator5.f();
-              }
-            }
-          }
-        } catch (err) {
-          _iterator4.e(err);
-        } finally {
-          _iterator4.f();
-        }
+        _this3.events.emit("cnui:disconnectAll");
       })); // The node can be removed?
 
       if (this.node.removable) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Delete</tspan>", function () {
-          _this3.canvas.removeComponent(_this3);
+          _this3.destroy();
         }));
       }
 
@@ -2993,7 +2921,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         }));
       } else {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
-          _this3.removeComponent(_classPrivateFieldGet(_this3, _commentComp));
+          _classPrivateFieldGet(_this3, _commentComp).events.removeAllListeners("cnui:change");
+
+          _classPrivateFieldGet(_this3, _commentComp).events.removeAllListeners("cnui:move");
+
+          _classPrivateFieldGet(_this3, _commentComp).destroy();
 
           _this3.node.meta.comment = undefined;
 
@@ -3023,24 +2955,28 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.height + 10;
       var initialEdit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
-      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent(comment).setup());
+      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(comment).setup());
 
       _classPrivateFieldGet(this, _commentComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
       _classPrivateFieldGet(this, _commentComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
       _classPrivateFieldGet(this, _commentComp).pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(x, y);
       _classPrivateFieldGet(this, _commentComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
-      this.addComponent(_classPrivateFieldGet(this, _commentComp));
 
-      _classPrivateFieldGet(this, _commentComp).setEditing(initialEdit); // Register to "cnui:change" to update title and meta info about it
+      _classPrivateFieldGet(this, _commentComp).addTo(this);
+
+      _classPrivateFieldGet(this, _commentComp).setEditing(initialEdit); // Register to "cnui:change" to update title
 
 
       _classPrivateFieldGet(this, _commentComp).events.on("cnui:change", function (component) {
         // Prevent empty title
         if (component.text === "") {
           component.text = "comment";
-        } // Update UI data in meta info
+        }
+      }); // Register "cnui:move" to update meta info
 
 
+      _classPrivateFieldGet(this, _commentComp).events.on("cnui:move", function (component) {
+        // Update UI data in meta info
         if (!_this4.node.meta) {
           _this4.node.meta = {};
         }
@@ -3066,6 +3002,16 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       if (this.canvas.program) {
         this.canvas.program.removeNode(this.node);
+      }
+
+      _classPrivateFieldGet(this, _titleComp).events.removeAllListeners("cnui:change");
+
+      _classPrivateFieldGet(this, _titleComp).events.removeAllListeners("cnui:move");
+
+      if (_classPrivateFieldGet(this, _commentComp)) {
+        _classPrivateFieldGet(this, _commentComp).events.removeAllListeners("cnui:change");
+
+        _classPrivateFieldGet(this, _commentComp).events.removeAllListeners("cnui:move");
       }
 
       _get(_getPrototypeOf(CnodeComponent.prototype), "destroy", this).call(this);
@@ -3350,7 +3296,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       // on the program instance
       _classPrivateFieldSet(this, _program, null);
 
-      this.removeAll(); // Import the program
+      this.destroyAll(); // Import the program
 
       var _iterator3 = _createForOfIteratorHelper(program.nodes),
           _step3;
@@ -3671,7 +3617,6 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
     value: function setup() {
       _get(_getPrototypeOf(CnodesConnection.prototype), "setup", this).call(this);
 
-      canvas.addConnection(this);
       this.updateSVGElement();
 
       if (canvas.program) {
@@ -5158,26 +5103,16 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       if (conn) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           // Disconnect this socket
-          _this4.canvas.removeConnection(conn);
-
-          _this4.socket.disconnect();
+          conn.destroy();
         }));
       }
 
       if (this.socket.node.canRemoveInput(this.socket)) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Delete input</tspan>", function () {
-          // First, disconnect if connected
-          var conn = _this4.canvas.getConnectionsFor(_this4)[0];
-
-          if (conn) {
-            _this4.canvas.removeConnection(conn);
-
-            _this4.socket.disconnect();
-          }
-
           _this4.socket.node.removeInput(_this4.socket);
 
-          _this4.parent.removeComponent(_this4);
+          _this4.destroy(); // Ensure that node parent redraw itself
+
 
           _this4.parent.updateSVGElement();
         }));
@@ -5482,17 +5417,12 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
-      var _this3 = this;
-
       var items = [];
       var conn = this.canvas.getConnectionsFor(this)[0];
 
       if (conn) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
-          // Disconnect this socket
-          _this3.canvas.removeConnection(conn);
-
-          _this3.socket.disconnect();
+          conn.destroy();
         }));
       }
 
@@ -5525,10 +5455,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodeBreakComponent": () => /* binding */ CnodeBreakComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/program */ "../cnodes/lib/core/program.js");
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ "./src/index.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.. */ "./src/index.js");
+/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
+/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -5587,7 +5516,6 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
 
 
 
-
 var _originalOutputs = new WeakMap();
 
 var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
@@ -5631,7 +5559,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
           _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeBreakComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
-      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Remove unused</tspan>"), function () {
+      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Remove unused</tspan>"), function () {
         var _iterator = _createForOfIteratorHelper(_this2.node.outputs),
             _step;
 
@@ -5642,7 +5570,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
             if (_this2.node.canAddOutput && _this2.node.canRemoveOutput(o) && o.peers.length === 0) {
               _this2.node.removeOutput(o);
 
-              _this2.removeComponent(o.__comp);
+              o.__comp.destroy();
             }
           }
         } catch (err) {
@@ -5652,7 +5580,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
         }
 
         _this2.updateSVGElement();
-      }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Reset outputs</tspan>"), function () {
+      }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Reset outputs</tspan>"), function () {
         var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(_this2, _originalOutputs)),
             _step2;
 
@@ -5677,7 +5605,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
   }]);
 
   return CnodeBreakComponent;
-}(_cnode__WEBPACK_IMPORTED_MODULE_3__.CnodeComponent);
+}(_cnode__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
 
 _defineProperty(CnodeBreakComponent, "instance", function (node, canvas) {
   return new CnodeBreakComponent(node, canvas);
@@ -5751,20 +5679,38 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
     return _super.call(this, node, canvas);
   }
   /**
-   * Returns the array of context menu items. This node gets
-   * the base node items, and add the action of edit internal program
+   * This override register a "dblclick" event listener to
+   * edit the program
    */
 
 
   _createClass(CnodeProgramComponent, [{
+    key: "setup",
+    value: function setup() {
+      var _this = this;
+
+      _get(_getPrototypeOf(CnodeProgramComponent.prototype), "setup", this).call(this); // Register a "dblclick" listener to edit the internal program
+
+
+      this.componentEl.addEventListener("dblclick", function (e) {
+        _this.canvas.pushProgram(_this.node);
+      });
+      return this;
+    }
+    /**
+     * Returns the array of context menu items. This node gets
+     * the base node items, and add the action of edit internal program
+     */
+
+  }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
       var _get$call,
-          _this = this;
+          _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeProgramComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
       items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Edit...</tspan>"), function () {
-        _this.canvas.pushProgram(_this.node);
+        _this2.canvas.pushProgram(_this2.node);
       }));
       return items.length ? items : null;
     }
@@ -5995,7 +5941,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
       if (socketComp.isConnected) {
-        this.canvas.removeConnection(this.canvas.getConnectionsFor(socketComp)[0]);
+        this.canvas.getConnectionsFor(socketComp)[0].destroy();
       } // This creates the connection and connects sockets
 
 
@@ -6143,11 +6089,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           try {
             for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
               var c = _step4.value;
-
-              // Disconnect this socket
-              _this4.canvas.removeConnection(c);
-
-              _this4.socket.disconnect(c.target);
+              c.destroy();
             }
           } catch (err) {
             _iterator4.e(err);
@@ -6159,31 +6101,10 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       if (this.socket.node.canRemoveOutput(this.socket)) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Delete output</tspan>", function () {
-          // First, disconnect all peers
-          var conns = _this4.canvas.getConnectionsFor(_this4);
-
-          if (conns.length > 0) {
-            var _iterator5 = _createForOfIteratorHelper(conns),
-                _step5;
-
-            try {
-              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                var c = _step5.value;
-
-                _this4.canvas.removeConnection(c);
-
-                _this4.socket.disconnect(c.target);
-              }
-            } catch (err) {
-              _iterator5.e(err);
-            } finally {
-              _iterator5.f();
-            }
-          }
-
           _this4.socket.node.removeOutput(_this4.socket);
 
-          _this4.parent.removeComponent(_this4);
+          _this4.destroy(); // Ensure that node parent redraw itself
+
 
           _this4.parent.updateSVGElement();
         }));
@@ -6380,7 +6301,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
       if (socketComp.isConnected) {
-        this.canvas.removeConnection(this.canvas.getConnectionsFor(socketComp)[0]);
+        this.canvas.getConnectionsFor(socketComp)[0].destroy();
       } // This creates the connection and connects sockets
 
 
@@ -6497,8 +6418,6 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
-      var _this3 = this;
-
       var items = [];
       var conns = this.canvas.getConnectionsFor(this);
 
@@ -6510,11 +6429,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           try {
             for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
               var c = _step4.value;
-
-              // Disconnect this socket
-              _this3.canvas.removeConnection(c);
-
-              _this3.socket.disconnect(c.source);
+              c.destroy();
             }
           } catch (err) {
             _iterator4.e(err);

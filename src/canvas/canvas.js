@@ -348,10 +348,6 @@ export class Canvas {
     this.#connections.push(connection);
     connection.canvas = this;
     this.#connectionsEl.appendChild(connection.connectionEl);
-
-    // Update connected sockets
-    connection.source.updateSVGElement();
-    connection.target.updateSVGElement();
   }
 
   /**
@@ -359,14 +355,9 @@ export class Canvas {
    * @param {Connection} connection The connection to remove
    */
   removeConnection(connection) {
-    // Signal the connection that will be destroyed
-    connection.destroy();
     this.#connections = this.#connections.filter((c) => c !== connection);
-    this.#connectionsEl.removeChild(connection.connectionEl);
-
-    // Update connected sockets
-    connection.source.updateSVGElement();
-    connection.target.updateSVGElement();
+    if (connection.connectionEl.parentElement === this.#connectionsEl)
+      this.#connectionsEl.removeChild(connection.connectionEl);
   }
 
   /**
@@ -399,45 +390,10 @@ export class Canvas {
    * @param {Component} component Component to remove
    */
   removeComponent(component) {
-    // Remove related connections
-    for (let s of component.components) {
-      if (s instanceof SocketComponent) {
-        for (let c of this.getConnectionsFor(s)) {
-          this.removeConnection(c);
-        }
-      }
-    }
-
-    // Signal component that will be removed
-    component.destroy();
-
     // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
-    this.#svgEl.removeChild(component.componentEl);
-  }
-
-  /**
-   * Update all connections in terms of SVG properties. This is
-   * important because when components are moved, this ensures that
-   * connections will follow them
-   */
-  updateAllConnections() {
-    for (let connection of this.#connections) {
-      connection.updateSVGElement();
-    }
-  }
-
-  /**
-   * Update all connections for a component in terms of SVG properties. This is
-   * important because when components are moved, this ensures that
-   * connections will follow them
-   * @param {Component} component The component for which update connections
-   */
-  updateAllConnectionsFor(component) {
-    let conns = this.getConnectionsFor(component);
-    for (let connection of conns) {
-      connection.updateSVGElement();
-    }
+    if (component.componentEl.parentElement === this.#svgEl)
+      this.#svgEl.removeChild(component.componentEl);
   }
 
   /**
@@ -452,29 +408,29 @@ export class Canvas {
   }
 
   /**
-   * Removes all connections from the canvas
+   * Destroy all connections from the canvas
    */
-  removeAllConnections() {
+  destroyAllConnections() {
     while (this.#connections.length > 0) {
-      this.removeConnection(this.#connections[0]);
+      this.#connections[0].destroy();
     }
   }
 
   /**
-   * Removes all components from the canvas
+   * Destroy all components from the canvas
    */
-  removeAllComponents() {
+  destroyAllComponents() {
     while (this.#components.length > 0) {
-      this.removeComponent(this.#components[0]);
+      this.#components[0].destroy();
     }
   }
 
   /**
-   * Remoives all connections and all components from the canvas
+   * Destroy all connections and all components from the canvas
    */
-  removeAll() {
-    this.removeAllConnections();
-    this.removeAllComponents();
+  destroyAll() {
+    this.destroyAllConnections();
+    this.destroyAllComponents();
   }
 
   /**

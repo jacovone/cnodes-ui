@@ -38,7 +38,7 @@ export class CnodeBreakComponent extends CnodeComponent {
 
     items.unshift(
       new MenuItem(
-        `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_FONT}">Remove unused</tspan>`,
+        `<tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">Remove unused</tspan>`,
         () => {
           for (let o of this.node.outputs) {
             if (
@@ -54,7 +54,7 @@ export class CnodeBreakComponent extends CnodeComponent {
         }
       ),
       new MenuItem(
-        `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_FONT}">Reset outputs</tspan>`,
+        `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_STYLE}">Reset outputs</tspan>`,
         () => {
           for (let o of this.#originalOutputs) {
             if (!this.node.outputs.includes(o)) {

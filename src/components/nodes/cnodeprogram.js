@@ -44,7 +44,7 @@ export class CnodeProgramComponent extends CnodeComponent {
 
     items.unshift(
       new MenuItem(
-        `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_FONT}">Edit...</tspan>`,
+        `<tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">Edit...</tspan>`,
         () => {
           this.canvas.pushProgram(this.node);
         }

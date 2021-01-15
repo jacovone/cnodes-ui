@@ -229,7 +229,7 @@ export class CnodesMenu extends Menu {
 
       itemTextEl.setAttribute("x", itemX + 5);
       itemTextEl.setAttribute("y", itemY + Theme.current.MENU_ITEM_HEIGHT / 2);
-      itemTextEl.setAttribute("style", Theme.current.MENU_ITEM_FONT);
+      itemTextEl.setAttribute("style", Theme.current.MENU_ITEM_STYLE);
       // itemTextEl.setAttribute("alignment-baseline", "middle");
       itemTextEl.style["pointer-events"] = "none";
       itemTextEl.style["user-select"] = "none";
@@ -282,7 +282,7 @@ export class CnodesMenu extends Menu {
 
       itemEl.setAttribute("width", itemWidth);
       itemEl.setAttribute("height", itemHeight);
-      itemEl.setAttribute("style", Theme.current.MENU_ITEM_FONT);
+      itemEl.setAttribute("style", Theme.current.MENU_ITEM_STYLE);
       itemEl.setAttribute("stroke", "transparent");
       itemEl.setAttribute("stroke-width", 0);
       itemEl.setAttribute("fill", "transparent");

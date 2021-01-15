@@ -111,7 +111,7 @@ export class CnodesEditableTextComponent extends Component {
     return [
       new MenuItem(
         `
-      <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+      <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
         Edit text...
       </tspan>
       `,

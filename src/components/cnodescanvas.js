@@ -145,7 +145,7 @@ export class CnodesCanvas extends Canvas {
       items.push(
         new MenuItem(
           `
-          <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+          <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
             Return to parent...
           </tspan>
           `,
@@ -163,14 +163,14 @@ export class CnodesCanvas extends Canvas {
           items.push(
             new MenuItem(
               `
-              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
                 New
               </tspan>
-              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_FONT}" fill="${Theme.current.MENU_ITEM_COLOR}">
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
                 ${nodeDef.name}
               </tspan>
-              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_FONT}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
-                ${nodeDef.category}
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_STYLE}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
+                (${nodeDef.category})
               </tspan>
               `,
               (x, y) => {

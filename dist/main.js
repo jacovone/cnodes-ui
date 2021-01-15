@@ -3198,7 +3198,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var items = [];
 
       if (this.canPopProgram()) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this2.popProgram();
         }));
       }
@@ -3219,7 +3219,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this2);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(x, y);
                 }));
@@ -3850,7 +3850,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     value: function getContextMenuItems() {
       var _this2 = this;
 
-      return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
+      return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
         _this2.setEditing(true);
       })];
     }
@@ -4330,7 +4330,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
           itemEl.setAttribute("y", itemY);
           itemTextEl.setAttribute("x", itemX + 5);
           itemTextEl.setAttribute("y", itemY + _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT / 2);
-          itemTextEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT); // itemTextEl.setAttribute("alignment-baseline", "middle");
+          itemTextEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE); // itemTextEl.setAttribute("alignment-baseline", "middle");
 
           itemTextEl.style["pointer-events"] = "none";
           itemTextEl.style["user-select"] = "none";
@@ -4398,7 +4398,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
           itemTextEl.setAttribute("height", itemHeight - 10);
           itemEl.setAttribute("width", itemWidth);
           itemEl.setAttribute("height", itemHeight);
-          itemEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_FONT);
+          itemEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE);
           itemEl.setAttribute("stroke", "transparent");
           itemEl.setAttribute("stroke-width", 0);
           itemEl.setAttribute("fill", "transparent");
@@ -5048,7 +5048,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
                     // Create an item only if the input in "compatible" with this output
                     if (_this3.socket.node.canBeConnected(_this3.socket, out)) {
-                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
+                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    (").concat(nodeDef.category, ")\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
                         var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_9__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
@@ -5381,7 +5381,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable && n.prev) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              ").concat(nodeDef.category, "\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   // create the node and return the specific socket component to
                   // the context menu client
                   var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_8__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
@@ -5559,7 +5559,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
           _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeBreakComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
-      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Remove unused</tspan>"), function () {
+      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Remove unused</tspan>"), function () {
         var _iterator = _createForOfIteratorHelper(_this2.node.outputs),
             _step;
 
@@ -5580,7 +5580,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
         }
 
         _this2.updateSVGElement();
-      }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Reset outputs</tspan>"), function () {
+      }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Reset outputs</tspan>"), function () {
         var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(_this2, _originalOutputs)),
             _step2;
 
@@ -5709,7 +5709,7 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
           _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeProgramComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
-      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_SPECIAL_ITEM_FONT, "\">Edit...</tspan>"), function () {
+      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Edit...</tspan>"), function () {
         _this2.canvas.pushProgram(_this2.node);
       }));
       return items.length ? items : null;
@@ -6029,7 +6029,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
                     // Create an item only if the input in "compatible" with this output
                     if (_this3.socket.node.canBeConnected(_this3.socket, inp)) {
-                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_FONT, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    ").concat(nodeDef.category, "\n                  </tspan>\n                  "), function (x, y) {
+                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    (").concat(nodeDef.category, ")\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
                         var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
@@ -6372,7 +6372,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 try {
                   var _loop2 = function _loop2() {
                     var next = _step3.value;
-                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, ".\n                </tspan>\n                <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_FONT, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_FONT, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  ").concat(nodeDef.category, "\n                </tspan>\n                "), function (x, y) {
+                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, ".\n                </tspan>\n                <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  (").concat(nodeDef.category, ")\n                </tspan>\n                "), function (x, y) {
                       // create the node and return the specific socket component to
                       // the context menu client
                       var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
@@ -6648,11 +6648,6 @@ var Theme = /*#__PURE__*/function () {
       return "bold 11px verdana";
     }
   }, {
-    key: "NODE_IO_NAME_COLOR",
-    get: function get() {
-      return "bold 11px black";
-    }
-  }, {
     key: "NODE_IO_POINT_RADIUS",
     get: function get() {
       return 10;
@@ -6728,7 +6723,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_STROKE_COLOR",
     get: function get() {
-      return "#EEEEEE";
+      return "#DDDDDD";
     }
   }, {
     key: "MENU_STROKE_WIDTH",
@@ -6738,22 +6733,22 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_ITEM_HEIGHT",
     get: function get() {
-      return 33;
+      return 26;
     }
   }, {
-    key: "MENU_ITEM_FONT",
+    key: "MENU_ITEM_STYLE",
     get: function get() {
-      return "font: 14px sans-serif";
+      return "font: bold 12px sans-serif";
     }
   }, {
-    key: "MENU_SPECIAL_ITEM_FONT",
+    key: "MENU_SPECIAL_ITEM_STYLE",
     get: function get() {
-      return "bold 14px sans-serif";
+      return "font: bold 12px sans-serif; fill: brown";
     }
   }, {
-    key: "MENU_ITEM_CATEGORY_FONT",
+    key: "MENU_ITEM_CATEGORY_STYLE",
     get: function get() {
-      return "bold 10px sans-serif";
+      return "font: bold 8px sans-serif";
     }
   }, {
     key: "MENU_ITEM_COLOR",

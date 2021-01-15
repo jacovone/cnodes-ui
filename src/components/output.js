@@ -247,19 +247,19 @@ export class OutputSocketComponent extends CnodesSocketComponent {
                 new MenuItem(
                   `
                   <tspan alignment-baseline="middle" style="${
-                    Theme.current.MENU_ITEM_FONT
+                    Theme.current.MENU_ITEM_STYLE
                   }" fill="${Theme.current.MENU_ITEM_COLOR}">
                     ${nodeDef.name}.
                   </tspan>
                   <tspan alignment-baseline="middle" fill="${CnodesSocketComponent.getColorForType(
                     inp.type
-                  )}" style="${Theme.current.MENU_ITEM_FONT}">
+                  )}" style="${Theme.current.MENU_ITEM_STYLE}">
                     ${inp.name}
                   </tspan>
                   <tspan alignment-baseline="middle" style="${
-                    Theme.current.MENU_ITEM_CATEGORY_FONT
+                    Theme.current.MENU_ITEM_CATEGORY_STYLE
                   }" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
-                    ${nodeDef.category}
+                    (${nodeDef.category})
                   </tspan>
                   `,
                   (x, y) => {

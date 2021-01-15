@@ -125,9 +125,6 @@ export class Theme {
   get NODE_IO_NAME_FONT() {
     return "bold 11px verdana";
   }
-  get NODE_IO_NAME_COLOR() {
-    return "bold 11px black";
-  }
   get NODE_IO_POINT_RADIUS() {
     return 10;
   }
@@ -180,22 +177,22 @@ export class Theme {
     return "#F3F3F3";
   }
   get MENU_STROKE_COLOR() {
-    return "#EEEEEE";
+    return "#DDDDDD";
   }
   get MENU_STROKE_WIDTH() {
     return 2;
   }
   get MENU_ITEM_HEIGHT() {
-    return 33;
+    return 26;
   }
-  get MENU_ITEM_FONT() {
-    return "font: 14px sans-serif";
+  get MENU_ITEM_STYLE() {
+    return "font: bold 12px sans-serif";
   }
-  get MENU_SPECIAL_ITEM_FONT() {
-    return "bold 14px sans-serif";
+  get MENU_SPECIAL_ITEM_STYLE() {
+    return "font: bold 12px sans-serif; fill: brown";
   }
-  get MENU_ITEM_CATEGORY_FONT() {
-    return "bold 10px sans-serif";
+  get MENU_ITEM_CATEGORY_STYLE() {
+    return "font: bold 8px sans-serif";
   }
   get MENU_ITEM_COLOR() {
     return "black";

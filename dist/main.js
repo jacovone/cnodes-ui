@@ -3319,7 +3319,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var items = [];
 
       if (this.canPopProgram()) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this2.popProgram();
         }));
       }
@@ -5827,6 +5827,25 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
       this.componentEl.addEventListener("dblclick", function (e) {
         _this.canvas.pushProgram(_this.node);
       });
+
+      if (!this.node.enter.meta) {
+        this.node.enter.meta = {
+          pos: {
+            x: 0,
+            y: 0
+          }
+        };
+      }
+
+      if (!this.node.exit.meta) {
+        this.node.exit.meta = {
+          pos: {
+            x: 500,
+            y: 0
+          }
+        };
+      }
+
       return this;
     }
     /**

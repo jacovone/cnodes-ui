@@ -32,6 +32,23 @@ export class CnodeProgramComponent extends CnodeComponent {
       this.canvas.pushProgram(this.node);
     });
 
+    if (!this.node.enter.meta) {
+      this.node.enter.meta = {
+        pos: {
+          x: 0,
+          y: 0,
+        },
+      };
+    }
+    if (!this.node.exit.meta) {
+      this.node.exit.meta = {
+        pos: {
+          x: 500,
+          y: 0,
+        },
+      };
+    }
+
     return this;
   }
 

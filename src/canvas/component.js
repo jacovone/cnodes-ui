@@ -180,6 +180,12 @@ export class Component {
       // This effectively move the element
       this.#pos.x = xDiff + this.#startMovePointerPos.x;
       this.#pos.y = yDiff + this.#startMovePointerPos.y;
+
+      if (e.ctrlKey) {
+        this.#pos.x = Math.ceil(this.#pos.x / 20) * 20;
+        this.#pos.y = Math.ceil(this.#pos.y / 20) * 20;
+      }
+
       this.updateSVGElement();
 
       this.events.emit("cnui:move", this);

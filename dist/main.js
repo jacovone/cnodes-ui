@@ -471,10 +471,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Canvas": () => /* binding */ Canvas
 /* harmony export */ });
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
-/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/socket */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
+/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
+/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -501,6 +503,8 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020
  */
+
+
 
 
 
@@ -684,7 +688,7 @@ var Canvas = /*#__PURE__*/function () {
     _classPrivateFieldGet(this, _svgEl).style.height = "100%";
     el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Background color
 
-    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
+    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components
 
     _classPrivateFieldSet(this, _connectionsEl, document.createElementNS("http://www.w3.org/2000/svg", "g"));
@@ -718,6 +722,11 @@ var Canvas = /*#__PURE__*/function () {
     });
 
     _classPrivateFieldGet(this, _svgEl).addEventListener("contextmenu", function (e) {
+      if (e.ctrlKey) {
+        e.preventDefault();
+        return;
+      }
+
       _classPrivateMethodGet(self, _onContextMenu, _onContextMenu2).call(self, e);
     });
   }
@@ -771,7 +780,7 @@ var Canvas = /*#__PURE__*/function () {
 
       while (pointedEl) {
         // Traverse the DOM tree
-        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_3__.SocketComponent)) {
+        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_5__.SocketComponent)) {
           return pointedEl.componentRef;
         }
 
@@ -957,20 +966,23 @@ var Canvas = /*#__PURE__*/function () {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var c = _step.value;
 
-          if (c.absPos.x < nodesBounds.minX) {
-            nodesBounds.minX = c.absPos.x;
-          }
+          // Ignore menus and sockets
+          if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
+            if (c.absPos.x < nodesBounds.minX) {
+              nodesBounds.minX = c.absPos.x;
+            }
 
-          if (c.absPos.y < nodesBounds.minY) {
-            nodesBounds.minY = c.absPos.y;
-          }
+            if (c.absPos.y < nodesBounds.minY) {
+              nodesBounds.minY = c.absPos.y;
+            }
 
-          if (c.absPos.x + c.width > nodesBounds.maxX) {
-            nodesBounds.maxX = c.absPos.x + c.width;
-          }
+            if (c.absPos.x + c.width > nodesBounds.maxX) {
+              nodesBounds.maxX = c.absPos.x + c.width;
+            }
 
-          if (c.absPos.y + c.height > nodesBounds.maxY) {
-            nodesBounds.maxY = c.absPos.y + c.height;
+            if (c.absPos.y + c.height > nodesBounds.maxY) {
+              nodesBounds.maxY = c.absPos.y + c.height;
+            }
           }
         } // Add dome padding
 
@@ -1609,6 +1621,12 @@ var _onPointerMove2 = function _onPointerMove2(e) {
 
     _classPrivateFieldGet(this, _pos).x = xDiff + _classPrivateFieldGet(this, _startMovePointerPos).x;
     _classPrivateFieldGet(this, _pos).y = yDiff + _classPrivateFieldGet(this, _startMovePointerPos).y;
+
+    if (e.ctrlKey) {
+      _classPrivateFieldGet(this, _pos).x = Math.ceil(_classPrivateFieldGet(this, _pos).x / 20) * 20;
+      _classPrivateFieldGet(this, _pos).y = Math.ceil(_classPrivateFieldGet(this, _pos).y / 20) * 20;
+    }
+
     this.updateSVGElement();
     this.events.emit("cnui:move", this);
 
@@ -3306,7 +3324,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         }));
       }
 
-      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n          Fit view\n        </tspan>\n        "), function () {
+      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
         _this2.fitGraph();
       }));
 
@@ -9194,14 +9212,7 @@ var Program = /*#__PURE__*/function (_Node) {
     _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket("Out", _assertThisInitialized(_this))];
     _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
 
-    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit())); // Not for now
-    // this.input("Val").canEditName = true;
-    // this.input("Val").canEditType = true;
-    // this.output("Val").canEditName = true;
-    // this.output("Val").canEditType = true;
-    // this.canAddInput = true;
-    // this.canAddOutput = true;
-
+    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit()));
 
     return _this;
   }

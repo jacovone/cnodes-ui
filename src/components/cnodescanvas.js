@@ -160,8 +160,8 @@ export class CnodesCanvas extends Canvas {
     items.push(
       new MenuItem(
         `
-        <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
-          Fit view
+        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
+          Fit graph
         </tspan>
         `,
         () => {

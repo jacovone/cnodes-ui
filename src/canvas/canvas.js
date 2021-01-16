@@ -7,9 +7,11 @@
  * Year: 2020
  */
 
+import { Socket } from "@marco.jacovone/cnodes/lib/core/socket";
 import { Theme } from "../components/theme";
 import { Component } from "./component";
 import { Connection } from "./connection";
+import { Menu } from "./menu";
 import { SocketComponent } from "./socket";
 
 /**
@@ -113,6 +115,10 @@ export class Canvas {
       self.#onPointerMove(e);
     });
     this.#svgEl.addEventListener("contextmenu", (e) => {
+      if (e.ctrlKey) {
+        e.preventDefault();
+        return;
+      }
       self.#onContextMenu(e);
     });
   }
@@ -481,17 +487,20 @@ export class Canvas {
 
     // Compute exact bounds
     for (let c of this.components) {
-      if (c.absPos.x < nodesBounds.minX) {
-        nodesBounds.minX = c.absPos.x;
-      }
-      if (c.absPos.y < nodesBounds.minY) {
-        nodesBounds.minY = c.absPos.y;
-      }
-      if (c.absPos.x + c.width > nodesBounds.maxX) {
-        nodesBounds.maxX = c.absPos.x + c.width;
-      }
-      if (c.absPos.y + c.height > nodesBounds.maxY) {
-        nodesBounds.maxY = c.absPos.y + c.height;
+      // Ignore menus and sockets
+      if (!(c instanceof Socket) && !(c instanceof Menu)) {
+        if (c.absPos.x < nodesBounds.minX) {
+          nodesBounds.minX = c.absPos.x;
+        }
+        if (c.absPos.y < nodesBounds.minY) {
+          nodesBounds.minY = c.absPos.y;
+        }
+        if (c.absPos.x + c.width > nodesBounds.maxX) {
+          nodesBounds.maxX = c.absPos.x + c.width;
+        }
+        if (c.absPos.y + c.height > nodesBounds.maxY) {
+          nodesBounds.maxY = c.absPos.y + c.height;
+        }
       }
     }
 

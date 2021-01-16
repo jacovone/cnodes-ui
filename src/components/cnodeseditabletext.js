@@ -79,6 +79,9 @@ export class CnodesEditableTextComponent extends Component {
     this.#width = val;
     this.updateSVGElement();
   }
+  get height() {
+    return 100;
+  }
   get color() {
     return this.#color;
   }

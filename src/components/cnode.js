@@ -54,6 +54,9 @@ export class CnodeComponent extends Component {
   get titleComp() {
     return this.#titleComp;
   }
+  get width() {
+    return Theme.current.NODE_WIDTH;
+  }
 
   /**
    * Sets up the component
@@ -220,6 +223,16 @@ export class CnodeComponent extends Component {
       }
       // Update position
       nComp.pos = new Position(Theme.current.NODE_WIDTH, posY);
+      posY += 30;
+    }
+
+    // Take account of the case in which there are not nexts and outputs
+    // but there is a prev.
+    if (
+      this.node.outputs.length === 0 &&
+      this.node.nexts.length === 0 &&
+      this.node.prev
+    ) {
       posY += 30;
     }
 

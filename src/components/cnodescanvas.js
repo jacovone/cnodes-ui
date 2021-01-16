@@ -119,6 +119,7 @@ export class CnodesCanvas extends Canvas {
   set program(val) {
     this.importCnodesProgram(val);
     this.#program = val;
+    this.fitGraph();
   }
 
   /**
@@ -155,6 +156,19 @@ export class CnodesCanvas extends Canvas {
         )
       );
     }
+
+    items.push(
+      new MenuItem(
+        `
+        <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
+          Fit view
+        </tspan>
+        `,
+        () => {
+          this.fitGraph();
+        }
+      )
+    );
 
     for (let cat of Env.getCategories()) {
       for (let nodeDef of Env.getCategoryNodes(cat)) {

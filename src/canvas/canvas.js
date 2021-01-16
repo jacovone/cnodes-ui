@@ -97,7 +97,7 @@ export class Canvas {
     // Define all pointer events to manager pan and zoom
     let self = this;
     window.addEventListener("resize", () => {
-      self.#adaptSVGSize();
+      self.fitGraph();
     });
     this.#svgEl.addEventListener("wheel", (e) => {
       self.#onWheel(e);
@@ -458,5 +458,59 @@ export class Canvas {
       this.removeComponent(this.#contextMenuComponent);
       this.contextMenuComponent = null;
     }
+  }
+
+  /**
+   * Set view box of the canvas to fit the entire graph
+   * with a padding
+   * @param { {x: number, y: number} } padding
+   */
+  fitGraph(padding) {
+    let nodesBounds = {
+      minX: Infinity,
+      minY: Infinity,
+      maxX: -Infinity,
+      maxY: -Infinity,
+      width: () => {
+        return nodesBounds.maxX - nodesBounds.minX;
+      },
+      height: () => {
+        return nodesBounds.maxY - nodesBounds.minY;
+      },
+    };
+
+    // Compute exact bounds
+    for (let c of this.components) {
+      if (c.absPos.x < nodesBounds.minX) {
+        nodesBounds.minX = c.absPos.x;
+      }
+      if (c.absPos.y < nodesBounds.minY) {
+        nodesBounds.minY = c.absPos.y;
+      }
+      if (c.absPos.x + c.width > nodesBounds.maxX) {
+        nodesBounds.maxX = c.absPos.x + c.width;
+      }
+      if (c.absPos.y + c.height > nodesBounds.maxY) {
+        nodesBounds.maxY = c.absPos.y + c.height;
+      }
+    }
+
+    // Add dome padding
+    let pad = padding ?? {
+      x: 100,
+      y: 100,
+    };
+
+    nodesBounds.minX -= pad.x;
+    nodesBounds.maxX += pad.x;
+    nodesBounds.minY -= pad.y;
+    nodesBounds.maxY += pad.y;
+
+    this.#vbX = nodesBounds.minX;
+    this.#vbY = nodesBounds.minY;
+    this.#vbWidth = nodesBounds.width();
+    this.#vbHeight = nodesBounds.height();
+
+    this.#updateSVGViewBox();
   }
 }

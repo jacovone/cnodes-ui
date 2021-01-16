@@ -475,6 +475,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
 /* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
 /* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -690,7 +696,7 @@ var Canvas = /*#__PURE__*/function () {
 
     var self = this;
     window.addEventListener("resize", function () {
-      _classPrivateMethodGet(self, _adaptSVGSize, _adaptSVGSize2).call(self);
+      self.fitGraph();
     });
 
     _classPrivateFieldGet(this, _svgEl).addEventListener("wheel", function (e) {
@@ -921,6 +927,77 @@ var Canvas = /*#__PURE__*/function () {
         this.removeComponent(_classPrivateFieldGet(this, _contextMenuComponent));
         this.contextMenuComponent = null;
       }
+    }
+    /**
+     * Set view box of the canvas to fit the entire graph
+     * with a padding
+     * @param { {x: number, y: number} } padding
+     */
+
+  }, {
+    key: "fitGraph",
+    value: function fitGraph(padding) {
+      var nodesBounds = {
+        minX: Infinity,
+        minY: Infinity,
+        maxX: -Infinity,
+        maxY: -Infinity,
+        width: function width() {
+          return nodesBounds.maxX - nodesBounds.minX;
+        },
+        height: function height() {
+          return nodesBounds.maxY - nodesBounds.minY;
+        }
+      }; // Compute exact bounds
+
+      var _iterator = _createForOfIteratorHelper(this.components),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var c = _step.value;
+
+          if (c.absPos.x < nodesBounds.minX) {
+            nodesBounds.minX = c.absPos.x;
+          }
+
+          if (c.absPos.y < nodesBounds.minY) {
+            nodesBounds.minY = c.absPos.y;
+          }
+
+          if (c.absPos.x + c.width > nodesBounds.maxX) {
+            nodesBounds.maxX = c.absPos.x + c.width;
+          }
+
+          if (c.absPos.y + c.height > nodesBounds.maxY) {
+            nodesBounds.maxY = c.absPos.y + c.height;
+          }
+        } // Add dome padding
+
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var pad = padding !== null && padding !== void 0 ? padding : {
+        x: 100,
+        y: 100
+      };
+      nodesBounds.minX -= pad.x;
+      nodesBounds.maxX += pad.x;
+      nodesBounds.minY -= pad.y;
+      nodesBounds.maxY += pad.y;
+
+      _classPrivateFieldSet(this, _vbX, nodesBounds.minX);
+
+      _classPrivateFieldSet(this, _vbY, nodesBounds.minY);
+
+      _classPrivateFieldSet(this, _vbWidth, nodesBounds.width());
+
+      _classPrivateFieldSet(this, _vbHeight, nodesBounds.height());
+
+      _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
     }
   }, {
     key: "minVBSize",
@@ -1422,6 +1499,16 @@ var Component = /*#__PURE__*/function () {
       this.events.emit("cnui:move", this);
     }
   }, {
+    key: "width",
+    get: function get() {
+      return 0;
+    }
+  }, {
+    key: "height",
+    get: function get() {
+      return 0;
+    }
+  }, {
     key: "canvas",
     get: function get() {
       return _classPrivateFieldGet(this, _canvas);
@@ -1524,6 +1611,11 @@ var _onPointerMove2 = function _onPointerMove2(e) {
     _classPrivateFieldGet(this, _pos).y = yDiff + _classPrivateFieldGet(this, _startMovePointerPos).y;
     this.updateSVGElement();
     this.events.emit("cnui:move", this);
+
+    if (e.shiftKey) {
+      this.canvas.fitGraph();
+    }
+
     e.stopPropagation();
   }
 };
@@ -2757,13 +2849,19 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
           _nComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, posY);
           posY += 30;
-        } // Output
+        } // Take account of the case in which there are not nexts and outputs
+        // but there is a prev.
 
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
+
+      if (this.node.outputs.length === 0 && this.node.nexts.length === 0 && this.node.prev) {
+        posY += 30;
+      } // Output
+
 
       var _iterator2 = _createForOfIteratorHelper(this.node.outputs),
           _step2;
@@ -3027,6 +3125,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       return _classPrivateFieldGet(this, _titleComp);
     }
   }, {
+    key: "width",
+    get: function get() {
+      return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
+    }
+  }, {
     key: "height",
     get: function get() {
       var leftSocketsHeight = this.node.inputs.length;
@@ -3202,6 +3305,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           _this2.popProgram();
         }));
       }
+
+      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n          Fit view\n        </tspan>\n        "), function () {
+        _this2.fitGraph();
+      }));
 
       var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
           _step;
@@ -3509,6 +3616,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       this.importCnodesProgram(val);
 
       _classPrivateFieldSet(this, _program, val);
+
+      this.fitGraph();
     }
   }], [{
     key: "registerNodeUI",
@@ -4009,6 +4118,11 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       _classPrivateFieldSet(this, _width, val);
 
       this.updateSVGElement();
+    }
+  }, {
+    key: "height",
+    get: function get() {
+      return 100;
     }
   }, {
     key: "color",
@@ -7383,7 +7497,7 @@ var Enter = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "Enter");
     _this.removable = false;
     _this.creatable = false;
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.inputs = [];
     _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
     _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Begin", _assertThisInitialized(_this))];
     _this.prev = null;
@@ -7397,9 +7511,6 @@ var Enter = /*#__PURE__*/function (_Node) {
   _createClass(Enter, [{
     key: "process",
     value: function process() {
-      this.evaluateInputs();
-      this.output("Val").value = this.input("Val").value;
-      this.output("Val").type = this.input("Val").type;
       return this.getFlowResult(this.next("Begin"));
     }
   }]);
@@ -8309,7 +8420,7 @@ var Exit = /*#__PURE__*/function (_Node) {
     _this.removable = false;
     _this.creatable = false;
     _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [];
     _this.nexts = [];
     _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("End", _assertThisInitialized(_this));
     return _this;
@@ -8323,8 +8434,6 @@ var Exit = /*#__PURE__*/function (_Node) {
     key: "process",
     value: function process() {
       this.evaluateInputs();
-      this.output("Val").value = this.input("Val").value;
-      this.output("Val").type = this.input("Val").type;
       return new _node_js__WEBPACK_IMPORTED_MODULE_0__.Result(); // End process
     }
   }]);
@@ -9085,7 +9194,14 @@ var Program = /*#__PURE__*/function (_Node) {
     _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket("Out", _assertThisInitialized(_this))];
     _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
 
-    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit()));
+    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit())); // Not for now
+    // this.input("Val").canEditName = true;
+    // this.input("Val").canEditType = true;
+    // this.output("Val").canEditName = true;
+    // this.output("Val").canEditType = true;
+    // this.canAddInput = true;
+    // this.canAddOutput = true;
+
 
     return _this;
   }
@@ -9128,25 +9244,21 @@ var Program = /*#__PURE__*/function (_Node) {
      * The Program node couldn't be a top-level program, but a sub-nod
      * of another program. For that reason, the process() method copy the
      * value of the only input in the Program node to the only one
-     * input of the "Enter" forst node.
+     * output of the "Enter" node.
      * This is a limitation: The Program node can be actually only 1 input
      * and only 1 output. At the same, Enter and Exit nodes will have only
-     * 1 input and output respectively.
+     * 1 output and 1 input respectively.
      * At the end, the process() methos of the Program node, will copy the
-     * value of the Exit's output to the unique output of the Program node
+     * value of the Exit's intput to the unique output of the Program node
      */
 
   }, {
     key: "process",
     value: function process() {
-      this.evaluateInputs(); // Copy input to enter's input
-
-      _classPrivateFieldGet(this, _enter).input("Val").value = this.input("Val").value;
-      _classPrivateFieldGet(this, _enter).input("Val").type = this.input("Val").type;
-      this.processFrom(_classPrivateFieldGet(this, _enter)); // Copy output to exit's output
-
-      this.output("Val").value = _classPrivateFieldGet(this, _exit).output("Val").value;
-      this.output("Val").type = _classPrivateFieldGet(this, _exit).output("Val").type;
+      this.evaluateInputs();
+      _classPrivateFieldGet(this, _enter).output("Val").value = this.input("Val").value;
+      this.processFrom(_classPrivateFieldGet(this, _enter));
+      this.output("Val").value = _classPrivateFieldGet(this, _exit).input("Val").value;
       return this.getFlowResult(this.next("Out"));
     }
     /**

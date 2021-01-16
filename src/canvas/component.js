@@ -98,6 +98,12 @@ export class Component {
     this.updateSVGElement();
     this.events.emit("cnui:move", this);
   }
+  get width() {
+    return 0;
+  }
+  get height() {
+    return 0;
+  }
   get canvas() {
     return this.#canvas;
   }
@@ -177,6 +183,10 @@ export class Component {
       this.updateSVGElement();
 
       this.events.emit("cnui:move", this);
+
+      if (e.shiftKey) {
+        this.canvas.fitGraph();
+      }
 
       e.stopPropagation();
     }

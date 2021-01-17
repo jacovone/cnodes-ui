@@ -1001,15 +1001,17 @@ var Canvas = /*#__PURE__*/function () {
       nodesBounds.minY -= pad.y;
       nodesBounds.maxY += pad.y;
 
-      _classPrivateFieldSet(this, _vbX, nodesBounds.minX);
+      if (nodesBounds.height() >= _classPrivateFieldGet(this, _minVBSize) && nodesBounds.width() >= _classPrivateFieldGet(this, _minVBSize) && nodesBounds.height() <= _classPrivateFieldGet(this, _maxVBSize) && nodesBounds.width() <= _classPrivateFieldGet(this, _maxVBSize)) {
+        _classPrivateFieldSet(this, _vbX, nodesBounds.minX);
 
-      _classPrivateFieldSet(this, _vbY, nodesBounds.minY);
+        _classPrivateFieldSet(this, _vbY, nodesBounds.minY);
 
-      _classPrivateFieldSet(this, _vbWidth, nodesBounds.width());
+        _classPrivateFieldSet(this, _vbWidth, nodesBounds.width());
 
-      _classPrivateFieldSet(this, _vbHeight, nodesBounds.height());
+        _classPrivateFieldSet(this, _vbHeight, nodesBounds.height());
 
-      _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
+        _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
+      }
     }
   }, {
     key: "minVBSize",
@@ -1108,7 +1110,7 @@ var _adaptSVGSize2 = function _adaptSVGSize2() {
 
 var _onWheel2 = function _onWheel2(e) {
   var p = this.clientToSvgPoint(e.clientX, e.clientY);
-  var zoomFactor = 0.003;
+  var zoomFactor = 0.001;
   var zoom = 1 + e.deltaY * zoomFactor;
   var newWidth = _classPrivateFieldGet(this, _vbWidth) * zoom;
   var newHeight = _classPrivateFieldGet(this, _vbHeight) * zoom;
@@ -2934,10 +2936,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       if (!_classPrivateFieldGet(this, _titleComp)) {
         var _this$node$meta;
 
-        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(this.node.title).setup());
+        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(this.node.title).setup()); // Register to "cnui:change" to update title and meta info about it
 
-        _classPrivateFieldGet(this, _titleComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
-        _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT; // Register to "cnui:change" to update title and meta info about it
 
         _classPrivateFieldGet(this, _titleComp).events.on("cnui:change", function (component) {
           // Prevent empty title
@@ -3186,8 +3186,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
 /* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
 /* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
+/* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
+/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -3245,6 +3246,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
 
 
 
+
 /**
  * This is the entry-point class for managing the canvas
  * relative to a cnodes program.
@@ -3282,7 +3284,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     });
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
     _this.svgEl.appendChild(defsEl);
 
@@ -3319,12 +3321,35 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var items = [];
 
       if (this.canPopProgram()) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this2.popProgram();
         }));
       }
 
-      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
+      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          New Annotation\n        </tspan>\n        "), function (x, y) {
+        console.log(x, y);
+        var annotation = new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent("Annotation").setup();
+
+        _this2.addComponent(annotation);
+
+        annotation.setEditing(true); // Register to "cnui:change" to update title and meta info about it
+
+        annotation.events.on("cnui:change", function (component) {
+          // Prevent empty title
+          if (component.text === "") {
+            component.text = "title";
+          }
+        });
+        annotation.events.on("cnui:move", function (component) {
+          // Update UI data in meta info
+          console.log(component.pos);
+        });
+        annotation.font = _theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CANVAS_ANNOTATION_FONT;
+        annotation.color = _theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CANVAS_ANNOTATION_COLOR;
+        annotation.width = 1000;
+        annotation.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(x, y);
+      }));
+      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
         _this2.fitGraph();
       }));
 
@@ -3344,7 +3369,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_9__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this2);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(x, y);
                 }));
@@ -3403,7 +3428,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           this.cancelContextMenu();
         }
 
-        this.contextMenuComponent = new _cnodesmenu__WEBPACK_IMPORTED_MODULE_8__.CnodesMenu(this, items);
+        this.contextMenuComponent = new _cnodesmenu__WEBPACK_IMPORTED_MODULE_9__.CnodesMenu(this, items);
         this.contextMenuComponent.menuCallback = menuCallback;
         this.contextMenuComponent.show(x, y);
       }
@@ -3915,8 +3940,6 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
    */
   function CnodesEditableTextComponent(text) {
     var _this;
-
-    var initialEdit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
     _classCallCheck(this, CnodesEditableTextComponent);
 
@@ -6951,6 +6974,17 @@ var Theme = /*#__PURE__*/function () {
     key: "TYPE_ANY_COLOR",
     get: function get() {
       return "#d9d9d9";
+    } // Canvas
+
+  }, {
+    key: "CANVAS_ANNOTATION_FONT",
+    get: function get() {
+      return "bold 26px verdana";
+    }
+  }, {
+    key: "CANVAS_ANNOTATION_COLOR",
+    get: function get() {
+      return "black";
     }
   }]);
 

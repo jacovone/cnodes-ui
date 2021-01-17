@@ -56,7 +56,7 @@ export class CnodesEditableTextComponent extends Component {
    * option for multiline
    * @param {string} text The text to show
    */
-  constructor(text, initialEdit = false) {
+  constructor(text) {
     super();
     this.#text = text;
   }

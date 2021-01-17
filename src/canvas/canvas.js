@@ -212,7 +212,7 @@ export class Canvas {
   #onWheel(e) {
     let p = this.clientToSvgPoint(e.clientX, e.clientY);
 
-    let zoomFactor = 0.003;
+    let zoomFactor = 0.002;
     let zoom = 1 + e.deltaY * zoomFactor;
 
     let newWidth = this.#vbWidth * zoom;
@@ -515,11 +515,18 @@ export class Canvas {
     nodesBounds.minY -= pad.y;
     nodesBounds.maxY += pad.y;
 
-    this.#vbX = nodesBounds.minX;
-    this.#vbY = nodesBounds.minY;
-    this.#vbWidth = nodesBounds.width();
-    this.#vbHeight = nodesBounds.height();
+    if (
+      nodesBounds.height() >= this.#minVBSize &&
+      nodesBounds.width() >= this.#minVBSize &&
+      nodesBounds.height() <= this.#maxVBSize &&
+      nodesBounds.width() <= this.#maxVBSize
+    ) {
+      this.#vbX = nodesBounds.minX;
+      this.#vbY = nodesBounds.minY;
+      this.#vbWidth = nodesBounds.width();
+      this.#vbHeight = nodesBounds.height();
 
-    this.#updateSVGViewBox();
+      this.#updateSVGViewBox();
+    }
   }
 }

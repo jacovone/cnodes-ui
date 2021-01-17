@@ -269,8 +269,6 @@ export class CnodeComponent extends Component {
       this.#titleComp = new CnodesEditableTextComponent(
         this.node.title
       ).setup();
-      this.#titleComp.color = Theme.current.NODE_TITLE_COLOR;
-      this.#titleComp.font = Theme.current.NODE_TITLE_FONT;
 
       // Register to "cnui:change" to update title and meta info about it
       this.#titleComp.events.on("cnui:change", (component) => {

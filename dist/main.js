@@ -1110,7 +1110,7 @@ var _adaptSVGSize2 = function _adaptSVGSize2() {
 
 var _onWheel2 = function _onWheel2(e) {
   var p = this.clientToSvgPoint(e.clientX, e.clientY);
-  var zoomFactor = 0.001;
+  var zoomFactor = 0.002;
   var zoom = 1 + e.deltaY * zoomFactor;
   var newWidth = _classPrivateFieldGet(this, _vbWidth) * zoom;
   var newHeight = _classPrivateFieldGet(this, _vbHeight) * zoom;
@@ -3178,15 +3178,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesCanvas": () => /* binding */ CnodesCanvas
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
-/* harmony import */ var _marco_jacovone_cnodes_lib_core_node__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/node */ "../cnodes/lib/core/node.js");
-/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
-/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_core_node__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/node */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
+/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
+/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
+/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
 /* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -3220,6 +3221,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to set private field on non-instance"); } if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
 
@@ -3266,6 +3269,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   /** The edited program */
 
   /** The stack of edited programs */
+
+  /** The event emitter connected to the canvas */
   function CnodesCanvas(el) {
     var _this;
 
@@ -3282,6 +3287,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       writable: true,
       value: []
     });
+
+    _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
@@ -3307,7 +3314,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "dump",
     value: function dump() {
-      console.log(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.export(_classPrivateFieldGet(this, _program)));
+      console.log(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
     }
     /**
      * Return a list of MenuItem for the context menu
@@ -3321,57 +3328,34 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var items = [];
 
       if (this.canPopProgram()) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this2.popProgram();
         }));
       }
 
-      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          New Annotation\n        </tspan>\n        "), function (x, y) {
-        console.log(x, y);
-        var annotation = new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent("Annotation").setup();
-
-        _this2.addComponent(annotation);
-
-        annotation.setEditing(true); // Register to "cnui:change" to update title and meta info about it
-
-        annotation.events.on("cnui:change", function (component) {
-          // Prevent empty title
-          if (component.text === "") {
-            component.text = "title";
-          }
-        });
-        annotation.events.on("cnui:move", function (component) {
-          // Update UI data in meta info
-          console.log(component.pos);
-        });
-        annotation.font = _theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CANVAS_ANNOTATION_FONT;
-        annotation.color = _theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CANVAS_ANNOTATION_COLOR;
-        annotation.width = 1000;
-        annotation.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(x, y);
-      }));
-      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
+      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
         _this2.fitGraph();
       }));
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
-              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this2);
-                  node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(x, y);
+                  node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
                 }));
               }
             };
@@ -3462,13 +3446,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           }
 
           if (n.meta.pos) {
-            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(n.meta.pos.x, n.meta.pos.y);
+            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(n.meta.pos.x, n.meta.pos.y);
           } else {
-            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(100, 100);
+            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(100, 100);
           }
 
           if (n.meta.titlePos) {
-            comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
+            comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
           }
 
           if (n.meta.comment) {
@@ -3500,7 +3484,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                 if (!this.alreadyConnected(peer.__comp, _n.prev.__comp)) {
                   // Create connection component
-                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
+                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_7__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
                 }
               }
             } catch (err) {
@@ -3521,7 +3505,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (next.peer) {
                 if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
                   // Create connection component
-                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_6__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
+                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_7__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
                 }
               }
             } // Setup inputs
@@ -3542,7 +3526,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (inp.peer) {
                 if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
                   // Create connection component
-                  new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
+                  new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_6__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
                 }
               }
             } // Setup outputs
@@ -3570,7 +3554,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                     if (!this.alreadyConnected(outp.__comp, _peer.__comp)) {
                       // Create connection component
-                      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_5__.IOConnection(outp.__comp, _peer.__comp, this).setup();
+                      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_6__.IOConnection(outp.__comp, _peer.__comp, this).setup();
                     }
                   }
                 } catch (err) {
@@ -3598,7 +3582,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     /**
      * Push a subprogram on the canvas. The current program
      * is pushed on to the stack and the new one is placed on the canvas
-     * @param {*} program The new program to edit
+     * @param {Program} program The new program to edit
      */
 
   }, {
@@ -3682,13 +3666,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       if (factory) {
         return factory(node, canvas).setup();
       } else {
-        return new _cnode__WEBPACK_IMPORTED_MODULE_7__.CnodeComponent(node, canvas).setup();
+        return new _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent(node, canvas).setup();
       }
     }
   }]);
 
   return CnodesCanvas;
-}(_canvas_canvas__WEBPACK_IMPORTED_MODULE_2__.Canvas);
+}(_canvas_canvas__WEBPACK_IMPORTED_MODULE_3__.Canvas);
 var _nodesUIRegistry = {
   writable: true,
   value: new Map()
@@ -6974,17 +6958,6 @@ var Theme = /*#__PURE__*/function () {
     key: "TYPE_ANY_COLOR",
     get: function get() {
       return "#d9d9d9";
-    } // Canvas
-
-  }, {
-    key: "CANVAS_ANNOTATION_FONT",
-    get: function get() {
-      return "bold 26px verdana";
-    }
-  }, {
-    key: "CANVAS_ANNOTATION_COLOR",
-    get: function get() {
-      return "black";
     }
   }]);
 
@@ -7227,6 +7200,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Getvar,
 /* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.If,
 /* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.InputSocket,
+/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Log,
 /* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.NextSocket,
 /* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.Node,
 /* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_7__.OutputSocket,
@@ -7362,61 +7336,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "callNode": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.callNode,
 /* harmony export */   "Console": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.Console,
 /* harmony export */   "consoleNode": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.consoleNode,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__.FGetvar,
-/* harmony export */   "fgetvarNode": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__.fgetvarNode,
-/* harmony export */   "For": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__.For,
-/* harmony export */   "forNode": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__.forNode,
-/* harmony export */   "Getvar": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__.Getvar,
-/* harmony export */   "getvarNode": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__.getvarNode,
-/* harmony export */   "If": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.If,
-/* harmony export */   "ifNode": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.ifNode,
-/* harmony export */   "Setvar": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.Setvar,
-/* harmony export */   "setvarNode": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__.setvarNode,
-/* harmony export */   "While": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.While,
-/* harmony export */   "whileNode": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__.whileNode,
-/* harmony export */   "FIf": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_13__.FIf,
-/* harmony export */   "fifNode": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_13__.fifNode,
-/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__.Comparision,
-/* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__.FCompare,
-/* harmony export */   "fcompareNode": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__.fcompareNode,
-/* harmony export */   "FSConst": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_15__.FSConst,
-/* harmony export */   "fsconstNode": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_15__.fsconstNode,
-/* harmony export */   "FConcat": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_16__.FConcat,
-/* harmony export */   "fconcatNode": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_16__.fconcatNode,
-/* harmony export */   "FNConst": () => /* reexport safe */ _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_17__.FNConst,
-/* harmony export */   "fnconstNode": () => /* reexport safe */ _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_17__.fnconstNode,
-/* harmony export */   "FAdd": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_18__.FAdd,
-/* harmony export */   "faddNode": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_18__.faddNode,
-/* harmony export */   "FDiv": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_19__.FDiv,
-/* harmony export */   "fdivNode": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_19__.fdivNode,
-/* harmony export */   "FMul": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__.FMul,
-/* harmony export */   "fmulNode": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__.fmulNode,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__.FSqrt,
-/* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__.fsqrtNode,
-/* harmony export */   "FMod": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.FMod,
-/* harmony export */   "fmodNode": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__.fmodNode,
-/* harmony export */   "APush": () => /* reexport safe */ _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_23__.APush,
-/* harmony export */   "apushNode": () => /* reexport safe */ _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_23__.apushNode,
-/* harmony export */   "FAConst": () => /* reexport safe */ _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_24__.FAConst,
-/* harmony export */   "faconstNode": () => /* reexport safe */ _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_24__.faconstNode,
-/* harmony export */   "FAMake": () => /* reexport safe */ _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__.FAMake,
-/* harmony export */   "famakeNode": () => /* reexport safe */ _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__.famakeNode,
-/* harmony export */   "FAGet": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.FAGet,
-/* harmony export */   "fagetNode": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__.fagetNode,
-/* harmony export */   "FALength": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.FALength,
-/* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__.falengthNode,
-/* harmony export */   "AMap": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__.AMap,
-/* harmony export */   "amapNode": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__.amapNode,
-/* harmony export */   "FAMap": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__.FAMap,
-/* harmony export */   "famapNode": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__.famapNode,
-/* harmony export */   "AReduce": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__.AReduce,
-/* harmony export */   "areduceNode": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__.areduceNode,
-/* harmony export */   "FAReduce": () => /* reexport safe */ _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_31__.FAReduce,
-/* harmony export */   "fareduceNode": () => /* reexport safe */ _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_31__.fareduceNode,
-/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_32__.FOMake,
-/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_32__.fomakeNode,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_33__.FOBreak,
-/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_33__.fobreakNode
+/* harmony export */   "Log": () => /* reexport safe */ _lib_nodes_log_js__WEBPACK_IMPORTED_MODULE_7__.Log,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_8__.FGetvar,
+/* harmony export */   "fgetvarNode": () => /* reexport safe */ _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_8__.fgetvarNode,
+/* harmony export */   "For": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_9__.For,
+/* harmony export */   "forNode": () => /* reexport safe */ _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_9__.forNode,
+/* harmony export */   "Getvar": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_10__.Getvar,
+/* harmony export */   "getvarNode": () => /* reexport safe */ _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_10__.getvarNode,
+/* harmony export */   "If": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_11__.If,
+/* harmony export */   "ifNode": () => /* reexport safe */ _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_11__.ifNode,
+/* harmony export */   "Setvar": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_12__.Setvar,
+/* harmony export */   "setvarNode": () => /* reexport safe */ _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_12__.setvarNode,
+/* harmony export */   "While": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_13__.While,
+/* harmony export */   "whileNode": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_13__.whileNode,
+/* harmony export */   "FIf": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_14__.FIf,
+/* harmony export */   "fifNode": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_14__.fifNode,
+/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_15__.Comparision,
+/* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_15__.FCompare,
+/* harmony export */   "fcompareNode": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_15__.fcompareNode,
+/* harmony export */   "FSConst": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_16__.FSConst,
+/* harmony export */   "fsconstNode": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_16__.fsconstNode,
+/* harmony export */   "FConcat": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_17__.FConcat,
+/* harmony export */   "fconcatNode": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_17__.fconcatNode,
+/* harmony export */   "FNConst": () => /* reexport safe */ _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_18__.FNConst,
+/* harmony export */   "fnconstNode": () => /* reexport safe */ _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_18__.fnconstNode,
+/* harmony export */   "FAdd": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_19__.FAdd,
+/* harmony export */   "faddNode": () => /* reexport safe */ _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_19__.faddNode,
+/* harmony export */   "FDiv": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_20__.FDiv,
+/* harmony export */   "fdivNode": () => /* reexport safe */ _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_20__.fdivNode,
+/* harmony export */   "FMul": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_21__.FMul,
+/* harmony export */   "fmulNode": () => /* reexport safe */ _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_21__.fmulNode,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_22__.FSqrt,
+/* harmony export */   "fsqrtNode": () => /* reexport safe */ _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_22__.fsqrtNode,
+/* harmony export */   "FMod": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_23__.FMod,
+/* harmony export */   "fmodNode": () => /* reexport safe */ _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_23__.fmodNode,
+/* harmony export */   "APush": () => /* reexport safe */ _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_24__.APush,
+/* harmony export */   "apushNode": () => /* reexport safe */ _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_24__.apushNode,
+/* harmony export */   "FAConst": () => /* reexport safe */ _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_25__.FAConst,
+/* harmony export */   "faconstNode": () => /* reexport safe */ _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_25__.faconstNode,
+/* harmony export */   "FAMake": () => /* reexport safe */ _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_26__.FAMake,
+/* harmony export */   "famakeNode": () => /* reexport safe */ _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_26__.famakeNode,
+/* harmony export */   "FAGet": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_27__.FAGet,
+/* harmony export */   "fagetNode": () => /* reexport safe */ _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_27__.fagetNode,
+/* harmony export */   "FALength": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_28__.FALength,
+/* harmony export */   "falengthNode": () => /* reexport safe */ _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_28__.falengthNode,
+/* harmony export */   "AMap": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_29__.AMap,
+/* harmony export */   "amapNode": () => /* reexport safe */ _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_29__.amapNode,
+/* harmony export */   "FAMap": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_30__.FAMap,
+/* harmony export */   "famapNode": () => /* reexport safe */ _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_30__.famapNode,
+/* harmony export */   "AReduce": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_31__.AReduce,
+/* harmony export */   "areduceNode": () => /* reexport safe */ _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_31__.areduceNode,
+/* harmony export */   "FAReduce": () => /* reexport safe */ _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_32__.FAReduce,
+/* harmony export */   "fareduceNode": () => /* reexport safe */ _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_32__.fareduceNode,
+/* harmony export */   "FOMake": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.FOMake,
+/* harmony export */   "fomakeNode": () => /* reexport safe */ _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.fomakeNode,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.FOBreak,
+/* harmony export */   "fobreakNode": () => /* reexport safe */ _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.fobreakNode
 /* harmony export */ });
 /* harmony import */ var _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/env.js */ "../cnodes/lib/core/env.js");
 /* harmony import */ var _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/core/node.js */ "../cnodes/lib/core/node.js");
@@ -7425,33 +7400,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/core/type.js */ "../cnodes/lib/core/type.js");
 /* harmony import */ var _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/nodes/call.js */ "../cnodes/lib/nodes/call.js");
 /* harmony import */ var _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/nodes/console.js */ "../cnodes/lib/nodes/console.js");
-/* harmony import */ var _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/nodes/fgetvar.js */ "../cnodes/lib/nodes/fgetvar.js");
-/* harmony import */ var _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/nodes/for.js */ "../cnodes/lib/nodes/for.js");
-/* harmony import */ var _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lib/nodes/getvar.js */ "../cnodes/lib/nodes/getvar.js");
-/* harmony import */ var _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/nodes/if.js */ "../cnodes/lib/nodes/if.js");
-/* harmony import */ var _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./lib/nodes/setvar.js */ "../cnodes/lib/nodes/setvar.js");
-/* harmony import */ var _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/nodes/while.js */ "../cnodes/lib/nodes/while.js");
-/* harmony import */ var _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./lib/nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
-/* harmony import */ var _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./lib/nodes/bool/fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
-/* harmony import */ var _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./lib/nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
-/* harmony import */ var _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lib/nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
-/* harmony import */ var _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
-/* harmony import */ var _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
-/* harmony import */ var _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
-/* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
-/* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
-/* harmony import */ var _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./lib/nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
-/* harmony import */ var _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./lib/nodes/array/apush.js */ "../cnodes/lib/nodes/array/apush.js");
-/* harmony import */ var _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./lib/nodes/array/faconst.js */ "../cnodes/lib/nodes/array/faconst.js");
-/* harmony import */ var _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/nodes/array/famake.js */ "../cnodes/lib/nodes/array/famake.js");
-/* harmony import */ var _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
-/* harmony import */ var _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
-/* harmony import */ var _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
-/* harmony import */ var _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
-/* harmony import */ var _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./lib/nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
-/* harmony import */ var _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./lib/nodes/array/fareduce.js */ "../cnodes/lib/nodes/array/fareduce.js");
-/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
-/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
+/* harmony import */ var _lib_nodes_log_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/nodes/log.js */ "../cnodes/lib/nodes/log.js");
+/* harmony import */ var _lib_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/nodes/fgetvar.js */ "../cnodes/lib/nodes/fgetvar.js");
+/* harmony import */ var _lib_nodes_for_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lib/nodes/for.js */ "../cnodes/lib/nodes/for.js");
+/* harmony import */ var _lib_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/nodes/getvar.js */ "../cnodes/lib/nodes/getvar.js");
+/* harmony import */ var _lib_nodes_if_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./lib/nodes/if.js */ "../cnodes/lib/nodes/if.js");
+/* harmony import */ var _lib_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./lib/nodes/setvar.js */ "../cnodes/lib/nodes/setvar.js");
+/* harmony import */ var _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./lib/nodes/while.js */ "../cnodes/lib/nodes/while.js");
+/* harmony import */ var _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./lib/nodes/fif.js */ "../cnodes/lib/nodes/fif.js");
+/* harmony import */ var _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./lib/nodes/bool/fcompare.js */ "../cnodes/lib/nodes/bool/fcompare.js");
+/* harmony import */ var _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./lib/nodes/string/fsconst.js */ "../cnodes/lib/nodes/string/fsconst.js");
+/* harmony import */ var _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./lib/nodes/string/fconcat.js */ "../cnodes/lib/nodes/string/fconcat.js");
+/* harmony import */ var _lib_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./lib/nodes/math/fnconst.js */ "../cnodes/lib/nodes/math/fnconst.js");
+/* harmony import */ var _lib_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./lib/nodes/math/fadd.js */ "../cnodes/lib/nodes/math/fadd.js");
+/* harmony import */ var _lib_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./lib/nodes/math/fdiv.js */ "../cnodes/lib/nodes/math/fdiv.js");
+/* harmony import */ var _lib_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./lib/nodes/math/fmul.js */ "../cnodes/lib/nodes/math/fmul.js");
+/* harmony import */ var _lib_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./lib/nodes/math/fsqrt.js */ "../cnodes/lib/nodes/math/fsqrt.js");
+/* harmony import */ var _lib_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./lib/nodes/math/fmod.js */ "../cnodes/lib/nodes/math/fmod.js");
+/* harmony import */ var _lib_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./lib/nodes/array/apush.js */ "../cnodes/lib/nodes/array/apush.js");
+/* harmony import */ var _lib_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./lib/nodes/array/faconst.js */ "../cnodes/lib/nodes/array/faconst.js");
+/* harmony import */ var _lib_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./lib/nodes/array/famake.js */ "../cnodes/lib/nodes/array/famake.js");
+/* harmony import */ var _lib_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./lib/nodes/array/faget.js */ "../cnodes/lib/nodes/array/faget.js");
+/* harmony import */ var _lib_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./lib/nodes/array/falength.js */ "../cnodes/lib/nodes/array/falength.js");
+/* harmony import */ var _lib_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./lib/nodes/array/amap.js */ "../cnodes/lib/nodes/array/amap.js");
+/* harmony import */ var _lib_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./lib/nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
+/* harmony import */ var _lib_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./lib/nodes/array/areduce.js */ "../cnodes/lib/nodes/array/areduce.js");
+/* harmony import */ var _lib_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./lib/nodes/array/fareduce.js */ "../cnodes/lib/nodes/array/fareduce.js");
+/* harmony import */ var _lib_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./lib/nodes/object/fomake.js */ "../cnodes/lib/nodes/object/fomake.js");
+/* harmony import */ var _lib_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./lib/nodes/object/fobreak.js */ "../cnodes/lib/nodes/object/fobreak.js");
 /**
  * cnodes
  *
@@ -7461,6 +7437,7 @@ __webpack_require__.r(__webpack_exports__);
  * Year: 2020
  */
 // Export core nodes
+
 
 
 
@@ -7648,6 +7625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../nodes/array/famap.js */ "../cnodes/lib/nodes/array/famap.js");
 /* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
 /* harmony import */ var _nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../nodes/array/fareduce.js */ "../cnodes/lib/nodes/array/fareduce.js");
+/* harmony import */ var _nodes_log_js__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../nodes/log.js */ "../cnodes/lib/nodes/log.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -7714,6 +7692,7 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
 
 
 
+
 /**
  * This class represents a main global environment for cnodes.
  * The class is a "static" class that is responible for maintaining a global
@@ -7732,6 +7711,8 @@ var Env = /*#__PURE__*/function () {
   _createClass(Env, null, [{
     key: "init",
 
+    /** The internal node registry */
+
     /**
      * Initialize the CNodes global environment
      */
@@ -7742,6 +7723,7 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("Program", "Core", _program_js__WEBPACK_IMPORTED_MODULE_0__.program);
       Env.registerNode("Call", "Core", _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__.callNode);
       Env.registerNode("Console", "Core", _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__.consoleNode);
+      Env.registerNode("Log", "Core", _nodes_log_js__WEBPACK_IMPORTED_MODULE_40__.Log.instance);
       Env.registerNode("FGetvar", "Core", _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__.fgetvarNode);
       Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.forNode);
       Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.getvarNode);
@@ -9149,11 +9131,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Program": () => /* binding */ Program,
 /* harmony export */   "program": () => /* binding */ program
 /* harmony export */ });
-/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enter.js */ "../cnodes/lib/core/enter.js");
-/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exit.js */ "../cnodes/lib/core/exit.js");
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "../cnodes/node_modules/events/events.js");
+/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.js */ "../cnodes/lib/core/enter.js");
+/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.js */ "../cnodes/lib/core/exit.js");
+/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9195,6 +9178,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
 
 
 
+
 /**
  * A program is a special node that contains nodes. The program
  * manages the flow of the global execution by starting from the
@@ -9228,6 +9212,8 @@ var Program = /*#__PURE__*/function (_Node) {
   /** The instruction pointer equivalent :) */
 
   /** The variable global space */
+
+  /** The event emitter connected to the program */
   function Program() {
     var _this;
 
@@ -9260,12 +9246,18 @@ var Program = /*#__PURE__*/function (_Node) {
       value: new Map()
     });
 
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_4__.Types.ANY, 0)];
-    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
+    _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
-    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_0__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_1__.Exit()));
+    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_4__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_5__.Types.ANY, 0)];
+    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_4__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_5__.Types.ANY, 0)];
+    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_4__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_4__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
+
+    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_1__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_2__.Exit()));
+
+    _this.events.on("log", function (msg) {
+      console.log("catched: ", msg);
+    });
 
     return _this;
   }
@@ -9383,7 +9375,7 @@ var Program = /*#__PURE__*/function (_Node) {
   }]);
 
   return Program;
-}(_node_js__WEBPACK_IMPORTED_MODULE_2__.Node);
+}(_node_js__WEBPACK_IMPORTED_MODULE_3__.Node);
 /**
  * A helper function to create the program
  * @param {string} name The name of the program
@@ -12470,6 +12462,101 @@ function ifNode() {
 
 /***/ }),
 
+/***/ "../cnodes/lib/nodes/log.js":
+/*!**********************************!*\
+  !*** ../cnodes/lib/nodes/log.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Log": () => /* binding */ Log
+/* harmony export */ });
+/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/lib/core/node.js");
+/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/lib/core/socket.js");
+/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/lib/core/type.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * cnodes
+ *
+ * A representation-agnostic library to define and execute nodes based processes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020
+ */
+
+
+
+/**
+ * This class implements a cnode that log a message through
+ * the events system
+ */
+
+var Log = /*#__PURE__*/function (_Node) {
+  _inherits(Log, _Node);
+
+  var _super = _createSuper(Log);
+
+  /** Return an instance of this node */
+  function Log() {
+    var _this;
+
+    _classCallCheck(this, Log);
+
+    _this = _super.call(this, "Log");
+    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.outputs = [];
+    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    return _this;
+  }
+  /**
+   * The process method
+   */
+
+
+  _createClass(Log, [{
+    key: "process",
+    value: function process() {
+      this.evaluateInputs(); // Send a "log" event
+
+      this.program.events.emit("cn:log", this.input("Val").value);
+      return this.getFlowResult(this.next("Out"));
+    }
+  }]);
+
+  return Log;
+}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+
+_defineProperty(Log, "instance", function () {
+  return new Log();
+});
+
+/***/ }),
+
 /***/ "../cnodes/lib/nodes/math/fadd.js":
 /*!****************************************!*\
   !*** ../cnodes/lib/nodes/math/fadd.js ***!
@@ -14124,6 +14211,464 @@ var While = /*#__PURE__*/function (_Node) {
 
 function whileNode() {
   return new While();
+}
+
+/***/ }),
+
+/***/ "../cnodes/node_modules/events/events.js":
+/*!***********************************************!*\
+  !*** ../cnodes/node_modules/events/events.js ***!
+  \***********************************************/
+/***/ ((module) => {
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var R = (typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === 'object' ? Reflect : null;
+var ReflectApply = R && typeof R.apply === 'function' ? R.apply : function ReflectApply(target, receiver, args) {
+  return Function.prototype.apply.call(target, receiver, args);
+};
+var ReflectOwnKeys;
+
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys;
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target).concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+};
+
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+
+module.exports = EventEmitter;
+module.exports.once = once; // Backwards-compat with node 0.10.x
+
+EventEmitter.EventEmitter = EventEmitter;
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
+EventEmitter.prototype._maxListeners = undefined; // By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+
+var defaultMaxListeners = 10;
+
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + _typeof(listener));
+  }
+}
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function get() {
+    return defaultMaxListeners;
+  },
+  set: function set(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function () {
+  if (this._events === undefined || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}; // Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+
+
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
+
+  this._maxListeners = n;
+  return this;
+};
+
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined) return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
+
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return _getMaxListeners(this);
+};
+
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+
+  for (var i = 1; i < arguments.length; i++) {
+    args.push(arguments[i]);
+  }
+
+  var doError = type === 'error';
+  var events = this._events;
+  if (events !== undefined) doError = doError && events.error === undefined;else if (!doError) return false; // If there is no 'error' event listener then throw.
+
+  if (doError) {
+    var er;
+    if (args.length > 0) er = args[0];
+
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
+    } // At least give some kind of context to the user
+
+
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+  if (handler === undefined) return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+
+    for (var i = 0; i < len; ++i) {
+      ReflectApply(listeners[i], this, args);
+    }
+  }
+
+  return true;
+};
+
+function _addListener(target, type, listener, prepend) {
+  var m;
+  var events;
+  var existing;
+  checkListener(listener);
+  events = target._events;
+
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type, listener.listener ? listener.listener : listener); // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+
+      events = target._events;
+    }
+
+    existing = events[type];
+  }
+
+  if (existing === undefined) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] = prepend ? [listener, existing] : [existing, listener]; // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
+    } // Check for listener leak
+
+
+    m = _getMaxListeners(target);
+
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true; // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+
+      var w = new Error('Possible EventEmitter memory leak detected. ' + existing.length + ' ' + String(type) + ' listeners ' + 'added. Use emitter.setMaxListeners() to ' + 'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
+    }
+  }
+
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.prependListener = function prependListener(type, listener) {
+  return _addListener(this, type, listener, true);
+};
+
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    if (arguments.length === 0) return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
+  }
+}
+
+function _onceWrap(target, type, listener) {
+  var state = {
+    fired: false,
+    wrapFn: undefined,
+    target: target,
+    type: type,
+    listener: listener
+  };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  checkListener(listener);
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener = function prependOnceListener(type, listener) {
+  checkListener(listener);
+  this.prependListener(type, _onceWrap(this, type, listener));
+  return this;
+}; // Emits a 'removeListener' event if and only if the listener was removed.
+
+
+EventEmitter.prototype.removeListener = function removeListener(type, listener) {
+  var list, events, position, i, originalListener;
+  checkListener(listener);
+  events = this._events;
+  if (events === undefined) return this;
+  list = events[type];
+  if (list === undefined) return this;
+
+  if (list === listener || list.listener === listener) {
+    if (--this._eventsCount === 0) this._events = Object.create(null);else {
+      delete events[type];
+      if (events.removeListener) this.emit('removeListener', type, list.listener || listener);
+    }
+  } else if (typeof list !== 'function') {
+    position = -1;
+
+    for (i = list.length - 1; i >= 0; i--) {
+      if (list[i] === listener || list[i].listener === listener) {
+        originalListener = list[i].listener;
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0) return this;
+    if (position === 0) list.shift();else {
+      spliceOne(list, position);
+    }
+    if (list.length === 1) events[type] = list[0];
+    if (events.removeListener !== undefined) this.emit('removeListener', type, originalListener || listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners = function removeAllListeners(type) {
+  var listeners, events, i;
+  events = this._events;
+  if (events === undefined) return this; // not listening for removeListener, no need to emit
+
+  if (events.removeListener === undefined) {
+    if (arguments.length === 0) {
+      this._events = Object.create(null);
+      this._eventsCount = 0;
+    } else if (events[type] !== undefined) {
+      if (--this._eventsCount === 0) this._events = Object.create(null);else delete events[type];
+    }
+
+    return this;
+  } // emit removeListener for all listeners on all events
+
+
+  if (arguments.length === 0) {
+    var keys = Object.keys(events);
+    var key;
+
+    for (i = 0; i < keys.length; ++i) {
+      key = keys[i];
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+
+    this.removeAllListeners('removeListener');
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+    return this;
+  }
+
+  listeners = events[type];
+
+  if (typeof listeners === 'function') {
+    this.removeListener(type, listeners);
+  } else if (listeners !== undefined) {
+    // LIFO order
+    for (i = listeners.length - 1; i >= 0; i--) {
+      this.removeListener(type, listeners[i]);
+    }
+  }
+
+  return this;
+};
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+  if (events === undefined) return [];
+  var evlistener = events[type];
+  if (evlistener === undefined) return [];
+  if (typeof evlistener === 'function') return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+  return unwrap ? unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+
+EventEmitter.listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+};
+
+EventEmitter.prototype.listenerCount = listenerCount;
+
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
+}
+
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+
+  for (var i = 0; i < n; ++i) {
+    copy[i] = arr[i];
+  }
+
+  return copy;
+}
+
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++) {
+    list[index] = list[index + 1];
+  }
+
+  list.pop();
+}
+
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+
+  return ret;
+}
+
+function once(emitter, name) {
+  return new Promise(function (resolve, reject) {
+    function eventListener() {
+      if (errorListener !== undefined) {
+        emitter.removeListener('error', errorListener);
+      }
+
+      resolve([].slice.call(arguments));
+    }
+
+    ;
+    var errorListener; // Adding an error listener is not optional because
+    // if an error is thrown on an event emitter we cannot
+    // guarantee that the actual event we are waiting will
+    // be fired. The result could be a silent way to create
+    // memory or file descriptor leaks, which is something
+    // we should avoid.
+
+    if (name !== 'error') {
+      errorListener = function errorListener(err) {
+        emitter.removeListener(name, eventListener);
+        reject(err);
+      };
+
+      emitter.once('error', errorListener);
+    }
+
+    emitter.once(name, eventListener);
+  });
 }
 
 /***/ })

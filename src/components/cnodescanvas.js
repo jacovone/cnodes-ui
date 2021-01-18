@@ -7,6 +7,7 @@
  * Year: 2020
  */
 
+import { EventEmitter } from "events";
 import { Env } from "@marco.jacovone/cnodes/cnodes";
 import { Program } from "@marco.jacovone/cnodes/cnodes";
 import { Node } from "@marco.jacovone/cnodes/lib/core/node";
@@ -32,6 +33,9 @@ export class CnodesCanvas extends Canvas {
 
   /** The stack of edited programs */
   #stack = [];
+
+  /** The event emitter connected to the canvas */
+  events = new EventEmitter();
 
   constructor(el) {
     super(el);
@@ -323,7 +327,7 @@ export class CnodesCanvas extends Canvas {
   /**
    * Push a subprogram on the canvas. The current program
    * is pushed on to the stack and the new one is placed on the canvas
-   * @param {*} program The new program to edit
+   * @param {Program} program The new program to edit
    */
   pushProgram(program) {
     setTimeout(() => {

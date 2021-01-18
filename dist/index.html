@@ -138,6 +138,9 @@
         }
       }
       canvas.program = prg;
+      prg.events.on("cn:log", msg => {
+        console.log("LOG: ", msg);
+      })
     };
 
     newCanvas();

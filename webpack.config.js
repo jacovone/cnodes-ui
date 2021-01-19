@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   devtool: "source-map",
   mode: "development",
-  entry: "./src/index.js",
+  entry: ["@babel/polyfill", "./src/index.js"],
   output: {
     library: "cnui",
     filename: "main.js",

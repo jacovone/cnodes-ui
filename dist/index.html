@@ -100,8 +100,10 @@
     canvas.minVBSize = 100;
 
     function runProgram() {
-      canvas.run();
-      console.log(canvas.program.output("Val").value);
+      (async () => {
+        await canvas.run()
+        console.log(canvas.program.output("Val").value);
+      })();
     }
 
     function exampleCanvas() {

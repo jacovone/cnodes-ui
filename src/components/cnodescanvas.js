@@ -129,8 +129,8 @@ export class CnodesCanvas extends Canvas {
   /**
    * Executes the program
    */
-  run() {
-    this.#program.process();
+  async run() {
+    await this.#program.process();
   }
 
   /**

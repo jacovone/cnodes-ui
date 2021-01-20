@@ -350,3 +350,5 @@ Last, try to press the right mouse button on the custom node, to see the custom 
 ![startcanvas](./images/customaction.png)
 
 That's all. We've created a new _cnodes_ node. We've created a new graph class to manage it, and we've intergrated all together.
+
+You can download the sample project [here](./downloads/custom-node.zip).

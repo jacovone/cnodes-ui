@@ -4,13 +4,13 @@ In this tutorial we create a custom graph node for the custom node created in th
 
 The steps of this tutorial are:
 
-- Create the "dist" folder
-- install _cnodes-ui_
-- install and configure _webpack_
-- Create the graph node class
-- Adjust index.js and try to build the bundle
-- Create index.html in the dist folder
-- Open the browser and launch the DEMO board
+- [Create the "dist" folder](#create-the-dist-folder)
+- [install _cnodes-ui_](#install-cnodes-ui)
+- [install and configure _webpack_](#install-and-configure-webpack)
+- [Create the graph node class](#create-the-graph-node-class)
+- [Adjust index.js and try to build the bundle](#adjust-indexjs)
+- [Create index.html in the dist folder](#create-indexhtml-in-the-dist-folder)
+- [Open the browser and launch the DEMO board](#open-the-browser-and-launch-the-demo-board)
 
 Lets start.
 

@@ -1,6 +1,6 @@
 # Extending canvas nodes
 
-In this tutorial we create a custom graph node for the custom node created in the [previous tutorial](./custom-nodes/CUSTOM-NODES.md).
+In this tutorial we create a custom graph node for the custom node created in the [previous tutorial](../custom-nodes/CUSTOM-NODES.md).
 
 The steps of this tutorial are:
 

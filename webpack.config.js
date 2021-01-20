@@ -6,7 +6,7 @@ module.exports = {
   entry: ["@babel/polyfill", "./src/index.js"],
   output: {
     library: "cnui",
-    filename: "main.js",
+    filename: "cnodesui.bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {

@@ -321,6 +321,16 @@ export class OutputSocketComponent extends CnodesSocketComponent {
         new MenuItem(
           `
           <tspan alignment-baseline="middle">Set type as</tspan>
+          <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_ANY_COLOR}">ANY</tspan>
+          `,
+          () => {
+            this.socket.type = Types.ANY;
+            this.updateSVGElement();
+          }
+        ),
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle">Set type as</tspan>
           <tspan alignment-baseline="middle" fill="${Theme.current.TYPE_NUMBER_COLOR}">NUMBER</tspan>
           `,
           () => {

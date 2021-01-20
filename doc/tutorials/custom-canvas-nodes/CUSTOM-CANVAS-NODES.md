@@ -16,8 +16,6 @@ Lets start.
 
 ## Create the dist folder
 
----
-
 This is the simple part 😉, simply type
 
 ```bash
@@ -27,8 +25,6 @@ mkdir dist
 In this folder we will create the index.html static file.
 
 ## install cnodes-ui
-
----
 
 ```bash
 npm install @marco.jacovone/cnodes-ui
@@ -46,8 +42,6 @@ found 0 vulnerabilities
 ```
 
 ## Install and configure _WEBPACK_
-
----
 
 This is a crucial part. **WEBPACK** is an important tool to "transpile" our entire scripts structure into a single bundle file. It also makes all magic needed to allow browsers to accept modern javascript.
 
@@ -132,8 +126,6 @@ Now edit _package.json_ by adding a script for _WEBPACK_ build.
 
 ## Create the graph node class
 
----
-
 Now it's time to create a graph node class, a subclass of _CnodeComponent_ that will support our _CustomNode_ class.
 
 Create a new javsscript file named _customnodecomponent.js_ in the project root as follows:
@@ -173,8 +165,6 @@ export class CustomNodeComponent extends CnodeComponent {
 ```
 
 ## Adjust index.js
-
----
 
 The _index.js_ file have to be adjusted to include all components needed by our webpack bundle, because index.js in the webpack entry point during the bundle building.
 
@@ -218,8 +208,6 @@ webpack 5.16.0 compiled successfully in 5292 ms
 ```
 
 ## Create index.html in the dist folder
-
----
 
 we're almost done, lets create the index.html file in the _dist_ folder, as follows:
 
@@ -324,8 +312,6 @@ customnode.CnodesCanvas.registerNodeUI(
 The first line, register the node in the _cnodes_ engine, while the second line register the graphical component (CustomNodeComponent) with the _CustomNode_ node.
 
 ## Open the browser and launch the DEMO board
-
----
 
 Try to navigate to "./dist/index.html" with your favorite browser and see the result. You should see your new program instantiated by the inline script.
 

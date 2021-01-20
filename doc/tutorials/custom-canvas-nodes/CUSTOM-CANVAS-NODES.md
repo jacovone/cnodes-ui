@@ -114,7 +114,7 @@ With this configuration of webpack, by building with _webpack_ (one more minute,
 
 Now edit _package.json_ by adding a script for _WEBPACK_ build.
 
-```json
+```js
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

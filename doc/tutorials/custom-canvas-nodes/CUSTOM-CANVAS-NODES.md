@@ -61,8 +61,7 @@ if all goes right, you shoud see packages in the _devDependencies_ of _package.j
 
 ```json
 {
-...
-"devDependencies": {
+  "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-private-methods": "^7.12.1",
@@ -72,7 +71,6 @@ if all goes right, you shoud see packages in the _devDependencies_ of _package.j
     "webpack": "^5.16.0",
     "webpack-cli": "^4.4.0"
   }
-  ...
 }
 ```
 
@@ -124,13 +122,11 @@ Now edit _package.json_ by adding a script for _WEBPACK_ build.
 
 ```json
 {
-...
-"scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     // Insert following line
     "build": "webpack"
-  },
-  ...
+  }
 }
 ```
 
@@ -326,6 +322,10 @@ customnode.CnodesCanvas.registerNodeUI(
 ```
 
 The first line, register the node in the _cnodes_ engine, while the second line register the graphical component (CustomNodeComponent) with the _CustomNode_ node.
+
+## Open the browser and launch the DEMO board
+
+---
 
 Try to navigate to "./dist/index.html" with your favorite browser and see the result. You should see your new program instantiated by the inline script.
 

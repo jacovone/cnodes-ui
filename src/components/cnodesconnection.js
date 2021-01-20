@@ -4,7 +4,7 @@
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 import { Types } from "@marco.jacovone/cnodes/lib/core/type";

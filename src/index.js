@@ -4,12 +4,13 @@
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 import { Canvas } from "./canvas/canvas";
 import { Component } from "./canvas/component";
 import { Position } from "./canvas/position";
+import { Menu, MenuItem } from "./canvas/menu";
 import { CnodeComponent } from "./components/cnode";
 import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
 import { Theme, defaultLight } from "./components/theme";
@@ -28,6 +29,8 @@ export {
   defaultLight,
   CnodesCanvas,
   CnodeProgramComponent,
+  Menu,
+  MenuItem,
 };
 
 export * from "@marco.jacovone/cnodes/cnodes";

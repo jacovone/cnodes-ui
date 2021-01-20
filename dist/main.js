@@ -11667,7 +11667,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -12396,7 +12396,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -12840,7 +12840,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 /**
@@ -13091,7 +13091,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -13289,7 +13289,7 @@ var _y = new WeakMap();
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 /**
@@ -13417,7 +13417,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -13826,7 +13826,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -14413,7 +14413,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -14922,7 +14922,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -15058,7 +15058,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -15454,7 +15454,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -15853,7 +15853,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -16070,7 +16070,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -16564,7 +16564,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -16853,7 +16853,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -16967,10 +16967,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodeProgramComponent": () => /* binding */ CnodeProgramComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/program */ "../cnodes/lib/core/program.js");
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../.. */ "./src/index.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.. */ "./src/index.js");
+/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
+/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17005,9 +17004,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
-
 
 
 
@@ -17072,7 +17070,7 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
           _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeProgramComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
-      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_2__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Edit...</tspan>"), function () {
+      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Edit...</tspan>"), function () {
         _this2.canvas.pushProgram(_this2.node);
       }));
       return items.length ? items : null;
@@ -17080,7 +17078,7 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
   }]);
 
   return CnodeProgramComponent;
-}(_cnode__WEBPACK_IMPORTED_MODULE_3__.CnodeComponent);
+}(_cnode__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
 
 _defineProperty(CnodeProgramComponent, "instance", function (node, canvas) {
   return new CnodeProgramComponent(node, canvas);
@@ -17150,7 +17148,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -17578,7 +17576,7 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -17849,7 +17847,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 /**
@@ -18222,7 +18220,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -18313,7 +18311,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 
@@ -18444,7 +18442,7 @@ __webpack_require__.r(__webpack_exports__);
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
 

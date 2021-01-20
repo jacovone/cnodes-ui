@@ -29,7 +29,10 @@ You can turn any HTML element into a cnodes-ui canvas. Lets start with a simple 
         padding: 0;
       }
     </style>
-    <script type="text/javascript" src="https://unpkg.com/@marco.jacovone/cnodes-ui/dist/main.js"></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/@marco.jacovone/cnodes-ui/dist/main.js"
+    ></script>
   </head>
 
   <body>
@@ -55,7 +58,7 @@ To insert some nodes, for example a _For_ node and a _If_ node, you can type
 
 ```js
 // Create two nodes: For and If
-let prg = cnui.program();
+let prg = cnui.Env.getInstance("Program"); // or cnui.Program.instance()
 let forNode = cnui.Env.getInstance("For");
 let ifNode = cnui.Env.getInstance("If");
 
@@ -97,11 +100,18 @@ This program (the **exp** variable) can be stored and loaded into a **CNODES** p
 
 ```js
 let prg = cnui.Env.import(JSON.parse(`{"id":"NID_3","version":1,...`));
-prg.process();
+// process execution is now asyncronous, this allow nodes to
+// be async and to efficiently wait for background events such as
+// webservice call. So await it with an IEF...
+(async () => await prg.process())();
 ```
 
 The **cnodes** engine doesn't require the cnodes-ui library to work, because it doesn't have any
 dependency.
+
+## Documentation
+
+Check out our [tutorials](./doc/tutorials/TUTORIALS.md) section.
 
 ## Demo
 

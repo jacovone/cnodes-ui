@@ -5,8 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "jsdoc": "jsdoc -r -p -d ./doc/docs ./src/*",
-    "start:dev": "webpack serve  --open Chrome"
+    "jsdoc": "jsdoc -r -p -d ./doc/docs ./src/*"
   },
   "repository": {
     "type": "git",

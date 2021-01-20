@@ -4,10 +4,9 @@
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020/2021
  */
 
-import { Program } from "@marco.jacovone/cnodes/lib/core/program";
 import { Theme } from "../..";
 import { MenuItem } from "../../canvas/menu";
 import { CnodeComponent } from "../cnode";

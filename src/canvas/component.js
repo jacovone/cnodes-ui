@@ -48,6 +48,9 @@ export class Component {
   /** The component is selectable? */
   #selectable = false;
 
+  /** The component is moved after it has been clicked? */
+  #dragged = false;
+
   /**
    * Events connected to the component:
    */
@@ -128,6 +131,18 @@ export class Component {
   set moveable(val) {
     this.#moveable = val;
   }
+  get selectable() {
+    return this.#selectable;
+  }
+  set selectable(val) {
+    this.#selectable = val;
+  }
+  get dragged() {
+    return this.#dragged;
+  }
+  set dragged(val) {
+    this.#dragged = val;
+  }
   get parent() {
     return this.#parent;
   }
@@ -142,6 +157,7 @@ export class Component {
   #onPointerDown(e) {
     if (e.button === 0) {
       if (this.#moveable) {
+        this.#dragged = false;
         this.#moving = true;
         this.#startMovePos = this.#canvas.clientToSvgPoint(
           e.clientX,
@@ -163,6 +179,9 @@ export class Component {
   #onPointerUp(e) {
     if (this.#moveable && e.button === 0) {
       this.#moving = false;
+      if (!this.#dragged) {
+        this.events.emit("cnui:clicked", this, e.shiftKey);
+      }
       this.#componentEl.releasePointerCapture(e.pointerId);
       e.stopPropagation();
     }
@@ -177,6 +196,10 @@ export class Component {
       if (!this.#moving) {
         return;
       }
+      this.#dragged = true;
+
+      let origPos = new Position(this.#pos.x, this.#pos.y);
+
       let movePoint = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
       let xDiff = movePoint.x - this.#startMovePos.x;
       let yDiff = movePoint.y - this.#startMovePos.y;
@@ -190,11 +213,22 @@ export class Component {
         this.#pos.y = Math.ceil(this.#pos.y / 20) * 20;
       }
 
+      let delta = new Position(
+        this.#pos.x - origPos.x,
+        this.#pos.y - origPos.y
+      );
+
       this.updateSVGElement();
 
-      this.events.emit("cnui:move", this, new Position(xDiff, yDiff));
+      // Notify that component has moved
+      this.events.emit("cnui:move", this, delta);
 
-      if (e.shiftKey) {
+      if (this.canvas.isComponentSelected(this)) {
+        // Notify that component has moved by the user
+        this.events.emit("cnui:usermoveselected", this, delta);
+      }
+
+      if (e.altKey) {
         this.canvas.fitGraph();
       }
 

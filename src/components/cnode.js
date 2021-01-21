@@ -312,6 +312,28 @@ export class CnodeComponent extends Component {
     super.updateSVGElement();
 
     this.#containerEl.setAttribute(
+      "stroke",
+      this.canvas.isComponentSelected(this) ? "red" : "blue"
+    );
+
+    this.#containerEl.setAttribute(
+      "stroke",
+      this.canvas.isComponentSelected(this)
+        ? Theme.current.NODE_SELECTED_STROKE_COLOR
+        : !this.node.functional
+        ? Theme.current.NODE_STROKE_COLOR
+        : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
+    );
+    this.#containerEl.setAttribute(
+      "fill",
+      this.canvas.isComponentSelected(this)
+        ? Theme.current.NODE_SELECTED_FILL_COLOR
+        : this.node.functional
+        ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
+        : Theme.current.NODE_FILL_COLOR
+    );
+
+    this.#containerEl.setAttribute(
       "d",
       `
       M 0 ${Theme.current.NODE_BORDER_RADIUS * 1.3} 

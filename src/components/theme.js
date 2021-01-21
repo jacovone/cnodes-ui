@@ -46,11 +46,17 @@ export class Theme {
   get NODE_FILL_COLOR() {
     return "#FAD7A0";
   }
+  get NODE_SELECTED_FILL_COLOR() {
+    return "#FAC790";
+  }
   get NODE_FUNCTIONAL_FILL_COLOR() {
     return "#C5F0FF";
   }
   get NODE_STROKE_COLOR() {
     return "#FFFFFF";
+  }
+  get NODE_SELECTED_STROKE_COLOR() {
+    return "black";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
     return "#FFFFFF";

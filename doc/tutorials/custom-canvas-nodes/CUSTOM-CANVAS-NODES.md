@@ -2,7 +2,7 @@
 
 In this tutorial we create a custom graph node for the custom node created in the [previous tutorial](../custom-nodes/CUSTOM-NODES.md). Creating a custom graph node for a custom node let you change the graphical aspect of your node and/or new functionalities, such as custom context menu items. For this particular node there are no real reasons to create a custom graph node, the customization is for educational purposes only.
 
-The steps of this tutorial are:
+These are steps of this tutorial:
 
 - [Create the "dist" folder](#create-the-dist-folder)
 - [install _cnodes-ui_](#install-cnodes-ui)

@@ -11642,7 +11642,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
 /* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
 /* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
-/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
+/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -11669,6 +11670,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020/2021
  */
+
 
 
 
@@ -11709,6 +11711,8 @@ var _contextMenuComponent = new WeakMap();
 
 var _components = new WeakMap();
 
+var _selectedComponents = new WeakMap();
+
 var _connections = new WeakMap();
 
 var _updateSVGViewBox = new WeakSet();
@@ -11722,6 +11726,10 @@ var _onPointerDown = new WeakSet();
 var _onPointerUp = new WeakSet();
 
 var _onPointerMove = new WeakSet();
+
+var _onSelectedComponentMovedByUser = new WeakMap();
+
+var _onComponentIsClicked = new WeakMap();
 
 var _onContextMenu = new WeakSet();
 
@@ -11755,6 +11763,8 @@ var Canvas = /*#__PURE__*/function () {
   /** The component for the contextual menu */
 
   /** The list of components in the canvas */
+
+  /** The list of selected components */
 
   /** The list of connections between components in the canvas */
 
@@ -11842,9 +11852,80 @@ var Canvas = /*#__PURE__*/function () {
       value: []
     });
 
+    _selectedComponents.set(this, {
+      writable: true,
+      value: []
+    });
+
     _connections.set(this, {
       writable: true,
       value: []
+    });
+
+    _onSelectedComponentMovedByUser.set(this, {
+      writable: true,
+      value: function value(component, delta) {
+        var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
+          return c !== component;
+        })),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var c = _step.value;
+            c.pos = c.pos.add(delta);
+            c.updateSVGElement();
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    });
+
+    _onComponentIsClicked.set(this, {
+      writable: true,
+      value: function value(component, shiftKey) {
+        if (shiftKey) {
+          // Invert the component selection
+          if (_classPrivateFieldGet(_this, _selectedComponents).findIndex(function (c) {
+            return c === component;
+          }) !== -1) {
+            _classPrivateFieldSet(_this, _selectedComponents, _classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
+              return c !== component;
+            }));
+          } else {
+            _classPrivateFieldGet(_this, _selectedComponents).push(component);
+          }
+
+          component.updateSVGElement();
+        } else {
+          // If is already selected does nothing
+          if (!_this.isComponentSelected(component)) {
+            // Set the component as the only one selected
+            var selection = _classPrivateFieldGet(_this, _selectedComponents);
+
+            _classPrivateFieldSet(_this, _selectedComponents, [component]);
+
+            var _iterator2 = _createForOfIteratorHelper(selection),
+                _step2;
+
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var c = _step2.value;
+                c.updateSVGElement();
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
+            }
+
+            component.updateSVGElement();
+          }
+        }
+      }
     });
 
     // Create the main SVG element
@@ -11946,7 +12027,7 @@ var Canvas = /*#__PURE__*/function () {
 
       while (pointedEl) {
         // Traverse the DOM tree
-        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_5__.SocketComponent)) {
+        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_6__.SocketComponent)) {
           return pointedEl.componentRef;
         }
 
@@ -12010,6 +12091,11 @@ var Canvas = /*#__PURE__*/function () {
       component.canvas = this;
 
       _classPrivateFieldGet(this, _svgEl).appendChild(component.componentEl);
+
+      if (component.moveable && component.selectable) {
+        component.events.on("cnui:clicked", _classPrivateFieldGet(this, _onComponentIsClicked));
+        component.events.on("cnui:usermoveselected", _classPrivateFieldGet(this, _onSelectedComponentMovedByUser));
+      }
     }
     /**
      * Remove a component from the canvas
@@ -12022,8 +12108,31 @@ var Canvas = /*#__PURE__*/function () {
       // Remove the component from the SVG space
       this.components = _classPrivateFieldGet(this, _components).filter(function (c) {
         return c !== component;
-      });
-      if (component.componentEl.parentElement === _classPrivateFieldGet(this, _svgEl)) _classPrivateFieldGet(this, _svgEl).removeChild(component.componentEl);
+      }); // Remove component from selected components
+
+      _classPrivateFieldSet(this, _selectedComponents, _classPrivateFieldGet(this, _selectedComponents).filter(function (c) {
+        return c !== component;
+      }));
+
+      if (component.componentEl.parentElement === _classPrivateFieldGet(this, _svgEl)) {
+        _classPrivateFieldGet(this, _svgEl).removeChild(component.componentEl);
+      } // Unregister callbacks
+
+
+      if (component.moveable && component.selectable) {
+        component.events.off("cnui:clicked", _classPrivateFieldGet(this, _onComponentIsClicked));
+        component.events.off("cnui:usermove", _classPrivateFieldGet(this, _onSelectedComponentMovedByUser));
+      }
+    }
+    /**
+     * True if the component passed as parameter is in the selection list
+     * @param {Component} component Component to be consider
+     */
+
+  }, {
+    key: "isComponentSelected",
+    value: function isComponentSelected(component) {
+      return _classPrivateFieldGet(this, _selectedComponents).includes(component);
     }
     /**
      * This method extract all connections in the canvas, that have
@@ -12067,6 +12176,7 @@ var Canvas = /*#__PURE__*/function () {
   }, {
     key: "destroyAll",
     value: function destroyAll() {
+      this.selectedComponents = [];
       this.destroyAllConnections();
       this.destroyAllComponents();
     }
@@ -12125,12 +12235,12 @@ var Canvas = /*#__PURE__*/function () {
         }
       }; // Compute exact bounds
 
-      var _iterator = _createForOfIteratorHelper(this.components),
-          _step;
+      var _iterator3 = _createForOfIteratorHelper(this.components),
+          _step3;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var c = _step.value;
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var c = _step3.value;
 
           // Ignore menus and sockets
           if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
@@ -12153,9 +12263,9 @@ var Canvas = /*#__PURE__*/function () {
         } // Add dome padding
 
       } catch (err) {
-        _iterator.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator.f();
+        _iterator3.f();
       }
 
       var pad = padding !== null && padding !== void 0 ? padding : {
@@ -12217,6 +12327,14 @@ var Canvas = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _components, val);
+    }
+  }, {
+    key: "selectedComponents",
+    get: function get() {
+      return _classPrivateFieldGet(this, _selectedComponents);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _selectedComponents, val);
     }
   }, {
     key: "connections",
@@ -12304,6 +12422,26 @@ var _onWheel2 = function _onWheel2(e) {
 
 var _onPointerDown2 = function _onPointerDown2(e) {
   if (e.button === 0) {
+    // Reset selection
+    var selection = _classPrivateFieldGet(this, _selectedComponents);
+
+    _classPrivateFieldSet(this, _selectedComponents, []); // Update components
+
+
+    var _iterator4 = _createForOfIteratorHelper(selection),
+        _step4;
+
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var c = _step4.value;
+        c.updateSVGElement();
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+
     _classPrivateFieldSet(this, _dragging, true);
 
     _classPrivateFieldSet(this, _startDragPos, this.clientToSvgPoint(e.clientX, e.clientY));
@@ -12317,6 +12455,18 @@ var _onPointerUp2 = function _onPointerUp2(e) {
     _classPrivateFieldSet(this, _dragging, false);
 
     _classPrivateFieldGet(this, _svgEl).releasePointerCapture(e.pointerId);
+  } else if (e.button === 2) {
+    var component = this.componentFromPosition(e.clientX, e.clientY);
+    var p = this.clientToSvgPoint(e.clientX, e.clientY);
+    var items;
+
+    if (!component) {
+      items = this.getCanvasContextMenuItems();
+    } else {
+      items = component.getContextMenuItems();
+    }
+
+    this.showContextMenu(items, p.x, p.y);
   }
 };
 
@@ -12339,19 +12489,7 @@ var _onPointerMove2 = function _onPointerMove2(e) {
 };
 
 var _onContextMenu2 = function _onContextMenu2(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  var component = this.componentFromPosition(e.clientX, e.clientY);
-  var p = this.clientToSvgPoint(e.clientX, e.clientY);
-  var items;
-
-  if (!component) {
-    items = this.getCanvasContextMenuItems();
-  } else {
-    items = component.getContextMenuItems();
-  }
-
-  this.showContextMenu(items, p.x, p.y);
+  e.preventDefault(); // e.stopPropagation();
 };
 
 /***/ }),
@@ -12427,6 +12565,8 @@ var _startMovePos = new WeakMap();
 
 var _startMovePointerPos = new WeakMap();
 
+var _selectable = new WeakMap();
+
 var _onPointerDown = new WeakSet();
 
 var _onPointerUp = new WeakSet();
@@ -12455,6 +12595,8 @@ var Component = /*#__PURE__*/function () {
   /** A reference to the position of the component at the time hi starts moving */
 
   /** The pointer position at the time in which the component starts moving */
+
+  /** The component is selectable? */
 
   /**
    * Events connected to the component:
@@ -12508,6 +12650,11 @@ var Component = /*#__PURE__*/function () {
     _startMovePointerPos.set(this, {
       writable: true,
       value: null
+    });
+
+    _selectable.set(this, {
+      writable: true,
+      value: false
     });
 
     _defineProperty(this, "events", new events__WEBPACK_IMPORTED_MODULE_1__.EventEmitter().setMaxListeners(30));
@@ -12674,10 +12821,12 @@ var Component = /*#__PURE__*/function () {
       return _classPrivateFieldGet(this, _pos);
     },
     set: function set(val) {
+      var diff = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(val.x - _classPrivateFieldGet(this, _pos).x, val.y - _classPrivateFieldGet(this, _pos).y);
+
       _classPrivateFieldSet(this, _pos, val);
 
       this.updateSVGElement();
-      this.events.emit("cnui:move", this);
+      this.events.emit("cnui:move", this, diff);
     }
   }, {
     key: "width",
@@ -12716,6 +12865,14 @@ var Component = /*#__PURE__*/function () {
       _classPrivateFieldSet(this, _moveable, val);
     }
   }, {
+    key: "selectable",
+    get: function get() {
+      return _classPrivateFieldGet(this, _selectable);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _selectable, val);
+    }
+  }, {
     key: "parent",
     get: function get() {
       return _classPrivateFieldGet(this, _parent);
@@ -12747,8 +12904,8 @@ var Component = /*#__PURE__*/function () {
 }();
 
 var _onPointerDown2 = function _onPointerDown2(e) {
-  if (e.button === 0) {
-    if (_classPrivateFieldGet(this, _moveable)) {
+  if (e.button === 0 || e.button === 2) {
+    if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
       _classPrivateFieldSet(this, _moving, true);
 
       _classPrivateFieldSet(this, _startMovePos, _classPrivateFieldGet(this, _canvas).clientToSvgPoint(e.clientX, e.clientY));
@@ -12759,7 +12916,11 @@ var _onPointerDown2 = function _onPointerDown2(e) {
       _classPrivateFieldGet(this, _startMovePointerPos).y = _classPrivateFieldGet(this, _pos).y;
 
       _classPrivateFieldGet(this, _componentEl).setPointerCapture(e.pointerId);
+    }
 
+    this.events.emit("cnui:clicked", this, e.shiftKey);
+
+    if (e.button === 0) {
       e.stopPropagation();
     }
   }
@@ -12781,6 +12942,8 @@ var _onPointerMove2 = function _onPointerMove2(e) {
       return;
     }
 
+    var origPos = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x, _classPrivateFieldGet(this, _pos).y);
+
     var movePoint = _classPrivateFieldGet(this, _canvas).clientToSvgPoint(e.clientX, e.clientY);
 
     var xDiff = movePoint.x - _classPrivateFieldGet(this, _startMovePos).x;
@@ -12796,10 +12959,17 @@ var _onPointerMove2 = function _onPointerMove2(e) {
       _classPrivateFieldGet(this, _pos).y = Math.ceil(_classPrivateFieldGet(this, _pos).y / 20) * 20;
     }
 
-    this.updateSVGElement();
-    this.events.emit("cnui:move", this);
+    var delta = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x - origPos.x, _classPrivateFieldGet(this, _pos).y - origPos.y);
+    this.updateSVGElement(); // Notify that component has moved
 
-    if (e.shiftKey) {
+    this.events.emit("cnui:move", this, delta);
+
+    if (this.canvas.isComponentSelected(this)) {
+      // Notify that component has moved by the user
+      this.events.emit("cnui:usermoveselected", this, delta);
+    }
+
+    if (e.altKey) {
       this.canvas.fitGraph();
     }
 
@@ -13907,8 +14077,9 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       value: null
     });
 
-    _classPrivateFieldSet(_assertThisInitialized(_this), _node, node); // write a back-reference
+    _classPrivateFieldSet(_assertThisInitialized(_this), _node, node);
 
+    _this.selectable = true; // write a back-reference
 
     _classPrivateFieldGet(_assertThisInitialized(_this), _node).__comp = _assertThisInitialized(_this);
     return _this;
@@ -14149,6 +14320,18 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     key: "updateSVGElement",
     value: function updateSVGElement() {
       _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this);
+
+      if (this.selectable && this.canvas.isComponentSelected(this)) {
+        _classPrivateFieldGet(this, _containerEl).setAttribute("filter", "url(#dropshadow)");
+      } else {
+        _classPrivateFieldGet(this, _containerEl).removeAttribute("filter");
+      }
+
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? "red" : "blue");
+
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
+
+      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_FILL_COLOR : this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      ")); // Update sub-sockets
 
@@ -15700,6 +15883,8 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
             }
 
             _this3.canvas.cancelContextMenu();
+
+            e.stopPropagation();
           }); // Compute text sizes
 
           maxWidth = Math.max(itemTextEl.getBBox().width + 10 + 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, maxWidth); // register items
@@ -17904,12 +18089,22 @@ var Theme = /*#__PURE__*/function () {
       return "#FAD7A0";
     }
   }, {
+    key: "NODE_SELECTED_FILL_COLOR",
+    get: function get() {
+      return "orange";
+    }
+  }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
     get: function get() {
       return "#C5F0FF";
     }
   }, {
     key: "NODE_STROKE_COLOR",
+    get: function get() {
+      return "#FFFFFF";
+    }
+  }, {
+    key: "NODE_SELECTED_STROKE_COLOR",
     get: function get() {
       return "#FFFFFF";
     }
@@ -18090,12 +18285,12 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_FILL_COLOR",
     get: function get() {
-      return "#F3F3F3";
+      return "#FFFFFF";
     }
   }, {
     key: "MENU_STROKE_COLOR",
     get: function get() {
-      return "#DDDDDD";
+      return "#FFFFFF";
     }
   }, {
     key: "MENU_STROKE_WIDTH",
@@ -18135,7 +18330,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_ITEM_HIGHLIGHT",
     get: function get() {
-      return "white";
+      return "#F5F5F5";
     }
   }, {
     key: "MENU_SEARCH_FONT",

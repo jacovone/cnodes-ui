@@ -12,6 +12,7 @@ import { Theme } from "../components/theme";
 import { Component } from "./component";
 import { Connection } from "./connection";
 import { Menu } from "./menu";
+import { Position } from "./position";
 import { SocketComponent } from "./socket";
 
 /**
@@ -65,6 +66,9 @@ export class Canvas {
 
   /** The list of components in the canvas */
   #components = [];
+
+  /** The list of selected components */
+  #selectedComponents = [];
 
   /** The list of connections between components in the canvas */
   #connections = [];
@@ -156,6 +160,12 @@ export class Canvas {
   }
   set components(val) {
     this.#components = val;
+  }
+  get selectedComponents() {
+    return this.#selectedComponents;
+  }
+  set selectedComponents(val) {
+    this.#selectedComponents = val;
   }
   get connections() {
     return this.#connections;
@@ -263,6 +273,14 @@ export class Canvas {
    */
   #onPointerDown(e) {
     if (e.button === 0) {
+      // Reset selection
+      let selection = this.#selectedComponents;
+      this.#selectedComponents = [];
+      // Update components
+      for (let c of selection) {
+        c.updateSVGElement();
+      }
+
       this.#dragging = true;
       this.#startDragPos = this.clientToSvgPoint(e.clientX, e.clientY);
       this.#svgEl.setPointerCapture(e.pointerId);
@@ -277,6 +295,18 @@ export class Canvas {
     if (e.button === 0) {
       this.#dragging = false;
       this.#svgEl.releasePointerCapture(e.pointerId);
+    } else if (e.button === 2) {
+      let component = this.componentFromPosition(e.clientX, e.clientY);
+      let p = this.clientToSvgPoint(e.clientX, e.clientY);
+
+      let items;
+      if (!component) {
+        items = this.getCanvasContextMenuItems();
+      } else {
+        items = component.getContextMenuItems();
+      }
+
+      this.showContextMenu(items, p.x, p.y);
     }
   }
 
@@ -297,24 +327,54 @@ export class Canvas {
   }
 
   /**
+   * This method is called whenever the user move a selected component
+   * @param {Component} component The moved component
+   * @param {Position} delta The diff position of movement
+   */
+  #onSelectedComponentMovedByUser = (component, delta) => {
+    for (let c of this.#selectedComponents.filter((c) => c !== component)) {
+      c.pos = c.pos.add(delta);
+      c.updateSVGElement();
+    }
+  };
+
+  /**
+   * This method is invoked whenever the user click a selected component
+   * @param {Component} component Thye clicked component
+   * @param {boolean} shiftKey Was the shift key pressed during the clock action?
+   */
+  #onComponentIsClicked = (component, shiftKey) => {
+    if (shiftKey) {
+      // Invert the component selection
+      if (this.#selectedComponents.findIndex((c) => c === component) !== -1) {
+        this.#selectedComponents = this.#selectedComponents.filter(
+          (c) => c !== component
+        );
+      } else {
+        this.#selectedComponents.push(component);
+      }
+      component.updateSVGElement();
+    } else {
+      // If is already selected does nothing
+      if (!this.isComponentSelected(component)) {
+        // Set the component as the only one selected
+        let selection = this.#selectedComponents;
+        this.#selectedComponents = [component];
+        for (let c of selection) {
+          c.updateSVGElement();
+        }
+        component.updateSVGElement();
+      }
+    }
+  };
+
+  /**
    * Manages the contextmenu event to implement custom menu
    * @param {Event} e The contextmenu event
    */
   #onContextMenu(e) {
     e.preventDefault();
-    e.stopPropagation();
-
-    let component = this.componentFromPosition(e.clientX, e.clientY);
-    let p = this.clientToSvgPoint(e.clientX, e.clientY);
-
-    let items;
-    if (!component) {
-      items = this.getCanvasContextMenuItems();
-    } else {
-      items = component.getContextMenuItems();
-    }
-
-    this.showContextMenu(items, p.x, p.y);
+    // e.stopPropagation();
   }
 
   /**
@@ -389,6 +449,14 @@ export class Canvas {
     this.#components.push(component);
     component.canvas = this;
     this.#svgEl.appendChild(component.componentEl);
+
+    if (component.moveable && component.selectable) {
+      component.events.on("cnui:clicked", this.#onComponentIsClicked);
+      component.events.on(
+        "cnui:usermoveselected",
+        this.#onSelectedComponentMovedByUser
+      );
+    }
   }
 
   /**
@@ -398,8 +466,32 @@ export class Canvas {
   removeComponent(component) {
     // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
-    if (component.componentEl.parentElement === this.#svgEl)
+
+    // Remove component from selected components
+    this.#selectedComponents = this.#selectedComponents.filter(
+      (c) => c !== component
+    );
+
+    if (component.componentEl.parentElement === this.#svgEl) {
       this.#svgEl.removeChild(component.componentEl);
+    }
+
+    // Unregister callbacks
+    if (component.moveable && component.selectable) {
+      component.events.off("cnui:clicked", this.#onComponentIsClicked);
+      component.events.off(
+        "cnui:usermove",
+        this.#onSelectedComponentMovedByUser
+      );
+    }
+  }
+
+  /**
+   * True if the component passed as parameter is in the selection list
+   * @param {Component} component Component to be consider
+   */
+  isComponentSelected(component) {
+    return this.#selectedComponents.includes(component);
   }
 
   /**
@@ -435,6 +527,7 @@ export class Canvas {
    * Destroy all connections and all components from the canvas
    */
   destroyAll() {
+    this.selectedComponents = [];
     this.destroyAllConnections();
     this.destroyAllComponents();
   }

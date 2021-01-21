@@ -46,10 +46,16 @@ export class Theme {
   get NODE_FILL_COLOR() {
     return "#FAD7A0";
   }
+  get NODE_SELECTED_FILL_COLOR() {
+    return "orange";
+  }
   get NODE_FUNCTIONAL_FILL_COLOR() {
     return "#C5F0FF";
   }
   get NODE_STROKE_COLOR() {
+    return "#FFFFFF";
+  }
+  get NODE_SELECTED_STROKE_COLOR() {
     return "#FFFFFF";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
@@ -174,10 +180,10 @@ export class Theme {
     return 10;
   }
   get MENU_FILL_COLOR() {
-    return "#F3F3F3";
+    return "#FFFFFF";
   }
   get MENU_STROKE_COLOR() {
-    return "#DDDDDD";
+    return "#FFFFFF";
   }
   get MENU_STROKE_WIDTH() {
     return 2;
@@ -201,7 +207,7 @@ export class Theme {
     return "lightgray";
   }
   get MENU_ITEM_HIGHLIGHT() {
-    return "white";
+    return "#F5F5F5";
   }
   get MENU_SEARCH_FONT() {
     return "bold 11px verdana";

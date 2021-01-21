@@ -45,6 +45,9 @@ export class Component {
   /** The pointer position at the time in which the component starts moving */
   #startMovePointerPos = null;
 
+  /** The component is selectable? */
+  #selectable = false;
+
   /**
    * Events connected to the component:
    */
@@ -94,9 +97,10 @@ export class Component {
     return this.#pos;
   }
   set pos(val) {
+    let diff = new Position(val.x - this.#pos.x, val.y - this.#pos.y);
     this.#pos = val;
     this.updateSVGElement();
-    this.events.emit("cnui:move", this);
+    this.events.emit("cnui:move", this, diff);
   }
   get width() {
     return 0;
@@ -124,6 +128,12 @@ export class Component {
   set moveable(val) {
     this.#moveable = val;
   }
+  get selectable() {
+    return this.#selectable;
+  }
+  set selectable(val) {
+    this.#selectable = val;
+  }
   get parent() {
     return this.#parent;
   }
@@ -136,8 +146,8 @@ export class Component {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
-    if (e.button === 0) {
-      if (this.#moveable) {
+    if (e.button === 0 || e.button === 2) {
+      if (this.#moveable && e.button === 0) {
         this.#moving = true;
         this.#startMovePos = this.#canvas.clientToSvgPoint(
           e.clientX,
@@ -147,6 +157,11 @@ export class Component {
         this.#startMovePointerPos.x = this.#pos.x;
         this.#startMovePointerPos.y = this.#pos.y;
         this.#componentEl.setPointerCapture(e.pointerId);
+      }
+
+      this.events.emit("cnui:clicked", this, e.shiftKey);
+
+      if (e.button === 0) {
         e.stopPropagation();
       }
     }
@@ -173,6 +188,9 @@ export class Component {
       if (!this.#moving) {
         return;
       }
+
+      let origPos = new Position(this.#pos.x, this.#pos.y);
+
       let movePoint = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
       let xDiff = movePoint.x - this.#startMovePos.x;
       let yDiff = movePoint.y - this.#startMovePos.y;
@@ -186,11 +204,22 @@ export class Component {
         this.#pos.y = Math.ceil(this.#pos.y / 20) * 20;
       }
 
+      let delta = new Position(
+        this.#pos.x - origPos.x,
+        this.#pos.y - origPos.y
+      );
+
       this.updateSVGElement();
 
-      this.events.emit("cnui:move", this);
+      // Notify that component has moved
+      this.events.emit("cnui:move", this, delta);
 
-      if (e.shiftKey) {
+      if (this.canvas.isComponentSelected(this)) {
+        // Notify that component has moved by the user
+        this.events.emit("cnui:usermoveselected", this, delta);
+      }
+
+      if (e.altKey) {
         this.canvas.fitGraph();
       }
 

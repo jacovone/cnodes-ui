@@ -43,6 +43,7 @@ export class CnodeComponent extends Component {
   constructor(node, canvas) {
     super();
     this.#node = node;
+    this.selectable = true;
 
     // write a back-reference
     this.#node.__comp = this;
@@ -310,6 +311,34 @@ export class CnodeComponent extends Component {
    */
   updateSVGElement() {
     super.updateSVGElement();
+
+    if (this.selectable && this.canvas.isComponentSelected(this)) {
+      this.#containerEl.setAttribute("filter", "url(#dropshadow)");
+    } else {
+      this.#containerEl.removeAttribute("filter");
+    }
+
+    this.#containerEl.setAttribute(
+      "stroke",
+      this.canvas.isComponentSelected(this) ? "red" : "blue"
+    );
+
+    this.#containerEl.setAttribute(
+      "stroke",
+      this.canvas.isComponentSelected(this)
+        ? Theme.current.NODE_SELECTED_STROKE_COLOR
+        : !this.node.functional
+        ? Theme.current.NODE_STROKE_COLOR
+        : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
+    );
+    this.#containerEl.setAttribute(
+      "fill",
+      this.canvas.isComponentSelected(this)
+        ? Theme.current.NODE_SELECTED_FILL_COLOR
+        : this.node.functional
+        ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
+        : Theme.current.NODE_FILL_COLOR
+    );
 
     this.#containerEl.setAttribute(
       "d",

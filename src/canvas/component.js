@@ -45,6 +45,9 @@ export class Component {
   /** The pointer position at the time in which the component starts moving */
   #startMovePointerPos = null;
 
+  /** The component is selectable? */
+  #selectable = false;
+
   /**
    * Events connected to the component:
    */
@@ -94,9 +97,10 @@ export class Component {
     return this.#pos;
   }
   set pos(val) {
+    let diff = new Position(val.x - this.#pos.x, val.y - this.#pos.y);
     this.#pos = val;
     this.updateSVGElement();
-    this.events.emit("cnui:move", this);
+    this.events.emit("cnui:move", this, diff);
   }
   get width() {
     return 0;
@@ -188,7 +192,7 @@ export class Component {
 
       this.updateSVGElement();
 
-      this.events.emit("cnui:move", this);
+      this.events.emit("cnui:move", this, new Position(xDiff, yDiff));
 
       if (e.shiftKey) {
         this.canvas.fitGraph();

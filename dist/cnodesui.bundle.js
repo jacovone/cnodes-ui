@@ -11727,9 +11727,9 @@ var _onPointerUp = new WeakSet();
 
 var _onPointerMove = new WeakSet();
 
-var _onSelectedComponentMovedByUser = new WeakSet();
+var _onSelectedComponentMovedByUser = new WeakMap();
 
-var _onComponentIsClicked = new WeakSet();
+var _onComponentIsClicked = new WeakMap();
 
 var _onContextMenu = new WeakSet();
 
@@ -11779,10 +11779,6 @@ var Canvas = /*#__PURE__*/function () {
     _classCallCheck(this, Canvas);
 
     _onContextMenu.add(this);
-
-    _onComponentIsClicked.add(this);
-
-    _onSelectedComponentMovedByUser.add(this);
 
     _onPointerMove.add(this);
 
@@ -11864,6 +11860,69 @@ var Canvas = /*#__PURE__*/function () {
     _connections.set(this, {
       writable: true,
       value: []
+    });
+
+    _onSelectedComponentMovedByUser.set(this, {
+      writable: true,
+      value: function value(component, delta) {
+        var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
+          return c !== component;
+        })),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var c = _step.value;
+            c.pos = c.pos.add(delta);
+            c.updateSVGElement();
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    });
+
+    _onComponentIsClicked.set(this, {
+      writable: true,
+      value: function value(component, shiftKey) {
+        if (shiftKey) {
+          // Invert the component selection
+          if (_classPrivateFieldGet(_this, _selectedComponents).findIndex(function (c) {
+            return c === component;
+          }) !== -1) {
+            _classPrivateFieldSet(_this, _selectedComponents, _classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
+              return c !== component;
+            }));
+          } else {
+            _classPrivateFieldGet(_this, _selectedComponents).push(component);
+          }
+
+          component.updateSVGElement();
+        } else {
+          // Set the component as the only one selected
+          var selection = _classPrivateFieldGet(_this, _selectedComponents);
+
+          _classPrivateFieldSet(_this, _selectedComponents, [component]);
+
+          var _iterator2 = _createForOfIteratorHelper(selection),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var c = _step2.value;
+              c.updateSVGElement();
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+
+          component.updateSVGElement();
+        }
+      }
     });
 
     // Create the main SVG element
@@ -12030,12 +12089,9 @@ var Canvas = /*#__PURE__*/function () {
 
       _classPrivateFieldGet(this, _svgEl).appendChild(component.componentEl);
 
-      if (component.moveable) {
-        // Register selection callbacks inside the component
-        component.clickedCb = _classPrivateMethodGet(this, _onComponentIsClicked, _onComponentIsClicked2).bind(this);
-        component.selectedMovedCb = _classPrivateMethodGet(this, _onSelectedComponentMovedByUser, _onSelectedComponentMovedByUser2).bind(this);
-        component.events.on("cnui:clicked", component.clickedCb);
-        component.events.on("cnui:usermoveselected", component.selectedMovedCb);
+      if (component.moveable && component.selectable) {
+        component.events.on("cnui:clicked", _classPrivateFieldGet(this, _onComponentIsClicked));
+        component.events.on("cnui:usermoveselected", _classPrivateFieldGet(this, _onSelectedComponentMovedByUser));
       }
     }
     /**
@@ -12056,14 +12112,9 @@ var Canvas = /*#__PURE__*/function () {
       } // Unregister callbacks
 
 
-      if (component.moveable) {
-        if (component.clickedCb) {
-          component.events.off("cnui:clicked", component.clickedCb);
-        }
-
-        if (component.selectedMovedCb) {
-          component.events.off("cnui:usermove", component.selectedMovedCb);
-        }
+      if (component.moveable && component.selectable) {
+        component.events.off("cnui:clicked", _classPrivateFieldGet(this, _onComponentIsClicked));
+        component.events.off("cnui:usermove", _classPrivateFieldGet(this, _onSelectedComponentMovedByUser));
       }
     }
     /**
@@ -12118,6 +12169,7 @@ var Canvas = /*#__PURE__*/function () {
   }, {
     key: "destroyAll",
     value: function destroyAll() {
+      this.selectedComponents = [];
       this.destroyAllConnections();
       this.destroyAllComponents();
     }
@@ -12176,12 +12228,12 @@ var Canvas = /*#__PURE__*/function () {
         }
       }; // Compute exact bounds
 
-      var _iterator = _createForOfIteratorHelper(this.components),
-          _step;
+      var _iterator3 = _createForOfIteratorHelper(this.components),
+          _step3;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var c = _step.value;
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var c = _step3.value;
 
           // Ignore menus and sockets
           if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
@@ -12204,9 +12256,9 @@ var Canvas = /*#__PURE__*/function () {
         } // Add dome padding
 
       } catch (err) {
-        _iterator.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator.f();
+        _iterator3.f();
       }
 
       var pad = padding !== null && padding !== void 0 ? padding : {
@@ -12273,6 +12325,9 @@ var Canvas = /*#__PURE__*/function () {
     key: "selectedComponents",
     get: function get() {
       return _classPrivateFieldGet(this, _selectedComponents);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _selectedComponents, val);
     }
   }, {
     key: "connections",
@@ -12366,18 +12421,18 @@ var _onPointerDown2 = function _onPointerDown2(e) {
     _classPrivateFieldSet(this, _selectedComponents, []); // Update components
 
 
-    var _iterator2 = _createForOfIteratorHelper(selection),
-        _step2;
+    var _iterator4 = _createForOfIteratorHelper(selection),
+        _step4;
 
     try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var c = _step2.value;
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var c = _step4.value;
         c.updateSVGElement();
       }
     } catch (err) {
-      _iterator2.e(err);
+      _iterator4.e(err);
     } finally {
-      _iterator2.f();
+      _iterator4.f();
     }
 
     _classPrivateFieldSet(this, _dragging, true);
@@ -12412,63 +12467,6 @@ var _onPointerMove2 = function _onPointerMove2(e) {
   _classPrivateFieldSet(this, _vbY, _classPrivateFieldGet(this, _vbY) - yDiff);
 
   _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
-};
-
-var _onSelectedComponentMovedByUser2 = function _onSelectedComponentMovedByUser2(component, delta) {
-  var _iterator3 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _selectedComponents).filter(function (c) {
-    return c !== component;
-  })),
-      _step3;
-
-  try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var c = _step3.value;
-      c.pos = c.pos.add(delta);
-      c.updateSVGElement();
-    }
-  } catch (err) {
-    _iterator3.e(err);
-  } finally {
-    _iterator3.f();
-  }
-};
-
-var _onComponentIsClicked2 = function _onComponentIsClicked2(component, shiftKey) {
-  if (shiftKey) {
-    // Invert the component selection
-    if (_classPrivateFieldGet(this, _selectedComponents).findIndex(function (c) {
-      return c === component;
-    }) !== -1) {
-      _classPrivateFieldSet(this, _selectedComponents, _classPrivateFieldGet(this, _selectedComponents).filter(function (c) {
-        return c !== component;
-      }));
-    } else {
-      _classPrivateFieldGet(this, _selectedComponents).push(component);
-    }
-
-    component.updateSVGElement();
-  } else {
-    // Set the component as the only one selected
-    var selection = _classPrivateFieldGet(this, _selectedComponents);
-
-    _classPrivateFieldSet(this, _selectedComponents, [component]);
-
-    var _iterator4 = _createForOfIteratorHelper(selection),
-        _step4;
-
-    try {
-      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-        var c = _step4.value;
-        c.updateSVGElement();
-      }
-    } catch (err) {
-      _iterator4.e(err);
-    } finally {
-      _iterator4.f();
-    }
-
-    component.updateSVGElement();
-  }
 };
 
 var _onContextMenu2 = function _onContextMenu2(e) {
@@ -12916,8 +12914,8 @@ var Component = /*#__PURE__*/function () {
 }();
 
 var _onPointerDown2 = function _onPointerDown2(e) {
-  if (e.button === 0) {
-    if (_classPrivateFieldGet(this, _moveable)) {
+  if (e.button === 0 || e.button === 2) {
+    if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
       _classPrivateFieldSet(this, _dragged, false);
 
       _classPrivateFieldSet(this, _moving, true);
@@ -12931,13 +12929,15 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       _classPrivateFieldGet(this, _componentEl).setPointerCapture(e.pointerId);
 
-      e.stopPropagation();
+      e.preventDefault();
     }
+
+    e.stopPropagation();
   }
 };
 
 var _onPointerUp2 = function _onPointerUp2(e) {
-  if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
+  if (_classPrivateFieldGet(this, _moveable) && (e.button === 0 || e.button === 2)) {
     _classPrivateFieldSet(this, _moving, false);
 
     if (!_classPrivateFieldGet(this, _dragged)) {
@@ -14093,8 +14093,9 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       value: null
     });
 
-    _classPrivateFieldSet(_assertThisInitialized(_this), _node, node); // write a back-reference
+    _classPrivateFieldSet(_assertThisInitialized(_this), _node, node);
 
+    _this.selectable = true; // write a back-reference
 
     _classPrivateFieldGet(_assertThisInitialized(_this), _node).__comp = _assertThisInitialized(_this);
     return _this;

@@ -155,8 +155,8 @@ export class Component {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
-    if (e.button === 0) {
-      if (this.#moveable) {
+    if (e.button === 0 || e.button === 2) {
+      if (this.#moveable && e.button === 0) {
         this.#dragged = false;
         this.#moving = true;
         this.#startMovePos = this.#canvas.clientToSvgPoint(
@@ -167,8 +167,9 @@ export class Component {
         this.#startMovePointerPos.x = this.#pos.x;
         this.#startMovePointerPos.y = this.#pos.y;
         this.#componentEl.setPointerCapture(e.pointerId);
-        e.stopPropagation();
+        e.preventDefault();
       }
+      e.stopPropagation();
     }
   }
 
@@ -177,7 +178,7 @@ export class Component {
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
-    if (this.#moveable && e.button === 0) {
+    if (this.#moveable && (e.button === 0 || e.button === 2)) {
       this.#moving = false;
       if (!this.#dragged) {
         this.events.emit("cnui:clicked", this, e.shiftKey);

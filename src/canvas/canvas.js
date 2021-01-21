@@ -164,6 +164,9 @@ export class Canvas {
   get selectedComponents() {
     return this.#selectedComponents;
   }
+  set selectedComponents(val) {
+    this.#selectedComponents = val;
+  }
   get connections() {
     return this.#connections;
   }
@@ -316,19 +319,19 @@ export class Canvas {
    * @param {Component} component The moved component
    * @param {Position} delta The diff position of movement
    */
-  #onSelectedComponentMovedByUser(component, delta) {
+  #onSelectedComponentMovedByUser = (component, delta) => {
     for (let c of this.#selectedComponents.filter((c) => c !== component)) {
       c.pos = c.pos.add(delta);
       c.updateSVGElement();
     }
-  }
+  };
 
   /**
    * This method is invoked whenever the user click a selected component
    * @param {Component} component Thye clicked component
    * @param {boolean} shiftKey Was the shift key pressed during the clock action?
    */
-  #onComponentIsClicked(component, shiftKey) {
+  #onComponentIsClicked = (component, shiftKey) => {
     if (shiftKey) {
       // Invert the component selection
       if (this.#selectedComponents.findIndex((c) => c === component) !== -1) {
@@ -348,7 +351,7 @@ export class Canvas {
       }
       component.updateSVGElement();
     }
-  }
+  };
 
   /**
    * Manages the contextmenu event to implement custom menu
@@ -444,15 +447,12 @@ export class Canvas {
     component.canvas = this;
     this.#svgEl.appendChild(component.componentEl);
 
-    if (component.moveable) {
-      // Register selection callbacks inside the component
-      component.clickedCb = this.#onComponentIsClicked.bind(this);
-      component.selectedMovedCb = this.#onSelectedComponentMovedByUser.bind(
-        this
+    if (component.moveable && component.selectable) {
+      component.events.on("cnui:clicked", this.#onComponentIsClicked);
+      component.events.on(
+        "cnui:usermoveselected",
+        this.#onSelectedComponentMovedByUser
       );
-
-      component.events.on("cnui:clicked", component.clickedCb);
-      component.events.on("cnui:usermoveselected", component.selectedMovedCb);
     }
   }
 
@@ -468,13 +468,12 @@ export class Canvas {
     }
 
     // Unregister callbacks
-    if (component.moveable) {
-      if (component.clickedCb) {
-        component.events.off("cnui:clicked", component.clickedCb);
-      }
-      if (component.selectedMovedCb) {
-        component.events.off("cnui:usermove", component.selectedMovedCb);
-      }
+    if (component.moveable && component.selectable) {
+      component.events.off("cnui:clicked", this.#onComponentIsClicked);
+      component.events.off(
+        "cnui:usermove",
+        this.#onSelectedComponentMovedByUser
+      );
     }
   }
 
@@ -519,6 +518,7 @@ export class Canvas {
    * Destroy all connections and all components from the canvas
    */
   destroyAll() {
+    this.selectedComponents = [];
     this.destroyAllConnections();
     this.destroyAllComponents();
   }

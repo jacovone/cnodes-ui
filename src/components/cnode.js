@@ -43,6 +43,7 @@ export class CnodeComponent extends Component {
   constructor(node, canvas) {
     super();
     this.#node = node;
+    this.selectable = true;
 
     // write a back-reference
     this.#node.__comp = this;

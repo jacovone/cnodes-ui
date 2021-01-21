@@ -11901,26 +11901,29 @@ var Canvas = /*#__PURE__*/function () {
 
           component.updateSVGElement();
         } else {
-          // Set the component as the only one selected
-          var selection = _classPrivateFieldGet(_this, _selectedComponents);
+          // If is already selected does nothing
+          if (!_this.isComponentSelected(component)) {
+            // Set the component as the only one selected
+            var selection = _classPrivateFieldGet(_this, _selectedComponents);
 
-          _classPrivateFieldSet(_this, _selectedComponents, [component]);
+            _classPrivateFieldSet(_this, _selectedComponents, [component]);
 
-          var _iterator2 = _createForOfIteratorHelper(selection),
-              _step2;
+            var _iterator2 = _createForOfIteratorHelper(selection),
+                _step2;
 
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var c = _step2.value;
-              c.updateSVGElement();
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var c = _step2.value;
+                c.updateSVGElement();
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
             }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
 
-          component.updateSVGElement();
+            component.updateSVGElement();
+          }
         }
       }
     });
@@ -12105,7 +12108,11 @@ var Canvas = /*#__PURE__*/function () {
       // Remove the component from the SVG space
       this.components = _classPrivateFieldGet(this, _components).filter(function (c) {
         return c !== component;
-      });
+      }); // Remove component from selected components
+
+      _classPrivateFieldSet(this, _selectedComponents, _classPrivateFieldGet(this, _selectedComponents).filter(function (c) {
+        return c !== component;
+      }));
 
       if (component.componentEl.parentElement === _classPrivateFieldGet(this, _svgEl)) {
         _classPrivateFieldGet(this, _svgEl).removeChild(component.componentEl);
@@ -12448,6 +12455,18 @@ var _onPointerUp2 = function _onPointerUp2(e) {
     _classPrivateFieldSet(this, _dragging, false);
 
     _classPrivateFieldGet(this, _svgEl).releasePointerCapture(e.pointerId);
+  } else if (e.button === 2) {
+    var component = this.componentFromPosition(e.clientX, e.clientY);
+    var p = this.clientToSvgPoint(e.clientX, e.clientY);
+    var items;
+
+    if (!component) {
+      items = this.getCanvasContextMenuItems();
+    } else {
+      items = component.getContextMenuItems();
+    }
+
+    this.showContextMenu(items, p.x, p.y);
   }
 };
 
@@ -12470,19 +12489,7 @@ var _onPointerMove2 = function _onPointerMove2(e) {
 };
 
 var _onContextMenu2 = function _onContextMenu2(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  var component = this.componentFromPosition(e.clientX, e.clientY);
-  var p = this.clientToSvgPoint(e.clientX, e.clientY);
-  var items;
-
-  if (!component) {
-    items = this.getCanvasContextMenuItems();
-  } else {
-    items = component.getContextMenuItems();
-  }
-
-  this.showContextMenu(items, p.x, p.y);
+  e.preventDefault(); // e.stopPropagation();
 };
 
 /***/ }),
@@ -12560,8 +12567,6 @@ var _startMovePointerPos = new WeakMap();
 
 var _selectable = new WeakMap();
 
-var _dragged = new WeakMap();
-
 var _onPointerDown = new WeakSet();
 
 var _onPointerUp = new WeakSet();
@@ -12592,8 +12597,6 @@ var Component = /*#__PURE__*/function () {
   /** The pointer position at the time in which the component starts moving */
 
   /** The component is selectable? */
-
-  /** The component is moved after it has been clicked? */
 
   /**
    * Events connected to the component:
@@ -12650,11 +12653,6 @@ var Component = /*#__PURE__*/function () {
     });
 
     _selectable.set(this, {
-      writable: true,
-      value: false
-    });
-
-    _dragged.set(this, {
       writable: true,
       value: false
     });
@@ -12875,14 +12873,6 @@ var Component = /*#__PURE__*/function () {
       _classPrivateFieldSet(this, _selectable, val);
     }
   }, {
-    key: "dragged",
-    get: function get() {
-      return _classPrivateFieldGet(this, _dragged);
-    },
-    set: function set(val) {
-      _classPrivateFieldSet(this, _dragged, val);
-    }
-  }, {
     key: "parent",
     get: function get() {
       return _classPrivateFieldGet(this, _parent);
@@ -12916,8 +12906,6 @@ var Component = /*#__PURE__*/function () {
 var _onPointerDown2 = function _onPointerDown2(e) {
   if (e.button === 0 || e.button === 2) {
     if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
-      _classPrivateFieldSet(this, _dragged, false);
-
       _classPrivateFieldSet(this, _moving, true);
 
       _classPrivateFieldSet(this, _startMovePos, _classPrivateFieldGet(this, _canvas).clientToSvgPoint(e.clientX, e.clientY));
@@ -12928,21 +12916,19 @@ var _onPointerDown2 = function _onPointerDown2(e) {
       _classPrivateFieldGet(this, _startMovePointerPos).y = _classPrivateFieldGet(this, _pos).y;
 
       _classPrivateFieldGet(this, _componentEl).setPointerCapture(e.pointerId);
-
-      e.preventDefault();
     }
 
-    e.stopPropagation();
+    this.events.emit("cnui:clicked", this, e.shiftKey);
+
+    if (e.button === 0) {
+      e.stopPropagation();
+    }
   }
 };
 
 var _onPointerUp2 = function _onPointerUp2(e) {
-  if (_classPrivateFieldGet(this, _moveable) && (e.button === 0 || e.button === 2)) {
+  if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
     _classPrivateFieldSet(this, _moving, false);
-
-    if (!_classPrivateFieldGet(this, _dragged)) {
-      this.events.emit("cnui:clicked", this, e.shiftKey);
-    }
 
     _classPrivateFieldGet(this, _componentEl).releasePointerCapture(e.pointerId);
 
@@ -12955,8 +12941,6 @@ var _onPointerMove2 = function _onPointerMove2(e) {
     if (!_classPrivateFieldGet(this, _moving)) {
       return;
     }
-
-    _classPrivateFieldSet(this, _dragged, true);
 
     var origPos = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x, _classPrivateFieldGet(this, _pos).y);
 
@@ -14336,6 +14320,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     key: "updateSVGElement",
     value: function updateSVGElement() {
       _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this);
+
+      if (this.selectable && this.canvas.isComponentSelected(this)) {
+        _classPrivateFieldGet(this, _containerEl).setAttribute("filter", "url(#dropshadow)");
+      } else {
+        _classPrivateFieldGet(this, _containerEl).removeAttribute("filter");
+      }
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? "red" : "blue");
 
@@ -15893,6 +15883,8 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
             }
 
             _this3.canvas.cancelContextMenu();
+
+            e.stopPropagation();
           }); // Compute text sizes
 
           maxWidth = Math.max(itemTextEl.getBBox().width + 10 + 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, maxWidth); // register items
@@ -18099,7 +18091,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FILL_COLOR",
     get: function get() {
-      return "#FAC790";
+      return "orange";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
@@ -18114,7 +18106,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_STROKE_COLOR",
     get: function get() {
-      return "black";
+      return "#FFFFFF";
     }
   }, {
     key: "NODE_FUNCTIONAL_STROKE_COLOR",
@@ -18293,12 +18285,12 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_FILL_COLOR",
     get: function get() {
-      return "#F3F3F3";
+      return "#FFFFFF";
     }
   }, {
     key: "MENU_STROKE_COLOR",
     get: function get() {
-      return "#DDDDDD";
+      return "#FFFFFF";
     }
   }, {
     key: "MENU_STROKE_WIDTH",
@@ -18338,7 +18330,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_ITEM_HIGHLIGHT",
     get: function get() {
-      return "white";
+      return "#F5F5F5";
     }
   }, {
     key: "MENU_SEARCH_FONT",

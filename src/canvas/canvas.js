@@ -295,6 +295,18 @@ export class Canvas {
     if (e.button === 0) {
       this.#dragging = false;
       this.#svgEl.releasePointerCapture(e.pointerId);
+    } else if (e.button === 2) {
+      let component = this.componentFromPosition(e.clientX, e.clientY);
+      let p = this.clientToSvgPoint(e.clientX, e.clientY);
+
+      let items;
+      if (!component) {
+        items = this.getCanvasContextMenuItems();
+      } else {
+        items = component.getContextMenuItems();
+      }
+
+      this.showContextMenu(items, p.x, p.y);
     }
   }
 
@@ -343,13 +355,16 @@ export class Canvas {
       }
       component.updateSVGElement();
     } else {
-      // Set the component as the only one selected
-      let selection = this.#selectedComponents;
-      this.#selectedComponents = [component];
-      for (let c of selection) {
-        c.updateSVGElement();
+      // If is already selected does nothing
+      if (!this.isComponentSelected(component)) {
+        // Set the component as the only one selected
+        let selection = this.#selectedComponents;
+        this.#selectedComponents = [component];
+        for (let c of selection) {
+          c.updateSVGElement();
+        }
+        component.updateSVGElement();
       }
-      component.updateSVGElement();
     }
   };
 
@@ -359,19 +374,7 @@ export class Canvas {
    */
   #onContextMenu(e) {
     e.preventDefault();
-    e.stopPropagation();
-
-    let component = this.componentFromPosition(e.clientX, e.clientY);
-    let p = this.clientToSvgPoint(e.clientX, e.clientY);
-
-    let items;
-    if (!component) {
-      items = this.getCanvasContextMenuItems();
-    } else {
-      items = component.getContextMenuItems();
-    }
-
-    this.showContextMenu(items, p.x, p.y);
+    // e.stopPropagation();
   }
 
   /**
@@ -463,6 +466,12 @@ export class Canvas {
   removeComponent(component) {
     // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
+
+    // Remove component from selected components
+    this.#selectedComponents = this.#selectedComponents.filter(
+      (c) => c !== component
+    );
+
     if (component.componentEl.parentElement === this.#svgEl) {
       this.#svgEl.removeChild(component.componentEl);
     }

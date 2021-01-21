@@ -257,6 +257,7 @@ export class CnodesMenu extends Menu {
           this.menuCallback = null;
         }
         this.canvas.cancelContextMenu();
+        e.stopPropagation();
       });
 
       // Compute text sizes

@@ -165,7 +165,7 @@ export class CnodesCanvas extends Canvas {
       new MenuItem(
         `
         <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
-          Riempi grafico
+          Fit graph
         </tspan>
         `,
         () => {
@@ -182,7 +182,7 @@ export class CnodesCanvas extends Canvas {
             new MenuItem(
               `
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
-                Nuovo
+                New
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
                 ${nodeDef.name}

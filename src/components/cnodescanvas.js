@@ -182,7 +182,7 @@ export class CnodesCanvas extends Canvas {
             new MenuItem(
               `
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
-                New
+                Nuovo
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
                 ${nodeDef.name}

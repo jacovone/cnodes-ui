@@ -12585,12 +12585,18 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
   var _this2 = this;
 
   /**
-   * Is the point (pX,pY) inside the box (x,y,width,height)?
-   * @param {number} pX The point x coordinate
-   * @param {number} pY The point y coordinate
+   * Return true if two rects passed as parameter overlaps
+   * @param {*} x1 x of the first rect
+   * @param {*} y1 y of the first rect
+   * @param {*} width1 width of the first rect
+   * @param {*} height1 height of the first rect
+   * @param {*} x2 x of the second rect
+   * @param {*} y2 y of the second rect
+   * @param {*} width2 width of the second rect
+   * @param {*} height2 hright of the second rect
    */
-  function pointInside(pX, pY) {
-    return pX >= x && pY >= y && pX <= x + width && pY <= y + height;
+  function rectsOverlaps(x1, y1, width1, height1, x2, y2, width2, height2) {
+    return Math.max(x1, x2, x1 + width1, x2 + width2) - Math.min(x1, x2, x1 + width1, x2 + width2) < width1 + width2 && Math.max(y1, y2, y1 + height1, y2 + height2) - Math.min(y1, y2, y1 + height1, y2 + height2) < height1 + height2;
   }
 
   var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components).filter(function (comp) {
@@ -12602,7 +12608,7 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
     var _loop = function _loop() {
       var c = _step5.value;
 
-      if (pointInside(c.absPos.x, c.absPos.y) || pointInside(c.absPos.x + c.width, c.absPos.y + c.height)) {
+      if (rectsOverlaps(c.absPos.x, c.absPos.y, c.width, c.height, x, y, width, height)) {
         if (_classPrivateFieldGet(_this2, _selectedComponents).findIndex(function (comp) {
           return comp === c;
         }) === -1) {
@@ -14544,7 +14550,9 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this); // if (this.selectable && this.canvas.isComponentSelected(this)) {
+      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this); // ** This is beautiful but slows down the browser
+      //
+      // if (this.selectable && this.canvas.isComponentSelected(this)) {
       //   this.#containerEl.setAttribute("filter", "url(#dropshadow)");
       // } else {
       //   this.#containerEl.removeAttribute("filter");

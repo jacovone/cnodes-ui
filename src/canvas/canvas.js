@@ -404,18 +404,39 @@ export class Canvas {
    */
   #addComponentToSelectionForBox(x, y, width, height) {
     /**
-     * Is the point (pX,pY) inside the box (x,y,width,height)?
-     * @param {number} pX The point x coordinate
-     * @param {number} pY The point y coordinate
+     * Return true if two rects passed as parameter overlaps
+     * @param {*} x1 x of the first rect
+     * @param {*} y1 y of the first rect
+     * @param {*} width1 width of the first rect
+     * @param {*} height1 height of the first rect
+     * @param {*} x2 x of the second rect
+     * @param {*} y2 y of the second rect
+     * @param {*} width2 width of the second rect
+     * @param {*} height2 hright of the second rect
      */
-    function pointInside(pX, pY) {
-      return pX >= x && pY >= y && pX <= x + width && pY <= y + height;
+    function rectsOverlaps(x1, y1, width1, height1, x2, y2, width2, height2) {
+      return (
+        Math.max(x1, x2, x1 + width1, x2 + width2) -
+          Math.min(x1, x2, x1 + width1, x2 + width2) <
+          width1 + width2 &&
+        Math.max(y1, y2, y1 + height1, y2 + height2) -
+          Math.min(y1, y2, y1 + height1, y2 + height2) <
+          height1 + height2
+      );
     }
 
     for (let c of this.#components.filter((comp) => comp.selectable)) {
       if (
-        pointInside(c.absPos.x, c.absPos.y) ||
-        pointInside(c.absPos.x + c.width, c.absPos.y + c.height)
+        rectsOverlaps(
+          c.absPos.x,
+          c.absPos.y,
+          c.width,
+          c.height,
+          x,
+          y,
+          width,
+          height
+        )
       ) {
         if (this.#selectedComponents.findIndex((comp) => comp === c) === -1) {
           this.#selectedComponents.push(c);

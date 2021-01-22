@@ -11725,6 +11725,8 @@ var _onPointerDown = new WeakSet();
 
 var _onPointerUp = new WeakSet();
 
+var _getAllCommonMenuItems = new WeakSet();
+
 var _onPointerMove = new WeakSet();
 
 var _onSelectedComponentMovedByUser = new WeakMap();
@@ -11781,6 +11783,8 @@ var Canvas = /*#__PURE__*/function () {
     _onContextMenu.add(this);
 
     _onPointerMove.add(this);
+
+    _getAllCommonMenuItems.add(this);
 
     _onPointerUp.add(this);
 
@@ -12452,10 +12456,12 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
 var _onPointerUp2 = function _onPointerUp2(e) {
   if (e.button === 0) {
+    // Pan end
     _classPrivateFieldSet(this, _dragging, false);
 
     _classPrivateFieldGet(this, _svgEl).releasePointerCapture(e.pointerId);
   } else if (e.button === 2) {
+    // Lets show context menu
     var component = this.componentFromPosition(e.clientX, e.clientY);
     var p = this.clientToSvgPoint(e.clientX, e.clientY);
     var items;
@@ -12463,11 +12469,104 @@ var _onPointerUp2 = function _onPointerUp2(e) {
     if (!component) {
       items = this.getCanvasContextMenuItems();
     } else {
-      items = component.getContextMenuItems();
+      // Check if there is more than a component selected
+      if (_classPrivateFieldGet(this, _selectedComponents).length <= 1) {
+        items = component.getContextMenuItems();
+      } else {
+        // There are more than 1 component selected, so merge menu items
+        // copmmont to all components
+        items = _classPrivateMethodGet(this, _getAllCommonMenuItems, _getAllCommonMenuItems2).call(this, _classPrivateFieldGet(this, _selectedComponents));
+      }
     }
 
     this.showContextMenu(items, p.x, p.y);
   }
+};
+
+var _getAllCommonMenuItems2 = function _getAllCommonMenuItems2(components) {
+  if (components.length === 0) {
+    return [];
+  }
+
+  var retItems = [];
+  var c = components[0]; // Compare this component with each other
+
+  var items = c.getContextMenuItems();
+
+  if ((items === null || items === void 0 ? void 0 : items.length) > 0) {
+    // For each menu item of c, check is it present
+    // in all other components
+    var _iterator5 = _createForOfIteratorHelper(items),
+        _step5;
+
+    try {
+      var _loop = function _loop() {
+        var item = _step5.value;
+        // Array of different copies for this item
+        var accItems = [item];
+        var presentInAllComponents = true;
+
+        var _iterator6 = _createForOfIteratorHelper(components.filter(function (comp) {
+          return comp !== c;
+        })),
+            _step6;
+
+        try {
+          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+            var c1 = _step6.value;
+            var items1 = c1.getContextMenuItems();
+            var item1 = items1.find(function (i) {
+              return i.text === item.text && i.searchText === item.searchText;
+            });
+
+            if (item1 !== undefined) {
+              accItems.push(item1);
+            } else {
+              presentInAllComponents = false;
+            }
+          } // If this item is present in all components, create a
+          // new MenuItem with sampe texts and a callback that is composition of
+          // all callbacks
+
+        } catch (err) {
+          _iterator6.e(err);
+        } finally {
+          _iterator6.f();
+        }
+
+        if (presentInAllComponents) {
+          // Define the composition of callbacks
+          var callback = function callback() {
+            var _iterator7 = _createForOfIteratorHelper(accItems),
+                _step7;
+
+            try {
+              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                var i = _step7.value;
+                i.callback();
+              }
+            } catch (err) {
+              _iterator7.e(err);
+            } finally {
+              _iterator7.f();
+            }
+          };
+
+          retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
+        }
+      };
+
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator5.e(err);
+    } finally {
+      _iterator5.f();
+    }
+  }
+
+  return retItems;
 };
 
 var _onPointerMove2 = function _onPointerMove2(e) {

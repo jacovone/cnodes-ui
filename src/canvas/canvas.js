@@ -11,7 +11,7 @@ import { Socket } from "@marco.jacovone/cnodes/lib/core/socket";
 import { Theme } from "../components/theme";
 import { Component } from "./component";
 import { Connection } from "./connection";
-import { Menu } from "./menu";
+import { Menu, MenuItem } from "./menu";
 import { Position } from "./position";
 import { SocketComponent } from "./socket";
 
@@ -293,9 +293,12 @@ export class Canvas {
    */
   #onPointerUp(e) {
     if (e.button === 0) {
+      // Pan end
       this.#dragging = false;
       this.#svgEl.releasePointerCapture(e.pointerId);
     } else if (e.button === 2) {
+      // Lets show context menu
+
       let component = this.componentFromPosition(e.clientX, e.clientY);
       let p = this.clientToSvgPoint(e.clientX, e.clientY);
 
@@ -303,11 +306,72 @@ export class Canvas {
       if (!component) {
         items = this.getCanvasContextMenuItems();
       } else {
-        items = component.getContextMenuItems();
+        // Check if there is more than a component selected
+        if (this.#selectedComponents.length <= 1) {
+          items = component.getContextMenuItems();
+        } else {
+          // There are more than 1 component selected, so merge menu items
+          // copmmont to all components
+          items = this.#getAllCommonMenuItems(this.#selectedComponents);
+        }
       }
 
       this.showContextMenu(items, p.x, p.y);
     }
+  }
+
+  /**
+   * This method extract all common menu items from an
+   * array of components. Menu items are considered the same
+   * if it have the same text and the same search text. The returned
+   * array is an array of menu items in which text and search text is preserved
+   * while callback are a composition of original callbacks, so by selecting
+   * a menu item, all action of all components are executed
+   * @param {Component[]} components The array of components
+   */
+  #getAllCommonMenuItems(components) {
+    if (components.length === 0) {
+      return [];
+    }
+    let retItems = [];
+    let c = components[0];
+    // Compare this component with each other
+    let items = c.getContextMenuItems();
+
+    if (items?.length > 0) {
+      // For each menu item of c, check is it present
+      // in all other components
+      for (let item of items) {
+        // Array of different copies for this item
+        let accItems = [item];
+        let presentInAllComponents = true;
+        for (let c1 of components.filter((comp) => comp !== c)) {
+          let items1 = c1.getContextMenuItems();
+          let item1 = items1.find(
+            (i) => i.text === item.text && i.searchText === item.searchText
+          );
+          if (item1 !== undefined) {
+            accItems.push(item1);
+          } else {
+            presentInAllComponents = false;
+          }
+        }
+        // If this item is present in all components, create a
+        // new MenuItem with sampe texts and a callback that is composition of
+        // all callbacks
+        if (presentInAllComponents) {
+          // Define the composition of callbacks
+          let callback = () => {
+            for (let i of accItems) {
+              i.callback();
+            }
+          };
+          retItems.push(new MenuItem(item.text, callback, item.searchText));
+        }
+      }
+    }
+
+    return retItems;
   }
 
   /**

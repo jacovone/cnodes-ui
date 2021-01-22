@@ -11691,6 +11691,8 @@ var _svgEl = new WeakMap();
 
 var _connectionsEl = new WeakMap();
 
+var _selectionEl = new WeakMap();
+
 var _vbX = new WeakMap();
 
 var _vbY = new WeakMap();
@@ -11703,7 +11705,9 @@ var _minVBSize = new WeakMap();
 
 var _maxVBSize = new WeakMap();
 
-var _dragging = new WeakMap();
+var _panning = new WeakMap();
+
+var _selecting = new WeakMap();
 
 var _startDragPos = new WeakMap();
 
@@ -11725,9 +11729,11 @@ var _onPointerDown = new WeakSet();
 
 var _onPointerUp = new WeakSet();
 
-var _getAllCommonMenuItems = new WeakSet();
-
 var _onPointerMove = new WeakSet();
+
+var _addComponentToSelectionForBox = new WeakSet();
+
+var _getAllCommonMenuItems = new WeakSet();
 
 var _onSelectedComponentMovedByUser = new WeakMap();
 
@@ -11739,6 +11745,8 @@ var Canvas = /*#__PURE__*/function () {
   /** The main svg element */
 
   /** A group under the main svg element to store connections */
+
+  /** An SVG element for rectangular selection */
 
   /** The current SVG box view left coord */
 
@@ -11758,7 +11766,9 @@ var Canvas = /*#__PURE__*/function () {
    * the max level of zoom (out)
    */
 
-  /** The user is dragging the canvas backgorund? */
+  /** The user is panning the canvas backgorund? */
+
+  /** The user is selecting multiple components with a rect */
 
   /** The point in which the drag was started */
 
@@ -11782,9 +11792,11 @@ var Canvas = /*#__PURE__*/function () {
 
     _onContextMenu.add(this);
 
-    _onPointerMove.add(this);
-
     _getAllCommonMenuItems.add(this);
+
+    _addComponentToSelectionForBox.add(this);
+
+    _onPointerMove.add(this);
 
     _onPointerUp.add(this);
 
@@ -11802,6 +11814,11 @@ var Canvas = /*#__PURE__*/function () {
     });
 
     _connectionsEl.set(this, {
+      writable: true,
+      value: null
+    });
+
+    _selectionEl.set(this, {
       writable: true,
       value: null
     });
@@ -11836,7 +11853,12 @@ var Canvas = /*#__PURE__*/function () {
       value: 50000
     });
 
-    _dragging.set(this, {
+    _panning.set(this, {
+      writable: true,
+      value: false
+    });
+
+    _selecting.set(this, {
       writable: true,
       value: false
     });
@@ -12007,7 +12029,7 @@ var Canvas = /*#__PURE__*/function () {
       return pSVG;
     }
     /**
-     * Manage the mousedown event to implement pan
+     * Manage the mousedown event to implement pan and canvas selection
      * @param {Event} e The mousedown event
      */
 
@@ -12426,40 +12448,77 @@ var _onWheel2 = function _onWheel2(e) {
 
 var _onPointerDown2 = function _onPointerDown2(e) {
   if (e.button === 0) {
-    // Reset selection
-    var selection = _classPrivateFieldGet(this, _selectedComponents);
+    if (!e.shiftKey) {
+      // Reset selection
+      var selection = _classPrivateFieldGet(this, _selectedComponents);
 
-    _classPrivateFieldSet(this, _selectedComponents, []); // Update components
+      _classPrivateFieldSet(this, _selectedComponents, []); // Update components
 
 
-    var _iterator4 = _createForOfIteratorHelper(selection),
-        _step4;
+      var _iterator4 = _createForOfIteratorHelper(selection),
+          _step4;
 
-    try {
-      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-        var c = _step4.value;
-        c.updateSVGElement();
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var c = _step4.value;
+          c.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
       }
-    } catch (err) {
-      _iterator4.e(err);
-    } finally {
-      _iterator4.f();
+
+      _classPrivateFieldSet(this, _panning, true);
+
+      _classPrivateFieldSet(this, _startDragPos, this.clientToSvgPoint(e.clientX, e.clientY));
+
+      _classPrivateFieldGet(this, _svgEl).setPointerCapture(e.pointerId);
+    } else {
+      // Begin the rect selection
+      _classPrivateFieldSet(this, _selecting, true);
+
+      _classPrivateFieldSet(this, _selectionEl, document.createElementNS("http://www.w3.org/2000/svg", "rect"));
+
+      var p = this.clientToSvgPoint(e.clientX, e.clientY);
+
+      _classPrivateFieldSet(this, _startDragPos, new _position__WEBPACK_IMPORTED_MODULE_5__.Position(p.x, p.y));
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("x", p.x);
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("y", p.y);
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("width", "0");
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("height", "0");
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
+
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
+
+      _classPrivateFieldGet(this, _svgEl).appendChild(_classPrivateFieldGet(this, _selectionEl));
+
+      _classPrivateFieldGet(this, _svgEl).setPointerCapture(e.pointerId);
     }
-
-    _classPrivateFieldSet(this, _dragging, true);
-
-    _classPrivateFieldSet(this, _startDragPos, this.clientToSvgPoint(e.clientX, e.clientY));
-
-    _classPrivateFieldGet(this, _svgEl).setPointerCapture(e.pointerId);
   }
 };
 
 var _onPointerUp2 = function _onPointerUp2(e) {
   if (e.button === 0) {
     // Pan end
-    _classPrivateFieldSet(this, _dragging, false);
+    _classPrivateFieldSet(this, _panning, false);
 
     _classPrivateFieldGet(this, _svgEl).releasePointerCapture(e.pointerId);
+
+    if (_classPrivateFieldGet(this, _selecting)) {
+      _classPrivateFieldSet(this, _selecting, false);
+
+      _classPrivateFieldGet(this, _svgEl).removeChild(_classPrivateFieldGet(this, _selectionEl));
+
+      _classPrivateFieldSet(this, _selectionEl, null);
+    }
   } else if (e.button === 2) {
     // Lets show context menu
     var component = this.componentFromPosition(e.clientX, e.clientY);
@@ -12483,6 +12542,91 @@ var _onPointerUp2 = function _onPointerUp2(e) {
   }
 };
 
+var _onPointerMove2 = function _onPointerMove2(e) {
+  if (!_classPrivateFieldGet(this, _panning) && !_classPrivateFieldGet(this, _selecting)) {
+    return;
+  }
+
+  var movePoint = this.clientToSvgPoint(e.clientX, e.clientY);
+
+  if (_classPrivateFieldGet(this, _panning)) {
+    var xDiff = movePoint.x - _classPrivateFieldGet(this, _startDragPos).x;
+
+    var yDiff = movePoint.y - _classPrivateFieldGet(this, _startDragPos).y;
+
+    _classPrivateFieldSet(this, _vbX, _classPrivateFieldGet(this, _vbX) - xDiff);
+
+    _classPrivateFieldSet(this, _vbY, _classPrivateFieldGet(this, _vbY) - yDiff);
+
+    _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
+  }
+
+  if (_classPrivateFieldGet(this, _selecting)) {
+    // Update selection rect
+    var x = Math.min(_classPrivateFieldGet(this, _startDragPos).x, movePoint.x);
+    var y = Math.min(_classPrivateFieldGet(this, _startDragPos).y, movePoint.y);
+    var width = Math.abs(_classPrivateFieldGet(this, _startDragPos).x - movePoint.x);
+    var height = Math.abs(_classPrivateFieldGet(this, _startDragPos).y - movePoint.y);
+
+    _classPrivateFieldGet(this, _selectionEl).setAttribute("x", x);
+
+    _classPrivateFieldGet(this, _selectionEl).setAttribute("y", y);
+
+    _classPrivateFieldGet(this, _selectionEl).setAttribute("width", width);
+
+    _classPrivateFieldGet(this, _selectionEl).setAttribute("height", height); // Update the selection
+
+
+    _classPrivateMethodGet(this, _addComponentToSelectionForBox, _addComponentToSelectionForBox2).call(this, x, y, width, height);
+  }
+};
+
+var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x, y, width, height) {
+  var _this2 = this;
+
+  /**
+   * Is the point (pX,pY) inside the box (x,y,width,height)?
+   * @param {number} pX The point x coordinate
+   * @param {number} pY The point y coordinate
+   */
+  function pointInside(pX, pY) {
+    return pX >= x && pY >= y && pX <= x + width && pY <= y + height;
+  }
+
+  var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components).filter(function (comp) {
+    return comp.selectable;
+  })),
+      _step5;
+
+  try {
+    var _loop = function _loop() {
+      var c = _step5.value;
+
+      if (pointInside(c.absPos.x, c.absPos.y) || pointInside(c.absPos.x + c.width, c.absPos.y + c.height)) {
+        if (_classPrivateFieldGet(_this2, _selectedComponents).findIndex(function (comp) {
+          return comp === c;
+        }) === -1) {
+          _classPrivateFieldGet(_this2, _selectedComponents).push(c);
+        }
+      } else {
+        _classPrivateFieldSet(_this2, _selectedComponents, _classPrivateFieldGet(_this2, _selectedComponents).filter(function (comp) {
+          return comp !== c;
+        }));
+      }
+
+      c.updateSVGElement();
+    };
+
+    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+      _loop();
+    }
+  } catch (err) {
+    _iterator5.e(err);
+  } finally {
+    _iterator5.f();
+  }
+};
+
 var _getAllCommonMenuItems2 = function _getAllCommonMenuItems2(components) {
   if (components.length === 0) {
     return [];
@@ -12496,24 +12640,24 @@ var _getAllCommonMenuItems2 = function _getAllCommonMenuItems2(components) {
   if ((items === null || items === void 0 ? void 0 : items.length) > 0) {
     // For each menu item of c, check is it present
     // in all other components
-    var _iterator5 = _createForOfIteratorHelper(items),
-        _step5;
+    var _iterator6 = _createForOfIteratorHelper(items),
+        _step6;
 
     try {
-      var _loop = function _loop() {
-        var item = _step5.value;
+      var _loop2 = function _loop2() {
+        var item = _step6.value;
         // Array of different copies for this item
         var accItems = [item];
         var presentInAllComponents = true;
 
-        var _iterator6 = _createForOfIteratorHelper(components.filter(function (comp) {
+        var _iterator7 = _createForOfIteratorHelper(components.filter(function (comp) {
           return comp !== c;
         })),
-            _step6;
+            _step7;
 
         try {
-          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-            var c1 = _step6.value;
+          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+            var c1 = _step7.value;
             var items1 = c1.getContextMenuItems();
             var item1 = items1.find(function (i) {
               return i.text === item.text && i.searchText === item.searchText;
@@ -12529,26 +12673,26 @@ var _getAllCommonMenuItems2 = function _getAllCommonMenuItems2(components) {
           // all callbacks
 
         } catch (err) {
-          _iterator6.e(err);
+          _iterator7.e(err);
         } finally {
-          _iterator6.f();
+          _iterator7.f();
         }
 
         if (presentInAllComponents) {
           // Define the composition of callbacks
           var callback = function callback() {
-            var _iterator7 = _createForOfIteratorHelper(accItems),
-                _step7;
+            var _iterator8 = _createForOfIteratorHelper(accItems),
+                _step8;
 
             try {
-              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                var i = _step7.value;
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                var i = _step8.value;
                 i.callback();
               }
             } catch (err) {
-              _iterator7.e(err);
+              _iterator8.e(err);
             } finally {
-              _iterator7.f();
+              _iterator8.f();
             }
           };
 
@@ -12556,39 +12700,21 @@ var _getAllCommonMenuItems2 = function _getAllCommonMenuItems2(components) {
         }
       };
 
-      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-        _loop();
+      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+        _loop2();
       }
     } catch (err) {
-      _iterator5.e(err);
+      _iterator6.e(err);
     } finally {
-      _iterator5.f();
+      _iterator6.f();
     }
   }
 
   return retItems;
 };
 
-var _onPointerMove2 = function _onPointerMove2(e) {
-  if (!_classPrivateFieldGet(this, _dragging)) {
-    return;
-  }
-
-  var movePoint = this.clientToSvgPoint(e.clientX, e.clientY);
-
-  var xDiff = movePoint.x - _classPrivateFieldGet(this, _startDragPos).x;
-
-  var yDiff = movePoint.y - _classPrivateFieldGet(this, _startDragPos).y;
-
-  _classPrivateFieldSet(this, _vbX, _classPrivateFieldGet(this, _vbX) - xDiff);
-
-  _classPrivateFieldSet(this, _vbY, _classPrivateFieldGet(this, _vbY) - yDiff);
-
-  _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
-};
-
 var _onContextMenu2 = function _onContextMenu2(e) {
-  e.preventDefault(); // e.stopPropagation();
+  e.preventDefault();
 };
 
 /***/ }),
@@ -14418,15 +14544,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this);
+      _get(_getPrototypeOf(CnodeComponent.prototype), "updateSVGElement", this).call(this); // if (this.selectable && this.canvas.isComponentSelected(this)) {
+      //   this.#containerEl.setAttribute("filter", "url(#dropshadow)");
+      // } else {
+      //   this.#containerEl.removeAttribute("filter");
+      // }
 
-      if (this.selectable && this.canvas.isComponentSelected(this)) {
-        _classPrivateFieldGet(this, _containerEl).setAttribute("filter", "url(#dropshadow)");
-      } else {
-        _classPrivateFieldGet(this, _containerEl).removeAttribute("filter");
-      }
-
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? "red" : "blue");
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
 
@@ -18170,6 +18293,21 @@ var Theme = /*#__PURE__*/function () {
     key: "CANVAS_BACKGROUND_COLOR",
     get: function get() {
       return "white";
+    }
+  }, {
+    key: "CANVAS_SELECTION_FILL_COLOR",
+    get: function get() {
+      return "#D6FBFF88";
+    }
+  }, {
+    key: "CANVAS_SELECTION_STROKE_COLOR",
+    get: function get() {
+      return "#85F4FF";
+    }
+  }, {
+    key: "CANVAS_SELECTION_STROKE_WIDTH",
+    get: function get() {
+      return "2";
     } // Node container
 
   }, {

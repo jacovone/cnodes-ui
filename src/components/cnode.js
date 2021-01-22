@@ -312,16 +312,13 @@ export class CnodeComponent extends Component {
   updateSVGElement() {
     super.updateSVGElement();
 
-    if (this.selectable && this.canvas.isComponentSelected(this)) {
-      this.#containerEl.setAttribute("filter", "url(#dropshadow)");
-    } else {
-      this.#containerEl.removeAttribute("filter");
-    }
-
-    this.#containerEl.setAttribute(
-      "stroke",
-      this.canvas.isComponentSelected(this) ? "red" : "blue"
-    );
+    // ** This is beautiful but slows down the browser
+    //
+    // if (this.selectable && this.canvas.isComponentSelected(this)) {
+    //   this.#containerEl.setAttribute("filter", "url(#dropshadow)");
+    // } else {
+    //   this.#containerEl.removeAttribute("filter");
+    // }
 
     this.#containerEl.setAttribute(
       "stroke",

@@ -33,13 +33,21 @@ export class Theme {
   get CANVAS_BACKGROUND_COLOR() {
     return "white";
   }
+  get CANVAS_SELECTION_FILL_COLOR() {
+    return "#D6FBFF88";
+  }
+  get CANVAS_SELECTION_STROKE_COLOR() {
+    return "#85F4FF";
+  }
+  get CANVAS_SELECTION_STROKE_WIDTH() {
+    return "2";
+  }
 
   // Node container
 
   get NODE_WIDTH() {
     return 200;
   }
-
   get NODE_BORDER_RADIUS() {
     return 15;
   }

@@ -31,6 +31,9 @@ export class Canvas {
   /** A group under the main svg element to store connections */
   #connectionsEl = null;
 
+  /** An SVG element for rectangular selection */
+  #selectionEl = null;
+
   /** The current SVG box view left coord */
   #vbX = 0;
 
@@ -55,8 +58,11 @@ export class Canvas {
    */
   #maxVBSize = 50000;
 
-  /** The user is dragging the canvas backgorund? */
-  #dragging = false;
+  /** The user is panning the canvas backgorund? */
+  #panning = false;
+
+  /** The user is selecting multiple components with a rect */
+  #selecting = false;
 
   /** The point in which the drag was started */
   #startDragPos;
@@ -268,34 +274,68 @@ export class Canvas {
   }
 
   /**
-   * Manage the mousedown event to implement pan
+   * Manage the mousedown event to implement pan and canvas selection
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
     if (e.button === 0) {
-      // Reset selection
-      let selection = this.#selectedComponents;
-      this.#selectedComponents = [];
-      // Update components
-      for (let c of selection) {
-        c.updateSVGElement();
-      }
+      if (!e.shiftKey) {
+        // Reset selection
+        let selection = this.#selectedComponents;
+        this.#selectedComponents = [];
+        // Update components
+        for (let c of selection) {
+          c.updateSVGElement();
+        }
 
-      this.#dragging = true;
-      this.#startDragPos = this.clientToSvgPoint(e.clientX, e.clientY);
-      this.#svgEl.setPointerCapture(e.pointerId);
+        this.#panning = true;
+        this.#startDragPos = this.clientToSvgPoint(e.clientX, e.clientY);
+        this.#svgEl.setPointerCapture(e.pointerId);
+      } else {
+        // Begin the rect selection
+        this.#selecting = true;
+        this.#selectionEl = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "rect"
+        );
+        let p = this.clientToSvgPoint(e.clientX, e.clientY);
+        this.#startDragPos = new Position(p.x, p.y);
+        this.#selectionEl.setAttribute("x", p.x);
+        this.#selectionEl.setAttribute("y", p.y);
+        this.#selectionEl.setAttribute("width", "0");
+        this.#selectionEl.setAttribute("height", "0");
+        this.#selectionEl.setAttribute(
+          "stroke",
+          Theme.current.CANVAS_SELECTION_STROKE_COLOR
+        );
+        this.#selectionEl.setAttribute(
+          "stroke-width",
+          Theme.current.CANVAS_SELECTION_STROKE_WIDTH
+        );
+        this.#selectionEl.setAttribute(
+          "fill",
+          Theme.current.CANVAS_SELECTION_FILL_COLOR
+        );
+        this.#svgEl.appendChild(this.#selectionEl);
+        this.#svgEl.setPointerCapture(e.pointerId);
+      }
     }
   }
 
   /**
-   * Manages the mouseup event to implement pan
+   * Manages the mouseup event to implement pan and canvas selection
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
     if (e.button === 0) {
       // Pan end
-      this.#dragging = false;
+      this.#panning = false;
       this.#svgEl.releasePointerCapture(e.pointerId);
+      if (this.#selecting) {
+        this.#selecting = false;
+        this.#svgEl.removeChild(this.#selectionEl);
+        this.#selectionEl = null;
+      }
     } else if (e.button === 2) {
       // Lets show context menu
 
@@ -317,6 +357,75 @@ export class Canvas {
       }
 
       this.showContextMenu(items, p.x, p.y);
+    }
+  }
+
+  /**
+   * Manages the mousemove event to implement pan and canvas selection
+   * @param {Event} e The mousemove event
+   */
+  #onPointerMove(e) {
+    if (!this.#panning && !this.#selecting) {
+      return;
+    }
+    let movePoint = this.clientToSvgPoint(e.clientX, e.clientY);
+
+    if (this.#panning) {
+      let xDiff = movePoint.x - this.#startDragPos.x;
+      let yDiff = movePoint.y - this.#startDragPos.y;
+      this.#vbX -= xDiff;
+      this.#vbY -= yDiff;
+      this.#updateSVGViewBox();
+    }
+    if (this.#selecting) {
+      // Update selection rect
+      let x = Math.min(this.#startDragPos.x, movePoint.x);
+      let y = Math.min(this.#startDragPos.y, movePoint.y);
+      let width = Math.abs(this.#startDragPos.x - movePoint.x);
+      let height = Math.abs(this.#startDragPos.y - movePoint.y);
+
+      this.#selectionEl.setAttribute("x", x);
+      this.#selectionEl.setAttribute("y", y);
+      this.#selectionEl.setAttribute("width", width);
+      this.#selectionEl.setAttribute("height", height);
+
+      // Update the selection
+      this.#addComponentToSelectionForBox(x, y, width, height);
+    }
+  }
+
+  /**
+   * Add components inside the specified rectangular area to the current
+   * canvas selection
+   * @param {number} x Box left
+   * @param {number} y Box top
+   * @param {number} width Box width
+   * @param {number} height Box height
+   */
+  #addComponentToSelectionForBox(x, y, width, height) {
+    /**
+     * Is the point (pX,pY) inside the box (x,y,width,height)?
+     * @param {number} pX The point x coordinate
+     * @param {number} pY The point y coordinate
+     */
+    function pointInside(pX, pY) {
+      return pX >= x && pY >= y && pX <= x + width && pY <= y + height;
+    }
+
+    for (let c of this.#components.filter((comp) => comp.selectable)) {
+      if (
+        pointInside(c.absPos.x, c.absPos.y) ||
+        pointInside(c.absPos.x + c.width, c.absPos.y + c.height)
+      ) {
+        if (this.#selectedComponents.findIndex((comp) => comp === c) === -1) {
+          this.#selectedComponents.push(c);
+        }
+      } else {
+        this.#selectedComponents = this.#selectedComponents.filter(
+          (comp) => comp !== c
+        );
+      }
+      c.updateSVGElement();
     }
   }
 
@@ -375,22 +484,6 @@ export class Canvas {
   }
 
   /**
-   * Manages the mousemove event to implement pan
-   * @param {Event} e The mousemove event
-   */
-  #onPointerMove(e) {
-    if (!this.#dragging) {
-      return;
-    }
-    let movePoint = this.clientToSvgPoint(e.clientX, e.clientY);
-    let xDiff = movePoint.x - this.#startDragPos.x;
-    let yDiff = movePoint.y - this.#startDragPos.y;
-    this.#vbX -= xDiff;
-    this.#vbY -= yDiff;
-    this.#updateSVGViewBox();
-  }
-
-  /**
    * This method is called whenever the user move a selected component
    * @param {Component} component The moved component
    * @param {Position} delta The diff position of movement
@@ -433,12 +526,12 @@ export class Canvas {
   };
 
   /**
-   * Manages the contextmenu event to implement custom menu
+   * Manages the contextmenu event to implement custom menu,
+   * by simply disabling the default menu
    * @param {Event} e The contextmenu event
    */
   #onContextMenu(e) {
     e.preventDefault();
-    // e.stopPropagation();
   }
 
   /**

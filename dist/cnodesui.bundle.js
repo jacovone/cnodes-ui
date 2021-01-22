@@ -11733,8 +11733,6 @@ var _onPointerMove = new WeakSet();
 
 var _addComponentToSelectionForBox = new WeakSet();
 
-var _getAllCommonMenuItems = new WeakSet();
-
 var _onSelectedComponentMovedByUser = new WeakMap();
 
 var _onComponentIsClicked = new WeakMap();
@@ -11791,8 +11789,6 @@ var Canvas = /*#__PURE__*/function () {
     _classCallCheck(this, Canvas);
 
     _onContextMenu.add(this);
-
-    _getAllCommonMenuItems.add(this);
 
     _addComponentToSelectionForBox.add(this);
 
@@ -11957,6 +11953,12 @@ var Canvas = /*#__PURE__*/function () {
     // Create the main SVG element
     _classPrivateFieldSet(this, _svgEl, document.createElementNS("http://www.w3.org/2000/svg", "svg"));
 
+    _classPrivateFieldGet(this, _svgEl).style["-webkit-touch-callout"] = "none";
+    _classPrivateFieldGet(this, _svgEl).style["-webkit-user-select"] = "none";
+    _classPrivateFieldGet(this, _svgEl).style["-khtml-user-select"] = "none";
+    _classPrivateFieldGet(this, _svgEl).style["-moz-user-select"] = "none";
+    _classPrivateFieldGet(this, _svgEl).style["-ms-user-select"] = "none";
+    _classPrivateFieldGet(this, _svgEl).style["user-select"] = "none";
     _classPrivateFieldGet(this, _svgEl).style.width = "100%";
     _classPrivateFieldGet(this, _svgEl).style.height = "100%";
     el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Background color
@@ -12031,6 +12033,109 @@ var Canvas = /*#__PURE__*/function () {
     /**
      * Manage the mousedown event to implement pan and canvas selection
      * @param {Event} e The mousedown event
+     */
+
+  }, {
+    key: "getAllCommonMenuItems",
+
+    /**
+     * This method extract all common menu items from an
+     * array of components. Menu items are considered the same
+     * if it have the same text and the same search text. The returned
+     * array is an array of menu items in which text and search text is preserved
+     * while callback are a composition of original callbacks, so by selecting
+     * a menu item, all action of all components are executed
+     * @param {Component[]} components The array of components
+     */
+    value: function getAllCommonMenuItems(components) {
+      if (components.length === 0) {
+        return [];
+      }
+
+      var retItems = [];
+      var c = components[0]; // Compare this component with each other
+
+      var items = c.getContextMenuItems();
+
+      if ((items === null || items === void 0 ? void 0 : items.length) > 0) {
+        // For each menu item of c, check is it present
+        // in all other components
+        var _iterator3 = _createForOfIteratorHelper(items),
+            _step3;
+
+        try {
+          var _loop = function _loop() {
+            var item = _step3.value;
+            // Array of different copies for this item
+            var accItems = [item];
+            var presentInAllComponents = true;
+
+            var _iterator4 = _createForOfIteratorHelper(components.filter(function (comp) {
+              return comp !== c;
+            })),
+                _step4;
+
+            try {
+              for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                var c1 = _step4.value;
+                var items1 = c1.getContextMenuItems();
+                var item1 = items1.find(function (i) {
+                  return i.text === item.text && i.searchText === item.searchText;
+                });
+
+                if (item1 !== undefined) {
+                  accItems.push(item1);
+                } else {
+                  presentInAllComponents = false;
+                }
+              } // If this item is present in all components, create a
+              // new MenuItem with sampe texts and a callback that is composition of
+              // all callbacks
+
+            } catch (err) {
+              _iterator4.e(err);
+            } finally {
+              _iterator4.f();
+            }
+
+            if (presentInAllComponents) {
+              // Define the composition of callbacks
+              var callback = function callback() {
+                var _iterator5 = _createForOfIteratorHelper(accItems),
+                    _step5;
+
+                try {
+                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                    var i = _step5.value;
+                    i.callback();
+                  }
+                } catch (err) {
+                  _iterator5.e(err);
+                } finally {
+                  _iterator5.f();
+                }
+              };
+
+              retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
+            }
+          };
+
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            _loop();
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      }
+
+      return retItems;
+    }
+    /**
+     * This method is called whenever the user move a selected component
+     * @param {Component} component The moved component
+     * @param {Position} delta The diff position of movement
      */
 
   }, {
@@ -12261,12 +12366,12 @@ var Canvas = /*#__PURE__*/function () {
         }
       }; // Compute exact bounds
 
-      var _iterator3 = _createForOfIteratorHelper(this.components),
-          _step3;
+      var _iterator6 = _createForOfIteratorHelper(this.components),
+          _step6;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var c = _step3.value;
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var c = _step6.value;
 
           // Ignore menus and sockets
           if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
@@ -12289,9 +12394,9 @@ var Canvas = /*#__PURE__*/function () {
         } // Add dome padding
 
       } catch (err) {
-        _iterator3.e(err);
+        _iterator6.e(err);
       } finally {
-        _iterator3.f();
+        _iterator6.f();
       }
 
       var pad = padding !== null && padding !== void 0 ? padding : {
@@ -12455,18 +12560,18 @@ var _onPointerDown2 = function _onPointerDown2(e) {
       _classPrivateFieldSet(this, _selectedComponents, []); // Update components
 
 
-      var _iterator4 = _createForOfIteratorHelper(selection),
-          _step4;
+      var _iterator7 = _createForOfIteratorHelper(selection),
+          _step7;
 
       try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var c = _step4.value;
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var c = _step7.value;
           c.updateSVGElement();
         }
       } catch (err) {
-        _iterator4.e(err);
+        _iterator7.e(err);
       } finally {
-        _iterator4.f();
+        _iterator7.f();
       }
 
       _classPrivateFieldSet(this, _panning, true);
@@ -12534,7 +12639,7 @@ var _onPointerUp2 = function _onPointerUp2(e) {
       } else {
         // There are more than 1 component selected, so merge menu items
         // copmmont to all components
-        items = _classPrivateMethodGet(this, _getAllCommonMenuItems, _getAllCommonMenuItems2).call(this, _classPrivateFieldGet(this, _selectedComponents));
+        items = this.getAllCommonMenuItems(_classPrivateFieldGet(this, _selectedComponents));
       }
     }
 
@@ -12599,14 +12704,14 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
     return Math.max(x1, x2, x1 + width1, x2 + width2) - Math.min(x1, x2, x1 + width1, x2 + width2) < width1 + width2 && Math.max(y1, y2, y1 + height1, y2 + height2) - Math.min(y1, y2, y1 + height1, y2 + height2) < height1 + height2;
   }
 
-  var _iterator5 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components).filter(function (comp) {
+  var _iterator8 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components).filter(function (comp) {
     return comp.selectable;
   })),
-      _step5;
+      _step8;
 
   try {
-    var _loop = function _loop() {
-      var c = _step5.value;
+    var _loop2 = function _loop2() {
+      var c = _step8.value;
 
       if (rectsOverlaps(c.absPos.x, c.absPos.y, c.width, c.height, x, y, width, height)) {
         if (_classPrivateFieldGet(_this2, _selectedComponents).findIndex(function (comp) {
@@ -12623,100 +12728,14 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
       c.updateSVGElement();
     };
 
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      _loop();
+    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+      _loop2();
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator8.e(err);
   } finally {
-    _iterator5.f();
+    _iterator8.f();
   }
-};
-
-var _getAllCommonMenuItems2 = function _getAllCommonMenuItems2(components) {
-  if (components.length === 0) {
-    return [];
-  }
-
-  var retItems = [];
-  var c = components[0]; // Compare this component with each other
-
-  var items = c.getContextMenuItems();
-
-  if ((items === null || items === void 0 ? void 0 : items.length) > 0) {
-    // For each menu item of c, check is it present
-    // in all other components
-    var _iterator6 = _createForOfIteratorHelper(items),
-        _step6;
-
-    try {
-      var _loop2 = function _loop2() {
-        var item = _step6.value;
-        // Array of different copies for this item
-        var accItems = [item];
-        var presentInAllComponents = true;
-
-        var _iterator7 = _createForOfIteratorHelper(components.filter(function (comp) {
-          return comp !== c;
-        })),
-            _step7;
-
-        try {
-          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-            var c1 = _step7.value;
-            var items1 = c1.getContextMenuItems();
-            var item1 = items1.find(function (i) {
-              return i.text === item.text && i.searchText === item.searchText;
-            });
-
-            if (item1 !== undefined) {
-              accItems.push(item1);
-            } else {
-              presentInAllComponents = false;
-            }
-          } // If this item is present in all components, create a
-          // new MenuItem with sampe texts and a callback that is composition of
-          // all callbacks
-
-        } catch (err) {
-          _iterator7.e(err);
-        } finally {
-          _iterator7.f();
-        }
-
-        if (presentInAllComponents) {
-          // Define the composition of callbacks
-          var callback = function callback() {
-            var _iterator8 = _createForOfIteratorHelper(accItems),
-                _step8;
-
-            try {
-              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                var i = _step8.value;
-                i.callback();
-              }
-            } catch (err) {
-              _iterator8.e(err);
-            } finally {
-              _iterator8.f();
-            }
-          };
-
-          retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
-        }
-      };
-
-      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-        _loop2();
-      }
-    } catch (err) {
-      _iterator6.e(err);
-    } finally {
-      _iterator6.f();
-    }
-  }
-
-  return retItems;
 };
 
 var _onContextMenu2 = function _onContextMenu2(e) {
@@ -14963,7 +14982,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this2);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
                 }));
@@ -15209,6 +15228,31 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       });
     }
     /**
+     * Override this method to add common actions on top, like
+     * duplicate, copy, paste.
+     * @param {Components[]} components Array of components from which
+     * retrieve actions
+     */
+
+  }, {
+    key: "getAllCommonMenuItems",
+    value: function getAllCommonMenuItems(components) {
+      var _this4 = this;
+
+      var retArr = _get(_getPrototypeOf(CnodesCanvas.prototype), "getAllCommonMenuItems", this).call(this, components);
+
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Paste selected\n        </tspan>\n        "), function () {
+        _this4.fitGraph();
+      }));
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy selected\n        </tspan>\n        "), function () {
+        _this4.fitGraph();
+      }));
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone selected\n        </tspan>\n        "), function () {
+        _this4.fitGraph();
+      }));
+      return retArr;
+    }
+    /**
      * Pops the last program and place it on the canvas. The actual
      * program (that is a subprogram of the popped) is abandoned
      */
@@ -15216,10 +15260,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "popProgram",
     value: function popProgram() {
-      var _this4 = this;
+      var _this5 = this;
 
       setTimeout(function () {
-        _this4.program = _classPrivateFieldGet(_this4, _stack).shift();
+        _this5.program = _classPrivateFieldGet(_this5, _stack).shift();
       });
     }
     /**

@@ -181,7 +181,7 @@ export class CnodesCanvas extends Canvas {
           items.push(
             new MenuItem(
               `
-              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
+              <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
                 New
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
@@ -337,6 +337,55 @@ export class CnodesCanvas extends Canvas {
       // Set the new Program
       this.program = program;
     });
+  }
+
+  /**
+   * Override this method to add common actions on top, like
+   * duplicate, copy, paste.
+   * @param {Components[]} components Array of components from which
+   * retrieve actions
+   */
+  getAllCommonMenuItems(components) {
+    let retArr = super.getAllCommonMenuItems(components);
+
+    retArr.unshift(
+      new MenuItem(
+        `
+        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
+          Paste selected
+        </tspan>
+        `,
+        () => {
+          this.fitGraph();
+        }
+      )
+    );
+    retArr.unshift(
+      new MenuItem(
+        `
+        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
+          Copy selected
+        </tspan>
+        `,
+        () => {
+          this.fitGraph();
+        }
+      )
+    );
+    retArr.unshift(
+      new MenuItem(
+        `
+        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
+          Clone selected
+        </tspan>
+        `,
+        () => {
+          this.fitGraph();
+        }
+      )
+    );
+
+    return retArr;
   }
 
   /**

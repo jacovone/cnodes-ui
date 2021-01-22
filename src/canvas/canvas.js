@@ -88,6 +88,13 @@ export class Canvas {
     // Create the main SVG element
     this.#svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
+    this.#svgEl.style["-webkit-touch-callout"] = "none";
+    this.#svgEl.style["-webkit-user-select"] = "none";
+    this.#svgEl.style["-khtml-user-select"] = "none";
+    this.#svgEl.style["-moz-user-select"] = "none";
+    this.#svgEl.style["-ms-user-select"] = "none";
+    this.#svgEl.style["user-select"] = "none";
+
     this.#svgEl.style.width = "100%";
     this.#svgEl.style.height = "100%";
     el.appendChild(this.#svgEl);
@@ -352,7 +359,7 @@ export class Canvas {
         } else {
           // There are more than 1 component selected, so merge menu items
           // copmmont to all components
-          items = this.#getAllCommonMenuItems(this.#selectedComponents);
+          items = this.getAllCommonMenuItems(this.#selectedComponents);
         }
       }
 
@@ -459,7 +466,7 @@ export class Canvas {
    * a menu item, all action of all components are executed
    * @param {Component[]} components The array of components
    */
-  #getAllCommonMenuItems(components) {
+  getAllCommonMenuItems(components) {
     if (components.length === 0) {
       return [];
     }

@@ -6,7 +6,7 @@
  * Author: Marco Jacovone
  * Year: 2020/2021
  */
-// TEST
+// TEST --2
 import { Canvas } from './canvas/canvas';
 import { Component } from './canvas/component';
 import { Position } from './canvas/position';

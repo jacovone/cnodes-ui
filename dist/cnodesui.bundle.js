@@ -18421,7 +18421,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FILL_COLOR2",
     get: function get() {
-      return "#F9C87999";
+      return "#F9C879";
     }
   }, {
     key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
@@ -18431,7 +18431,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR2",
     get: function get() {
-      return "#AEEDFF99";
+      return "#AEEDFF";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
@@ -18446,7 +18446,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_STROKE_COLOR",
     get: function get() {
-      return "#00000033";
+      return "#000000";
     }
   }, {
     key: "NODE_FUNCTIONAL_STROKE_COLOR",
@@ -18456,7 +18456,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_STROKE_WIDTH",
     get: function get() {
-      return 4;
+      return 3;
     }
   }, {
     key: "NODE_TITLE_COLOR",

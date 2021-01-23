@@ -109,13 +109,13 @@ export class Theme {
     return "#FAD7A0";
   }
   get NODE_SELECTED_FILL_COLOR2() {
-    return "#F9C87999";
+    return "#F9C879";
   }
   get NODE_SELECTED_FUNCTIONAL_FILL_COLOR() {
     return "#C5F0FF";
   }
   get NODE_SELECTED_FUNCTIONAL_FILL_COLOR2() {
-    return "#AEEDFF99";
+    return "#AEEDFF";
   }
   get NODE_FUNCTIONAL_FILL_COLOR() {
     return "#C5F0FF";
@@ -124,13 +124,13 @@ export class Theme {
     return "#FFFFFF";
   }
   get NODE_SELECTED_STROKE_COLOR() {
-    return "#00000033";
+    return "#000000";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
     return "#FFFFFF";
   }
   get NODE_STROKE_WIDTH() {
-    return 4;
+    return 3;
   }
 
   get NODE_TITLE_COLOR() {

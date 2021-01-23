@@ -34,13 +34,13 @@ export class Theme {
     return "white";
   }
   get CANVAS_SELECTION_FILL_COLOR() {
-    return "#D6FBFF88";
+    return "#29DEFF33";
   }
   get CANVAS_SELECTION_STROKE_COLOR() {
-    return "#85F4FF";
+    return "#01AECE99";
   }
   get CANVAS_SELECTION_STROKE_WIDTH() {
-    return "2";
+    return "1";
   }
 
   // Node container
@@ -55,7 +55,7 @@ export class Theme {
     return "#FAD7A0";
   }
   get NODE_SELECTED_FILL_COLOR() {
-    return "orange";
+    return "#FFA56E";
   }
   get NODE_FUNCTIONAL_FILL_COLOR() {
     return "#C5F0FF";
@@ -64,7 +64,7 @@ export class Theme {
     return "#FFFFFF";
   }
   get NODE_SELECTED_STROKE_COLOR() {
-    return "#FFFFFF";
+    return "#D97B40";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
     return "#FFFFFF";

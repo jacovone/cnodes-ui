@@ -11733,6 +11733,8 @@ var _onPointerMove = new WeakSet();
 
 var _addComponentToSelectionForBox = new WeakSet();
 
+var _cloneComponents = new WeakSet();
+
 var _onSelectedComponentMovedByUser = new WeakMap();
 
 var _onComponentIsClicked = new WeakMap();
@@ -11789,6 +11791,8 @@ var Canvas = /*#__PURE__*/function () {
     _classCallCheck(this, Canvas);
 
     _onContextMenu.add(this);
+
+    _cloneComponents.add(this);
 
     _addComponentToSelectionForBox.add(this);
 
@@ -12738,6 +12742,8 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
   }
 };
 
+var _cloneComponents2 = function _cloneComponents2(components) {};
+
 var _onContextMenu2 = function _onContextMenu2(e) {
   e.preventDefault();
 };
@@ -12807,6 +12813,8 @@ var _parent = new WeakMap();
 
 var _moveable = new WeakMap();
 
+var _clonable = new WeakMap();
+
 var _pos = new WeakMap();
 
 var _moving = new WeakMap();
@@ -12837,6 +12845,8 @@ var Component = /*#__PURE__*/function () {
   /** The parent component if there is one */
 
   /** Is this component moveable? */
+
+  /* Is this component clonable? */
 
   /** The position fo this component inside the canvas, in SVG coordinates */
 
@@ -12880,6 +12890,11 @@ var Component = /*#__PURE__*/function () {
     _moveable.set(this, {
       writable: true,
       value: true
+    });
+
+    _clonable.set(this, {
+      writable: true,
+      value: false
     });
 
     _pos.set(this, {
@@ -13121,6 +13136,14 @@ var Component = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _selectable, val);
+    }
+  }, {
+    key: "clonable",
+    get: function get() {
+      return _classPrivateFieldGet(this, _clonable);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _clonable, val);
     }
   }, {
     key: "parent",
@@ -18349,17 +18372,17 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "CANVAS_SELECTION_FILL_COLOR",
     get: function get() {
-      return "#D6FBFF88";
+      return "#29DEFF33";
     }
   }, {
     key: "CANVAS_SELECTION_STROKE_COLOR",
     get: function get() {
-      return "#85F4FF";
+      return "#01AECE99";
     }
   }, {
     key: "CANVAS_SELECTION_STROKE_WIDTH",
     get: function get() {
-      return "2";
+      return "1";
     } // Node container
 
   }, {
@@ -18380,7 +18403,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FILL_COLOR",
     get: function get() {
-      return "orange";
+      return "#FFA56E";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
@@ -18395,7 +18418,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_STROKE_COLOR",
     get: function get() {
-      return "#FFFFFF";
+      return "#D97B40";
     }
   }, {
     key: "NODE_FUNCTIONAL_STROKE_COLOR",
@@ -18937,7 +18960,7 @@ __webpack_require__.r(__webpack_exports__);
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020/2021
+ * Year: 2020/2021\
  */
 
 

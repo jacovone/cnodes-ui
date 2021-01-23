@@ -458,6 +458,13 @@ export class Canvas {
   }
 
   /**
+   * This method clones a list of components and put it on the map. Components
+   * have to be selectable and clonable
+   * @param {Component[]} components Components to clone
+   */
+  #cloneComponents(components) {}
+
+  /**
    * This method extract all common menu items from an
    * array of components. Menu items are considered the same
    * if it have the same text and the same search text. The returned

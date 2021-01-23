@@ -43,6 +43,9 @@ export class CnodesCanvas extends Canvas {
     let defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
 
     defsEl.innerHTML = `
+      <defs>
+      ${Theme.current.DEFS}
+      </defs>
       <filter xmlns="http://www.w3.org/2000/svg" id="dropshadow" height="130%">
         <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
         <feOffset dx="0" dy="0" result="offsetblur"/> 

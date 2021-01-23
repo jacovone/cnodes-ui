@@ -320,6 +320,24 @@ export class CnodeComponent extends Component {
     //   this.#containerEl.removeAttribute("filter");
     // }
 
+    if (this.selectable && this.canvas.isComponentSelected(this)) {
+      if (this.node.functional) {
+        this.#containerEl.setAttribute(
+          "fill",
+          "url(#selection-functional-pattern)"
+        );
+      } else {
+        this.#containerEl.setAttribute("fill", "url(#selection-pattern)");
+      }
+    } else {
+      this.#containerEl.setAttribute(
+        "fill",
+        this.node.functional
+          ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
+          : Theme.current.NODE_FILL_COLOR
+      );
+    }
+
     this.#containerEl.setAttribute(
       "stroke",
       this.canvas.isComponentSelected(this)
@@ -327,14 +345,6 @@ export class CnodeComponent extends Component {
         : !this.node.functional
         ? Theme.current.NODE_STROKE_COLOR
         : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
-    );
-    this.#containerEl.setAttribute(
-      "fill",
-      this.canvas.isComponentSelected(this)
-        ? Theme.current.NODE_SELECTED_FILL_COLOR
-        : this.node.functional
-        ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
-        : Theme.current.NODE_FILL_COLOR
     );
 
     this.#containerEl.setAttribute(

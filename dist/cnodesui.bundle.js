@@ -12695,14 +12695,14 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
 
   /**
    * Return true if two rects passed as parameter overlaps
-   * @param {*} x1 x of the first rect
-   * @param {*} y1 y of the first rect
-   * @param {*} width1 width of the first rect
-   * @param {*} height1 height of the first rect
-   * @param {*} x2 x of the second rect
-   * @param {*} y2 y of the second rect
-   * @param {*} width2 width of the second rect
-   * @param {*} height2 hright of the second rect
+   * @param {number} x1 x of the first rect
+   * @param {number} y1 y of the first rect
+   * @param {number} width1 width of the first rect
+   * @param {number} height1 height of the first rect
+   * @param {number} x2 x of the second rect
+   * @param {number} y2 y of the second rect
+   * @param {number} width2 width of the second rect
+   * @param {number} height2 hright of the second rect
    */
   function rectsOverlaps(x1, y1, width1, height1, x2, y2, width2, height2) {
     return Math.max(x1, x2, x1 + width1, x2 + width2) - Math.min(x1, x2, x1 + width1, x2 + width2) < width1 + width2 && Math.max(y1, y2, y1 + height1, y2 + height2) - Math.min(y1, y2, y1 + height1, y2 + height2) < height1 + height2;
@@ -14601,9 +14601,17 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       // }
 
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
+      if (this.selectable && this.canvas.isComponentSelected(this)) {
+        if (this.node.functional) {
+          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-functional-pattern)");
+        } else {
+          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-pattern)");
+        }
+      } else {
+        _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
+      }
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_FILL_COLOR : this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      ")); // Update sub-sockets
 
@@ -14923,7 +14931,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      <defs>\n      ".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.DEFS, "\n      </defs>\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
     _this.svgEl.appendChild(defsEl);
 
@@ -18372,12 +18380,12 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "CANVAS_SELECTION_FILL_COLOR",
     get: function get() {
-      return "#29DEFF33";
+      return "#99999922";
     }
   }, {
     key: "CANVAS_SELECTION_STROKE_COLOR",
     get: function get() {
-      return "#01AECE99";
+      return "#99999999";
     }
   }, {
     key: "CANVAS_SELECTION_STROKE_WIDTH",
@@ -18385,6 +18393,11 @@ var Theme = /*#__PURE__*/function () {
       return "1";
     } // Node container
 
+  }, {
+    key: "DEFS",
+    get: function get() {
+      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='".concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ");
+    }
   }, {
     key: "NODE_WIDTH",
     get: function get() {
@@ -18403,7 +18416,22 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FILL_COLOR",
     get: function get() {
-      return "#FFA56E";
+      return "#FAD7A0";
+    }
+  }, {
+    key: "NODE_SELECTED_FILL_COLOR2",
+    get: function get() {
+      return "#F9C87999";
+    }
+  }, {
+    key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
+    get: function get() {
+      return "#C5F0FF";
+    }
+  }, {
+    key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR2",
+    get: function get() {
+      return "#AEEDFF99";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
@@ -18418,7 +18446,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_STROKE_COLOR",
     get: function get() {
-      return "#D97B40";
+      return "#00000033";
     }
   }, {
     key: "NODE_FUNCTIONAL_STROKE_COLOR",
@@ -18428,7 +18456,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_STROKE_WIDTH",
     get: function get() {
-      return 3;
+      return 4;
     }
   }, {
     key: "NODE_TITLE_COLOR",

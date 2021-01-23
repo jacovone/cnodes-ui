@@ -412,14 +412,14 @@ export class Canvas {
   #addComponentToSelectionForBox(x, y, width, height) {
     /**
      * Return true if two rects passed as parameter overlaps
-     * @param {*} x1 x of the first rect
-     * @param {*} y1 y of the first rect
-     * @param {*} width1 width of the first rect
-     * @param {*} height1 height of the first rect
-     * @param {*} x2 x of the second rect
-     * @param {*} y2 y of the second rect
-     * @param {*} width2 width of the second rect
-     * @param {*} height2 hright of the second rect
+     * @param {number} x1 x of the first rect
+     * @param {number} y1 y of the first rect
+     * @param {number} width1 width of the first rect
+     * @param {number} height1 height of the first rect
+     * @param {number} x2 x of the second rect
+     * @param {number} y2 y of the second rect
+     * @param {number} width2 width of the second rect
+     * @param {number} height2 hright of the second rect
      */
     function rectsOverlaps(x1, y1, width1, height1, x2, y2, width2, height2) {
       return (

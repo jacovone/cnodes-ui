@@ -124,7 +124,7 @@ export class Theme {
     return "#FFFFFF";
   }
   get NODE_SELECTED_STROKE_COLOR() {
-    return "#000000";
+    return "#00000055";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
     return "#FFFFFF";

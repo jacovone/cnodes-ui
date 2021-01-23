@@ -43,6 +43,7 @@ export class CnodeComponent extends Component {
   constructor(node, canvas) {
     super();
     this.#node = node;
+    this.canvas = canvas;
     this.selectable = true;
 
     // write a back-reference
@@ -52,8 +53,20 @@ export class CnodeComponent extends Component {
   get node() {
     return this.#node;
   }
+  set node(val) {
+    this.#node = val;
+  }
   get titleComp() {
     return this.#titleComp;
+  }
+  set titleComp(val) {
+    this.#titleComp = val;
+  }
+  get commentComp() {
+    return this.#commentComp;
+  }
+  set commentComp(val) {
+    this.#commentComp = val;
   }
   get width() {
     return Theme.current.NODE_WIDTH;
@@ -64,7 +77,7 @@ export class CnodeComponent extends Component {
    */
   setup() {
     super.setup();
-    canvas.addComponent(this);
+    this.canvas.addComponent(this);
 
     // If there is an active program, add this node to it
     if (this.canvas.program) {

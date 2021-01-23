@@ -7,33 +7,22 @@
  * Year: 2020/2021\
  */
 
-import { Canvas } from "./canvas/canvas";
-import { Component } from "./canvas/component";
-import { Position } from "./canvas/position";
-import { Menu, MenuItem } from "./canvas/menu";
-import { CnodeComponent } from "./components/cnode";
-import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
-import { Theme, defaultLight } from "./components/theme";
-import { CnodesCanvas } from "./components/cnodescanvas";
-import { Env } from "@marco.jacovone/cnodes/cnodes";
-import { Program } from "@marco.jacovone/cnodes/lib/core/program";
-import { FOBreak } from "@marco.jacovone/cnodes/lib/nodes/object/fobreak";
-import { CnodeBreakComponent } from "./components/nodes/cnodebreak";
+import { Canvas } from './canvas/canvas';
+import { Component } from './canvas/component';
+import { Position } from './canvas/position';
+import { Menu, MenuItem } from './canvas/menu';
+import { CnodeComponent } from './components/cnode';
+import { CnodeProgramComponent } from './components/nodes/cnodeprogram';
+import { Theme, defaultLight } from './components/theme';
+import { CnodesCanvas } from './components/cnodescanvas';
+import { Env } from '@marco.jacovone/cnodes/cnodes';
+import { Program } from '@marco.jacovone/cnodes/lib/core/program';
+import { FOBreak } from '@marco.jacovone/cnodes/lib/nodes/object/fobreak';
+import { CnodeBreakComponent } from './components/nodes/cnodebreak';
 
-export {
-  Canvas,
-  Component,
-  CnodeComponent,
-  Position,
-  Theme,
-  defaultLight,
-  CnodesCanvas,
-  CnodeProgramComponent,
-  Menu,
-  MenuItem,
-};
+export { Canvas, Component, CnodeComponent, Position, Theme, defaultLight, CnodesCanvas, CnodeProgramComponent, Menu, MenuItem };
 
-export * from "@marco.jacovone/cnodes/cnodes";
+export * from '@marco.jacovone/cnodes/cnodes';
 
 /**
  * This is the main entrypoint function. You can pass an ID of a
@@ -61,7 +50,7 @@ export function canvas(elId) {
   Env.init();
   return new CnodesCanvas(el);
 }
-
+// QUI HAI FATTO UNA CAZZATA..
 // register core custom nodes
 CnodesCanvas.registerNodeUI(new Program(), CnodeProgramComponent.instance);
 CnodesCanvas.registerNodeUI(new FOBreak(), CnodeBreakComponent.instance);

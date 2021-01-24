@@ -11733,6 +11733,8 @@ var _onPointerMove = new WeakSet();
 
 var _addComponentToSelectionForBox = new WeakSet();
 
+var _cloneComponents = new WeakSet();
+
 var _onSelectedComponentMovedByUser = new WeakMap();
 
 var _onComponentIsClicked = new WeakMap();
@@ -11789,6 +11791,8 @@ var Canvas = /*#__PURE__*/function () {
     _classCallCheck(this, Canvas);
 
     _onContextMenu.add(this);
+
+    _cloneComponents.add(this);
 
     _addComponentToSelectionForBox.add(this);
 
@@ -12633,13 +12637,13 @@ var _onPointerUp2 = function _onPointerUp2(e) {
     if (!component) {
       items = this.getCanvasContextMenuItems();
     } else {
-      // Check if there is more than a component selected
-      if (_classPrivateFieldGet(this, _selectedComponents).length <= 1) {
-        items = component.getContextMenuItems();
-      } else {
-        // There are more than 1 component selected, so merge menu items
-        // copmmont to all components
+      // Check if there are selected component
+      if (_classPrivateFieldGet(this, _selectedComponents).length > 0) {
+        // There are selected components, so merge menu items
+        // common to all components
         items = this.getAllCommonMenuItems(_classPrivateFieldGet(this, _selectedComponents));
+      } else {
+        items = component.getContextMenuItems();
       }
     }
 
@@ -12691,14 +12695,14 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
 
   /**
    * Return true if two rects passed as parameter overlaps
-   * @param {*} x1 x of the first rect
-   * @param {*} y1 y of the first rect
-   * @param {*} width1 width of the first rect
-   * @param {*} height1 height of the first rect
-   * @param {*} x2 x of the second rect
-   * @param {*} y2 y of the second rect
-   * @param {*} width2 width of the second rect
-   * @param {*} height2 hright of the second rect
+   * @param {number} x1 x of the first rect
+   * @param {number} y1 y of the first rect
+   * @param {number} width1 width of the first rect
+   * @param {number} height1 height of the first rect
+   * @param {number} x2 x of the second rect
+   * @param {number} y2 y of the second rect
+   * @param {number} width2 width of the second rect
+   * @param {number} height2 hright of the second rect
    */
   function rectsOverlaps(x1, y1, width1, height1, x2, y2, width2, height2) {
     return Math.max(x1, x2, x1 + width1, x2 + width2) - Math.min(x1, x2, x1 + width1, x2 + width2) < width1 + width2 && Math.max(y1, y2, y1 + height1, y2 + height2) - Math.min(y1, y2, y1 + height1, y2 + height2) < height1 + height2;
@@ -12737,6 +12741,8 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
     _iterator8.f();
   }
 };
+
+var _cloneComponents2 = function _cloneComponents2(components) {};
 
 var _onContextMenu2 = function _onContextMenu2(e) {
   e.preventDefault();
@@ -12807,6 +12813,8 @@ var _parent = new WeakMap();
 
 var _moveable = new WeakMap();
 
+var _clonable = new WeakMap();
+
 var _pos = new WeakMap();
 
 var _moving = new WeakMap();
@@ -12837,6 +12845,8 @@ var Component = /*#__PURE__*/function () {
   /** The parent component if there is one */
 
   /** Is this component moveable? */
+
+  /* Is this component clonable? */
 
   /** The position fo this component inside the canvas, in SVG coordinates */
 
@@ -12880,6 +12890,11 @@ var Component = /*#__PURE__*/function () {
     _moveable.set(this, {
       writable: true,
       value: true
+    });
+
+    _clonable.set(this, {
+      writable: true,
+      value: false
     });
 
     _pos.set(this, {
@@ -13121,6 +13136,14 @@ var Component = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _selectable, val);
+    }
+  }, {
+    key: "clonable",
+    get: function get() {
+      return _classPrivateFieldGet(this, _clonable);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _clonable, val);
     }
   }, {
     key: "parent",
@@ -14329,6 +14352,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
     _classPrivateFieldSet(_assertThisInitialized(_this), _node, node);
 
+    _this.canvas = canvas;
     _this.selectable = true; // write a back-reference
 
     _classPrivateFieldGet(_assertThisInitialized(_this), _node).__comp = _assertThisInitialized(_this);
@@ -14344,7 +14368,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     value: function setup() {
       _get(_getPrototypeOf(CnodeComponent.prototype), "setup", this).call(this);
 
-      canvas.addComponent(this); // If there is an active program, add this node to it
+      this.canvas.addComponent(this); // If there is an active program, add this node to it
 
       if (this.canvas.program) {
         this.canvas.program.addNode(_classPrivateFieldGet(this, _node));
@@ -14578,9 +14602,17 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       // }
 
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
+      if (this.selectable && this.canvas.isComponentSelected(this)) {
+        if (this.node.functional) {
+          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-functional-pattern)");
+        } else {
+          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-pattern)");
+        }
+      } else {
+        _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
+      }
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_FILL_COLOR : this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      ")); // Update sub-sockets
 
@@ -14740,11 +14772,25 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     key: "node",
     get: function get() {
       return _classPrivateFieldGet(this, _node);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _node, val);
     }
   }, {
     key: "titleComp",
     get: function get() {
       return _classPrivateFieldGet(this, _titleComp);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _titleComp, val);
+    }
+  }, {
+    key: "commentComp",
+    get: function get() {
+      return _classPrivateFieldGet(this, _commentComp);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _commentComp, val);
     }
   }, {
     key: "width",
@@ -14868,6 +14914,8 @@ var _program = new WeakMap();
 
 var _stack = new WeakMap();
 
+var _clipboard = new WeakMap();
+
 var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   _inherits(CnodesCanvas, _Canvas);
 
@@ -14878,6 +14926,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   /** The edited program */
 
   /** The stack of edited programs */
+
+  /** The clipboard of the canvas */
 
   /** The event emitter connected to the canvas */
   function CnodesCanvas(el) {
@@ -14897,13 +14947,50 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       value: []
     });
 
+    _clipboard.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      <defs>\n      ".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.DEFS, "\n      </defs>\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
-    _this.svgEl.appendChild(defsEl);
+    _this.svgEl.appendChild(defsEl); // Register keystrokes
 
+
+    document.addEventListener("keydown", function (e) {
+      if (e.ctrlKey || e.metaKey) {
+        if (e.key === "c") {
+          _this.copySelectedNodes();
+
+          e.preventDefault();
+        }
+
+        if (e.key === "v") {
+          _this.pasteNodes();
+
+          e.preventDefault();
+        }
+
+        if (e.key === "d") {
+          _this.cloneSelectedNodes();
+
+          e.preventDefault();
+        }
+
+        if (e.key === "z" && !e.shiftKey) {
+          // this.undoChanges();
+          e.preventDefault();
+        }
+
+        if (e.key === "z" && e.shiftKey) {
+          // this.redoChanges();
+          e.preventDefault();
+        }
+      }
+    });
     return _this;
   }
 
@@ -14946,25 +15033,53 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       console.log(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
     }
     /**
+     * Override this method to add common actions on top, like
+     * duplicate, copy, paste.
+     * @param {Components[]} components Array of components from which
+     * retrieve actions
+     */
+
+  }, {
+    key: "getAllCommonMenuItems",
+    value: function getAllCommonMenuItems(components) {
+      var _this2 = this;
+
+      var retArr = _get(_getPrototypeOf(CnodesCanvas.prototype), "getAllCommonMenuItems", this).call(this, components);
+
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
+        _this2.copySelectedNodes();
+      }));
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
+        _this2.cloneSelectedNodes();
+      }));
+      return retArr;
+    }
+    /**
      * Return a list of MenuItem for the context menu
      */
 
   }, {
     key: "getCanvasContextMenuItems",
     value: function getCanvasContextMenuItems() {
-      var _this2 = this;
+      var _this3 = this;
 
       var items = [];
 
       if (this.canPopProgram()) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
-          _this2.popProgram();
+          _this3.popProgram();
         }));
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
-        _this2.fitGraph();
+        _this3.fitGraph();
       }));
+
+      if (_classPrivateFieldGet(this, _clipboard)) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(_classPrivateFieldGet(this, _clipboard).length, " node").concat(_classPrivateFieldGet(this, _clipboard).length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
+          _this3.pasteNodes(x, y);
+        }));
+      }
 
       var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
@@ -14983,7 +15098,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
               if (n.creatable) {
                 items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
-                  var node = CnodesCanvas.getNodeUIInstance(n, _this2);
+                  var node = CnodesCanvas.getNodeUIInstance(n, _this3);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
                 }));
               }
@@ -15059,15 +15174,31 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       // on the program instance
       _classPrivateFieldSet(this, _program, null);
 
-      this.destroyAll(); // Import the program
+      this.destroyAll(); // Import nodes
 
-      var _iterator3 = _createForOfIteratorHelper(program.nodes),
+      this.importNodes(program.nodes); // Restore the program instance
+
+      _classPrivateFieldSet(this, _program, program);
+    }
+    /**
+     * This method import a list of nodes inside the current program
+     * by reconstructing all connection between nodes
+     * @param {Node[]} nodes A list of nodes to import
+     */
+
+  }, {
+    key: "importNodes",
+    value: function importNodes(nodes) {
+      var importedNodes = []; // Import the program
+
+      var _iterator3 = _createForOfIteratorHelper(nodes),
           _step3;
 
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           var n = _step3.value;
           var comp = CnodesCanvas.getNodeUIInstance(n, this);
+          importedNodes.push(comp);
           comp.moveable = true; // Extract meta info
 
           if (!n.meta) {
@@ -15095,7 +15226,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         _iterator3.f();
       }
 
-      var _iterator4 = _createForOfIteratorHelper(program.nodes),
+      var _iterator4 = _createForOfIteratorHelper(nodes),
           _step4;
 
       try {
@@ -15198,15 +15329,211 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           } finally {
             _iterator8.f();
           }
-        } // Restore the program instance
-
+        }
       } catch (err) {
         _iterator4.e(err);
       } finally {
         _iterator4.f();
       }
 
-      _classPrivateFieldSet(this, _program, program);
+      return importedNodes;
+    }
+    /**
+     * This method clones selected nodes and add them to the canvas
+     * at a position a bit doifferent from it source set
+     */
+
+  }, {
+    key: "cloneSelectedNodes",
+    value: function cloneSelectedNodes() {
+      var oldSelected = this.selectedComponents;
+      var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
+      }).map(function (c) {
+        return c.node;
+      }));
+      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
+
+      var _iterator10 = _createForOfIteratorHelper(cloneNodes),
+          _step10;
+
+      try {
+        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+          var _node$meta;
+
+          var node = _step10.value;
+
+          if ((_node$meta = node.meta) !== null && _node$meta !== void 0 && _node$meta.pos) {
+            node.meta.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(node.meta.pos.x + 100, node.meta.pos.y + 100);
+          }
+        }
+      } catch (err) {
+        _iterator10.e(err);
+      } finally {
+        _iterator10.f();
+      }
+
+      var importedNodes = this.importNodes(cloneNodes); // Now select newly imported nodes and deselect older one
+
+      this.selectedComponents = importedNodes;
+
+      var _iterator11 = _createForOfIteratorHelper(oldSelected),
+          _step11;
+
+      try {
+        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+          var comp = _step11.value;
+          comp.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator11.e(err);
+      } finally {
+        _iterator11.f();
+      }
+
+      var _iterator12 = _createForOfIteratorHelper(importedNodes),
+          _step12;
+
+      try {
+        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+          var _comp = _step12.value;
+
+          _comp.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator12.e(err);
+      } finally {
+        _iterator12.f();
+      }
+    }
+    /**
+     * This method copy all selected nodes to a property of the canvas
+     */
+
+  }, {
+    key: "copySelectedNodes",
+    value: function copySelectedNodes() {
+      var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
+      }).map(function (c) {
+        return c.node;
+      }));
+
+      _classPrivateFieldSet(this, _clipboard, _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes));
+    }
+    /**
+     * Paste copied nodes to the canvas, at a position
+     * @param {number} x X Position to which paste nodes
+     * @param {number} y Y Position to which paste nodes
+     */
+
+  }, {
+    key: "pasteNodes",
+    value: function pasteNodes(x, y) {
+      if (!_classPrivateFieldGet(this, _clipboard)) {
+        return;
+      }
+
+      var oldSelected = this.selectedComponents;
+      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(_classPrivateFieldGet(this, _clipboard));
+
+      if (x && y) {
+        // Compute the min x,y of cloned nodes
+        var minPos = cloneNodes.reduce(function (acc, val) {
+          var _val$meta, _val$meta2;
+
+          return new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(Math.min(acc.x, val === null || val === void 0 ? void 0 : (_val$meta = val.meta) === null || _val$meta === void 0 ? void 0 : _val$meta.pos.x), Math.min(acc.y, val === null || val === void 0 ? void 0 : (_val$meta2 = val.meta) === null || _val$meta2 === void 0 ? void 0 : _val$meta2.pos.y));
+        }, new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(Infinity, Infinity)); // Normalize positions
+
+        cloneNodes = cloneNodes.map(function (n) {
+          var _n$meta;
+
+          if (n !== null && n !== void 0 && (_n$meta = n.meta) !== null && _n$meta !== void 0 && _n$meta.pos) {
+            n.meta.pos.x -= minPos.x;
+            n.meta.pos.y -= minPos.y;
+          }
+
+          return n;
+        }); // Relocate nodes to menu point
+
+        var _iterator13 = _createForOfIteratorHelper(cloneNodes),
+            _step13;
+
+        try {
+          for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+            var _node$meta2;
+
+            var node = _step13.value;
+
+            if (node !== null && node !== void 0 && (_node$meta2 = node.meta) !== null && _node$meta2 !== void 0 && _node$meta2.pos) {
+              node.meta.pos = {
+                x: x + node.meta.pos.x,
+                y: y + node.meta.pos.y
+              };
+            }
+          }
+        } catch (err) {
+          _iterator13.e(err);
+        } finally {
+          _iterator13.f();
+        }
+      } else {
+        // Shift nodes by (100,100)
+        var _iterator14 = _createForOfIteratorHelper(cloneNodes),
+            _step14;
+
+        try {
+          for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+            var _node$meta3;
+
+            var _node = _step14.value;
+
+            if (_node !== null && _node !== void 0 && (_node$meta3 = _node.meta) !== null && _node$meta3 !== void 0 && _node$meta3.pos) {
+              _node.meta.pos = {
+                x: 100 + _node.meta.pos.x,
+                y: 100 + _node.meta.pos.y
+              };
+            }
+          }
+        } catch (err) {
+          _iterator14.e(err);
+        } finally {
+          _iterator14.f();
+        }
+      }
+
+      var importedNodes = this.importNodes(cloneNodes); // Now select newly imported nodes and deselect older one
+
+      this.selectedComponents = importedNodes;
+
+      var _iterator15 = _createForOfIteratorHelper(oldSelected),
+          _step15;
+
+      try {
+        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+          var comp = _step15.value;
+          comp.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator15.e(err);
+      } finally {
+        _iterator15.f();
+      }
+
+      var _iterator16 = _createForOfIteratorHelper(importedNodes),
+          _step16;
+
+      try {
+        for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+          var _comp2 = _step16.value;
+
+          _comp2.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator16.e(err);
+      } finally {
+        _iterator16.f();
+      }
     }
     /**
      * Push a subprogram on the canvas. The current program
@@ -15217,40 +15544,15 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "pushProgram",
     value: function pushProgram(program) {
-      var _this3 = this;
+      var _this4 = this;
 
       setTimeout(function () {
         // Push this current program to the stack
-        _classPrivateFieldGet(_this3, _stack).unshift(_this3.program); // Set the new Program
+        _classPrivateFieldGet(_this4, _stack).unshift(_this4.program); // Set the new Program
 
 
-        _this3.program = program;
+        _this4.program = program;
       });
-    }
-    /**
-     * Override this method to add common actions on top, like
-     * duplicate, copy, paste.
-     * @param {Components[]} components Array of components from which
-     * retrieve actions
-     */
-
-  }, {
-    key: "getAllCommonMenuItems",
-    value: function getAllCommonMenuItems(components) {
-      var _this4 = this;
-
-      var retArr = _get(_getPrototypeOf(CnodesCanvas.prototype), "getAllCommonMenuItems", this).call(this, components);
-
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Paste selected\n        </tspan>\n        "), function () {
-        _this4.fitGraph();
-      }));
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy selected\n        </tspan>\n        "), function () {
-        _this4.fitGraph();
-      }));
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone selected\n        </tspan>\n        "), function () {
-        _this4.fitGraph();
-      }));
-      return retArr;
     }
     /**
      * Pops the last program and place it on the canvas. The actual
@@ -18349,19 +18651,24 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "CANVAS_SELECTION_FILL_COLOR",
     get: function get() {
-      return "#D6FBFF88";
+      return "#99999922";
     }
   }, {
     key: "CANVAS_SELECTION_STROKE_COLOR",
     get: function get() {
-      return "#85F4FF";
+      return "#99999999";
     }
   }, {
     key: "CANVAS_SELECTION_STROKE_WIDTH",
     get: function get() {
-      return "2";
+      return "1";
     } // Node container
 
+  }, {
+    key: "DEFS",
+    get: function get() {
+      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='".concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ");
+    }
   }, {
     key: "NODE_WIDTH",
     get: function get() {
@@ -18380,7 +18687,22 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FILL_COLOR",
     get: function get() {
-      return "orange";
+      return "#FAD7A0";
+    }
+  }, {
+    key: "NODE_SELECTED_FILL_COLOR2",
+    get: function get() {
+      return "#F9C879";
+    }
+  }, {
+    key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
+    get: function get() {
+      return "#C5F0FF";
+    }
+  }, {
+    key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR2",
+    get: function get() {
+      return "#AEEDFF";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
@@ -18395,7 +18717,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_STROKE_COLOR",
     get: function get() {
-      return "#FFFFFF";
+      return "#00000055";
     }
   }, {
     key: "NODE_FUNCTIONAL_STROKE_COLOR",
@@ -18937,7 +19259,7 @@ __webpack_require__.r(__webpack_exports__);
  * A GUI for cnodes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020/2021
+ * Year: 2020/2021\
  */
 
 
@@ -19160,6 +19482,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -19213,11 +19539,22 @@ var Enter = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Enter, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Enter.instance;
+      return _get(_getPrototypeOf(Enter.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -20117,6 +20454,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -20170,11 +20511,22 @@ var Exit = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Exit, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Exit.instance;
+      return _get(_getPrototypeOf(Exit.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -20619,7 +20971,7 @@ var Node = /*#__PURE__*/function () {
      * This method removes a specific input from the node, if
      * this is possible whit this instance
      * Subclass with variable number of input should override this method
-     * @param {*} input The input to remove
+     * @param {InputSocket} input The input to remove
      */
 
   }, {
@@ -20734,6 +21086,105 @@ var Node = /*#__PURE__*/function () {
 
       return process;
     }()
+    /**
+     * This method clones the node. Cloning will create a new node
+     * of the same type of the particular node, so each node must
+     * override this method to return the exact class type to the
+     * caller. The param "factory" is a function to create the specific
+     * class instance, to this base version of the method can create
+     * the instance and clone all sockets, and other propertiesthat
+     * is a same process for all different instances
+     *
+     * @param {Function} factory A function that return a new instance of the class
+     */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {
+        return new Node("Node");
+      };
+      var n = factory(); // Copy all inputs
+
+      n.inputs = [];
+
+      var _iterator5 = _createForOfIteratorHelper(this.inputs),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var i = _step5.value;
+          var cloneI = i.clone();
+          cloneI.node = n;
+          n.inputs.push(cloneI);
+        } // Copy all outputs
+
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+
+      n.outputs = [];
+
+      var _iterator6 = _createForOfIteratorHelper(this.outputs),
+          _step6;
+
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var o = _step6.value;
+          var cloneO = o.clone();
+          cloneO.node = n;
+          n.outputs.push(cloneO);
+        } // Copy all nexts
+
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+
+      n.nexts = [];
+
+      var _iterator7 = _createForOfIteratorHelper(this.nexts),
+          _step7;
+
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var nx = _step7.value;
+          var cloneNx = nx.clone();
+          cloneNx.node = n;
+          n.nexts.push(cloneNx);
+        } // Copy prev
+
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
+
+      n.prev = null;
+
+      if (this.prev) {
+        var clonePrev = this.prev.clone();
+        clonePrev.node = n;
+        n.prev = clonePrev;
+      } // Copy base properties
+
+
+      n.id = "NID_" + Node.lastNodeIdIndex++;
+      n.name = this.name;
+      n.title = this.title;
+      n.functional = this.functional;
+      n.program = this.program;
+      n.meta = this.meta ? JSON.parse(JSON.stringify(this.meta)) : null;
+      n.removable = this.removable;
+      n.creatable = this.creatable;
+      n.canAddInput = this.canAddInput;
+      n.canAddOutput = this.canAddOutput;
+      n.canAddNext = this.canAddNext;
+      return n;
+    }
   }, {
     key: "id",
     get: function get() {
@@ -20916,6 +21367,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./type.js */ "../cnodes/lib/core/type.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -20925,6 +21382,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -21044,8 +21505,38 @@ var Program = /*#__PURE__*/function (_Node) {
 
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
 
   _createClass(Program, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Program.instance;
+
+      var retNode = _get(_getPrototypeOf(Program.prototype), "clone", this).call(this, factory); // Clone internal nodes
+
+
+      retNode.nodes = Program.cloneNodes(_classPrivateFieldGet(this, _nodes)); // Connect actual Enter and Exit
+
+      retNode.enter = retNode.nodes.find(function (n) {
+        return n instanceof _enter_js__WEBPACK_IMPORTED_MODULE_1__.Enter;
+      });
+      retNode.exit = retNode.nodes.find(function (n) {
+        return n instanceof _exit_js__WEBPACK_IMPORTED_MODULE_2__.Exit;
+      });
+      return retNode;
+    }
+    /**
+     * This method clone a group of nodes, by reconstructing the
+     * connections from sockets too. All connections involvong nodes
+     * outside this set will be not reconstructed.
+     * @param {Node[]} nodes Nodes (and) connections to clone
+     */
+
+  }, {
     key: "addNode",
 
     /**
@@ -21210,6 +21701,121 @@ var Program = /*#__PURE__*/function (_Node) {
     set: function set(val) {
       _classPrivateFieldSet(this, _nodes, val);
     }
+  }], [{
+    key: "cloneNodes",
+    value: function cloneNodes(nodes) {
+      // First of all, clone all nodes
+      var retNodes = [];
+
+      var _iterator = _createForOfIteratorHelper(nodes),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _n = _step.value;
+
+          var cloneN = _n.clone(); // Setup a temporary link between each node and its peer
+
+
+          cloneN.__peer = _n;
+          _n.__peer = cloneN;
+          retNodes.push(cloneN);
+        } // Reconstruct all links by traversong all nodes and
+        // consider all output-->input and next-->prev connections
+        // and duplicate them in clone nodes
+
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var _iterator2 = _createForOfIteratorHelper(nodes),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _n2 = _step2.value;
+
+          // Clone output->input
+          var _iterator4 = _createForOfIteratorHelper(_n2.outputs),
+              _step4;
+
+          try {
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+              var o = _step4.value;
+
+              var _iterator6 = _createForOfIteratorHelper(o.peers),
+                  _step6;
+
+              try {
+                for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                  var p = _step6.value;
+
+                  if (nodes.includes(p.node)) {
+                    _n2.__peer.output(o.name).connect(p.node.__peer.input(p.name));
+                  }
+                }
+              } catch (err) {
+                _iterator6.e(err);
+              } finally {
+                _iterator6.f();
+              }
+            } // Clone next->prev
+
+          } catch (err) {
+            _iterator4.e(err);
+          } finally {
+            _iterator4.f();
+          }
+
+          var _iterator5 = _createForOfIteratorHelper(_n2.nexts),
+              _step5;
+
+          try {
+            for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+              var nx = _step5.value;
+
+              if (nx.peer) {
+                if (nodes.includes(nx.peer.node)) {
+                  _n2.__peer.next(nx.name).connect(nx.peer.node.__peer.prev);
+                }
+              }
+            }
+          } catch (err) {
+            _iterator5.e(err);
+          } finally {
+            _iterator5.f();
+          }
+        } // Remove __peer fields
+
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      var _iterator3 = _createForOfIteratorHelper(nodes),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _n3 = _step3.value;
+          _n3.__peer = undefined;
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      for (var _i = 0, _retNodes = retNodes; _i < _retNodes.length; _i++) {
+        var n = _retNodes[_i];
+        n.__peer = undefined;
+      }
+
+      return retNodes;
+    }
   }]);
 
   return Program;
@@ -21333,6 +21939,13 @@ var Socket = /*#__PURE__*/function () {
   }
 
   _createClass(Socket, [{
+    key: "clone",
+
+    /** Clone the spcket */
+    value: function clone() {
+      throw new Error("You must override this method");
+    }
+  }, {
     key: "id",
     get: function get() {
       return _classPrivateFieldGet(this, _id);
@@ -21454,6 +22067,13 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
      */
     value: function evaluate() {
       throw new Error("This method must be redefined in a subclass!");
+    }
+    /** Clone the socket */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      throw new Error("You must override this method");
     }
   }, {
     key: "type",
@@ -21610,6 +22230,18 @@ var InputSocket = /*#__PURE__*/function (_ValueSocket) {
 
       this.peer = null;
     }
+    /** Clone the spcket */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var s = new InputSocket(this.name, null, this.type, this.value);
+      s.id = "SID_" + Socket.lastSocketIdIndex++;
+      s.peer = null;
+      s.canEditName = this.canEditName;
+      s.canEditType = this.canEditType;
+      return s;
+    }
   }, {
     key: "peer",
     get: function get() {
@@ -21760,6 +22392,18 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
         socket.peer = null;
       }
     }
+    /** Clone the socket */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var s = new OutputSocket(this.name, null, this.type, this.value, this.cached);
+      s.id = "SID_" + Socket.lastSocketIdIndex++;
+      s.peers = [];
+      s.canEditName = this.canEditName;
+      s.canEditType = this.canEditType;
+      return s;
+    }
   }, {
     key: "peers",
     get: function get() {
@@ -21800,6 +22444,15 @@ var FlowSocket = /*#__PURE__*/function (_Socket2) {
 
     return _super4.call(this, name, node);
   }
+  /** Clone the spcket */
+
+
+  _createClass(FlowSocket, [{
+    key: "clone",
+    value: function clone() {
+      throw new Error("You must override this method");
+    }
+  }]);
 
   return FlowSocket;
 }(Socket);
@@ -21871,6 +22524,16 @@ var PrevSocket = /*#__PURE__*/function (_FlowSocket) {
         this.peers.splice(index, 1);
         socket.peer = null;
       }
+    }
+    /** Clone the socket */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var s = new PrevSocket(this.name, null);
+      s.id = "SID_" + Socket.lastSocketIdIndex++;
+      s.peers = [];
+      return s;
     }
   }, {
     key: "peers",
@@ -21958,6 +22621,16 @@ var NextSocket = /*#__PURE__*/function (_FlowSocket2) {
 
         this.peer = null;
       }
+    }
+    /** Clone the spcket */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var s = new NextSocket(this.name, null);
+      s.id = "SID_" + Socket.lastSocketIdIndex++;
+      s.peer = null;
+      return s;
     }
   }, {
     key: "peer",
@@ -22048,6 +22721,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -22101,11 +22778,22 @@ var AMap = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(AMap, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : AMap.instance;
+      return _get(_getPrototypeOf(AMap.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -22246,6 +22934,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -22297,11 +22989,22 @@ var APush = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(APush, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : APush.instance;
+      return _get(_getPrototypeOf(APush.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -22390,6 +23093,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -22441,11 +23148,22 @@ var AReduce = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(AReduce, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : AReduce.instance;
+      return _get(_getPrototypeOf(AReduce.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -22589,6 +23307,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -22641,11 +23363,22 @@ var FAConst = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FAConst, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAConst.instance;
+      return _get(_getPrototypeOf(FAConst.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -22728,6 +23461,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -22782,11 +23519,22 @@ var FAGet = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FAGet, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAGet.instance;
+      return _get(_getPrototypeOf(FAGet.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -22858,6 +23606,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -22912,11 +23664,22 @@ var FALength = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FALength, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FALength.instance;
+      return _get(_getPrototypeOf(FALength.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -23009,6 +23772,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -23062,11 +23829,22 @@ var FAMake = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FAMake, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAMake.instance;
+      return _get(_getPrototypeOf(FAMake.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -23203,6 +23981,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -23252,6 +24038,19 @@ var FAMap = /*#__PURE__*/function (_AMap) {
     _this.prev = null;
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FAMap, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAMap.instance;
+      return _get(_getPrototypeOf(FAMap.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FAMap;
 }(_amap_js__WEBPACK_IMPORTED_MODULE_1__.AMap);
@@ -23278,6 +24077,14 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23328,6 +24135,19 @@ var FAReduce = /*#__PURE__*/function (_AReduce) {
     _this.prev = null;
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FAReduce, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAReduce.instance;
+      return _get(_getPrototypeOf(FAReduce.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FAReduce;
 }(_areduce_js__WEBPACK_IMPORTED_MODULE_1__.AReduce);
@@ -23364,6 +24184,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23447,8 +24271,19 @@ var FCompare = /*#__PURE__*/function (_Node) {
     _this.nexts = [];
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
 
   _createClass(FCompare, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FCompare.instance;
+      return _get(_getPrototypeOf(FCompare.prototype), "clone", this).call(this, factory);
+    }
+  }, {
     key: "process",
 
     /**
@@ -23550,6 +24385,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -23596,6 +24439,19 @@ var FEqual = /*#__PURE__*/function (_FCompare) {
     _this.title = "==";
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FEqual, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FEqual.instance;
+      return _get(_getPrototypeOf(FEqual.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FEqual;
 }(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
@@ -23621,6 +24477,14 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23668,6 +24532,19 @@ var FGT = /*#__PURE__*/function (_FCompare) {
     _this.title = ">";
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FGT, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FGT.instance;
+      return _get(_getPrototypeOf(FGT.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FGT;
 }(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
@@ -23693,6 +24570,14 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23740,6 +24625,19 @@ var FGTE = /*#__PURE__*/function (_FCompare) {
     _this.title = ">=";
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FGTE, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FGTE.instance;
+      return _get(_getPrototypeOf(FGTE.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FGTE;
 }(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
@@ -23765,6 +24663,14 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23812,6 +24718,19 @@ var FLT = /*#__PURE__*/function (_FCompare) {
     _this.title = "<";
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FLT, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FLT.instance;
+      return _get(_getPrototypeOf(FLT.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FLT;
 }(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
@@ -23837,6 +24756,14 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23884,6 +24811,19 @@ var FLTE = /*#__PURE__*/function (_FCompare) {
     _this.title = "<=";
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FLTE, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FLTE.instance;
+      return _get(_getPrototypeOf(FLTE.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FLTE;
 }(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
@@ -23909,6 +24849,14 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -23956,6 +24904,19 @@ var FNotEqual = /*#__PURE__*/function (_FCompare) {
     _this.title = "!=";
     return _this;
   }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FNotEqual, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FNotEqual.instance;
+      return _get(_getPrototypeOf(FNotEqual.prototype), "clone", this).call(this, factory);
+    }
+  }]);
 
   return FNotEqual;
 }(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
@@ -23990,6 +24951,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -24040,11 +25005,22 @@ var Call = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Call, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Call.instance;
+      return _get(_getPrototypeOf(Call.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24115,6 +25091,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24166,11 +25146,22 @@ var Console = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Console, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Console.instance;
+      return _get(_getPrototypeOf(Console.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24236,6 +25227,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24289,11 +25284,22 @@ var FGetvar = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FGetvar, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FGetvar.instance;
+      return _get(_getPrototypeOf(FGetvar.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24360,6 +25366,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24413,11 +25423,22 @@ var FIf = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FIf, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FIf.instance;
+      return _get(_getPrototypeOf(FIf.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24482,6 +25503,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24534,11 +25559,22 @@ var For = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(For, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : For.instance;
+      return _get(_getPrototypeOf(For.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24640,6 +25676,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24692,11 +25732,22 @@ var Getvar = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Getvar, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Getvar.instance;
+      return _get(_getPrototypeOf(Getvar.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24764,6 +25815,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24816,11 +25871,22 @@ var If = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(If, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : If.instance;
+      return _get(_getPrototypeOf(If.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -24894,6 +25960,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -24945,11 +26015,22 @@ var Log = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Log, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Log.instance;
+      return _get(_getPrototypeOf(Log.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -25029,6 +26110,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -25210,6 +26295,17 @@ var FAdd = /*#__PURE__*/function (_Node) {
     value: function canRemoveInput(input) {
       return this.inputs.length > 2;
     }
+    /**
+     * Clone this node
+     * @param {Function} factory The factory class function
+     */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAdd.instance;
+      return _get(_getPrototypeOf(FAdd.prototype), "clone", this).call(this, factory);
+    }
   }]);
 
   return FAdd;
@@ -25246,6 +26342,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -25300,11 +26400,22 @@ var FDiv = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FDiv, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FDiv.instance;
+      return _get(_getPrototypeOf(FDiv.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -25369,6 +26480,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -25422,11 +26537,22 @@ var FMod = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FMod, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FMod.instance;
+      return _get(_getPrototypeOf(FMod.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -25505,6 +26631,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -25561,11 +26691,22 @@ var FMul = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FMul, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FMul.instance;
+      return _get(_getPrototypeOf(FMul.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -25722,6 +26863,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -25774,11 +26919,22 @@ var FNConst = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FNConst, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FNConst.instance;
+      return _get(_getPrototypeOf(FNConst.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -25844,6 +27000,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -25897,11 +27057,22 @@ var FSqrt = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FSqrt, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FSqrt.instance;
+      return _get(_getPrototypeOf(FSqrt.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -25966,6 +27137,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -26020,11 +27195,22 @@ var FTofixed = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process override
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FTofixed, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FTofixed.instance;
+      return _get(_getPrototypeOf(FTofixed.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -26095,6 +27281,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -26164,11 +27354,22 @@ var FOBreak = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FOBreak, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FOBreak.instance;
+      return _get(_getPrototypeOf(FOBreak.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -26304,6 +27505,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -26410,6 +27615,17 @@ var FOMake = /*#__PURE__*/function (_Node) {
       return process;
     }()
     /**
+     * Clone this node
+     * @param {Function} factory The factory class function
+     */
+
+  }, {
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FOMake.instance;
+      return _get(_getPrototypeOf(FOMake.prototype), "clone", this).call(this, factory);
+    }
+    /**
      * Can this node remove a specific input?
      * In this case, there must be at least 1 input
      * @param {InputsSocket} input The input to remove
@@ -26488,6 +27704,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -26540,11 +27760,22 @@ var Setvar = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process fmethod
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Setvar, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Setvar.instance;
+      return _get(_getPrototypeOf(Setvar.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process fmethod
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -26628,6 +27859,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -26681,11 +27916,22 @@ var FConcat = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FConcat, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FConcat.instance;
+      return _get(_getPrototypeOf(FConcat.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -26843,6 +28089,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -26895,11 +28145,22 @@ var FSConst = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(FSConst, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FSConst.instance;
+      return _get(_getPrototypeOf(FSConst.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -26965,6 +28226,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -27016,11 +28281,22 @@ var Wait = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process method
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(Wait, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Wait.instance;
+      return _get(_getPrototypeOf(Wait.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process method
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -27095,6 +28371,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -27147,11 +28427,22 @@ var While = /*#__PURE__*/function (_Node) {
     return _this;
   }
   /**
-   * The process function
+   * Clone this node
+   * @param {Function} factory The factory class function
    */
 
 
   _createClass(While, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : While.instance;
+      return _get(_getPrototypeOf(While.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process function
+     */
+
+  }, {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {

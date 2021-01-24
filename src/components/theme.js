@@ -34,16 +34,67 @@ export class Theme {
     return "white";
   }
   get CANVAS_SELECTION_FILL_COLOR() {
-    return "#D6FBFF88";
+    return "#99999922";
   }
   get CANVAS_SELECTION_STROKE_COLOR() {
-    return "#85F4FF";
+    return "#99999999";
   }
   get CANVAS_SELECTION_STROKE_WIDTH() {
-    return "2";
+    return "1";
   }
 
   // Node container
+
+  get DEFS() {
+    return `
+        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>
+        <stop offset='0%'  stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='12.45%'  stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='12.5%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='24.45%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='25.5%'  stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='37.45%'  stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='37.5%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='49.9%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='50%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='62.45%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='62.5%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='74.95%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='75%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='87.45%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR}'></stop>
+        <stop offset='87.5%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+        <stop offset='100%' stop-color='${Theme.current.NODE_SELECTED_FILL_COLOR2}'></stop>
+    </linearGradient>
+    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>
+        <stop offset='0%'  stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='12.45%'  stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='12.5%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='24.45%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='25.5%'  stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='37.45%'  stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='37.5%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='49.9%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='50%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='62.45%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='62.5%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='74.95%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='75%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='87.45%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR}'></stop>
+        <stop offset='87.5%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+        <stop offset='100%' stop-color='${Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2}'></stop>
+    </linearGradient>
+    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >
+        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>
+            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>
+        </rect>
+    </pattern>
+    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >
+        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>
+            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>
+        </rect>
+    </pattern>
+    `;
+  }
 
   get NODE_WIDTH() {
     return 200;
@@ -55,7 +106,16 @@ export class Theme {
     return "#FAD7A0";
   }
   get NODE_SELECTED_FILL_COLOR() {
-    return "orange";
+    return "#FAD7A0";
+  }
+  get NODE_SELECTED_FILL_COLOR2() {
+    return "#F9C879";
+  }
+  get NODE_SELECTED_FUNCTIONAL_FILL_COLOR() {
+    return "#C5F0FF";
+  }
+  get NODE_SELECTED_FUNCTIONAL_FILL_COLOR2() {
+    return "#AEEDFF";
   }
   get NODE_FUNCTIONAL_FILL_COLOR() {
     return "#C5F0FF";
@@ -64,7 +124,7 @@ export class Theme {
     return "#FFFFFF";
   }
   get NODE_SELECTED_STROKE_COLOR() {
-    return "#FFFFFF";
+    return "#00000055";
   }
   get NODE_FUNCTIONAL_STROKE_COLOR() {
     return "#FFFFFF";

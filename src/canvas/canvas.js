@@ -353,13 +353,13 @@ export class Canvas {
       if (!component) {
         items = this.getCanvasContextMenuItems();
       } else {
-        // Check if there is more than a component selected
-        if (this.#selectedComponents.length <= 1) {
-          items = component.getContextMenuItems();
-        } else {
-          // There are more than 1 component selected, so merge menu items
-          // copmmont to all components
+        // Check if there are selected component
+        if (this.#selectedComponents.length > 0) {
+          // There are selected components, so merge menu items
+          // common to all components
           items = this.getAllCommonMenuItems(this.#selectedComponents);
+        } else {
+          items = component.getContextMenuItems();
         }
       }
 
@@ -412,14 +412,14 @@ export class Canvas {
   #addComponentToSelectionForBox(x, y, width, height) {
     /**
      * Return true if two rects passed as parameter overlaps
-     * @param {*} x1 x of the first rect
-     * @param {*} y1 y of the first rect
-     * @param {*} width1 width of the first rect
-     * @param {*} height1 height of the first rect
-     * @param {*} x2 x of the second rect
-     * @param {*} y2 y of the second rect
-     * @param {*} width2 width of the second rect
-     * @param {*} height2 hright of the second rect
+     * @param {number} x1 x of the first rect
+     * @param {number} y1 y of the first rect
+     * @param {number} width1 width of the first rect
+     * @param {number} height1 height of the first rect
+     * @param {number} x2 x of the second rect
+     * @param {number} y2 y of the second rect
+     * @param {number} width2 width of the second rect
+     * @param {number} height2 hright of the second rect
      */
     function rectsOverlaps(x1, y1, width1, height1, x2, y2, width2, height2) {
       return (
@@ -456,6 +456,13 @@ export class Canvas {
       c.updateSVGElement();
     }
   }
+
+  /**
+   * This method clones a list of components and put it on the map. Components
+   * have to be selectable and clonable
+   * @param {Component[]} components Components to clone
+   */
+  #cloneComponents(components) {}
 
   /**
    * This method extract all common menu items from an

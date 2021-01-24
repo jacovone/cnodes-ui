@@ -43,6 +43,7 @@ export class CnodeComponent extends Component {
   constructor(node, canvas) {
     super();
     this.#node = node;
+    this.canvas = canvas;
     this.selectable = true;
 
     // write a back-reference
@@ -52,8 +53,20 @@ export class CnodeComponent extends Component {
   get node() {
     return this.#node;
   }
+  set node(val) {
+    this.#node = val;
+  }
   get titleComp() {
     return this.#titleComp;
+  }
+  set titleComp(val) {
+    this.#titleComp = val;
+  }
+  get commentComp() {
+    return this.#commentComp;
+  }
+  set commentComp(val) {
+    this.#commentComp = val;
   }
   get width() {
     return Theme.current.NODE_WIDTH;
@@ -64,7 +77,7 @@ export class CnodeComponent extends Component {
    */
   setup() {
     super.setup();
-    canvas.addComponent(this);
+    this.canvas.addComponent(this);
 
     // If there is an active program, add this node to it
     if (this.canvas.program) {
@@ -320,6 +333,24 @@ export class CnodeComponent extends Component {
     //   this.#containerEl.removeAttribute("filter");
     // }
 
+    if (this.selectable && this.canvas.isComponentSelected(this)) {
+      if (this.node.functional) {
+        this.#containerEl.setAttribute(
+          "fill",
+          "url(#selection-functional-pattern)"
+        );
+      } else {
+        this.#containerEl.setAttribute("fill", "url(#selection-pattern)");
+      }
+    } else {
+      this.#containerEl.setAttribute(
+        "fill",
+        this.node.functional
+          ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
+          : Theme.current.NODE_FILL_COLOR
+      );
+    }
+
     this.#containerEl.setAttribute(
       "stroke",
       this.canvas.isComponentSelected(this)
@@ -327,14 +358,6 @@ export class CnodeComponent extends Component {
         : !this.node.functional
         ? Theme.current.NODE_STROKE_COLOR
         : Theme.current.NODE_FUNCTIONAL_STROKE_COLOR
-    );
-    this.#containerEl.setAttribute(
-      "fill",
-      this.canvas.isComponentSelected(this)
-        ? Theme.current.NODE_SELECTED_FILL_COLOR
-        : this.node.functional
-        ? Theme.current.NODE_FUNCTIONAL_FILL_COLOR
-        : Theme.current.NODE_FILL_COLOR
     );
 
     this.#containerEl.setAttribute(

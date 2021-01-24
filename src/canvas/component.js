@@ -33,6 +33,9 @@ export class Component {
   /** Is this component moveable? */
   #moveable = true;
 
+  /* Is this component clonable? */
+  #clonable = false;
+
   /** The position fo this component inside the canvas, in SVG coordinates */
   #pos = new Position(0, 0);
 
@@ -133,6 +136,12 @@ export class Component {
   }
   set selectable(val) {
     this.#selectable = val;
+  }
+  get clonable() {
+    return this.#clonable;
+  }
+  set clonable(val) {
+    this.#clonable = val;
   }
   get parent() {
     return this.#parent;

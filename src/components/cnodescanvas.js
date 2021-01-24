@@ -35,7 +35,7 @@ export class CnodesCanvas extends Canvas {
   #stack = [];
 
   /** The clipboard of the canvas */
-  #clipboard = null;
+  static clipboard = null;
 
   /** The event emitter connected to the canvas */
   events = new EventEmitter();
@@ -94,6 +94,14 @@ export class CnodesCanvas extends Canvas {
 
     // Register keystrokes
     document.addEventListener("keydown", (e) => {
+      if (e.key === "Delete") {
+        for (let c of this.selectedComponents) {
+          if (c instanceof CnodeComponent && c.node.removable) {
+            c.destroy();
+          }
+        }
+        e.preventDefault();
+      }
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "c") {
           this.copySelectedNodes();
@@ -251,15 +259,15 @@ export class CnodesCanvas extends Canvas {
       )
     );
 
-    if (this.#clipboard) {
+    if (CnodesCanvas.clipboard) {
       items.push(
         new MenuItem(
           `
           <tspan alignment-baseline="middle" style="${
             Theme.current.MENU_SPECIAL_ITEM_STYLE
           }">
-            Paste ${this.#clipboard.length} node${
-            this.#clipboard.length !== 1 ? "s" : ""
+            Paste ${CnodesCanvas.clipboard.length} node${
+            CnodesCanvas.clipboard.length !== 1 ? "s" : ""
           }
           </tspan>
           `,
@@ -444,7 +452,7 @@ export class CnodesCanvas extends Canvas {
 
     let selectedNodes = Program.cloneNodes(
       this.selectedComponents
-        .filter((c) => c instanceof CnodeComponent)
+        .filter((c) => c instanceof CnodeComponent && c.node.creatable)
         .map((c) => c.node)
     );
     let cloneNodes = Program.cloneNodes(selectedNodes);
@@ -475,10 +483,10 @@ export class CnodesCanvas extends Canvas {
   copySelectedNodes() {
     let selectedNodes = Program.cloneNodes(
       this.selectedComponents
-        .filter((c) => c instanceof CnodeComponent)
+        .filter((c) => c instanceof CnodeComponent && c.node.creatable)
         .map((c) => c.node)
     );
-    this.#clipboard = Program.cloneNodes(selectedNodes);
+    CnodesCanvas.clipboard = Program.cloneNodes(selectedNodes);
   }
 
   /**
@@ -487,13 +495,13 @@ export class CnodesCanvas extends Canvas {
    * @param {number} y Y Position to which paste nodes
    */
   pasteNodes(x, y) {
-    if (!this.#clipboard) {
+    if (!CnodesCanvas.clipboard) {
       return;
     }
 
     let oldSelected = this.selectedComponents;
 
-    let cloneNodes = Program.cloneNodes(this.#clipboard);
+    let cloneNodes = Program.cloneNodes(CnodesCanvas.clipboard);
 
     if (x && y) {
       // Compute the min x,y of cloned nodes

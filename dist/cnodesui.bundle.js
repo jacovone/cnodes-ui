@@ -14843,15 +14843,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14914,8 +14914,6 @@ var _program = new WeakMap();
 
 var _stack = new WeakMap();
 
-var _clipboard = new WeakMap();
-
 var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   _inherits(CnodesCanvas, _Canvas);
 
@@ -14947,11 +14945,6 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       value: []
     });
 
-    _clipboard.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: null
-    });
-
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -14961,6 +14954,27 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
 
     document.addEventListener("keydown", function (e) {
+      if (e.key === "Delete") {
+        var _iterator = _createForOfIteratorHelper(_this.selectedComponents),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var c = _step.value;
+
+            if (c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.removable) {
+              c.destroy();
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
+        e.preventDefault();
+      }
+
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "c") {
           _this.copySelectedNodes();
@@ -15075,25 +15089,25 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         _this3.fitGraph();
       }));
 
-      if (_classPrivateFieldGet(this, _clipboard)) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(_classPrivateFieldGet(this, _clipboard).length, " node").concat(_classPrivateFieldGet(this, _clipboard).length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
+      if (CnodesCanvas.clipboard) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(CnodesCanvas.clipboard.length, " node").concat(CnodesCanvas.clipboard.length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
           _this3.pasteNodes(x, y);
         }));
       }
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+          _step2;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var cat = _step.value;
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var cat = _step2.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
-              _step2;
+          var _iterator3 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+              _step3;
 
           try {
             var _loop = function _loop() {
-              var nodeDef = _step2.value;
+              var nodeDef = _step3.value;
               var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
@@ -15104,19 +15118,19 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               }
             };
 
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
               _loop();
             }
           } catch (err) {
-            _iterator2.e(err);
+            _iterator3.e(err);
           } finally {
-            _iterator2.f();
+            _iterator3.f();
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
 
       if (items.length === 0) {
@@ -15191,12 +15205,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     value: function importNodes(nodes) {
       var importedNodes = []; // Import the program
 
-      var _iterator3 = _createForOfIteratorHelper(nodes),
-          _step3;
+      var _iterator4 = _createForOfIteratorHelper(nodes),
+          _step4;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var n = _step3.value;
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var n = _step4.value;
           var comp = CnodesCanvas.getNodeUIInstance(n, this);
           importedNodes.push(comp);
           comp.moveable = true; // Extract meta info
@@ -15221,26 +15235,26 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         } // Setup connections
 
       } catch (err) {
-        _iterator3.e(err);
+        _iterator4.e(err);
       } finally {
-        _iterator3.f();
+        _iterator4.f();
       }
 
-      var _iterator4 = _createForOfIteratorHelper(nodes),
-          _step4;
+      var _iterator5 = _createForOfIteratorHelper(nodes),
+          _step5;
 
       try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var _n = _step4.value;
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _n = _step5.value;
 
           // Setup prev
           if (_n.prev && _n.prev.peers.length > 0) {
-            var _iterator5 = _createForOfIteratorHelper(_n.prev.peers),
-                _step5;
+            var _iterator6 = _createForOfIteratorHelper(_n.prev.peers),
+                _step6;
 
             try {
-              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                var peer = _step5.value;
+              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                var peer = _step6.value;
 
                 if (!this.alreadyConnected(peer.__comp, _n.prev.__comp)) {
                   // Create connection component
@@ -15248,19 +15262,19 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
                 }
               }
             } catch (err) {
-              _iterator5.e(err);
+              _iterator6.e(err);
             } finally {
-              _iterator5.f();
+              _iterator6.f();
             }
           } // Setup nexts
 
 
-          var _iterator6 = _createForOfIteratorHelper(_n.nexts),
-              _step6;
+          var _iterator7 = _createForOfIteratorHelper(_n.nexts),
+              _step7;
 
           try {
-            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-              var next = _step6.value;
+            for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+              var next = _step7.value;
 
               if (next.peer) {
                 if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
@@ -15271,17 +15285,17 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
             } // Setup inputs
 
           } catch (err) {
-            _iterator6.e(err);
+            _iterator7.e(err);
           } finally {
-            _iterator6.f();
+            _iterator7.f();
           }
 
-          var _iterator7 = _createForOfIteratorHelper(_n.inputs),
-              _step7;
+          var _iterator8 = _createForOfIteratorHelper(_n.inputs),
+              _step8;
 
           try {
-            for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-              var inp = _step7.value;
+            for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+              var inp = _step8.value;
 
               if (inp.peer) {
                 if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
@@ -15292,25 +15306,25 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
             } // Setup outputs
 
           } catch (err) {
-            _iterator7.e(err);
+            _iterator8.e(err);
           } finally {
-            _iterator7.f();
+            _iterator8.f();
           }
 
-          var _iterator8 = _createForOfIteratorHelper(_n.outputs),
-              _step8;
+          var _iterator9 = _createForOfIteratorHelper(_n.outputs),
+              _step9;
 
           try {
-            for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-              var outp = _step8.value;
+            for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+              var outp = _step9.value;
 
               if (outp.peers.length > 0) {
-                var _iterator9 = _createForOfIteratorHelper(outp.peers),
-                    _step9;
+                var _iterator10 = _createForOfIteratorHelper(outp.peers),
+                    _step10;
 
                 try {
-                  for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                    var _peer = _step9.value;
+                  for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                    var _peer = _step10.value;
 
                     if (!this.alreadyConnected(outp.__comp, _peer.__comp)) {
                       // Create connection component
@@ -15318,22 +15332,22 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
                     }
                   }
                 } catch (err) {
-                  _iterator9.e(err);
+                  _iterator10.e(err);
                 } finally {
-                  _iterator9.f();
+                  _iterator10.f();
                 }
               }
             }
           } catch (err) {
-            _iterator8.e(err);
+            _iterator9.e(err);
           } finally {
-            _iterator8.f();
+            _iterator9.f();
           }
         }
       } catch (err) {
-        _iterator4.e(err);
+        _iterator5.e(err);
       } finally {
-        _iterator4.f();
+        _iterator5.f();
       }
 
       return importedNodes;
@@ -15348,42 +15362,24 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     value: function cloneSelectedNodes() {
       var oldSelected = this.selectedComponents;
       var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
-        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
+        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
       }).map(function (c) {
         return c.node;
       }));
       var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
 
-      var _iterator10 = _createForOfIteratorHelper(cloneNodes),
-          _step10;
-
-      try {
-        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
-          var _node$meta;
-
-          var node = _step10.value;
-
-          if ((_node$meta = node.meta) !== null && _node$meta !== void 0 && _node$meta.pos) {
-            node.meta.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(node.meta.pos.x + 100, node.meta.pos.y + 100);
-          }
-        }
-      } catch (err) {
-        _iterator10.e(err);
-      } finally {
-        _iterator10.f();
-      }
-
-      var importedNodes = this.importNodes(cloneNodes); // Now select newly imported nodes and deselect older one
-
-      this.selectedComponents = importedNodes;
-
-      var _iterator11 = _createForOfIteratorHelper(oldSelected),
+      var _iterator11 = _createForOfIteratorHelper(cloneNodes),
           _step11;
 
       try {
         for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-          var comp = _step11.value;
-          comp.updateSVGElement();
+          var _node$meta;
+
+          var node = _step11.value;
+
+          if ((_node$meta = node.meta) !== null && _node$meta !== void 0 && _node$meta.pos) {
+            node.meta.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(node.meta.pos.x + 100, node.meta.pos.y + 100);
+          }
         }
       } catch (err) {
         _iterator11.e(err);
@@ -15391,19 +15387,37 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         _iterator11.f();
       }
 
-      var _iterator12 = _createForOfIteratorHelper(importedNodes),
+      var importedNodes = this.importNodes(cloneNodes); // Now select newly imported nodes and deselect older one
+
+      this.selectedComponents = importedNodes;
+
+      var _iterator12 = _createForOfIteratorHelper(oldSelected),
           _step12;
 
       try {
         for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-          var _comp = _step12.value;
-
-          _comp.updateSVGElement();
+          var comp = _step12.value;
+          comp.updateSVGElement();
         }
       } catch (err) {
         _iterator12.e(err);
       } finally {
         _iterator12.f();
+      }
+
+      var _iterator13 = _createForOfIteratorHelper(importedNodes),
+          _step13;
+
+      try {
+        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          var _comp = _step13.value;
+
+          _comp.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator13.e(err);
+      } finally {
+        _iterator13.f();
       }
     }
     /**
@@ -15414,12 +15428,11 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     key: "copySelectedNodes",
     value: function copySelectedNodes() {
       var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
-        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
+        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
       }).map(function (c) {
         return c.node;
       }));
-
-      _classPrivateFieldSet(this, _clipboard, _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes));
+      CnodesCanvas.clipboard = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
     }
     /**
      * Paste copied nodes to the canvas, at a position
@@ -15430,12 +15443,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "pasteNodes",
     value: function pasteNodes(x, y) {
-      if (!_classPrivateFieldGet(this, _clipboard)) {
+      if (!CnodesCanvas.clipboard) {
         return;
       }
 
       var oldSelected = this.selectedComponents;
-      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(_classPrivateFieldGet(this, _clipboard));
+      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(CnodesCanvas.clipboard);
 
       if (x && y) {
         // Compute the min x,y of cloned nodes
@@ -15456,14 +15469,14 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           return n;
         }); // Relocate nodes to menu point
 
-        var _iterator13 = _createForOfIteratorHelper(cloneNodes),
-            _step13;
+        var _iterator14 = _createForOfIteratorHelper(cloneNodes),
+            _step14;
 
         try {
-          for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
             var _node$meta2;
 
-            var node = _step13.value;
+            var node = _step14.value;
 
             if (node !== null && node !== void 0 && (_node$meta2 = node.meta) !== null && _node$meta2 !== void 0 && _node$meta2.pos) {
               node.meta.pos = {
@@ -15473,20 +15486,20 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
             }
           }
         } catch (err) {
-          _iterator13.e(err);
+          _iterator14.e(err);
         } finally {
-          _iterator13.f();
+          _iterator14.f();
         }
       } else {
         // Shift nodes by (100,100)
-        var _iterator14 = _createForOfIteratorHelper(cloneNodes),
-            _step14;
+        var _iterator15 = _createForOfIteratorHelper(cloneNodes),
+            _step15;
 
         try {
-          for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+          for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
             var _node$meta3;
 
-            var _node = _step14.value;
+            var _node = _step15.value;
 
             if (_node !== null && _node !== void 0 && (_node$meta3 = _node.meta) !== null && _node$meta3 !== void 0 && _node$meta3.pos) {
               _node.meta.pos = {
@@ -15496,9 +15509,9 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
             }
           }
         } catch (err) {
-          _iterator14.e(err);
+          _iterator15.e(err);
         } finally {
-          _iterator14.f();
+          _iterator15.f();
         }
       }
 
@@ -15506,33 +15519,33 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
       this.selectedComponents = importedNodes;
 
-      var _iterator15 = _createForOfIteratorHelper(oldSelected),
-          _step15;
-
-      try {
-        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
-          var comp = _step15.value;
-          comp.updateSVGElement();
-        }
-      } catch (err) {
-        _iterator15.e(err);
-      } finally {
-        _iterator15.f();
-      }
-
-      var _iterator16 = _createForOfIteratorHelper(importedNodes),
+      var _iterator16 = _createForOfIteratorHelper(oldSelected),
           _step16;
 
       try {
         for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-          var _comp2 = _step16.value;
-
-          _comp2.updateSVGElement();
+          var comp = _step16.value;
+          comp.updateSVGElement();
         }
       } catch (err) {
         _iterator16.e(err);
       } finally {
         _iterator16.f();
+      }
+
+      var _iterator17 = _createForOfIteratorHelper(importedNodes),
+          _step17;
+
+      try {
+        for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+          var _comp2 = _step17.value;
+
+          _comp2.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator17.e(err);
+      } finally {
+        _iterator17.f();
       }
     }
     /**
@@ -15633,6 +15646,8 @@ var _nodesUIRegistry = {
   writable: true,
   value: new Map()
 };
+
+_defineProperty(CnodesCanvas, "clipboard", null);
 
 /***/ }),
 

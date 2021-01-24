@@ -353,13 +353,13 @@ export class Canvas {
       if (!component) {
         items = this.getCanvasContextMenuItems();
       } else {
-        // Check if there is more than a component selected
-        if (this.#selectedComponents.length <= 1) {
-          items = component.getContextMenuItems();
-        } else {
-          // There are more than 1 component selected, so merge menu items
-          // copmmont to all components
+        // Check if there are selected component
+        if (this.#selectedComponents.length > 0) {
+          // There are selected components, so merge menu items
+          // common to all components
           items = this.getAllCommonMenuItems(this.#selectedComponents);
+        } else {
+          items = component.getContextMenuItems();
         }
       }
 

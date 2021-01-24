@@ -34,6 +34,9 @@ export class CnodesCanvas extends Canvas {
   /** The stack of edited programs */
   #stack = [];
 
+  /** The clipboard of the canvas */
+  #clipboard = null;
+
   /** The event emitter connected to the canvas */
   events = new EventEmitter();
 
@@ -88,6 +91,32 @@ export class CnodesCanvas extends Canvas {
     `;
 
     this.svgEl.appendChild(defsEl);
+
+    // Register keystrokes
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        if (e.key === "c") {
+          this.copySelectedNodes();
+          e.preventDefault();
+        }
+        if (e.key === "v") {
+          this.pasteNodes();
+          e.preventDefault();
+        }
+        if (e.key === "d") {
+          this.cloneSelectedNodes();
+          e.preventDefault();
+        }
+        if (e.key === "z" && !e.shiftKey) {
+          // this.undoChanges();
+          e.preventDefault();
+        }
+        if (e.key === "z" && e.shiftKey) {
+          // this.redoChanges();
+          e.preventDefault();
+        }
+      }
+    });
   }
 
   get program() {
@@ -144,6 +173,51 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
+   * Override this method to add common actions on top, like
+   * duplicate, copy, paste.
+   * @param {Components[]} components Array of components from which
+   * retrieve actions
+   */
+  getAllCommonMenuItems(components) {
+    let retArr = super.getAllCommonMenuItems(components);
+
+    retArr.unshift(
+      new MenuItem(
+        `
+        <tspan alignment-baseline="middle" style="${
+          Theme.current.MENU_SPECIAL_ITEM_STYLE
+        }">
+          Copy ${this.selectedComponents.length} node${
+          this.selectedComponents.length !== 1 ? "s" : ""
+        }
+        </tspan>
+        `,
+        () => {
+          this.copySelectedNodes();
+        }
+      )
+    );
+    retArr.unshift(
+      new MenuItem(
+        `
+        <tspan alignment-baseline="middle" style="${
+          Theme.current.MENU_SPECIAL_ITEM_STYLE
+        }">
+          Clone ${this.selectedComponents.length} node${
+          this.selectedComponents.length !== 1 ? "s" : ""
+        }
+        </tspan>
+        `,
+        () => {
+          this.cloneSelectedNodes();
+        }
+      )
+    );
+
+    return retArr;
+  }
+
+  /**
    * Return a list of MenuItem for the context menu
    */
   getCanvasContextMenuItems() {
@@ -176,6 +250,25 @@ export class CnodesCanvas extends Canvas {
         }
       )
     );
+
+    if (this.#clipboard) {
+      items.push(
+        new MenuItem(
+          `
+          <tspan alignment-baseline="middle" style="${
+            Theme.current.MENU_SPECIAL_ITEM_STYLE
+          }">
+            Paste ${this.#clipboard.length} node${
+            this.#clipboard.length !== 1 ? "s" : ""
+          }
+          </tspan>
+          `,
+          (x, y) => {
+            this.pasteNodes(x, y);
+          }
+        )
+      );
+    }
 
     for (let cat of Env.getCategories()) {
       for (let nodeDef of Env.getCategoryNodes(cat)) {
@@ -343,55 +436,6 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
-   * Override this method to add common actions on top, like
-   * duplicate, copy, paste.
-   * @param {Components[]} components Array of components from which
-   * retrieve actions
-   */
-  getAllCommonMenuItems(components) {
-    let retArr = super.getAllCommonMenuItems(components);
-
-    retArr.unshift(
-      new MenuItem(
-        `
-        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
-          Paste selected
-        </tspan>
-        `,
-        () => {
-          this.fitGraph();
-        }
-      )
-    );
-    retArr.unshift(
-      new MenuItem(
-        `
-        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
-          Copy selected
-        </tspan>
-        `,
-        () => {
-          this.fitGraph();
-        }
-      )
-    );
-    retArr.unshift(
-      new MenuItem(
-        `
-        <tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">
-          Clone selected
-        </tspan>
-        `,
-        () => {
-          this.cloneSelectedNodes();
-        }
-      )
-    );
-
-    return retArr;
-  }
-
-  /**
    * This method clones selected nodes and add them to the canvas
    * at a position a bit doifferent from it source set
    */
@@ -413,6 +457,85 @@ export class CnodesCanvas extends Canvas {
         );
       }
     }
+    let importedNodes = this.importNodes(cloneNodes);
+
+    // Now select newly imported nodes and deselect older one
+    this.selectedComponents = importedNodes;
+    for (let comp of oldSelected) {
+      comp.updateSVGElement();
+    }
+    for (let comp of importedNodes) {
+      comp.updateSVGElement();
+    }
+  }
+
+  /**
+   * This method copy all selected nodes to a property of the canvas
+   */
+  copySelectedNodes() {
+    let selectedNodes = Program.cloneNodes(
+      this.selectedComponents
+        .filter((c) => c instanceof CnodeComponent)
+        .map((c) => c.node)
+    );
+    this.#clipboard = Program.cloneNodes(selectedNodes);
+  }
+
+  /**
+   * Paste copied nodes to the canvas, at a position
+   * @param {number} x X Position to which paste nodes
+   * @param {number} y Y Position to which paste nodes
+   */
+  pasteNodes(x, y) {
+    if (!this.#clipboard) {
+      return;
+    }
+
+    let oldSelected = this.selectedComponents;
+
+    let cloneNodes = Program.cloneNodes(this.#clipboard);
+
+    if (x && y) {
+      // Compute the min x,y of cloned nodes
+      let minPos = cloneNodes.reduce(
+        (acc, val) =>
+          new Position(
+            Math.min(acc.x, val?.meta?.pos.x),
+            Math.min(acc.y, val?.meta?.pos.y)
+          ),
+        new Position(Infinity, Infinity)
+      );
+
+      // Normalize positions
+      cloneNodes = cloneNodes.map((n) => {
+        if (n?.meta?.pos) {
+          n.meta.pos.x -= minPos.x;
+          n.meta.pos.y -= minPos.y;
+        }
+        return n;
+      });
+
+      // Relocate nodes to menu point
+      for (let node of cloneNodes) {
+        if (node?.meta?.pos) {
+          node.meta.pos = {
+            x: x + node.meta.pos.x,
+            y: y + node.meta.pos.y,
+          };
+        }
+      }
+    } else {
+      // Shift nodes by (100,100)
+      for (let node of cloneNodes) {
+        if (node?.meta?.pos) {
+          node.meta.pos = {
+            x: 100 + node.meta.pos.x,
+            y: 100 + node.meta.pos.y,
+          };
+        }
+      }
+    }
+
     let importedNodes = this.importNodes(cloneNodes);
 
     // Now select newly imported nodes and deselect older one

@@ -12637,13 +12637,13 @@ var _onPointerUp2 = function _onPointerUp2(e) {
     if (!component) {
       items = this.getCanvasContextMenuItems();
     } else {
-      // Check if there is more than a component selected
-      if (_classPrivateFieldGet(this, _selectedComponents).length <= 1) {
-        items = component.getContextMenuItems();
-      } else {
-        // There are more than 1 component selected, so merge menu items
-        // copmmont to all components
+      // Check if there are selected component
+      if (_classPrivateFieldGet(this, _selectedComponents).length > 0) {
+        // There are selected components, so merge menu items
+        // common to all components
         items = this.getAllCommonMenuItems(_classPrivateFieldGet(this, _selectedComponents));
+      } else {
+        items = component.getContextMenuItems();
       }
     }
 
@@ -14914,6 +14914,8 @@ var _program = new WeakMap();
 
 var _stack = new WeakMap();
 
+var _clipboard = new WeakMap();
+
 var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   _inherits(CnodesCanvas, _Canvas);
 
@@ -14924,6 +14926,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   /** The edited program */
 
   /** The stack of edited programs */
+
+  /** The clipboard of the canvas */
 
   /** The event emitter connected to the canvas */
   function CnodesCanvas(el) {
@@ -14943,13 +14947,50 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       value: []
     });
 
+    _clipboard.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: null
+    });
+
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     defsEl.innerHTML = "\n      <defs>\n      ".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.DEFS, "\n      </defs>\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
-    _this.svgEl.appendChild(defsEl);
+    _this.svgEl.appendChild(defsEl); // Register keystrokes
 
+
+    document.addEventListener("keydown", function (e) {
+      if (e.ctrlKey || e.metaKey) {
+        if (e.key === "c") {
+          _this.copySelectedNodes();
+
+          e.preventDefault();
+        }
+
+        if (e.key === "v") {
+          _this.pasteNodes();
+
+          e.preventDefault();
+        }
+
+        if (e.key === "d") {
+          _this.cloneSelectedNodes();
+
+          e.preventDefault();
+        }
+
+        if (e.key === "z" && !e.shiftKey) {
+          // this.undoChanges();
+          e.preventDefault();
+        }
+
+        if (e.key === "z" && e.shiftKey) {
+          // this.redoChanges();
+          e.preventDefault();
+        }
+      }
+    });
     return _this;
   }
 
@@ -14992,25 +15033,53 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       console.log(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
     }
     /**
+     * Override this method to add common actions on top, like
+     * duplicate, copy, paste.
+     * @param {Components[]} components Array of components from which
+     * retrieve actions
+     */
+
+  }, {
+    key: "getAllCommonMenuItems",
+    value: function getAllCommonMenuItems(components) {
+      var _this2 = this;
+
+      var retArr = _get(_getPrototypeOf(CnodesCanvas.prototype), "getAllCommonMenuItems", this).call(this, components);
+
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
+        _this2.copySelectedNodes();
+      }));
+      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
+        _this2.cloneSelectedNodes();
+      }));
+      return retArr;
+    }
+    /**
      * Return a list of MenuItem for the context menu
      */
 
   }, {
     key: "getCanvasContextMenuItems",
     value: function getCanvasContextMenuItems() {
-      var _this2 = this;
+      var _this3 = this;
 
       var items = [];
 
       if (this.canPopProgram()) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
-          _this2.popProgram();
+          _this3.popProgram();
         }));
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
-        _this2.fitGraph();
+        _this3.fitGraph();
       }));
+
+      if (_classPrivateFieldGet(this, _clipboard)) {
+        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(_classPrivateFieldGet(this, _clipboard).length, " node").concat(_classPrivateFieldGet(this, _clipboard).length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
+          _this3.pasteNodes(x, y);
+        }));
+      }
 
       var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
@@ -15029,7 +15098,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
               if (n.creatable) {
                 items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
-                  var node = CnodesCanvas.getNodeUIInstance(n, _this2);
+                  var node = CnodesCanvas.getNodeUIInstance(n, _this3);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
                 }));
               }
@@ -15270,31 +15339,6 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       return importedNodes;
     }
     /**
-     * Override this method to add common actions on top, like
-     * duplicate, copy, paste.
-     * @param {Components[]} components Array of components from which
-     * retrieve actions
-     */
-
-  }, {
-    key: "getAllCommonMenuItems",
-    value: function getAllCommonMenuItems(components) {
-      var _this3 = this;
-
-      var retArr = _get(_getPrototypeOf(CnodesCanvas.prototype), "getAllCommonMenuItems", this).call(this, components);
-
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Paste selected\n        </tspan>\n        "), function () {
-        _this3.fitGraph();
-      }));
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy selected\n        </tspan>\n        "), function () {
-        _this3.fitGraph();
-      }));
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone selected\n        </tspan>\n        "), function () {
-        _this3.cloneSelectedNodes();
-      }));
-      return retArr;
-    }
-    /**
      * This method clones selected nodes and add them to the canvas
      * at a position a bit doifferent from it source set
      */
@@ -15360,6 +15404,135 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         _iterator12.e(err);
       } finally {
         _iterator12.f();
+      }
+    }
+    /**
+     * This method copy all selected nodes to a property of the canvas
+     */
+
+  }, {
+    key: "copySelectedNodes",
+    value: function copySelectedNodes() {
+      var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
+      }).map(function (c) {
+        return c.node;
+      }));
+
+      _classPrivateFieldSet(this, _clipboard, _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes));
+    }
+    /**
+     * Paste copied nodes to the canvas, at a position
+     * @param {number} x X Position to which paste nodes
+     * @param {number} y Y Position to which paste nodes
+     */
+
+  }, {
+    key: "pasteNodes",
+    value: function pasteNodes(x, y) {
+      if (!_classPrivateFieldGet(this, _clipboard)) {
+        return;
+      }
+
+      var oldSelected = this.selectedComponents;
+      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(_classPrivateFieldGet(this, _clipboard));
+
+      if (x && y) {
+        // Compute the min x,y of cloned nodes
+        var minPos = cloneNodes.reduce(function (acc, val) {
+          var _val$meta, _val$meta2;
+
+          return new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(Math.min(acc.x, val === null || val === void 0 ? void 0 : (_val$meta = val.meta) === null || _val$meta === void 0 ? void 0 : _val$meta.pos.x), Math.min(acc.y, val === null || val === void 0 ? void 0 : (_val$meta2 = val.meta) === null || _val$meta2 === void 0 ? void 0 : _val$meta2.pos.y));
+        }, new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(Infinity, Infinity)); // Normalize positions
+
+        cloneNodes = cloneNodes.map(function (n) {
+          var _n$meta;
+
+          if (n !== null && n !== void 0 && (_n$meta = n.meta) !== null && _n$meta !== void 0 && _n$meta.pos) {
+            n.meta.pos.x -= minPos.x;
+            n.meta.pos.y -= minPos.y;
+          }
+
+          return n;
+        }); // Relocate nodes to menu point
+
+        var _iterator13 = _createForOfIteratorHelper(cloneNodes),
+            _step13;
+
+        try {
+          for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+            var _node$meta2;
+
+            var node = _step13.value;
+
+            if (node !== null && node !== void 0 && (_node$meta2 = node.meta) !== null && _node$meta2 !== void 0 && _node$meta2.pos) {
+              node.meta.pos = {
+                x: x + node.meta.pos.x,
+                y: y + node.meta.pos.y
+              };
+            }
+          }
+        } catch (err) {
+          _iterator13.e(err);
+        } finally {
+          _iterator13.f();
+        }
+      } else {
+        // Shift nodes by (100,100)
+        var _iterator14 = _createForOfIteratorHelper(cloneNodes),
+            _step14;
+
+        try {
+          for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+            var _node$meta3;
+
+            var _node = _step14.value;
+
+            if (_node !== null && _node !== void 0 && (_node$meta3 = _node.meta) !== null && _node$meta3 !== void 0 && _node$meta3.pos) {
+              _node.meta.pos = {
+                x: 100 + _node.meta.pos.x,
+                y: 100 + _node.meta.pos.y
+              };
+            }
+          }
+        } catch (err) {
+          _iterator14.e(err);
+        } finally {
+          _iterator14.f();
+        }
+      }
+
+      var importedNodes = this.importNodes(cloneNodes); // Now select newly imported nodes and deselect older one
+
+      this.selectedComponents = importedNodes;
+
+      var _iterator15 = _createForOfIteratorHelper(oldSelected),
+          _step15;
+
+      try {
+        for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+          var comp = _step15.value;
+          comp.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator15.e(err);
+      } finally {
+        _iterator15.f();
+      }
+
+      var _iterator16 = _createForOfIteratorHelper(importedNodes),
+          _step16;
+
+      try {
+        for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+          var _comp2 = _step16.value;
+
+          _comp2.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator16.e(err);
+      } finally {
+        _iterator16.f();
       }
     }
     /**
@@ -18494,7 +18667,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "DEFS",
     get: function get() {
-      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='".concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ");
+      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='".concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ");
     }
   }, {
     key: "NODE_WIDTH",

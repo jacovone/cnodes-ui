@@ -254,9 +254,25 @@ export class CnodesCanvas extends Canvas {
 
     this.destroyAll();
 
+    // Import nodes
+    this.importNodes(program.nodes);
+
+    // Restore the program instance
+    this.#program = program;
+  }
+
+  /**
+   * This method import a list of nodes inside the current program
+   * by reconstructing all connection between nodes
+   * @param {Node[]} nodes A list of nodes to import
+   */
+  importNodes(nodes) {
+    let importedNodes = [];
+
     // Import the program
-    for (let n of program.nodes) {
+    for (let n of nodes) {
       let comp = CnodesCanvas.getNodeUIInstance(n, this);
+      importedNodes.push(comp);
       comp.moveable = true;
 
       // Extract meta info
@@ -282,7 +298,7 @@ export class CnodesCanvas extends Canvas {
     }
 
     // Setup connections
-    for (let n of program.nodes) {
+    for (let n of nodes) {
       // Setup prev
       if (n.prev && n.prev.peers.length > 0) {
         for (let peer of n.prev.peers) {
@@ -323,23 +339,7 @@ export class CnodesCanvas extends Canvas {
       }
     }
 
-    // Restore the program instance
-    this.#program = program;
-  }
-
-  /**
-   * Push a subprogram on the canvas. The current program
-   * is pushed on to the stack and the new one is placed on the canvas
-   * @param {Program} program The new program to edit
-   */
-  pushProgram(program) {
-    setTimeout(() => {
-      // Push this current program to the stack
-      this.#stack.unshift(this.program);
-
-      // Set the new Program
-      this.program = program;
-    });
+    return importedNodes;
   }
 
   /**
@@ -383,12 +383,61 @@ export class CnodesCanvas extends Canvas {
         </tspan>
         `,
         () => {
-          this.fitGraph();
+          this.cloneSelectedNodes();
         }
       )
     );
 
     return retArr;
+  }
+
+  /**
+   * This method clones selected nodes and add them to the canvas
+   * at a position a bit doifferent from it source set
+   */
+  cloneSelectedNodes() {
+    let oldSelected = this.selectedComponents;
+
+    let selectedNodes = Program.cloneNodes(
+      this.selectedComponents
+        .filter((c) => c instanceof CnodeComponent)
+        .map((c) => c.node)
+    );
+    let cloneNodes = Program.cloneNodes(selectedNodes);
+
+    for (let node of cloneNodes) {
+      if (node.meta?.pos) {
+        node.meta.pos = new Position(
+          node.meta.pos.x + 100,
+          node.meta.pos.y + 100
+        );
+      }
+    }
+    let importedNodes = this.importNodes(cloneNodes);
+
+    // Now select newly imported nodes and deselect older one
+    this.selectedComponents = importedNodes;
+    for (let comp of oldSelected) {
+      comp.updateSVGElement();
+    }
+    for (let comp of importedNodes) {
+      comp.updateSVGElement();
+    }
+  }
+
+  /**
+   * Push a subprogram on the canvas. The current program
+   * is pushed on to the stack and the new one is placed on the canvas
+   * @param {Program} program The new program to edit
+   */
+  pushProgram(program) {
+    setTimeout(() => {
+      // Push this current program to the stack
+      this.#stack.unshift(this.program);
+
+      // Set the new Program
+      this.program = program;
+    });
   }
 
   /**

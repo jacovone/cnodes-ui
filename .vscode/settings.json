@@ -1,7 +1,7 @@
     {
         "workbench.iconTheme": "vscode-icons",
-        // "editor.fontFamily": "Input Sans Narrow, Menlo, Monaco, 'Courier New', monospace",
-        "editor.fontFamily": "Dank Mono, Menlo, Monaco, 'Courier New', monospace",
+        "editor.fontFamily": "Input Sans Narrow, Menlo, Monaco, 'Courier New', monospace",
+        // "editor.fontFamily": "Dank Mono, Menlo, Monaco, 'Courier New', monospace",
         "editor.lineHeight": 20,
         "editor.fontLigatures": true,
         "explorer.decorations.badges": false,

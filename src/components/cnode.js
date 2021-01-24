@@ -290,6 +290,7 @@ export class CnodeComponent extends Component {
         if (component.text === "") {
           component.text = "title";
         }
+        this.node.title = component.text;
       });
 
       this.#titleComp.events.on("cnui:move", (component) => {
@@ -516,6 +517,17 @@ export class CnodeComponent extends Component {
       if (component.text === "") {
         component.text = "comment";
       }
+      // Update UI data in meta info
+      if (!this.node.meta) {
+        this.node.meta = {};
+      }
+      this.node.meta.comment = {
+        text: component.text,
+        pos: {
+          x: component.pos.x,
+          y: component.pos.y,
+        },
+      };
     });
     // Register "cnui:move" to update meta info
     this.#commentComp.events.on("cnui:move", (component) => {

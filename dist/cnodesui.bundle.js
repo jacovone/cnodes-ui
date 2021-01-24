@@ -14561,6 +14561,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           if (component.text === "") {
             component.text = "title";
           }
+
+          _this2.node.title = component.text;
         });
 
         _classPrivateFieldGet(this, _titleComp).events.on("cnui:move", function (component) {
@@ -14723,7 +14725,20 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         // Prevent empty title
         if (component.text === "") {
           component.text = "comment";
+        } // Update UI data in meta info
+
+
+        if (!_this4.node.meta) {
+          _this4.node.meta = {};
         }
+
+        _this4.node.meta.comment = {
+          text: component.text,
+          pos: {
+            x: component.pos.x,
+            y: component.pos.y
+          }
+        };
       }); // Register "cnui:move" to update meta info
 
 
@@ -20918,6 +20933,8 @@ var Node = /*#__PURE__*/function () {
       if (_classPrivateFieldGet(this, _prev)) {
         while (_classPrivateFieldGet(this, _prev).peers.length > 0) {
           _classPrivateFieldGet(this, _prev).disconnect(_classPrivateFieldGet(this, _prev).peers[0]);
+
+          _classPrivateFieldGet(this, _prev).splice(0, 1);
         }
       }
 
@@ -20947,6 +20964,7 @@ var Node = /*#__PURE__*/function () {
 
           while (o.peers.length > 0) {
             o.peers[0].disconnect();
+            o.peers.splice(0, 1);
           }
         }
       } catch (err) {

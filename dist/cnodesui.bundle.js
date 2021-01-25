@@ -13664,7 +13664,7 @@ var Menu = /*#__PURE__*/function (_Component) {
      */
     value: function show(x, y) {
       this.setup();
-      canvas.addComponent(this);
+      this.canvas.addComponent(this);
       this.pos = new _position__WEBPACK_IMPORTED_MODULE_2__.Position(x, y);
     }
     /**

@@ -19166,8 +19166,6 @@ var PrevNextConnection = /*#__PURE__*/function (_CnodesConnection) {
   var _super = _createSuper(PrevNextConnection);
 
   function PrevNextConnection(source, target, canvas) {
-    var connect = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
     _classCallCheck(this, PrevNextConnection);
 
     return _super.call(this, source, target, canvas);

@@ -13395,7 +13395,7 @@ var Connection = /*#__PURE__*/function () {
     value: function setup() {
       _classPrivateFieldSet(this, _connectionEl, this.createElement());
 
-      canvas.addConnection(this);
+      this.canvas.addConnection(this);
 
       _classPrivateFieldGet(this, _source).updateSVGElement();
 

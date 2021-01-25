@@ -68,7 +68,7 @@ export class Connection {
    */
   setup() {
     this.#connectionEl = this.createElement();
-    canvas.addConnection(this);
+    this.canvas.addConnection(this);
     this.#source.updateSVGElement();
     this.#target.updateSVGElement();
 

@@ -388,7 +388,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             // Disconnect this socket
             conn.destroy();
-          }
+          },
+          "disconnect"
         )
       );
     }
@@ -402,7 +403,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
             // Ensure that node parent redraw itself
             this.parent.updateSVGElement();
-          }
+          },
+          "delete input"
         )
       );
     }
@@ -416,7 +418,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.NUMBER;
             this.updateSVGElement();
-          }
+          },
+          "number"
         ),
         new MenuItem(
           `
@@ -426,7 +429,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.ANY;
             this.updateSVGElement();
-          }
+          },
+          "any"
         ),
         new MenuItem(
           `
@@ -436,7 +440,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.STRING;
             this.updateSVGElement();
-          }
+          },
+          "string"
         ),
         new MenuItem(
           `
@@ -446,7 +451,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.BOOLEAN;
             this.updateSVGElement();
-          }
+          },
+          "boolean"
         ),
         new MenuItem(
           `
@@ -456,7 +462,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.ARRAY;
             this.updateSVGElement();
-          }
+          },
+          "array"
         ),
         new MenuItem(
           `
@@ -466,7 +473,8 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.OBJECT;
             this.updateSVGElement();
-          }
+          },
+          "object"
         )
       );
     }

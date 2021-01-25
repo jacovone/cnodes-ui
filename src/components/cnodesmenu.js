@@ -62,7 +62,7 @@ export class CnodesMenu extends Menu {
 
   /** Returns the filtered items of the menu */
   get filteredElements() {
-    let filterElems = this.items.filter((i, idx) =>
+    let filterElems = this.items.filter((i) =>
       i.searchText.toUpperCase().includes(this.searchFilter.toUpperCase())
     );
     return filterElems.filter((i, idx) => idx <= 10);
@@ -103,7 +103,7 @@ export class CnodesMenu extends Menu {
     );
     textInputElem.style = `
       font: ${Theme.current.MENU_SEARCH_FONT}; 
-      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+      color: black; 
       text-align: left;
       line-height: 30px;
       user-select: none;

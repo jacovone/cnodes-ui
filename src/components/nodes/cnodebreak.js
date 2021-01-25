@@ -51,7 +51,8 @@ export class CnodeBreakComponent extends CnodeComponent {
             }
           }
           this.updateSVGElement();
-        }
+        },
+        "remove unused"
       ),
       new MenuItem(
         `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_STYLE}">Reset outputs</tspan>`,
@@ -62,7 +63,8 @@ export class CnodeBreakComponent extends CnodeComponent {
             }
           }
           this.updateSVGElement();
-        }
+        },
+        "reset outputs"
       )
     );
 

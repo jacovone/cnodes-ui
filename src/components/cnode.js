@@ -416,7 +416,8 @@ export class CnodeComponent extends Component {
           () => {
             this.node.addInput();
             this.updateSVGElement();
-          }
+          },
+          "add input"
         )
       );
     }
@@ -429,7 +430,8 @@ export class CnodeComponent extends Component {
           () => {
             this.node.addOutput();
             this.updateSVGElement();
-          }
+          },
+          "add output"
         )
       );
     }
@@ -439,7 +441,8 @@ export class CnodeComponent extends Component {
         `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
         () => {
           this.events.emit("cnui:disconnectAll");
-        }
+        },
+        "disconnect all"
       )
     );
 
@@ -450,7 +453,8 @@ export class CnodeComponent extends Component {
           `<tspan alignment-baseline="middle">Delete</tspan>`,
           () => {
             this.destroy();
-          }
+          },
+          "delete"
         )
       );
     }
@@ -466,7 +470,8 @@ export class CnodeComponent extends Component {
               this.height + 10,
               true
             );
-          }
+          },
+          "add comment"
         )
       );
     } else {
@@ -479,7 +484,8 @@ export class CnodeComponent extends Component {
             this.#commentComp.destroy();
             this.node.meta.comment = undefined;
             this.#commentComp = null;
-          }
+          },
+          "remove comment"
         )
       );
     }

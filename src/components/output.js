@@ -297,7 +297,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
             for (let c of conns) {
               c.destroy();
             }
-          }
+          },
+          "disconnect all"
         )
       );
     }
@@ -311,7 +312,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
 
             // Ensure that node parent redraw itself
             this.parent.updateSVGElement();
-          }
+          },
+          "delete output"
         )
       );
     }
@@ -326,7 +328,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.ANY;
             this.updateSVGElement();
-          }
+          },
+          "any"
         ),
         new MenuItem(
           `
@@ -336,7 +339,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.NUMBER;
             this.updateSVGElement();
-          }
+          },
+          "number"
         ),
         new MenuItem(
           `
@@ -356,7 +360,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.BOOLEAN;
             this.updateSVGElement();
-          }
+          },
+          "boolean"
         ),
         new MenuItem(
           `
@@ -366,7 +371,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.ARRAY;
             this.updateSVGElement();
-          }
+          },
+          "array"
         ),
         new MenuItem(
           `
@@ -376,7 +382,8 @@ export class OutputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.type = Types.OBJECT;
             this.updateSVGElement();
-          }
+          },
+          "object"
         )
       );
     }

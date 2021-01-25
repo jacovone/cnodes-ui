@@ -202,7 +202,8 @@ export class CnodesCanvas extends Canvas {
         `,
         () => {
           this.copySelectedNodes();
-        }
+        },
+        "copy"
       )
     );
     retArr.unshift(
@@ -218,7 +219,8 @@ export class CnodesCanvas extends Canvas {
         `,
         () => {
           this.cloneSelectedNodes();
-        }
+        },
+        "clone"
       )
     );
 
@@ -241,7 +243,8 @@ export class CnodesCanvas extends Canvas {
           `,
           () => {
             this.popProgram();
-          }
+          },
+          "return"
         )
       );
     }
@@ -255,7 +258,8 @@ export class CnodesCanvas extends Canvas {
         `,
         () => {
           this.fitGraph();
-        }
+        },
+        "fit graph"
       )
     );
 
@@ -273,7 +277,8 @@ export class CnodesCanvas extends Canvas {
           `,
           (x, y) => {
             this.pasteNodes(x, y);
-          }
+          },
+          "paste"
         )
       );
     }
@@ -298,7 +303,8 @@ export class CnodesCanvas extends Canvas {
               (x, y) => {
                 let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
-              }
+              },
+              n.title
             )
           );
         }

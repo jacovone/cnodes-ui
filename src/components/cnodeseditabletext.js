@@ -120,7 +120,8 @@ export class CnodesEditableTextComponent extends Component {
       `,
         () => {
           this.setEditing(true);
-        }
+        },
+        "edit text"
       ),
     ];
   }

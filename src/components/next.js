@@ -213,7 +213,8 @@ export class NextSocketComponent extends CnodesSocketComponent {
           `<tspan alignment-baseline="middle">Disconnect</tspan>`,
           () => {
             conn.destroy();
-          }
+          },
+          "disconnect"
         )
       );
     }

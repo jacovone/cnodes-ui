@@ -11638,13 +11638,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Canvas": () => /* binding */ Canvas
 /* harmony export */ });
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/socket */ "../cnodes/lib/core/socket.js");
-/* harmony import */ var _marco_jacovone_cnodes_lib_nodes_if__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/nodes/if */ "../cnodes/lib/nodes/if.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
-/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
-/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
-/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
+/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
+/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -11671,7 +11670,6 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020/2021
  */
-
 
 
 
@@ -11969,7 +11967,7 @@ var Canvas = /*#__PURE__*/function () {
     _classPrivateFieldGet(this, _svgEl).style.height = "100%";
     el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Background color
 
-    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
+    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components
 
     _classPrivateFieldSet(this, _connectionsEl, document.createElementNS("http://www.w3.org/2000/svg", "g"));
@@ -12122,7 +12120,7 @@ var Canvas = /*#__PURE__*/function () {
                 }
               };
 
-              retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem(item.text, callback, item.searchText));
+              retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
             }
           };
 
@@ -12164,7 +12162,7 @@ var Canvas = /*#__PURE__*/function () {
 
       while (pointedEl) {
         // Traverse the DOM tree
-        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_7__.SocketComponent)) {
+        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_6__.SocketComponent)) {
           return pointedEl.componentRef;
         }
 
@@ -12380,7 +12378,7 @@ var Canvas = /*#__PURE__*/function () {
           var c = _step6.value;
 
           // Ignore menus and sockets
-          if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_5__.Menu)) {
+          if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
             if (c.absPos.x < nodesBounds.minX) {
               nodesBounds.minX = c.absPos.x;
             }
@@ -12593,7 +12591,7 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       var p = this.clientToSvgPoint(e.clientX, e.clientY);
 
-      _classPrivateFieldSet(this, _startDragPos, new _position__WEBPACK_IMPORTED_MODULE_6__.Position(p.x, p.y));
+      _classPrivateFieldSet(this, _startDragPos, new _position__WEBPACK_IMPORTED_MODULE_5__.Position(p.x, p.y));
 
       _classPrivateFieldGet(this, _selectionEl).setAttribute("x", p.x);
 
@@ -12603,11 +12601,11 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       _classPrivateFieldGet(this, _selectionEl).setAttribute("height", "0");
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
 
       _classPrivateFieldGet(this, _svgEl).appendChild(_classPrivateFieldGet(this, _selectionEl));
 
@@ -14648,7 +14646,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           _this3.node.addInput();
 
           _this3.updateSVGElement();
-        }));
+        }, "add input"));
       } // The node can add inputs?
 
 
@@ -14657,23 +14655,23 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           _this3.node.addOutput();
 
           _this3.updateSVGElement();
-        }));
+        }, "add output"));
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
         _this3.events.emit("cnui:disconnectAll");
-      })); // The node can be removed?
+      }, "disconnect all")); // The node can be removed?
 
       if (this.node.removable) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Delete</tspan>", function () {
           _this3.destroy();
-        }));
+        }, "delete"));
       }
 
       if (!_classPrivateFieldGet(this, _commentComp)) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
           _this3.createCommentComponent("write a comment", 0, _this3.height + 10, true);
-        }));
+        }, "add comment"));
       } else {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
           _classPrivateFieldGet(_this3, _commentComp).events.removeAllListeners("cnui:change");
@@ -14685,7 +14683,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           _this3.node.meta.comment = undefined;
 
           _classPrivateFieldSet(_this3, _commentComp, null);
-        }));
+        }, "remove comment"));
       }
 
       return items;
@@ -15078,10 +15076,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
       retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
         _this2.copySelectedNodes();
-      }));
+      }, "copy"));
       retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
         _this2.cloneSelectedNodes();
-      }));
+      }, "clone"));
       return retArr;
     }
     /**
@@ -15098,17 +15096,17 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       if (this.canPopProgram()) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this3.popProgram();
-        }));
+        }, "return"));
       }
 
       items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
         _this3.fitGraph();
-      }));
+      }, "fit graph"));
 
       if (CnodesCanvas.clipboard) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(CnodesCanvas.clipboard.length, " node").concat(CnodesCanvas.clipboard.length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
           _this3.pasteNodes(x, y);
-        }));
+        }, "paste"));
       }
 
       var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
@@ -15130,7 +15128,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
                 items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this3);
                   node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
-                }));
+                }, n.title));
               }
             };
 
@@ -15975,7 +15973,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
 
       return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
         _this2.setEditing(true);
-      })];
+      }, "edit text")];
     }
     /**
      * Sets the editing mode
@@ -16352,7 +16350,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
       var menuEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
       var textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      textInputElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
+      textInputElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_FONT, "; \n      color: black; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
       textInputElem.setAttribute("x", 0);
       textInputElem.setAttribute("y", 0);
       textInputElem.setAttribute("transform", "translate(".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ", ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ")"));
@@ -16566,7 +16564,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
     get: function get() {
       var _this4 = this;
 
-      var filterElems = this.items.filter(function (i, idx) {
+      var filterElems = this.items.filter(function (i) {
         return i.searchText.toUpperCase().includes(_this4.searchFilter.toUpperCase());
       });
       return filterElems.filter(function (i, idx) {
@@ -17237,7 +17235,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           // Disconnect this socket
           conn.destroy();
-        }));
+        }, "disconnect"));
       }
 
       if (this.socket.node.canRemoveInput(this.socket)) {
@@ -17248,7 +17246,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
           _this4.parent.updateSVGElement();
-        }));
+        }, "delete input"));
       }
 
       if (this.socket.canEditType) {
@@ -17256,27 +17254,27 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
+        }, "number"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
+        }, "any"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
+        }, "string"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
+        }, "boolean"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
+        }, "array"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
 
           _this4.updateSVGElement();
-        }));
+        }, "object"));
       }
 
       return items.length > 0 ? items : null;
@@ -17561,7 +17559,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       if (conn) {
         items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           conn.destroy();
-        }));
+        }, "disconnect"));
       }
 
       return items.length > 0 ? items : null;
@@ -17719,7 +17717,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
         }
 
         _this2.updateSVGElement();
-      }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Reset outputs</tspan>"), function () {
+      }, "remove unused"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Reset outputs</tspan>"), function () {
         var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(_this2, _originalOutputs)),
             _step2;
 
@@ -17738,7 +17736,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
         }
 
         _this2.updateSVGElement();
-      }));
+      }, "reset outputs"));
       return items.length ? items : null;
     }
   }]);
@@ -17868,7 +17866,7 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
       var items = (_get$call = _get(_getPrototypeOf(CnodeProgramComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
       items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Edit...</tspan>"), function () {
         _this2.canvas.pushProgram(_this2.node);
-      }));
+      }, "edit"));
       return items.length ? items : null;
     }
   }]);
@@ -18254,7 +18252,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           } finally {
             _iterator4.f();
           }
-        }));
+        }, "disconnect all"));
       }
 
       if (this.socket.node.canRemoveOutput(this.socket)) {
@@ -18265,7 +18263,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
           _this4.parent.updateSVGElement();
-        }));
+        }, "delete output"));
       }
 
       if (this.socket.canEditType) {
@@ -18273,11 +18271,11 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
+        }, "any"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
+        }, "number"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
 
           _this4.updateSVGElement();
@@ -18285,15 +18283,15 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
+        }, "boolean"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
+        }, "array"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
 
           _this4.updateSVGElement();
-        }));
+        }, "object"));
       }
 
       return items.length > 0 ? items : null;
@@ -18599,7 +18597,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           } finally {
             _iterator4.f();
           }
-        }));
+        }, "disconnect all"));
       }
 
       return items.length > 0 ? items : null;
@@ -18972,7 +18970,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "MENU_ITEM_HIGHLIGHT",
     get: function get() {
-      return "#F5F5F5";
+      return "#F0F0F0";
     }
   }, {
     key: "MENU_SEARCH_FONT",
@@ -20935,7 +20933,7 @@ var Node = /*#__PURE__*/function () {
         while (_classPrivateFieldGet(this, _prev).peers.length > 0) {
           _classPrivateFieldGet(this, _prev).disconnect(_classPrivateFieldGet(this, _prev).peers[0]);
 
-          _classPrivateFieldGet(this, _prev).splice(0, 1);
+          _classPrivateFieldGet(this, _prev).peers.splice(0, 1);
         }
       }
 

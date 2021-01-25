@@ -63,7 +63,8 @@ export class CnodeProgramComponent extends CnodeComponent {
         `<tspan alignment-baseline="middle" style="${Theme.current.MENU_SPECIAL_ITEM_STYLE}">Edit...</tspan>`,
         () => {
           this.canvas.pushProgram(this.node);
-        }
+        },
+        "edit"
       )
     );
 

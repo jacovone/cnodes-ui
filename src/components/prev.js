@@ -210,7 +210,8 @@ export class PrevSocketComponent extends CnodesSocketComponent {
             for (let c of conns) {
               c.destroy();
             }
-          }
+          },
+          "disconnect all"
         )
       );
     }

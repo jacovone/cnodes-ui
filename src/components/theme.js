@@ -275,7 +275,7 @@ export class Theme {
     return "lightgray";
   }
   get MENU_ITEM_HIGHLIGHT() {
-    return "#F5F5F5";
+    return "#F0F0F0";
   }
   get MENU_SEARCH_FONT() {
     return "bold 11px verdana";

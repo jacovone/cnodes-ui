@@ -85,12 +85,12 @@ export class Theme {
     </linearGradient>
     <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >
         <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>
-            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>
+            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>
         </rect>
     </pattern>
     <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >
         <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>
-            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>
+            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>
         </rect>
     </pattern>
     `;

@@ -353,8 +353,7 @@ export class Canvas {
       if (!component) {
         items = this.getCanvasContextMenuItems();
       } else {
-        // Check if there are selected component
-        if (this.#selectedComponents.length > 0) {
+        if (component.selectable && this.isComponentSelected(component)) {
           // There are selected components, so merge menu items
           // common to all components
           items = this.getAllCommonMenuItems(this.#selectedComponents);

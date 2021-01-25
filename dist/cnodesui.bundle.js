@@ -11638,12 +11638,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Canvas": () => /* binding */ Canvas
 /* harmony export */ });
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/socket */ "../cnodes/lib/core/socket.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
-/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
-/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
-/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
+/* harmony import */ var _marco_jacovone_cnodes_lib_nodes_if__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/nodes/if */ "../cnodes/lib/nodes/if.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
+/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
+/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
+/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -11670,6 +11671,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * Author: Marco Jacovone
  * Year: 2020/2021
  */
+
 
 
 
@@ -11967,7 +11969,7 @@ var Canvas = /*#__PURE__*/function () {
     _classPrivateFieldGet(this, _svgEl).style.height = "100%";
     el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Background color
 
-    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
+    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components
 
     _classPrivateFieldSet(this, _connectionsEl, document.createElementNS("http://www.w3.org/2000/svg", "g"));
@@ -12120,7 +12122,7 @@ var Canvas = /*#__PURE__*/function () {
                 }
               };
 
-              retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
+              retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem(item.text, callback, item.searchText));
             }
           };
 
@@ -12162,7 +12164,7 @@ var Canvas = /*#__PURE__*/function () {
 
       while (pointedEl) {
         // Traverse the DOM tree
-        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_6__.SocketComponent)) {
+        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_7__.SocketComponent)) {
           return pointedEl.componentRef;
         }
 
@@ -12378,7 +12380,7 @@ var Canvas = /*#__PURE__*/function () {
           var c = _step6.value;
 
           // Ignore menus and sockets
-          if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
+          if (!(c instanceof _marco_jacovone_cnodes_lib_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_5__.Menu)) {
             if (c.absPos.x < nodesBounds.minX) {
               nodesBounds.minX = c.absPos.x;
             }
@@ -12591,7 +12593,7 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       var p = this.clientToSvgPoint(e.clientX, e.clientY);
 
-      _classPrivateFieldSet(this, _startDragPos, new _position__WEBPACK_IMPORTED_MODULE_5__.Position(p.x, p.y));
+      _classPrivateFieldSet(this, _startDragPos, new _position__WEBPACK_IMPORTED_MODULE_6__.Position(p.x, p.y));
 
       _classPrivateFieldGet(this, _selectionEl).setAttribute("x", p.x);
 
@@ -12601,11 +12603,11 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       _classPrivateFieldGet(this, _selectionEl).setAttribute("height", "0");
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
 
       _classPrivateFieldGet(this, _svgEl).appendChild(_classPrivateFieldGet(this, _selectionEl));
 
@@ -12637,8 +12639,7 @@ var _onPointerUp2 = function _onPointerUp2(e) {
     if (!component) {
       items = this.getCanvasContextMenuItems();
     } else {
-      // Check if there are selected component
-      if (_classPrivateFieldGet(this, _selectedComponents).length > 0) {
+      if (component.selectable && this.isComponentSelected(component)) {
         // There are selected components, so merge menu items
         // common to all components
         items = this.getAllCommonMenuItems(_classPrivateFieldGet(this, _selectedComponents));
@@ -18697,7 +18698,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "DEFS",
     get: function get() {
-      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='".concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='0.5s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ");
+      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='".concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='12.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='24.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='25.5%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.45%'  stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='37.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='49.9%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='50%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='62.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='74.95%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='75%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.45%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR, "'></stop>\n        <stop offset='87.5%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n        <stop offset='100%' stop-color='").concat(Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR2, "'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ");
     }
   }, {
     key: "NODE_WIDTH",

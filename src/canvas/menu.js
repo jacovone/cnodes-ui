@@ -90,7 +90,7 @@ export class Menu extends Component {
   show(x, y) {
     this.setup();
 
-    canvas.addComponent(this);
+    this.canvas.addComponent(this);
     this.pos = new Position(x, y);
   }
 

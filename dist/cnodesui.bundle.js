@@ -15725,9 +15725,13 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
   var _super = _createSuper(CnodesConnection);
 
   function CnodesConnection(source, target, canvas) {
+    var _this;
+
     _classCallCheck(this, CnodesConnection);
 
-    return _super.call(this, source, target);
+    _this = _super.call(this, source, target);
+    _this.canvas = canvas;
+    return _this;
   }
   /**
    * Sets up the component
@@ -15741,7 +15745,7 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
 
       this.updateSVGElement();
 
-      if (canvas.program) {
+      if (this.canvas.program) {
         // Connect cnodes sockets
         this.source.socket.connect(this.target.socket);
       }

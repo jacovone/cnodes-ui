@@ -18,7 +18,7 @@ import { Theme } from "../components/theme";
  * the connection status of the embedded cnodes's socket
  */
 export class PrevNextConnection extends CnodesConnection {
-  constructor(source, target, canvas, connect = true) {
+  constructor(source, target, canvas) {
     super(source, target, canvas);
   }
 

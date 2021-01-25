@@ -1,6 +1,6 @@
 {
   "name": "@marco.jacovone/cnodes-ui",
-  "version": "0.15.7",
+  "version": "0.15.10",
   "description": "A javascript UI for cnodes",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,6 @@
   "keywords": [],
   "author": "Marco Jacovone",
   "license": "MIT",
-  "types": "./dist/types/index.d.ts",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",

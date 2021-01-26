@@ -96,6 +96,16 @@ export class CnodesCanvas extends Canvas {
         return;
       }
 
+      if (e.key === "Backspace") {
+        if (this.canPopProgram()) {
+          this.popProgram();
+        }
+        e.preventDefault();
+      }
+      if (e.key === "Escape") {
+        this.unselectAllNodes();
+        e.preventDefault();
+      }
       if (e.key === "Delete") {
         this.deleteSelectedNodes();
         e.preventDefault();
@@ -511,6 +521,14 @@ export class CnodesCanvas extends Canvas {
         c.destroy();
       }
     }
+  }
+
+  /**
+   * This method unselect all nodes
+   */
+  unselectAllNodes() {
+    this.selectedComponents = [];
+    this.components.forEach((c) => c.updateSVGElement());
   }
 
   /**

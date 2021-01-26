@@ -143,7 +143,7 @@ export class CnodesMenu extends Menu {
       self.createMenuItemsElements();
     });
     this.#inputElement.addEventListener("keydown", (e) => {
-      if (e.keyCode === 27) {
+      if (e.key === "Escape") {
         self.canvas.cancelContextMenu();
 
         // If there is client of the menu interested to user selection or abort

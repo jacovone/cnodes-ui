@@ -14972,6 +14972,20 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         return;
       }
 
+      if (e.key === "Backspace") {
+        if (_this.canPopProgram()) {
+          _this.popProgram();
+        }
+
+        e.preventDefault();
+      }
+
+      if (e.key === "Escape") {
+        _this.unselectAllNodes();
+
+        e.preventDefault();
+      }
+
       if (e.key === "Delete") {
         _this.deleteSelectedNodes();
 
@@ -15474,6 +15488,18 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       } finally {
         _iterator13.f();
       }
+    }
+    /**
+     * This method unselect all nodes
+     */
+
+  }, {
+    key: "unselectAllNodes",
+    value: function unselectAllNodes() {
+      this.selectedComponents = [];
+      this.components.forEach(function (c) {
+        return c.updateSVGElement();
+      });
     }
     /**
      * This method select all nodes
@@ -16419,7 +16445,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
       });
 
       _classPrivateFieldGet(this, _inputElement).addEventListener("keydown", function (e) {
-        if (e.keyCode === 27) {
+        if (e.key === "Escape") {
           self.canvas.cancelContextMenu(); // If there is client of the menu interested to user selection or abort
 
           if (self.menuCallback) {

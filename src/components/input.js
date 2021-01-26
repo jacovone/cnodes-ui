@@ -116,7 +116,6 @@ export class InputSocketComponent extends CnodesSocketComponent {
       this.#inputNameElement.addEventListener("keyup", (e) => {
         this.socket.name = e.target.value;
       });
-
       /** Prevent descendants management of the click (pan) and allow selection */
       this.#inputNameElement.addEventListener("pointerdown", (e) => {
         e.stopPropagation();

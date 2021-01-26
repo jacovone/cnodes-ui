@@ -92,15 +92,24 @@ export class CnodesCanvas extends Canvas {
 
     // Register keystrokes
     document.addEventListener("keydown", (e) => {
+      if (document.activeElement.tagName.toUpperCase() === "INPUT") {
+        return;
+      }
+
       if (e.key === "Delete") {
-        for (let c of this.selectedComponents) {
-          if (c instanceof CnodeComponent && c.node.removable) {
-            c.destroy();
-          }
-        }
+        this.deleteSelectedNodes();
         e.preventDefault();
       }
       if (e.ctrlKey || e.metaKey) {
+        if (e.key === "x") {
+          this.copySelectedNodes();
+          this.deleteSelectedNodes();
+          e.preventDefault();
+        }
+        if (e.key === "a") {
+          this.selectAllNodes();
+          e.preventDefault();
+        }
         if (e.key === "c") {
           this.copySelectedNodes();
           e.preventDefault();
@@ -491,6 +500,27 @@ export class CnodesCanvas extends Canvas {
         .map((c) => c.node)
     );
     CnodesCanvas.clipboard = Program.cloneNodes(selectedNodes);
+  }
+
+  /**
+   * This method deletes selected nodes
+   */
+  deleteSelectedNodes() {
+    for (let c of this.selectedComponents) {
+      if (c instanceof CnodeComponent && c.node.removable) {
+        c.destroy();
+      }
+    }
+  }
+
+  /**
+   * This method select all nodes
+   */
+  selectAllNodes() {
+    this.selectedComponents = this.components.filter(
+      (c) => c instanceof CnodeComponent
+    );
+    this.selectedComponents.forEach((c) => c.updateSVGElement());
   }
 
   /**

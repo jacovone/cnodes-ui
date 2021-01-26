@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/marco-jacovone/cnodes-ui.git"
   },
+  "types": "index.d.ts",
   "keywords": [],
   "author": "Marco Jacovone",
   "license": "MIT",

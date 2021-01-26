@@ -44,7 +44,7 @@ declare module cnui {
     static getNodeUIInstance(node: any, canvas: CnodesCanvas): any;
     constructor(el: any);
     /** The event emitter connected to the canvas */
-    events: any;
+    events: import("events").EventEmitter;
     /**
      * This setter is a trigger for the import procedure
      */
@@ -609,7 +609,7 @@ declare module cnui {
     /**
      * Events connected to the component:
      */
-    events: any;
+    events: import("events").EventEmitter;
     /**
      * Sets up this connection. In terms of construction flow
      * this means create the SVG element that will be shown
@@ -654,7 +654,7 @@ declare module cnui {
     /**
      * Events connected to the component:
      */
-    events: any;
+    events: import("events").EventEmitter;
     /**
      * Sets up the component. The component creation follow a specific flow.
      * The user that creates the component have to call this method after, to
@@ -1252,7 +1252,7 @@ declare module cnui {
      */
     static cloneNodes(nodes: Node[]): any[];
     /** The event emitter connected to the program */
-    events: any;
+    events: import("events").EventEmitter;
     set vars(arg: Map<any, any>);
     get vars(): Map<any, any>;
     set enter(arg: any);

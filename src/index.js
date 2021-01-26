@@ -15,7 +15,7 @@ import { CnodeComponent } from "./components/cnode";
 import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
 import { Theme, defaultLight } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
-import { Env } from "@marco.jacovone/cnodes/cnodes";
+import { Env } from "@marco.jacovone/cnodes/index";
 import { Program } from "@marco.jacovone/cnodes/lib/core/program";
 import { FOBreak } from "@marco.jacovone/cnodes/lib/nodes/object/fobreak";
 import { CnodeBreakComponent } from "./components/nodes/cnodebreak";
@@ -33,7 +33,7 @@ export {
   MenuItem,
 };
 
-export * from "@marco.jacovone/cnodes/cnodes";
+export * from "@marco.jacovone/cnodes/index";
 
 /**
  * This is the main entrypoint function. You can pass an ID of a

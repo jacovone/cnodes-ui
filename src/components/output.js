@@ -8,7 +8,7 @@
  */
 
 import { Theme } from "./theme";
-import { Env } from "@marco.jacovone/cnodes/cnodes";
+import { Env } from "@marco.jacovone/cnodes/index";
 import { IOConnection } from "../connections/ioconnection";
 import { CnodesSocketComponent } from "./cnodessocket";
 import { MenuItem } from "../canvas/menu";

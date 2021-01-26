@@ -14845,7 +14845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_node__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/node */ "../cnodes/lib/core/node.js");
 /* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
@@ -15075,7 +15075,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "dump",
     value: function dump() {
-      console.log(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
+      console.log(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
     }
     /**
      * Override this method to add common actions on top, like
@@ -15126,20 +15126,20 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         }, "paste"));
       }
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
-              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
@@ -15392,12 +15392,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     key: "cloneSelectedNodes",
     value: function cloneSelectedNodes() {
       var oldSelected = this.selectedComponents;
-      var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+      var selectedNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
         return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
       }).map(function (c) {
         return c.node;
       }));
-      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
+      var cloneNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
 
       var _iterator10 = _createForOfIteratorHelper(cloneNodes),
           _step10;
@@ -15458,12 +15458,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "copySelectedNodes",
     value: function copySelectedNodes() {
-      var selectedNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+      var selectedNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
         return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
       }).map(function (c) {
         return c.node;
       }));
-      CnodesCanvas.clipboard = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
+      CnodesCanvas.clipboard = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
     }
     /**
      * This method deletes selected nodes
@@ -15529,7 +15529,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       }
 
       var oldSelected = this.selectedComponents;
-      var cloneNodes = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(CnodesCanvas.clipboard);
+      var cloneNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(CnodesCanvas.clipboard);
 
       if (x && y) {
         // Compute the min x,y of cloned nodes
@@ -16673,7 +16673,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesSocketComponent": () => /* binding */ CnodesSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/type */ "../cnodes/lib/core/type.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
@@ -16880,7 +16880,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "InputSocketComponent": () => /* binding */ InputSocketComponent
 /* harmony export */ });
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
@@ -17224,21 +17224,21 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 var _iterator3 = _createForOfIteratorHelper(n.outputs),
@@ -17378,7 +17378,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NextSocketComponent": () => /* binding */ NextSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
 /* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
@@ -17514,7 +17514,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
     }
     /**
      * The user has completed a valid connection
@@ -17538,7 +17538,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
     }
     /**
      * This socket supports single connection, so if the user
@@ -17571,21 +17571,21 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable && n.prev) {
                 items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
@@ -17963,7 +17963,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "OutputSocketComponent": () => /* binding */ OutputSocketComponent
 /* harmony export */ });
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
@@ -18230,21 +18230,21 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 var _iterator3 = _createForOfIteratorHelper(n.inputs),
@@ -18395,7 +18395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PrevSocketComponent": () => /* binding */ PrevSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
 /* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
 /* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
@@ -18548,7 +18548,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.NextSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.NextSocket;
     }
     /**
      * Returns the direction of the source point for this socket component:
@@ -18581,21 +18581,21 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 var _iterator3 = _createForOfIteratorHelper(n.nexts),
@@ -19282,51 +19282,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_5__.CnodeProgramComponent,
 /* harmony export */   "Menu": () => /* reexport safe */ _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.Menu,
 /* harmony export */   "MenuItem": () => /* reexport safe */ _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem,
-/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.AMap,
-/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.APush,
-/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.AReduce,
-/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Call,
-/* harmony export */   "Comparision": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Comparision,
-/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Console,
-/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Env,
-/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FAConst,
-/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FAGet,
-/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FALength,
-/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FAMake,
-/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FAMap,
-/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FAReduce,
-/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FAdd,
-/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FCompare,
-/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FConcat,
-/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FDiv,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FGetvar,
-/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FIf,
-/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FMod,
-/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FMul,
-/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FNConst,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FOBreak,
-/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FOMake,
-/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FSConst,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FSqrt,
-/* harmony export */   "FTofixed": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FTofixed,
-/* harmony export */   "FlowSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.FlowSocket,
-/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.For,
-/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Getvar,
-/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.If,
-/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.InputSocket,
-/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Log,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.NextSocket,
-/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Node,
-/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.OutputSocket,
-/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.PrevSocket,
-/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Program,
-/* harmony export */   "Result": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Result,
-/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Setvar,
-/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Socket,
-/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Types,
-/* harmony export */   "ValueSocket": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.ValueSocket,
-/* harmony export */   "Wait": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Wait,
-/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.While,
+/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.AMap,
+/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.APush,
+/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.AReduce,
+/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Call,
+/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Console,
+/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Env,
+/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAConst,
+/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAGet,
+/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FALength,
+/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAMake,
+/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAMap,
+/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAReduce,
+/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAdd,
+/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FCompare,
+/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FConcat,
+/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FDiv,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FGetvar,
+/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FIf,
+/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FMod,
+/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FMul,
+/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FNConst,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FOBreak,
+/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FOMake,
+/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FSConst,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FSqrt,
+/* harmony export */   "FTofixed": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FTofixed,
+/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.For,
+/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Getvar,
+/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.If,
+/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.InputSocket,
+/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Log,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.NextSocket,
+/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Node,
+/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.OutputSocket,
+/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.PrevSocket,
+/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Program,
+/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Setvar,
+/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Socket,
+/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Types,
+/* harmony export */   "Wait": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Wait,
+/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.While,
 /* harmony export */   "canvas": () => /* binding */ canvas
 /* harmony export */ });
 /* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas/canvas */ "./src/canvas/canvas.js");
@@ -19337,7 +19333,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/nodes/cnodeprogram */ "./src/components/nodes/cnodeprogram.js");
 /* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
 /* harmony import */ var _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/cnodes */ "../cnodes/cnodes.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /* harmony import */ var _marco_jacovone_cnodes_lib_core_program__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/core/program */ "../cnodes/lib/core/program.js");
 /* harmony import */ var _marco_jacovone_cnodes_lib_nodes_object_fobreak__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @marco.jacovone/cnodes/lib/nodes/object/fobreak */ "../cnodes/lib/nodes/object/fobreak.js");
 /* harmony import */ var _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/nodes/cnodebreak */ "./src/components/nodes/cnodebreak.js");
@@ -19389,7 +19385,7 @@ function canvas(elId) {
     return null;
   }
 
-  _marco_jacovone_cnodes_cnodes__WEBPACK_IMPORTED_MODULE_8__.Env.init();
+  _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Env.init();
   return new _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas(el);
 } // register core custom nodes
 
@@ -19398,10 +19394,10 @@ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeU
 
 /***/ }),
 
-/***/ "../cnodes/cnodes.js":
-/*!***************************!*\
-  !*** ../cnodes/cnodes.js ***!
-  \***************************/
+/***/ "../cnodes/index.js":
+/*!**************************!*\
+  !*** ../cnodes/index.js ***!
+  \**************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19409,15 +19405,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Env": () => /* reexport safe */ _lib_core_env_js__WEBPACK_IMPORTED_MODULE_0__.Env,
 /* harmony export */   "Node": () => /* reexport safe */ _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Node,
-/* harmony export */   "Result": () => /* reexport safe */ _lib_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Result,
 /* harmony export */   "Program": () => /* reexport safe */ _lib_core_program_js__WEBPACK_IMPORTED_MODULE_2__.Program,
-/* harmony export */   "FlowSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.FlowSocket,
+/* harmony export */   "Socket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.Socket,
 /* harmony export */   "InputSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket,
 /* harmony export */   "OutputSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket,
 /* harmony export */   "PrevSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket,
-/* harmony export */   "Socket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.Socket,
-/* harmony export */   "ValueSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.ValueSocket,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _lib_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket,
 /* harmony export */   "Types": () => /* reexport safe */ _lib_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Types,
 /* harmony export */   "Call": () => /* reexport safe */ _lib_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.Call,
 /* harmony export */   "Console": () => /* reexport safe */ _lib_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.Console,
@@ -19430,7 +19423,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "While": () => /* reexport safe */ _lib_nodes_while_js__WEBPACK_IMPORTED_MODULE_13__.While,
 /* harmony export */   "FIf": () => /* reexport safe */ _lib_nodes_fif_js__WEBPACK_IMPORTED_MODULE_14__.FIf,
 /* harmony export */   "Wait": () => /* reexport safe */ _lib_nodes_wait_js__WEBPACK_IMPORTED_MODULE_15__.Wait,
-/* harmony export */   "Comparision": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_16__.Comparision,
 /* harmony export */   "FCompare": () => /* reexport safe */ _lib_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_16__.FCompare,
 /* harmony export */   "FSConst": () => /* reexport safe */ _lib_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_17__.FSConst,
 /* harmony export */   "FConcat": () => /* reexport safe */ _lib_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_18__.FConcat,
@@ -19498,7 +19490,7 @@ __webpack_require__.r(__webpack_exports__);
  * Author: Marco Jacovone
  * Year: 2020
  */
-// Export core nodes
+// Import core nodes
 
 
 
@@ -19514,20 +19506,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Export boolean nodes
+ // Import boolean nodes
 
- // Export string nodes
-
-
- // Export math nodes
+ // Import string nodes
 
 
-
-
-
-
-
- // Export arrays nodes
+ // Import math nodes
 
 
 
@@ -19535,9 +19519,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // Import arrays nodes
 
 
- // Export objects nodes
+
+
+
+
+
+
+
+ // Import objects nodes
+
 
 
 
@@ -19612,6 +19605,10 @@ var Enter = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Enter);
 
   // Provide a node instance
+
+  /**
+   * Construct a new Enter node
+   */
   function Enter() {
     var _this;
 
@@ -20584,6 +20581,10 @@ var Exit = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Exit);
 
   // Provide a node instance
+
+  /**
+   * Construct a new Exit node
+   */
   function Exit() {
     var _this;
 
@@ -20771,6 +20772,12 @@ var Node = /*#__PURE__*/function () {
   /** Can the user add an output? */
 
   /** Can the user add a next? */
+
+  /**
+   * Construct a new Node
+   * @param {string} name The name of the node
+   * @param {string} title The title of the node
+   */
   function Node(name) {
     var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : name;
 
@@ -21411,6 +21418,11 @@ var _next2 = new WeakMap();
 
 var Result = /*#__PURE__*/function () {
   /** The next node */
+
+  /**
+   * Construct a new Result
+   * @param {Socket} next The next socket to follow
+   */
   function Result() {
     var next = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -21549,6 +21561,10 @@ var Program = /*#__PURE__*/function (_Node) {
   /** The variable global space */
 
   /** The event emitter connected to the program */
+
+  /**
+   * Construct a new Program node
+   */
   function Program() {
     var _this;
 
@@ -22854,6 +22870,10 @@ var AMap = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(AMap);
 
   // Provide a node instance
+
+  /**
+   * Construct a new AMap node
+   */
   function AMap() {
     var _this;
 
@@ -23067,6 +23087,10 @@ var APush = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(APush);
 
   // Provide a node instance
+
+  /**
+   * Construct a new APush node
+   */
   function APush() {
     var _this;
 
@@ -23226,6 +23250,10 @@ var AReduce = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(AReduce);
 
   // Provide a node instance
+
+  /**
+   * Construct a new AReduce node
+   */
   function AReduce() {
     var _this;
 
@@ -23440,6 +23468,10 @@ var FAConst = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FAConst);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FAConst node
+   */
   function FAConst() {
     var _this;
 
@@ -23594,6 +23626,10 @@ var FAGet = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FAGet);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FAGet node
+   */
   function FAGet() {
     var _this;
 
@@ -23739,6 +23775,10 @@ var FALength = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FALength);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FALength node
+   */
   function FALength() {
     var _this;
 
@@ -23905,6 +23945,10 @@ var FAMake = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FAMake);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FAMake node
+   */
   function FAMake() {
     var _this;
 
@@ -24116,6 +24160,10 @@ var FAMap = /*#__PURE__*/function (_AMap) {
   var _super = _createSuper(FAMap);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FAMap node
+   */
   function FAMap() {
     var _this;
 
@@ -24213,6 +24261,10 @@ var FAReduce = /*#__PURE__*/function (_AReduce) {
   var _super = _createSuper(FAReduce);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FACompareNode
+   */
   function FAReduce() {
     var _this;
 
@@ -24337,6 +24389,11 @@ var FCompare = /*#__PURE__*/function (_Node) {
   // Provide a node instance
 
   /** Configured comparision for this node */
+
+  /**
+   * Construct a new FCompare node
+   * @param {Comparision} comparision The comparision type
+   */
   function FCompare() {
     var _this;
 
@@ -24520,6 +24577,10 @@ var FEqual = /*#__PURE__*/function (_FCompare) {
   var _super = _createSuper(FEqual);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FEqual
+   */
   function FEqual() {
     var _this;
 
@@ -24613,6 +24674,10 @@ var FGT = /*#__PURE__*/function (_FCompare) {
   var _super = _createSuper(FGT);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FGT
+   */
   function FGT() {
     var _this;
 
@@ -24706,6 +24771,10 @@ var FGTE = /*#__PURE__*/function (_FCompare) {
   var _super = _createSuper(FGTE);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FGTE
+   */
   function FGTE() {
     var _this;
 
@@ -24799,6 +24868,10 @@ var FLT = /*#__PURE__*/function (_FCompare) {
   var _super = _createSuper(FLT);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FLT
+   */
   function FLT() {
     var _this;
 
@@ -24892,6 +24965,10 @@ var FLTE = /*#__PURE__*/function (_FCompare) {
   var _super = _createSuper(FLTE);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FLTE
+   */
   function FLTE() {
     var _this;
 
@@ -24985,6 +25062,10 @@ var FNotEqual = /*#__PURE__*/function (_FCompare) {
   var _super = _createSuper(FNotEqual);
 
   // Provide a node instance
+
+  /**
+   * COnstruct a new FNotEqual node
+   */
   function FNotEqual() {
     var _this;
 
@@ -25083,6 +25164,10 @@ var Call = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Call);
 
   // Provide a node instance
+
+  /**
+   * Construct a new Call node
+   */
   function Call() {
     var _this;
 
@@ -25224,6 +25309,10 @@ var Console = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Console);
 
   // Provide a node instance
+
+  /**
+   * Construct a new Console node
+   */
   function Console() {
     var _this;
 
@@ -25361,6 +25450,10 @@ var FGetvar = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FGetvar);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FGetvar node
+   */
   function FGetvar() {
     var _this;
 
@@ -25498,6 +25591,10 @@ var FIf = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FIf);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FIf node
+   */
   function FIf() {
     var _this;
 
@@ -25637,6 +25734,10 @@ var For = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(For);
 
   // Provide a node instance
+
+  /**
+   * Construct a new For node
+   */
   function For() {
     var _this;
 
@@ -25810,6 +25911,10 @@ var Getvar = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Getvar);
 
   // Provide a node instance
+
+  /**
+   * Construct a new Getvar node
+   */
   function Getvar() {
     var _this;
 
@@ -25949,6 +26054,10 @@ var If = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(If);
 
   // Provide a node instance
+
+  /**
+   * Construct a new If node
+   */
   function If() {
     var _this;
 
@@ -26093,6 +26202,10 @@ var Log = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Log);
 
   /** Return an instance of this node */
+
+  /**
+   * Construct a new Log node
+   */
   function Log() {
     var _this;
 
@@ -26244,6 +26357,10 @@ var FAdd = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FAdd);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FAdd node
+   */
   function FAdd() {
     var _this;
 
@@ -26475,6 +26592,10 @@ var FDiv = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FDiv);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FDiv node
+   */
   function FDiv() {
     var _this;
 
@@ -26612,6 +26733,10 @@ var FMod = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FMod);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FMod node
+   */
   function FMod() {
     var _this;
 
@@ -26764,6 +26889,10 @@ var FMul = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FMul);
 
   // Provide a node instance
+
+  /**
+   * COnstruct a new FMul node
+   */
   function FMul() {
     var _this;
 
@@ -26996,6 +27125,10 @@ var FNConst = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FNConst);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FNConst node
+   */
   function FNConst() {
     var _this;
 
@@ -27132,6 +27265,10 @@ var FSqrt = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FSqrt);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FSqrt node
+   */
   function FSqrt() {
     var _this;
 
@@ -27270,6 +27407,10 @@ var FTofixed = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FTofixed);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FTofixed node
+   */
   function FTofixed() {
     var _this;
 
@@ -27414,6 +27555,10 @@ var FOBreak = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FOBreak);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FOBreak node
+   */
   function FOBreak() {
     var _this;
 
@@ -27638,6 +27783,10 @@ var FOMake = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FOMake);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FOMake node
+   */
   function FOMake() {
     var _this;
 
@@ -27838,6 +27987,10 @@ var Setvar = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Setvar);
 
   // Provide a node instance
+
+  /**
+   * Construct a new Setvar node
+   */
   function Setvar() {
     var _this;
 
@@ -27992,6 +28145,10 @@ var FConcat = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FConcat);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FConcat node
+   */
   function FConcat() {
     var _this;
 
@@ -28222,6 +28379,10 @@ var FSConst = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(FSConst);
 
   // Provide a node instance
+
+  /**
+   * Construct a new FSConst node
+   */
   function FSConst() {
     var _this;
 
@@ -28359,6 +28520,10 @@ var Wait = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(Wait);
 
   /** Return an instance of this node */
+
+  /**
+   * Construct a new Wait node
+   */
   function Wait() {
     var _this;
 
@@ -28505,6 +28670,10 @@ var While = /*#__PURE__*/function (_Node) {
   var _super = _createSuper(While);
 
   // Provide a node instance
+
+  /**
+   * Construct a new While node
+   */
   function While() {
     var _this;
 

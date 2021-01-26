@@ -38,7 +38,7 @@ import {
   OutputSocket,
   PrevSocket,
   Types,
-} from "@marco.jacovone/cnodes/cnodes.js";
+} from "@marco.jacovone/cnodes/index.js";
 
 export class CustomNode extends Node {
   static instance = () => new CustomNode();

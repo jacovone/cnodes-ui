@@ -5,7 +5,7 @@
  * the connection status of the embedded cnodes's socket
  */
 export class PrevNextConnection extends CnodesConnection {
-    constructor(source: any, target: any, canvas: any, connect?: boolean);
+    constructor(source: any, target: any, canvas: any);
     #private;
 }
 import { CnodesConnection } from "../components/cnodesconnection";

@@ -7,8 +7,8 @@
  * Year: 2020/2021
  */
 
-import { PrevSocket } from "@marco.jacovone/cnodes/cnodes";
-import { Env } from "@marco.jacovone/cnodes/cnodes";
+import { PrevSocket } from "@marco.jacovone/cnodes/index";
+import { Env } from "@marco.jacovone/cnodes/index";
 import { Theme } from "./theme";
 import { Position } from "../canvas/position";
 import { PrevNextConnection } from "../connections/prevnextconnection";

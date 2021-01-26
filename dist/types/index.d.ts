@@ -29,6 +29,7 @@ import { MenuItem } from "./canvas/menu";
 
 declare module cnui {
   export {
+    canvas,
     Canvas,
     Component,
     CnodeComponent,

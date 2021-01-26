@@ -14968,7 +14968,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
 
     document.addEventListener("keydown", function (e) {
-      if (document.activeElement.tagName.toUpperCase() === "INPUT") {
+      if (document.activeElement.tagName.toUpperCase() === "INPUT" || document.activeElement.tagName.toUpperCase() === "TEXTAREA") {
         return;
       }
 

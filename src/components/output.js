@@ -15,7 +15,7 @@ import { MenuItem } from "../canvas/menu";
 import { Position } from "../canvas/position";
 import { InputSocketComponent } from "./input";
 import { CnodesCanvas } from "./cnodescanvas";
-import { Types } from "@marco.jacovone/cnodes/lib/core/type";
+import { Types } from "@marco.jacovone/cnodes/src/core/type";
 
 /**
  * This class implements a socket representing a Output in the

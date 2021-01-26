@@ -7,7 +7,7 @@
  * Year: 2020/2021
  */
 
-import { Types } from "@marco.jacovone/cnodes/lib/core/type";
+import { Types } from "@marco.jacovone/cnodes/src/core/type";
 import { Connection } from "../canvas/connection";
 
 /**

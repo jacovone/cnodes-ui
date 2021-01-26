@@ -10,7 +10,7 @@
 import { EventEmitter } from "events";
 import { Env } from "@marco.jacovone/cnodes/index";
 import { Program } from "@marco.jacovone/cnodes/index";
-import { Node } from "@marco.jacovone/cnodes/lib/core/node";
+import { Node } from "@marco.jacovone/cnodes/src/core/node";
 import { Canvas } from "../canvas/canvas";
 import { MenuItem } from "../canvas/menu";
 import { Position } from "../canvas/position";

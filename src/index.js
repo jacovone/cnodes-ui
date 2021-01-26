@@ -16,8 +16,8 @@ import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
 import { Theme, defaultLight } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
 import { Env } from "@marco.jacovone/cnodes/index";
-import { Program } from "@marco.jacovone/cnodes/lib/core/program";
-import { FOBreak } from "@marco.jacovone/cnodes/lib/nodes/object/fobreak";
+import { Program } from "@marco.jacovone/cnodes/src/core/program";
+import { FOBreak } from "@marco.jacovone/cnodes/src/nodes/object/fobreak";
 import { CnodeBreakComponent } from "./components/nodes/cnodebreak";
 
 export {

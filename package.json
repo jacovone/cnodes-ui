@@ -7,7 +7,7 @@
     "build": "webpack",
     "jsdoc": "jsdoc -r -p -d ./doc/docs ./src/*"
   },
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/marco-jacovone/cnodes-ui.git"

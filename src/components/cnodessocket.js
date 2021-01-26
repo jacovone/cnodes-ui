@@ -8,7 +8,7 @@
  */
 
 import { Socket } from "@marco.jacovone/cnodes/index";
-import { Types } from "@marco.jacovone/cnodes/lib/core/type";
+import { Types } from "@marco.jacovone/cnodes/src/core/type";
 import { Position } from "../canvas/position";
 import { SocketComponent } from "../canvas/socket";
 import { Theme } from "./theme";

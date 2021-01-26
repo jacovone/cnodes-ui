@@ -40,5 +40,5 @@ declare module cnui {
     Menu,
     MenuItem,
   };
-  export * from "@marco.jacovone/cnodes/index";
+  export * from "@marco.jacovone/cnodes/lib/types/index";
 }

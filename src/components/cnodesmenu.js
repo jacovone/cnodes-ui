@@ -153,10 +153,10 @@ export class CnodesMenu extends Menu {
         }
         return;
       }
-      if (e.keyCode === 13) {
+      if (e.key === "Enter") {
         if (self.filteredElements.length > 0) {
-          let menuEl = this.canvas.contextMenuComponent.componentEl.getBoundingClientRect();
-          let p = this.canvas.clientToSvgPoint(menuEl.left, menuEl.top);
+          let bbox = menuEl.getBoundingClientRect();
+          let p = this.canvas.clientToSvgPoint(bbox.left, bbox.top);
 
           // Items can return a result to inform the menu client about the item selection
           let itemResult = self.filteredElements[0].callback(p.x, p.y);
@@ -246,8 +246,8 @@ export class CnodesMenu extends Menu {
         itemEl.setAttribute("fill", "transparent");
       });
       itemEl.addEventListener("pointerdown", (e) => {
-        let menuEl = this.canvas.contextMenuComponent.componentEl.getBoundingClientRect();
-        let p = this.canvas.clientToSvgPoint(menuEl.left, menuEl.top);
+        let bbox = itemEl.getBoundingClientRect();
+        let p = this.canvas.clientToSvgPoint(bbox.left, bbox.top);
 
         let result = item.callback(p.x, p.y);
 

@@ -16456,11 +16456,11 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
           return;
         }
 
-        if (e.keyCode === 13) {
+        if (e.key === "Enter") {
           if (self.filteredElements.length > 0) {
-            var _menuEl = _this2.canvas.contextMenuComponent.componentEl.getBoundingClientRect();
+            var bbox = menuEl.getBoundingClientRect();
 
-            var p = _this2.canvas.clientToSvgPoint(_menuEl.left, _menuEl.top); // Items can return a result to inform the menu client about the item selection
+            var p = _this2.canvas.clientToSvgPoint(bbox.left, bbox.top); // Items can return a result to inform the menu client about the item selection
 
 
             var itemResult = self.filteredElements[0].callback(p.x, p.y); // If there is client of the menu interested to user selection or abort
@@ -16546,9 +16546,9 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
             itemEl.setAttribute("fill", "transparent");
           });
           itemEl.addEventListener("pointerdown", function (e) {
-            var menuEl = _this3.canvas.contextMenuComponent.componentEl.getBoundingClientRect();
+            var bbox = itemEl.getBoundingClientRect();
 
-            var p = _this3.canvas.clientToSvgPoint(menuEl.left, menuEl.top);
+            var p = _this3.canvas.clientToSvgPoint(bbox.left, bbox.top);
 
             var result = item.callback(p.x, p.y); // If there is client of the menu interested to user selection or abort
 
@@ -19274,69 +19274,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Canvas": () => /* reexport safe */ _canvas_canvas__WEBPACK_IMPORTED_MODULE_0__.Canvas,
 /* harmony export */   "Component": () => /* reexport safe */ _canvas_component__WEBPACK_IMPORTED_MODULE_1__.Component,
-/* harmony export */   "CnodeComponent": () => /* reexport safe */ _components_cnode__WEBPACK_IMPORTED_MODULE_4__.CnodeComponent,
-/* harmony export */   "Position": () => /* reexport safe */ _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position,
-/* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_6__.Theme,
-/* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_6__.defaultLight,
-/* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas,
-/* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_5__.CnodeProgramComponent,
+/* harmony export */   "Connection": () => /* reexport safe */ _canvas_connection__WEBPACK_IMPORTED_MODULE_2__.Connection,
 /* harmony export */   "Menu": () => /* reexport safe */ _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.Menu,
 /* harmony export */   "MenuItem": () => /* reexport safe */ _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem,
-/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.AMap,
-/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.APush,
-/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.AReduce,
-/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Call,
-/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Console,
-/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Env,
-/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAConst,
-/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAGet,
-/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FALength,
-/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAMake,
-/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAMap,
-/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAReduce,
-/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FAdd,
-/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FCompare,
-/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FConcat,
-/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FDiv,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FGetvar,
-/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FIf,
-/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FMod,
-/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FMul,
-/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FNConst,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FOBreak,
-/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FOMake,
-/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FSConst,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FSqrt,
-/* harmony export */   "FTofixed": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.FTofixed,
-/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.For,
-/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Getvar,
-/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.If,
-/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.InputSocket,
-/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Log,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.NextSocket,
-/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Node,
-/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.OutputSocket,
-/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.PrevSocket,
-/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Program,
-/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Setvar,
-/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Socket,
-/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Types,
-/* harmony export */   "Wait": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Wait,
-/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.While,
+/* harmony export */   "Position": () => /* reexport safe */ _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position,
+/* harmony export */   "SocketComponent": () => /* reexport safe */ _canvas_socket__WEBPACK_IMPORTED_MODULE_5__.SocketComponent,
+/* harmony export */   "CnodeComponent": () => /* reexport safe */ _components_cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent,
+/* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas,
+/* harmony export */   "CnodesConnection": () => /* reexport safe */ _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_8__.CnodesConnection,
+/* harmony export */   "CnodesEditableTextComponent": () => /* reexport safe */ _components_cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent,
+/* harmony export */   "CnodesMenu": () => /* reexport safe */ _components_cnodesmenu__WEBPACK_IMPORTED_MODULE_10__.CnodesMenu,
+/* harmony export */   "CnodesSocketComponent": () => /* reexport safe */ _components_cnodessocket__WEBPACK_IMPORTED_MODULE_11__.CnodesSocketComponent,
+/* harmony export */   "InputSocketComponent": () => /* reexport safe */ _components_input__WEBPACK_IMPORTED_MODULE_12__.InputSocketComponent,
+/* harmony export */   "OutputSocketComponent": () => /* reexport safe */ _components_output__WEBPACK_IMPORTED_MODULE_13__.OutputSocketComponent,
+/* harmony export */   "PrevSocketComponent": () => /* reexport safe */ _components_prev__WEBPACK_IMPORTED_MODULE_14__.PrevSocketComponent,
+/* harmony export */   "NextSocketComponent": () => /* reexport safe */ _components_next__WEBPACK_IMPORTED_MODULE_15__.NextSocketComponent,
+/* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_16__.Theme,
+/* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_16__.defaultLight,
+/* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent,
+/* harmony export */   "CnodeBreakComponent": () => /* reexport safe */ _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent,
+/* harmony export */   "IOConnection": () => /* reexport safe */ _connections_ioconnection__WEBPACK_IMPORTED_MODULE_19__.IOConnection,
+/* harmony export */   "PrevNextConnection": () => /* reexport safe */ _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_20__.PrevNextConnection,
+/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.AMap,
+/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.APush,
+/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.AReduce,
+/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Call,
+/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Console,
+/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Env,
+/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAConst,
+/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAGet,
+/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FALength,
+/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAMake,
+/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAMap,
+/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAReduce,
+/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAdd,
+/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FCompare,
+/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FConcat,
+/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FDiv,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FGetvar,
+/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FIf,
+/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FMod,
+/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FMul,
+/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FNConst,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FOBreak,
+/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FOMake,
+/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FSConst,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FSqrt,
+/* harmony export */   "FTofixed": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FTofixed,
+/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.For,
+/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Getvar,
+/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.If,
+/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.InputSocket,
+/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Log,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.NextSocket,
+/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Node,
+/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.OutputSocket,
+/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.PrevSocket,
+/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Program,
+/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Setvar,
+/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Socket,
+/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Types,
+/* harmony export */   "Wait": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Wait,
+/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.While,
 /* harmony export */   "canvas": () => /* binding */ canvas
 /* harmony export */ });
 /* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas/canvas */ "./src/canvas/canvas.js");
 /* harmony import */ var _canvas_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canvas/component */ "./src/canvas/component.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _canvas_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./canvas/connection */ "./src/canvas/connection.js");
 /* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _components_cnode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/cnode */ "./src/components/cnode.js");
-/* harmony import */ var _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/nodes/cnodeprogram */ "./src/components/nodes/cnodeprogram.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
+/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./canvas/position */ "./src/canvas/position.js");
+/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./canvas/socket */ "./src/canvas/socket.js");
+/* harmony import */ var _components_cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/cnode */ "./src/components/cnode.js");
 /* harmony import */ var _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _marco_jacovone_cnodes_src_core_program__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/program */ "../cnodes/src/core/program.js");
-/* harmony import */ var _marco_jacovone_cnodes_src_nodes_object_fobreak__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/nodes/object/fobreak */ "../cnodes/src/nodes/object/fobreak.js");
-/* harmony import */ var _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/nodes/cnodebreak */ "./src/components/nodes/cnodebreak.js");
+/* harmony import */ var _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/cnodesconnection */ "./src/components/cnodesconnection.js");
+/* harmony import */ var _components_cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
+/* harmony import */ var _components_cnodesmenu__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/cnodesmenu */ "./src/components/cnodesmenu.js");
+/* harmony import */ var _components_cnodessocket__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/cnodessocket */ "./src/components/cnodessocket.js");
+/* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/input */ "./src/components/input.js");
+/* harmony import */ var _components_output__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/output */ "./src/components/output.js");
+/* harmony import */ var _components_prev__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/prev */ "./src/components/prev.js");
+/* harmony import */ var _components_next__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/next */ "./src/components/next.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
+/* harmony import */ var _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nodes/cnodeprogram */ "./src/components/nodes/cnodeprogram.js");
+/* harmony import */ var _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/nodes/cnodebreak */ "./src/components/nodes/cnodebreak.js");
+/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./connections/ioconnection */ "./src/connections/ioconnection.js");
+/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
+/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
 /**
  * cnodes-ui
  *
@@ -19345,6 +19368,16 @@ __webpack_require__.r(__webpack_exports__);
  * Author: Marco Jacovone
  * Year: 2020/2021\
  */
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -19385,12 +19418,12 @@ function canvas(elId) {
     return null;
   }
 
-  _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_8__.Env.init();
+  _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Env.init();
   return new _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas(el);
 } // register core custom nodes
 
-_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_src_core_program__WEBPACK_IMPORTED_MODULE_9__.Program(), _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_5__.CnodeProgramComponent.instance);
-_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_src_nodes_object_fobreak__WEBPACK_IMPORTED_MODULE_10__.FOBreak(), _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_11__.CnodeBreakComponent.instance);
+_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Program(), _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent.instance);
+_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FOBreak(), _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent.instance);
 
 /***/ }),
 
@@ -20333,7 +20366,7 @@ var Env = /*#__PURE__*/function () {
      * Register a node type
      * @param {string} name The name of the node
      * @param {string} category The category of the node
-     * @param {any} factory A class that instantiate the node
+     * @param {any} factory A function that instantiate the node
      */
 
   }, {
@@ -21539,7 +21572,7 @@ var Node = /*#__PURE__*/function () {
     /**
      * Can this node remove a specific input?
      * Subclass with variable number of input should override this method
-     * @param {InputsSocket} input The input to remove
+     * @param {InputSocket} input The input to remove
      */
 
   }, {
@@ -22853,6 +22886,7 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
    * @param {Node} node The parent node
    * @param {Type} type The type of the socket
    * @param {any} value The default value of the socket
+   * @param {boolean} [cached] This socket is cached?
    */
   function OutputSocket(name, node) {
     var _this5;

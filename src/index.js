@@ -9,30 +9,55 @@
 
 import { Canvas } from "./canvas/canvas";
 import { Component } from "./canvas/component";
-import { Position } from "./canvas/position";
+import { Connection } from "./canvas/connection";
 import { Menu, MenuItem } from "./canvas/menu";
+import { Position } from "./canvas/position";
+import { SocketComponent } from "./canvas/socket";
+
 import { CnodeComponent } from "./components/cnode";
-import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
-import { Theme, defaultLight } from "./components/theme";
 import { CnodesCanvas } from "./components/cnodescanvas";
-import { Env } from "@marco.jacovone/cnodes/index";
-import { Program } from "@marco.jacovone/cnodes/src/core/program";
-import { FOBreak } from "@marco.jacovone/cnodes/src/nodes/object/fobreak";
+import { CnodesConnection } from "./components/cnodesconnection";
+import { CnodesEditableTextComponent } from "./components/cnodeseditabletext";
+import { CnodesMenu } from "./components/cnodesmenu";
+import { CnodesSocketComponent } from "./components/cnodessocket";
+import { InputSocketComponent } from "./components/input";
+import { OutputSocketComponent } from "./components/output";
+import { PrevSocketComponent } from "./components/prev";
+import { NextSocketComponent } from "./components/next";
+import { Theme, defaultLight } from "./components/theme";
+
+import { CnodeProgramComponent } from "./components/nodes/cnodeprogram";
 import { CnodeBreakComponent } from "./components/nodes/cnodebreak";
+import { IOConnection } from "./connections/ioconnection";
+import { PrevNextConnection } from "./connections/prevnextconnection";
 
 export {
   Canvas,
   Component,
-  CnodeComponent,
-  Position,
-  Theme,
-  defaultLight,
-  CnodesCanvas,
-  CnodeProgramComponent,
+  Connection,
   Menu,
   MenuItem,
+  Position,
+  SocketComponent,
+  CnodeComponent,
+  CnodesCanvas,
+  CnodesConnection,
+  CnodesEditableTextComponent,
+  CnodesMenu,
+  CnodesSocketComponent,
+  InputSocketComponent,
+  OutputSocketComponent,
+  PrevSocketComponent,
+  NextSocketComponent,
+  Theme,
+  defaultLight,
+  CnodeProgramComponent,
+  CnodeBreakComponent,
+  IOConnection,
+  PrevNextConnection,
 };
 
+import { Program, FOBreak, Env } from "@marco.jacovone/cnodes/index";
 export * from "@marco.jacovone/cnodes/index";
 
 /**

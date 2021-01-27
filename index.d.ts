@@ -388,7 +388,13 @@ declare module cnui {
    * It embed both source and target sockets
    */
   export class CnodesConnection extends Connection {
-    constructor(source: any, target: any, canvas: any);
+    /**
+     * Constructs a new generic connection from CnodesSockets
+     * @param source Starting socket
+     * @param target Ending socket
+     * @param canvas The canvas
+     */
+    constructor(source: Socket, target: Socket, canvas: CnodesCanvas);
     /**
      * Return a relevant type between two types passed as parameter
      * @param {string} type1 CNODES source type
@@ -402,13 +408,20 @@ declare module cnui {
    * inside the cnodes-ui canvas. It embed a cnodes node instance
    */
   export class CnodeComponent extends Component {
-    constructor(node: any, canvas: any);
-    set node(arg: any);
-    get node(): any;
-    set titleComp(arg: any);
-    get titleComp(): any;
-    set commentComp(arg: any);
-    get commentComp(): any;
+
+    /**
+     * Constructs a new CnodeComponent, a special component that
+     * represents a node in the cnodes world
+     * @param node The encapsulated cnodes Node
+     * @param canvas The canvas of this component
+     */
+    constructor(node: Node, canvas: CnodesCanvas);
+    set node(arg: Node);
+    get node(): Node;
+    set titleComp(arg: CnodesEditableTextComponent);
+    get titleComp(): CnodesEditableTextComponent;
+    set commentComp(arg: CnodesEditableTextComponent);
+    get commentComp(): CnodesEditableTextComponent;
     /**
      * This method construct and/or update all sub components. They are all sockets
      * representing input, outputs, prev and nexts.
@@ -431,14 +444,34 @@ declare module cnui {
     ): void;
     #private;
   }
+  /**
+   * This is a particular subclass of CnodeComponent that override
+   * the default behaviors to implement a Component for the Program
+   * node in the cnodes world
+   */
   export class CnodeProgramComponent extends CnodeComponent {
-    static instance: (node: any, canvas: any) => CnodeProgramComponent;
-    constructor(node: any, canvas: any);
+    static instance: (node: Node, canvas: CnodesCanvas) => CnodeProgramComponent;
+    /**
+     * Constructs a new CnodeProgramComponent
+     * @param node The cnodes Node
+     * @param canvas The reference canvas
+     */
+    constructor(node: Node, canvas: CnodesCanvas);
     #private;
   }
+  /**
+   * This is a particular subclass of CnodeComponent that override
+   * the default behaviors to implement a Component for the FOBreak
+   * node in the cnodes world
+   */
   export class CnodeBreakComponent extends CnodeComponent {
-    static instance: (node: any, canvas: any) => CnodeBreakComponent;
-    constructor(node: any, canvas: any);
+    static instance: (node: Node, canvas: CnodesCanvas) => CnodeBreakComponent;
+    /**
+     * Constructs a new CnodeBreakComponent
+     * @param node The cnodes Node
+     * @param canvas The reference canvas
+     */
+    constructor(node: Node, canvas: CnodesCanvas);
     #private;
   }
   /**
@@ -450,14 +483,14 @@ declare module cnui {
   export class SocketComponent extends Component {
     set connecting(arg: boolean);
     get connecting(): boolean;
-    get currentPeerSocketComponent(): any;
-    set tempConnectionEl(arg: any);
-    get tempConnectionEl(): any;
+    get currentPeerSocketComponent(): CnodesSocketComponent;
+    set tempConnectionEl(arg: HTMLElement);
+    get tempConnectionEl(): HTMLElement;
     /**
      * Returns the element that responds to pointer events. By
      * default this is the entire root element
      */
-    get dragElement(): any;
+    get dragElement(): HTMLElement;
     /**
      * Manages the pointerdown event to implement the start of the
      * drag-and-link process. If the socket is a one-link socket, such as
@@ -519,7 +552,7 @@ declare module cnui {
     /**
      * Return true if this socket only support one connection at most
      */
-    get hasSingleConnection(): void;
+    get hasSingleConnection(): boolean;
     /**
      * Is this socket actually connected?
      */
@@ -528,7 +561,7 @@ declare module cnui {
      * Return the peer component of the socket in case
      * of this socket is a single connection. Otherwise return null
      */
-    getSinglePeerComponent(): any;
+    getSinglePeerComponent(): SocketComponent;
     #private;
   }
   /**
@@ -567,6 +600,15 @@ declare module cnui {
     sub(pos: Position): Position;
     #private;
   }
+
+  /**
+   * This callback is a function that will be called when the user clicks
+   * on a menu item. It takes a couple of canvas coordinates, and, optionally,
+   * returns a generic object. This object will be passed back to the MenuCallbackFn
+   * set from the client that created the menu
+   */
+  export type ItemCallbackFn = (x: number, y: number) => any;
+
   /**
    * This class represents a single Menu item.
    * A menu itemhas a text, and a callback to call on click
@@ -575,13 +617,14 @@ declare module cnui {
     /**
      * Constructs a menu item
      * @param {string} text Title of the menu item
-     * @param {function} callback The callback function to call on click event
+     * @param {ItemCallbackFn} callback The callback function to call on click event
+     * @param {string} searchText The text used during text search in the menu
      */
-    constructor(text: string, callback: Function, searchText?: string);
+    constructor(text: string, callback: ItemCallbackFn, searchText?: string);
     set text(arg: string);
     get text(): string;
-    set callback(arg: any);
-    get callback(): any;
+    set callback(arg: ItemCallbackFn);
+    get callback(): ItemCallbackFn;
     set searchText(arg: string);
     get searchText(): string;
     #private;
@@ -596,8 +639,8 @@ declare module cnui {
      * @param {MenuItem[]} items The menu items
      */
     constructor(canvas: Canvas, items: MenuItem[]);
-    set items(arg: any[]);
-    get items(): any[];
+    set items(arg: MenuItem[]);
+    get items(): MenuItem[];
     /**
      * Show the menu
      * @param {number} x The x coordinate
@@ -627,14 +670,14 @@ declare module cnui {
      * this means create the SVG element that will be shown
      */
     setup(): Connection;
-    set canvas(arg: any);
-    get canvas(): any;
-    set source(arg: any);
-    get source(): any;
-    set target(arg: any);
-    get target(): any;
-    get connectionEl(): any;
-    get svgEl(): any;
+    set canvas(arg: Canvas);
+    get canvas(): Canvas;
+    set source(arg: SocketComponent);
+    get source(): SocketComponent;
+    set target(arg: SocketComponent);
+    get target(): SocketComponent;
+    get connectionEl(): HTMLElement;
+    get svgEl(): HTMLElement;
     /**
      * This method is responsible to create the SVG element
      * for display the connetion. Subclasses must override this method
@@ -680,18 +723,18 @@ declare module cnui {
     get pos(): Position;
     get width(): number;
     get height(): number;
-    set canvas(arg: any);
-    get canvas(): any;
-    get componentEl(): any;
-    get svgEl(): any;
+    set canvas(arg: Canvas);
+    get canvas(): Canvas;
+    get componentEl(): HTMLElement;
+    get svgEl(): HTMLElement;
     set moveable(arg: boolean);
     get moveable(): boolean;
     set selectable(arg: boolean);
     get selectable(): boolean;
     set clonable(arg: boolean);
     get clonable(): boolean;
-    set parent(arg: any);
-    get parent(): any;
+    set parent(arg: Component);
+    get parent(): Component;
     /**
      * Returns the array of context menu items. If the component
      * returns null, no contextual menu is shown
@@ -765,14 +808,14 @@ declare module cnui {
      * the max level of zoom (out)
      */
     get maxVBSize(): number;
-    set components(arg: any[]);
-    get components(): any[];
-    set selectedComponents(arg: any[]);
-    get selectedComponents(): any[];
-    set connections(arg: any[]);
-    get connections(): any[];
-    set contextMenuComponent(arg: any);
-    get contextMenuComponent(): any;
+    set components(arg: Component[]);
+    get components(): Component[];
+    set selectedComponents(arg: Component[]);
+    get selectedComponents(): Component[];
+    set connections(arg: Connection[]);
+    get connections(): Connection[];
+    set contextMenuComponent(arg: Menu);
+    get contextMenuComponent(): Menu;
     /**
      * Return the internal SVG element
      */
@@ -885,7 +928,8 @@ declare module cnui {
     #private;
   }
 
-  // CNODES
+  //////////////////////////////////////////////////////////////////
+  // CNODES typings definitions
 
   export namespace Types {
     const NUMBER: string;
@@ -912,10 +956,10 @@ declare module cnui {
     get id(): string;
     set name(arg: string);
     get name(): string;
-    set node(arg: any);
-    get node(): any;
+    set node(arg: Node);
+    get node(): Node;
     /** Clone the spcket */
-    clone(): void;
+    clone(): Socket;
     #private;
   }
   /**
@@ -927,10 +971,10 @@ declare module cnui {
      * Construct a new ValueSocket
      * @param {string} name Name of the socket
      * @param {Node} node The parent node
-     * @param {Type} type The type of this socket
+     * @param {string} type The type of this socket
      * @param {any} value The default value of the socket
      */
-    constructor(name: string, node: Node, type?: any, value?: any);
+    constructor(name: string, node: Node, type?: string, value?: any);
     set type(arg: string);
     get type(): string;
     set value(arg: number);
@@ -944,7 +988,7 @@ declare module cnui {
      * that is staying inside. The meaning is different in case of
      * InputSocket and OutputSocket, that re-defines this method
      */
-    evaluate(): void;
+    evaluate(): Promise<void>;
     #private;
   }
   /**
@@ -957,12 +1001,12 @@ declare module cnui {
      * Construct a new InputSocket
      * @param {string} name The name of the socket
      * @param {Node} node The parent node
-     * @param {Type} type The type of the socket
+     * @param {string} type The type of the socket
      * @param {any} value The default value of the socket
      */
-    constructor(name: string, node: Node, type?: any, value?: any);
-    set peer(arg: any);
-    get peer(): any;
+    constructor(name: string, node: Node, type?: string, value?: any);
+    set peer(arg: Socket);
+    get peer(): Socket;
     /**
      * Connect this socket to another (output) socket
      * @param {Socket} socket The output socket to connect
@@ -985,12 +1029,13 @@ declare module cnui {
      * Construct a new OutputSocket
      * @param {string} name The name of the socket
      * @param {Node} node The parent node
-     * @param {Type} type The type of the socket
+     * @param {string} type The type of the socket
      * @param {any} value The default value of the socket
+     * @param {boolean} cached The default value of the socket
      */
-    constructor(name: string, node: Node, type: any, value: any, cached: any);
-    set peers(arg: any[]);
-    get peers(): any[];
+    constructor(name: string, node: Node, type: string, value: any, cached?: boolean);
+    set peers(arg: Socket[]);
+    get peers(): Socket[];
     set cached(arg: boolean);
     get cached(): boolean;
     /**
@@ -1015,7 +1060,7 @@ declare module cnui {
      * @param {sring} name Name of the socket
      * @param {Node} node The parent node
      */
-    constructor(name: any, node: Node);
+    constructor(name: string, node: Node);
     #private;
   }
   /**
@@ -1031,8 +1076,8 @@ declare module cnui {
      * @param {Node} node Parent node
      */
     constructor(name: string, node: Node);
-    set peers(arg: any[]);
-    get peers(): any[];
+    set peers(arg: Socket[]);
+    get peers(): Socket[];
     /**
      * Connect this socket to a next socket
      * @param {Socket} socket The next socket to connect
@@ -1058,8 +1103,8 @@ declare module cnui {
      * @param {Node} node The parent node of the socket
      */
     constructor(name: string, node: Node);
-    set peer(arg: any);
-    get peer(): any;
+    set peer(arg: Socket);
+    get peer(): Socket;
     /**
      * Connect this socket to another (prev) socket
      * @param {Socket} socket The prev socket to connect to
@@ -1071,6 +1116,14 @@ declare module cnui {
     disconnect(): void;
     #private;
   }
+
+  /**
+   * This is a function passed to the method clone of the class Node.
+   * Its is used to create an instance of the correct type of the node
+   * before cloning all its values in terms of IO and other characteristics
+   */
+  export type CloneFactoryFn = () => Node;
+
   /**
    * This is the base node class. A node have some input and output
    * to exchange data with other nodes, some nexts to determine next
@@ -1089,24 +1142,24 @@ declare module cnui {
      * @param {string} [title] The title of the node
      */
     constructor(name?: string, title?: string);
-    set id(arg: any);
-    get id(): any;
+    set id(arg: string);
+    get id(): string;
     set name(arg: string);
     get name(): string;
     set title(arg: string);
     get title(): string;
     set functional(arg: boolean);
     get functional(): boolean;
-    set inputs(arg: any[]);
-    get inputs(): any[];
-    set outputs(arg: any[]);
-    get outputs(): any[];
-    set nexts(arg: any[]);
-    get nexts(): any[];
-    set prev(arg: any);
-    get prev(): any;
-    set program(arg: any);
-    get program(): any;
+    set inputs(arg: InputSocket[]);
+    get inputs(): InputSocket[];
+    set outputs(arg: OutputSocket[]);
+    get outputs(): OutputSocket[];
+    set nexts(arg: NextSocket[]);
+    get nexts(): NextSocket[];
+    set prev(arg: PrevSocket);
+    get prev(): PrevSocket;
+    set program(arg: Program);
+    get program(): Program;
     set removable(arg: boolean);
     get removable(): boolean;
     set creatable(arg: boolean);
@@ -1163,13 +1216,13 @@ declare module cnui {
      * Subclass with variable number of input should override this method
      * @param {InputSocket} input The input to remove
      */
-    removeInput(input: any): void;
+    removeInput(input: InputSocket): void;
     /**
      * Can this node remove a specific input?
      * Subclass with variable number of input should override this method
      * @param {InputsSocket} input The input to remove
      */
-    canRemoveInput(input: any): boolean;
+    canRemoveInput(input: InputSocket): boolean;
     /**
      * If this.#canAddOutput is true, the user can add an output
      * Subclass with variable number of output should override this method
@@ -1200,7 +1253,14 @@ declare module cnui {
      * @param {Socket} otherSocket The other socket
      */
     canBeConnected(thisSocket: Socket, otherSocket: Socket): boolean;
-    /** The base version of the node does nothing */
+    /**
+     * This method is called when the engine need to compute outputs
+     * and the next socket on which pass, based on inputs and current state.
+     * The engine calls the methos and expects back a instance of Result
+     * class to know where to go for the next step. The method is asynchronous
+     * so the engine will await it, this allow this method to perform
+     * asynchronous calls in turn
+     */
     process(): Promise<Result>;
     /**
      * This method clones the node. Cloning will create a new node
@@ -1211,9 +1271,9 @@ declare module cnui {
      * the instance and clone all sockets, and other propertiesthat
      * is a same process for all different instances
      *
-     * @param {Function} factory A function that return a new instance of the class
+     * @param {CloneFactoryFn} factory A function that return a new instance of the class
      */
-    clone(factory?: Function): any;
+    clone(factory?: CloneFactoryFn): Node;
     #private;
   }
   /**
@@ -1223,11 +1283,11 @@ declare module cnui {
   export class Result {
     /**
      * Construct a new Result
-     * @param {Socket} next The next socket to follow
+     * @param {NextSocket} next The next socket to follow
      */
-    constructor(next?: Socket);
-    set next(arg: any);
-    get next(): any;
+    constructor(next?: NextSocket);
+    set next(arg: NextSocket);
+    get next(): NextSocket;
     #private;
   }
   /**
@@ -1265,16 +1325,16 @@ declare module cnui {
     static cloneNodes(nodes: Node[]): any[];
     /** The event emitter connected to the program */
     events: import("events").EventEmitter;
-    set vars(arg: Map<any, any>);
-    get vars(): Map<any, any>;
-    set enter(arg: any);
-    get enter(): any;
-    set exit(arg: any);
-    get exit(): any;
-    set currentNode(arg: any);
-    get currentNode(): any;
-    set nodes(arg: any[]);
-    get nodes(): any[];
+    set vars(arg: Map<string, any>);
+    get vars(): Map<string, any>;
+    set enter(arg: Enter);
+    get enter(): Enter;
+    set exit(arg: Exit);
+    get exit(): Exit;
+    set currentNode(arg: Node);
+    get currentNode(): Node;
+    set nodes(arg: Node[]);
+    get nodes(): Node[];
     /**
      * Add a new node to this program
      * @param {Node} node The node to add
@@ -1607,6 +1667,26 @@ declare module cnui {
     static instance: () => Wait;
     #private;
   }
+
+  export interface RegisterMakerOpts {
+    recursive?: boolean,
+    fillValues?: boolean,
+    forceTypes?: boolean,
+    editableInputs?: boolean
+  }
+  export interface RegisterBreakerOpts {
+    recursive?: boolean,
+    forceTypes?: boolean,
+    editableOutputs?: boolean
+  }
+  export interface RegisterObjectOpts {
+    recursive?: boolean,
+    fillValues?: boolean,
+    forceTypes?: boolean,
+    editableInputs?: boolean
+    editableOutputs?: boolean
+  }
+
   /**
    * This class represents a main global environment for cnodes.
    * The class is a "static" class that is responible for maintaining a global
@@ -1618,7 +1698,7 @@ declare module cnui {
    */
   export class Env {
     /** The internal node registry */
-    static "__#11@#nodeRegistry": Map<any, any>;
+    static "__#11@#nodeRegistry": Map<string, {category: string, factory: () => Node}>;
     /**
      * Initialize the CNodes global environment
      */
@@ -1627,24 +1707,24 @@ declare module cnui {
      * Register a node type
      * @param {string} name The name of the node
      * @param {string} category The category of the node
-     * @param {any} factory A class that instantiate the node
+     * @param {() => Node} factory A class that instantiate the node
      */
-    static registerNode(name: string, category: string, factory: any): void;
+    static registerNode(name: string, category: string, factory: () => Node): void;
     /**
      * Return the list of unique registered categories
      */
-    static getCategories(): any[];
+    static getCategories(): string[];
     /**
      * Return an array of registrations for nodes.
      * Registrations have the sign: {name, category, factory}
      * @param {string} category The category for which seacrh registrations
      */
-    static getCategoryNodes(category: string): any[];
+    static getCategoryNodes(category: string): {name: string, category: string, factory: () => Node}[];
     /**
      * Instantiate a node by name
      * @param {string} name The name of the node
      */
-    static getInstance(name: string): any;
+    static getInstance(name: string): Node;
     /**
      * Create helper maker nodes to support user with dealing with
      * specific object structures. This method accepts optional
@@ -1656,10 +1736,11 @@ declare module cnui {
      *   editableInputs: true
      * }
      *
+     * @param {string} name The name of generated structure
      * @param {any} obj The object structure to consider whiel create nodes
-     * @param {any} opts The options on create nodes
+     * @param {RegisterMakerOpts} opts The options on create nodes
      */
-    static registerMaker(name: any, obj: any, opts?: any): void;
+    static registerMaker(name: string, obj: any, opts?: RegisterMakerOpts): void;
     /**
      * Create helper breaker nodes to support user with dealing with
      * specific object structures. This method accepts optional
@@ -1670,10 +1751,11 @@ declare module cnui {
      *   editableOutputs: true
      * }
      *
+     * @param {string} name The name of generated structure
      * @param {any} obj The object structure to consider whiel create nodes
-     * @param {any} opts The options on create nodes
+     * @param {RegisterBreakerOpts} opts The options on create nodes
      */
-    static registerBreaker(name: any, obj: any, opts?: any): void;
+    static registerBreaker(name: string, obj: any, opts?: RegisterBreakerOpts): void;
     /**
      * Create both helper maker and breaker nodes to support user with dealing with
      * specific object structures. This method accepts optional
@@ -1686,26 +1768,18 @@ declare module cnui {
      *   editableOutputs: true
      * }
      *
+     * @param {string} name The name of generated structure
      * @param {any} obj The object structure to consider whiel create nodes
-     * @param {any} opts The options on create nodes
+     * @param {RegisterObjectOpts} opts The options on create nodes
      */
-    static registerObject(name: any, obj: any, opts?: any): void;
+    static registerObject(name: any, obj: any, opts?: RegisterObjectOpts): void;
     /**
      * Creates and returns a JSON representation of the entire program
      * @param {Program} program The program to export
      */
     static export(
       program: Program
-    ): {
-      id: any;
-      version: number;
-      lastNodeIndex: number;
-      lastSocketIndex: number;
-      enter: any;
-      exit: any;
-      nodes: any[];
-      connections: any[];
-    };
+    ): any;
     /**
      * Create a program instance based on export data created with export() method
      * @param {any} data A object with the export data format

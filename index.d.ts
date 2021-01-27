@@ -19,12 +19,22 @@ declare module cnui {
   export function canvas(elId: string): CnodesCanvas;
 
   /**
+   * This factory function is a factory passed to the registerNodeUI() method
+   * to instruct the canvas how to create a new UI node for a specific cnodes Node,
+   * instead of the default standard CnodeComponent instance
+   */
+  export type RegisterUINodeFactoryFn = (
+    node: Node,
+    canvas: CnodesCanvas
+  ) => CnodeComponent;
+
+  /**
    * This is the entry-point class for managing the canvas
    * relative to a cnodes program.
    */
   export class CnodesCanvas extends Canvas {
     /** The static registry of (cnodes NDOE) <--> (CnodeComponent) map */
-    static "__#10@#nodesUIRegistry": Map<any, any>;
+    static "__#10@#nodesUIRegistry": Map<Node, RegisterUINodeFactoryFn>;
     /** The clipboard of the canvas */
     static clipboard: any;
     /**
@@ -32,16 +42,16 @@ declare module cnui {
      * a specific node passed as parameter, by registering the instance
      * in the canvas registry
      * @param {Node} node The node instance (cnodes)
-     * @param {Function} factory The factory, that is a function that creates the UI component
+     * @param {RegisterUINodeFactoryFn} factory The factory, that is a function that creates the UI component
      */
-    static registerNodeUI(node: any, factory: Function): void;
+    static registerNodeUI(node: Node, factory: RegisterUINodeFactoryFn): void;
     /**
      * Returns the instance of the UI component registered in the canvas registry
      * that is able to manage a cnode specific instance passed as parameter
      * @param {Node} node The node instance (cnodes)
      * @param {CnodesCanvas} canvas The canvas instance, to create the node UI component
      */
-    static getNodeUIInstance(node: Node, canvas: CnodesCanvas): any;
+    static getNodeUIInstance(node: Node, canvas: CnodesCanvas): CnodeComponent;
     /**
      * Creates a new CnodesCanvas object and install it on top of an HTML element
      * @param el The HTML id of the element on which create the canvas
@@ -408,7 +418,6 @@ declare module cnui {
    * inside the cnodes-ui canvas. It embed a cnodes node instance
    */
   export class CnodeComponent extends Component {
-
     /**
      * Constructs a new CnodeComponent, a special component that
      * represents a node in the cnodes world
@@ -450,7 +459,10 @@ declare module cnui {
    * node in the cnodes world
    */
   export class CnodeProgramComponent extends CnodeComponent {
-    static instance: (node: Node, canvas: CnodesCanvas) => CnodeProgramComponent;
+    static instance: (
+      node: Node,
+      canvas: CnodesCanvas
+    ) => CnodeProgramComponent;
     /**
      * Constructs a new CnodeProgramComponent
      * @param node The cnodes Node
@@ -1033,7 +1045,13 @@ declare module cnui {
      * @param {any} value The default value of the socket
      * @param {boolean} cached The default value of the socket
      */
-    constructor(name: string, node: Node, type: string, value: any, cached?: boolean);
+    constructor(
+      name: string,
+      node: Node,
+      type: string,
+      value: any,
+      cached?: boolean
+    );
     set peers(arg: Socket[]);
     get peers(): Socket[];
     set cached(arg: boolean);
@@ -1669,22 +1687,22 @@ declare module cnui {
   }
 
   export interface RegisterMakerOpts {
-    recursive?: boolean,
-    fillValues?: boolean,
-    forceTypes?: boolean,
-    editableInputs?: boolean
+    recursive?: boolean;
+    fillValues?: boolean;
+    forceTypes?: boolean;
+    editableInputs?: boolean;
   }
   export interface RegisterBreakerOpts {
-    recursive?: boolean,
-    forceTypes?: boolean,
-    editableOutputs?: boolean
+    recursive?: boolean;
+    forceTypes?: boolean;
+    editableOutputs?: boolean;
   }
   export interface RegisterObjectOpts {
-    recursive?: boolean,
-    fillValues?: boolean,
-    forceTypes?: boolean,
-    editableInputs?: boolean
-    editableOutputs?: boolean
+    recursive?: boolean;
+    fillValues?: boolean;
+    forceTypes?: boolean;
+    editableInputs?: boolean;
+    editableOutputs?: boolean;
   }
 
   /**
@@ -1698,7 +1716,10 @@ declare module cnui {
    */
   export class Env {
     /** The internal node registry */
-    static "__#11@#nodeRegistry": Map<string, {category: string, factory: () => Node}>;
+    static "__#11@#nodeRegistry": Map<
+      string,
+      { category: string; factory: () => Node }
+    >;
     /**
      * Initialize the CNodes global environment
      */
@@ -1709,7 +1730,11 @@ declare module cnui {
      * @param {string} category The category of the node
      * @param {() => Node} factory A class that instantiate the node
      */
-    static registerNode(name: string, category: string, factory: () => Node): void;
+    static registerNode(
+      name: string,
+      category: string,
+      factory: () => Node
+    ): void;
     /**
      * Return the list of unique registered categories
      */
@@ -1719,7 +1744,9 @@ declare module cnui {
      * Registrations have the sign: {name, category, factory}
      * @param {string} category The category for which seacrh registrations
      */
-    static getCategoryNodes(category: string): {name: string, category: string, factory: () => Node}[];
+    static getCategoryNodes(
+      category: string
+    ): { name: string; category: string; factory: () => Node }[];
     /**
      * Instantiate a node by name
      * @param {string} name The name of the node
@@ -1740,7 +1767,11 @@ declare module cnui {
      * @param {any} obj The object structure to consider whiel create nodes
      * @param {RegisterMakerOpts} opts The options on create nodes
      */
-    static registerMaker(name: string, obj: any, opts?: RegisterMakerOpts): void;
+    static registerMaker(
+      name: string,
+      obj: any,
+      opts?: RegisterMakerOpts
+    ): void;
     /**
      * Create helper breaker nodes to support user with dealing with
      * specific object structures. This method accepts optional
@@ -1755,7 +1786,11 @@ declare module cnui {
      * @param {any} obj The object structure to consider whiel create nodes
      * @param {RegisterBreakerOpts} opts The options on create nodes
      */
-    static registerBreaker(name: string, obj: any, opts?: RegisterBreakerOpts): void;
+    static registerBreaker(
+      name: string,
+      obj: any,
+      opts?: RegisterBreakerOpts
+    ): void;
     /**
      * Create both helper maker and breaker nodes to support user with dealing with
      * specific object structures. This method accepts optional
@@ -1777,9 +1812,7 @@ declare module cnui {
      * Creates and returns a JSON representation of the entire program
      * @param {Program} program The program to export
      */
-    static export(
-      program: Program
-    ): any;
+    static export(program: Program): any;
     /**
      * Create a program instance based on export data created with export() method
      * @param {any} data A object with the export data format

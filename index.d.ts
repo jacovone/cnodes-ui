@@ -41,15 +41,19 @@ declare module cnui {
      * @param {Node} node The node instance (cnodes)
      * @param {CnodesCanvas} canvas The canvas instance, to create the node UI component
      */
-    static getNodeUIInstance(node: any, canvas: CnodesCanvas): any;
-    constructor(el: any);
+    static getNodeUIInstance(node: Node, canvas: CnodesCanvas): any;
+    /**
+     * Creates a new CnodesCanvas object and install it on top of an HTML element
+     * @param el The HTML id of the element on which create the canvas
+     */
+    constructor(el: string);
     /** The event emitter connected to the canvas */
     events: import("events").EventEmitter;
     /**
      * This setter is a trigger for the import procedure
      */
-    set program(arg: any);
-    get program(): any;
+    set program(arg: Program);
+    get program(): Program;
     /**
      * Executes the program
      */
@@ -62,13 +66,13 @@ declare module cnui {
      * This method imports an entire cnodes program
      * @param {Program} program Program to import
      */
-    importCnodesProgram(program: any): void;
+    importCnodesProgram(program: Program): void;
     /**
      * This method import a list of nodes inside the current program
      * by reconstructing all connection between nodes
      * @param {Node[]} nodes A list of nodes to import
      */
-    importNodes(nodes: any[]): any[];
+    importNodes(nodes: Node[]): Node[];
     /**
      * This method clones selected nodes and add them to the canvas
      * at a position a bit doifferent from it source set
@@ -101,7 +105,7 @@ declare module cnui {
      * is pushed on to the stack and the new one is placed on the canvas
      * @param {Program} program The new program to edit
      */
-    pushProgram(program: any): void;
+    pushProgram(program: Program): void;
     /**
      * Pops the last program and place it on the canvas. The actual
      * program (that is a subprogram of the popped) is abandoned
@@ -213,7 +217,7 @@ declare module cnui {
    * in the cnodes world
    */
   export class PrevSocketComponent extends CnodesSocketComponent {
-    constructor(socket: any);
+    constructor(socket: PrevSocket);
     /**
      * Returns the direction of the source point for this socket component:
      * -1 = Left
@@ -235,7 +239,7 @@ declare module cnui {
    * cnodes world
    */
   export class OutputSocketComponent extends CnodesSocketComponent {
-    constructor(socket: any);
+    constructor(socket: OutputSocket);
     /**
      * Returns the direction of the source point for this socket component:
      * -1 = Left
@@ -257,7 +261,7 @@ declare module cnui {
    * cnodes context
    */
   export class NextSocketComponent extends CnodesSocketComponent {
-    constructor(socket: any);
+    constructor(socket: NextSocket);
     /**
      * Returns the direction of the source point for this socket component:
      * -1 = Left
@@ -279,7 +283,7 @@ declare module cnui {
    * in the cnodes world
    */
   export class InputSocketComponent extends CnodesSocketComponent {
-    constructor(socket: any);
+    constructor(socket: InputSocket);
     /**
      * Returns the direction of the source point for this socket component:
      * -1 = Left
@@ -315,10 +319,18 @@ declare module cnui {
      * Construct a new CnodesSocket object
      * @param {Socket} socket The internal cnodes socket object
      */
-    constructor(socket: any);
-    get socket(): any;
+    constructor(socket: Socket);
+    get socket(): Socket;
     #private;
   }
+
+  /**
+   * This is the menu callback. When the user selects an item
+   * the related callback is invoked, the result of that callback
+   * if routed into this menu callback
+   */
+  export type MenuCallbackFn = (result: any) => void;
+
   /**
    * This class implements a context menu for cnodes canvas
    */
@@ -328,13 +340,13 @@ declare module cnui {
      * @param {CnodesCanvas} canvas The canvas
      * @param {MenuItem[]} items The menu items
      */
-    constructor(canvas: CnodesCanvas, items: any[]);
+    constructor(canvas: CnodesCanvas, items: MenuItem[]);
     set searchFilter(arg: string);
     get searchFilter(): string;
-    set menuCallback(arg: any);
-    get menuCallback(): any;
+    set menuCallback(arg: MenuCallbackFn);
+    get menuCallback(): MenuCallbackFn;
     /** Returns the filtered items of the menu */
-    get filteredElements(): any[];
+    get filteredElements(): MenuItem[];
     /**
      * Creates/Updates menu items based on the search input field, and
      * adjust the size of the container element
@@ -361,8 +373,8 @@ declare module cnui {
     get color(): string;
     set font(arg: string);
     get font(): string;
-    get textInputEl(): any;
-    get inputEl(): any;
+    get textInputEl(): HTMLElement;
+    get inputEl(): HTMLElement;
     get state(): number;
     /**
      * Sets the editing mode

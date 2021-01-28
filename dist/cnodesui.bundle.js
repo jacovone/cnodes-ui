@@ -11626,24 +11626,24 @@ try {
 
 /***/ }),
 
-/***/ "./src/canvas/canvas.js":
-/*!******************************!*\
-  !*** ./src/canvas/canvas.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/canvas/canvas.mjs":
+/*!*******************************!*\
+  !*** ./src/canvas/canvas.mjs ***!
+  \*******************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Canvas": () => /* binding */ Canvas
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_src_core_socket__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/socket */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connection */ "./src/canvas/connection.js");
-/* harmony import */ var _menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu */ "./src/canvas/menu.js");
-/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
-/* harmony import */ var _socket__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./socket */ "./src/canvas/socket.js");
+/* harmony import */ var _marco_jacovone_cnodes_src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _components_theme_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _component_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component.mjs */ "./src/canvas/component.mjs");
+/* harmony import */ var _connection_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connection.mjs */ "./src/canvas/connection.mjs");
+/* harmony import */ var _menu_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _position_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _socket_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./socket.mjs */ "./src/canvas/socket.mjs");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -11967,7 +11967,7 @@ var Canvas = /*#__PURE__*/function () {
     _classPrivateFieldGet(this, _svgEl).style.height = "100%";
     el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Background color
 
-    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
+    _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components
 
     _classPrivateFieldSet(this, _connectionsEl, document.createElementNS("http://www.w3.org/2000/svg", "g"));
@@ -12120,7 +12120,7 @@ var Canvas = /*#__PURE__*/function () {
                 }
               };
 
-              retItems.push(new _menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
+              retItems.push(new _menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem(item.text, callback, item.searchText));
             }
           };
 
@@ -12162,7 +12162,7 @@ var Canvas = /*#__PURE__*/function () {
 
       while (pointedEl) {
         // Traverse the DOM tree
-        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket__WEBPACK_IMPORTED_MODULE_6__.SocketComponent)) {
+        if (pointedEl.componentRef && (!onlySockets || pointedEl.componentRef instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_6__.SocketComponent)) {
           return pointedEl.componentRef;
         }
 
@@ -12378,7 +12378,7 @@ var Canvas = /*#__PURE__*/function () {
           var c = _step6.value;
 
           // Ignore menus and sockets
-          if (!(c instanceof _marco_jacovone_cnodes_src_core_socket__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
+          if (!(c instanceof _marco_jacovone_cnodes_src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_0__.Socket) && !(c instanceof _menu_mjs__WEBPACK_IMPORTED_MODULE_4__.Menu)) {
             if (c.absPos.x < nodesBounds.minX) {
               nodesBounds.minX = c.absPos.x;
             }
@@ -12591,7 +12591,7 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       var p = this.clientToSvgPoint(e.clientX, e.clientY);
 
-      _classPrivateFieldSet(this, _startDragPos, new _position__WEBPACK_IMPORTED_MODULE_5__.Position(p.x, p.y));
+      _classPrivateFieldSet(this, _startDragPos, new _position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(p.x, p.y));
 
       _classPrivateFieldGet(this, _selectionEl).setAttribute("x", p.x);
 
@@ -12601,11 +12601,11 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       _classPrivateFieldGet(this, _selectionEl).setAttribute("height", "0");
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke", _components_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("stroke-width", _components_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
+      _classPrivateFieldGet(this, _selectionEl).setAttribute("fill", _components_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_SELECTION_FILL_COLOR);
 
       _classPrivateFieldGet(this, _svgEl).appendChild(_classPrivateFieldGet(this, _selectionEl));
 
@@ -12749,20 +12749,19 @@ var _onContextMenu2 = function _onContextMenu2(e) {
 
 /***/ }),
 
-/***/ "./src/canvas/component.js":
-/*!*********************************!*\
-  !*** ./src/canvas/component.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/canvas/component.mjs":
+/*!**********************************!*\
+  !*** ./src/canvas/component.mjs ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Component": () => /* binding */ Component
 /* harmony export */ });
-/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var _position_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./position.mjs */ "./src/canvas/position.mjs");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_1__);
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -12898,7 +12897,7 @@ var Component = /*#__PURE__*/function () {
 
     _pos.set(this, {
       writable: true,
-      value: new _position__WEBPACK_IMPORTED_MODULE_0__.Position(0, 0)
+      value: new _position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(0, 0)
     });
 
     _moving.set(this, {
@@ -13085,7 +13084,7 @@ var Component = /*#__PURE__*/function () {
       return _classPrivateFieldGet(this, _pos);
     },
     set: function set(val) {
-      var diff = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(val.x - _classPrivateFieldGet(this, _pos).x, val.y - _classPrivateFieldGet(this, _pos).y);
+      var diff = new _position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(val.x - _classPrivateFieldGet(this, _pos).x, val.y - _classPrivateFieldGet(this, _pos).y);
 
       _classPrivateFieldSet(this, _pos, val);
 
@@ -13160,7 +13159,7 @@ var Component = /*#__PURE__*/function () {
   }, {
     key: "absPos",
     get: function get() {
-      var pos = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x, _classPrivateFieldGet(this, _pos).y);
+      var pos = new _position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x, _classPrivateFieldGet(this, _pos).y);
 
       if (_classPrivateFieldGet(this, _parent)) {
         var parentPos = _classPrivateFieldGet(this, _parent).absPos;
@@ -13214,7 +13213,7 @@ var _onPointerMove2 = function _onPointerMove2(e) {
       return;
     }
 
-    var origPos = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x, _classPrivateFieldGet(this, _pos).y);
+    var origPos = new _position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x, _classPrivateFieldGet(this, _pos).y);
 
     var movePoint = _classPrivateFieldGet(this, _canvas).clientToSvgPoint(e.clientX, e.clientY);
 
@@ -13231,7 +13230,7 @@ var _onPointerMove2 = function _onPointerMove2(e) {
       _classPrivateFieldGet(this, _pos).y = Math.ceil(_classPrivateFieldGet(this, _pos).y / 20) * 20;
     }
 
-    var delta = new _position__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x - origPos.x, _classPrivateFieldGet(this, _pos).y - origPos.y);
+    var delta = new _position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(_classPrivateFieldGet(this, _pos).x - origPos.x, _classPrivateFieldGet(this, _pos).y - origPos.y);
     this.updateSVGElement(); // Notify that component has moved
 
     this.events.emit("cnui:move", this, delta);
@@ -13251,11 +13250,11 @@ var _onPointerMove2 = function _onPointerMove2(e) {
 
 /***/ }),
 
-/***/ "./src/canvas/connection.js":
-/*!**********************************!*\
-  !*** ./src/canvas/connection.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/canvas/connection.mjs":
+/*!***********************************!*\
+  !*** ./src/canvas/connection.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -13263,7 +13262,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Connection": () => /* binding */ Connection
 /* harmony export */ });
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13486,11 +13484,11 @@ var Connection = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/canvas/menu.js":
-/*!****************************!*\
-  !*** ./src/canvas/menu.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/canvas/menu.mjs":
+/*!*****************************!*\
+  !*** ./src/canvas/menu.mjs ***!
+  \*****************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -13498,9 +13496,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MenuItem": () => /* binding */ MenuItem,
 /* harmony export */   "Menu": () => /* binding */ Menu
 /* harmony export */ });
-/* harmony import */ var _canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas */ "./src/canvas/canvas.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var _canvas_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas.mjs */ "./src/canvas/canvas.mjs");
+/* harmony import */ var _component_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component.mjs */ "./src/canvas/component.mjs");
+/* harmony import */ var _position_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./position.mjs */ "./src/canvas/position.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -13665,7 +13663,7 @@ var Menu = /*#__PURE__*/function (_Component) {
     value: function show(x, y) {
       this.setup();
       this.canvas.addComponent(this);
-      this.pos = new _position__WEBPACK_IMPORTED_MODULE_2__.Position(x, y);
+      this.pos = new _position_mjs__WEBPACK_IMPORTED_MODULE_2__.Position(x, y);
     }
     /**
      * Computes the menu vertical size, based on menu items
@@ -13696,15 +13694,15 @@ var Menu = /*#__PURE__*/function (_Component) {
   }]);
 
   return Menu;
-}(_component__WEBPACK_IMPORTED_MODULE_1__.Component);
+}(_component_mjs__WEBPACK_IMPORTED_MODULE_1__.Component);
 
 /***/ }),
 
-/***/ "./src/canvas/position.js":
-/*!********************************!*\
-  !*** ./src/canvas/position.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/canvas/position.mjs":
+/*!*********************************!*\
+  !*** ./src/canvas/position.mjs ***!
+  \*********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -13810,19 +13808,19 @@ var Position = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/canvas/socket.js":
-/*!******************************!*\
-  !*** ./src/canvas/socket.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/canvas/socket.mjs":
+/*!*******************************!*\
+  !*** ./src/canvas/socket.mjs ***!
+  \*******************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SocketComponent": () => /* binding */ SocketComponent
 /* harmony export */ });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ "./src/canvas/component.js");
-/* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./position */ "./src/canvas/position.js");
+/* harmony import */ var _component_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component.mjs */ "./src/canvas/component.mjs");
+/* harmony import */ var _position_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./position.mjs */ "./src/canvas/position.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14086,8 +14084,8 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "connectionMoving",
     value: function connectionMoving(x, y, invalid) {
-      var sourcePoint = new _position__WEBPACK_IMPORTED_MODULE_1__.Position(this.absPos.x, this.absPos.y);
-      var targetPoint = new _position__WEBPACK_IMPORTED_MODULE_1__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
+      var sourcePoint = new _position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(this.absPos.x, this.absPos.y);
+      var targetPoint = new _position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
 
       _classPrivateFieldGet(this, _tempConnectionEl).setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      L ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
 
@@ -14202,30 +14200,30 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
   }]);
 
   return SocketComponent;
-}(_component__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(_component_mjs__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /***/ }),
 
-/***/ "./src/components/cnode.js":
-/*!*********************************!*\
-  !*** ./src/components/cnode.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/cnode.mjs":
+/*!**********************************!*\
+  !*** ./src/components/cnode.mjs ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodeComponent": () => /* binding */ CnodeComponent
 /* harmony export */ });
-/* harmony import */ var _canvas_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/component */ "./src/canvas/component.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _prev__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prev */ "./src/components/prev.js");
-/* harmony import */ var _next__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./next */ "./src/components/next.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
-/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
+/* harmony import */ var _canvas_component_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/component.mjs */ "./src/canvas/component.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _prev_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prev.mjs */ "./src/components/prev.mjs");
+/* harmony import */ var _next_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./next.mjs */ "./src/components/next.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _output_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./output.mjs */ "./src/components/output.mjs");
+/* harmony import */ var _input_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input.mjs */ "./src/components/input.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _cnodeseditabletext_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodeseditabletext.mjs */ "./src/components/cnodeseditabletext.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -14397,11 +14395,11 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       _classPrivateFieldSet(this, _signEl, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", !this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("x", "0");
 
@@ -14411,23 +14409,23 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       _classPrivateFieldGet(this, _symbolEl).setAttribute("cy", 0);
 
-      _classPrivateFieldGet(this, _symbolEl).setAttribute("r", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.9);
+      _classPrivateFieldGet(this, _symbolEl).setAttribute("r", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.9);
 
-      _classPrivateFieldGet(this, _symbolEl).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SYMBOL_STROKE_COLOR);
+      _classPrivateFieldGet(this, _symbolEl).setAttribute("stroke", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SYMBOL_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _symbolEl).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SYMBOL_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _symbolEl).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SYMBOL_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _symbolEl).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SYMBOL_FILL_COLOR);
+      _classPrivateFieldGet(this, _symbolEl).setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SYMBOL_FILL_COLOR);
 
-      var signRadius = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.7;
+      var signRadius = _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.7;
 
       _classPrivateFieldGet(this, _signEl).setAttribute("d", !this.node.functional ? "\n      M ".concat(signRadius * 0.5, " 0\n      L ").concat(-signRadius * 0.3, " ").concat(-signRadius / 2, "\n      L ").concat(-signRadius * 0.3, " ").concat(signRadius / 2, "\n      Z\n      ") : "\n      M ".concat(signRadius * 0.6, " 0\n      L ").concat(-signRadius * 0.5, " 0\n\n      M 0 ").concat(-signRadius * 0.6, "\n      L ").concat(-signRadius * 0.5, " 0\n      L 0 ").concat(+signRadius * 0.6, "\n      "));
 
-      _classPrivateFieldGet(this, _signEl).setAttribute("stroke", !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SIGN_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_SIGN_COLOR);
+      _classPrivateFieldGet(this, _signEl).setAttribute("stroke", !this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SIGN_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_SIGN_COLOR);
 
       _classPrivateFieldGet(this, _signEl).setAttribute("stroke-width", !this.node.functional ? 1 : 3);
 
-      _classPrivateFieldGet(this, _signEl).setAttribute("fill", !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SIGN_COLOR : "transparent");
+      _classPrivateFieldGet(this, _signEl).setAttribute("fill", !this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SIGN_COLOR : "transparent");
 
       _classPrivateFieldGet(this, _signEl).setAttribute("stroke-linejoin", "null");
 
@@ -14452,19 +14450,19 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
     value: function updateSubcomponents() {
       var _this2 = this;
 
-      var posY = 30 + 0.5 * _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Prev
+      var posY = 30 + 0.5 * _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS; // Prev
 
       if (this.node.prev) {
         var nComp = this.node.prev.__comp;
 
         if (!nComp) {
-          nComp = new _prev__WEBPACK_IMPORTED_MODULE_2__.PrevSocketComponent(this.node.prev).setup().addTo(this); // write a back_reference
+          nComp = new _prev_mjs__WEBPACK_IMPORTED_MODULE_2__.PrevSocketComponent(this.node.prev).setup().addTo(this); // write a back_reference
 
           this.node.prev.__comp = nComp;
         } // Update position
 
 
-        nComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(0, posY);
+        nComp.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(0, posY);
       } // Nexts
 
 
@@ -14477,13 +14475,13 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp = next.__comp;
 
           if (!_nComp) {
-            _nComp = new _next__WEBPACK_IMPORTED_MODULE_3__.NextSocketComponent(next).setup().addTo(this); // write a back-reference
+            _nComp = new _next_mjs__WEBPACK_IMPORTED_MODULE_3__.NextSocketComponent(next).setup().addTo(this); // write a back-reference
 
             next.__comp = _nComp;
           } // Update position
 
 
-          _nComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, posY);
+          _nComp.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, posY);
           posY += 30;
         } // Take account of the case in which there are not nexts and outputs
         // but there is a prev.
@@ -14508,13 +14506,13 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp2 = output.__comp;
 
           if (!_nComp2) {
-            _nComp2 = new _output__WEBPACK_IMPORTED_MODULE_5__.OutputSocketComponent(output).setup().addTo(this); // write a back-reference
+            _nComp2 = new _output_mjs__WEBPACK_IMPORTED_MODULE_5__.OutputSocketComponent(output).setup().addTo(this); // write a back-reference
 
             output.__comp = _nComp2;
           } // Update position
 
 
-          _nComp2.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, posY);
+          _nComp2.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, posY);
           posY += 30;
         } // Input
 
@@ -14533,13 +14531,13 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           var _nComp3 = input.__comp;
 
           if (!_nComp3) {
-            _nComp3 = new _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent(input).setup().addTo(this); // write a back-reference
+            _nComp3 = new _input_mjs__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent(input).setup().addTo(this); // write a back-reference
 
             input.__comp = _nComp3;
           } // Update position
 
 
-          _nComp3.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(0, posY);
+          _nComp3.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(0, posY);
           posY += 30;
         } // Title
 
@@ -14552,7 +14550,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       if (!_classPrivateFieldGet(this, _titleComp)) {
         var _this$node$meta;
 
-        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(this.node.title).setup()); // Register to "cnui:change" to update title and meta info about it
+        _classPrivateFieldSet(this, _titleComp, new _cnodeseditabletext_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(this.node.title).setup()); // Register to "cnui:change" to update title and meta info about it
 
 
         _classPrivateFieldGet(this, _titleComp).events.on("cnui:change", function (component) {
@@ -14578,10 +14576,10 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           };
         });
 
-        _classPrivateFieldGet(this, _titleComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
-        _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
-        _classPrivateFieldGet(this, _titleComp).pos = (_this$node$meta = this.node.meta) !== null && _this$node$meta !== void 0 && _this$node$meta.titlePos ? new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y) : new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, -25);
-        _classPrivateFieldGet(this, _titleComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - (10 + _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS);
+        _classPrivateFieldGet(this, _titleComp).font = _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_FONT;
+        _classPrivateFieldGet(this, _titleComp).color = this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_TITLE_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_TITLE_COLOR;
+        _classPrivateFieldGet(this, _titleComp).pos = (_this$node$meta = this.node.meta) !== null && _this$node$meta !== void 0 && _this$node$meta.titlePos ? new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(this.node.meta.titlePos.x, this.node.meta.titlePos.y) : new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(10 + _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, -25);
+        _classPrivateFieldGet(this, _titleComp).width = _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - (10 + _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS);
 
         _classPrivateFieldGet(this, _titleComp).addTo(this);
       }
@@ -14610,12 +14608,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-pattern)");
         }
       } else {
-        _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
+        _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
       }
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", this.canvas.isComponentSelected(this) ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_STROKE_COLOR : !this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_STROKE_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      ")); // Update sub-sockets
+      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 0 0 ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH, " ").concat(this.height - _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH - _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS, " \n      Z\n      ")); // Update sub-sockets
 
 
       this.updateSubcomponents(); // Update UI data in meta info
@@ -14642,7 +14640,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       var items = []; // The node can add inputs?
 
       if (this.node.canAddInput) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add input</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add input</tspan>", function () {
           _this3.node.addInput();
 
           _this3.updateSVGElement();
@@ -14651,29 +14649,29 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
 
       if (this.node.canAddOutput) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add output</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add output</tspan>", function () {
           _this3.node.addOutput();
 
           _this3.updateSVGElement();
         }, "add output"));
       }
 
-      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
+      items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
         _this3.events.emit("cnui:disconnectAll");
       }, "disconnect all")); // The node can be removed?
 
       if (this.node.removable) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Delete</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Delete</tspan>", function () {
           _this3.destroy();
         }, "delete"));
       }
 
       if (!_classPrivateFieldGet(this, _commentComp)) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
           _this3.createCommentComponent("write a comment", 0, _this3.height + 10, true);
         }, "add comment"));
       } else {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
           _classPrivateFieldGet(_this3, _commentComp).events.removeAllListeners("cnui:change");
 
           _classPrivateFieldGet(_this3, _commentComp).events.removeAllListeners("cnui:move");
@@ -14708,12 +14706,12 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.height + 10;
       var initialEdit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
-      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(comment).setup());
+      _classPrivateFieldSet(this, _commentComp, new _cnodeseditabletext_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodesEditableTextComponent(comment).setup());
 
-      _classPrivateFieldGet(this, _commentComp).font = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
-      _classPrivateFieldGet(this, _commentComp).color = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
-      _classPrivateFieldGet(this, _commentComp).pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_1__.Position(x, y);
-      _classPrivateFieldGet(this, _commentComp).width = _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
+      _classPrivateFieldGet(this, _commentComp).font = _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_FONT;
+      _classPrivateFieldGet(this, _commentComp).color = _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_COMMENT_COLOR;
+      _classPrivateFieldGet(this, _commentComp).pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_1__.Position(x, y);
+      _classPrivateFieldGet(this, _commentComp).width = _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
 
       _classPrivateFieldGet(this, _commentComp).addTo(this);
 
@@ -14809,7 +14807,7 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "width",
     get: function get() {
-      return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
+      return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_WIDTH;
     }
   }, {
     key: "height",
@@ -14821,22 +14819,22 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
       }
 
       var rightSocketsHeight = this.node.outputs.length + this.node.nexts.length;
-      return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5 + 20 + // padding
+      return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_BORDER_RADIUS * 0.5 + 20 + // padding
       30 * (leftSocketsHeight + rightSocketsHeight) + 15 // Padding
       ;
     }
   }]);
 
   return CnodeComponent;
-}(_canvas_component__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(_canvas_component_mjs__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /***/ }),
 
-/***/ "./src/components/cnodescanvas.js":
-/*!****************************************!*\
-  !*** ./src/components/cnodescanvas.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/cnodescanvas.mjs":
+/*!*****************************************!*\
+  !*** ./src/components/cnodescanvas.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -14844,17 +14842,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CnodesCanvas": () => /* binding */ CnodesCanvas
 /* harmony export */ });
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _marco_jacovone_cnodes_src_core_node__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/node */ "../cnodes/src/core/node.js");
-/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/canvas */ "./src/canvas/canvas.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
-/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _cnodesmenu__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodesmenu */ "./src/components/cnodesmenu.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_src_core_node_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _canvas_canvas_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/canvas.mjs */ "./src/canvas/canvas.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../connections/ioconnection.mjs */ "./src/connections/ioconnection.mjs");
+/* harmony import */ var _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../connections/prevnextconnection.mjs */ "./src/connections/prevnextconnection.mjs");
+/* harmony import */ var _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnode.mjs */ "./src/components/cnode.mjs");
+/* harmony import */ var _cnodesmenu_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodesmenu.mjs */ "./src/components/cnodesmenu.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -14962,7 +14959,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
     var defsEl = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defsEl.innerHTML = "\n      ".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.DEFS, "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
+    defsEl.innerHTML = "\n      ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.DEFS, "\n      <filter xmlns=\"http://www.w3.org/2000/svg\" id=\"dropshadow\" height=\"130%\">\n        <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\"/> \n        <feOffset dx=\"0\" dy=\"0\" result=\"offsetblur\"/> \n        <feComponentTransfer>\n          <feFuncA type=\"linear\" slope=\"0.3\"/>\n        </feComponentTransfer>\n        <feMerge> \n          <feMergeNode/>\n          <feMergeNode in=\"SourceGraphic\"/> \n        </feMerge>\n      </filter>\n      <marker id=\"io-arrow-any\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ANY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-boolean\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_BOOLEAN_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-number\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_NUMBER_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-string\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_STRING_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-object\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_OBJECT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"io-arrow-array\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.TYPE_ARRAY_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>\n      <marker id=\"prevnext-arrow\" viewBox=\"0 0 10 10\" refX=\"10\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.CONNECTION_PREV_NEXT_COLOR, "\" orient=\"auto-start-reverse\">\n        <path d=\"M 3 0 L 10 4 L 10 6 L 3 10 Z\">\n        </path>\n      </marker>      \n    ");
 
     _this.svgEl.appendChild(defsEl); // Register keystrokes
 
@@ -15075,7 +15072,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "dump",
     value: function dump() {
-      console.log(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
+      console.log(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.export(_classPrivateFieldGet(this, _program)));
     }
     /**
      * Override this method to add common actions on top, like
@@ -15091,10 +15088,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
       var retArr = _get(_getPrototypeOf(CnodesCanvas.prototype), "getAllCommonMenuItems", this).call(this, components);
 
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
+      retArr.unshift(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Copy ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
         _this2.copySelectedNodes();
       }, "copy"));
-      retArr.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
+      retArr.unshift(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
         _this2.cloneSelectedNodes();
       }, "clone"));
       return retArr;
@@ -15111,40 +15108,40 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var items = [];
 
       if (this.canPopProgram()) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Return to parent...\n          </tspan>\n          "), function () {
           _this3.popProgram();
         }, "return"));
       }
 
-      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
+      items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Fit graph\n        </tspan>\n        "), function () {
         _this3.fitGraph();
       }, "fit graph"));
 
       if (CnodesCanvas.clipboard) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(CnodesCanvas.clipboard.length, " node").concat(CnodesCanvas.clipboard.length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(CnodesCanvas.clipboard.length, " node").concat(CnodesCanvas.clipboard.length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
           _this3.pasteNodes(x, y);
         }, "paste"));
       }
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
-              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this3);
-                  node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
+                  node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
                 }, n.title));
               }
             };
@@ -15201,7 +15198,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           this.cancelContextMenu();
         }
 
-        this.contextMenuComponent = new _cnodesmenu__WEBPACK_IMPORTED_MODULE_9__.CnodesMenu(this, items);
+        this.contextMenuComponent = new _cnodesmenu_mjs__WEBPACK_IMPORTED_MODULE_9__.CnodesMenu(this, items);
         this.contextMenuComponent.menuCallback = menuCallback;
         this.contextMenuComponent.show(x, y);
       }
@@ -15251,13 +15248,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           }
 
           if (n.meta.pos) {
-            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(n.meta.pos.x, n.meta.pos.y);
+            comp.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(n.meta.pos.x, n.meta.pos.y);
           } else {
-            comp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(100, 100);
+            comp.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(100, 100);
           }
 
           if (n.meta.titlePos) {
-            comp.titleComp.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
+            comp.titleComp.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(n.meta.titlePos.x, n.meta.titlePos.y);
           }
 
           if (n.meta.comment) {
@@ -15289,7 +15286,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                 if (!this.alreadyConnected(peer.__comp, _n.prev.__comp)) {
                   // Create connection component
-                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_7__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
+                  new _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_7__.PrevNextConnection(peer.__comp, _n.prev.__comp, this).setup();
                 }
               }
             } catch (err) {
@@ -15310,7 +15307,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (next.peer) {
                 if (!this.alreadyConnected(next.peer.__comp, next.__comp)) {
                   // Create connection component
-                  new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_7__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
+                  new _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_7__.PrevNextConnection(next.__comp, next.peer.__comp, this).setup();
                 }
               }
             } // Setup inputs
@@ -15331,7 +15328,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               if (inp.peer) {
                 if (!this.alreadyConnected(inp.peer.__comp, inp.__comp)) {
                   // Create connection component
-                  new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_6__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
+                  new _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_6__.IOConnection(inp.peer.__comp, inp.__comp, this).setup();
                 }
               }
             } // Setup outputs
@@ -15359,7 +15356,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
                     if (!this.alreadyConnected(outp.__comp, _peer.__comp)) {
                       // Create connection component
-                      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_6__.IOConnection(outp.__comp, _peer.__comp, this).setup();
+                      new _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_6__.IOConnection(outp.__comp, _peer.__comp, this).setup();
                     }
                   }
                 } catch (err) {
@@ -15392,12 +15389,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     key: "cloneSelectedNodes",
     value: function cloneSelectedNodes() {
       var oldSelected = this.selectedComponents;
-      var selectedNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
-        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
+      var selectedNodes = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+        return c instanceof _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
       }).map(function (c) {
         return c.node;
       }));
-      var cloneNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
+      var cloneNodes = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
 
       var _iterator10 = _createForOfIteratorHelper(cloneNodes),
           _step10;
@@ -15409,7 +15406,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           var node = _step10.value;
 
           if ((_node$meta = node.meta) !== null && _node$meta !== void 0 && _node$meta.pos) {
-            node.meta.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(node.meta.pos.x + 100, node.meta.pos.y + 100);
+            node.meta.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(node.meta.pos.x + 100, node.meta.pos.y + 100);
           }
         }
       } catch (err) {
@@ -15458,12 +15455,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "copySelectedNodes",
     value: function copySelectedNodes() {
-      var selectedNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
-        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
+      var selectedNodes = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
+        return c instanceof _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
       }).map(function (c) {
         return c.node;
       }));
-      CnodesCanvas.clipboard = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
+      CnodesCanvas.clipboard = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
     }
     /**
      * This method deletes selected nodes
@@ -15479,7 +15476,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
           var c = _step13.value;
 
-          if (c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.removable) {
+          if (c instanceof _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.removable) {
             c.destroy();
           }
         }
@@ -15509,7 +15506,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     key: "selectAllNodes",
     value: function selectAllNodes() {
       this.selectedComponents = this.components.filter(function (c) {
-        return c instanceof _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
+        return c instanceof _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent;
       });
       this.selectedComponents.forEach(function (c) {
         return c.updateSVGElement();
@@ -15529,15 +15526,15 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       }
 
       var oldSelected = this.selectedComponents;
-      var cloneNodes = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(CnodesCanvas.clipboard);
+      var cloneNodes = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(CnodesCanvas.clipboard);
 
       if (x && y) {
         // Compute the min x,y of cloned nodes
         var minPos = cloneNodes.reduce(function (acc, val) {
           var _val$meta, _val$meta2;
 
-          return new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(Math.min(acc.x, val === null || val === void 0 ? void 0 : (_val$meta = val.meta) === null || _val$meta === void 0 ? void 0 : _val$meta.pos.x), Math.min(acc.y, val === null || val === void 0 ? void 0 : (_val$meta2 = val.meta) === null || _val$meta2 === void 0 ? void 0 : _val$meta2.pos.y));
-        }, new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(Infinity, Infinity)); // Normalize positions
+          return new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(Math.min(acc.x, val === null || val === void 0 ? void 0 : (_val$meta = val.meta) === null || _val$meta === void 0 ? void 0 : _val$meta.pos.x), Math.min(acc.y, val === null || val === void 0 ? void 0 : (_val$meta2 = val.meta) === null || _val$meta2 === void 0 ? void 0 : _val$meta2.pos.y));
+        }, new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(Infinity, Infinity)); // Normalize positions
 
         cloneNodes = cloneNodes.map(function (n) {
           var _n$meta;
@@ -15716,13 +15713,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       if (factory) {
         return factory(node, canvas).setup();
       } else {
-        return new _cnode__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent(node, canvas).setup();
+        return new _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent(node, canvas).setup();
       }
     }
   }]);
 
   return CnodesCanvas;
-}(_canvas_canvas__WEBPACK_IMPORTED_MODULE_3__.Canvas);
+}(_canvas_canvas_mjs__WEBPACK_IMPORTED_MODULE_3__.Canvas);
 var _nodesUIRegistry = {
   writable: true,
   value: new Map()
@@ -15732,19 +15729,19 @@ _defineProperty(CnodesCanvas, "clipboard", null);
 
 /***/ }),
 
-/***/ "./src/components/cnodesconnection.js":
-/*!********************************************!*\
-  !*** ./src/components/cnodesconnection.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/cnodesconnection.mjs":
+/*!*********************************************!*\
+  !*** ./src/components/cnodesconnection.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesConnection": () => /* binding */ CnodesConnection
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type */ "../cnodes/src/core/type.js");
-/* harmony import */ var _canvas_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/connection */ "./src/canvas/connection.js");
+/* harmony import */ var _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type.mjs */ "../cnodes/src/core/type.mjs");
+/* harmony import */ var _canvas_connection_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/connection.mjs */ "./src/canvas/connection.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15852,9 +15849,9 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
   }, {
     key: "getRelevantType",
     value: function getRelevantType(type1, type2) {
-      if (type1 === _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_0__.Types.ANY) {
+      if (type1 === _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_0__.Types.ANY) {
         return type2;
-      } else if (type2 === _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_0__.Types.ANY) {
+      } else if (type2 === _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_0__.Types.ANY) {
         return type1;
       } else {
         return type1;
@@ -15863,24 +15860,24 @@ var CnodesConnection = /*#__PURE__*/function (_Connection) {
   }]);
 
   return CnodesConnection;
-}(_canvas_connection__WEBPACK_IMPORTED_MODULE_1__.Connection);
+}(_canvas_connection_mjs__WEBPACK_IMPORTED_MODULE_1__.Connection);
 
 /***/ }),
 
-/***/ "./src/components/cnodeseditabletext.js":
-/*!**********************************************!*\
-  !*** ./src/components/cnodeseditabletext.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/cnodeseditabletext.mjs":
+/*!***********************************************!*\
+  !*** ./src/components/cnodeseditabletext.mjs ***!
+  \***********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesEditableTextComponent": () => /* binding */ CnodesEditableTextComponent
 /* harmony export */ });
-/* harmony import */ var _canvas_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/component */ "./src/canvas/component.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _canvas_component_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/component.mjs */ "./src/canvas/component.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16042,7 +16039,7 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
     value: function getContextMenuItems() {
       var _this2 = this;
 
-      return [new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
+      return [new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__.MenuItem("\n      <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_COLOR, "\">\n        Edit text...\n      </tspan>\n      "), function () {
         _this2.setEditing(true);
       }, "edit text")];
     }
@@ -16105,9 +16102,9 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
       _classPrivateFieldGet(this, _inputEl).style["border"] = "1px dashed lightgray";
       _classPrivateFieldGet(this, _inputEl).style["padding"] = "0";
       _classPrivateFieldGet(this, _inputEl).style["margin"] = "-1px";
-      _classPrivateFieldGet(this, _inputEl).style["background-color"] = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_BACKGROUND;
+      _classPrivateFieldGet(this, _inputEl).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_BACKGROUND;
       _classPrivateFieldGet(this, _inputEl).style["overflow"] = "hidden";
-      _classPrivateFieldGet(this, _inputEl).style["color"] = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_COLOR;
+      _classPrivateFieldGet(this, _inputEl).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_EDITORS_COLOR;
       /** Simply disable pointer events */
 
       _classPrivateFieldGet(this, _inputEl).addEventListener("pointerdown", function (e) {
@@ -16245,24 +16242,24 @@ var CnodesEditableTextComponent = /*#__PURE__*/function (_Component) {
   }]);
 
   return CnodesEditableTextComponent;
-}(_canvas_component__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(_canvas_component_mjs__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /***/ }),
 
-/***/ "./src/components/cnodesmenu.js":
-/*!**************************************!*\
-  !*** ./src/components/cnodesmenu.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/cnodesmenu.mjs":
+/*!***************************************!*\
+  !*** ./src/components/cnodesmenu.mjs ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesMenu": () => /* binding */ CnodesMenu
 /* harmony export */ });
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cnodescanvas.mjs */ "./src/components/cnodescanvas.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -16421,16 +16418,16 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
       var menuEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
       var textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      textInputElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_FONT, "; \n      color: black; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
+      textInputElem.style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_FONT, "; \n      color: black; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
       textInputElem.setAttribute("x", 0);
       textInputElem.setAttribute("y", 0);
-      textInputElem.setAttribute("transform", "translate(".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ", ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ")"));
-      textInputElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH - 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS);
-      textInputElem.setAttribute("height", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT);
+      textInputElem.setAttribute("transform", "translate(".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ", ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ")"));
+      textInputElem.setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH - 2 * _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS);
+      textInputElem.setAttribute("height", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT);
 
       _classPrivateFieldSet(this, _inputElement, document.createElement("input"));
 
-      _classPrivateFieldGet(this, _inputElement).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(textInputElem.getAttribute("width") - 10, "px; // 10px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
+      _classPrivateFieldGet(this, _inputElement).style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(textInputElem.getAttribute("width") - 10, "px; // 10px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
 
       _classPrivateFieldGet(this, _inputElement).setAttribute("value", "");
 
@@ -16480,11 +16477,11 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
       _classPrivateFieldSet(this, _containerEl, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_FILL_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_FILL_COLOR);
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_STROKE_COLOR);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _containerEl).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_STROKE_WIDTH);
 
       _classPrivateFieldGet(this, _containerEl).setAttribute("filter", "url(#dropshadow)");
 
@@ -16509,7 +16506,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
         _classPrivateFieldGet(this, _itemsEls).splice(0, 1);
       }
 
-      var maxWidth = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH; // Create menu items
+      var maxWidth = _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_MIN_WIDTH; // Create menu items
 
       var _iterator = _createForOfIteratorHelper(this.filteredElements.entries()),
           _step;
@@ -16522,13 +16519,13 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
           var itemEl = document.createElementNS("http://www.w3.org/2000/svg", "rect");
           var itemTextEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
-          var itemX = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
-          var itemY = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS + _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT * (i + 1);
+          var itemX = _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
+          var itemY = _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS + _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT * (i + 1);
           itemEl.setAttribute("x", itemX);
           itemEl.setAttribute("y", itemY);
           itemTextEl.setAttribute("x", itemX + 5);
-          itemTextEl.setAttribute("y", itemY + _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT / 2);
-          itemTextEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE); // itemTextEl.setAttribute("alignment-baseline", "middle");
+          itemTextEl.setAttribute("y", itemY + _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT / 2);
+          itemTextEl.setAttribute("style", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE); // itemTextEl.setAttribute("alignment-baseline", "middle");
 
           itemTextEl.style["pointer-events"] = "none";
           itemTextEl.style["user-select"] = "none";
@@ -16540,7 +16537,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
 
           itemEl.addEventListener("pointerenter", function (e) {
-            itemEl.setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HIGHLIGHT);
+            itemEl.setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HIGHLIGHT);
           });
           itemEl.addEventListener("pointerleave", function (e) {
             itemEl.setAttribute("fill", "transparent");
@@ -16563,7 +16560,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
             e.stopPropagation();
           }); // Compute text sizes
 
-          maxWidth = Math.max(itemTextEl.getBBox().width + 10 + 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, maxWidth); // register items
+          maxWidth = Math.max(itemTextEl.getBBox().width + 10 + 2 * _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, maxWidth); // register items
 
           _classPrivateFieldGet(_this3, _itemsEls).push({
             itemEl: itemEl,
@@ -16592,13 +16589,13 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
           var itemEl = item.itemEl;
           var itemTextEl = item.itemTextEl;
-          var itemWidth = maxWidth - 2 * _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
-          var itemHeight = _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT;
+          var itemWidth = maxWidth - 2 * _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS;
+          var itemHeight = _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT;
           itemTextEl.setAttribute("width", itemWidth - 10);
           itemTextEl.setAttribute("height", itemHeight - 10);
           itemEl.setAttribute("width", itemWidth);
           itemEl.setAttribute("height", itemHeight);
-          itemEl.setAttribute("style", _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE);
+          itemEl.setAttribute("style", _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_STYLE);
           itemEl.setAttribute("stroke", "transparent");
           itemEl.setAttribute("stroke-width", 0);
           itemEl.setAttribute("fill", "transparent");
@@ -16610,7 +16607,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
         _iterator2.f();
       }
 
-      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 0 1 ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(maxWidth - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(maxWidth, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      L ").concat(maxWidth, " ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(maxWidth - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      Z\n      "));
+      _classPrivateFieldGet(this, _containerEl).setAttribute("d", "\n      M 0 ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 0 1 ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 1.3, " 0 \n      L ").concat(maxWidth - _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(maxWidth, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      L ").concat(maxWidth, " ").concat(this.height - _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 ").concat(maxWidth - _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(this.height, " \n      A ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " 0 0 1 0 ").concat(this.height - _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, " \n      Z\n      "));
     }
   }, {
     key: "searchFilter",
@@ -16650,34 +16647,34 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
   }, {
     key: "height",
     get: function get() {
-      return _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 2 + // Padding
+      return _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS * 2 + // Padding
       30 + // Search input
-      _theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT * this.filteredElements.length // Items
+      _theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_ITEM_HEIGHT * this.filteredElements.length // Items
       ;
     }
   }]);
 
   return CnodesMenu;
-}(_canvas_menu__WEBPACK_IMPORTED_MODULE_0__.Menu);
+}(_canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_0__.Menu);
 
 /***/ }),
 
-/***/ "./src/components/cnodessocket.js":
-/*!****************************************!*\
-  !*** ./src/components/cnodessocket.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/cnodessocket.mjs":
+/*!*****************************************!*\
+  !*** ./src/components/cnodessocket.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodesSocketComponent": () => /* binding */ CnodesSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type */ "../cnodes/src/core/type.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type.mjs */ "../cnodes/src/core/type.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _canvas_socket_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../canvas/socket.mjs */ "./src/canvas/socket.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -16802,14 +16799,14 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
   }, {
     key: "connectionMoving",
     value: function connectionMoving(x, y, invalid) {
-      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(this.absPos.x, this.absPos.y);
-      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
+      var sourcePoint = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__.Position(this.absPos.x, this.absPos.y);
+      var targetPoint = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__.Position(this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.x : x, this.currentPeerSocketComponent ? this.currentPeerSocketComponent.absPos.y : y);
       var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100));
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(cpXDistance * this.getSourcePointDirection(), -0.3 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(-cpXDistance * this.getSourcePointDirection(), 0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp1 = sourcePoint.add(new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__.Position(cpXDistance * this.getSourcePointDirection(), -0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__.Position(-cpXDistance * this.getSourcePointDirection(), 0.3 * (sourcePoint.y - targetPoint.y)));
       this.tempConnectionEl.setAttribute("d", "\n      M ".concat(this.absPos.x, " ").concat(this.absPos.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
-      this.tempConnectionEl.setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_WIDTH);
-      this.tempConnectionEl.setAttribute("stroke", invalid ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_INVALID_COLOR : this.currentPeerSocketComponent ? _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_VALID_COLOR : _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_COLOR);
+      this.tempConnectionEl.setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_WIDTH);
+      this.tempConnectionEl.setAttribute("stroke", invalid ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_INVALID_COLOR : this.currentPeerSocketComponent ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_VALID_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.CONNECTION_TEMP_COLOR);
       this.tempConnectionEl.setAttribute("stroke-dasharray", "5 5");
       this.tempConnectionEl.setAttribute("fill", "transparent");
     }
@@ -16839,23 +16836,23 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
     key: "getColorForType",
     value: function getColorForType(type) {
       switch (type) {
-        case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.ARRAY:
-          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_ARRAY_COLOR;
+        case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.ARRAY:
+          return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_ARRAY_COLOR;
 
-        case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.NUMBER:
-          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_NUMBER_COLOR;
+        case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.NUMBER:
+          return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_NUMBER_COLOR;
 
-        case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.STRING:
-          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_STRING_COLOR;
+        case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.STRING:
+          return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_STRING_COLOR;
 
-        case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.OBJECT:
-          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_OBJECT_COLOR;
+        case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.OBJECT:
+          return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_OBJECT_COLOR;
 
-        case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.BOOLEAN:
-          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_BOOLEAN_COLOR;
+        case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.BOOLEAN:
+          return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_BOOLEAN_COLOR;
 
-        case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_1__.Types.ANY:
-          return _theme__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_ANY_COLOR;
+        case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.ANY:
+          return _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.TYPE_ANY_COLOR;
 
         default:
           return "black";
@@ -16864,31 +16861,31 @@ var CnodesSocketComponent = /*#__PURE__*/function (_SocketComponent) {
   }]);
 
   return CnodesSocketComponent;
-}(_canvas_socket__WEBPACK_IMPORTED_MODULE_3__.SocketComponent);
+}(_canvas_socket_mjs__WEBPACK_IMPORTED_MODULE_3__.SocketComponent);
 
 /***/ }),
 
-/***/ "./src/components/input.js":
-/*!*********************************!*\
-  !*** ./src/components/input.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/input.mjs":
+/*!**********************************!*\
+  !*** ./src/components/input.mjs ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "InputSocketComponent": () => /* binding */ InputSocketComponent
 /* harmony export */ });
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
-/* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
-/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _output__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./output */ "./src/components/output.js");
-/* harmony import */ var _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type */ "../cnodes/src/core/type.js");
-/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
+/* harmony import */ var _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection.mjs */ "./src/connections/ioconnection.mjs");
+/* harmony import */ var _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket.mjs */ "./src/components/cnodessocket.mjs");
+/* harmony import */ var _canvas_socket_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/socket.mjs */ "./src/canvas/socket.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _output_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./output.mjs */ "./src/components/output.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type.mjs */ "../cnodes/src/core/type.mjs");
+/* harmony import */ var _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cnodescanvas.mjs */ "./src/components/cnodescanvas.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -17017,13 +17014,13 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("cy", 0);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("r", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_POINT_RADIUS);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("r", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_POINT_RADIUS);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
       var textInputNameElem = null;
       /*
@@ -17033,16 +17030,16 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       if (this.socket.canEditName) {
         textInputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-        textInputNameElem.style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        line-height: 30px;\n        user-select: none;\n        pointer-events: auto;\n      ");
+        textInputNameElem.style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        line-height: 30px;\n        user-select: none;\n        pointer-events: auto;\n      ");
         textInputNameElem.setAttribute("x", 0);
         textInputNameElem.setAttribute("y", 0);
         textInputNameElem.setAttribute("transform", "translate(".concat(15, ", ", -15, ")"));
-        textInputNameElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+        textInputNameElem.setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
         textInputNameElem.setAttribute("height", 30);
 
         _classPrivateFieldSet(this, _inputNameElement, document.createElement("input"));
 
-        _classPrivateFieldGet(this, _inputNameElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n      ");
+        _classPrivateFieldGet(this, _inputNameElement).style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n      ");
 
         _classPrivateFieldGet(this, _inputNameElement).addEventListener("keyup", function (e) {
           _this2.socket.name = e.target.value;
@@ -17062,7 +17059,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } else {
         _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
 
-        _classPrivateFieldGet(this, _labelElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n        height: 30px;\n        line-height: 30px;\n        user-select: none;\n      ");
+        _classPrivateFieldGet(this, _labelElement).style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n        height: 30px;\n        line-height: 30px;\n        user-select: none;\n      ");
         _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
 
         _classPrivateFieldGet(this, _labelElement).setAttribute("x", 0);
@@ -17071,22 +17068,22 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _labelElement).setAttribute("transform", "translate(".concat(15, ", ", -15, ")"));
 
-        _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+        _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
 
         _classPrivateFieldGet(this, _labelElement).setAttribute("height", 30);
       }
 
       var textInputValueElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      textInputValueElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
+      textInputValueElem.style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
       textInputValueElem.setAttribute("x", 0);
       textInputValueElem.setAttribute("y", 0);
-      textInputValueElem.setAttribute("transform", "translate(".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
-      textInputValueElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+      textInputValueElem.setAttribute("transform", "translate(".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
+      textInputValueElem.setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
       textInputValueElem.setAttribute("height", 30);
 
       _classPrivateFieldSet(this, _inputValueElement, document.createElement("input"));
 
-      _classPrivateFieldGet(this, _inputValueElement).style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
+      _classPrivateFieldGet(this, _inputValueElement).style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
       /** Register value modifications */
 
       _classPrivateFieldGet(this, _inputValueElement).addEventListener("keyup", function (e) {
@@ -17129,7 +17126,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(InputSocketComponent.prototype), "connectionDone", this).call(this, socketComp); // This creates the connection and connects sockets
 
 
-      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas).setup();
+      new _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas).setup();
     }
     /**
      * Query if this socket could accept a connection with
@@ -17140,7 +17137,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp instanceof _output__WEBPACK_IMPORTED_MODULE_7__.OutputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
+      return socketComp instanceof _output_mjs__WEBPACK_IMPORTED_MODULE_7__.OutputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
     }
     /**
      * This socket supports single connection, so if the user
@@ -17170,7 +17167,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     value: function updateSVGElement() {
       _get(_getPrototypeOf(InputSocketComponent.prototype), "updateSVGElement", this).call(this);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type)); // Show/Hide the imput component
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type)); // Show/Hide the imput component
 
 
       _classPrivateFieldGet(this, _inputValueElement).style["display"] = this.isConnected ? "none" : "table-cell";
@@ -17183,25 +17180,25 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       // input textbox
 
 
-      if (this.socket.type === _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY || this.socket.type === _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING || this.socket.type === _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER) {
+      if (this.socket.type === _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.ANY || this.socket.type === _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.STRING || this.socket.type === _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER) {
         _classPrivateFieldGet(this, _inputValueElement).removeAttribute("disabled"); // Now update the internal socket value according to the
         // text input box by parsing the text
 
 
         switch (this.socket.type) {
-          case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER:
+          case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER:
             this.socket.value = parseFloat(_classPrivateFieldGet(this, _inputValueElement).value);
             break;
 
-          case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING:
+          case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.STRING:
             this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
             break;
 
-          case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY:
+          case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.ANY:
             this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value;
             break;
 
-          case _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN:
+          case _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN:
             this.socket.value = _classPrivateFieldGet(this, _inputValueElement).value === "true" ? true : false;
             break;
         }
@@ -17224,21 +17221,21 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 var _iterator3 = _createForOfIteratorHelper(n.outputs),
@@ -17250,11 +17247,11 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
                     // Create an item only if the input in "compatible" with this output
                     if (_this3.socket.node.canBeConnected(_this3.socket, out)) {
-                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    (").concat(nodeDef.category, ")\n                  </tspan>\n                  "), function (x, y) {
+                      items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(out.type), "\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\">\n                    ").concat(out.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    (").concat(nodeDef.category, ")\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
-                        var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_9__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
-                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
+                        var node = _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_9__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
+                        node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
 
                         return out.__comp;
                       }, "".concat(nodeDef.name, ".").concat(out.name, " ").concat(nodeDef.category)));
@@ -17303,14 +17300,14 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       var conn = this.canvas.getConnectionsFor(this)[0];
 
       if (conn) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           // Disconnect this socket
           conn.destroy();
         }, "disconnect"));
       }
 
       if (this.socket.node.canRemoveInput(this.socket)) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Delete input</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Delete input</tspan>", function () {
           _this4.socket.node.removeInput(_this4.socket);
 
           _this4.destroy(); // Ensure that node parent redraw itself
@@ -17321,28 +17318,28 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       }
 
       if (this.socket.canEditType) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
 
           _this4.updateSVGElement();
-        }, "number"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY;
+        }, "number"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.ANY;
 
           _this4.updateSVGElement();
-        }, "any"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
+        }, "any"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
 
           _this4.updateSVGElement();
-        }, "string"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
+        }, "string"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
 
           _this4.updateSVGElement();
-        }, "boolean"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
+        }, "boolean"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
 
           _this4.updateSVGElement();
-        }, "array"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
+        }, "array"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
 
           _this4.updateSVGElement();
         }, "object"));
@@ -17363,30 +17360,30 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }]);
 
   return InputSocketComponent;
-}(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent);
+}(_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent);
 
 /***/ }),
 
-/***/ "./src/components/next.js":
-/*!********************************!*\
-  !*** ./src/components/next.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/next.mjs":
+/*!*********************************!*\
+  !*** ./src/components/next.mjs ***!
+  \*********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NextSocketComponent": () => /* binding */ NextSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
-/* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
-/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/prevnextconnection.mjs */ "./src/connections/prevnextconnection.mjs");
+/* harmony import */ var _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cnodessocket.mjs */ "./src/components/cnodessocket.mjs");
+/* harmony import */ var _canvas_socket_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/socket.mjs */ "./src/canvas/socket.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _cnode_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnode.mjs */ "./src/components/cnode.mjs");
+/* harmony import */ var _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cnodescanvas.mjs */ "./src/components/cnodescanvas.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -17482,21 +17479,21 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     value: function createElement() {
       _classPrivateFieldSet(this, _socketSymbol, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("d", "\n      M ".concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      Z\n      "));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("d", "\n      M ".concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      Z\n      "));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR);
 
       var labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      labelElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_COLOR, "; \n      text-align: right;\n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n      height: 30px;\n      line-height: 30px;\n      user-select: none;\n      ");
+      labelElem.style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_COLOR, "; \n      text-align: right;\n      width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n      height: 30px;\n      line-height: 30px;\n      user-select: none;\n      ");
       labelElem.innerHTML = "".concat(this.socket.name);
       labelElem.setAttribute("x", 0);
       labelElem.setAttribute("y", 0);
-      labelElem.setAttribute("transform", "translate(".concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
-      labelElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15);
+      labelElem.setAttribute("transform", "translate(".concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
+      labelElem.setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15);
       labelElem.setAttribute("height", 30);
       var prevElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
       prevElem.setAttribute("x", 0);
@@ -17514,7 +17511,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
     }
     /**
      * The user has completed a valid connection
@@ -17527,7 +17524,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _get(_getPrototypeOf(NextSocketComponent.prototype), "connectionDone", this).call(this, socketComp); // This creates the connection and connects sockets
 
 
-      new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas).setup();
+      new _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas).setup();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -17538,7 +17535,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.PrevSocket;
     }
     /**
      * This socket supports single connection, so if the user
@@ -17571,28 +17568,28 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable && n.prev) {
-                items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_6__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n              ").concat(nodeDef.name, ".\n              </tspan>\n              <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                ").concat(n.prev.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n              (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   // create the node and return the specific socket component to
                   // the context menu client
-                  var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_8__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
-                  node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_2__.Position(x, y); // Return the connected component instead
+                  var node = _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
+                  node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_2__.Position(x, y); // Return the connected component instead
 
                   return n.prev.__comp;
                 }, "".concat(nodeDef.name, ".").concat(n.prev.name, " ").concat(nodeDef.category)));
@@ -17628,7 +17625,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       var conn = this.canvas.getConnectionsFor(this)[0];
 
       if (conn) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_6__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_6__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           conn.destroy();
         }, "disconnect"));
       }
@@ -17648,24 +17645,24 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }]);
 
   return NextSocketComponent;
-}(_cnodessocket__WEBPACK_IMPORTED_MODULE_4__.CnodesSocketComponent);
+}(_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_4__.CnodesSocketComponent);
 
 /***/ }),
 
-/***/ "./src/components/nodes/cnodebreak.js":
-/*!********************************************!*\
-  !*** ./src/components/nodes/cnodebreak.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/nodes/cnodebreak.mjs":
+/*!*********************************************!*\
+  !*** ./src/components/nodes/cnodebreak.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodeBreakComponent": () => /* binding */ CnodeBreakComponent
 /* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.. */ "./src/index.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
+/* harmony import */ var _index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../index.mjs */ "./src/index.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _cnode_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode.mjs */ "./src/components/cnode.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -17767,7 +17764,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
           _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeBreakComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
-      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Remove unused</tspan>"), function () {
+      items.unshift(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Remove unused</tspan>"), function () {
         var _iterator = _createForOfIteratorHelper(_this2.node.outputs),
             _step;
 
@@ -17788,7 +17785,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
         }
 
         _this2.updateSVGElement();
-      }, "remove unused"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Reset outputs</tspan>"), function () {
+      }, "remove unused"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Reset outputs</tspan>"), function () {
         var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(_this2, _originalOutputs)),
             _step2;
 
@@ -17813,7 +17810,7 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
   }]);
 
   return CnodeBreakComponent;
-}(_cnode__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
+}(_cnode_mjs__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
 
 _defineProperty(CnodeBreakComponent, "instance", function (node, canvas) {
   return new CnodeBreakComponent(node, canvas);
@@ -17821,20 +17818,20 @@ _defineProperty(CnodeBreakComponent, "instance", function (node, canvas) {
 
 /***/ }),
 
-/***/ "./src/components/nodes/cnodeprogram.js":
-/*!**********************************************!*\
-  !*** ./src/components/nodes/cnodeprogram.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/nodes/cnodeprogram.mjs":
+/*!***********************************************!*\
+  !*** ./src/components/nodes/cnodeprogram.mjs ***!
+  \***********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CnodeProgramComponent": () => /* binding */ CnodeProgramComponent
 /* harmony export */ });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../.. */ "./src/index.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode */ "./src/components/cnode.js");
+/* harmony import */ var _index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../index.mjs */ "./src/index.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _cnode_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode.mjs */ "./src/components/cnode.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17935,7 +17932,7 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
           _this2 = this;
 
       var items = (_get$call = _get(_getPrototypeOf(CnodeProgramComponent.prototype), "getContextMenuItems", this).call(this)) !== null && _get$call !== void 0 ? _get$call : [];
-      items.unshift(new _canvas_menu__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(___WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Edit...</tspan>"), function () {
+      items.unshift(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"".concat(_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Edit...</tspan>"), function () {
         _this2.canvas.pushProgram(_this2.node);
       }, "edit"));
       return items.length ? items : null;
@@ -17943,7 +17940,7 @@ var CnodeProgramComponent = /*#__PURE__*/function (_CnodeComponent) {
   }]);
 
   return CnodeProgramComponent;
-}(_cnode__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
+}(_cnode_mjs__WEBPACK_IMPORTED_MODULE_2__.CnodeComponent);
 
 _defineProperty(CnodeProgramComponent, "instance", function (node, canvas) {
   return new CnodeProgramComponent(node, canvas);
@@ -17951,26 +17948,26 @@ _defineProperty(CnodeProgramComponent, "instance", function (node, canvas) {
 
 /***/ }),
 
-/***/ "./src/components/output.js":
-/*!**********************************!*\
-  !*** ./src/components/output.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/output.mjs":
+/*!***********************************!*\
+  !*** ./src/components/output.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "OutputSocketComponent": () => /* binding */ OutputSocketComponent
 /* harmony export */ });
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection */ "./src/connections/ioconnection.js");
-/* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input */ "./src/components/input.js");
-/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type */ "../cnodes/src/core/type.js");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
+/* harmony import */ var _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/ioconnection.mjs */ "./src/connections/ioconnection.mjs");
+/* harmony import */ var _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket.mjs */ "./src/components/cnodessocket.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _input_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./input.mjs */ "./src/components/input.mjs");
+/* harmony import */ var _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnodescanvas.mjs */ "./src/components/cnodescanvas.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @marco.jacovone/cnodes/src/core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -18089,13 +18086,13 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _socketSymbol).setAttribute("cy", 0);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("r", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_POINT_RADIUS);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("r", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_POINT_RADIUS);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
 
       var textOutputNameElem = null;
       /*
@@ -18105,16 +18102,16 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       if (this.socket.canEditName) {
         textOutputNameElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-        textOutputNameElem.style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        line-height: 30px;\n        user-select: none;\n        pointer-events: auto;\n      ");
+        textOutputNameElem.style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: left;\n        line-height: 30px;\n        user-select: none;\n        pointer-events: auto;\n      ");
         textOutputNameElem.setAttribute("x", 0);
         textOutputNameElem.setAttribute("y", 0);
-        textOutputNameElem.setAttribute("transform", "translate(".concat(-_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
-        textOutputNameElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
+        textOutputNameElem.setAttribute("transform", "translate(".concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2, ", ").concat(-15, ")"));
+        textOutputNameElem.setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 15);
         textOutputNameElem.setAttribute("height", 30);
 
         _classPrivateFieldSet(this, _outputNameElement, document.createElement("input"));
 
-        _classPrivateFieldGet(this, _outputNameElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n        text-align: right\n      ");
+        _classPrivateFieldGet(this, _outputNameElement).style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n        text-align: right\n      ");
 
         _classPrivateFieldGet(this, _outputNameElement).addEventListener("keyup", function (e) {
           _this2.socket.name = e.target.value;
@@ -18128,16 +18125,16 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } else {
         _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
 
-        _classPrivateFieldGet(this, _labelElement).style = "\n        font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: right;\n        width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30, "px;\n        height: 30px;\n        line-height: 30px;\n        user-select: none;\n        ");
+        _classPrivateFieldGet(this, _labelElement).style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_IO_NAME_COLOR, "; \n        text-align: right;\n        width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30, "px;\n        height: 30px;\n        line-height: 30px;\n        user-select: none;\n        ");
         _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
 
         _classPrivateFieldGet(this, _labelElement).setAttribute("x", 0);
 
         _classPrivateFieldGet(this, _labelElement).setAttribute("y", 0);
 
-        _classPrivateFieldGet(this, _labelElement).setAttribute("transform", "translate(".concat(-_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH + 15, ", ").concat(-15, ")"));
+        _classPrivateFieldGet(this, _labelElement).setAttribute("transform", "translate(".concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH + 15, ", ").concat(-15, ")"));
 
-        _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30);
+        _classPrivateFieldGet(this, _labelElement).setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.NODE_WIDTH - 30);
 
         _classPrivateFieldGet(this, _labelElement).setAttribute("height", 30);
       }
@@ -18172,7 +18169,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } // This creates the connection and connects sockets
 
 
-      new _connections_ioconnection__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas).setup();
+      new _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas).setup();
     }
     /**
      * Query if this socket could accept a connection with
@@ -18183,7 +18180,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp instanceof _input__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
+      return socketComp instanceof _input_mjs__WEBPACK_IMPORTED_MODULE_6__.InputSocketComponent && this.socket.node.canBeConnected(this.socket, socketComp.socket);
     }
     /**
      * Returns the direction of the source point for this socket component:
@@ -18213,7 +18210,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     value: function updateSVGElement() {
       _get(_getPrototypeOf(OutputSocketComponent.prototype), "updateSVGElement", this).call(this);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
     }
     /**
      * This method is responsible to enumerate all socket of registered nodes
@@ -18230,21 +18227,21 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 var _iterator3 = _createForOfIteratorHelper(n.inputs),
@@ -18256,11 +18253,11 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
                     // Create an item only if the input in "compatible" with this output
                     if (_this3.socket.node.canBeConnected(_this3.socket, inp)) {
-                      items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    (").concat(nodeDef.category, ")\n                  </tspan>\n                  "), function (x, y) {
+                      items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                  <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_COLOR, "\">\n                    ").concat(nodeDef.name, ".\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" fill=\"").concat(_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(inp.type), "\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_STYLE, "\">\n                    ").concat(inp.name, "\n                  </tspan>\n                  <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                    (").concat(nodeDef.category, ")\n                  </tspan>\n                  "), function (x, y) {
                         // create the node and return the specific socket component to
                         // the context menu client
-                        var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
-                        node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_5__.Position(x, y); // Return the connected component instead
+                        var node = _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this3.canvas);
+                        node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(x, y); // Return the connected component instead
 
                         return inp.__comp;
                       }, "".concat(nodeDef.name, ".").concat(inp.name, " ").concat(nodeDef.category)));
@@ -18309,7 +18306,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       var conns = this.canvas.getConnectionsFor(this);
 
       if (conns.length > 0) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
           var _iterator4 = _createForOfIteratorHelper(conns),
               _step4;
 
@@ -18327,7 +18324,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       }
 
       if (this.socket.node.canRemoveOutput(this.socket)) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Delete output</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Delete output</tspan>", function () {
           _this4.socket.node.removeOutput(_this4.socket);
 
           _this4.destroy(); // Ensure that node parent redraw itself
@@ -18338,28 +18335,28 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       }
 
       if (this.socket.canEditType) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ANY;
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.ANY;
 
           _this4.updateSVGElement();
-        }, "any"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
+        }, "any"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.NUMBER;
 
           _this4.updateSVGElement();
-        }, "number"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
+        }, "number"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.STRING;
 
           _this4.updateSVGElement();
-        }), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
+        }), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.BOOLEAN;
 
           _this4.updateSVGElement();
-        }, "boolean"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
+        }, "boolean"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.ARRAY;
 
           _this4.updateSVGElement();
-        }, "array"), new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
-          _this4.socket.type = _marco_jacovone_cnodes_src_core_type__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
+        }, "array"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
+          _this4.socket.type = _marco_jacovone_cnodes_src_core_type_mjs__WEBPACK_IMPORTED_MODULE_8__.Types.OBJECT;
 
           _this4.updateSVGElement();
         }, "object"));
@@ -18380,29 +18377,28 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }]);
 
   return OutputSocketComponent;
-}(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent);
+}(_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent);
 
 /***/ }),
 
-/***/ "./src/components/prev.js":
-/*!********************************!*\
-  !*** ./src/components/prev.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/prev.mjs":
+/*!*********************************!*\
+  !*** ./src/components/prev.mjs ***!
+  \*********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PrevSocketComponent": () => /* binding */ PrevSocketComponent
 /* harmony export */ });
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme */ "./src/components/theme.js");
-/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
-/* harmony import */ var _cnodessocket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket */ "./src/components/cnodessocket.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _cnode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./cnode */ "./src/components/cnode.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cnodescanvas */ "./src/components/cnodescanvas.js");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
+/* harmony import */ var _theme_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/prevnextconnection.mjs */ "./src/connections/prevnextconnection.mjs");
+/* harmony import */ var _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cnodessocket.mjs */ "./src/components/cnodessocket.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cnodescanvas.mjs */ "./src/components/cnodescanvas.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -18455,7 +18451,6 @@ function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateM
 
 
 
-
 /**
  * This class implements a socket that represents a Prev object
  * in the cnodes world
@@ -18497,21 +18492,21 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     value: function createElement() {
       _classPrivateFieldSet(this, _socketSymbol, document.createElementNS("http://www.w3.org/2000/svg", "path"));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("d", "\n      M ".concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(-_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      Z\n      "));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("d", "\n      M ".concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      L ").concat(-_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, " ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, "\n      Z\n      "));
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_COLOR);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("stroke-width", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_STROKE_WIDTH);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR);
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR);
 
       var labelElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      labelElem.style = "\n      font: ".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_FONT, "; \n      color: ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_COLOR, "; \n      text-align: left;\n      width: ").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n      height: 30px;\n      line-height: 30px;\n      user-select: none;\n      ");
+      labelElem.style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_NAME_COLOR, "; \n      text-align: left;\n      width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15, "px;\n      height: 30px;\n      line-height: 30px;\n      user-select: none;\n      ");
       labelElem.innerHTML = "".concat(this.socket.name);
       labelElem.setAttribute("x", 0);
       labelElem.setAttribute("y", 0);
       labelElem.setAttribute("transform", "translate(".concat(15, ", ", -15, ")"));
-      labelElem.setAttribute("width", _theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15);
+      labelElem.setAttribute("width", _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 15);
       labelElem.setAttribute("height", 30);
       var prevElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
       prevElem.setAttribute("x", 0);
@@ -18537,7 +18532,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       } // This creates the connection and connects sockets
 
 
-      new _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas).setup();
+      new _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas).setup();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -18548,7 +18543,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "canAcceptPeerSocket",
     value: function canAcceptPeerSocket(socketComp) {
-      return socketComp.socket instanceof _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.NextSocket;
+      return socketComp.socket instanceof _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.NextSocket;
     }
     /**
      * Returns the direction of the source point for this socket component:
@@ -18581,21 +18576,21 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       var items = [];
 
-      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
+      var _iterator = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Env.getCategories()),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var cat = _step.value;
 
-          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
+          var _iterator2 = _createForOfIteratorHelper(_marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Env.getCategoryNodes(cat)),
               _step2;
 
           try {
             var _loop = function _loop() {
               var nodeDef = _step2.value;
               // Instantiate the node to enumerate its sockets
-              var n = _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
+              var n = _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
                 var _iterator3 = _createForOfIteratorHelper(n.nexts),
@@ -18604,11 +18599,11 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
                 try {
                   var _loop2 = function _loop2() {
                     var next = _step3.value;
-                    items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" style=\"".concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, ".\n                </tspan>\n                <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  (").concat(nodeDef.category, ")\n                </tspan>\n                "), function (x, y) {
+                    items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n                <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_COLOR, "\">\n                  ").concat(nodeDef.name, ".\n                </tspan>\n                <tspan alignment-baseline=\"middle\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_PREV_NEXT_FILL_COLOR, "\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_STYLE, "\">\n                  ").concat(next.name, "\n                </tspan>\n                <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                  (").concat(nodeDef.category, ")\n                </tspan>\n                "), function (x, y) {
                       // create the node and return the specific socket component to
                       // the context menu client
-                      var node = _cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
-                      node.pos = new _canvas_position__WEBPACK_IMPORTED_MODULE_6__.Position(x, y); // Return the connected component instead
+                      var node = _cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_6__.CnodesCanvas.getNodeUIInstance(n, _this2.canvas);
+                      node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(x, y); // Return the connected component instead
 
                       return next.__comp;
                     }, "".concat(nodeDef.name, ".").concat(next.name, " ").concat(nodeDef.category)));
@@ -18654,7 +18649,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       var conns = this.canvas.getConnectionsFor(this);
 
       if (conns.length > 0) {
-        items.push(new _canvas_menu__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
+        items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
           var _iterator4 = _createForOfIteratorHelper(conns),
               _step4;
 
@@ -18686,15 +18681,15 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }]);
 
   return PrevSocketComponent;
-}(_cnodessocket__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent);
+}(_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent);
 
 /***/ }),
 
-/***/ "./src/components/theme.js":
-/*!*********************************!*\
-  !*** ./src/components/theme.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/components/theme.mjs":
+/*!**********************************!*\
+  !*** ./src/components/theme.mjs ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -19081,21 +19076,21 @@ var defaultLight = new Theme();
 
 /***/ }),
 
-/***/ "./src/connections/ioconnection.js":
-/*!*****************************************!*\
-  !*** ./src/connections/ioconnection.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/connections/ioconnection.mjs":
+/*!******************************************!*\
+  !*** ./src/connections/ioconnection.mjs ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "IOConnection": () => /* binding */ IOConnection
 /* harmony export */ });
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cnodesconnection */ "./src/components/cnodesconnection.js");
-/* harmony import */ var _components_cnodessocket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/cnodessocket */ "./src/components/cnodessocket.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _components_cnodesconnection_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cnodesconnection.mjs */ "./src/components/cnodesconnection.mjs");
+/* harmony import */ var _components_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/cnodessocket.mjs */ "./src/components/cnodessocket.mjs");
+/* harmony import */ var _components_theme_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/theme.mjs */ "./src/components/theme.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19155,38 +19150,38 @@ var IOConnection = /*#__PURE__*/function (_CnodesConnection) {
   _createClass(IOConnection, [{
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
-      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
+      var sourcePoint = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
+      var targetPoint = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme_mjs__WEBPACK_IMPORTED_MODULE_3__.Theme.current.NODE_IO_POINT_RADIUS, this.target.absPos.y);
       var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100));
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp1 = sourcePoint.add(new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y)));
       this.connectionEl.setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
-      this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_IO_WIDTH);
-      this.connectionEl.setAttribute("stroke", _components_cnodessocket__WEBPACK_IMPORTED_MODULE_2__.CnodesSocketComponent.getColorForType(this.getRelevantType(this.source.socket.type, this.target.socket.type)));
+      this.connectionEl.setAttribute("stroke-width", _components_theme_mjs__WEBPACK_IMPORTED_MODULE_3__.Theme.current.CONNECTION_IO_WIDTH);
+      this.connectionEl.setAttribute("stroke", _components_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_2__.CnodesSocketComponent.getColorForType(this.getRelevantType(this.source.socket.type, this.target.socket.type)));
       this.connectionEl.setAttribute("marker-end", "url(#io-arrow-".concat(this.getRelevantType(this.source.socket.type, this.target.socket.type), ")"));
       this.connectionEl.setAttribute("fill", "transparent");
     }
   }]);
 
   return IOConnection;
-}(_components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__.CnodesConnection);
+}(_components_cnodesconnection_mjs__WEBPACK_IMPORTED_MODULE_1__.CnodesConnection);
 
 /***/ }),
 
-/***/ "./src/connections/prevnextconnection.js":
-/*!***********************************************!*\
-  !*** ./src/connections/prevnextconnection.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/connections/prevnextconnection.mjs":
+/*!************************************************!*\
+  !*** ./src/connections/prevnextconnection.mjs ***!
+  \************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PrevNextConnection": () => /* binding */ PrevNextConnection
 /* harmony export */ });
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cnodesconnection */ "./src/components/cnodesconnection.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme */ "./src/components/theme.js");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _components_cnodesconnection_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cnodesconnection.mjs */ "./src/components/cnodesconnection.mjs");
+/* harmony import */ var _components_theme_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/theme.mjs */ "./src/components/theme.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19245,121 +19240,121 @@ var PrevNextConnection = /*#__PURE__*/function (_CnodesConnection) {
   _createClass(PrevNextConnection, [{
     key: "updateSVGElement",
     value: function updateSVGElement() {
-      var sourcePoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
-      var targetPoint = new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, this.target.absPos.y);
+      var sourcePoint = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(this.source.absPos.x, this.source.absPos.y);
+      var targetPoint = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(this.target.absPos.x - _components_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_PREV_NEXT_POINT_RADIUS, this.target.absPos.y);
       var cpXDistance = Math.max(0.8 * Math.abs(sourcePoint.x - targetPoint.x), Math.min(Math.abs(sourcePoint.y - targetPoint.y), 100));
-      var cp1 = sourcePoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y)));
-      var cp2 = targetPoint.add(new _canvas_position__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp1 = sourcePoint.add(new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(cpXDistance, -0.3 * (sourcePoint.y - targetPoint.y)));
+      var cp2 = targetPoint.add(new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_0__.Position(-cpXDistance, 0.3 * (sourcePoint.y - targetPoint.y)));
       this.connectionEl.setAttribute("d", "\n      M ".concat(sourcePoint.x, " ").concat(sourcePoint.y, "\n      C ").concat(cp1.x, " ").concat(cp1.y, " ").concat(cp2.x, " ").concat(cp2.y, " ").concat(targetPoint.x, " ").concat(targetPoint.y, "\n    "));
-      this.connectionEl.setAttribute("stroke-width", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_WIDTH);
-      this.connectionEl.setAttribute("stroke", _components_theme__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_COLOR);
+      this.connectionEl.setAttribute("stroke-width", _components_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_WIDTH);
+      this.connectionEl.setAttribute("stroke", _components_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.CONNECTION_PREV_NEXT_COLOR);
       this.connectionEl.setAttribute("marker-end", "url(#prevnext-arrow)");
       this.connectionEl.setAttribute("fill", "transparent");
     }
   }]);
 
   return PrevNextConnection;
-}(_components_cnodesconnection__WEBPACK_IMPORTED_MODULE_1__.CnodesConnection);
+}(_components_cnodesconnection_mjs__WEBPACK_IMPORTED_MODULE_1__.CnodesConnection);
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/index.mjs":
+/*!***********************!*\
+  !*** ./src/index.mjs ***!
+  \***********************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Canvas": () => /* reexport safe */ _canvas_canvas__WEBPACK_IMPORTED_MODULE_0__.Canvas,
-/* harmony export */   "Component": () => /* reexport safe */ _canvas_component__WEBPACK_IMPORTED_MODULE_1__.Component,
-/* harmony export */   "Connection": () => /* reexport safe */ _canvas_connection__WEBPACK_IMPORTED_MODULE_2__.Connection,
-/* harmony export */   "Menu": () => /* reexport safe */ _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.Menu,
-/* harmony export */   "MenuItem": () => /* reexport safe */ _canvas_menu__WEBPACK_IMPORTED_MODULE_3__.MenuItem,
-/* harmony export */   "Position": () => /* reexport safe */ _canvas_position__WEBPACK_IMPORTED_MODULE_4__.Position,
-/* harmony export */   "SocketComponent": () => /* reexport safe */ _canvas_socket__WEBPACK_IMPORTED_MODULE_5__.SocketComponent,
-/* harmony export */   "CnodeComponent": () => /* reexport safe */ _components_cnode__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent,
-/* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas,
-/* harmony export */   "CnodesConnection": () => /* reexport safe */ _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_8__.CnodesConnection,
-/* harmony export */   "CnodesEditableTextComponent": () => /* reexport safe */ _components_cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent,
-/* harmony export */   "CnodesMenu": () => /* reexport safe */ _components_cnodesmenu__WEBPACK_IMPORTED_MODULE_10__.CnodesMenu,
-/* harmony export */   "CnodesSocketComponent": () => /* reexport safe */ _components_cnodessocket__WEBPACK_IMPORTED_MODULE_11__.CnodesSocketComponent,
-/* harmony export */   "InputSocketComponent": () => /* reexport safe */ _components_input__WEBPACK_IMPORTED_MODULE_12__.InputSocketComponent,
-/* harmony export */   "OutputSocketComponent": () => /* reexport safe */ _components_output__WEBPACK_IMPORTED_MODULE_13__.OutputSocketComponent,
-/* harmony export */   "PrevSocketComponent": () => /* reexport safe */ _components_prev__WEBPACK_IMPORTED_MODULE_14__.PrevSocketComponent,
-/* harmony export */   "NextSocketComponent": () => /* reexport safe */ _components_next__WEBPACK_IMPORTED_MODULE_15__.NextSocketComponent,
-/* harmony export */   "Theme": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_16__.Theme,
-/* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme__WEBPACK_IMPORTED_MODULE_16__.defaultLight,
-/* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent,
-/* harmony export */   "CnodeBreakComponent": () => /* reexport safe */ _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent,
-/* harmony export */   "IOConnection": () => /* reexport safe */ _connections_ioconnection__WEBPACK_IMPORTED_MODULE_19__.IOConnection,
-/* harmony export */   "PrevNextConnection": () => /* reexport safe */ _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_20__.PrevNextConnection,
-/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.AMap,
-/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.APush,
-/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.AReduce,
-/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Call,
-/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Console,
-/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Env,
-/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAConst,
-/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAGet,
-/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FALength,
-/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAMake,
-/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAMap,
-/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAReduce,
-/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FAdd,
-/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FCompare,
-/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FConcat,
-/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FDiv,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FGetvar,
-/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FIf,
-/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FMod,
-/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FMul,
-/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FNConst,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FOBreak,
-/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FOMake,
-/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FSConst,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FSqrt,
-/* harmony export */   "FTofixed": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FTofixed,
-/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.For,
-/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Getvar,
-/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.If,
-/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.InputSocket,
-/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Log,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.NextSocket,
-/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Node,
-/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.OutputSocket,
-/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.PrevSocket,
-/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Program,
-/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Setvar,
-/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Socket,
-/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Types,
-/* harmony export */   "Wait": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Wait,
-/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.While,
+/* harmony export */   "Canvas": () => /* reexport safe */ _canvas_canvas_mjs__WEBPACK_IMPORTED_MODULE_0__.Canvas,
+/* harmony export */   "Component": () => /* reexport safe */ _canvas_component_mjs__WEBPACK_IMPORTED_MODULE_1__.Component,
+/* harmony export */   "Connection": () => /* reexport safe */ _canvas_connection_mjs__WEBPACK_IMPORTED_MODULE_2__.Connection,
+/* harmony export */   "Menu": () => /* reexport safe */ _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_3__.Menu,
+/* harmony export */   "MenuItem": () => /* reexport safe */ _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_3__.MenuItem,
+/* harmony export */   "Position": () => /* reexport safe */ _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_4__.Position,
+/* harmony export */   "SocketComponent": () => /* reexport safe */ _canvas_socket_mjs__WEBPACK_IMPORTED_MODULE_5__.SocketComponent,
+/* harmony export */   "CnodeComponent": () => /* reexport safe */ _components_cnode_mjs__WEBPACK_IMPORTED_MODULE_6__.CnodeComponent,
+/* harmony export */   "CnodesCanvas": () => /* reexport safe */ _components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas,
+/* harmony export */   "CnodesConnection": () => /* reexport safe */ _components_cnodesconnection_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodesConnection,
+/* harmony export */   "CnodesEditableTextComponent": () => /* reexport safe */ _components_cnodeseditabletext_mjs__WEBPACK_IMPORTED_MODULE_9__.CnodesEditableTextComponent,
+/* harmony export */   "CnodesMenu": () => /* reexport safe */ _components_cnodesmenu_mjs__WEBPACK_IMPORTED_MODULE_10__.CnodesMenu,
+/* harmony export */   "CnodesSocketComponent": () => /* reexport safe */ _components_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_11__.CnodesSocketComponent,
+/* harmony export */   "InputSocketComponent": () => /* reexport safe */ _components_input_mjs__WEBPACK_IMPORTED_MODULE_12__.InputSocketComponent,
+/* harmony export */   "OutputSocketComponent": () => /* reexport safe */ _components_output_mjs__WEBPACK_IMPORTED_MODULE_13__.OutputSocketComponent,
+/* harmony export */   "PrevSocketComponent": () => /* reexport safe */ _components_prev_mjs__WEBPACK_IMPORTED_MODULE_14__.PrevSocketComponent,
+/* harmony export */   "NextSocketComponent": () => /* reexport safe */ _components_next_mjs__WEBPACK_IMPORTED_MODULE_15__.NextSocketComponent,
+/* harmony export */   "Theme": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.Theme,
+/* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.defaultLight,
+/* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram_mjs__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent,
+/* harmony export */   "CnodeBreakComponent": () => /* reexport safe */ _components_nodes_cnodebreak_mjs__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent,
+/* harmony export */   "IOConnection": () => /* reexport safe */ _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_19__.IOConnection,
+/* harmony export */   "PrevNextConnection": () => /* reexport safe */ _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_20__.PrevNextConnection,
+/* harmony export */   "AMap": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.AMap,
+/* harmony export */   "APush": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.APush,
+/* harmony export */   "AReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.AReduce,
+/* harmony export */   "Call": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Call,
+/* harmony export */   "Console": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Console,
+/* harmony export */   "Env": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Env,
+/* harmony export */   "FAConst": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FAConst,
+/* harmony export */   "FAGet": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FAGet,
+/* harmony export */   "FALength": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FALength,
+/* harmony export */   "FAMake": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FAMake,
+/* harmony export */   "FAMap": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FAMap,
+/* harmony export */   "FAReduce": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FAReduce,
+/* harmony export */   "FAdd": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FAdd,
+/* harmony export */   "FCompare": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FCompare,
+/* harmony export */   "FConcat": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FConcat,
+/* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FDiv,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FGetvar,
+/* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FIf,
+/* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FMod,
+/* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FMul,
+/* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FNConst,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FOBreak,
+/* harmony export */   "FOMake": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FOMake,
+/* harmony export */   "FSConst": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FSConst,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FSqrt,
+/* harmony export */   "FTofixed": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FTofixed,
+/* harmony export */   "For": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.For,
+/* harmony export */   "Getvar": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Getvar,
+/* harmony export */   "If": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.If,
+/* harmony export */   "InputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.InputSocket,
+/* harmony export */   "Log": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Log,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.NextSocket,
+/* harmony export */   "Node": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Node,
+/* harmony export */   "OutputSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.OutputSocket,
+/* harmony export */   "PrevSocket": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.PrevSocket,
+/* harmony export */   "Program": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Program,
+/* harmony export */   "Setvar": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Setvar,
+/* harmony export */   "Socket": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Socket,
+/* harmony export */   "Types": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Types,
+/* harmony export */   "Wait": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Wait,
+/* harmony export */   "While": () => /* reexport safe */ _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.While,
 /* harmony export */   "canvas": () => /* binding */ canvas
 /* harmony export */ });
-/* harmony import */ var _canvas_canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas/canvas */ "./src/canvas/canvas.js");
-/* harmony import */ var _canvas_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canvas/component */ "./src/canvas/component.js");
-/* harmony import */ var _canvas_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./canvas/connection */ "./src/canvas/connection.js");
-/* harmony import */ var _canvas_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./canvas/menu */ "./src/canvas/menu.js");
-/* harmony import */ var _canvas_position__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./canvas/position */ "./src/canvas/position.js");
-/* harmony import */ var _canvas_socket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./canvas/socket */ "./src/canvas/socket.js");
-/* harmony import */ var _components_cnode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/cnode */ "./src/components/cnode.js");
-/* harmony import */ var _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/cnodescanvas */ "./src/components/cnodescanvas.js");
-/* harmony import */ var _components_cnodesconnection__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/cnodesconnection */ "./src/components/cnodesconnection.js");
-/* harmony import */ var _components_cnodeseditabletext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/cnodeseditabletext */ "./src/components/cnodeseditabletext.js");
-/* harmony import */ var _components_cnodesmenu__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/cnodesmenu */ "./src/components/cnodesmenu.js");
-/* harmony import */ var _components_cnodessocket__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/cnodessocket */ "./src/components/cnodessocket.js");
-/* harmony import */ var _components_input__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/input */ "./src/components/input.js");
-/* harmony import */ var _components_output__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/output */ "./src/components/output.js");
-/* harmony import */ var _components_prev__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/prev */ "./src/components/prev.js");
-/* harmony import */ var _components_next__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/next */ "./src/components/next.js");
-/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/theme */ "./src/components/theme.js");
-/* harmony import */ var _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nodes/cnodeprogram */ "./src/components/nodes/cnodeprogram.js");
-/* harmony import */ var _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/nodes/cnodebreak */ "./src/components/nodes/cnodebreak.js");
-/* harmony import */ var _connections_ioconnection__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./connections/ioconnection */ "./src/connections/ioconnection.js");
-/* harmony import */ var _connections_prevnextconnection__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./connections/prevnextconnection */ "./src/connections/prevnextconnection.js");
-/* harmony import */ var _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @marco.jacovone/cnodes/index */ "../cnodes/index.js");
+/* harmony import */ var _canvas_canvas_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./canvas/canvas.mjs */ "./src/canvas/canvas.mjs");
+/* harmony import */ var _canvas_component_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./canvas/component.mjs */ "./src/canvas/component.mjs");
+/* harmony import */ var _canvas_connection_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./canvas/connection.mjs */ "./src/canvas/connection.mjs");
+/* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./canvas/menu.mjs */ "./src/canvas/menu.mjs");
+/* harmony import */ var _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./canvas/position.mjs */ "./src/canvas/position.mjs");
+/* harmony import */ var _canvas_socket_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./canvas/socket.mjs */ "./src/canvas/socket.mjs");
+/* harmony import */ var _components_cnode_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/cnode.mjs */ "./src/components/cnode.mjs");
+/* harmony import */ var _components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/cnodescanvas.mjs */ "./src/components/cnodescanvas.mjs");
+/* harmony import */ var _components_cnodesconnection_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/cnodesconnection.mjs */ "./src/components/cnodesconnection.mjs");
+/* harmony import */ var _components_cnodeseditabletext_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/cnodeseditabletext.mjs */ "./src/components/cnodeseditabletext.mjs");
+/* harmony import */ var _components_cnodesmenu_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/cnodesmenu.mjs */ "./src/components/cnodesmenu.mjs");
+/* harmony import */ var _components_cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/cnodessocket.mjs */ "./src/components/cnodessocket.mjs");
+/* harmony import */ var _components_input_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/input.mjs */ "./src/components/input.mjs");
+/* harmony import */ var _components_output_mjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/output.mjs */ "./src/components/output.mjs");
+/* harmony import */ var _components_prev_mjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/prev.mjs */ "./src/components/prev.mjs");
+/* harmony import */ var _components_next_mjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/next.mjs */ "./src/components/next.mjs");
+/* harmony import */ var _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/theme.mjs */ "./src/components/theme.mjs");
+/* harmony import */ var _components_nodes_cnodeprogram_mjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nodes/cnodeprogram.mjs */ "./src/components/nodes/cnodeprogram.mjs");
+/* harmony import */ var _components_nodes_cnodebreak_mjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/nodes/cnodebreak.mjs */ "./src/components/nodes/cnodebreak.mjs");
+/* harmony import */ var _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./connections/ioconnection.mjs */ "./src/connections/ioconnection.mjs");
+/* harmony import */ var _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./connections/prevnextconnection.mjs */ "./src/connections/prevnextconnection.mjs");
+/* harmony import */ var _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @marco.jacovone/cnodes/index.mjs */ "../cnodes/index.mjs");
 /**
  * cnodes-ui
  *
@@ -19418,110 +19413,110 @@ function canvas(elId) {
     return null;
   }
 
-  _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Env.init();
-  return new _components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas(el);
+  _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Env.init();
+  return new _components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas(el);
 } // register core custom nodes
 
-_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.Program(), _components_nodes_cnodeprogram__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent.instance);
-_components_cnodescanvas__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_index__WEBPACK_IMPORTED_MODULE_21__.FOBreak(), _components_nodes_cnodebreak__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent.instance);
+_components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.Program(), _components_nodes_cnodeprogram_mjs__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent.instance);
+_components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes_index_mjs__WEBPACK_IMPORTED_MODULE_21__.FOBreak(), _components_nodes_cnodebreak_mjs__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent.instance);
 
 /***/ }),
 
-/***/ "../cnodes/index.js":
-/*!**************************!*\
-  !*** ../cnodes/index.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/index.mjs":
+/*!***************************!*\
+  !*** ../cnodes/index.mjs ***!
+  \***************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Env": () => /* reexport safe */ _src_core_env_js__WEBPACK_IMPORTED_MODULE_0__.Env,
-/* harmony export */   "Node": () => /* reexport safe */ _src_core_node_js__WEBPACK_IMPORTED_MODULE_1__.Node,
-/* harmony export */   "Program": () => /* reexport safe */ _src_core_program_js__WEBPACK_IMPORTED_MODULE_2__.Program,
-/* harmony export */   "Socket": () => /* reexport safe */ _src_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.Socket,
-/* harmony export */   "InputSocket": () => /* reexport safe */ _src_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.InputSocket,
-/* harmony export */   "OutputSocket": () => /* reexport safe */ _src_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.OutputSocket,
-/* harmony export */   "PrevSocket": () => /* reexport safe */ _src_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.PrevSocket,
-/* harmony export */   "NextSocket": () => /* reexport safe */ _src_core_socket_js__WEBPACK_IMPORTED_MODULE_3__.NextSocket,
-/* harmony export */   "Types": () => /* reexport safe */ _src_core_type_js__WEBPACK_IMPORTED_MODULE_4__.Types,
-/* harmony export */   "Call": () => /* reexport safe */ _src_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__.Call,
-/* harmony export */   "Console": () => /* reexport safe */ _src_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__.Console,
-/* harmony export */   "Log": () => /* reexport safe */ _src_nodes_log_js__WEBPACK_IMPORTED_MODULE_7__.Log,
-/* harmony export */   "FGetvar": () => /* reexport safe */ _src_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_8__.FGetvar,
-/* harmony export */   "For": () => /* reexport safe */ _src_nodes_for_js__WEBPACK_IMPORTED_MODULE_9__.For,
-/* harmony export */   "Getvar": () => /* reexport safe */ _src_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_10__.Getvar,
-/* harmony export */   "If": () => /* reexport safe */ _src_nodes_if_js__WEBPACK_IMPORTED_MODULE_11__.If,
-/* harmony export */   "Setvar": () => /* reexport safe */ _src_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_12__.Setvar,
-/* harmony export */   "While": () => /* reexport safe */ _src_nodes_while_js__WEBPACK_IMPORTED_MODULE_13__.While,
-/* harmony export */   "FIf": () => /* reexport safe */ _src_nodes_fif_js__WEBPACK_IMPORTED_MODULE_14__.FIf,
-/* harmony export */   "Wait": () => /* reexport safe */ _src_nodes_wait_js__WEBPACK_IMPORTED_MODULE_15__.Wait,
-/* harmony export */   "FCompare": () => /* reexport safe */ _src_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_16__.FCompare,
-/* harmony export */   "FSConst": () => /* reexport safe */ _src_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_17__.FSConst,
-/* harmony export */   "FConcat": () => /* reexport safe */ _src_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_18__.FConcat,
-/* harmony export */   "FNConst": () => /* reexport safe */ _src_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_19__.FNConst,
-/* harmony export */   "FAdd": () => /* reexport safe */ _src_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_20__.FAdd,
-/* harmony export */   "FDiv": () => /* reexport safe */ _src_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_21__.FDiv,
-/* harmony export */   "FMul": () => /* reexport safe */ _src_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_22__.FMul,
-/* harmony export */   "FSqrt": () => /* reexport safe */ _src_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_23__.FSqrt,
-/* harmony export */   "FMod": () => /* reexport safe */ _src_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_24__.FMod,
-/* harmony export */   "FTofixed": () => /* reexport safe */ _src_nodes_math_ftofixed_js__WEBPACK_IMPORTED_MODULE_25__.FTofixed,
-/* harmony export */   "APush": () => /* reexport safe */ _src_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_26__.APush,
-/* harmony export */   "FAConst": () => /* reexport safe */ _src_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_27__.FAConst,
-/* harmony export */   "FAMake": () => /* reexport safe */ _src_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_28__.FAMake,
-/* harmony export */   "FAGet": () => /* reexport safe */ _src_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_29__.FAGet,
-/* harmony export */   "FALength": () => /* reexport safe */ _src_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_30__.FALength,
-/* harmony export */   "AMap": () => /* reexport safe */ _src_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_31__.AMap,
-/* harmony export */   "FAMap": () => /* reexport safe */ _src_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_32__.FAMap,
-/* harmony export */   "AReduce": () => /* reexport safe */ _src_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_33__.AReduce,
-/* harmony export */   "FAReduce": () => /* reexport safe */ _src_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_34__.FAReduce,
-/* harmony export */   "FOMake": () => /* reexport safe */ _src_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_35__.FOMake,
-/* harmony export */   "FOBreak": () => /* reexport safe */ _src_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_36__.FOBreak
+/* harmony export */   "Env": () => /* reexport safe */ _src_core_env_mjs__WEBPACK_IMPORTED_MODULE_0__.Env,
+/* harmony export */   "Node": () => /* reexport safe */ _src_core_node_mjs__WEBPACK_IMPORTED_MODULE_1__.Node,
+/* harmony export */   "Program": () => /* reexport safe */ _src_core_program_mjs__WEBPACK_IMPORTED_MODULE_2__.Program,
+/* harmony export */   "Socket": () => /* reexport safe */ _src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_3__.Socket,
+/* harmony export */   "InputSocket": () => /* reexport safe */ _src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_3__.InputSocket,
+/* harmony export */   "OutputSocket": () => /* reexport safe */ _src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_3__.OutputSocket,
+/* harmony export */   "PrevSocket": () => /* reexport safe */ _src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_3__.PrevSocket,
+/* harmony export */   "NextSocket": () => /* reexport safe */ _src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_3__.NextSocket,
+/* harmony export */   "Types": () => /* reexport safe */ _src_core_type_mjs__WEBPACK_IMPORTED_MODULE_4__.Types,
+/* harmony export */   "Call": () => /* reexport safe */ _src_nodes_call_mjs__WEBPACK_IMPORTED_MODULE_5__.Call,
+/* harmony export */   "Console": () => /* reexport safe */ _src_nodes_console_mjs__WEBPACK_IMPORTED_MODULE_6__.Console,
+/* harmony export */   "Log": () => /* reexport safe */ _src_nodes_log_mjs__WEBPACK_IMPORTED_MODULE_7__.Log,
+/* harmony export */   "FGetvar": () => /* reexport safe */ _src_nodes_fgetvar_mjs__WEBPACK_IMPORTED_MODULE_8__.FGetvar,
+/* harmony export */   "For": () => /* reexport safe */ _src_nodes_for_mjs__WEBPACK_IMPORTED_MODULE_9__.For,
+/* harmony export */   "Getvar": () => /* reexport safe */ _src_nodes_getvar_mjs__WEBPACK_IMPORTED_MODULE_10__.Getvar,
+/* harmony export */   "If": () => /* reexport safe */ _src_nodes_if_mjs__WEBPACK_IMPORTED_MODULE_11__.If,
+/* harmony export */   "Setvar": () => /* reexport safe */ _src_nodes_setvar_mjs__WEBPACK_IMPORTED_MODULE_12__.Setvar,
+/* harmony export */   "While": () => /* reexport safe */ _src_nodes_while_mjs__WEBPACK_IMPORTED_MODULE_13__.While,
+/* harmony export */   "FIf": () => /* reexport safe */ _src_nodes_fif_mjs__WEBPACK_IMPORTED_MODULE_14__.FIf,
+/* harmony export */   "Wait": () => /* reexport safe */ _src_nodes_wait_mjs__WEBPACK_IMPORTED_MODULE_15__.Wait,
+/* harmony export */   "FCompare": () => /* reexport safe */ _src_nodes_bool_fcompare_mjs__WEBPACK_IMPORTED_MODULE_16__.FCompare,
+/* harmony export */   "FSConst": () => /* reexport safe */ _src_nodes_string_fsconst_mjs__WEBPACK_IMPORTED_MODULE_17__.FSConst,
+/* harmony export */   "FConcat": () => /* reexport safe */ _src_nodes_string_fconcat_mjs__WEBPACK_IMPORTED_MODULE_18__.FConcat,
+/* harmony export */   "FNConst": () => /* reexport safe */ _src_nodes_math_fnconst_mjs__WEBPACK_IMPORTED_MODULE_19__.FNConst,
+/* harmony export */   "FAdd": () => /* reexport safe */ _src_nodes_math_fadd_mjs__WEBPACK_IMPORTED_MODULE_20__.FAdd,
+/* harmony export */   "FDiv": () => /* reexport safe */ _src_nodes_math_fdiv_mjs__WEBPACK_IMPORTED_MODULE_21__.FDiv,
+/* harmony export */   "FMul": () => /* reexport safe */ _src_nodes_math_fmul_mjs__WEBPACK_IMPORTED_MODULE_22__.FMul,
+/* harmony export */   "FSqrt": () => /* reexport safe */ _src_nodes_math_fsqrt_mjs__WEBPACK_IMPORTED_MODULE_23__.FSqrt,
+/* harmony export */   "FMod": () => /* reexport safe */ _src_nodes_math_fmod_mjs__WEBPACK_IMPORTED_MODULE_24__.FMod,
+/* harmony export */   "FTofixed": () => /* reexport safe */ _src_nodes_math_ftofixed_mjs__WEBPACK_IMPORTED_MODULE_25__.FTofixed,
+/* harmony export */   "APush": () => /* reexport safe */ _src_nodes_array_apush_mjs__WEBPACK_IMPORTED_MODULE_26__.APush,
+/* harmony export */   "FAConst": () => /* reexport safe */ _src_nodes_array_faconst_mjs__WEBPACK_IMPORTED_MODULE_27__.FAConst,
+/* harmony export */   "FAMake": () => /* reexport safe */ _src_nodes_array_famake_mjs__WEBPACK_IMPORTED_MODULE_28__.FAMake,
+/* harmony export */   "FAGet": () => /* reexport safe */ _src_nodes_array_faget_mjs__WEBPACK_IMPORTED_MODULE_29__.FAGet,
+/* harmony export */   "FALength": () => /* reexport safe */ _src_nodes_array_falength_mjs__WEBPACK_IMPORTED_MODULE_30__.FALength,
+/* harmony export */   "AMap": () => /* reexport safe */ _src_nodes_array_amap_mjs__WEBPACK_IMPORTED_MODULE_31__.AMap,
+/* harmony export */   "FAMap": () => /* reexport safe */ _src_nodes_array_famap_mjs__WEBPACK_IMPORTED_MODULE_32__.FAMap,
+/* harmony export */   "AReduce": () => /* reexport safe */ _src_nodes_array_areduce_mjs__WEBPACK_IMPORTED_MODULE_33__.AReduce,
+/* harmony export */   "FAReduce": () => /* reexport safe */ _src_nodes_array_fareduce_mjs__WEBPACK_IMPORTED_MODULE_34__.FAReduce,
+/* harmony export */   "FOMake": () => /* reexport safe */ _src_nodes_object_fomake_mjs__WEBPACK_IMPORTED_MODULE_35__.FOMake,
+/* harmony export */   "FOBreak": () => /* reexport safe */ _src_nodes_object_fobreak_mjs__WEBPACK_IMPORTED_MODULE_36__.FOBreak
 /* harmony export */ });
-/* harmony import */ var _src_core_env_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/core/env.js */ "../cnodes/src/core/env.js");
-/* harmony import */ var _src_core_node_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./src/core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _src_core_program_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/core/program.js */ "../cnodes/src/core/program.js");
-/* harmony import */ var _src_core_socket_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _src_core_type_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./src/core/type.js */ "../cnodes/src/core/type.js");
-/* harmony import */ var _src_nodes_call_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/nodes/call.js */ "../cnodes/src/nodes/call.js");
-/* harmony import */ var _src_nodes_console_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./src/nodes/console.js */ "../cnodes/src/nodes/console.js");
-/* harmony import */ var _src_nodes_log_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./src/nodes/log.js */ "../cnodes/src/nodes/log.js");
-/* harmony import */ var _src_nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./src/nodes/fgetvar.js */ "../cnodes/src/nodes/fgetvar.js");
-/* harmony import */ var _src_nodes_for_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./src/nodes/for.js */ "../cnodes/src/nodes/for.js");
-/* harmony import */ var _src_nodes_getvar_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./src/nodes/getvar.js */ "../cnodes/src/nodes/getvar.js");
-/* harmony import */ var _src_nodes_if_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./src/nodes/if.js */ "../cnodes/src/nodes/if.js");
-/* harmony import */ var _src_nodes_setvar_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./src/nodes/setvar.js */ "../cnodes/src/nodes/setvar.js");
-/* harmony import */ var _src_nodes_while_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./src/nodes/while.js */ "../cnodes/src/nodes/while.js");
-/* harmony import */ var _src_nodes_fif_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./src/nodes/fif.js */ "../cnodes/src/nodes/fif.js");
-/* harmony import */ var _src_nodes_wait_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./src/nodes/wait.js */ "../cnodes/src/nodes/wait.js");
-/* harmony import */ var _src_nodes_bool_fcompare_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./src/nodes/bool/fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
-/* harmony import */ var _src_nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./src/nodes/string/fsconst.js */ "../cnodes/src/nodes/string/fsconst.js");
-/* harmony import */ var _src_nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./src/nodes/string/fconcat.js */ "../cnodes/src/nodes/string/fconcat.js");
-/* harmony import */ var _src_nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./src/nodes/math/fnconst.js */ "../cnodes/src/nodes/math/fnconst.js");
-/* harmony import */ var _src_nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./src/nodes/math/fadd.js */ "../cnodes/src/nodes/math/fadd.js");
-/* harmony import */ var _src_nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./src/nodes/math/fdiv.js */ "../cnodes/src/nodes/math/fdiv.js");
-/* harmony import */ var _src_nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./src/nodes/math/fmul.js */ "../cnodes/src/nodes/math/fmul.js");
-/* harmony import */ var _src_nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./src/nodes/math/fsqrt.js */ "../cnodes/src/nodes/math/fsqrt.js");
-/* harmony import */ var _src_nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./src/nodes/math/fmod.js */ "../cnodes/src/nodes/math/fmod.js");
-/* harmony import */ var _src_nodes_math_ftofixed_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./src/nodes/math/ftofixed.js */ "../cnodes/src/nodes/math/ftofixed.js");
-/* harmony import */ var _src_nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./src/nodes/array/apush.js */ "../cnodes/src/nodes/array/apush.js");
-/* harmony import */ var _src_nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./src/nodes/array/faconst.js */ "../cnodes/src/nodes/array/faconst.js");
-/* harmony import */ var _src_nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./src/nodes/array/famake.js */ "../cnodes/src/nodes/array/famake.js");
-/* harmony import */ var _src_nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./src/nodes/array/faget.js */ "../cnodes/src/nodes/array/faget.js");
-/* harmony import */ var _src_nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./src/nodes/array/falength.js */ "../cnodes/src/nodes/array/falength.js");
-/* harmony import */ var _src_nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./src/nodes/array/amap.js */ "../cnodes/src/nodes/array/amap.js");
-/* harmony import */ var _src_nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./src/nodes/array/famap.js */ "../cnodes/src/nodes/array/famap.js");
-/* harmony import */ var _src_nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./src/nodes/array/areduce.js */ "../cnodes/src/nodes/array/areduce.js");
-/* harmony import */ var _src_nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./src/nodes/array/fareduce.js */ "../cnodes/src/nodes/array/fareduce.js");
-/* harmony import */ var _src_nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./src/nodes/object/fomake.js */ "../cnodes/src/nodes/object/fomake.js");
-/* harmony import */ var _src_nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./src/nodes/object/fobreak.js */ "../cnodes/src/nodes/object/fobreak.js");
+/* harmony import */ var _src_core_env_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/core/env.mjs */ "../cnodes/src/core/env.mjs");
+/* harmony import */ var _src_core_node_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./src/core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _src_core_program_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/core/program.mjs */ "../cnodes/src/core/program.mjs");
+/* harmony import */ var _src_core_socket_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _src_core_type_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./src/core/type.mjs */ "../cnodes/src/core/type.mjs");
+/* harmony import */ var _src_nodes_call_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/nodes/call.mjs */ "../cnodes/src/nodes/call.mjs");
+/* harmony import */ var _src_nodes_console_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./src/nodes/console.mjs */ "../cnodes/src/nodes/console.mjs");
+/* harmony import */ var _src_nodes_log_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./src/nodes/log.mjs */ "../cnodes/src/nodes/log.mjs");
+/* harmony import */ var _src_nodes_fgetvar_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./src/nodes/fgetvar.mjs */ "../cnodes/src/nodes/fgetvar.mjs");
+/* harmony import */ var _src_nodes_for_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./src/nodes/for.mjs */ "../cnodes/src/nodes/for.mjs");
+/* harmony import */ var _src_nodes_getvar_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./src/nodes/getvar.mjs */ "../cnodes/src/nodes/getvar.mjs");
+/* harmony import */ var _src_nodes_if_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./src/nodes/if.mjs */ "../cnodes/src/nodes/if.mjs");
+/* harmony import */ var _src_nodes_setvar_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./src/nodes/setvar.mjs */ "../cnodes/src/nodes/setvar.mjs");
+/* harmony import */ var _src_nodes_while_mjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./src/nodes/while.mjs */ "../cnodes/src/nodes/while.mjs");
+/* harmony import */ var _src_nodes_fif_mjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./src/nodes/fif.mjs */ "../cnodes/src/nodes/fif.mjs");
+/* harmony import */ var _src_nodes_wait_mjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./src/nodes/wait.mjs */ "../cnodes/src/nodes/wait.mjs");
+/* harmony import */ var _src_nodes_bool_fcompare_mjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./src/nodes/bool/fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
+/* harmony import */ var _src_nodes_string_fsconst_mjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./src/nodes/string/fsconst.mjs */ "../cnodes/src/nodes/string/fsconst.mjs");
+/* harmony import */ var _src_nodes_string_fconcat_mjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./src/nodes/string/fconcat.mjs */ "../cnodes/src/nodes/string/fconcat.mjs");
+/* harmony import */ var _src_nodes_math_fnconst_mjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./src/nodes/math/fnconst.mjs */ "../cnodes/src/nodes/math/fnconst.mjs");
+/* harmony import */ var _src_nodes_math_fadd_mjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./src/nodes/math/fadd.mjs */ "../cnodes/src/nodes/math/fadd.mjs");
+/* harmony import */ var _src_nodes_math_fdiv_mjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./src/nodes/math/fdiv.mjs */ "../cnodes/src/nodes/math/fdiv.mjs");
+/* harmony import */ var _src_nodes_math_fmul_mjs__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./src/nodes/math/fmul.mjs */ "../cnodes/src/nodes/math/fmul.mjs");
+/* harmony import */ var _src_nodes_math_fsqrt_mjs__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./src/nodes/math/fsqrt.mjs */ "../cnodes/src/nodes/math/fsqrt.mjs");
+/* harmony import */ var _src_nodes_math_fmod_mjs__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./src/nodes/math/fmod.mjs */ "../cnodes/src/nodes/math/fmod.mjs");
+/* harmony import */ var _src_nodes_math_ftofixed_mjs__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./src/nodes/math/ftofixed.mjs */ "../cnodes/src/nodes/math/ftofixed.mjs");
+/* harmony import */ var _src_nodes_array_apush_mjs__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./src/nodes/array/apush.mjs */ "../cnodes/src/nodes/array/apush.mjs");
+/* harmony import */ var _src_nodes_array_faconst_mjs__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./src/nodes/array/faconst.mjs */ "../cnodes/src/nodes/array/faconst.mjs");
+/* harmony import */ var _src_nodes_array_famake_mjs__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./src/nodes/array/famake.mjs */ "../cnodes/src/nodes/array/famake.mjs");
+/* harmony import */ var _src_nodes_array_faget_mjs__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./src/nodes/array/faget.mjs */ "../cnodes/src/nodes/array/faget.mjs");
+/* harmony import */ var _src_nodes_array_falength_mjs__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./src/nodes/array/falength.mjs */ "../cnodes/src/nodes/array/falength.mjs");
+/* harmony import */ var _src_nodes_array_amap_mjs__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./src/nodes/array/amap.mjs */ "../cnodes/src/nodes/array/amap.mjs");
+/* harmony import */ var _src_nodes_array_famap_mjs__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./src/nodes/array/famap.mjs */ "../cnodes/src/nodes/array/famap.mjs");
+/* harmony import */ var _src_nodes_array_areduce_mjs__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./src/nodes/array/areduce.mjs */ "../cnodes/src/nodes/array/areduce.mjs");
+/* harmony import */ var _src_nodes_array_fareduce_mjs__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./src/nodes/array/fareduce.mjs */ "../cnodes/src/nodes/array/fareduce.mjs");
+/* harmony import */ var _src_nodes_object_fomake_mjs__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./src/nodes/object/fomake.mjs */ "../cnodes/src/nodes/object/fomake.mjs");
+/* harmony import */ var _src_nodes_object_fobreak_mjs__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./src/nodes/object/fobreak.mjs */ "../cnodes/src/nodes/object/fobreak.mjs");
 /**
  * cnodes
  *
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 // Import core nodes
 
@@ -20029,20 +20024,20 @@ function once(emitter, name) {
 
 /***/ }),
 
-/***/ "../cnodes/src/core/enter.js":
-/*!***********************************!*\
-  !*** ../cnodes/src/core/enter.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/enter.mjs":
+/*!************************************!*\
+  !*** ../cnodes/src/core/enter.mjs ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Enter": () => /* binding */ Enter
 /* harmony export */ });
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -20081,7 +20076,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -20110,8 +20105,8 @@ var Enter = /*#__PURE__*/function (_Node) {
     _this.removable = false;
     _this.creatable = false;
     _this.inputs = [];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Begin", _assertThisInitialized(_this))];
+    _this.outputs = [new _socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.nexts = [new _socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Begin", _assertThisInitialized(_this))];
     _this.prev = null;
     return _this;
   }
@@ -20158,7 +20153,7 @@ var Enter = /*#__PURE__*/function (_Node) {
   }]);
 
   return Enter;
-}(_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Enter, "instance", function () {
   return new Enter();
@@ -20166,60 +20161,60 @@ _defineProperty(Enter, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/core/env.js":
-/*!*********************************!*\
-  !*** ../cnodes/src/core/env.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/env.mjs":
+/*!**********************************!*\
+  !*** ../cnodes/src/core/env.mjs ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Env": () => /* binding */ Env
 /* harmony export */ });
-/* harmony import */ var _program_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./program.js */ "../cnodes/src/core/program.js");
-/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.js */ "../cnodes/src/core/enter.js");
-/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.js */ "../cnodes/src/core/exit.js");
-/* harmony import */ var _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../nodes/call.js */ "../cnodes/src/nodes/call.js");
-/* harmony import */ var _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../nodes/console.js */ "../cnodes/src/nodes/console.js");
-/* harmony import */ var _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../nodes/fgetvar.js */ "../cnodes/src/nodes/fgetvar.js");
-/* harmony import */ var _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../nodes/for.js */ "../cnodes/src/nodes/for.js");
-/* harmony import */ var _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../nodes/getvar.js */ "../cnodes/src/nodes/getvar.js");
-/* harmony import */ var _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../nodes/setvar.js */ "../cnodes/src/nodes/setvar.js");
-/* harmony import */ var _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../nodes/while.js */ "../cnodes/src/nodes/while.js");
-/* harmony import */ var _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../nodes/if.js */ "../cnodes/src/nodes/if.js");
-/* harmony import */ var _nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../nodes/array/apush.js */ "../cnodes/src/nodes/array/apush.js");
-/* harmony import */ var _nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../nodes/array/faconst.js */ "../cnodes/src/nodes/array/faconst.js");
-/* harmony import */ var _nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../nodes/array/famake.js */ "../cnodes/src/nodes/array/famake.js");
-/* harmony import */ var _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../nodes/array/faget.js */ "../cnodes/src/nodes/array/faget.js");
-/* harmony import */ var _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../nodes/array/falength.js */ "../cnodes/src/nodes/array/falength.js");
-/* harmony import */ var _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../nodes/math/fadd.js */ "../cnodes/src/nodes/math/fadd.js");
-/* harmony import */ var _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../nodes/math/fdiv.js */ "../cnodes/src/nodes/math/fdiv.js");
-/* harmony import */ var _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../nodes/math/fmul.js */ "../cnodes/src/nodes/math/fmul.js");
-/* harmony import */ var _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../nodes/math/fsqrt.js */ "../cnodes/src/nodes/math/fsqrt.js");
-/* harmony import */ var _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nodes/bool/fequal.js */ "../cnodes/src/nodes/bool/fequal.js");
-/* harmony import */ var _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../nodes/bool/fgt.js */ "../cnodes/src/nodes/bool/fgt.js");
-/* harmony import */ var _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../nodes/bool/fgte.js */ "../cnodes/src/nodes/bool/fgte.js");
-/* harmony import */ var _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../nodes/bool/flt.js */ "../cnodes/src/nodes/bool/flt.js");
-/* harmony import */ var _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../nodes/bool/flte.js */ "../cnodes/src/nodes/bool/flte.js");
-/* harmony import */ var _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../nodes/bool/fnotequal.js */ "../cnodes/src/nodes/bool/fnotequal.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../nodes/string/fsconst.js */ "../cnodes/src/nodes/string/fsconst.js");
-/* harmony import */ var _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../nodes/string/fconcat.js */ "../cnodes/src/nodes/string/fconcat.js");
-/* harmony import */ var _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../nodes/math/fmod.js */ "../cnodes/src/nodes/math/fmod.js");
-/* harmony import */ var _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../nodes/fif.js */ "../cnodes/src/nodes/fif.js");
-/* harmony import */ var _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../nodes/math/fnconst.js */ "../cnodes/src/nodes/math/fnconst.js");
-/* harmony import */ var _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../nodes/object/fomake.js */ "../cnodes/src/nodes/object/fomake.js");
-/* harmony import */ var _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../nodes/object/fobreak.js */ "../cnodes/src/nodes/object/fobreak.js");
-/* harmony import */ var _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../nodes/array/amap.js */ "../cnodes/src/nodes/array/amap.js");
-/* harmony import */ var _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../nodes/array/areduce.js */ "../cnodes/src/nodes/array/areduce.js");
-/* harmony import */ var _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../nodes/array/famap.js */ "../cnodes/src/nodes/array/famap.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./type.js */ "../cnodes/src/core/type.js");
-/* harmony import */ var _nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../nodes/array/fareduce.js */ "../cnodes/src/nodes/array/fareduce.js");
-/* harmony import */ var _nodes_log_js__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../nodes/log.js */ "../cnodes/src/nodes/log.js");
-/* harmony import */ var _nodes_math_ftofixed_js__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../nodes/math/ftofixed.js */ "../cnodes/src/nodes/math/ftofixed.js");
-/* harmony import */ var _nodes_wait_js__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../nodes/wait.js */ "../cnodes/src/nodes/wait.js");
+/* harmony import */ var _program_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./program.mjs */ "../cnodes/src/core/program.mjs");
+/* harmony import */ var _enter_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.mjs */ "../cnodes/src/core/enter.mjs");
+/* harmony import */ var _exit_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.mjs */ "../cnodes/src/core/exit.mjs");
+/* harmony import */ var _nodes_call_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../nodes/call.mjs */ "../cnodes/src/nodes/call.mjs");
+/* harmony import */ var _nodes_console_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../nodes/console.mjs */ "../cnodes/src/nodes/console.mjs");
+/* harmony import */ var _nodes_fgetvar_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../nodes/fgetvar.mjs */ "../cnodes/src/nodes/fgetvar.mjs");
+/* harmony import */ var _nodes_for_mjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../nodes/for.mjs */ "../cnodes/src/nodes/for.mjs");
+/* harmony import */ var _nodes_getvar_mjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../nodes/getvar.mjs */ "../cnodes/src/nodes/getvar.mjs");
+/* harmony import */ var _nodes_setvar_mjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../nodes/setvar.mjs */ "../cnodes/src/nodes/setvar.mjs");
+/* harmony import */ var _nodes_while_mjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../nodes/while.mjs */ "../cnodes/src/nodes/while.mjs");
+/* harmony import */ var _nodes_if_mjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../nodes/if.mjs */ "../cnodes/src/nodes/if.mjs");
+/* harmony import */ var _nodes_array_apush_mjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../nodes/array/apush.mjs */ "../cnodes/src/nodes/array/apush.mjs");
+/* harmony import */ var _nodes_array_faconst_mjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../nodes/array/faconst.mjs */ "../cnodes/src/nodes/array/faconst.mjs");
+/* harmony import */ var _nodes_array_famake_mjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../nodes/array/famake.mjs */ "../cnodes/src/nodes/array/famake.mjs");
+/* harmony import */ var _nodes_array_faget_mjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../nodes/array/faget.mjs */ "../cnodes/src/nodes/array/faget.mjs");
+/* harmony import */ var _nodes_array_falength_mjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../nodes/array/falength.mjs */ "../cnodes/src/nodes/array/falength.mjs");
+/* harmony import */ var _nodes_math_fadd_mjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../nodes/math/fadd.mjs */ "../cnodes/src/nodes/math/fadd.mjs");
+/* harmony import */ var _nodes_math_fdiv_mjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../nodes/math/fdiv.mjs */ "../cnodes/src/nodes/math/fdiv.mjs");
+/* harmony import */ var _nodes_math_fmul_mjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../nodes/math/fmul.mjs */ "../cnodes/src/nodes/math/fmul.mjs");
+/* harmony import */ var _nodes_math_fsqrt_mjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../nodes/math/fsqrt.mjs */ "../cnodes/src/nodes/math/fsqrt.mjs");
+/* harmony import */ var _nodes_bool_fequal_mjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../nodes/bool/fequal.mjs */ "../cnodes/src/nodes/bool/fequal.mjs");
+/* harmony import */ var _nodes_bool_fgt_mjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../nodes/bool/fgt.mjs */ "../cnodes/src/nodes/bool/fgt.mjs");
+/* harmony import */ var _nodes_bool_fgte_mjs__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../nodes/bool/fgte.mjs */ "../cnodes/src/nodes/bool/fgte.mjs");
+/* harmony import */ var _nodes_bool_flt_mjs__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../nodes/bool/flt.mjs */ "../cnodes/src/nodes/bool/flt.mjs");
+/* harmony import */ var _nodes_bool_flte_mjs__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../nodes/bool/flte.mjs */ "../cnodes/src/nodes/bool/flte.mjs");
+/* harmony import */ var _nodes_bool_fnotequal_mjs__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../nodes/bool/fnotequal.mjs */ "../cnodes/src/nodes/bool/fnotequal.mjs");
+/* harmony import */ var _socket_mjs__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _node_mjs__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _nodes_string_fsconst_mjs__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../nodes/string/fsconst.mjs */ "../cnodes/src/nodes/string/fsconst.mjs");
+/* harmony import */ var _nodes_string_fconcat_mjs__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../nodes/string/fconcat.mjs */ "../cnodes/src/nodes/string/fconcat.mjs");
+/* harmony import */ var _nodes_math_fmod_mjs__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../nodes/math/fmod.mjs */ "../cnodes/src/nodes/math/fmod.mjs");
+/* harmony import */ var _nodes_fif_mjs__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../nodes/fif.mjs */ "../cnodes/src/nodes/fif.mjs");
+/* harmony import */ var _nodes_math_fnconst_mjs__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../nodes/math/fnconst.mjs */ "../cnodes/src/nodes/math/fnconst.mjs");
+/* harmony import */ var _nodes_object_fomake_mjs__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../nodes/object/fomake.mjs */ "../cnodes/src/nodes/object/fomake.mjs");
+/* harmony import */ var _nodes_object_fobreak_mjs__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../nodes/object/fobreak.mjs */ "../cnodes/src/nodes/object/fobreak.mjs");
+/* harmony import */ var _nodes_array_amap_mjs__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../nodes/array/amap.mjs */ "../cnodes/src/nodes/array/amap.mjs");
+/* harmony import */ var _nodes_array_areduce_mjs__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../nodes/array/areduce.mjs */ "../cnodes/src/nodes/array/areduce.mjs");
+/* harmony import */ var _nodes_array_famap_mjs__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../nodes/array/famap.mjs */ "../cnodes/src/nodes/array/famap.mjs");
+/* harmony import */ var _type_mjs__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./type.mjs */ "../cnodes/src/core/type.mjs");
+/* harmony import */ var _nodes_array_fareduce_mjs__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../nodes/array/fareduce.mjs */ "../cnodes/src/nodes/array/fareduce.mjs");
+/* harmony import */ var _nodes_log_mjs__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../nodes/log.mjs */ "../cnodes/src/nodes/log.mjs");
+/* harmony import */ var _nodes_math_ftofixed_mjs__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../nodes/math/ftofixed.mjs */ "../cnodes/src/nodes/math/ftofixed.mjs");
+/* harmony import */ var _nodes_wait_mjs__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../nodes/wait.mjs */ "../cnodes/src/nodes/wait.mjs");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -20244,7 +20239,7 @@ function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor,
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -20316,51 +20311,51 @@ var Env = /*#__PURE__*/function () {
       _classStaticPrivateFieldSpecSet(Env, Env, _nodeRegistry, new Map()); // Core nodes
 
 
-      Env.registerNode("Program", "Core", _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.instance);
-      Env.registerNode("Call", "Core", _nodes_call_js__WEBPACK_IMPORTED_MODULE_3__.Call.instance);
-      Env.registerNode("Console", "Core", _nodes_console_js__WEBPACK_IMPORTED_MODULE_4__.Console.instance);
-      Env.registerNode("Log", "Core", _nodes_log_js__WEBPACK_IMPORTED_MODULE_40__.Log.instance);
-      Env.registerNode("FGetvar", "Core", _nodes_fgetvar_js__WEBPACK_IMPORTED_MODULE_5__.FGetvar.instance);
-      Env.registerNode("For", "Core", _nodes_for_js__WEBPACK_IMPORTED_MODULE_6__.For.instance);
-      Env.registerNode("Getvar", "Core", _nodes_getvar_js__WEBPACK_IMPORTED_MODULE_7__.Getvar.instance);
-      Env.registerNode("If", "Core", _nodes_if_js__WEBPACK_IMPORTED_MODULE_10__.If.instance);
-      Env.registerNode("FIf", "Core", _nodes_fif_js__WEBPACK_IMPORTED_MODULE_31__.FIf.instance);
-      Env.registerNode("Setvar", "Core", _nodes_setvar_js__WEBPACK_IMPORTED_MODULE_8__.Setvar.instance);
-      Env.registerNode("While", "Core", _nodes_while_js__WEBPACK_IMPORTED_MODULE_9__.While.instance);
-      Env.registerNode("Enter", "Core", _enter_js__WEBPACK_IMPORTED_MODULE_1__.Enter.instance);
-      Env.registerNode("Exit", "Core", _exit_js__WEBPACK_IMPORTED_MODULE_2__.Exit.instance);
-      Env.registerNode("Wait", "Core", _nodes_wait_js__WEBPACK_IMPORTED_MODULE_42__.Wait.instance); // String nodes
+      Env.registerNode("Program", "Core", _program_mjs__WEBPACK_IMPORTED_MODULE_0__.Program.instance);
+      Env.registerNode("Call", "Core", _nodes_call_mjs__WEBPACK_IMPORTED_MODULE_3__.Call.instance);
+      Env.registerNode("Console", "Core", _nodes_console_mjs__WEBPACK_IMPORTED_MODULE_4__.Console.instance);
+      Env.registerNode("Log", "Core", _nodes_log_mjs__WEBPACK_IMPORTED_MODULE_40__.Log.instance);
+      Env.registerNode("FGetvar", "Core", _nodes_fgetvar_mjs__WEBPACK_IMPORTED_MODULE_5__.FGetvar.instance);
+      Env.registerNode("For", "Core", _nodes_for_mjs__WEBPACK_IMPORTED_MODULE_6__.For.instance);
+      Env.registerNode("Getvar", "Core", _nodes_getvar_mjs__WEBPACK_IMPORTED_MODULE_7__.Getvar.instance);
+      Env.registerNode("If", "Core", _nodes_if_mjs__WEBPACK_IMPORTED_MODULE_10__.If.instance);
+      Env.registerNode("FIf", "Core", _nodes_fif_mjs__WEBPACK_IMPORTED_MODULE_31__.FIf.instance);
+      Env.registerNode("Setvar", "Core", _nodes_setvar_mjs__WEBPACK_IMPORTED_MODULE_8__.Setvar.instance);
+      Env.registerNode("While", "Core", _nodes_while_mjs__WEBPACK_IMPORTED_MODULE_9__.While.instance);
+      Env.registerNode("Enter", "Core", _enter_mjs__WEBPACK_IMPORTED_MODULE_1__.Enter.instance);
+      Env.registerNode("Exit", "Core", _exit_mjs__WEBPACK_IMPORTED_MODULE_2__.Exit.instance);
+      Env.registerNode("Wait", "Core", _nodes_wait_mjs__WEBPACK_IMPORTED_MODULE_42__.Wait.instance); // String nodes
 
-      Env.registerNode("FSConst", "String", _nodes_string_fsconst_js__WEBPACK_IMPORTED_MODULE_28__.FSConst.instance);
-      Env.registerNode("FConcat", "String", _nodes_string_fconcat_js__WEBPACK_IMPORTED_MODULE_29__.FConcat.instance); // Math nodes
+      Env.registerNode("FSConst", "String", _nodes_string_fsconst_mjs__WEBPACK_IMPORTED_MODULE_28__.FSConst.instance);
+      Env.registerNode("FConcat", "String", _nodes_string_fconcat_mjs__WEBPACK_IMPORTED_MODULE_29__.FConcat.instance); // Math nodes
 
-      Env.registerNode("FNConst", "Math", _nodes_math_fnconst_js__WEBPACK_IMPORTED_MODULE_32__.FNConst.instance);
-      Env.registerNode("FAdd", "Math", _nodes_math_fadd_js__WEBPACK_IMPORTED_MODULE_16__.FAdd.instance);
-      Env.registerNode("FDiv", "Math", _nodes_math_fdiv_js__WEBPACK_IMPORTED_MODULE_17__.FDiv.instance);
-      Env.registerNode("FMod", "Math", _nodes_math_fmod_js__WEBPACK_IMPORTED_MODULE_30__.FMod.instance);
-      Env.registerNode("FMul", "Math", _nodes_math_fmul_js__WEBPACK_IMPORTED_MODULE_18__.FMul.instance);
-      Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_js__WEBPACK_IMPORTED_MODULE_19__.FSqrt.instance);
-      Env.registerNode("FTofixed", "Math", _nodes_math_ftofixed_js__WEBPACK_IMPORTED_MODULE_41__.FTofixed.instance); // Boolean Nodes
+      Env.registerNode("FNConst", "Math", _nodes_math_fnconst_mjs__WEBPACK_IMPORTED_MODULE_32__.FNConst.instance);
+      Env.registerNode("FAdd", "Math", _nodes_math_fadd_mjs__WEBPACK_IMPORTED_MODULE_16__.FAdd.instance);
+      Env.registerNode("FDiv", "Math", _nodes_math_fdiv_mjs__WEBPACK_IMPORTED_MODULE_17__.FDiv.instance);
+      Env.registerNode("FMod", "Math", _nodes_math_fmod_mjs__WEBPACK_IMPORTED_MODULE_30__.FMod.instance);
+      Env.registerNode("FMul", "Math", _nodes_math_fmul_mjs__WEBPACK_IMPORTED_MODULE_18__.FMul.instance);
+      Env.registerNode("FSqrt", "Math", _nodes_math_fsqrt_mjs__WEBPACK_IMPORTED_MODULE_19__.FSqrt.instance);
+      Env.registerNode("FTofixed", "Math", _nodes_math_ftofixed_mjs__WEBPACK_IMPORTED_MODULE_41__.FTofixed.instance); // Boolean Nodes
 
-      Env.registerNode("FEqual", "Boolean", _nodes_bool_fequal_js__WEBPACK_IMPORTED_MODULE_20__.FEqual.instance);
-      Env.registerNode("FGT", "Boolean", _nodes_bool_fgt_js__WEBPACK_IMPORTED_MODULE_21__.FGT.instance);
-      Env.registerNode("FGTE", "Boolean", _nodes_bool_fgte_js__WEBPACK_IMPORTED_MODULE_22__.FGTE.instance);
-      Env.registerNode("FLT", "Boolean", _nodes_bool_flt_js__WEBPACK_IMPORTED_MODULE_23__.FLT.instance);
-      Env.registerNode("FLTE", "Boolean", _nodes_bool_flte_js__WEBPACK_IMPORTED_MODULE_24__.FLTE.instance);
-      Env.registerNode("FNotEqual", "Boolean", _nodes_bool_fnotequal_js__WEBPACK_IMPORTED_MODULE_25__.FNotEqual.instance); // Arrays Nodes
+      Env.registerNode("FEqual", "Boolean", _nodes_bool_fequal_mjs__WEBPACK_IMPORTED_MODULE_20__.FEqual.instance);
+      Env.registerNode("FGT", "Boolean", _nodes_bool_fgt_mjs__WEBPACK_IMPORTED_MODULE_21__.FGT.instance);
+      Env.registerNode("FGTE", "Boolean", _nodes_bool_fgte_mjs__WEBPACK_IMPORTED_MODULE_22__.FGTE.instance);
+      Env.registerNode("FLT", "Boolean", _nodes_bool_flt_mjs__WEBPACK_IMPORTED_MODULE_23__.FLT.instance);
+      Env.registerNode("FLTE", "Boolean", _nodes_bool_flte_mjs__WEBPACK_IMPORTED_MODULE_24__.FLTE.instance);
+      Env.registerNode("FNotEqual", "Boolean", _nodes_bool_fnotequal_mjs__WEBPACK_IMPORTED_MODULE_25__.FNotEqual.instance); // Arrays Nodes
 
-      Env.registerNode("APush", "Arrays", _nodes_array_apush_js__WEBPACK_IMPORTED_MODULE_11__.APush.instance);
-      Env.registerNode("FAConst", "Arrays", _nodes_array_faconst_js__WEBPACK_IMPORTED_MODULE_12__.FAConst.instance);
-      Env.registerNode("FAMake", "Arrays", _nodes_array_famake_js__WEBPACK_IMPORTED_MODULE_13__.FAMake.instance);
-      Env.registerNode("FAGet", "Arrays", _nodes_array_faget_js__WEBPACK_IMPORTED_MODULE_14__.FAGet.instance);
-      Env.registerNode("FALength", "Arrays", _nodes_array_falength_js__WEBPACK_IMPORTED_MODULE_15__.FALength.instance);
-      Env.registerNode("AMap", "Arrays", _nodes_array_amap_js__WEBPACK_IMPORTED_MODULE_35__.AMap.instance);
-      Env.registerNode("FAMap", "Arrays", _nodes_array_famap_js__WEBPACK_IMPORTED_MODULE_37__.FAMap.instance);
-      Env.registerNode("AReduce", "Arrays", _nodes_array_areduce_js__WEBPACK_IMPORTED_MODULE_36__.AReduce.instance);
-      Env.registerNode("FAReduce", "Arrays", _nodes_array_fareduce_js__WEBPACK_IMPORTED_MODULE_39__.FAReduce.instance); // Object Nodes
+      Env.registerNode("APush", "Arrays", _nodes_array_apush_mjs__WEBPACK_IMPORTED_MODULE_11__.APush.instance);
+      Env.registerNode("FAConst", "Arrays", _nodes_array_faconst_mjs__WEBPACK_IMPORTED_MODULE_12__.FAConst.instance);
+      Env.registerNode("FAMake", "Arrays", _nodes_array_famake_mjs__WEBPACK_IMPORTED_MODULE_13__.FAMake.instance);
+      Env.registerNode("FAGet", "Arrays", _nodes_array_faget_mjs__WEBPACK_IMPORTED_MODULE_14__.FAGet.instance);
+      Env.registerNode("FALength", "Arrays", _nodes_array_falength_mjs__WEBPACK_IMPORTED_MODULE_15__.FALength.instance);
+      Env.registerNode("AMap", "Arrays", _nodes_array_amap_mjs__WEBPACK_IMPORTED_MODULE_35__.AMap.instance);
+      Env.registerNode("FAMap", "Arrays", _nodes_array_famap_mjs__WEBPACK_IMPORTED_MODULE_37__.FAMap.instance);
+      Env.registerNode("AReduce", "Arrays", _nodes_array_areduce_mjs__WEBPACK_IMPORTED_MODULE_36__.AReduce.instance);
+      Env.registerNode("FAReduce", "Arrays", _nodes_array_fareduce_mjs__WEBPACK_IMPORTED_MODULE_39__.FAReduce.instance); // Object Nodes
 
-      Env.registerNode("FOMake", "Objects", _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.FOMake.instance);
-      Env.registerNode("FOBreak", "Objects", _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.FOBreak.instance);
+      Env.registerNode("FOMake", "Objects", _nodes_object_fomake_mjs__WEBPACK_IMPORTED_MODULE_33__.FOMake.instance);
+      Env.registerNode("FOBreak", "Objects", _nodes_object_fobreak_mjs__WEBPACK_IMPORTED_MODULE_34__.FOBreak.instance);
     }
     /**
      * Register a node type
@@ -20452,12 +20447,12 @@ var Env = /*#__PURE__*/function () {
        * instances of the OMake node for the user object
        */
       var createMake = function createMake() {
-        var makeNode = new _nodes_object_fomake_js__WEBPACK_IMPORTED_MODULE_33__.FOMake();
+        var makeNode = new _nodes_object_fomake_mjs__WEBPACK_IMPORTED_MODULE_33__.FOMake();
         makeNode.title = name;
         makeNode.inputs = [];
 
         for (var field in obj) {
-          var is = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.InputSocket(field, makeNode, _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
+          var is = new _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.InputSocket(field, makeNode, _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
 
           if (opts.editableInputs) {
             is.canEditName = true;
@@ -20466,26 +20461,26 @@ var Env = /*#__PURE__*/function () {
 
           switch (_typeof(obj[field])) {
             case "string":
-              is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.STRING : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              is.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.STRING : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               is.value = opts.fillValues ? obj[field] : "";
               break;
 
             case "number":
-              is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.NUMBER : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              is.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.NUMBER : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               is.value = opts.fillValues ? obj[field] : opts.forceTypes ? 0 : "";
               break;
 
             case "boolean":
-              is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.BOOLEAN : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              is.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.BOOLEAN : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               is.value = opts.fillValues ? obj[field] : opts.forceTypes ? false : "";
               break;
 
             case "object":
               if (obj[field] instanceof Array) {
-                is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ARRAY : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+                is.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ARRAY : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
                 is.value = opts.fillValues ? obj[field] : opts.forceTypes ? [] : "";
               } else if (obj[field] instanceof Object) {
-                is.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.OBJECT : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+                is.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.OBJECT : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
                 is.value = opts.fillValues ? obj[field] : opts.forceTypes ? {} : "";
               } else {
                 throw new Error("Unknown field type: " + field);
@@ -20538,12 +20533,12 @@ var Env = /*#__PURE__*/function () {
        * instances of the OBreak node for the user object
        */
       var createBreak = function createBreak() {
-        var breakNode = new _nodes_object_fobreak_js__WEBPACK_IMPORTED_MODULE_34__.FOBreak();
+        var breakNode = new _nodes_object_fobreak_mjs__WEBPACK_IMPORTED_MODULE_34__.FOBreak();
         breakNode.title = name;
         breakNode.outputs = [];
 
         for (var field in obj) {
-          var os = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(field, breakNode, _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
+          var os = new _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(field, breakNode, _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY, 0);
 
           if (opts.editableOutputs) {
             os.canEditName = true;
@@ -20552,22 +20547,22 @@ var Env = /*#__PURE__*/function () {
 
           switch (_typeof(obj[field])) {
             case "string":
-              os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.STRING : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              os.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.STRING : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               break;
 
             case "number":
-              os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.NUMBER : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              os.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.NUMBER : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               break;
 
             case "boolean":
-              os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.BOOLEAN : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+              os.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.BOOLEAN : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               break;
 
             case "object":
               if (obj[field] instanceof Array) {
-                os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ARRAY : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+                os.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ARRAY : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               } else if (obj[field] instanceof Object) {
-                os.type = opts.forceTypes ? _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.OBJECT : _type_js__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
+                os.type = opts.forceTypes ? _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.OBJECT : _type_mjs__WEBPACK_IMPORTED_MODULE_38__.Types.ANY;
               } else {
                 throw new Error("Unknown field type: " + field);
               }
@@ -20628,9 +20623,9 @@ var Env = /*#__PURE__*/function () {
     value: function _export(program) {
       var exp = {
         id: program.id,
-        version: _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version,
-        lastNodeIndex: _node_js__WEBPACK_IMPORTED_MODULE_27__.Node.lastNodeIdIndex,
-        lastSocketIndex: _socket_js__WEBPACK_IMPORTED_MODULE_26__.Socket.lastSocketIdIndex,
+        version: _program_mjs__WEBPACK_IMPORTED_MODULE_0__.Program.version,
+        lastNodeIndex: _node_mjs__WEBPACK_IMPORTED_MODULE_27__.Node.lastNodeIdIndex,
+        lastSocketIndex: _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.Socket.lastSocketIdIndex,
         enter: program.enter.id,
         exit: program.exit.id,
         nodes: [],
@@ -20649,7 +20644,7 @@ var Env = /*#__PURE__*/function () {
             title: node.title,
             functional: node.functional,
             meta: node.meta,
-            program: node instanceof _program_js__WEBPACK_IMPORTED_MODULE_0__.Program ? Env["export"](node) : undefined,
+            program: node instanceof _program_mjs__WEBPACK_IMPORTED_MODULE_0__.Program ? Env["export"](node) : undefined,
             inputs: node.inputs.map(function (inp) {
               return {
                 id: inp.id,
@@ -20846,12 +20841,12 @@ var Env = /*#__PURE__*/function () {
         throw new Error("Imported data must have version 1");
       }
 
-      var p = new _program_js__WEBPACK_IMPORTED_MODULE_0__.Program(); // Removes enter and exit auto-nodes, these
+      var p = new _program_mjs__WEBPACK_IMPORTED_MODULE_0__.Program(); // Removes enter and exit auto-nodes, these
       // will be re-created by import procedure
 
       p.removeNode(p.enter);
       p.removeNode(p.exit);
-      _program_js__WEBPACK_IMPORTED_MODULE_0__.Program.version = data.version; // Now import nodes without connections
+      _program_mjs__WEBPACK_IMPORTED_MODULE_0__.Program.version = data.version; // Now import nodes without connections
 
       var _iterator8 = _createForOfIteratorHelper(data.nodes),
           _step8;
@@ -20890,7 +20885,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
               var inpData = _step10.value;
-              var inp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.InputSocket(inpData.name, node, inpData.type, inpData.value);
+              var inp = new _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.InputSocket(inpData.name, node, inpData.type, inpData.value);
               inp.id = inpData.id;
               inp.canEditName = inpData.canEditName;
               node.inputs.push(inp);
@@ -20907,7 +20902,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
               var outpData = _step11.value;
-              var outp = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(outpData.name, node, outpData.type, outpData.value, outpData.cached);
+              var outp = new _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.OutputSocket(outpData.name, node, outpData.type, outpData.value, outpData.cached);
               outp.canEditName = outpData.canEditName;
               outp.id = outpData.id;
               node.outputs.push(outp);
@@ -20919,7 +20914,7 @@ var Env = /*#__PURE__*/function () {
           }
 
           if (nodeData.prev) {
-            var prev = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.PrevSocket(nodeData.prev.name, node);
+            var prev = new _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.PrevSocket(nodeData.prev.name, node);
             prev.id = nodeData.prev.id;
             node.prev = prev;
           }
@@ -20930,7 +20925,7 @@ var Env = /*#__PURE__*/function () {
           try {
             for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
               var nextData = _step12.value;
-              var next = new _socket_js__WEBPACK_IMPORTED_MODULE_26__.NextSocket(nextData.name, node);
+              var next = new _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.NextSocket(nextData.name, node);
               next.id = nextData.id;
               node.nexts.push(next);
             }
@@ -20990,8 +20985,8 @@ var Env = /*#__PURE__*/function () {
         _iterator9.f();
       }
 
-      _node_js__WEBPACK_IMPORTED_MODULE_27__.Node.lastNodeIdIndex = data.lastNodeIndex;
-      _socket_js__WEBPACK_IMPORTED_MODULE_26__.Socket.lastSocketIdIndex = data.lastSocketIndex;
+      _node_mjs__WEBPACK_IMPORTED_MODULE_27__.Node.lastNodeIdIndex = data.lastNodeIndex;
+      _socket_mjs__WEBPACK_IMPORTED_MODULE_26__.Socket.lastSocketIdIndex = data.lastSocketIndex;
       return p;
     }
   }]);
@@ -21005,20 +21000,20 @@ var _nodeRegistry = {
 
 /***/ }),
 
-/***/ "../cnodes/src/core/exit.js":
-/*!**********************************!*\
-  !*** ../cnodes/src/core/exit.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/exit.mjs":
+/*!***********************************!*\
+  !*** ../cnodes/src/core/exit.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Exit": () => /* binding */ Exit
 /* harmony export */ });
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -21057,7 +21052,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -21085,10 +21080,10 @@ var Exit = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "Exit");
     _this.removable = false;
     _this.creatable = false;
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.inputs = [new _socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
     _this.outputs = [];
     _this.nexts = [];
-    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("End", _assertThisInitialized(_this));
+    _this.prev = new _socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("End", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -21119,7 +21114,7 @@ var Exit = /*#__PURE__*/function (_Node) {
                 return this.evaluateInputs();
 
               case 2:
-                return _context.abrupt("return", new _node_js__WEBPACK_IMPORTED_MODULE_0__.Result());
+                return _context.abrupt("return", new _node_mjs__WEBPACK_IMPORTED_MODULE_0__.Result());
 
               case 3:
               case "end":
@@ -21138,7 +21133,7 @@ var Exit = /*#__PURE__*/function (_Node) {
   }]);
 
   return Exit;
-}(_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Exit, "instance", function () {
   return new Exit();
@@ -21146,11 +21141,11 @@ _defineProperty(Exit, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/core/node.js":
-/*!**********************************!*\
-  !*** ../cnodes/src/core/node.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/node.mjs":
+/*!***********************************!*\
+  !*** ../cnodes/src/core/node.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -21158,8 +21153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Node": () => /* binding */ Node,
 /* harmony export */   "Result": () => /* binding */ Result
 /* harmony export */ });
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _socket_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _type_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./type.mjs */ "../cnodes/src/core/type.mjs");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -21188,7 +21183,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -21628,19 +21623,19 @@ var Node = /*#__PURE__*/function () {
   }, {
     key: "canBeConnected",
     value: function canBeConnected(thisSocket, otherSocket) {
-      if (thisSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket && !(otherSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket)) {
+      if (thisSocket instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_0__.FlowSocket && !(otherSocket instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_0__.FlowSocket)) {
         return false;
       }
 
-      if (otherSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket && !(thisSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket)) {
+      if (otherSocket instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_0__.FlowSocket && !(thisSocket instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_0__.FlowSocket)) {
         return false;
       }
 
-      if (thisSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket || otherSocket instanceof _socket_js__WEBPACK_IMPORTED_MODULE_0__.FlowSocket) {
+      if (thisSocket instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_0__.FlowSocket || otherSocket instanceof _socket_mjs__WEBPACK_IMPORTED_MODULE_0__.FlowSocket) {
         return true;
       }
 
-      if (thisSocket.type === _type_js__WEBPACK_IMPORTED_MODULE_1__.Types.ANY || otherSocket.type === _type_js__WEBPACK_IMPORTED_MODULE_1__.Types.ANY) {
+      if (thisSocket.type === _type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.ANY || otherSocket.type === _type_mjs__WEBPACK_IMPORTED_MODULE_1__.Types.ANY) {
         return true;
       }
 
@@ -21943,11 +21938,11 @@ var Result = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/core/program.js":
-/*!*************************************!*\
-  !*** ../cnodes/src/core/program.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/program.mjs":
+/*!**************************************!*\
+  !*** ../cnodes/src/core/program.mjs ***!
+  \**************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -21955,12 +21950,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Program": () => /* binding */ Program
 /* harmony export */ });
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "../cnodes/node_modules/events/events.js");
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _enter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.js */ "../cnodes/src/core/enter.js");
-/* harmony import */ var _exit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.js */ "../cnodes/src/core/exit.js");
-/* harmony import */ var _node_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _socket_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _enter_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enter.mjs */ "../cnodes/src/core/enter.mjs");
+/* harmony import */ var _exit_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exit.mjs */ "../cnodes/src/core/exit.mjs");
+/* harmony import */ var _node_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _socket_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _type_mjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -22009,7 +22003,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -22092,12 +22086,12 @@ var Program = /*#__PURE__*/function (_Node) {
 
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
 
-    _this.inputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_4__.InputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_5__.Types.ANY, 0)];
-    _this.outputs = [new _socket_js__WEBPACK_IMPORTED_MODULE_4__.OutputSocket("Val", _assertThisInitialized(_this), _type_js__WEBPACK_IMPORTED_MODULE_5__.Types.ANY, 0)];
-    _this.nexts = [new _socket_js__WEBPACK_IMPORTED_MODULE_4__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _socket_js__WEBPACK_IMPORTED_MODULE_4__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
+    _this.inputs = [new _socket_mjs__WEBPACK_IMPORTED_MODULE_4__.InputSocket("Val", _assertThisInitialized(_this), _type_mjs__WEBPACK_IMPORTED_MODULE_5__.Types.ANY, 0)];
+    _this.outputs = [new _socket_mjs__WEBPACK_IMPORTED_MODULE_4__.OutputSocket("Val", _assertThisInitialized(_this), _type_mjs__WEBPACK_IMPORTED_MODULE_5__.Types.ANY, 0)];
+    _this.nexts = [new _socket_mjs__WEBPACK_IMPORTED_MODULE_4__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _socket_mjs__WEBPACK_IMPORTED_MODULE_4__.PrevSocket("In", _assertThisInitialized(_this)); // Create default enter, exit nodes
 
-    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_js__WEBPACK_IMPORTED_MODULE_1__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_js__WEBPACK_IMPORTED_MODULE_2__.Exit()));
+    _this.addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _enter, new _enter_mjs__WEBPACK_IMPORTED_MODULE_1__.Enter())).addNode(_classPrivateFieldSet(_assertThisInitialized(_this), _exit, new _exit_mjs__WEBPACK_IMPORTED_MODULE_2__.Exit()));
 
     _this.events.on("log", function (msg) {
       console.log("catched: ", msg);
@@ -22122,10 +22116,10 @@ var Program = /*#__PURE__*/function (_Node) {
       retNode.nodes = Program.cloneNodes(_classPrivateFieldGet(this, _nodes)); // Connect actual Enter and Exit
 
       retNode.enter = retNode.nodes.find(function (n) {
-        return n instanceof _enter_js__WEBPACK_IMPORTED_MODULE_1__.Enter;
+        return n instanceof _enter_mjs__WEBPACK_IMPORTED_MODULE_1__.Enter;
       });
       retNode.exit = retNode.nodes.find(function (n) {
-        return n instanceof _exit_js__WEBPACK_IMPORTED_MODULE_2__.Exit;
+        return n instanceof _exit_mjs__WEBPACK_IMPORTED_MODULE_2__.Exit;
       });
       return retNode;
     }
@@ -22419,7 +22413,7 @@ var Program = /*#__PURE__*/function (_Node) {
   }]);
 
   return Program;
-}(_node_js__WEBPACK_IMPORTED_MODULE_3__.Node);
+}(_node_mjs__WEBPACK_IMPORTED_MODULE_3__.Node);
 
 _defineProperty(Program, "instance", function () {
   return new Program();
@@ -22429,11 +22423,11 @@ _defineProperty(Program, "version", 1);
 
 /***/ }),
 
-/***/ "../cnodes/src/core/socket.js":
-/*!************************************!*\
-  !*** ../cnodes/src/core/socket.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/socket.mjs":
+/*!*************************************!*\
+  !*** ../cnodes/src/core/socket.mjs ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -22446,7 +22440,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PrevSocket": () => /* binding */ PrevSocket,
 /* harmony export */   "NextSocket": () => /* binding */ NextSocket
 /* harmony export */ });
-/* harmony import */ var _type_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _type_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -22485,7 +22479,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 /**
@@ -22625,7 +22619,7 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
   function ValueSocket(name, node) {
     var _this;
 
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_mjs__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
     _classCallCheck(this, ValueSocket);
@@ -22634,7 +22628,7 @@ var ValueSocket = /*#__PURE__*/function (_Socket) {
 
     _type.set(_assertThisInitialized(_this), {
       writable: true,
-      value: _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER
+      value: _type_mjs__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER
     });
 
     _value.set(_assertThisInitialized(_this), {
@@ -22736,7 +22730,7 @@ var InputSocket = /*#__PURE__*/function (_ValueSocket) {
   function InputSocket(name, node) {
     var _this2;
 
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_mjs__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
     _classCallCheck(this, InputSocket);
@@ -22891,7 +22885,7 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
   function OutputSocket(name, node) {
     var _this5;
 
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_js__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _type_mjs__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
     var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
     var cached = arguments.length > 4 ? arguments[4] : undefined;
 
@@ -22910,7 +22904,7 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
       value: true
     });
 
-    _classPrivateFieldSet(_assertThisInitialized(_this5), _cached, cached !== null && cached !== void 0 ? cached : !node.functional);
+    _classPrivateFieldSet(_assertThisInitialized(_this5), _cached, cached || !node.functional);
 
     return _this5;
   }
@@ -22932,13 +22926,11 @@ var OutputSocket = /*#__PURE__*/function (_ValueSocket2) {
      */
     value: function () {
       var _evaluate2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var _this$node;
-
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!((_this$node = this.node) !== null && _this$node !== void 0 && _this$node.functional && !this.cached)) {
+                if (!(this.node && this.node.functional && !this.cached)) {
                   _context2.next = 3;
                   break;
                 }
@@ -23248,11 +23240,11 @@ var NextSocket = /*#__PURE__*/function (_FlowSocket2) {
 
 /***/ }),
 
-/***/ "../cnodes/src/core/type.js":
-/*!**********************************!*\
-  !*** ../cnodes/src/core/type.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/core/type.mjs":
+/*!***********************************!*\
+  !*** ../cnodes/src/core/type.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -23265,7 +23257,7 @@ __webpack_require__.r(__webpack_exports__);
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 /**
@@ -23282,20 +23274,20 @@ var Types = {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/amap.js":
-/*!*****************************************!*\
-  !*** ../cnodes/src/nodes/array/amap.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/amap.mjs":
+/*!******************************************!*\
+  !*** ../cnodes/src/nodes/array/amap.mjs ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AMap": () => /* binding */ AMap
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -23348,7 +23340,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -23374,12 +23366,12 @@ var AMap = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, AMap);
 
     _this = _super.call(this, "AMap");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Mapped", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), // cached
-    new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true) // cached
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Mapped", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Array", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), // cached
+    new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true) // cached
     ];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -23402,7 +23394,7 @@ var AMap = /*#__PURE__*/function (_Node) {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var arr, outArr, _iterator, _step, _this$next$peer, _step$value, index, item;
+        var arr, outArr, _iterator, _step, _step$value, index, item;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -23441,7 +23433,7 @@ var AMap = /*#__PURE__*/function (_Node) {
 
                 this.output("Item").value = item; // If there's a node connected to the "Item" next socket...
 
-                if (!((_this$next$peer = this.next("Do").peer) !== null && _this$next$peer !== void 0 && _this$next$peer.node)) {
+                if (!(this.next("Do").peer && this.next("Do").peer.node)) {
                   _context.next = 17;
                   break;
                 }
@@ -23505,7 +23497,7 @@ var AMap = /*#__PURE__*/function (_Node) {
   }]);
 
   return AMap;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(AMap, "instance", function () {
   return new AMap();
@@ -23513,20 +23505,20 @@ _defineProperty(AMap, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/apush.js":
-/*!******************************************!*\
-  !*** ../cnodes/src/nodes/array/apush.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/apush.mjs":
+/*!*******************************************!*\
+  !*** ../cnodes/src/nodes/array/apush.mjs ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "APush": () => /* binding */ APush
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -23565,7 +23557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -23591,10 +23583,10 @@ var APush = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, APush);
 
     _this = _super.call(this, "APush");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -23654,7 +23646,7 @@ var APush = /*#__PURE__*/function (_Node) {
   }]);
 
   return APush;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(APush, "instance", function () {
   return new APush();
@@ -23662,20 +23654,20 @@ _defineProperty(APush, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/areduce.js":
-/*!********************************************!*\
-  !*** ../cnodes/src/nodes/array/areduce.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/areduce.mjs":
+/*!*********************************************!*\
+  !*** ../cnodes/src/nodes/array/areduce.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AReduce": () => /* binding */ AReduce
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -23728,7 +23720,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -23754,10 +23746,10 @@ var AReduce = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, AReduce);
 
     _this = _super.call(this, "AReduce");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false, true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Acc", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true)];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc0", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Acc", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Item", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, false, true), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Acc", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", true), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, true)];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -23780,7 +23772,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
     key: "process",
     value: function () {
       var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var arr, acc0, acc, _iterator, _step, _this$next$peer, _step$value, index, elem;
+        var arr, acc0, acc, _iterator, _step, _step$value, index, elem;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -23822,7 +23814,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
 
                 this.output("Acc").value = acc; // If there's a node connected to the "Item" next socket...
 
-                if (!((_this$next$peer = this.next("Do").peer) !== null && _this$next$peer !== void 0 && _this$next$peer.node)) {
+                if (!(this.next("Do").peer && this.next("Do").peer.node)) {
                   _context.next = 19;
                   break;
                 }
@@ -23886,7 +23878,7 @@ var AReduce = /*#__PURE__*/function (_Node) {
   }]);
 
   return AReduce;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(AReduce, "instance", function () {
   return new AReduce();
@@ -23894,20 +23886,20 @@ _defineProperty(AReduce, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/faconst.js":
-/*!********************************************!*\
-  !*** ../cnodes/src/nodes/array/faconst.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/faconst.mjs":
+/*!*********************************************!*\
+  !*** ../cnodes/src/nodes/array/faconst.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FAConst": () => /* binding */ FAConst
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -23946,7 +23938,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -23973,8 +23965,8 @@ var FAConst = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FAConst");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "[0, 1, 2]")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "[0, 1, 2]")];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -24044,7 +24036,7 @@ var FAConst = /*#__PURE__*/function (_Node) {
   }]);
 
   return FAConst;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FAConst, "instance", function () {
   return new FAConst();
@@ -24052,20 +24044,20 @@ _defineProperty(FAConst, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/faget.js":
-/*!******************************************!*\
-  !*** ../cnodes/src/nodes/array/faget.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/faget.mjs":
+/*!*******************************************!*\
+  !*** ../cnodes/src/nodes/array/faget.mjs ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FAGet": () => /* binding */ FAGet
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -24104,7 +24096,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -24133,8 +24125,8 @@ var FAGet = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -24193,7 +24185,7 @@ var FAGet = /*#__PURE__*/function (_Node) {
   }]);
 
   return FAGet;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FAGet, "instance", function () {
   return new FAGet();
@@ -24201,20 +24193,20 @@ _defineProperty(FAGet, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/falength.js":
-/*!*********************************************!*\
-  !*** ../cnodes/src/nodes/array/falength.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/falength.mjs":
+/*!**********************************************!*\
+  !*** ../cnodes/src/nodes/array/falength.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FALength": () => /* binding */ FALength
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -24253,7 +24245,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -24282,8 +24274,8 @@ var FALength = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Array", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -24341,7 +24333,7 @@ var FALength = /*#__PURE__*/function (_Node) {
   }]);
 
   return FALength;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FALength, "instance", function () {
   return new FALength();
@@ -24349,20 +24341,20 @@ _defineProperty(FALength, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/famake.js":
-/*!*******************************************!*\
-  !*** ../cnodes/src/nodes/array/famake.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/famake.mjs":
+/*!********************************************!*\
+  !*** ../cnodes/src/nodes/array/famake.mjs ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FAMake": () => /* binding */ FAMake
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -24423,7 +24415,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -24451,8 +24443,8 @@ var FAMake = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FAMake");
     _this.canAddInput = true;
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ARRAY, [], false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -24526,7 +24518,7 @@ var FAMake = /*#__PURE__*/function (_Node) {
     key: "addInput",
     value: function addInput() {
       if (this.canAddInput) {
-        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
+        this.inputs.push(new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")); // Rename all inputs to its ordinal number in the inputs array
 
         var _iterator = _createForOfIteratorHelper(this.inputs.entries()),
             _step;
@@ -24585,7 +24577,7 @@ var FAMake = /*#__PURE__*/function (_Node) {
   }]);
 
   return FAMake;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FAMake, "instance", function () {
   return new FAMake();
@@ -24593,19 +24585,19 @@ _defineProperty(FAMake, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/famap.js":
-/*!******************************************!*\
-  !*** ../cnodes/src/nodes/array/famap.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/famap.mjs":
+/*!*******************************************!*\
+  !*** ../cnodes/src/nodes/array/famap.mjs ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FAMap": () => /* binding */ FAMap
 /* harmony export */ });
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _amap_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./amap.js */ "../cnodes/src/nodes/array/amap.js");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _amap_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./amap.mjs */ "../cnodes/src/nodes/array/amap.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24640,7 +24632,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -24667,7 +24659,7 @@ var FAMap = /*#__PURE__*/function (_AMap) {
     _this.name = "FAMap";
     _this.title = "FAMap";
     _this.functional = true;
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = null;
     return _this;
   }
@@ -24686,7 +24678,7 @@ var FAMap = /*#__PURE__*/function (_AMap) {
   }]);
 
   return FAMap;
-}(_amap_js__WEBPACK_IMPORTED_MODULE_1__.AMap);
+}(_amap_mjs__WEBPACK_IMPORTED_MODULE_1__.AMap);
 
 _defineProperty(FAMap, "instance", function () {
   return new FAMap();
@@ -24694,19 +24686,19 @@ _defineProperty(FAMap, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/array/fareduce.js":
-/*!*********************************************!*\
-  !*** ../cnodes/src/nodes/array/fareduce.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/array/fareduce.mjs":
+/*!**********************************************!*\
+  !*** ../cnodes/src/nodes/array/fareduce.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FAReduce": () => /* binding */ FAReduce
 /* harmony export */ });
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _areduce_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./areduce.js */ "../cnodes/src/nodes/array/areduce.js");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _areduce_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./areduce.mjs */ "../cnodes/src/nodes/array/areduce.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24741,7 +24733,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -24768,7 +24760,7 @@ var FAReduce = /*#__PURE__*/function (_AReduce) {
     _this.name = "FAReduce";
     _this.title = "FAReduce";
     _this.functional = true;
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_0__.NextSocket("Do", _assertThisInitialized(_this))];
     _this.prev = null;
     return _this;
   }
@@ -24787,7 +24779,7 @@ var FAReduce = /*#__PURE__*/function (_AReduce) {
   }]);
 
   return FAReduce;
-}(_areduce_js__WEBPACK_IMPORTED_MODULE_1__.AReduce);
+}(_areduce_mjs__WEBPACK_IMPORTED_MODULE_1__.AReduce);
 
 _defineProperty(FAReduce, "instance", function () {
   return new FAReduce();
@@ -24795,11 +24787,11 @@ _defineProperty(FAReduce, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/fcompare.js":
-/*!********************************************!*\
-  !*** ../cnodes/src/nodes/bool/fcompare.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/fcompare.mjs":
+/*!*********************************************!*\
+  !*** ../cnodes/src/nodes/bool/fcompare.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -24807,9 +24799,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Comparision": () => /* binding */ Comparision,
 /* harmony export */   "FCompare": () => /* binding */ FCompare
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -24852,7 +24844,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -24907,8 +24899,8 @@ var FCompare = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -25003,7 +24995,7 @@ var FCompare = /*#__PURE__*/function (_Node) {
   }]);
 
   return FCompare;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FCompare, "instance", function () {
   return new FCompare();
@@ -25011,18 +25003,18 @@ _defineProperty(FCompare, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/fequal.js":
-/*!******************************************!*\
-  !*** ../cnodes/src/nodes/bool/fequal.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/fequal.mjs":
+/*!*******************************************!*\
+  !*** ../cnodes/src/nodes/bool/fequal.mjs ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FEqual": () => /* binding */ FEqual
 /* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
+/* harmony import */ var _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25057,7 +25049,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25080,7 +25072,7 @@ var FEqual = /*#__PURE__*/function (_FCompare) {
 
     _classCallCheck(this, FEqual);
 
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.EQUAL);
+    _this = _super.call(this, _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.Comparision.EQUAL);
     _this.name = "FEqual";
     _this.title = "==";
     return _this;
@@ -25100,7 +25092,7 @@ var FEqual = /*#__PURE__*/function (_FCompare) {
   }]);
 
   return FEqual;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+}(_fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.FCompare);
 
 _defineProperty(FEqual, "instance", function () {
   return new FEqual();
@@ -25108,18 +25100,18 @@ _defineProperty(FEqual, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/fgt.js":
-/*!***************************************!*\
-  !*** ../cnodes/src/nodes/bool/fgt.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/fgt.mjs":
+/*!****************************************!*\
+  !*** ../cnodes/src/nodes/bool/fgt.mjs ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FGT": () => /* binding */ FGT
 /* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
+/* harmony import */ var _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25154,7 +25146,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25177,7 +25169,7 @@ var FGT = /*#__PURE__*/function (_FCompare) {
 
     _classCallCheck(this, FGT);
 
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GT);
+    _this = _super.call(this, _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.Comparision.GT);
     _this.name = "FGT";
     _this.title = ">";
     return _this;
@@ -25197,7 +25189,7 @@ var FGT = /*#__PURE__*/function (_FCompare) {
   }]);
 
   return FGT;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+}(_fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.FCompare);
 
 _defineProperty(FGT, "instance", function () {
   return new FGT();
@@ -25205,18 +25197,18 @@ _defineProperty(FGT, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/fgte.js":
-/*!****************************************!*\
-  !*** ../cnodes/src/nodes/bool/fgte.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/fgte.mjs":
+/*!*****************************************!*\
+  !*** ../cnodes/src/nodes/bool/fgte.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FGTE": () => /* binding */ FGTE
 /* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
+/* harmony import */ var _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25251,7 +25243,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25274,7 +25266,7 @@ var FGTE = /*#__PURE__*/function (_FCompare) {
 
     _classCallCheck(this, FGTE);
 
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.GTE);
+    _this = _super.call(this, _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.Comparision.GTE);
     _this.name = "FGTE";
     _this.title = ">=";
     return _this;
@@ -25294,7 +25286,7 @@ var FGTE = /*#__PURE__*/function (_FCompare) {
   }]);
 
   return FGTE;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+}(_fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.FCompare);
 
 _defineProperty(FGTE, "instance", function () {
   return new FGTE();
@@ -25302,18 +25294,18 @@ _defineProperty(FGTE, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/flt.js":
-/*!***************************************!*\
-  !*** ../cnodes/src/nodes/bool/flt.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/flt.mjs":
+/*!****************************************!*\
+  !*** ../cnodes/src/nodes/bool/flt.mjs ***!
+  \****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FLT": () => /* binding */ FLT
 /* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
+/* harmony import */ var _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25348,7 +25340,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25371,7 +25363,7 @@ var FLT = /*#__PURE__*/function (_FCompare) {
 
     _classCallCheck(this, FLT);
 
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LT);
+    _this = _super.call(this, _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.Comparision.LT);
     _this.name = "FLT";
     _this.title = "<";
     return _this;
@@ -25391,7 +25383,7 @@ var FLT = /*#__PURE__*/function (_FCompare) {
   }]);
 
   return FLT;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+}(_fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.FCompare);
 
 _defineProperty(FLT, "instance", function () {
   return new FLT();
@@ -25399,18 +25391,18 @@ _defineProperty(FLT, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/flte.js":
-/*!****************************************!*\
-  !*** ../cnodes/src/nodes/bool/flte.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/flte.mjs":
+/*!*****************************************!*\
+  !*** ../cnodes/src/nodes/bool/flte.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FLTE": () => /* binding */ FLTE
 /* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
+/* harmony import */ var _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25445,7 +25437,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25468,7 +25460,7 @@ var FLTE = /*#__PURE__*/function (_FCompare) {
 
     _classCallCheck(this, FLTE);
 
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.LTE);
+    _this = _super.call(this, _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.Comparision.LTE);
     _this.name = "FLTE";
     _this.title = "<=";
     return _this;
@@ -25488,7 +25480,7 @@ var FLTE = /*#__PURE__*/function (_FCompare) {
   }]);
 
   return FLTE;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+}(_fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.FCompare);
 
 _defineProperty(FLTE, "instance", function () {
   return new FLTE();
@@ -25496,18 +25488,18 @@ _defineProperty(FLTE, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/bool/fnotequal.js":
-/*!*********************************************!*\
-  !*** ../cnodes/src/nodes/bool/fnotequal.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/bool/fnotequal.mjs":
+/*!**********************************************!*\
+  !*** ../cnodes/src/nodes/bool/fnotequal.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FNotEqual": () => /* binding */ FNotEqual
 /* harmony export */ });
-/* harmony import */ var _fcompare_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.js */ "../cnodes/src/nodes/bool/fcompare.js");
+/* harmony import */ var _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fcompare.mjs */ "../cnodes/src/nodes/bool/fcompare.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25542,7 +25534,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25565,7 +25557,7 @@ var FNotEqual = /*#__PURE__*/function (_FCompare) {
 
     _classCallCheck(this, FNotEqual);
 
-    _this = _super.call(this, _fcompare_js__WEBPACK_IMPORTED_MODULE_0__.Comparision.NOT_EQUAL);
+    _this = _super.call(this, _fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.Comparision.NOT_EQUAL);
     _this.name = "FNotEqual";
     _this.title = "!=";
     return _this;
@@ -25585,7 +25577,7 @@ var FNotEqual = /*#__PURE__*/function (_FCompare) {
   }]);
 
   return FNotEqual;
-}(_fcompare_js__WEBPACK_IMPORTED_MODULE_0__.FCompare);
+}(_fcompare_mjs__WEBPACK_IMPORTED_MODULE_0__.FCompare);
 
 _defineProperty(FNotEqual, "instance", function () {
   return new FNotEqual();
@@ -25593,19 +25585,19 @@ _defineProperty(FNotEqual, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/call.js":
-/*!***********************************!*\
-  !*** ../cnodes/src/nodes/call.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/call.mjs":
+/*!************************************!*\
+  !*** ../cnodes/src/nodes/call.mjs ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Call": () => /* binding */ Call
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -25644,7 +25636,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25670,8 +25662,8 @@ var Call = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "Call");
     _this.inputs = [];
     _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Call", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Call", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -25727,7 +25719,7 @@ var Call = /*#__PURE__*/function (_Node) {
   }]);
 
   return Call;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Call, "instance", function () {
   return new Call();
@@ -25735,20 +25727,20 @@ _defineProperty(Call, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/console.js":
-/*!**************************************!*\
-  !*** ../cnodes/src/nodes/console.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/console.mjs":
+/*!***************************************!*\
+  !*** ../cnodes/src/nodes/console.mjs ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Console": () => /* binding */ Console
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -25787,7 +25779,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25813,10 +25805,10 @@ var Console = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Console);
 
     _this = _super.call(this, "Console");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
     _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -25867,7 +25859,7 @@ var Console = /*#__PURE__*/function (_Node) {
   }]);
 
   return Console;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Console, "instance", function () {
   return new Console();
@@ -25875,20 +25867,20 @@ _defineProperty(Console, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/fgetvar.js":
-/*!**************************************!*\
-  !*** ../cnodes/src/nodes/fgetvar.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/fgetvar.mjs":
+/*!***************************************!*\
+  !*** ../cnodes/src/nodes/fgetvar.mjs ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FGetvar": () => /* binding */ FGetvar
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -25927,7 +25919,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -25955,8 +25947,8 @@ var FGetvar = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FGetvar");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -26010,7 +26002,7 @@ var FGetvar = /*#__PURE__*/function (_Node) {
   }]);
 
   return FGetvar;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FGetvar, "instance", function () {
   return new FGetvar();
@@ -26018,20 +26010,20 @@ _defineProperty(FGetvar, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/fif.js":
-/*!**********************************!*\
-  !*** ../cnodes/src/nodes/fif.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/fif.mjs":
+/*!***********************************!*\
+  !*** ../cnodes/src/nodes/fif.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FIf": () => /* binding */ FIf
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -26070,7 +26062,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -26098,8 +26090,8 @@ var FIf = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two any inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("True", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("False", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("True", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("False", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -26151,7 +26143,7 @@ var FIf = /*#__PURE__*/function (_Node) {
   }]);
 
   return FIf;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FIf, "instance", function () {
   return new FIf();
@@ -26159,20 +26151,20 @@ _defineProperty(FIf, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/for.js":
-/*!**********************************!*\
-  !*** ../cnodes/src/nodes/for.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/for.mjs":
+/*!***********************************!*\
+  !*** ../cnodes/src/nodes/for.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "For": () => /* binding */ For
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -26211,7 +26203,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -26238,10 +26230,10 @@ var For = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, For);
 
     _this = _super.call(this, "For");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("From", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("To", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("From", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("To", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -26328,7 +26320,7 @@ var For = /*#__PURE__*/function (_Node) {
   }]);
 
   return For;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(For, "instance", function () {
   return new For();
@@ -26336,20 +26328,20 @@ _defineProperty(For, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/getvar.js":
-/*!*************************************!*\
-  !*** ../cnodes/src/nodes/getvar.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/getvar.mjs":
+/*!**************************************!*\
+  !*** ../cnodes/src/nodes/getvar.mjs ***!
+  \**************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Getvar": () => /* binding */ Getvar
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -26388,7 +26380,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -26415,10 +26407,10 @@ var Getvar = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Getvar);
 
     _this = _super.call(this, "Getvar");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -26471,7 +26463,7 @@ var Getvar = /*#__PURE__*/function (_Node) {
   }]);
 
   return Getvar;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Getvar, "instance", function () {
   return new Getvar();
@@ -26479,20 +26471,20 @@ _defineProperty(Getvar, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/if.js":
-/*!*********************************!*\
-  !*** ../cnodes/src/nodes/if.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/if.mjs":
+/*!**********************************!*\
+  !*** ../cnodes/src/nodes/if.mjs ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "If": () => /* binding */ If
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -26531,7 +26523,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -26558,10 +26550,10 @@ var If = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, If);
 
     _this = _super.call(this, "If");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
     _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Then", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Else", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Then", _assertThisInitialized(_this)), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Else", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -26620,7 +26612,7 @@ var If = /*#__PURE__*/function (_Node) {
   }]);
 
   return If;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(If, "instance", function () {
   return new If();
@@ -26628,20 +26620,20 @@ _defineProperty(If, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/log.js":
-/*!**********************************!*\
-  !*** ../cnodes/src/nodes/log.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/log.mjs":
+/*!***********************************!*\
+  !*** ../cnodes/src/nodes/log.mjs ***!
+  \***********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Log": () => /* binding */ Log
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -26680,7 +26672,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -26706,10 +26698,10 @@ var Log = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Log);
 
     _this = _super.call(this, "Log");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY)];
     _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -26761,7 +26753,7 @@ var Log = /*#__PURE__*/function (_Node) {
   }]);
 
   return Log;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Log, "instance", function () {
   return new Log();
@@ -26769,20 +26761,20 @@ _defineProperty(Log, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/fadd.js":
-/*!****************************************!*\
-  !*** ../cnodes/src/nodes/math/fadd.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/fadd.mjs":
+/*!*****************************************!*\
+  !*** ../cnodes/src/nodes/math/fadd.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FAdd": () => /* binding */ FAdd
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -26835,7 +26827,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -26866,8 +26858,8 @@ var FAdd = /*#__PURE__*/function (_Node) {
 
     _this.canAddInput = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -26930,7 +26922,7 @@ var FAdd = /*#__PURE__*/function (_Node) {
     key: "addInput",
     value: function addInput() {
       if (this.canAddInput) {
-        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, "")); // Rename all inputs to its ordinal number in the inputs array
+        this.inputs.push(new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, "")); // Rename all inputs to its ordinal number in the inputs array
 
         var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
             _step2;
@@ -27011,7 +27003,7 @@ var FAdd = /*#__PURE__*/function (_Node) {
   }]);
 
   return FAdd;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FAdd, "instance", function () {
   return new FAdd();
@@ -27019,20 +27011,20 @@ _defineProperty(FAdd, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/fdiv.js":
-/*!****************************************!*\
-  !*** ../cnodes/src/nodes/math/fdiv.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/fdiv.mjs":
+/*!*****************************************!*\
+  !*** ../cnodes/src/nodes/math/fdiv.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FDiv": () => /* binding */ FDiv
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -27071,7 +27063,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -27099,8 +27091,8 @@ var FDiv = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -27152,7 +27144,7 @@ var FDiv = /*#__PURE__*/function (_Node) {
   }]);
 
   return FDiv;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FDiv, "instance", function () {
   return new FDiv();
@@ -27160,20 +27152,20 @@ _defineProperty(FDiv, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/fmod.js":
-/*!****************************************!*\
-  !*** ../cnodes/src/nodes/math/fmod.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/fmod.mjs":
+/*!*****************************************!*\
+  !*** ../cnodes/src/nodes/math/fmod.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FMod": () => /* binding */ FMod
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -27212,7 +27204,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -27240,8 +27232,8 @@ var FMod = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val2", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -27293,7 +27285,7 @@ var FMod = /*#__PURE__*/function (_Node) {
   }]);
 
   return FMod;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FMod, "instance", function () {
   return new FMod();
@@ -27301,20 +27293,20 @@ _defineProperty(FMod, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/fmul.js":
-/*!****************************************!*\
-  !*** ../cnodes/src/nodes/math/fmul.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/fmul.mjs":
+/*!*****************************************!*\
+  !*** ../cnodes/src/nodes/math/fmul.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FMul": () => /* binding */ FMul
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -27367,7 +27359,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -27398,8 +27390,8 @@ var FMul = /*#__PURE__*/function (_Node) {
 
     _this.canAddInput = true; // Default to two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -27473,7 +27465,7 @@ var FMul = /*#__PURE__*/function (_Node) {
     key: "addInput",
     value: function addInput() {
       if (this.canAddInput) {
-        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, "")); // Rename all inputs to its ordinal number in the inputs array
+        this.inputs.push(new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, "")); // Rename all inputs to its ordinal number in the inputs array
 
         var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
             _step2;
@@ -27543,7 +27535,7 @@ var FMul = /*#__PURE__*/function (_Node) {
   }]);
 
   return FMul;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FMul, "instance", function () {
   return new FMul();
@@ -27551,20 +27543,20 @@ _defineProperty(FMul, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/fnconst.js":
-/*!*******************************************!*\
-  !*** ../cnodes/src/nodes/math/fnconst.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/fnconst.mjs":
+/*!********************************************!*\
+  !*** ../cnodes/src/nodes/math/fnconst.mjs ***!
+  \********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FNConst": () => /* binding */ FNConst
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -27603,7 +27595,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -27630,8 +27622,8 @@ var FNConst = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FNConst");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -27684,7 +27676,7 @@ var FNConst = /*#__PURE__*/function (_Node) {
   }]);
 
   return FNConst;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FNConst, "instance", function () {
   return new FNConst();
@@ -27692,20 +27684,20 @@ _defineProperty(FNConst, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/fsqrt.js":
-/*!*****************************************!*\
-  !*** ../cnodes/src/nodes/math/fsqrt.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/fsqrt.mjs":
+/*!******************************************!*\
+  !*** ../cnodes/src/nodes/math/fsqrt.mjs ***!
+  \******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FSqrt": () => /* binding */ FSqrt
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -27744,7 +27736,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -27772,8 +27764,8 @@ var FSqrt = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Default to one numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -27825,7 +27817,7 @@ var FSqrt = /*#__PURE__*/function (_Node) {
   }]);
 
   return FSqrt;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FSqrt, "instance", function () {
   return new FSqrt();
@@ -27833,20 +27825,20 @@ _defineProperty(FSqrt, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/math/ftofixed.js":
-/*!********************************************!*\
-  !*** ../cnodes/src/nodes/math/ftofixed.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/math/ftofixed.mjs":
+/*!*********************************************!*\
+  !*** ../cnodes/src/nodes/math/ftofixed.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FTofixed": () => /* binding */ FTofixed
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -27885,7 +27877,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -27914,8 +27906,8 @@ var FTofixed = /*#__PURE__*/function (_Node) {
 
     _this.functional = true; // Two numeric inputs
 
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Digits", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Digits", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0, false)];
     _this.prev = null;
     _this.nexts = [];
     return _this;
@@ -27967,7 +27959,7 @@ var FTofixed = /*#__PURE__*/function (_Node) {
   }]);
 
   return FTofixed;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FTofixed, "instance", function () {
   return new FTofixed();
@@ -27975,20 +27967,20 @@ _defineProperty(FTofixed, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/object/fobreak.js":
-/*!*********************************************!*\
-  !*** ../cnodes/src/nodes/object/fobreak.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/object/fobreak.mjs":
+/*!**********************************************!*\
+  !*** ../cnodes/src/nodes/object/fobreak.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FOBreak": () => /* binding */ FOBreak
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -28033,7 +28025,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -28061,8 +28053,8 @@ var FOBreak = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FOBreak");
     _this.canAddOutput = true;
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)]; // Sets all output as changeable in terms of name and type
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {})];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("field2", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "", false)]; // Sets all output as changeable in terms of name and type
 
     var _iterator = _createForOfIteratorHelper(_this.outputs),
         _step;
@@ -28151,7 +28143,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
     value: function addOutput(o) {
       if (this.canAddOutput) {
         if (!o) {
-          o = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
+          o = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("", this, _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
           o.canEditName = true;
           o.canEditType = true;
         }
@@ -28191,7 +28183,7 @@ var FOBreak = /*#__PURE__*/function (_Node) {
   }]);
 
   return FOBreak;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FOBreak, "instance", function () {
   return new FOBreak();
@@ -28199,20 +28191,20 @@ _defineProperty(FOBreak, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/object/fomake.js":
-/*!********************************************!*\
-  !*** ../cnodes/src/nodes/object/fomake.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/object/fomake.mjs":
+/*!*********************************************!*\
+  !*** ../cnodes/src/nodes/object/fomake.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FOMake": () => /* binding */ FOMake
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -28261,7 +28253,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -28289,7 +28281,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FOMake");
     _this.canAddInput = true;
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("field1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("field2", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")]; // Sets all input as changeable in terms of name
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("field1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, ""), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("field2", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")]; // Sets all input as changeable in terms of name
 
     var _iterator = _createForOfIteratorHelper(_this.inputs),
         _step;
@@ -28306,7 +28298,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
       _iterator.f();
     }
 
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {}, false)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.OBJECT, {}, false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -28380,7 +28372,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
   }, {
     key: "addInput",
     value: function addInput() {
-      var is = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
+      var is = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "");
       is.canEditName = true;
       is.canEditType = true;
       this.inputs.push(is);
@@ -28404,7 +28396,7 @@ var FOMake = /*#__PURE__*/function (_Node) {
   }]);
 
   return FOMake;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FOMake, "instance", function () {
   return new FOMake();
@@ -28412,20 +28404,20 @@ _defineProperty(FOMake, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/setvar.js":
-/*!*************************************!*\
-  !*** ../cnodes/src/nodes/setvar.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/setvar.mjs":
+/*!**************************************!*\
+  !*** ../cnodes/src/nodes/setvar.mjs ***!
+  \**************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Setvar": () => /* binding */ Setvar
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -28464,7 +28456,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -28491,10 +28483,10 @@ var Setvar = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Setvar);
 
     _this = _super.call(this, "Setvar");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Name", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, 0)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -28549,7 +28541,7 @@ var Setvar = /*#__PURE__*/function (_Node) {
   }]);
 
   return Setvar;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Setvar, "instance", function () {
   return new Setvar();
@@ -28557,20 +28549,20 @@ _defineProperty(Setvar, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/string/fconcat.js":
-/*!*********************************************!*\
-  !*** ../cnodes/src/nodes/string/fconcat.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/string/fconcat.mjs":
+/*!**********************************************!*\
+  !*** ../cnodes/src/nodes/string/fconcat.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FConcat": () => /* binding */ FConcat
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -28623,7 +28615,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -28651,8 +28643,8 @@ var FConcat = /*#__PURE__*/function (_Node) {
     _this = _super.call(this, "FConcat");
     _this.functional = true;
     _this.canAddInput = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, ""), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "", false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("0", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, ""), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("1", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "", false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -28727,7 +28719,7 @@ var FConcat = /*#__PURE__*/function (_Node) {
     key: "addInput",
     value: function addInput() {
       if (this.canAddInput) {
-        this.inputs.push(new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")); // Rename all inputs to its ordinal number in the inputs array
+        this.inputs.push(new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("", this, _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "")); // Rename all inputs to its ordinal number in the inputs array
 
         var _iterator2 = _createForOfIteratorHelper(this.inputs.entries()),
             _step2;
@@ -28797,7 +28789,7 @@ var FConcat = /*#__PURE__*/function (_Node) {
   }]);
 
   return FConcat;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FConcat, "instance", function () {
   return new FConcat();
@@ -28805,20 +28797,20 @@ _defineProperty(FConcat, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/string/fsconst.js":
-/*!*********************************************!*\
-  !*** ../cnodes/src/nodes/string/fsconst.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/string/fsconst.mjs":
+/*!**********************************************!*\
+  !*** ../cnodes/src/nodes/string/fsconst.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FSConst": () => /* binding */ FSConst
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -28857,7 +28849,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -28884,8 +28876,8 @@ var FSConst = /*#__PURE__*/function (_Node) {
 
     _this = _super.call(this, "FSConst");
     _this.functional = true;
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "", false)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.ANY, "")];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Val", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.STRING, "", false)];
     _this.nexts = [];
     _this.prev = null;
     return _this;
@@ -28938,7 +28930,7 @@ var FSConst = /*#__PURE__*/function (_Node) {
   }]);
 
   return FSConst;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(FSConst, "instance", function () {
   return new FSConst();
@@ -28946,20 +28938,20 @@ _defineProperty(FSConst, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/wait.js":
-/*!***********************************!*\
-  !*** ../cnodes/src/nodes/wait.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/wait.mjs":
+/*!************************************!*\
+  !*** ../cnodes/src/nodes/wait.mjs ***!
+  \************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Wait": () => /* binding */ Wait
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -28998,7 +28990,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -29024,10 +29016,10 @@ var Wait = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, Wait);
 
     _this = _super.call(this, "Wait");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Secs", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER)];
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Secs", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER)];
     _this.outputs = [];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -29087,7 +29079,7 @@ var Wait = /*#__PURE__*/function (_Node) {
   }]);
 
   return Wait;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(Wait, "instance", function () {
   return new Wait();
@@ -29095,20 +29087,20 @@ _defineProperty(Wait, "instance", function () {
 
 /***/ }),
 
-/***/ "../cnodes/src/nodes/while.js":
-/*!************************************!*\
-  !*** ../cnodes/src/nodes/while.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "../cnodes/src/nodes/while.mjs":
+/*!*************************************!*\
+  !*** ../cnodes/src/nodes/while.mjs ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "While": () => /* binding */ While
 /* harmony export */ });
-/* harmony import */ var _core_node_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.js */ "../cnodes/src/core/node.js");
-/* harmony import */ var _core_socket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.js */ "../cnodes/src/core/socket.js");
-/* harmony import */ var _core_type_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.js */ "../cnodes/src/core/type.js");
+/* harmony import */ var _core_node_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/node.mjs */ "../cnodes/src/core/node.mjs");
+/* harmony import */ var _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/socket.mjs */ "../cnodes/src/core/socket.mjs");
+/* harmony import */ var _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/type.mjs */ "../cnodes/src/core/type.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -29147,7 +29139,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * A representation-agnostic library to define and execute nodes based processes
  * License: MIT
  * Author: Marco Jacovone
- * Year: 2020
+ * Year: 2020-2021
  */
 
 
@@ -29174,10 +29166,10 @@ var While = /*#__PURE__*/function (_Node) {
     _classCallCheck(this, While);
 
     _this = _super.call(this, "While");
-    _this.inputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
-    _this.outputs = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_js__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
-    _this.nexts = [new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
-    _this.prev = new _core_socket_js__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
+    _this.inputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Index", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.InputSocket("Condition", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.BOOLEAN, false)];
+    _this.outputs = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.OutputSocket("Index", _assertThisInitialized(_this), _core_type_mjs__WEBPACK_IMPORTED_MODULE_2__.Types.NUMBER, 0)];
+    _this.nexts = [new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Out", _assertThisInitialized(_this)), new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.NextSocket("Do", _assertThisInitialized(_this))];
+    _this.prev = new _core_socket_mjs__WEBPACK_IMPORTED_MODULE_1__.PrevSocket("In", _assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -29266,7 +29258,7 @@ var While = /*#__PURE__*/function (_Node) {
   }]);
 
   return While;
-}(_core_node_js__WEBPACK_IMPORTED_MODULE_0__.Node);
+}(_core_node_mjs__WEBPACK_IMPORTED_MODULE_0__.Node);
 
 _defineProperty(While, "instance", function () {
   return new While();
@@ -29303,18 +29295,6 @@ _defineProperty(While, "instance", function () {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -29357,7 +29337,7 @@ _defineProperty(While, "instance", function () {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	__webpack_require__("./node_modules/@babel/polyfill/lib/index.js");
-/******/ 	return __webpack_require__("./src/index.js");
+/******/ 	return __webpack_require__("./src/index.mjs");
 /******/ })()
 ;
 //# sourceMappingURL=cnodesui.bundle.js.map

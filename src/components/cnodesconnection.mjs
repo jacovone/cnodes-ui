@@ -7,8 +7,8 @@
  * Year: 2020/2021
  */
 
-import { Types } from "@marco.jacovone/cnodes/src/core/type";
-import { Connection } from "../canvas/connection";
+import { Types } from "@marco.jacovone/cnodes/src/core/type.mjs";
+import { Connection } from "../canvas/connection.mjs";
 
 /**
  * This class implements a connection for the cnodes system

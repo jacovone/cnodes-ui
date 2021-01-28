@@ -7,16 +7,16 @@
  * Year: 2020/2021
  */
 
-import { PrevSocket } from "@marco.jacovone/cnodes/index";
-import { Env } from "@marco.jacovone/cnodes/index";
-import { Theme } from "./theme";
-import { Position } from "../canvas/position";
-import { PrevNextConnection } from "../connections/prevnextconnection";
-import { CnodesSocketComponent } from "./cnodessocket";
-import { SocketComponent } from "../canvas/socket";
-import { MenuItem } from "../canvas/menu";
-import { CnodeComponent } from "./cnode";
-import { CnodesCanvas } from "./cnodescanvas";
+import { PrevSocket } from "@marco.jacovone/cnodes/index.mjs";
+import { Env } from "@marco.jacovone/cnodes/index.mjs";
+import { Theme } from "./theme.mjs";
+import { Position } from "../canvas/position.mjs";
+import { PrevNextConnection } from "../connections/prevnextconnection.mjs";
+import { CnodesSocketComponent } from "./cnodessocket.mjs";
+import { SocketComponent } from "../canvas/socket.mjs";
+import { MenuItem } from "../canvas/menu.mjs";
+import { CnodeComponent } from "./cnode.mjs";
+import { CnodesCanvas } from "./cnodescanvas.mjs";
 
 /**
  * This class implements a socket representing the Next socket in the

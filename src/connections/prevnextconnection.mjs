@@ -7,9 +7,9 @@
  * Year: 2020/2021
  */
 
-import { Position } from "../canvas/position";
-import { CnodesConnection } from "../components/cnodesconnection";
-import { Theme } from "../components/theme";
+import { Position } from "../canvas/position.mjs";
+import { CnodesConnection } from "../components/cnodesconnection.mjs";
+import { Theme } from "../components/theme.mjs";
 
 /**
  * This class implements a connection for Input->Output connection

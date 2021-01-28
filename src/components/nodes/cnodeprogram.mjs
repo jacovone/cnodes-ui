@@ -7,9 +7,9 @@
  * Year: 2020/2021
  */
 
-import { Theme } from "../..";
-import { MenuItem } from "../../canvas/menu";
-import { CnodeComponent } from "../cnode";
+import { Theme } from "../../index.mjs";
+import { MenuItem } from "../../canvas/menu.mjs";
+import { CnodeComponent } from "../cnode.mjs";
 
 export class CnodeProgramComponent extends CnodeComponent {
   // Factory function

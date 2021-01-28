@@ -7,15 +7,15 @@
  * Year: 2020/2021
  */
 
-import { Component } from "../canvas/component";
-import { Position } from "../canvas/position";
-import { PrevSocketComponent } from "./prev";
-import { NextSocketComponent } from "./next";
-import { Theme } from "./theme";
-import { OutputSocketComponent } from "./output";
-import { InputSocketComponent } from "./input";
-import { MenuItem } from "../canvas/menu";
-import { CnodesEditableTextComponent } from "./cnodeseditabletext";
+import { Component } from "../canvas/component.mjs";
+import { Position } from "../canvas/position.mjs";
+import { PrevSocketComponent } from "./prev.mjs";
+import { NextSocketComponent } from "./next.mjs";
+import { Theme } from "./theme.mjs";
+import { OutputSocketComponent } from "./output.mjs";
+import { InputSocketComponent } from "./input.mjs";
+import { MenuItem } from "../canvas/menu.mjs";
+import { CnodesEditableTextComponent } from "./cnodeseditabletext.mjs";
 
 /**
  * This is the main class for managing a single CNode

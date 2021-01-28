@@ -7,15 +7,15 @@
  * Year: 2020/2021
  */
 
-import { Theme } from "./theme";
-import { Env } from "@marco.jacovone/cnodes/index";
-import { IOConnection } from "../connections/ioconnection";
-import { CnodesSocketComponent } from "./cnodessocket";
-import { MenuItem } from "../canvas/menu";
-import { Position } from "../canvas/position";
-import { InputSocketComponent } from "./input";
-import { CnodesCanvas } from "./cnodescanvas";
-import { Types } from "@marco.jacovone/cnodes/src/core/type";
+import { Theme } from "./theme.mjs";
+import { Env } from "@marco.jacovone/cnodes/index.mjs";
+import { IOConnection } from "../connections/ioconnection.mjs";
+import { CnodesSocketComponent } from "./cnodessocket.mjs";
+import { MenuItem } from "../canvas/menu.mjs";
+import { Position } from "../canvas/position.mjs";
+import { InputSocketComponent } from "./input.mjs";
+import { CnodesCanvas } from "./cnodescanvas.mjs";
+import { Types } from "@marco.jacovone/cnodes/src/core/type.mjs";
 
 /**
  * This class implements a socket representing a Output in the

@@ -7,13 +7,13 @@
  * Year: 2020/2021
  */
 
-import { Socket } from "@marco.jacovone/cnodes/src/core/socket";
-import { Theme } from "../components/theme";
-import { Component } from "./component";
-import { Connection } from "./connection";
-import { Menu, MenuItem } from "./menu";
-import { Position } from "./position";
-import { SocketComponent } from "./socket";
+import { Socket } from "@marco.jacovone/cnodes/src/core/socket.mjs";
+import { Theme } from "../components/theme.mjs";
+import { Component } from "./component.mjs";
+import { Connection } from "./connection.mjs";
+import { Menu, MenuItem } from "./menu.mjs";
+import { Position } from "./position.mjs";
+import { SocketComponent } from "./socket.mjs";
 
 /**
  * This is the main Canvas class. This class implement a general purpose canvas

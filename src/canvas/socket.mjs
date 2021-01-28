@@ -7,8 +7,8 @@
  * Year: 2020/2021
  */
 
-import { Component } from "./component";
-import { Position } from "./position";
+import { Component } from "./component.mjs";
+import { Position } from "./position.mjs";
 
 /**
  * A Socket is a special case of component. Tipically, to design

@@ -8,17 +8,17 @@
  */
 
 import { EventEmitter } from "events";
-import { Env } from "@marco.jacovone/cnodes/index";
-import { Program } from "@marco.jacovone/cnodes/index";
-import { Node } from "@marco.jacovone/cnodes/src/core/node";
-import { Canvas } from "../canvas/canvas";
-import { MenuItem } from "../canvas/menu";
-import { Position } from "../canvas/position";
-import { IOConnection } from "../connections/ioconnection";
-import { PrevNextConnection } from "../connections/prevnextconnection";
-import { CnodeComponent } from "./cnode";
-import { CnodesMenu } from "./cnodesmenu";
-import { Theme } from "./theme";
+import { Env } from "@marco.jacovone/cnodes/index.mjs";
+import { Program } from "@marco.jacovone/cnodes/index.mjs";
+import { Node } from "@marco.jacovone/cnodes/src/core/node.mjs";
+import { Canvas } from "../canvas/canvas.mjs";
+import { MenuItem } from "../canvas/menu.mjs";
+import { Position } from "../canvas/position.mjs";
+import { IOConnection } from "../connections/ioconnection.mjs";
+import { PrevNextConnection } from "../connections/prevnextconnection.mjs";
+import { CnodeComponent } from "./cnode.mjs";
+import { CnodesMenu } from "./cnodesmenu.mjs";
+import { Theme } from "./theme.mjs";
 
 /**
  * This is the entry-point class for managing the canvas

@@ -7,9 +7,9 @@
  * Year: 2020/2021
  */
 
-import { Menu } from "../canvas/menu";
-import { CnodesCanvas } from "./cnodescanvas";
-import { Theme } from "./theme";
+import { Menu } from "../canvas/menu.mjs";
+import { CnodesCanvas } from "./cnodescanvas.mjs";
+import { Theme } from "./theme.mjs";
 
 /**
  * This class implements a context menu for cnodes canvas

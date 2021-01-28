@@ -7,9 +7,9 @@
  * Year: 2020/2021
  */
 
-import { Component } from "../canvas/component";
-import { MenuItem } from "../canvas/menu";
-import { Theme } from "./theme";
+import { Component } from "../canvas/component.mjs";
+import { MenuItem } from "../canvas/menu.mjs";
+import { Theme } from "./theme.mjs";
 
 /**
  * This is component to draw a simple SVG Text that let the user

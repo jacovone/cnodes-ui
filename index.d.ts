@@ -376,7 +376,7 @@ declare module cnui {
      * @param {string} text The text to show
      */
     constructor(text: string);
-    get textEl(): any;
+    get textEl(): HTMLElement;
     set text(arg: string);
     get text(): string;
     set color(arg: string);
@@ -672,7 +672,7 @@ declare module cnui {
      * This method takes also the opportunity to register itself to
      * source and target events, and react accordingly
      */
-    constructor(source: any, target: any);
+    constructor(source: SocketComponent, target: SocketComponent);
     /**
      * Events connected to the component:
      */
@@ -751,7 +751,7 @@ declare module cnui {
      * Returns the array of context menu items. If the component
      * returns null, no contextual menu is shown
      */
-    getContextMenuItems(): any;
+    getContextMenuItems(): MenuItem[];
     /**
      * This method must be overridden in a child concrete class.
      * The setup() mthod calls this one during the creation process
@@ -831,18 +831,21 @@ declare module cnui {
     /**
      * Return the internal SVG element
      */
-    get svgEl(): any;
+    get svgEl(): HTMLElement;
     /**
      * Return the internal SVG connections element
      */
-    get connectionsEl(): any;
+    get connectionsEl(): HTMLElement;
     /**
      * This method is responsible for translate client (browser) coordinates
      * to SVG space coordinates
      * @param {number} clientX The client x coordinate
      * @param {number} clientY The client y coordinate
      */
-    clientToSvgPoint(clientX: number, clientY: number): any;
+    clientToSvgPoint(
+      clientX: number,
+      clientY: number
+    ): { x: number; y: number };
     /**
      * This method extract all common menu items from an
      * array of components. Menu items are considered the same
@@ -862,7 +865,11 @@ declare module cnui {
      * @param {number} y Te y coordinate in the canvas
      * @param {boolean} onlySockets If true, this method search only for socket components
      */
-    componentFromPosition(x: number, y: number, onlySockets?: boolean): any;
+    componentFromPosition(
+      x: number,
+      y: number,
+      onlySockets?: boolean
+    ): Component;
     /**
      * Add a new connection to the canvas, also add the related element to
      * the main SVG group of connections
@@ -903,7 +910,7 @@ declare module cnui {
      * the source or the target SocketComponent as endpoint
      * @param {SocketComponent} socket The socket component for which search the connection
      */
-    getConnectionsFor(socket: SocketComponent): any[];
+    getConnectionsFor(socket: SocketComponent): Connection[];
     /**
      * Destroy all connections from the canvas
      */
@@ -919,7 +926,7 @@ declare module cnui {
     /**
      * Return a list of MenuItem for the context menu
      */
-    getCanvasContextMenuItems(): any;
+    getCanvasContextMenuItems(): MenuItem[];
     /**
      * Shows the context menu retated to the component or the canvas
      * @param {MenuItem[]} items Items that compose the menu
@@ -1194,17 +1201,17 @@ declare module cnui {
      * Returns the input by name
      * @param {string} name Name of the input
      */
-    input(name: string): any;
+    input(name: string): InputSocket;
     /**
      * Returns the output by name
      * @param {string} name The name of the output
      */
-    output(name: string): any;
+    output(name: string): OutputSocket;
     /**
      * Returns the next by name
      * @param {string} name The name of the next
      */
-    next(name: string): any;
+    next(name: string): NextSocket;
     /**
      * Evaluate all imputs of this node. Inputs are sockets.
      * If the socket is connected the evaluation will search
@@ -1340,7 +1347,7 @@ declare module cnui {
      * outside this set will be not reconstructed.
      * @param {Node[]} nodes Nodes (and) connections to clone
      */
-    static cloneNodes(nodes: Node[]): any[];
+    static cloneNodes(nodes: Node[]): Node[];
     /** The event emitter connected to the program */
     events: import("events").EventEmitter;
     set vars(arg: Map<string, any>);
@@ -1807,7 +1814,11 @@ declare module cnui {
      * @param {any} obj The object structure to consider whiel create nodes
      * @param {RegisterObjectOpts} opts The options on create nodes
      */
-    static registerObject(name: any, obj: any, opts?: RegisterObjectOpts): void;
+    static registerObject(
+      name: string,
+      obj: any,
+      opts?: RegisterObjectOpts
+    ): void;
     /**
      * Creates and returns a JSON representation of the entire program
      * @param {Program} program The program to export

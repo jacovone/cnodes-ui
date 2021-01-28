@@ -7,7 +7,7 @@
  * Year: 2020/2021
  */
 
-import { Position } from "./position";
+import { Position } from "./position.mjs";
 import { EventEmitter } from "events";
 
 /**

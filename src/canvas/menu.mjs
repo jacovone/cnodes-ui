@@ -7,9 +7,9 @@
  * Year: 2020/2021
  */
 
-import { Canvas } from "./canvas";
-import { Component } from "./component";
-import { Position } from "./position";
+import { Canvas } from "./canvas.mjs";
+import { Component } from "./component.mjs";
+import { Position } from "./position.mjs";
 
 /**
  * This class represents a single Menu item.

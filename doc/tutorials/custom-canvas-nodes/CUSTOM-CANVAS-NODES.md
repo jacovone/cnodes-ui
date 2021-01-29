@@ -223,18 +223,6 @@ we're almost done, lets create the index.html file in the _dist_ folder, as foll
         background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
         background-position: -8px -8px, -8px -8px, -4px -4px, -4px -4px;
       }
-
-      .action {
-        border: none;
-        border-radius: 5px;
-        padding: 4px;
-        margin-left: 10px;
-        margin-top: 3px;
-        font-weight: bold;
-        font-size: 12px;
-        font: sans-serif;
-        background-color: rgb(247, 247, 247);
-      }
     </style>
   </head>
   <body

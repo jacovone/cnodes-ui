@@ -68,14 +68,6 @@ if all goes right, you shoud see packages in the _devDependencies_ of _package.j
 }
 ```
 
-Remove the line
-
-```js
-"type": "module"
-```
-
-from _package.json_ file. This is very important in order to _webpack_ to successfully build the bundle.
-
 Now we configure WEBPACK with a custom configuration file: _webpack.config.js_. Create it in the project root as follows:
 
 ```js
@@ -84,7 +76,7 @@ const path = require("path");
 module.exports = {
   devtool: "source-map",
   mode: "development",
-  entry: ["@babel/polyfill", "./index.js"],
+  entry: ["@babel/polyfill", "./index.mjs"],
   output: {
     library: "customnode",
     filename: "customnode.bundle.js",
@@ -128,12 +120,14 @@ Now edit _package.json_ by adding a script for _WEBPACK_ build.
 
 Now it's time to create a graph node class, a subclass of _CnodeComponent_ that will support our _CustomNode_ class.
 
-Create a new javsscript file named _customnodecomponent.js_ in the project root as follows:
+Create a new javsscript file named `customnodecomponent.mjs` in the project root as follows:
 
 ```js
-import { Theme } from "@marco.jacovone/cnodes-ui/src/index";
-import { MenuItem } from "@marco.jacovone/cnodes-ui/src/index";
-import { CnodeComponent } from "@marco.jacovone/cnodes-ui/src/index";
+import {
+  Theme,
+  MenuItem,
+  CnodeComponent,
+} from "@marco.jacovone/cnodes-ui/src/index.mjs";
 
 export class CustomNodeComponent extends CnodeComponent {
   // Factory function
@@ -171,9 +165,9 @@ The _index.js_ file have to be adjusted to include all components needed by our 
 Adjust index.js as follows:
 
 ```js
-export * from "@marco.jacovone/cnodes-ui/src/index";
-export * from "./customnode.js";
-export * from "./customnodecomponent.js";
+export * from "@marco.jacovone/cnodes-ui/src/index.mjs";
+export * from "./customnode.mjs";
+export * from "./customnodecomponent.mjs";
 ```
 
 Now we should be able to build the bundle. Lets try.
@@ -337,4 +331,4 @@ Last, try to press the right mouse button on the custom node, to see the custom 
 
 That's all. We've created a new _cnodes_ node. We've created a new graph class to manage it, and we've intergrated all together.
 
-You can download the sample project [here](./downloads/custom-node.zip).
+You can download the sample project [here](./downloads/custom-canvas-node.zip).

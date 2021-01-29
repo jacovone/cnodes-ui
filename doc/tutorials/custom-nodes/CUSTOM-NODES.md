@@ -27,10 +27,10 @@ Lets create the custom node. A node has two main parts:
 ## Initialization
 
 In this phase we have to create inputs, outputs, with relative types, as well as prev and nexts, needed by the node logic. For our example, we will create a very simple node that compute the upper case of a string.
-Let create a base node structure in a new _customnode.js_ script:
+Let create a base node structure in a new _customnode.mjs_ script:
 
 ```js
-// customnode.js
+// customnode.mjs
 import {
   InputSocket,
   NextSocket,
@@ -38,7 +38,7 @@ import {
   OutputSocket,
   PrevSocket,
   Types,
-} from "@marco.jacovone/cnodes/index.js";
+} from "@marco.jacovone/cnodes/index.mjs";
 
 export class CustomNode extends Node {
   static instance = () => new CustomNode();
@@ -81,9 +81,9 @@ Now it's time to test our node, by creating a sample program.
 Create a _index.js_ file in the project directory as follows.
 
 ```js
-// Index.js
-import { Console, Env, Program } from "@marco.jacovone/cnodes";
-import { CustomNode } from "./customnode.js";
+// index.mjs
+import { Console, Env, Program } from "@marco.jacovone/cnodes/index.mjs";
+import { CustomNode } from "./customnode.mjs";
 
 // Register the node in the cnodes registry
 Env.registerNode("My Custom Node", "Custom nodes", CustomNode.instance);
@@ -128,7 +128,7 @@ custom.input("Val").value = "test string";
 To run the program, simply type
 
 ```bash
-node index.js
+node index.mjs
 ```
 
 The output will be:
@@ -138,6 +138,8 @@ TEST STRING
 ```
 
 as expected.
+
+You can download the sample project [here](./downloads/custom-node.zip).
 
 The next step will integrate our node with the _cnodes-ui_ beautiful canvas, by creating a new Graph node to support our custom node within the graphical canvas.
 

@@ -7,15 +7,15 @@
  * Year: 2020/2021
  */
 
+import { Env } from "@marco.jacovone/cnodes";
+import { Types } from "@marco.jacovone/cnodes";
 import { Theme } from "./theme.mjs";
-import { Env } from "@marco.jacovone/cnodes/index.mjs";
 import { IOConnection } from "../connections/ioconnection.mjs";
 import { CnodesSocketComponent } from "./cnodessocket.mjs";
 import { SocketComponent } from "../canvas/socket.mjs";
 import { MenuItem } from "../canvas/menu.mjs";
 import { Position } from "../canvas/position.mjs";
 import { OutputSocketComponent } from "./output.mjs";
-import { Types } from "@marco.jacovone/cnodes/src/core/type.mjs";
 import { CnodesCanvas } from "./cnodescanvas.mjs";
 
 /**

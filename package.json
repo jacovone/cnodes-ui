@@ -12,6 +12,7 @@
     "url": "git+ssh://git@github.com/marco-jacovone/cnodes-ui.git"
   },
   "types": "index.d.ts",
+  "main": "dist/cnodesui.bundle.js",
   "keywords": [],
   "author": "Marco Jacovone",
   "license": "MIT",
@@ -21,6 +22,7 @@
     "@babel/plugin-proposal-private-methods": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
+    "@marco.jacovone/cnodes": "^0.18.4",
     "babel-loader": "^8.2.2",
     "events": "^3.2.0",
     "jdoc": "^0.2.0",
@@ -28,7 +30,5 @@
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
   },
-  "dependencies": {
-    "@marco.jacovone/cnodes": "^0.17.2"
-  }
+  "dependencies": {}
 }

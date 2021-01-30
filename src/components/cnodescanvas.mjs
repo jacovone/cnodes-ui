@@ -8,8 +8,8 @@
  */
 
 import { EventEmitter } from "events";
-import { Env } from "@marco.jacovone/cnodes/index.mjs";
-import { Program } from "@marco.jacovone/cnodes/index.mjs";
+import { Env } from "@marco.jacovone/cnodes";
+import { Program } from "@marco.jacovone/cnodes";
 import { Node } from "@marco.jacovone/cnodes/src/core/node.mjs";
 import { Canvas } from "../canvas/canvas.mjs";
 import { MenuItem } from "../canvas/menu.mjs";

@@ -57,8 +57,8 @@ export {
   PrevNextConnection,
 };
 
-import { Program, FOBreak, Env } from "@marco.jacovone/cnodes/index.mjs";
-export * from "@marco.jacovone/cnodes/index.mjs";
+import { Program, FOBreak, Env } from "@marco.jacovone/cnodes";
+export * from "@marco.jacovone/cnodes";
 
 /**
  * This is the main entrypoint function. You can pass an ID of a

@@ -7,8 +7,8 @@
  * Year: 2020/2021
  */
 
-import { Socket } from "@marco.jacovone/cnodes/index.mjs";
-import { Types } from "@marco.jacovone/cnodes/src/core/type.mjs";
+import { Socket } from "@marco.jacovone/cnodes";
+import { Types } from "@marco.jacovone/cnodes";
 import { Position } from "../canvas/position.mjs";
 import { SocketComponent } from "../canvas/socket.mjs";
 import { Theme } from "./theme.mjs";

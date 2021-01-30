@@ -7,8 +7,8 @@
  * Year: 2020/2021
  */
 
-import { NextSocket } from "@marco.jacovone/cnodes/index.mjs";
-import { Env } from "@marco.jacovone/cnodes/index.mjs";
+import { NextSocket } from "@marco.jacovone/cnodes";
+import { Env } from "@marco.jacovone/cnodes";
 import { Theme } from "./theme.mjs";
 import { PrevNextConnection } from "../connections/prevnextconnection.mjs";
 import { CnodesSocketComponent } from "./cnodessocket.mjs";

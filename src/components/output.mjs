@@ -7,15 +7,14 @@
  * Year: 2020/2021
  */
 
+import { Env, Types } from "@marco.jacovone/cnodes";
 import { Theme } from "./theme.mjs";
-import { Env } from "@marco.jacovone/cnodes/index.mjs";
 import { IOConnection } from "../connections/ioconnection.mjs";
 import { CnodesSocketComponent } from "./cnodessocket.mjs";
 import { MenuItem } from "../canvas/menu.mjs";
 import { Position } from "../canvas/position.mjs";
 import { InputSocketComponent } from "./input.mjs";
 import { CnodesCanvas } from "./cnodescanvas.mjs";
-import { Types } from "@marco.jacovone/cnodes/src/core/type.mjs";
 
 /**
  * This class implements a socket representing a Output in the

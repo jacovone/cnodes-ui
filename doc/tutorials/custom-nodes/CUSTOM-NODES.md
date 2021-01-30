@@ -38,7 +38,7 @@ import {
   OutputSocket,
   PrevSocket,
   Types,
-} from "@marco.jacovone/cnodes/index.mjs";
+} from "@marco.jacovone/cnodes";
 
 export class CustomNode extends Node {
   static instance = () => new CustomNode();
@@ -82,7 +82,7 @@ Create a _index.js_ file in the project directory as follows.
 
 ```js
 // index.mjs
-import { Console, Env, Program } from "@marco.jacovone/cnodes/index.mjs";
+import { Console, Env, Program } from "@marco.jacovone/cnodes";
 import { CustomNode } from "./customnode.mjs";
 
 // Register the node in the cnodes registry

@@ -24174,6 +24174,7 @@ var _onWheel2 = function _onWheel2(e) {
   _classPrivateMethodGet(this, _updateSVGViewBox, _updateSVGViewBox2).call(this);
 
   e.stopPropagation();
+  e.preventDefault();
 };
 
 var _onPointerDown2 = function _onPointerDown2(e) {

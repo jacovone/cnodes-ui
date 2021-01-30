@@ -260,6 +260,7 @@ export class Canvas {
 
     this.#updateSVGViewBox();
     e.stopPropagation();
+    e.preventDefault();
   }
 
   /**

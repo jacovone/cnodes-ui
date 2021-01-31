@@ -29287,6 +29287,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../index.mjs */ "./src/index.mjs");
 /* harmony import */ var _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../canvas/menu.mjs */ "./src/canvas/menu.mjs");
 /* harmony import */ var _cnode_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cnode.mjs */ "./src/components/cnode.mjs");
+/* harmony import */ var _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @marco.jacovone/cnodes */ "./node_modules/@marco.jacovone/cnodes/lib/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -29345,6 +29346,7 @@ function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = p
 
 
 
+
 var _originalOutputs = new WeakMap();
 
 var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
@@ -29363,14 +29365,14 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
 
     _classCallCheck(this, CnodeBreakComponent);
 
-    _this = _super.call(this, node, canvas); // Save original outputs
+    _this = _super.call(this, node, canvas); // Save original outputs, by re-instancying the node from the registry
 
     _originalOutputs.set(_assertThisInitialized(_this), {
       writable: true,
       value: null
     });
 
-    _classPrivateFieldSet(_assertThisInitialized(_this), _originalOutputs, _toConsumableArray(node.outputs));
+    _classPrivateFieldSet(_assertThisInitialized(_this), _originalOutputs, _toConsumableArray(_marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_3__.Env.getInstance(node.name).outputs));
 
     return _this;
   }

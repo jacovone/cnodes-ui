@@ -10,6 +10,7 @@
 import { Theme } from "../../index.mjs";
 import { MenuItem } from "../../canvas/menu.mjs";
 import { CnodeComponent } from "../cnode.mjs";
+import { Env } from "@marco.jacovone/cnodes";
 
 export class CnodeBreakComponent extends CnodeComponent {
   // Factory function
@@ -24,8 +25,8 @@ export class CnodeBreakComponent extends CnodeComponent {
   constructor(node, canvas) {
     super(node, canvas);
 
-    // Save original outputs
-    this.#originalOutputs = [...node.outputs];
+    // Save original outputs, by re-instancying the node from the registry
+    this.#originalOutputs = [...Env.getInstance(node.name).outputs];
   }
 
   /**

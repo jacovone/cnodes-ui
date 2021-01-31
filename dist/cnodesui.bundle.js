@@ -527,6 +527,7 @@ var Env = /*#__PURE__*/function () {
        */
       var createMake = function createMake() {
         var makeNode = new _fomake.FOMake();
+        makeNode.name = name;
         makeNode.title = name;
         makeNode.inputs = [];
 
@@ -613,6 +614,7 @@ var Env = /*#__PURE__*/function () {
        */
       var createBreak = function createBreak() {
         var breakNode = new _fobreak.FOBreak();
+        breakNode.name = name;
         breakNode.title = name;
         breakNode.outputs = [];
 

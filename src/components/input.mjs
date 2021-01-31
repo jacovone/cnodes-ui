@@ -340,7 +340,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
                   <tspan alignment-baseline="middle" style="${
                     Theme.current.MENU_ITEM_STYLE
                   }" fill="${Theme.current.MENU_ITEM_COLOR}">
-                    ${nodeDef.name}.
+                    ${nodeDef.description}.
                   </tspan>
                   <tspan alignment-baseline="middle" fill="${CnodesSocketComponent.getColorForType(
                     out.type

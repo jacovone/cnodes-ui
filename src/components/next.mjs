@@ -172,7 +172,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
             new MenuItem(
               `
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
-              ${nodeDef.name}.
+              ${nodeDef.description}.
               </tspan>
               <tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}" style="${Theme.current.MENU_ITEM_STYLE}">
                 ${n.prev.name}

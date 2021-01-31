@@ -434,15 +434,18 @@ var Env = /*#__PURE__*/function () {
     }
     /**
      * Register a node type
-     * @param {string} name The name of the node
+     * @param {string} description The name of the node
      * @param {string} category The category of the node
      * @param {any} factory A function that instantiate the node
      */
 
   }, {
     key: "registerNode",
-    value: function registerNode(name, category, factory) {
-      _classStaticPrivateFieldSpecGet(Env, Env, _nodeRegistry).set(name, {
+    value: function registerNode(description, category, factory) {
+      var inst = factory();
+
+      _classStaticPrivateFieldSpecGet(Env, Env, _nodeRegistry).set(inst.name, {
+        description: description,
         category: category,
         factory: factory
       });
@@ -475,6 +478,7 @@ var Env = /*#__PURE__*/function () {
           registrations.push({
             name: entry[0],
             category: entry[1].category,
+            descrption: entry[1].description,
             factory: entry[1].factory
           });
         }
@@ -26761,10 +26765,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
               var n = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.getInstance(nodeDef.name);
 
               if (n.creatable) {
-                items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.name, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
+                items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.description, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this3);
                   node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
-                }, n.title + n.name));
+                }, n.title + n.name + nodeDef.description));
               }
             };
 

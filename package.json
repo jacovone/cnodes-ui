@@ -22,7 +22,7 @@
     "@babel/plugin-proposal-private-methods": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
-    "@marco.jacovone/cnodes": "^0.18.4",
+    "@marco.jacovone/cnodes": "^0.18.5",
     "babel-loader": "^8.2.2",
     "events": "^3.2.0",
     "jdoc": "^0.2.0",

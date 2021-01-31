@@ -314,7 +314,7 @@ export class CnodesCanvas extends Canvas {
                 New
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
-                ${nodeDef.name}
+                ${nodeDef.description}
               </tspan>
               <tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_STYLE}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
                 (${nodeDef.category})
@@ -324,7 +324,7 @@ export class CnodesCanvas extends Canvas {
                 let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
               },
-              n.title + n.name
+              n.title + n.name + nodeDef.description
             )
           );
         }

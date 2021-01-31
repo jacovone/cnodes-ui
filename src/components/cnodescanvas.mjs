@@ -324,7 +324,7 @@ export class CnodesCanvas extends Canvas {
                 let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
               },
-              n.title
+              n.title + n.name
             )
           );
         }

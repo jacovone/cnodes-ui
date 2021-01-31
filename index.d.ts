@@ -996,8 +996,8 @@ declare module cnui {
     constructor(name: string, node: Node, type?: string, value?: any);
     set type(arg: string);
     get type(): string;
-    set value(arg: number);
-    get value(): number;
+    set value(arg: any);
+    get value(): any;
     set canEditName(arg: boolean);
     get canEditName(): boolean;
     set canEditType(arg: boolean);

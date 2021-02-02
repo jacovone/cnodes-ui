@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/prev.mjs</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/prev.mjs</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020/2021
+ */
+
+import { NextSocket } from "@marco.jacovone/cnodes";
+import { Env } from "@marco.jacovone/cnodes";
+import { Theme } from "./theme.mjs";
+import { PrevNextConnection } from "../connections/prevnextconnection.mjs";
+import { CnodesSocketComponent } from "./cnodessocket.mjs";
+import { MenuItem } from "../canvas/menu.mjs";
+import { Position } from "../canvas/position.mjs";
+import { CnodesCanvas } from "./cnodescanvas.mjs";
+
+/**
+ * This class implements a socket that represents a Prev object
+ * in the cnodes world
+ */
+export class PrevSocketComponent extends CnodesSocketComponent {
+  /** The socket symbol element */
+  #socketSymbol = null;
+
+  constructor(socket) {
+    super(socket);
+  }
+
+  /**
+   * Customize the drag element
+   */
+  get dragElement() {
+    return this.#socketSymbol;
+  }
+
+  /**
+   * Lets create the element
+   */
+  createElement() {
+    this.#socketSymbol = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+
+    this.#socketSymbol.setAttribute(
+      "d",
+      `
+      M ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current
+        .NODE_PREV_NEXT_POINT_RADIUS}
+      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${-Theme.current
+        .NODE_PREV_NEXT_POINT_RADIUS}
+      L ${Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${
+        Theme.current.NODE_PREV_NEXT_POINT_RADIUS
+      }
+      L ${-Theme.current.NODE_PREV_NEXT_POINT_RADIUS} ${
+        Theme.current.NODE_PREV_NEXT_POINT_RADIUS
+      }
+      Z
+      `
+    );
+    this.#socketSymbol.setAttribute(
+      "stroke",
+      Theme.current.NODE_PREV_NEXT_STROKE_COLOR
+    );
+    this.#socketSymbol.setAttribute(
+      "stroke-width",
+      Theme.current.NODE_PREV_NEXT_STROKE_WIDTH
+    );
+    this.#socketSymbol.setAttribute(
+      "fill",
+      Theme.current.NODE_PREV_NEXT_FILL_COLOR
+    );
+
+    let labelElem = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "foreignObject"
+    );
+    labelElem.style = `
+      font: ${Theme.current.NODE_PREV_NEXT_NAME_FONT}; 
+      color: ${Theme.current.NODE_PREV_NEXT_NAME_COLOR}; 
+      text-align: left;
+      width: ${Theme.current.NODE_WIDTH / 2 - 15}px;
+      height: 30px;
+      line-height: 30px;
+      user-select: none;
+      `;
+
+    labelElem.innerHTML = `${this.socket.name}`;
+
+    labelElem.setAttribute("x", 0);
+    labelElem.setAttribute("y", 0);
+    labelElem.setAttribute("transform", `translate(${15}, ${-15})`);
+    labelElem.setAttribute("width", Theme.current.NODE_WIDTH / 2 - 15);
+    labelElem.setAttribute("height", 30);
+
+    let prevElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    prevElem.setAttribute("x", 0);
+    prevElem.setAttribute("y", 0);
+    prevElem.appendChild(this.#socketSymbol);
+    prevElem.appendChild(labelElem);
+
+    return prevElem;
+  }
+
+  /**
+   * The user has completed a valid connection
+   * @param {SocketComponent} socketComp Peer socket to connect
+   */
+  connectionDone(socketComp) {
+    super.connectionDone(socketComp);
+
+    // if there is another connection for the target component,
+    // delete the oldest one
+    if (socketComp.isConnected) {
+      this.canvas.getConnectionsFor(socketComp)[0].destroy();
+    }
+
+    // This creates the connection and connects sockets
+    new PrevNextConnection(socketComp, this, this.canvas).setup();
+  }
+
+  /**
+   * Quesry if this socket could accept a connection with
+   * a peer socket passed as parmeter
+   * @param {SocketComponent} socketComp Peer socket to connect
+   */
+  canAcceptPeerSocket(socketComp) {
+    return socketComp.socket instanceof NextSocket;
+  }
+
+  /**
+   * Returns the direction of the source point for this socket component:
+   * -1 = Left
+   * 1 = Right
+   */
+  getSourcePointDirection() {
+    return -1;
+  }
+
+  /**
+   * This socket is a multi-connection socket. This means that
+   * many sockets can be connected to it
+   */
+  get hasSingleConnection() {
+    return false;
+  }
+
+  /**
+   * This method is responsible to enumerate all socket of registered nodes
+   * that can enstabilish a valid connection with this socket and construct
+   * a menu items array thst define callback to create the related node and
+   * return the particular socket. It is used by the smart connection process
+   * via the context menu
+   */
+  getRegisteredPossiblePeers() {
+    let items = [];
+    for (let cat of Env.getCategories()) {
+      for (let nodeDef of Env.getCategoryNodes(cat)) {
+        // Instantiate the node to enumerate its sockets
+        let n = Env.getInstance(nodeDef.name);
+        if (n.creatable) {
+          for (let next of n.nexts) {
+            items.push(
+              new MenuItem(
+                `
+                &lt;tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_STYLE}" fill="${Theme.current.MENU_ITEM_COLOR}">
+                  ${nodeDef.description}.
+                &lt;/tspan>
+                &lt;tspan alignment-baseline="middle" fill="${Theme.current.NODE_PREV_NEXT_FILL_COLOR}" style="${Theme.current.MENU_ITEM_STYLE}">
+                  ${next.name}
+                &lt;/tspan>
+                &lt;tspan alignment-baseline="middle" style="${Theme.current.MENU_ITEM_CATEGORY_STYLE}" fill="${Theme.current.MENU_ITEM_CATEGORY_COLOR}">
+                  (${nodeDef.category})
+                &lt;/tspan>
+                `,
+                (x, y) => {
+                  // create the node and return the specific socket component to
+                  // the context menu client
+                  let node = CnodesCanvas.getNodeUIInstance(n, this.canvas);
+                  node.pos = new Position(x, y);
+                  // Return the connected component instead
+                  return next.__comp;
+                },
+                `${nodeDef.name}.${next.name} ${nodeDef.category}`
+              )
+            );
+          }
+        }
+      }
+    }
+    return items;
+  }
+
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
+  getContextMenuItems() {
+    let items = [];
+
+    let conns = this.canvas.getConnectionsFor(this);
+    if (conns.length > 0) {
+      items.push(
+        new MenuItem(
+          `&lt;tspan alignment-baseline="middle">Disconnect all&lt;/tspan>`,
+          () => {
+            for (let c of conns) {
+              c.destroy();
+            }
+          },
+          "disconnect all"
+        )
+      );
+    }
+
+    return items.length > 0 ? items : null;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 01:57:46 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>cnodes-ui</h1>
+<h2>An ultimate UI for cnodes</h2>
+<p><strong>cnodes-ui</strong> is a User Interface specifically developed for <a href="https://github.com/marco-jacovone/cnodes">cnodes</a>.
+It is inspired by the interface model proposed for the Unreal Engine product, which has been hugely successful in the developer community.</p>
+<p>I therefore decided to develop a project completely created in javascript, to make a tool available to the community that they can use within their own projects.</p>
+<p><img src="https://github.com/marco-jacovone/cnodes-ui/blob/main/doc/images/screenshot1.png?raw=true" alt="Screenshot"></p>
+<p>I strongly believe in the separation between the graphic interface and the processing engine. This is the reason that prompted me to create two distinct projects.</p>
+<p>Taking advantage of this separation, it is possible to imagine the scenario in which the graphic part is integrated within a WEB client, while the server part, which is able to independently execute the processes defined with the client, can be integrated into the backend.</p>
+<h2>Getting started</h2>
+<p>You can turn any HTML element into a cnodes-ui canvas. Lets start with a simple HTML file such as</p>
+<pre class="prettyprint source lang-html"><code>&lt;html>
+  &lt;head>
+    &lt;style>
+      html,
+      body,
+      div {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    &lt;/style>
+    &lt;script
+      type=&quot;text/javascript&quot;
+      src=&quot;https://unpkg.com/@marco.jacovone/cnodes-ui/dist/main.js&quot;
+    >&lt;/script>
+  &lt;/head>
+
+  &lt;body>
+    &lt;div id=&quot;my-canvas-id&quot;>&lt;/div>
+  &lt;/body>
+  &lt;script type=&quot;text/javascript&quot;>
+    // Create the canvas on the div element
+    let canvas = cnui.canvas(&quot;my-canvas-id&quot;);
+
+    // To create an empty canvas, lets define a empty program
+    let prg = cnui.program();
+    canvas.program = prg;
+  &lt;/script>
+&lt;/html>
+</code></pre>
+<p>Now you can play with links with only two elements: <em>Enter</em> and <em>Exit</em>, the main entry point and exit point of the <em>prg</em> program.
+Connections let you compose your program with your favorite custom nodes.</p>
+<p><img src="https://raw.githubusercontent.com/marco-jacovone/cnodes-ui/main/doc/images/connect.gif" alt="Connection"></p>
+<p>To insert some nodes, for example a <em>For</em> node and a <em>If</em> node, you can type</p>
+<pre class="prettyprint source lang-js"><code>// Create two nodes: For and If
+let prg = cnui.Env.getInstance(&quot;Program&quot;); // or cnui.Program.instance()
+let forNode = cnui.Env.getInstance(&quot;For&quot;);
+let ifNode = cnui.Env.getInstance(&quot;If&quot;);
+
+prg.addNode(forNode).addNode(ifNode);
+canvas.program = prg;
+</code></pre>
+<p>Nodes will overlap, to give a position to nodes, you can set a <em>pos</em> structure</p>
+<pre class="prettyprint source lang-js"><code>let forNode = cnui.Env.getInstance(&quot;For&quot;);
+let ifNode = cnui.Env.getInstance(&quot;If&quot;);
+forNode.meta = {
+  pos: {
+    x: 400,
+    y: 100,
+  },
+};
+ifNode.meta = {
+  pos: {
+    x: 700,
+    y: 100,
+  },
+};
+
+prg.addNode(forNode).addNode(ifNode);
+canvas.program = prg;
+</code></pre>
+<p>You can now edit your node graph, and whenever you want, you can export the resulting
+program by typing</p>
+<pre class="prettyprint source lang-js"><code>let exp = cnui.Env.export(prg);
+console.log(JSON.stringify(exp));
+</code></pre>
+<p>This program (the <strong>exp</strong> variable) can be stored and loaded into a <strong>CNODES</strong> program instance to execute.</p>
+<pre class="prettyprint source lang-js"><code>let prg = cnui.Env.import(JSON.parse(`{&quot;id&quot;:&quot;NID_3&quot;,&quot;version&quot;:1,...`));
+// process execution is now asyncronous, this allow nodes to
+// be async and to efficiently wait for background events such as
+// webservice call. So await it with an IEF...
+(async () => await prg.process())();
+</code></pre>
+<p>The <strong>cnodes</strong> engine doesn't require the cnodes-ui library to work, because it doesn't have any
+dependency.</p>
+<h2>Documentation</h2>
+<p>Check out our <a href="./doc/tutorials/TUTORIALS.md">tutorials</a> section.</p>
+<h2>Demo</h2>
+<p>Try a demo test board at:</p>
+<p><a href="https://unpkg.com/@marco.jacovone/cnodes-ui/dist/index.html">DEMO Test board</a></p>
+<p>Once you've built the graph, you can press the <strong>Run</strong> button ti test its effect. please check the console
+to see the &quot;Console&quot; node output.</p>
+<h2>State of the art</h2>
+<p>The project is actually in a early alpha stage, but is growing rapidly ;-)</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 01:57:46 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

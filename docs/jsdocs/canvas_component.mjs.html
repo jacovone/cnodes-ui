@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: canvas/component.mjs</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: canvas/component.mjs</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020/2021
+ */
+
+import { Position } from "./position.mjs";
+import { EventEmitter } from "events";
+
+/**
+ * This class is the base class for all components in the cnodes-ui canvas.
+ * The class is responsible for manage mobility of components. This is not
+ * yet the class for the cnodes nodes, is more abstract so that the user can
+ * derive from that to implement components that are not explicitly connected
+ * to the cnodes library, such as decorators, comments, etc.
+ * In general component can have subcomponents. Special examples of subcomponents are
+ * sockets. The socket is a component that can be connected through connections,
+ * in the canvas-ui class model.
+ */
+export class Component {
+  /** A reference to the enclosing canvas */
+  #canvas = null;
+
+  /** A reference to the SVG element that implement the component */
+  #componentEl = null;
+
+  /** The parent component if there is one */
+  #parent = null;
+
+  /** Is this component moveable? */
+  #moveable = true;
+
+  /* Is this component clonable? */
+  #clonable = false;
+
+  /** The position fo this component inside the canvas, in SVG coordinates */
+  #pos = new Position(0, 0);
+
+  /** The component is actually moving */
+  #moving = false;
+
+  /** A reference to the position of the component at the time hi starts moving */
+  #startMovePos = null;
+
+  /** The pointer position at the time in which the component starts moving */
+  #startMovePointerPos = null;
+
+  /** The component is selectable? */
+  #selectable = false;
+
+  /**
+   * Events connected to the component:
+   */
+  events = new EventEmitter().setMaxListeners(30);
+
+  constructor() {}
+
+  /**
+   * Sets up the component. The component creation follow a specific flow.
+   * The user that creates the component have to call this method after, to
+   * initializes the internal SVG component and optionally installs pointer
+   * event listeners to manage moving.
+   * By default setup() return this, so you can concatenate construction such as
+   * new Component(...).setup();
+   */
+  setup() {
+    // Create the SVG element. A subclass must override this method
+    // to define the graphical aspect of the component
+    this.#componentEl = this.createElement();
+
+    let self = this;
+
+    // Register a reference of this component inside the HTML element
+    this.#componentEl.componentRef = this;
+
+    // Cancel context menu on any pointerdown event
+    this.#componentEl.addEventListener("pointerdown", (e) => {
+      self.canvas.cancelContextMenu();
+    });
+
+    if (this.moveable) {
+      this.#componentEl.addEventListener("pointerdown", (e) => {
+        self.#onPointerDown(e);
+      });
+      this.#componentEl.addEventListener("pointerup", (e) => {
+        self.#onPointerUp(e);
+      });
+      this.#componentEl.addEventListener("pointermove", (e) => {
+        self.#onPointerMove(e);
+      });
+    }
+
+    return this;
+  }
+
+  get pos() {
+    return this.#pos;
+  }
+  set pos(val) {
+    let diff = new Position(val.x - this.#pos.x, val.y - this.#pos.y);
+    this.#pos = val;
+    this.updateSVGElement();
+    this.events.emit("cnui:move", this, diff);
+  }
+  get width() {
+    return 0;
+  }
+  get height() {
+    return 0;
+  }
+  get canvas() {
+    return this.#canvas;
+  }
+  set canvas(val) {
+    this.#canvas = val;
+  }
+  get componentEl() {
+    return this.#componentEl;
+  }
+
+  get svgEl() {
+    return this.#canvas.svgEl;
+  }
+
+  get moveable() {
+    return this.#moveable;
+  }
+  set moveable(val) {
+    this.#moveable = val;
+  }
+  get selectable() {
+    return this.#selectable;
+  }
+  set selectable(val) {
+    this.#selectable = val;
+  }
+  get clonable() {
+    return this.#clonable;
+  }
+  set clonable(val) {
+    this.#clonable = val;
+  }
+  get parent() {
+    return this.#parent;
+  }
+  set parent(val) {
+    this.#parent = val;
+  }
+
+  /**
+   * Manages the mousedown event to implement moving
+   * @param {Event} e The mousedown event
+   */
+  #onPointerDown(e) {
+    if (e.button === 0 || e.button === 2) {
+      if (this.#moveable &amp;&amp; e.button === 0) {
+        this.#moving = true;
+        this.#startMovePos = this.#canvas.clientToSvgPoint(
+          e.clientX,
+          e.clientY
+        );
+        this.#startMovePointerPos = this.#canvas.svgEl.createSVGPoint();
+        this.#startMovePointerPos.x = this.#pos.x;
+        this.#startMovePointerPos.y = this.#pos.y;
+        this.#componentEl.setPointerCapture(e.pointerId);
+      }
+
+      this.events.emit("cnui:clicked", this, e.shiftKey);
+
+      if (e.button === 0) {
+        e.stopPropagation();
+      }
+    }
+  }
+
+  /**
+   * Manages the mouseup event to implement pan
+   * @param {Event} e The mouseup event
+   */
+  #onPointerUp(e) {
+    if (this.#moveable &amp;&amp; e.button === 0) {
+      this.#moving = false;
+      this.#componentEl.releasePointerCapture(e.pointerId);
+      e.stopPropagation();
+    }
+  }
+
+  /**
+   * Manages the mousemove event to implement pan
+   * @param {Event} e The mousemove event
+   */
+  #onPointerMove(e) {
+    if (this.#moveable) {
+      if (!this.#moving) {
+        return;
+      }
+
+      let origPos = new Position(this.#pos.x, this.#pos.y);
+
+      let movePoint = this.#canvas.clientToSvgPoint(e.clientX, e.clientY);
+      let xDiff = movePoint.x - this.#startMovePos.x;
+      let yDiff = movePoint.y - this.#startMovePos.y;
+
+      // This effectively move the element
+      this.#pos.x = xDiff + this.#startMovePointerPos.x;
+      this.#pos.y = yDiff + this.#startMovePointerPos.y;
+
+      if (e.ctrlKey) {
+        this.#pos.x = Math.ceil(this.#pos.x / 20) * 20;
+        this.#pos.y = Math.ceil(this.#pos.y / 20) * 20;
+      }
+
+      let delta = new Position(
+        this.#pos.x - origPos.x,
+        this.#pos.y - origPos.y
+      );
+
+      this.updateSVGElement();
+
+      // Notify that component has moved
+      this.events.emit("cnui:move", this, delta);
+
+      if (this.canvas.isComponentSelected(this)) {
+        // Notify that component has moved by the user
+        this.events.emit("cnui:usermoveselected", this, delta);
+      }
+
+      if (e.altKey) {
+        this.canvas.fitGraph();
+      }
+
+      e.stopPropagation();
+    }
+  }
+
+  /**
+   * Returns the array of context menu items. If the component
+   * returns null, no contextual menu is shown
+   */
+  getContextMenuItems() {
+    return null;
+  }
+
+  /**
+   * This method must be overridden in a child concrete class.
+   * The setup() mthod calls this one during the creation process
+   */
+  createElement() {
+    throw new Error("Element must be defined in a subclass!");
+  }
+
+  /**
+   * Returns the absolute position of this component, in terms
+   * of canvas coordinates, by travering the child-parent component
+   * hierarchy
+   */
+  get absPos() {
+    let pos = new Position(this.#pos.x, this.#pos.y);
+    if (this.#parent) {
+      let parentPos = this.#parent.absPos;
+      pos = pos.add(parentPos);
+    }
+    return pos;
+  }
+
+  /**
+   * Update the component element according to x and y local coordinates,
+   * if this component is a child component, coordinates in canvas space
+   * are computed
+   */
+  updateSVGElement() {
+    let pos = this.absPos;
+    this.#componentEl.setAttribute("transform", `translate(${pos.x},${pos.y})`);
+  }
+
+  /**
+   * A listener to the parent's move event
+   */
+  #cbMove = () => {
+    this.updateSVGElement();
+    this.events.emit("cnui:move", this);
+  };
+
+  /**
+   * A listener to the parent's destroy event
+   */
+  #cbDestroy = () => {
+    this.destroy();
+  };
+
+  /**
+   * A listener to the parent's disconnectAll event
+   */
+  #cbDisconnectAll = () => {
+    for (let c of this.canvas.getConnectionsFor(this)) {
+      c.destroy();
+    }
+  };
+
+  /**
+   * This method add this component as a child of another component. This means
+   * tht this component register itself for receive parent component events, to
+   * react on them. The addTo() method return this, to allow user to chain calls
+   * during creation process
+   * @param {Component} component
+   */
+  addTo(component) {
+    this.#parent = component;
+    component.canvas.addComponent(this);
+
+    component.events.on("cnui:move", this.#cbMove);
+    component.events.on("cnui:disconnectAll", this.#cbDisconnectAll);
+    component.events.on("cnui:destroy", this.#cbDestroy);
+
+    return this;
+  }
+
+  /**
+   * This method is called when this component is removed
+   * from the canvas of from its parent component
+   */
+  destroy() {
+    this.canvas.removeComponent(this);
+    this.events.emit("cnui:destroy", this);
+
+    // If this component is a child for another component
+    // we must unregister listeners
+    this.#parent?.events.off("cnui:move", this.#cbMove);
+    this.#parent?.events.off("cnui:disconnectAll", this.#cbDisconnectAll);
+    this.#parent?.events.off("cnui:destroy", this.#cbDestroy);
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 01:57:46 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: canvas/connection.mjs</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: canvas/connection.mjs</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * cnodes-ui
+ *
+ * A GUI for cnodes
+ * License: MIT
+ * Author: Marco Jacovone
+ * Year: 2020/2021
+ */
+
+import { EventEmitter } from "events";
+
+/**
+ * This is tha base class of all connections. A Connection is always a
+ * link from two sockets. Sockets are special subclass of components, tipically
+ * child of base components
+ */
+export class Connection {
+  /** A reference to the enclosing canvas */
+  #canvas = null;
+
+  /** A reference to the SVG element of this connection */
+  #connectionEl = null;
+
+  /** The source socket component for the link */
+  #source = null;
+
+  /** Yhe destination socket component for the link */
+  #target = null;
+
+  /**
+   * Events connected to the component:
+   */
+  events = new EventEmitter();
+
+  /**
+   * A listener for parent's move event
+   */
+  #cbMove = () => {
+    this.updateSVGElement();
+    this.events.emit("cnui:move", this);
+  };
+
+  /**
+   * A listener for parent's destroy event
+   */
+  #cbDestroy = () => {
+    this.destroy();
+  };
+
+  /**
+   * Construct a connection instance by setting its source and target.
+   * This method takes also the opportunity to register itself to
+   * source and target events, and react accordingly
+   */
+  constructor(source, target) {
+    this.#source = source;
+    this.#target = target;
+
+    this.#source.events.on("cnui:move", this.#cbMove);
+    this.#source.events.on("cnui:destroy", this.#cbDestroy);
+    this.#target.events.on("cnui:move", this.#cbMove);
+    this.#target.events.on("cnui:destroy", this.#cbDestroy);
+  }
+
+  /**
+   * Sets up this connection. In terms of construction flow
+   * this means create the SVG element that will be shown
+   */
+  setup() {
+    this.#connectionEl = this.createElement();
+    this.canvas.addConnection(this);
+    this.#source.updateSVGElement();
+    this.#target.updateSVGElement();
+
+    return this;
+  }
+
+  get canvas() {
+    return this.#canvas;
+  }
+  set canvas(val) {
+    this.#canvas = val;
+  }
+  get source() {
+    return this.#source;
+  }
+  set source(val) {
+    this.#source = val;
+  }
+  get target() {
+    return this.#target;
+  }
+  set target(val) {
+    this.#target = val;
+  }
+  get connectionEl() {
+    return this.#connectionEl;
+  }
+  get svgEl() {
+    return this.#canvas.svgEl;
+  }
+
+  /**
+   * This method is responsible to create the SVG element
+   * for display the connetion. Subclasses must override this method
+   */
+  createElement() {
+    throw new Error("Element must be defined in a subclass!");
+  }
+
+  /**
+   * This method is called when the connetion needs to be updated.
+   * This happens when sockets and/or components connected to this
+   * object where moved
+   */
+  updateSVGElement() {
+    throw new Error("Element must be defined in a subclass!");
+  }
+
+  /**
+   * This method is called when the connection is removed from the canvas
+   */
+  destroy() {
+    this.canvas.removeConnection(this);
+    this.#source.events.off("cnui:move", this.#cbMove);
+    this.#target.events.off("cnui:move", this.#cbMove);
+    this.#source.events.off("cnui:destroy", this.#cbDestroy);
+    this.#target.events.off("cnui:destroy", this.#cbDestroy);
+
+    this.#source.updateSVGElement();
+    this.#target.updateSVGElement();
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 01:57:46 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

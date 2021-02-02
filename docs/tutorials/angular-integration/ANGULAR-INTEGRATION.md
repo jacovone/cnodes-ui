@@ -180,4 +180,23 @@ Finally replace the entire content of the file `app.component.html` with the fol
 <app-angular-canvas></app-angular-canvas>
 ```
 
-Now the browser should already show the canvas component, with `Enter` and `Exit` nodes visible, and overlapped.
+Now the browser should already show the canvas component, with `Enter` and `Exit` nodes visible, overlapped. To place a distance between the two nodes, simply define the initial positions of program's nodes:
+
+```ts
+prg.enter.meta = {
+  pos: {
+    x: 100,
+    y: 100,
+  },
+};
+prg.exit.meta = {
+  pos: {
+    x: 700,
+    y: 100,
+  },
+};
+```
+
+The component at this point should appear as follows:
+
+![figure3](./images/angular-int-3.png)

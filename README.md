@@ -7,7 +7,7 @@ It is inspired by the interface model proposed for the Unreal Engine product, wh
 
 I therefore decided to develop a project completely created in javascript, to make a tool available to the community that they can use within their own projects.
 
-![Screenshot](https://github.com/marco-jacovone/cnodes-ui/main/docs/images/screenshot1.png)
+![Screenshot](https://raw.githubusercontent.com/marco-jacovone/cnodes-ui/main/docs/images/screenshot1.png)
 
 I strongly believe in the separation between the graphic interface and the processing engine. This is the reason that prompted me to create two distinct projects.
 
@@ -111,7 +111,7 @@ dependency.
 
 ## Documentation
 
-Check out our [tutorials](./doc/tutorials/TUTORIALS.md) section.
+Check out our [tutorials](./docs/tutorials/TUTORIALS.md) section.
 
 ## Demo
 

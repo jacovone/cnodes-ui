@@ -30,14 +30,14 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Component<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>This class is the base class for all components in the cnodes-ui canvas.
+            <div class="class-description">This class is the base class for all components in the cnodes-ui canvas.
 The class is responsible for manage mobility of components. This is not
 yet the class for the cnodes nodes, is more abstract so that the user can
 derive from that to implement components that are not explicitly connected
 to the cnodes library, such as decorators, comments, etc.
 In general component can have subcomponents. Special examples of subcomponents are
 sockets. The socket is a component that can be connected through connections,
-in the canvas-ui class model.</p></div>
+in the canvas-ui class model.</div>
         
     
 </header>
@@ -163,9 +163,9 @@ in the canvas-ui class model.</p></div>
 
 
 <div class="description">
-    <p>Returns the absolute position of this component, in terms
+    Returns the absolute position of this component, in terms
 of canvas coordinates, by travering the child-parent component
-hierarchy</p>
+hierarchy
 </div>
 
 
@@ -227,7 +227,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>A reference to the enclosing canvas</p>
+    A reference to the enclosing canvas
 </div>
 
 
@@ -289,7 +289,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>A listener to the parent's destroy event</p>
+    A listener to the parent's destroy event
 </div>
 
 
@@ -351,7 +351,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>A listener to the parent's disconnectAll event</p>
+    A listener to the parent's disconnectAll event
 </div>
 
 
@@ -413,7 +413,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>A listener to the parent's move event</p>
+    A listener to the parent's move event
 </div>
 
 
@@ -475,7 +475,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>A reference to the SVG element that implement the component</p>
+    A reference to the SVG element that implement the component
 </div>
 
 
@@ -537,7 +537,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>Events connected to the component:</p>
+    Events connected to the component:
 </div>
 
 
@@ -599,7 +599,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>Is this component moveable?</p>
+    Is this component moveable?
 </div>
 
 
@@ -661,7 +661,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>The component is actually moving</p>
+    The component is actually moving
 </div>
 
 
@@ -723,7 +723,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>The parent component if there is one</p>
+    The parent component if there is one
 </div>
 
 
@@ -785,7 +785,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>The position fo this component inside the canvas, in SVG coordinates</p>
+    The position fo this component inside the canvas, in SVG coordinates
 </div>
 
 
@@ -847,7 +847,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>The component is selectable?</p>
+    The component is selectable?
 </div>
 
 
@@ -909,7 +909,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>The pointer position at the time in which the component starts moving</p>
+    The pointer position at the time in which the component starts moving
 </div>
 
 
@@ -971,7 +971,7 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>A reference to the position of the component at the time hi starts moving</p>
+    A reference to the position of the component at the time hi starts moving
 </div>
 
 
@@ -1045,10 +1045,10 @@ hierarchy</p>
 
 
 <div class="description">
-    <p>This method add this component as a child of another component. This means
+    This method add this component as a child of another component. This means
 tht this component register itself for receive parent component events, to
 react on them. The addTo() method return this, to allow user to chain calls
-during creation process</p>
+during creation process
 </div>
 
 
@@ -1185,8 +1185,8 @@ during creation process</p>
 
 
 <div class="description">
-    <p>This method must be overridden in a child concrete class.
-The setup() mthod calls this one during the creation process</p>
+    This method must be overridden in a child concrete class.
+The setup() mthod calls this one during the creation process
 </div>
 
 
@@ -1274,8 +1274,8 @@ The setup() mthod calls this one during the creation process</p>
 
 
 <div class="description">
-    <p>This method is called when this component is removed
-from the canvas of from its parent component</p>
+    This method is called when this component is removed
+from the canvas of from its parent component
 </div>
 
 
@@ -1363,8 +1363,8 @@ from the canvas of from its parent component</p>
 
 
 <div class="description">
-    <p>Returns the array of context menu items. If the component
-returns null, no contextual menu is shown</p>
+    Returns the array of context menu items. If the component
+returns null, no contextual menu is shown
 </div>
 
 
@@ -1452,12 +1452,12 @@ returns null, no contextual menu is shown</p>
 
 
 <div class="description">
-    <p>Sets up the component. The component creation follow a specific flow.
+    Sets up the component. The component creation follow a specific flow.
 The user that creates the component have to call this method after, to
 initializes the internal SVG component and optionally installs pointer
 event listeners to manage moving.
 By default setup() return this, so you can concatenate construction such as
-new Component(...).setup();</p>
+new Component(...).setup();
 </div>
 
 
@@ -1545,9 +1545,9 @@ new Component(...).setup();</p>
 
 
 <div class="description">
-    <p>Update the component element according to x and y local coordinates,
+    Update the component element according to x and y local coordinates,
 if this component is a child component, coordinates in canvas space
-are computed</p>
+are computed
 </div>
 
 
@@ -1643,7 +1643,7 @@ are computed</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:10:50 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:28:33 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

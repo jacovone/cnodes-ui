@@ -30,10 +30,10 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>SocketComponent<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>A Socket is a special case of component. Tipically, to design
+            <div class="class-description">A Socket is a special case of component. Tipically, to design
 a component node in canvas-ui, you define a base component, and attach
 to it a list of subcomponents that derives from Socket class, for
-give the user the chance to link nodes</p></div>
+give the user the chance to link nodes</div>
         
     
 </header>
@@ -159,7 +159,7 @@ give the user the chance to link nodes</p></div>
 
 
 <div class="description">
-    <p>This socket is connecting, the user is dragging with the mouse</p>
+    This socket is connecting, the user is dragging with the mouse
 </div>
 
 
@@ -221,7 +221,7 @@ give the user the chance to link nodes</p></div>
 
 
 <div class="description">
-    <p>The last (other) socket pointed by the mouse cursor while connecting</p>
+    The last (other) socket pointed by the mouse cursor while connecting
 </div>
 
 
@@ -283,8 +283,8 @@ give the user the chance to link nodes</p></div>
 
 
 <div class="description">
-    <p>Returns the element that responds to pointer events. By
-default this is the entire root element</p>
+    Returns the element that responds to pointer events. By
+default this is the entire root element
 </div>
 
 
@@ -346,7 +346,7 @@ default this is the entire root element</p>
 
 
 <div class="description">
-    <p>Return true if this socket only support one connection at most</p>
+    Return true if this socket only support one connection at most
 </div>
 
 
@@ -408,7 +408,7 @@ default this is the entire root element</p>
 
 
 <div class="description">
-    <p>Is this socket actually connected?</p>
+    Is this socket actually connected?
 </div>
 
 
@@ -470,7 +470,7 @@ default this is the entire root element</p>
 
 
 <div class="description">
-    <p>This SVG component is used to display a temporary floating link during the connection</p>
+    This SVG component is used to display a temporary floating link during the connection
 </div>
 
 
@@ -544,8 +544,8 @@ default this is the entire root element</p>
 
 
 <div class="description">
-    <p>Query if this socket could accept a connection with
-a peer socket passed as parmeter</p>
+    Query if this socket could accept a connection with
+a peer socket passed as parmeter
 </div>
 
 
@@ -597,7 +597,7 @@ a peer socket passed as parmeter</p>
 
             
 
-            <td class="description last"><p>Peer socket to connect</p></td>
+            <td class="description last">Peer socket to connect</td>
         </tr>
 
     
@@ -682,7 +682,7 @@ a peer socket passed as parmeter</p>
 
 
 <div class="description">
-    <p>The user has completed a valid connection</p>
+    The user has completed a valid connection
 </div>
 
 
@@ -734,7 +734,7 @@ a peer socket passed as parmeter</p>
 
             
 
-            <td class="description last"><p>Peer socket to connect</p></td>
+            <td class="description last">Peer socket to connect</td>
         </tr>
 
     
@@ -819,8 +819,8 @@ a peer socket passed as parmeter</p>
 
 
 <div class="description">
-    <p>The user has released the pointer button out of a valid socket,
-so by default, cancel the connection</p>
+    The user has released the pointer button out of a valid socket,
+so by default, cancel the connection
 </div>
 
 
@@ -872,7 +872,7 @@ so by default, cancel the connection</p>
 
             
 
-            <td class="description last"><p>The event pointerup</p></td>
+            <td class="description last">The event pointerup</td>
         </tr>
 
     
@@ -957,7 +957,7 @@ so by default, cancel the connection</p>
 
 
 <div class="description">
-    <p>The user is moving the pointer around, with a connection pending</p>
+    The user is moving the pointer around, with a connection pending
 </div>
 
 
@@ -1009,7 +1009,7 @@ so by default, cancel the connection</p>
 
             
 
-            <td class="description last"><p>The x coordinate in SVG space</p></td>
+            <td class="description last">The x coordinate in SVG space</td>
         </tr>
 
     
@@ -1032,7 +1032,7 @@ so by default, cancel the connection</p>
 
             
 
-            <td class="description last"><p>The y coordinate in SVG space</p></td>
+            <td class="description last">The y coordinate in SVG space</td>
         </tr>
 
     
@@ -1055,7 +1055,7 @@ so by default, cancel the connection</p>
 
             
 
-            <td class="description last"><p>true if the pointer is overing a unacceptable socket</p></td>
+            <td class="description last">true if the pointer is overing a unacceptable socket</td>
         </tr>
 
     
@@ -1140,7 +1140,7 @@ so by default, cancel the connection</p>
 
 
 <div class="description">
-    <p>The user has began dragging the socket to create a connection</p>
+    The user has began dragging the socket to create a connection
 </div>
 
 
@@ -1228,8 +1228,8 @@ so by default, cancel the connection</p>
 
 
 <div class="description">
-    <p>Returns the array of context menu items. If the component
-returns null, no contextual menu is shown</p>
+    Returns the array of context menu items. If the component
+returns null, no contextual menu is shown
 </div>
 
 
@@ -1317,8 +1317,8 @@ returns null, no contextual menu is shown</p>
 
 
 <div class="description">
-    <p>Return the peer component of the socket in case
-of this socket is a single connection. Otherwise return null</p>
+    Return the peer component of the socket in case
+of this socket is a single connection. Otherwise return null
 </div>
 
 
@@ -1406,13 +1406,13 @@ of this socket is a single connection. Otherwise return null</p>
 
 
 <div class="description">
-    <p>Manages the pointerdown event to implement the start of the
+    Manages the pointerdown event to implement the start of the
 drag-and-link process. If the socket is a one-link socket, such as
-a &quot;next&quot; connection to another node, a pointerdown should disconnect
+a "next" connection to another node, a pointerdown should disconnect
 the old connection and restart the dragging of the peek socket, to give
 the user the chance to connect the peer socket to another one.
 If the socket was not already connected, call the connectionStarted()
-method that will be overridden in subclasses</p>
+method that will be overridden in subclasses
 </div>
 
 
@@ -1464,7 +1464,7 @@ method that will be overridden in subclasses</p>
 
             
 
-            <td class="description last"><p>The pointerdown event</p></td>
+            <td class="description last">The pointerdown event</td>
         </tr>
 
     
@@ -1549,12 +1549,12 @@ method that will be overridden in subclasses</p>
 
 
 <div class="description">
-    <p>This method manages the pointermove event to implement the
+    This method manages the pointermove event to implement the
 middle part of the connection process. During this phase, cnodes-ui
 check if the pointer is overing a valid peer socket component, and
-if true, show the temprary link in a &quot;valid state&quot;, such as a special color
+if true, show the temprary link in a "valid state", such as a special color
 of the stroke stroke, and store the peer component in the currentPeerSocketComponent
-for future use.</p>
+for future use.
 </div>
 
 
@@ -1606,7 +1606,7 @@ for future use.</p>
 
             
 
-            <td class="description last"><p>The pointermove event</p></td>
+            <td class="description last">The pointermove event</td>
         </tr>
 
     
@@ -1691,11 +1691,11 @@ for future use.</p>
 
 
 <div class="description">
-    <p>This method manages the pointerup event to implement
+    This method manages the pointerup event to implement
 the final part of the connection. If the pointer is overing a
 valid peer socket, then the connection ca be done, and the
 connectionDone() method can be call. Otherwise the
-connectionEndedOutOfSocket() is called.</p>
+connectionEndedOutOfSocket() is called.
 </div>
 
 
@@ -1747,7 +1747,7 @@ connectionEndedOutOfSocket() is called.</p>
 
             
 
-            <td class="description last"><p>The pointerup event</p></td>
+            <td class="description last">The pointerup event</td>
         </tr>
 
     
@@ -1832,8 +1832,8 @@ connectionEndedOutOfSocket() is called.</p>
 
 
 <div class="description">
-    <p>Sets up a socket. A socket is not movable by default and
-calls the createElement() method to prepare the SVG element</p>
+    Sets up a socket. A socket is not movable by default and
+calls the createElement() method to prepare the SVG element
 </div>
 
 
@@ -1929,7 +1929,7 @@ calls the createElement() method to prepare the SVG element</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:10:50 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:28:33 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

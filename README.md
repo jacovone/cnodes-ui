@@ -7,7 +7,7 @@ It is inspired by the interface model proposed for the Unreal Engine product, wh
 
 I therefore decided to develop a project completely created in javascript, to make a tool available to the community that they can use within their own projects.
 
-![Screenshot](https://raw.githubusercontent.com/marco-jacovone/cnodes-ui/main/docs/images/screenshot1.png)
+![Screenshot](./docs/images/screenshot1.png)
 
 I strongly believe in the separation between the graphic interface and the processing engine. This is the reason that prompted me to create two distinct projects.
 
@@ -52,7 +52,7 @@ You can turn any HTML element into a cnodes-ui canvas. Lets start with a simple 
 Now you can play with links with only two elements: _Enter_ and _Exit_, the main entry point and exit point of the _prg_ program.
 Connections let you compose your program with your favorite custom nodes.
 
-![Connection](https://raw.githubusercontent.com/marco-jacovone/cnodes-ui/main/docs/images/connect.gif)
+![Connection](./docs/images/connect.gif)
 
 To insert some nodes, for example a _For_ node and a _If_ node, you can type
 
@@ -111,7 +111,7 @@ dependency.
 
 ## Documentation
 
-Check out our [tutorials](https://marco-jacovone.github.io/cnodes-ui/tutorials/TUTORIALS.md) section.
+Check out our [tutorials](./docs/index.md) section.
 
 ## Demo
 

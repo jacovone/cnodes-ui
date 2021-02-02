@@ -14,40 +14,43 @@ Create the empty angular project.
 ng new
 ```
 
-> ? What name would you like to use for the new workspace and initial project?
+```bash
+? What name would you like to use for the new workspace and initial project?
+```
 
 type: `angular-int`
 
-> ? Do you want to enforce stricter type checking and stricter bundle budgets in the workspace?
-> This setting helps improve maintainability and catch bugs ahead of time.
-> For more information, see https://angular.io/strict (y/N)
+```bash
+Do you want to enforce stricter type checking and stricter bundle budgets in the workspace?
+This setting helps improve maintainability and catch bugs ahead of time.
+For more information, see https://angular.io/strict (y/N)
+```
 
 type: `n`
 
-> ? Would you like to add Angular routing? (y/N)
+```bash
+? Would you like to add Angular routing? (y/N)
+```
 
 type: `n`
 
-> ❯ CSS
-> SCSS [ https://sass-lang.com/documentation/syntax#scss ]
->
-> Sass [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]
->
-> Less [ http://lesscss.org ]
->
-> Stylus [ https://stylus-lang.com ]
+```bash
+❯ CSS
+SCSS [ https://sass-lang.com/documentation/syntax#scss ]
+Sass [ https://sass-lang.com/documentation/syntax#the-indented-syntax ]
+Less [ http://lesscss.org ]
+Stylus [ https://stylus-lang.com ]
+```
 
 press: `enter`
 
-> CREATE angular-int/README.md (1019 bytes)
->
-> CREATE angular-int/.editorconfig (274 bytes)
->
-> ...
->
-> ✔ Packages installed successfully.
->
-> Successfully initialized git.
+```bash
+CREATE angular-int/README.md (1019 bytes)
+CREATE angular-int/.editorconfig (274 bytes)
+...
+✔ Packages installed successfully.
+Successfully initialized git.
+```
 
 The project is now initialized, enter the project directory.
 
@@ -66,3 +69,115 @@ If you open the browser at `http://localhost:4200` you should see the Angular de
 ![figure1](./images/angular-int-1.png)
 
 ## Step 2: Install _cnodes-ui_ package
+
+To install _cnodes-ui_ simply type
+
+```bash
+npm install @marco.jacovone/cnodes-ui
+```
+
+Now is the time to configure your project to include the package in the compilation
+process by modifying the `angular.json` file, by inserting the following line:
+
+```json
+{
+  ...
+  "projects": {
+    "angular-int": {
+      ...
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            ...
+            "scripts": [
+              // Add this line
+              "@marco.jacovone/cnodes-ui"
+            ]
+          },
+          ...
+      }
+    }
+  },
+  "defaultProject": "angular-int"
+}
+```
+
+Restart the `ng serve` process and check that compilation process successful
+
+**CNODES-UI** includes typescript declarations. To enable the compiler and the IDE to know them, simpli insert this line at the top of (for example) `main.ts` file:
+
+```ts
+/// <reference types="@marco.jacovone/cnodes-ui" />
+```
+
+In the code editor now you should "see" types under the cnui module:
+
+![figure2](./images/angular-int-2.png)
+
+## Step 3: Create the Angular component
+
+Now we create an Angular component that will encapsulates the cnodes canvas. To create an empty component, in the termina window, type:
+
+```bash
+ng generate component angular-canvas
+```
+
+```bash
+CREATE src/app/angular-canvas/angular-canvas.component.css (0 bytes)
+CREATE src/app/angular-canvas/angular-canvas.component.html (29 bytes)
+CREATE src/app/angular-canvas/angular-canvas.component.spec.ts (676 bytes)
+CREATE src/app/angular-canvas/angular-canvas.component.ts (306 bytes)
+UPDATE src/app/app.module.ts (426 bytes)
+```
+
+Now edit the `angular-canvas.component.html`, remove the antire content and insert the following line:
+
+```html
+<div id="cnodesui></div>
+```
+
+Now edit the `angular-canvas.component.ts`, in the following way:
+
+```ts
+import { Component, OnInit } from "@angular/core";
+
+@Component({
+  selector: "app-angular-canvas",
+  templateUrl: "./angular-canvas.component.html",
+  styleUrls: ["./angular-canvas.component.css"],
+})
+export class AngularCanvasComponent implements OnInit {
+  // Inser this attribute
+  private canvas: cnui.CnodesCanvas;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    // Insert these lines of code
+    setTimeout(() => {
+      this.canvas = cnui.canvas("cnodesui");
+      let prg = new cnui.Program();
+      this.canvas.program = prg;
+    });
+  }
+}
+```
+
+Now insert this style in `angular-canvas.component.css`:
+
+```css
+div#cnodesui {
+  width: 800px;
+  height: 500px;
+  border: 1px solid black;
+}
+```
+
+Finally replace the entire content of the file `app.component.html` with the following lines.
+
+```html
+<app-angular-canvas></app-angular-canvas>
+```
+
+Now the browser should already show the canvas component, with `Enter` and `Exit` nodes visible, and overlapped.

@@ -111,7 +111,7 @@ dependency.
 
 ## Documentation
 
-Check out our [tutorials](./docs/index.md) section.
+Check out our [Documentation](./docs/index.md) section.
 
 ## Demo
 

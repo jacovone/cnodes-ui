@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "jsdoc": "jsdoc -c ./jsdoc.conf.json -R ./README.md -r -p -d ./docs/jsdocs ./src/*"
+    "jsdoc": "jsdoc -c ./jsdoc.conf.json -R ./docs/jsdocs/INDEX.md -r -p -d ./docs/jsdocs ./src/*"
   },
   "repository": {
     "type": "git",

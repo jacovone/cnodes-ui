@@ -13,7 +13,7 @@ Taking advantage of this separation, it is possible to imagine the scenario in w
 
 ## Documentation
 
-Check out our [tutorials](./docs/tutorials/TUTORIALS.md) section.
+Check out our [tutorials](https://marco-jacovone.github.io/cnodes-ui/tutorials/TUTORIALS.md) section.
 
 Take a look at JDoc [Documentation](https://marco-jacovone.github.io/cnodes-ui/jsdocs/index.html)
 

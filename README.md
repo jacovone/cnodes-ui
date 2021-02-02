@@ -111,7 +111,7 @@ dependency.
 
 ## Documentation
 
-Check out our [tutorials](./docs/tutorials/TUTORIALS.md) section.
+Check out our [tutorials](https://marco-jacovone.github.io/cnodes-ui/tutorials/TUTORIALS.md) section.
 
 ## Demo
 

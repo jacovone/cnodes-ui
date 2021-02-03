@@ -77,25 +77,18 @@ npm install @marco.jacovone/cnodes-ui
 ```
 
 Now is the time to configure your project to include the package in the compilation
-process by modifying the `angular.json` file, by inserting the following line:
+process by modifying the `angular.json` file, by inserting the line at path `projects->angular-int->architect->build->options->scripts`:
 
 ```json
 {
-  ...
   "projects": {
     "angular-int": {
-      ...
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            ...
-            "scripts": [
-              // Add this line
-              "@marco.jacovone/cnodes-ui"
-            ]
-          },
-          ...
+            "scripts": ["@marco.jacovone/cnodes-ui"]
+          }
+        }
       }
     }
   },
@@ -200,3 +193,81 @@ prg.exit.meta = {
 The component at this point should appear as follows:
 
 ![figure3](./images/angular-int-3.png)
+
+## Step 4: Extending the component
+
+Just for remind, we can create a custom node and a custom node ui component inside the angula project, as well as we made in previous tutorials.
+
+Create a typescript file inside the same folder as the angular component, named `CustomNode.ts`, with fillowing content.
+
+```ts
+export class CustomNode extends cnui.Node {
+  static instance = () => new CustomNode();
+
+  constructor() {
+    super("a-unique-node-internal-id", "Sample node");
+    this.inputs = [
+      new cnui.InputSocket("Input1", this, cnui.Types.STRING, "INPUT1"),
+      new cnui.InputSocket("Input2", this, cnui.Types.ARRAY, [1, 2, 3]),
+      new cnui.InputSocket("Input3", this, cnui.Types.NUMBER, 99),
+    ];
+    this.outputs = [
+      new cnui.OutputSocket("Output", this, cnui.Types.STRING, "OUTPUT"),
+    ];
+    this.nexts = [new cnui.NextSocket("Next", this)];
+    this.prev = new cnui.PrevSocket("Previous", this);
+  }
+
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+  clone(factory = CustomNode.instance) {
+    return super.clone(factory);
+  }
+
+  async process() {
+    await this.evaluateInputs();
+    this.output("Output").value = parseFloat(this.input("Input3").value);
+
+    return this.getFlowResult(this.next("Vai"));
+  }
+}
+```
+
+and another typescript file with following content.
+
+```ts
+export class CustomNodeComponent extends cnui.CnodeComponent {
+  // Factory function
+  static instance = (node: cnui.Node, canvas: cnui.CnodesCanvas) =>
+    new CustomNodeComponent(node, canvas);
+
+  constructor(node: cnui.Node, canvas: cnui.CnodesCanvas) {
+    super(node, canvas);
+  }
+
+  /**
+   * Override this method to add a context menu item "My Custom
+   * Action", that simply console logs a message
+   */
+  getContextMenuItems() {
+    let items = super.getContextMenuItems() ?? [];
+
+    items.unshift(
+      new cnui.MenuItem(
+        `<tspan alignment-baseline="middle" style="${cnui.Theme.current.MENU_SPECIAL_ITEM_STYLE}">My Custom Action</tspan>`,
+        () => {
+          console.log("Custom action called");
+        }
+      )
+    );
+
+    return items.length ? items : null;
+  }
+}
+```
+
+Now we can use the new graph node together with the cnodes node, by clicking the RMB and selecting `New sample node`.
+
+![figure4](./images/angular-int-4.png)

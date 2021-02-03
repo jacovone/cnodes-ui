@@ -148,11 +148,9 @@ export class AngularCanvasComponent implements OnInit {
 
   ngOnInit(): void {
     // Insert these lines of code
-    setTimeout(() => {
-      this.canvas = cnui.canvas("cnodesui");
-      let prg = new cnui.Program();
-      this.canvas.program = prg;
-    });
+    this.canvas = cnui.canvas("cnodesui");
+    let prg = new cnui.Program();
+    this.canvas.program = prg;
   }
 }
 ```

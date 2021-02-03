@@ -98,7 +98,7 @@ process by modifying the `angular.json` file, by inserting the line at path `pro
 
 Restart the `ng serve` process and check that compilation process successful
 
-**CNODES-UI** includes typescript declarations. To enable the compiler and the IDE to know them, simpli insert this line at the top of (for example) `main.ts` file:
+**CNODES-UI** includes typescript declarations. To enable the compiler and the IDE to know them, simply insert this line at the top of (for example) `main.ts` file:
 
 ```ts
 /// <reference types="@marco.jacovone/cnodes-ui" />
@@ -127,7 +127,7 @@ UPDATE src/app/app.module.ts (426 bytes)
 Now edit the `angular-canvas.component.html`, remove the antire content and insert the following line:
 
 ```html
-<div id="cnodesui></div>
+<div id="cnodesui"></div>
 ```
 
 Now edit the `angular-canvas.component.ts`, in the following way:
@@ -196,9 +196,9 @@ The component at this point should appear as follows:
 
 ## Step 4: Extending the component
 
-Just for remind, we can create a custom node and a custom node ui component inside the angula project, as well as we made in previous tutorials.
+Just for remind, we can create a custom node and a custom node ui component inside the angular project, as well as we made in previous tutorials.
 
-Create a typescript file inside the same folder as the angular component, named `CustomNode.ts`, with fillowing content.
+Create a typescript file inside the same folder as the angular component, named `CustomNode.ts`, with following content.
 
 ```ts
 export class CustomNode extends cnui.Node {

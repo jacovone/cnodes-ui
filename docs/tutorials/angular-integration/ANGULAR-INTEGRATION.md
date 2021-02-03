@@ -271,3 +271,5 @@ export class CustomNodeComponent extends cnui.CnodeComponent {
 Now we can use the new graph node together with the cnodes node, by clicking the RMB and selecting `New sample node`.
 
 ![figure4](./images/angular-int-4.png)
+
+You can download project sources [here](./downloads/angular-int.zip)

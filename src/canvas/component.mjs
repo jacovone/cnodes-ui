@@ -156,7 +156,7 @@ export class Component {
    */
   #onPointerDown(e) {
     if (e.button === 0 || e.button === 2) {
-      this.canvas.bringToFront(this);
+      this.events.emit("cnui:clicked", this, e.shiftKey);
 
       if (this.#moveable && e.button === 0) {
         this.#moving = true;
@@ -169,8 +169,6 @@ export class Component {
         this.#startMovePointerPos.y = this.#pos.y;
         this.#componentEl.setPointerCapture(e.pointerId);
       }
-
-      this.events.emit("cnui:clicked", this, e.shiftKey);
 
       if (e.button === 0) {
         e.stopPropagation();
@@ -294,13 +292,10 @@ export class Component {
   };
 
   /**
-   * A listener to the parent's cliecked event
-   * @param {Component} c The component that was clicked
-   * @param {boolean} ShiftKey True if the component was clicked with shift button down
+   * A listener to the parent's bringedToFront event
    */
-  #cbClicked = (c, shiftKey) => {
+  #cbBringedToFront = () => {
     this.canvas.bringToFront(this);
-    this.events.emit("cnui:clicked", this, shiftKey);
   };
 
   /**
@@ -326,7 +321,7 @@ export class Component {
     component.events.on("cnui:move", this.#cbMove);
     component.events.on("cnui:disconnectAll", this.#cbDisconnectAll);
     component.events.on("cnui:destroy", this.#cbDestroy);
-    component.events.on("cnui:clicked", this.#cbClicked);
+    component.events.on("cnui:bringedToFront", this.#cbBringedToFront);
 
     return this;
   }
@@ -344,6 +339,6 @@ export class Component {
     this.#parent?.events.off("cnui:move", this.#cbMove);
     this.#parent?.events.off("cnui:disconnectAll", this.#cbDisconnectAll);
     this.#parent?.events.off("cnui:destroy", this.#cbDestroy);
-    this.#parent?.events.off("cnui:clicked", this.#cbClicked);
+    this.#parent?.events.off("cnui:bringedToFront", this.#cbBringedToFront);
   }
 }

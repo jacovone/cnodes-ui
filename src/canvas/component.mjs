@@ -156,6 +156,8 @@ export class Component {
    */
   #onPointerDown(e) {
     if (e.button === 0 || e.button === 2) {
+      this.events.emit("cnui:clicked", this, e.shiftKey);
+
       if (this.#moveable && e.button === 0) {
         this.#moving = true;
         this.#startMovePos = this.#canvas.clientToSvgPoint(
@@ -167,8 +169,6 @@ export class Component {
         this.#startMovePointerPos.y = this.#pos.y;
         this.#componentEl.setPointerCapture(e.pointerId);
       }
-
-      this.events.emit("cnui:clicked", this, e.shiftKey);
 
       if (e.button === 0) {
         e.stopPropagation();
@@ -292,6 +292,13 @@ export class Component {
   };
 
   /**
+   * A listener to the parent's bringedToFront event
+   */
+  #cbBringedToFront = () => {
+    this.canvas.bringToFront(this);
+  };
+
+  /**
    * A listener to the parent's disconnectAll event
    */
   #cbDisconnectAll = () => {
@@ -305,7 +312,7 @@ export class Component {
    * tht this component register itself for receive parent component events, to
    * react on them. The addTo() method return this, to allow user to chain calls
    * during creation process
-   * @param {Component} component
+   * @param {Component} component The component to attach to
    */
   addTo(component) {
     this.#parent = component;
@@ -314,6 +321,7 @@ export class Component {
     component.events.on("cnui:move", this.#cbMove);
     component.events.on("cnui:disconnectAll", this.#cbDisconnectAll);
     component.events.on("cnui:destroy", this.#cbDestroy);
+    component.events.on("cnui:bringedToFront", this.#cbBringedToFront);
 
     return this;
   }
@@ -331,5 +339,6 @@ export class Component {
     this.#parent?.events.off("cnui:move", this.#cbMove);
     this.#parent?.events.off("cnui:disconnectAll", this.#cbDisconnectAll);
     this.#parent?.events.off("cnui:destroy", this.#cbDestroy);
+    this.#parent?.events.off("cnui:bringedToFront", this.#cbBringedToFront);
   }
 }

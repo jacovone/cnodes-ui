@@ -774,7 +774,7 @@ declare module cnui {
      * tht this component register itself for receive parent component events, to
      * react on them. The addTo() method return this, to allow user to chain calls
      * during creation process
-     * @param {Component} component
+     * @param {Component} component The component to attach to
      */
     addTo(component: Component): Component;
     /**
@@ -836,6 +836,11 @@ declare module cnui {
      * Return the internal SVG connections element
      */
     get connectionsEl(): HTMLElement;
+    /**
+     * Bring a component in front of others
+     * @param {Component} c The component to bring to front
+     */
+    bringToFront(c: Component): void;
     /**
      * This method is responsible for translate client (browser) coordinates
      * to SVG space coordinates

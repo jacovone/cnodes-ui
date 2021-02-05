@@ -23360,8 +23360,6 @@ var _onPointerMove = new WeakSet();
 
 var _addComponentToSelectionForBox = new WeakSet();
 
-var _cloneComponents = new WeakSet();
-
 var _onSelectedComponentMovedByUser = new WeakMap();
 
 var _onComponentIsClicked = new WeakMap();
@@ -23418,8 +23416,6 @@ var Canvas = /*#__PURE__*/function () {
     _classCallCheck(this, Canvas);
 
     _onContextMenu.add(this);
-
-    _cloneComponents.add(this);
 
     _addComponentToSelectionForBox.add(this);
 
@@ -23550,6 +23546,8 @@ var Canvas = /*#__PURE__*/function () {
             }));
           } else {
             _classPrivateFieldGet(_this, _selectedComponents).push(component);
+
+            _this.bringToFront(component);
           }
 
           component.updateSVGElement();
@@ -23574,6 +23572,8 @@ var Canvas = /*#__PURE__*/function () {
             } finally {
               _iterator2.f();
             }
+
+            _this.bringToFront(component);
 
             component.updateSVGElement();
           }
@@ -23664,6 +23664,30 @@ var Canvas = /*#__PURE__*/function () {
     /**
      * Manage the mousedown event to implement pan and canvas selection
      * @param {Event} e The mousedown event
+     */
+
+  }, {
+    key: "bringToFront",
+
+    /**
+     * Bring a component in front of others
+     * @param {Component} c The component to bring to front
+     */
+    value: function bringToFront(c) {
+      // Bring to front
+      _classPrivateFieldGet(this, _svgEl).removeChild(c.componentEl);
+
+      _classPrivateFieldGet(this, _svgEl).appendChild(c.componentEl);
+
+      c.events.emit("cnui:bringedToFront");
+    }
+    /**
+     * Add components inside the specified rectangular area to the current
+     * canvas selection
+     * @param {number} x Box left
+     * @param {number} y Box top
+     * @param {number} width Box width
+     * @param {number} height Box height
      */
 
   }, {
@@ -24349,6 +24373,8 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
           return comp === c;
         }) === -1) {
           _classPrivateFieldGet(_this2, _selectedComponents).push(c);
+
+          _this2.bringToFront(c);
         }
       } else {
         _classPrivateFieldSet(_this2, _selectedComponents, _classPrivateFieldGet(_this2, _selectedComponents).filter(function (comp) {
@@ -24368,8 +24394,6 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
     _iterator8.f();
   }
 };
-
-var _cloneComponents2 = function _cloneComponents2(components) {};
 
 var _onContextMenu2 = function _onContextMenu2(e) {
   e.preventDefault();
@@ -24460,6 +24484,8 @@ var _onPointerMove = new WeakSet();
 var _cbMove = new WeakMap();
 
 var _cbDestroy = new WeakMap();
+
+var _cbBringedToFront = new WeakMap();
 
 var _cbDisconnectAll = new WeakMap();
 
@@ -24563,6 +24589,13 @@ var Component = /*#__PURE__*/function () {
       writable: true,
       value: function value() {
         _this.destroy();
+      }
+    });
+
+    _cbBringedToFront.set(this, {
+      writable: true,
+      value: function value() {
+        _this.canvas.bringToFront(_this);
       }
     });
 
@@ -24677,7 +24710,7 @@ var Component = /*#__PURE__*/function () {
      * tht this component register itself for receive parent component events, to
      * react on them. The addTo() method return this, to allow user to chain calls
      * during creation process
-     * @param {Component} component
+     * @param {Component} component The component to attach to
      */
     value: function addTo(component) {
       _classPrivateFieldSet(this, _parent, component);
@@ -24686,6 +24719,7 @@ var Component = /*#__PURE__*/function () {
       component.events.on("cnui:move", _classPrivateFieldGet(this, _cbMove));
       component.events.on("cnui:disconnectAll", _classPrivateFieldGet(this, _cbDisconnectAll));
       component.events.on("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+      component.events.on("cnui:bringedToFront", _classPrivateFieldGet(this, _cbBringedToFront));
       return this;
     }
     /**
@@ -24696,7 +24730,7 @@ var Component = /*#__PURE__*/function () {
   }, {
     key: "destroy",
     value: function destroy() {
-      var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
+      var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4, _classPrivateFieldGet5;
 
       this.canvas.removeComponent(this);
       this.events.emit("cnui:destroy", this); // If this component is a child for another component
@@ -24705,6 +24739,7 @@ var Component = /*#__PURE__*/function () {
       (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.events.off("cnui:move", _classPrivateFieldGet(this, _cbMove));
       (_classPrivateFieldGet3 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.events.off("cnui:disconnectAll", _classPrivateFieldGet(this, _cbDisconnectAll));
       (_classPrivateFieldGet4 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.events.off("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+      (_classPrivateFieldGet5 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.events.off("cnui:bringedToFront", _classPrivateFieldGet(this, _cbBringedToFront));
     }
   }, {
     key: "pos",
@@ -24804,6 +24839,8 @@ var Component = /*#__PURE__*/function () {
 
 var _onPointerDown2 = function _onPointerDown2(e) {
   if (e.button === 0 || e.button === 2) {
+    this.events.emit("cnui:clicked", this, e.shiftKey);
+
     if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
       _classPrivateFieldSet(this, _moving, true);
 
@@ -24816,8 +24853,6 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
       _classPrivateFieldGet(this, _componentEl).setPointerCapture(e.pointerId);
     }
-
-    this.events.emit("cnui:clicked", this, e.shiftKey);
 
     if (e.button === 0) {
       e.stopPropagation();

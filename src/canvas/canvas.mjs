@@ -402,6 +402,17 @@ export class Canvas {
   }
 
   /**
+   * Bring a component in front of others
+   * @param {Component} c The component to bring to front
+   */
+  bringToFront(c) {
+    // Bring to front
+    this.#svgEl.removeChild(c.componentEl);
+    this.#svgEl.appendChild(c.componentEl);
+    c.events.emit("cnui:bringedToFront");
+  }
+
+  /**
    * Add components inside the specified rectangular area to the current
    * canvas selection
    * @param {number} x Box left
@@ -447,6 +458,7 @@ export class Canvas {
       ) {
         if (this.#selectedComponents.findIndex((comp) => comp === c) === -1) {
           this.#selectedComponents.push(c);
+          this.bringToFront(c);
         }
       } else {
         this.#selectedComponents = this.#selectedComponents.filter(
@@ -456,13 +468,6 @@ export class Canvas {
       c.updateSVGElement();
     }
   }
-
-  /**
-   * This method clones a list of components and put it on the map. Components
-   * have to be selectable and clonable
-   * @param {Component[]} components Components to clone
-   */
-  #cloneComponents(components) {}
 
   /**
    * This method extract all common menu items from an
@@ -544,6 +549,7 @@ export class Canvas {
         );
       } else {
         this.#selectedComponents.push(component);
+        this.bringToFront(component);
       }
       component.updateSVGElement();
     } else {
@@ -555,6 +561,7 @@ export class Canvas {
         for (let c of selection) {
           c.updateSVGElement();
         }
+        this.bringToFront(component);
         component.updateSVGElement();
       }
     }

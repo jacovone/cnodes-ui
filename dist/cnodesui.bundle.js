@@ -23667,6 +23667,28 @@ var Canvas = /*#__PURE__*/function () {
      */
 
   }, {
+    key: "bringToFront",
+
+    /**
+     * Bring a component in front of others
+     * @param {Component} c The component to bring to front
+     */
+    value: function bringToFront(c) {
+      // Bring to front
+      _classPrivateFieldGet(this, _svgEl).removeChild(c.componentEl);
+
+      _classPrivateFieldGet(this, _svgEl).appendChild(c.componentEl);
+    }
+    /**
+     * Add components inside the specified rectangular area to the current
+     * canvas selection
+     * @param {number} x Box left
+     * @param {number} y Box top
+     * @param {number} width Box width
+     * @param {number} height Box height
+     */
+
+  }, {
     key: "getAllCommonMenuItems",
 
     /**
@@ -24461,6 +24483,8 @@ var _cbMove = new WeakMap();
 
 var _cbDestroy = new WeakMap();
 
+var _cbClicked = new WeakMap();
+
 var _cbDisconnectAll = new WeakMap();
 
 var Component = /*#__PURE__*/function () {
@@ -24563,6 +24587,15 @@ var Component = /*#__PURE__*/function () {
       writable: true,
       value: function value() {
         _this.destroy();
+      }
+    });
+
+    _cbClicked.set(this, {
+      writable: true,
+      value: function value(c, shiftKey) {
+        _this.canvas.bringToFront(_this);
+
+        _this.events.emit("cnui:clicked", _this, shiftKey);
       }
     });
 
@@ -24677,7 +24710,7 @@ var Component = /*#__PURE__*/function () {
      * tht this component register itself for receive parent component events, to
      * react on them. The addTo() method return this, to allow user to chain calls
      * during creation process
-     * @param {Component} component
+     * @param {Component} component The component to attach to
      */
     value: function addTo(component) {
       _classPrivateFieldSet(this, _parent, component);
@@ -24686,6 +24719,7 @@ var Component = /*#__PURE__*/function () {
       component.events.on("cnui:move", _classPrivateFieldGet(this, _cbMove));
       component.events.on("cnui:disconnectAll", _classPrivateFieldGet(this, _cbDisconnectAll));
       component.events.on("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+      component.events.on("cnui:clicked", _classPrivateFieldGet(this, _cbClicked));
       return this;
     }
     /**
@@ -24696,7 +24730,7 @@ var Component = /*#__PURE__*/function () {
   }, {
     key: "destroy",
     value: function destroy() {
-      var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4;
+      var _classPrivateFieldGet2, _classPrivateFieldGet3, _classPrivateFieldGet4, _classPrivateFieldGet5;
 
       this.canvas.removeComponent(this);
       this.events.emit("cnui:destroy", this); // If this component is a child for another component
@@ -24705,6 +24739,7 @@ var Component = /*#__PURE__*/function () {
       (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.events.off("cnui:move", _classPrivateFieldGet(this, _cbMove));
       (_classPrivateFieldGet3 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.events.off("cnui:disconnectAll", _classPrivateFieldGet(this, _cbDisconnectAll));
       (_classPrivateFieldGet4 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.events.off("cnui:destroy", _classPrivateFieldGet(this, _cbDestroy));
+      (_classPrivateFieldGet5 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet5 === void 0 ? void 0 : _classPrivateFieldGet5.events.off("cnui:clicked", _classPrivateFieldGet(this, _cbClicked));
     }
   }, {
     key: "pos",
@@ -24804,6 +24839,8 @@ var Component = /*#__PURE__*/function () {
 
 var _onPointerDown2 = function _onPointerDown2(e) {
   if (e.button === 0 || e.button === 2) {
+    this.canvas.bringToFront(this);
+
     if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
       _classPrivateFieldSet(this, _moving, true);
 

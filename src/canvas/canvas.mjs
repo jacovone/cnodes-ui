@@ -402,6 +402,16 @@ export class Canvas {
   }
 
   /**
+   * Bring a component in front of others
+   * @param {Component} c The component to bring to front
+   */
+  bringToFront(c) {
+    // Bring to front
+    this.#svgEl.removeChild(c.componentEl);
+    this.#svgEl.appendChild(c.componentEl);
+  }
+
+  /**
    * Add components inside the specified rectangular area to the current
    * canvas selection
    * @param {number} x Box left

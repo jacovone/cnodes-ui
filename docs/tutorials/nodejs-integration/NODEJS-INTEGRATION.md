@@ -4,7 +4,7 @@ In this tutorial we will use _cnodes_ library within a nodejs sample project.
 
 ## First step: Create a sample noode project
 
-In a termina window type:
+In a terminal window type:
 
 ```bash
 mkdir nodejs-int
@@ -45,15 +45,15 @@ For test a pretty complex cnodes program, we will create it on a cnodes-ui canva
 
 ![BrowserCanvas](./images/nodejs-int-1.png)
 
-3. Now create a program that compute the factorial of 10, like this:
+3. Now create a program that compute the factorial of 9, like this:
 
 ![Program](./images/nodejs-int-2.png)
 
-4. Press the `DUMP` button on the top left of the browser, an object will appera in the broser console
+4. Press the `DUMP` button on the top left of the browser, an object will appear in the broser console
 
-5. Press the right mouse button on the JSON object in the console and copy the value (use the speicified browser capability to do that)
+5. Press the right mouse button on the JSON object in the console and copy the value (use the specified browser capability to do that)
 
-6. Return to the project nodejs-int and create a new json file named `program.json`, inside that paste the json copied from the dump; the file should contain something like that
+6. Return to the project nodejs-int and create a new JSON file named `program.json`, inside it paste the json copied from the dump; the file should contain something like that
 
 ```json
 {

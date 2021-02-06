@@ -1,6 +1,6 @@
 # React integration
 
-This tutorial will drive the user to create a very simple React sample project with a simple React component that embeds the CnodesCanvas.
+This tutorial will drive the user to create a very simple React project containing a component that embeds the CnodesCanvas.
 
 To create a new React project follow these steps:
 
@@ -99,7 +99,7 @@ ReactDOM.render(
 //...
 ```
 
-Now you should see the cnodes canvas with teo default nodes of the empty program.
+Now you should see the cnodes canvas with default nodes of the empty program.
 
 ![Figure1](./images/react-int-1.png)
 

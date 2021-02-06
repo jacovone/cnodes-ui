@@ -34,6 +34,9 @@ export class CnodesCanvas extends Canvas {
   /** The stack of edited programs */
   #stack = [];
 
+  /** The list of root program export for all actions */
+  #history = [];
+
   /** The clipboard of the canvas */
   static clipboard = null;
 

@@ -26266,9 +26266,9 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
 
       if (this.selectable && this.canvas.isComponentSelected(this)) {
         if (this.node.functional) {
-          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-functional-pattern)");
+          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR);
         } else {
-          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", "url(#selection-pattern)");
+          _classPrivateFieldGet(this, _containerEl).setAttribute("fill", _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_SELECTED_FILL_COLOR);
         }
       } else {
         _classPrivateFieldGet(this, _containerEl).setAttribute("fill", this.node.functional ? _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FUNCTIONAL_FILL_COLOR : _theme_mjs__WEBPACK_IMPORTED_MODULE_4__.Theme.current.NODE_FILL_COLOR);
@@ -26588,6 +26588,8 @@ var _program = new WeakMap();
 
 var _stack = new WeakMap();
 
+var _history = new WeakMap();
+
 var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   _inherits(CnodesCanvas, _Canvas);
 
@@ -26598,6 +26600,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   /** The edited program */
 
   /** The stack of edited programs */
+
+  /** The list of root program export for all actions */
 
   /** The clipboard of the canvas */
 
@@ -26615,6 +26619,11 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     });
 
     _stack.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: []
+    });
+
+    _history.set(_assertThisInitialized(_this), {
       writable: true,
       value: []
     });
@@ -30451,7 +30460,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
     get: function get() {
-      return "url(selection-functional-pattern)";
+      return "url(#selection-functional-pattern)";
     }
   }, {
     key: "NODE_STROKE_COLOR",

@@ -112,7 +112,7 @@ export class Theme {
     return "url(#selection-pattern)";
   }
   get NODE_SELECTED_FUNCTIONAL_FILL_COLOR() {
-    return "url(selection-functional-pattern)";
+    return "url(#selection-functional-pattern)";
   }
   get NODE_STROKE_COLOR() {
     return "#FFFFFF";

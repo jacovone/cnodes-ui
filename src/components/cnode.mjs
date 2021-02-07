@@ -338,10 +338,13 @@ export class CnodeComponent extends Component {
       if (this.node.functional) {
         this.#containerEl.setAttribute(
           "fill",
-          "url(#selection-functional-pattern)"
+          Theme.current.NODE_SELECTED_FUNCTIONAL_FILL_COLOR
         );
       } else {
-        this.#containerEl.setAttribute("fill", "url(#selection-pattern)");
+        this.#containerEl.setAttribute(
+          "fill",
+          Theme.current.NODE_SELECTED_FILL_COLOR
+        );
       }
     } else {
       this.#containerEl.setAttribute(

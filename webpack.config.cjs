@@ -1,14 +1,7 @@
 const path = require("path");
 
-module.exports = {
-  devtool: "source-map",
-  mode: "development",
+let commonConfig = {
   entry: ["@babel/polyfill", "./src/index.mjs"],
-  output: {
-    library: "cnui",
-    filename: "cnodesui.bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
   module: {
     rules: [
       {
@@ -28,3 +21,26 @@ module.exports = {
     ],
   },
 };
+
+let minConfig = {
+  ...commonConfig,
+  mode: "production",
+  output: {
+    library: "cnui",
+    filename: "cnodesui.min.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+};
+
+let devConfig = {
+  ...commonConfig,
+  devtool: "source-map",
+  mode: "development",
+  output: {
+    library: "cnui",
+    filename: "cnodesui.bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+};
+
+module.exports = [devConfig, minConfig];

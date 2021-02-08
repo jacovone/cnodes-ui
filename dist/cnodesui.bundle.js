@@ -30576,7 +30576,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_IO_NAME_FONT",
     get: function get() {
-      return "bold 11px verdana";
+      return "black";
     }
   }, {
     key: "NODE_IO_POINT_RADIUS",

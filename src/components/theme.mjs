@@ -193,6 +193,9 @@ export class Theme {
   get NODE_IO_NAME_FONT() {
     return "bold 11px verdana";
   }
+  get NODE_IO_NAME_FONT() {
+    return "black";
+  }
   get NODE_IO_POINT_RADIUS() {
     return 10;
   }

@@ -30378,8 +30378,25 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Theme": () => /* binding */ Theme,
-/* harmony export */   "defaultLight": () => /* binding */ defaultLight
+/* harmony export */   "defaultLight": () => /* binding */ defaultLight,
+/* harmony export */   "defaultDark": () => /* binding */ defaultDark
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -30771,11 +30788,155 @@ var Theme = /*#__PURE__*/function () {
 
   return Theme;
 }();
-/** Default Light Theme */
+/**
+ * The dark version of default theme
+ */
 
 _defineProperty(Theme, "current", new Theme());
 
+var DarkTheme = /*#__PURE__*/function (_cnui$Theme) {
+  _inherits(DarkTheme, _cnui$Theme);
+
+  var _super = _createSuper(DarkTheme);
+
+  function DarkTheme() {
+    _classCallCheck(this, DarkTheme);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(DarkTheme, [{
+    key: "CANVAS_BACKGROUND_COLOR",
+    // Canvas
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "CANVAS_SELECTION_STROKE_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "CANVAS_SELECTION_FILL_COLOR",
+    get: function get() {
+      return "rgba(255,255,255,0.2)";
+    } // Node container
+
+  }, {
+    key: "NODE_FILL_COLOR",
+    get: function get() {
+      return "#D35400";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_FILL_COLOR",
+    get: function get() {
+      return "#3498DB";
+    }
+  }, {
+    key: "NODE_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    } // Connections
+
+  }, {
+    key: "CONNECTION_PREV_NEXT_COLOR",
+    get: function get() {
+      return "#BF4FFF";
+    } // Sockets
+
+  }, {
+    key: "NODE_PREV_NEXT_FILL_COLOR",
+    get: function get() {
+      return "#BF4FFF";
+    }
+  }, {
+    key: "NODE_PREV_NEXT_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_PREV_NEXT_NAME_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_IO_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_PREV_NEXT_STROKE_WIDTH",
+    get: function get() {
+      return 3;
+    }
+  }, {
+    key: "NODE_IO_NAME_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_IO_INPUT_FONT",
+    get: function get() {
+      return "bold 11px verdana";
+    }
+  }, {
+    key: "NODE_IO_INPUT_COLOR",
+    get: function get() {
+      return "brown";
+    }
+  }, {
+    key: "NODE_IO_INPUT_BACKGROUND_COLOR",
+    get: function get() {
+      return "lightyellow";
+    } // Title
+
+  }, {
+    key: "NODE_TITLE_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_TITLE_COLOR",
+    get: function get() {
+      return "white";
+    } // Selection
+
+  }, {
+    key: "NODE_SELECTED_FILL_COLOR",
+    get: function get() {
+      return "#E59866";
+    }
+  }, {
+    key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
+    get: function get() {
+      return "#85C1E9";
+    }
+  }, {
+    key: "NODE_SELECTED_STROKE_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_SELECTED_FILL_COLOR",
+    get: function get() {
+      return "orangered";
+    }
+  }]);
+
+  return DarkTheme;
+}(cnui.Theme);
+/** Default Light Theme */
+
+
 var defaultLight = new Theme();
+/** Default Dark Theme */
+
+var defaultDark = new DarkTheme();
 
 /***/ }),
 

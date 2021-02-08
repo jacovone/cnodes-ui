@@ -311,5 +311,94 @@ export class Theme {
   static current = new Theme();
 }
 
+/**
+ * The dark version of default theme
+ */
+class DarkTheme extends cnui.Theme {
+  // Canvas
+  get CANVAS_BACKGROUND_COLOR() {
+    return "black";
+  }
+  get CANVAS_SELECTION_STROKE_COLOR() {
+    return "white";
+  }
+  get CANVAS_SELECTION_FILL_COLOR() {
+    return "rgba(255,255,255,0.2)";
+  }
+
+  // Node container
+  get NODE_FILL_COLOR() {
+    return "#D35400";
+  }
+  get NODE_FUNCTIONAL_FILL_COLOR() {
+    return "#3498DB";
+  }
+  get NODE_STROKE_COLOR() {
+    return "black";
+  }
+  get NODE_FUNCTIONAL_STROKE_COLOR() {
+    return "black";
+  }
+
+  // Connections
+  get CONNECTION_PREV_NEXT_COLOR() {
+    return "#BF4FFF";
+  }
+
+  // Sockets
+  get NODE_PREV_NEXT_FILL_COLOR() {
+    return "#BF4FFF";
+  }
+  get NODE_PREV_NEXT_STROKE_COLOR() {
+    return "black";
+  }
+  get NODE_PREV_NEXT_NAME_COLOR() {
+    return "white";
+  }
+  get NODE_IO_STROKE_COLOR() {
+    return "black";
+  }
+  get NODE_PREV_NEXT_STROKE_WIDTH() {
+    return 3;
+  }
+  get NODE_IO_NAME_COLOR() {
+    return "white";
+  }
+  get NODE_IO_INPUT_FONT() {
+    return "bold 11px verdana";
+  }
+  get NODE_IO_INPUT_COLOR() {
+    return "brown";
+  }
+  get NODE_IO_INPUT_BACKGROUND_COLOR() {
+    return "lightyellow";
+  }
+
+  // Title
+  get NODE_TITLE_COLOR() {
+    return "white";
+  }
+  get NODE_FUNCTIONAL_TITLE_COLOR() {
+    return "white";
+  }
+
+  // Selection
+  get NODE_SELECTED_FILL_COLOR() {
+    return "#E59866";
+  }
+  get NODE_SELECTED_FUNCTIONAL_FILL_COLOR() {
+    return "#85C1E9";
+  }
+  get NODE_SELECTED_STROKE_COLOR() {
+    return "white";
+  }
+  get NODE_FUNCTIONAL_SELECTED_FILL_COLOR() {
+    return "orangered";
+  }
+}
+
 /** Default Light Theme */
 export const defaultLight = new Theme();
+
+/** Default Dark Theme */
+export const defaultDark = new DarkTheme();

@@ -118,6 +118,11 @@ export class OutputSocketComponent extends CnodesSocketComponent {
 
       this.#outputNameElement.setAttribute("value", this.socket.name);
       this.#outputNameElement.setAttribute("type", "text");
+      this.#outputNameElement.style["background-color"] =
+        Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+      this.#outputNameElement.style["color"] =
+        Theme.current.NODE_IO_INPUT_COLOR;
+      this.#outputNameElement.style["font"] = Theme.current.NODE_IO_INPUT_FONT;
 
       textOutputNameElem.appendChild(this.#outputNameElement);
     } else {

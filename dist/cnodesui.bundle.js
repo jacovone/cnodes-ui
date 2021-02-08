@@ -31150,6 +31150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NextSocketComponent": () => /* reexport safe */ _components_next_mjs__WEBPACK_IMPORTED_MODULE_15__.NextSocketComponent,
 /* harmony export */   "Theme": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.Theme,
 /* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.defaultLight,
+/* harmony export */   "defaultDark": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.defaultDark,
 /* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram_mjs__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent,
 /* harmony export */   "CnodeBreakComponent": () => /* reexport safe */ _components_nodes_cnodebreak_mjs__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent,
 /* harmony export */   "IOConnection": () => /* reexport safe */ _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_19__.IOConnection,

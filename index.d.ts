@@ -227,7 +227,6 @@ declare module cnui {
   }
   /** Default Light Theme */
   export const defaultLight: Theme;
-
   /** Default Dark Theme */
   export const defaultDark: Theme;
   /**

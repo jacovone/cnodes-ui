@@ -29792,6 +29792,9 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _outputNameElement).setAttribute("type", "text");
 
+        _classPrivateFieldGet(this, _outputNameElement).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+        _classPrivateFieldGet(this, _outputNameElement).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_COLOR;
+        _classPrivateFieldGet(this, _outputNameElement).style["font"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_FONT;
         textOutputNameElem.appendChild(_classPrivateFieldGet(this, _outputNameElement));
       } else {
         _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));

@@ -30789,20 +30789,38 @@ var Theme = /*#__PURE__*/function () {
   return Theme;
 }();
 /**
- * The dark version of default theme
+ * The light version of the theme
  */
 
 _defineProperty(Theme, "current", new Theme());
 
-var DarkTheme = /*#__PURE__*/function (_cnui$Theme) {
-  _inherits(DarkTheme, _cnui$Theme);
+var LightTheme = /*#__PURE__*/function (_Theme) {
+  _inherits(LightTheme, _Theme);
 
-  var _super = _createSuper(DarkTheme);
+  var _super = _createSuper(LightTheme);
+
+  function LightTheme() {
+    _classCallCheck(this, LightTheme);
+
+    return _super.apply(this, arguments);
+  }
+
+  return LightTheme;
+}(Theme);
+/**
+ * The dark version of default theme
+ */
+
+
+var DarkTheme = /*#__PURE__*/function (_Theme2) {
+  _inherits(DarkTheme, _Theme2);
+
+  var _super2 = _createSuper(DarkTheme);
 
   function DarkTheme() {
     _classCallCheck(this, DarkTheme);
 
-    return _super.apply(this, arguments);
+    return _super2.apply(this, arguments);
   }
 
   _createClass(DarkTheme, [{
@@ -30929,11 +30947,11 @@ var DarkTheme = /*#__PURE__*/function (_cnui$Theme) {
   }]);
 
   return DarkTheme;
-}(cnui.Theme);
+}(Theme);
 /** Default Light Theme */
 
 
-var defaultLight = new Theme();
+var defaultLight = new LightTheme();
 /** Default Dark Theme */
 
 var defaultDark = new DarkTheme();

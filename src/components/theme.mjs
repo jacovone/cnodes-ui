@@ -312,9 +312,14 @@ export class Theme {
 }
 
 /**
+ * The light version of the theme
+ */
+class LightTheme extends Theme {}
+
+/**
  * The dark version of default theme
  */
-class DarkTheme extends cnui.Theme {
+class DarkTheme extends Theme {
   // Canvas
   get CANVAS_BACKGROUND_COLOR() {
     return "black";
@@ -398,7 +403,7 @@ class DarkTheme extends cnui.Theme {
 }
 
 /** Default Light Theme */
-export const defaultLight = new Theme();
+export const defaultLight = new LightTheme();
 
 /** Default Dark Theme */
 export const defaultDark = new DarkTheme();

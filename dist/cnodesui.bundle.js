@@ -28725,6 +28725,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _inputNameElement).setAttribute("type", "text");
 
+        _classPrivateFieldGet(this, _inputNameElement).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+        _classPrivateFieldGet(this, _inputNameElement).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_COLOR;
+        _classPrivateFieldGet(this, _inputNameElement).style["font"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_FONT;
         textInputNameElem.appendChild(_classPrivateFieldGet(this, _inputNameElement));
       } else {
         _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
@@ -30576,7 +30579,27 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_IO_NAME_FONT",
     get: function get() {
+      return "bold 11px verdana";
+    }
+  }, {
+    key: "NODE_IO_NAME_COLOR",
+    get: function get() {
       return "black";
+    }
+  }, {
+    key: "NODE_IO_INPUT_FONT",
+    get: function get() {
+      return "bold 11px verdana";
+    }
+  }, {
+    key: "NODE_IO_INPUT_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_IO_INPUT_BACKGROUND_COLOR",
+    get: function get() {
+      return "white";
     }
   }, {
     key: "NODE_IO_POINT_RADIUS",

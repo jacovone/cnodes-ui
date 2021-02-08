@@ -30462,7 +30462,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "DEFS",
     get: function get() {
-      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='#FAD7A0'></stop>\n        <stop offset='12.45%'  stop-color='#FAD7A0'></stop>\n        <stop offset='12.5%' stop-color='#F9C879'></stop>\n        <stop offset='24.45%' stop-color='#F9C879'></stop>\n        <stop offset='25.5%'  stop-color='#FAD7A0'></stop>\n        <stop offset='37.45%'  stop-color='#FAD7A0'></stop>\n        <stop offset='37.5%' stop-color='#F9C879'></stop>\n        <stop offset='49.9%' stop-color='#F9C879'></stop>\n        <stop offset='50%' stop-color='#FAD7A0'></stop>\n        <stop offset='62.45%' stop-color='#FAD7A0'></stop>\n        <stop offset='62.5%' stop-color='#F9C879'></stop>\n        <stop offset='74.95%' stop-color='#F9C879'></stop>\n        <stop offset='75%' stop-color='#FAD7A0'></stop>\n        <stop offset='87.45%' stop-color='#FAD7A0'></stop>\n        <stop offset='87.5%' stop-color='#F9C879'></stop>\n        <stop offset='100%' stop-color='#F9C879'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='#C5F0FF'></stop>\n        <stop offset='12.45%'  stop-color='#C5F0FF'></stop>\n        <stop offset='12.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='24.45%' stop-color='#AEEDFF'></stop>\n        <stop offset='25.5%'  stop-color='#C5F0FF'></stop>\n        <stop offset='37.45%'  stop-color='#C5F0FF'></stop>\n        <stop offset='37.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='49.9%' stop-color='#AEEDFF'></stop>\n        <stop offset='50%' stop-color='#C5F0FF'></stop>\n        <stop offset='62.45%' stop-color='#C5F0FF'></stop>\n        <stop offset='62.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='74.95%' stop-color='#AEEDFF'></stop>\n        <stop offset='75%' stop-color='#C5F0FF'></stop>\n        <stop offset='87.45%' stop-color='#C5F0FF'></stop>\n        <stop offset='87.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='100%' stop-color='#AEEDFF'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ";
+      return "\n    ";
     }
   }, {
     key: "NODE_WIDTH",
@@ -30477,22 +30477,22 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_FILL_COLOR",
     get: function get() {
-      return "#FAD7A0";
+      return "#FFD657";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
     get: function get() {
-      return "#C5F0FF";
+      return "#81EEFF";
     }
   }, {
     key: "NODE_SELECTED_FILL_COLOR",
     get: function get() {
-      return "url(#selection-pattern)";
+      return "#FEC000";
     }
   }, {
     key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
     get: function get() {
-      return "url(#selection-functional-pattern)";
+      return "#00DCFF";
     }
   }, {
     key: "NODE_STROKE_COLOR",

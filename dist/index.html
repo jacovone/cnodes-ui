@@ -6,14 +6,6 @@
 
   <title>cnodes-ui test board</title>
   <style>
-    svg {
-      background-color: #ffffff;
-      opacity: 1;
-      background-image: linear-gradient(#fafafa 8px, transparent 8px), linear-gradient(90deg, #fafafa 8px, transparent 8px), linear-gradient(#fafafa 4px, transparent 4px), linear-gradient(90deg, #fafafa 4px, #ffffff 4px);
-      background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
-      background-position: -8px -8px, -8px -8px, -4px -4px, -4px -4px;
-    }
-
     .action {
       border: none;
       border-radius: 5px;
@@ -33,22 +25,20 @@
   <button class="action" onclick="newCanvas()">New</button>
   <button class="action" onclick="runProgram()">Run</button>
   <button class="action" onclick="canvas.dump()">Dump</button>
+  <button class="action" onclick="changeToDark()">Dark Theme</button>
+  <button class="action" onclick="changeToLight()">Light Theme</button>
   <button class="action" onclick="loadProgram()">Load</button>
   <button class="action" onclick="saveProgram()">Save</button>
   <button class="action" onclick="exampleCanvas()">Example1</button>
   <button class="action" onclick="exampleCanvas2()">Example2</button>
   <button class="action" onclick="exampleClassDiagram()">Class Diagram</button>
   <div id="cnodes"
-    style="margin: 10px; border: 10px solid gray; position: absolute; top:20px; left:0; right:0; bottom:0">
+    style="background-color: black;margin: 10px; border: 10px solid gray; position: absolute; top:20px; left:0; right:0; bottom:0">
   </div>
 
   <script type="text/javascript" src="cnodesui.bundle.js"></script>
   <script>
-
-    let canvas = cnui.canvas('cnodes');
-
-    canvas.maxVBSize = 5000;
-    canvas.minVBSize = 100;
+    let canvas;
 
     function runProgram() {
       (async () => {
@@ -82,6 +72,28 @@
       canvas.program = cnui.Env.import(JSON.parse(localStorage.getItem("lastProgram")));
     }
 
+    function changeToDark() {
+      let prg = cnui.Env.export(canvas.program);
+      document.getElementById("cnodes").innerHTML = "";
+      cnui.Theme.current = cnui.defaultDark;
+      canvas = cnui.canvas('cnodes');
+
+      canvas.maxVBSize = 5000;
+      canvas.minVBSize = 100;
+      canvas.program = cnui.Env.import(prg);
+    }
+
+    function changeToLight() {
+      let prg = cnui.Env.export(canvas.program);
+      document.getElementById("cnodes").innerHTML = "";
+      cnui.Theme.current = cnui.defaultLight;
+      canvas = cnui.canvas('cnodes');
+
+      canvas.maxVBSize = 5000;
+      canvas.minVBSize = 100;
+      canvas.program = cnui.Env.import(prg);
+    }
+
     function newCanvas() {
       let prg = new cnui.Program();
       prg.exit.meta = {
@@ -92,12 +104,13 @@
       }
 
       canvas.program = prg;
-      prg.events.on("cn:log", msg => {
-        console.log("LOG: ", msg);
-      })
     };
 
-    Theme.cuurent = defalutDark;
+    cnui.Theme.current = cnui.defaultLight;
+    canvas = cnui.canvas('cnodes');
+
+    canvas.maxVBSize = 5000;
+    canvas.minVBSize = 100;
 
     newCanvas();
   </script>

@@ -109,6 +109,12 @@ let prg = cnui.Env.import(JSON.parse(`{"id":"NID_3","version":1,...`));
 The **cnodes** engine doesn't require the cnodes-ui library to work, because it doesn't have any
 dependency.
 
+**Update**:
+
+_0.18.25_ Introduces new **Dark** theme!
+
+![DarkTheme](./docs/images/screenshot3.png)
+
 ## Documentation
 
 Check out our [Documentation](./docs/index.md) section.

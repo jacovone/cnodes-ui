@@ -28773,6 +28773,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _inputValueElement).setAttribute("type", "text");
 
+      _classPrivateFieldGet(this, _inputValueElement).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+      _classPrivateFieldGet(this, _inputValueElement).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_COLOR;
+      _classPrivateFieldGet(this, _inputValueElement).style["font"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_FONT;
       textInputValueElem.appendChild(_classPrivateFieldGet(this, _inputValueElement));
       var inputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
       inputElem.setAttribute("x", 0);
@@ -29786,6 +29789,12 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _outputNameElement).addEventListener("keyup", function (e) {
           _this2.socket.name = e.target.value;
+        });
+        /** Prevent descendants management of the click (pan) and allow selection */
+
+
+        _classPrivateFieldGet(this, _outputNameElement).addEventListener("pointerdown", function (e) {
+          e.stopPropagation();
         });
 
         _classPrivateFieldGet(this, _outputNameElement).setAttribute("value", this.socket.name);

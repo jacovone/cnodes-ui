@@ -204,6 +204,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
     this.#inputValueElement.setAttribute("value", this.socket.value);
     this.#inputValueElement.setAttribute("type", "text");
 
+    this.#inputValueElement.style["background-color"] =
+      Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+    this.#inputValueElement.style["color"] = Theme.current.NODE_IO_INPUT_COLOR;
+    this.#inputValueElement.style["font"] = Theme.current.NODE_IO_INPUT_FONT;
+
     textInputValueElem.appendChild(this.#inputValueElement);
 
     let inputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");

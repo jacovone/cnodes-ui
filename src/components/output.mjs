@@ -116,8 +116,14 @@ export class OutputSocketComponent extends CnodesSocketComponent {
         this.socket.name = e.target.value;
       });
 
+      /** Prevent descendants management of the click (pan) and allow selection */
+      this.#outputNameElement.addEventListener("pointerdown", (e) => {
+        e.stopPropagation();
+      });
+
       this.#outputNameElement.setAttribute("value", this.socket.name);
       this.#outputNameElement.setAttribute("type", "text");
+
       this.#outputNameElement.style["background-color"] =
         Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
       this.#outputNameElement.style["color"] =

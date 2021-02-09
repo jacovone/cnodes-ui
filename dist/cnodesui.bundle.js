@@ -26590,6 +26590,8 @@ var _stack = new WeakMap();
 
 var _history = new WeakMap();
 
+var _oldStateIndex = new WeakMap();
+
 var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   _inherits(CnodesCanvas, _Canvas);
 
@@ -26601,7 +26603,9 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
   /** The stack of edited programs */
 
-  /** The list of root program export for all actions */
+  /** The list of root program export for all undo/redo actions */
+
+  /** The integer pointer of the previous state in the undo/redo history */
 
   /** The clipboard of the canvas */
 
@@ -26626,6 +26630,11 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     _history.set(_assertThisInitialized(_this), {
       writable: true,
       value: []
+    });
+
+    _oldStateIndex.set(_assertThisInitialized(_this), {
+      writable: true,
+      value: -1
     });
 
     _defineProperty(_assertThisInitialized(_this), "events", new events__WEBPACK_IMPORTED_MODULE_0__.EventEmitter());
@@ -26695,12 +26704,14 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         }
 
         if (e.key === "z" && !e.shiftKey) {
-          // this.undoChanges();
+          _this.undoChanges();
+
           e.preventDefault();
         }
 
         if (e.key === "z" && e.shiftKey) {
-          // this.redoChanges();
+          _this.redoChanges();
+
           e.preventDefault();
         }
       }
@@ -26883,9 +26894,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "importCnodesProgram",
     value: function importCnodesProgram(program) {
-      // By temporary clearing the instance of the program, we inform
+      if (this.program) {
+        this.saveState();
+      } // By temporary clearing the instance of the program, we inform
       // components that all creation/destruction will not have effect
       // on the program instance
+
+
       _classPrivateFieldSet(this, _program, null);
 
       this.destroyAll(); // Import nodes
@@ -27060,6 +27075,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "cloneSelectedNodes",
     value: function cloneSelectedNodes() {
+      this.saveState();
       var oldSelected = this.selectedComponents;
       var selectedNodes = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(this.selectedComponents.filter(function (c) {
         return c instanceof _cnode_mjs__WEBPACK_IMPORTED_MODULE_8__.CnodeComponent && c.node.creatable;
@@ -27197,6 +27213,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         return;
       }
 
+      this.saveState();
       var oldSelected = this.selectedComponents;
       var cloneNodes = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(CnodesCanvas.clipboard);
 
@@ -27341,6 +27358,45 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     value: function canPopProgram() {
       return _classPrivateFieldGet(this, _stack).length > 0;
     }
+    /**
+     * This method saves the current state of the canvas in the
+     * undo/redo history
+     */
+
+  }, {
+    key: "saveState",
+    value: function saveState() {
+      // Saving the state means do a complete
+      // export of the program and shift the current
+      // state pointer ahead
+      var state = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(this.program);
+
+      _classPrivateFieldSet(this, _oldStateIndex, +_classPrivateFieldGet(this, _oldStateIndex) + 1);
+
+      _classPrivateFieldGet(this, _history).splice(_classPrivateFieldGet(this, _oldStateIndex), _classPrivateFieldGet(this, _history).length, state);
+    }
+  }, {
+    key: "undoChanges",
+    value: function undoChanges() {
+      if (_classPrivateFieldGet(this, _oldStateIndex) > 0) {
+        var _this$oldStateIndex;
+
+        _classPrivateFieldSet(this, _program, null);
+
+        this.destroyAll();
+        this.program = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.import(_classPrivateFieldGet(this, _history)[(_classPrivateFieldSet(this, _oldStateIndex, (_this$oldStateIndex = +_classPrivateFieldGet(this, _oldStateIndex)) - 1), _this$oldStateIndex)]);
+      }
+    }
+  }, {
+    key: "redoChanges",
+    value: function redoChanges() {
+      if (_classPrivateFieldGet(this, _oldStateIndex) < _classPrivateFieldGet(this, _history).length - 1) {
+        _classPrivateFieldSet(this, _program, null);
+
+        this.destroyAll();
+        this.program = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.import(_classPrivateFieldGet(this, _history)[_classPrivateFieldSet(this, _oldStateIndex, +_classPrivateFieldGet(this, _oldStateIndex) + 1)]);
+      }
+    }
   }, {
     key: "program",
     get: function get() {
@@ -27362,8 +27418,6 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       this.importCnodesProgram(val);
 
       _classPrivateFieldSet(this, _program, val);
-
-      this.fitGraph();
     }
   }], [{
     key: "registerNodeUI",

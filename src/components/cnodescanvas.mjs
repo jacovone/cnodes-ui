@@ -34,8 +34,11 @@ export class CnodesCanvas extends Canvas {
   /** The stack of edited programs */
   #stack = [];
 
-  /** The list of root program export for all actions */
+  /** The list of root program export for all undo/redo actions */
   #history = [];
+
+  /** The integer pointer of the previous state in the undo/redo history */
+  #oldStateIndex = -1;
 
   /** The clipboard of the canvas */
   static clipboard = null;
@@ -139,11 +142,11 @@ export class CnodesCanvas extends Canvas {
           e.preventDefault();
         }
         if (e.key === "z" && !e.shiftKey) {
-          // this.undoChanges();
+          this.undoChanges();
           e.preventDefault();
         }
         if (e.key === "z" && e.shiftKey) {
-          // this.redoChanges();
+          this.redoChanges();
           e.preventDefault();
         }
       }
@@ -186,7 +189,6 @@ export class CnodesCanvas extends Canvas {
   set program(val) {
     this.importCnodesProgram(val);
     this.#program = val;
-    this.fitGraph();
   }
 
   /**
@@ -377,6 +379,10 @@ export class CnodesCanvas extends Canvas {
    * @param {Program} program Program to import
    */
   importCnodesProgram(program) {
+    if (this.program) {
+      this.saveState();
+    }
+
     // By temporary clearing the instance of the program, we inform
     // components that all creation/destruction will not have effect
     // on the program instance
@@ -477,6 +483,7 @@ export class CnodesCanvas extends Canvas {
    * at a position a bit doifferent from it source set
    */
   cloneSelectedNodes() {
+    this.saveState();
     let oldSelected = this.selectedComponents;
 
     let selectedNodes = Program.cloneNodes(
@@ -557,6 +564,7 @@ export class CnodesCanvas extends Canvas {
       return;
     }
 
+    this.saveState();
     let oldSelected = this.selectedComponents;
 
     let cloneNodes = Program.cloneNodes(CnodesCanvas.clipboard);
@@ -645,5 +653,34 @@ export class CnodesCanvas extends Canvas {
    */
   canPopProgram() {
     return this.#stack.length > 0;
+  }
+
+  /**
+   * This method saves the current state of the canvas in the
+   * undo/redo history
+   */
+  saveState() {
+    // Saving the state means do a complete
+    // export of the program and shift the current
+    // state pointer ahead
+    let state = Env.export(this.program);
+    ++this.#oldStateIndex;
+    this.#history.splice(this.#oldStateIndex, this.#history.length, state);
+  }
+
+  undoChanges() {
+    if (this.#oldStateIndex > 0) {
+      this.#program = null;
+      this.destroyAll();
+      this.program = Env.import(this.#history[this.#oldStateIndex--]);
+    }
+  }
+
+  redoChanges() {
+    if (this.#oldStateIndex < this.#history.length - 1) {
+      this.#program = null;
+      this.destroyAll();
+      this.program = Env.import(this.#history[++this.#oldStateIndex]);
+    }
   }
 }

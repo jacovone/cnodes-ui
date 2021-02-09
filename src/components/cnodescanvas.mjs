@@ -660,6 +660,7 @@ export class CnodesCanvas extends Canvas {
    * undo/redo history
    */
   saveState() {
+    console.log(this.#oldStateIndex);
     // Saving the state means do a complete
     // export of the program and shift the current
     // state pointer ahead
@@ -669,7 +670,8 @@ export class CnodesCanvas extends Canvas {
   }
 
   undoChanges() {
-    if (this.#oldStateIndex > 0) {
+    console.log(this.#oldStateIndex);
+    if (this.#oldStateIndex > -1) {
       this.#program = null;
       this.destroyAll();
       this.program = Env.import(this.#history[this.#oldStateIndex--]);
@@ -677,7 +679,8 @@ export class CnodesCanvas extends Canvas {
   }
 
   redoChanges() {
-    if (this.#oldStateIndex < this.#history.length - 1) {
+    console.log(this.#oldStateIndex);
+    if (this.#oldStateIndex < this.#history.length) {
       this.#program = null;
       this.destroyAll();
       this.program = Env.import(this.#history[++this.#oldStateIndex]);

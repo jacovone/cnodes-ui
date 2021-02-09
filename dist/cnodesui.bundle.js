@@ -27366,9 +27366,10 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "saveState",
     value: function saveState() {
-      // Saving the state means do a complete
+      console.log(_classPrivateFieldGet(this, _oldStateIndex)); // Saving the state means do a complete
       // export of the program and shift the current
       // state pointer ahead
+
       var state = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(this.program);
 
       _classPrivateFieldSet(this, _oldStateIndex, +_classPrivateFieldGet(this, _oldStateIndex) + 1);
@@ -27378,7 +27379,9 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "undoChanges",
     value: function undoChanges() {
-      if (_classPrivateFieldGet(this, _oldStateIndex) > 0) {
+      console.log(_classPrivateFieldGet(this, _oldStateIndex));
+
+      if (_classPrivateFieldGet(this, _oldStateIndex) > -1) {
         var _this$oldStateIndex;
 
         _classPrivateFieldSet(this, _program, null);
@@ -27390,7 +27393,9 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   }, {
     key: "redoChanges",
     value: function redoChanges() {
-      if (_classPrivateFieldGet(this, _oldStateIndex) < _classPrivateFieldGet(this, _history).length - 1) {
+      console.log(_classPrivateFieldGet(this, _oldStateIndex));
+
+      if (_classPrivateFieldGet(this, _oldStateIndex) < _classPrivateFieldGet(this, _history).length) {
         _classPrivateFieldSet(this, _program, null);
 
         this.destroyAll();

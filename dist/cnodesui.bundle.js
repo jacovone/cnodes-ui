@@ -28779,6 +28779,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _inputNameElement).setAttribute("type", "text");
 
+        _classPrivateFieldGet(this, _inputNameElement).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+        _classPrivateFieldGet(this, _inputNameElement).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_COLOR;
+        _classPrivateFieldGet(this, _inputNameElement).style["font"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_FONT;
         textInputNameElem.appendChild(_classPrivateFieldGet(this, _inputNameElement));
       } else {
         _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
@@ -28824,6 +28827,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
       _classPrivateFieldGet(this, _inputValueElement).setAttribute("type", "text");
 
+      _classPrivateFieldGet(this, _inputValueElement).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+      _classPrivateFieldGet(this, _inputValueElement).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_COLOR;
+      _classPrivateFieldGet(this, _inputValueElement).style["font"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_FONT;
       textInputValueElem.appendChild(_classPrivateFieldGet(this, _inputValueElement));
       var inputElem = document.createElementNS("http://www.w3.org/2000/svg", "g");
       inputElem.setAttribute("x", 0);
@@ -29838,11 +29844,20 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         _classPrivateFieldGet(this, _outputNameElement).addEventListener("keyup", function (e) {
           _this2.socket.name = e.target.value;
         });
+        /** Prevent descendants management of the click (pan) and allow selection */
+
+
+        _classPrivateFieldGet(this, _outputNameElement).addEventListener("pointerdown", function (e) {
+          e.stopPropagation();
+        });
 
         _classPrivateFieldGet(this, _outputNameElement).setAttribute("value", this.socket.name);
 
         _classPrivateFieldGet(this, _outputNameElement).setAttribute("type", "text");
 
+        _classPrivateFieldGet(this, _outputNameElement).style["background-color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+        _classPrivateFieldGet(this, _outputNameElement).style["color"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_COLOR;
+        _classPrivateFieldGet(this, _outputNameElement).style["font"] = _theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_INPUT_FONT;
         textOutputNameElem.appendChild(_classPrivateFieldGet(this, _outputNameElement));
       } else {
         _classPrivateFieldSet(this, _labelElement, document.createElementNS("http://www.w3.org/2000/svg", "foreignObject"));
@@ -30417,8 +30432,25 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Theme": () => /* binding */ Theme,
-/* harmony export */   "defaultLight": () => /* binding */ defaultLight
+/* harmony export */   "defaultLight": () => /* binding */ defaultLight,
+/* harmony export */   "defaultDark": () => /* binding */ defaultDark
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -30484,7 +30516,7 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "DEFS",
     get: function get() {
-      return "\n        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='#FAD7A0'></stop>\n        <stop offset='12.45%'  stop-color='#FAD7A0'></stop>\n        <stop offset='12.5%' stop-color='#F9C879'></stop>\n        <stop offset='24.45%' stop-color='#F9C879'></stop>\n        <stop offset='25.5%'  stop-color='#FAD7A0'></stop>\n        <stop offset='37.45%'  stop-color='#FAD7A0'></stop>\n        <stop offset='37.5%' stop-color='#F9C879'></stop>\n        <stop offset='49.9%' stop-color='#F9C879'></stop>\n        <stop offset='50%' stop-color='#FAD7A0'></stop>\n        <stop offset='62.45%' stop-color='#FAD7A0'></stop>\n        <stop offset='62.5%' stop-color='#F9C879'></stop>\n        <stop offset='74.95%' stop-color='#F9C879'></stop>\n        <stop offset='75%' stop-color='#FAD7A0'></stop>\n        <stop offset='87.45%' stop-color='#FAD7A0'></stop>\n        <stop offset='87.5%' stop-color='#F9C879'></stop>\n        <stop offset='100%' stop-color='#F9C879'></stop>\n    </linearGradient>\n    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>\n        <stop offset='0%'  stop-color='#C5F0FF'></stop>\n        <stop offset='12.45%'  stop-color='#C5F0FF'></stop>\n        <stop offset='12.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='24.45%' stop-color='#AEEDFF'></stop>\n        <stop offset='25.5%'  stop-color='#C5F0FF'></stop>\n        <stop offset='37.45%'  stop-color='#C5F0FF'></stop>\n        <stop offset='37.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='49.9%' stop-color='#AEEDFF'></stop>\n        <stop offset='50%' stop-color='#C5F0FF'></stop>\n        <stop offset='62.45%' stop-color='#C5F0FF'></stop>\n        <stop offset='62.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='74.95%' stop-color='#AEEDFF'></stop>\n        <stop offset='75%' stop-color='#C5F0FF'></stop>\n        <stop offset='87.45%' stop-color='#C5F0FF'></stop>\n        <stop offset='87.5%' stop-color='#AEEDFF'></stop>\n        <stop offset='100%' stop-color='#AEEDFF'></stop>\n    </linearGradient>\n    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >\n        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>\n            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>\n        </rect>\n    </pattern>\n    ";
+      return "\n    ";
     }
   }, {
     key: "NODE_WIDTH",
@@ -30499,22 +30531,22 @@ var Theme = /*#__PURE__*/function () {
   }, {
     key: "NODE_FILL_COLOR",
     get: function get() {
-      return "#FAD7A0";
+      return "#FFD657";
     }
   }, {
     key: "NODE_FUNCTIONAL_FILL_COLOR",
     get: function get() {
-      return "#C5F0FF";
+      return "#81EEFF";
     }
   }, {
     key: "NODE_SELECTED_FILL_COLOR",
     get: function get() {
-      return "url(#selection-pattern)";
+      return "#FEC000";
     }
   }, {
     key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
     get: function get() {
-      return "url(#selection-functional-pattern)";
+      return "#00DCFF";
     }
   }, {
     key: "NODE_STROKE_COLOR",
@@ -30631,6 +30663,26 @@ var Theme = /*#__PURE__*/function () {
     key: "NODE_IO_NAME_FONT",
     get: function get() {
       return "bold 11px verdana";
+    }
+  }, {
+    key: "NODE_IO_NAME_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_IO_INPUT_FONT",
+    get: function get() {
+      return "bold 11px verdana";
+    }
+  }, {
+    key: "NODE_IO_INPUT_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_IO_INPUT_BACKGROUND_COLOR",
+    get: function get() {
+      return "white";
     }
   }, {
     key: "NODE_IO_POINT_RADIUS",
@@ -30790,11 +30842,173 @@ var Theme = /*#__PURE__*/function () {
 
   return Theme;
 }();
-/** Default Light Theme */
+/**
+ * The light version of the theme
+ */
 
 _defineProperty(Theme, "current", new Theme());
 
-var defaultLight = new Theme();
+var LightTheme = /*#__PURE__*/function (_Theme) {
+  _inherits(LightTheme, _Theme);
+
+  var _super = _createSuper(LightTheme);
+
+  function LightTheme() {
+    _classCallCheck(this, LightTheme);
+
+    return _super.apply(this, arguments);
+  }
+
+  return LightTheme;
+}(Theme);
+/**
+ * The dark version of default theme
+ */
+
+
+var DarkTheme = /*#__PURE__*/function (_Theme2) {
+  _inherits(DarkTheme, _Theme2);
+
+  var _super2 = _createSuper(DarkTheme);
+
+  function DarkTheme() {
+    _classCallCheck(this, DarkTheme);
+
+    return _super2.apply(this, arguments);
+  }
+
+  _createClass(DarkTheme, [{
+    key: "CANVAS_BACKGROUND_COLOR",
+    // Canvas
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "CANVAS_SELECTION_STROKE_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "CANVAS_SELECTION_FILL_COLOR",
+    get: function get() {
+      return "rgba(255,255,255,0.2)";
+    } // Node container
+
+  }, {
+    key: "NODE_FILL_COLOR",
+    get: function get() {
+      return "#D35400";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_FILL_COLOR",
+    get: function get() {
+      return "#3498DB";
+    }
+  }, {
+    key: "NODE_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    } // Connections
+
+  }, {
+    key: "CONNECTION_PREV_NEXT_COLOR",
+    get: function get() {
+      return "#BF4FFF";
+    } // Sockets
+
+  }, {
+    key: "NODE_PREV_NEXT_FILL_COLOR",
+    get: function get() {
+      return "#BF4FFF";
+    }
+  }, {
+    key: "NODE_PREV_NEXT_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_PREV_NEXT_NAME_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_IO_STROKE_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "NODE_PREV_NEXT_STROKE_WIDTH",
+    get: function get() {
+      return 3;
+    }
+  }, {
+    key: "NODE_IO_NAME_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_IO_INPUT_FONT",
+    get: function get() {
+      return "bold 11px verdana";
+    }
+  }, {
+    key: "NODE_IO_INPUT_COLOR",
+    get: function get() {
+      return "brown";
+    }
+  }, {
+    key: "NODE_IO_INPUT_BACKGROUND_COLOR",
+    get: function get() {
+      return "lightyellow";
+    } // Title
+
+  }, {
+    key: "NODE_TITLE_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_TITLE_COLOR",
+    get: function get() {
+      return "white";
+    } // Selection
+
+  }, {
+    key: "NODE_SELECTED_FILL_COLOR",
+    get: function get() {
+      return "#E59866";
+    }
+  }, {
+    key: "NODE_SELECTED_FUNCTIONAL_FILL_COLOR",
+    get: function get() {
+      return "#85C1E9";
+    }
+  }, {
+    key: "NODE_SELECTED_STROKE_COLOR",
+    get: function get() {
+      return "white";
+    }
+  }, {
+    key: "NODE_FUNCTIONAL_SELECTED_FILL_COLOR",
+    get: function get() {
+      return "orangered";
+    }
+  }]);
+
+  return DarkTheme;
+}(Theme);
+/** Default Light Theme */
+
+
+var defaultLight = new LightTheme();
+/** Default Dark Theme */
+
+var defaultDark = new DarkTheme();
 
 /***/ }),
 
@@ -31008,6 +31222,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NextSocketComponent": () => /* reexport safe */ _components_next_mjs__WEBPACK_IMPORTED_MODULE_15__.NextSocketComponent,
 /* harmony export */   "Theme": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.Theme,
 /* harmony export */   "defaultLight": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.defaultLight,
+/* harmony export */   "defaultDark": () => /* reexport safe */ _components_theme_mjs__WEBPACK_IMPORTED_MODULE_16__.defaultDark,
 /* harmony export */   "CnodeProgramComponent": () => /* reexport safe */ _components_nodes_cnodeprogram_mjs__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent,
 /* harmony export */   "CnodeBreakComponent": () => /* reexport safe */ _components_nodes_cnodebreak_mjs__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent,
 /* harmony export */   "IOConnection": () => /* reexport safe */ _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_19__.IOConnection,

@@ -123,6 +123,10 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
       this.#inputNameElement.setAttribute("value", this.socket.name);
       this.#inputNameElement.setAttribute("type", "text");
+      this.#inputNameElement.style["background-color"] =
+        Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+      this.#inputNameElement.style["color"] = Theme.current.NODE_IO_INPUT_COLOR;
+      this.#inputNameElement.style["font"] = Theme.current.NODE_IO_INPUT_FONT;
 
       textInputNameElem.appendChild(this.#inputNameElement);
     } else {
@@ -199,6 +203,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
     this.#inputValueElement.setAttribute("value", this.socket.value);
     this.#inputValueElement.setAttribute("type", "text");
+
+    this.#inputValueElement.style["background-color"] =
+      Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+    this.#inputValueElement.style["color"] = Theme.current.NODE_IO_INPUT_COLOR;
+    this.#inputValueElement.style["font"] = Theme.current.NODE_IO_INPUT_FONT;
 
     textInputValueElem.appendChild(this.#inputValueElement);
 

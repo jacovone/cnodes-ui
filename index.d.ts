@@ -192,6 +192,9 @@ declare module cnui {
     get NODE_IO_STROKE_COLOR(): string;
     get NODE_IO_NAME_FONT(): string;
     get NODE_IO_POINT_RADIUS(): number;
+    get NODE_IO_INPUT_FONT();
+    get NODE_IO_INPUT_COLOR();
+    get NODE_IO_INPUT_BACKGROUND_COLOR();
     get NODE_COMMENT_FONT(): string;
     get NODE_COMMENT_COLOR(): string;
     get CONNECTION_TEMP_WIDTH(): number;
@@ -222,6 +225,10 @@ declare module cnui {
     get TYPE_BOOLEAN_COLOR(): string;
     get TYPE_ANY_COLOR(): string;
   }
+  /** Default Light Theme */
+  export const defaultLight: Theme;
+  /** Default Dark Theme */
+  export const defaultDark: Theme;
   /**
    * This class implements a socket that represents a Prev object
    * in the cnodes world

@@ -47,52 +47,6 @@ export class Theme {
 
   get DEFS() {
     return `
-        <linearGradient id='stripe-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>
-        <stop offset='0%'  stop-color='#FAD7A0'></stop>
-        <stop offset='12.45%'  stop-color='#FAD7A0'></stop>
-        <stop offset='12.5%' stop-color='#F9C879'></stop>
-        <stop offset='24.45%' stop-color='#F9C879'></stop>
-        <stop offset='25.5%'  stop-color='#FAD7A0'></stop>
-        <stop offset='37.45%'  stop-color='#FAD7A0'></stop>
-        <stop offset='37.5%' stop-color='#F9C879'></stop>
-        <stop offset='49.9%' stop-color='#F9C879'></stop>
-        <stop offset='50%' stop-color='#FAD7A0'></stop>
-        <stop offset='62.45%' stop-color='#FAD7A0'></stop>
-        <stop offset='62.5%' stop-color='#F9C879'></stop>
-        <stop offset='74.95%' stop-color='#F9C879'></stop>
-        <stop offset='75%' stop-color='#FAD7A0'></stop>
-        <stop offset='87.45%' stop-color='#FAD7A0'></stop>
-        <stop offset='87.5%' stop-color='#F9C879'></stop>
-        <stop offset='100%' stop-color='#F9C879'></stop>
-    </linearGradient>
-    <linearGradient id='stripe-functional-gradient' x1='0%' y1='0%' x2='100%' y2='100%'>
-        <stop offset='0%'  stop-color='#C5F0FF'></stop>
-        <stop offset='12.45%'  stop-color='#C5F0FF'></stop>
-        <stop offset='12.5%' stop-color='#AEEDFF'></stop>
-        <stop offset='24.45%' stop-color='#AEEDFF'></stop>
-        <stop offset='25.5%'  stop-color='#C5F0FF'></stop>
-        <stop offset='37.45%'  stop-color='#C5F0FF'></stop>
-        <stop offset='37.5%' stop-color='#AEEDFF'></stop>
-        <stop offset='49.9%' stop-color='#AEEDFF'></stop>
-        <stop offset='50%' stop-color='#C5F0FF'></stop>
-        <stop offset='62.45%' stop-color='#C5F0FF'></stop>
-        <stop offset='62.5%' stop-color='#AEEDFF'></stop>
-        <stop offset='74.95%' stop-color='#AEEDFF'></stop>
-        <stop offset='75%' stop-color='#C5F0FF'></stop>
-        <stop offset='87.45%' stop-color='#C5F0FF'></stop>
-        <stop offset='87.5%' stop-color='#AEEDFF'></stop>
-        <stop offset='100%' stop-color='#AEEDFF'></stop>
-    </linearGradient>
-    <pattern id='selection-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >
-        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-gradient)' stroke-width='0' stroke='none'>
-            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>
-        </rect>
-    </pattern>
-    <pattern id='selection-functional-pattern' width='40' height='40' patternUnits='userSpaceOnUse' >
-        <rect x='-20' y='0' width='80' height='80' fill='url(#stripe-functional-gradient)' stroke-width='0' stroke='none'>
-            <animate attributeName='x' from='-40' to='0' dur='2s' repeatCount='indefinite'></animate>
-        </rect>
-    </pattern>
     `;
   }
 
@@ -103,16 +57,16 @@ export class Theme {
     return 15;
   }
   get NODE_FILL_COLOR() {
-    return "#FAD7A0";
+    return "#FFD657";
   }
   get NODE_FUNCTIONAL_FILL_COLOR() {
-    return "#C5F0FF";
+    return "#81EEFF";
   }
   get NODE_SELECTED_FILL_COLOR() {
-    return "url(#selection-pattern)";
+    return "#FEC000";
   }
   get NODE_SELECTED_FUNCTIONAL_FILL_COLOR() {
-    return "url(#selection-functional-pattern)";
+    return "#00DCFF";
   }
   get NODE_STROKE_COLOR() {
     return "#FFFFFF";
@@ -192,6 +146,18 @@ export class Theme {
   }
   get NODE_IO_NAME_FONT() {
     return "bold 11px verdana";
+  }
+  get NODE_IO_NAME_COLOR() {
+    return "black";
+  }
+  get NODE_IO_INPUT_FONT() {
+    return "bold 11px verdana";
+  }
+  get NODE_IO_INPUT_COLOR() {
+    return "black";
+  }
+  get NODE_IO_INPUT_BACKGROUND_COLOR() {
+    return "white";
   }
   get NODE_IO_POINT_RADIUS() {
     return 10;
@@ -299,5 +265,99 @@ export class Theme {
   static current = new Theme();
 }
 
+/**
+ * The light version of the theme
+ */
+class LightTheme extends Theme {}
+
+/**
+ * The dark version of default theme
+ */
+class DarkTheme extends Theme {
+  // Canvas
+  get CANVAS_BACKGROUND_COLOR() {
+    return "black";
+  }
+  get CANVAS_SELECTION_STROKE_COLOR() {
+    return "white";
+  }
+  get CANVAS_SELECTION_FILL_COLOR() {
+    return "rgba(255,255,255,0.2)";
+  }
+
+  // Node container
+  get NODE_FILL_COLOR() {
+    return "#D35400";
+  }
+  get NODE_FUNCTIONAL_FILL_COLOR() {
+    return "#3498DB";
+  }
+  get NODE_STROKE_COLOR() {
+    return "black";
+  }
+  get NODE_FUNCTIONAL_STROKE_COLOR() {
+    return "black";
+  }
+
+  // Connections
+  get CONNECTION_PREV_NEXT_COLOR() {
+    return "#BF4FFF";
+  }
+
+  // Sockets
+  get NODE_PREV_NEXT_FILL_COLOR() {
+    return "#BF4FFF";
+  }
+  get NODE_PREV_NEXT_STROKE_COLOR() {
+    return "black";
+  }
+  get NODE_PREV_NEXT_NAME_COLOR() {
+    return "white";
+  }
+  get NODE_IO_STROKE_COLOR() {
+    return "black";
+  }
+  get NODE_PREV_NEXT_STROKE_WIDTH() {
+    return 3;
+  }
+  get NODE_IO_NAME_COLOR() {
+    return "white";
+  }
+  get NODE_IO_INPUT_FONT() {
+    return "bold 11px verdana";
+  }
+  get NODE_IO_INPUT_COLOR() {
+    return "brown";
+  }
+  get NODE_IO_INPUT_BACKGROUND_COLOR() {
+    return "lightyellow";
+  }
+
+  // Title
+  get NODE_TITLE_COLOR() {
+    return "white";
+  }
+  get NODE_FUNCTIONAL_TITLE_COLOR() {
+    return "white";
+  }
+
+  // Selection
+  get NODE_SELECTED_FILL_COLOR() {
+    return "#E59866";
+  }
+  get NODE_SELECTED_FUNCTIONAL_FILL_COLOR() {
+    return "#85C1E9";
+  }
+  get NODE_SELECTED_STROKE_COLOR() {
+    return "white";
+  }
+  get NODE_FUNCTIONAL_SELECTED_FILL_COLOR() {
+    return "orangered";
+  }
+}
+
 /** Default Light Theme */
-export const defaultLight = new Theme();
+export const defaultLight = new LightTheme();
+
+/** Default Dark Theme */
+export const defaultDark = new DarkTheme();

@@ -79,6 +79,12 @@ export class Canvas {
   /** The list of connections between components in the canvas */
   #connections = [];
 
+  /** The list of root program export for all undo/redo actions */
+  #history = [];
+
+  /** The integer pointer of the previous state in the undo/redo history */
+  #currentStateIndex = -1;
+
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
    * set up all listeners to manage panning, zooming and selection.
@@ -191,6 +197,18 @@ export class Canvas {
   }
   set contextMenuComponent(val) {
     this.#contextMenuComponent = val;
+  }
+  get history() {
+    return this.#history;
+  }
+  set history(val) {
+    this.#history = val;
+  }
+  get currentStateIndex() {
+    return this.#currentStateIndex;
+  }
+  set currentStateIndex(val) {
+    this.#currentStateIndex = val;
   }
 
   /**
@@ -528,7 +546,7 @@ export class Canvas {
    * @param {Component} component The moved component
    * @param {Position} delta The diff position of movement
    */
-  #onSelectedComponentMovedByUser = (component, delta) => {
+  onSelectedComponentMovedByUser = (component, delta) => {
     for (let c of this.#selectedComponents.filter((c) => c !== component)) {
       c.pos = c.pos.add(delta);
       c.updateSVGElement();
@@ -540,7 +558,7 @@ export class Canvas {
    * @param {Component} component Thye clicked component
    * @param {boolean} shiftKey Was the shift key pressed during the clock action?
    */
-  #onComponentIsClicked = (component, shiftKey) => {
+  onComponentIsClicked = (component, shiftKey) => {
     if (shiftKey) {
       // Invert the component selection
       if (this.#selectedComponents.findIndex((c) => c === component) !== -1) {
@@ -605,6 +623,81 @@ export class Canvas {
   }
 
   /**
+   * This method saves the current state of the canvas in the
+   * undo/redo history. All actions that are subsequent to the current
+   * index of undo/redo index are removed from the history
+   */
+  saveState() {
+    let state = this.state();
+
+    // If the current state is the same as the last one
+    // dont store the new state in another #history position
+    if (
+      this.#currentStateIndex >= 0 &&
+      JSON.stringify(state) ===
+        JSON.stringify(this.#history[this.#currentStateIndex])
+    ) {
+      // console.log(
+      //   "Ignored, Current:",
+      //   this.#history[this.#currentStateIndex],
+      //   "Save:",
+      //   state
+      // );
+      return;
+    }
+    // console.log(
+    //   "Accepted, Current:",
+    //   this.#history[this.#currentStateIndex],
+    //   "Save:",
+    //   state
+    // );
+
+    ++this.#currentStateIndex;
+    this.#history.splice(
+      this.#currentStateIndex,
+      this.#history.length - this.#currentStateIndex,
+      state
+    );
+
+    console.log("SAVE", this.#currentStateIndex, this.#history);
+  }
+
+  /**
+   * Restore a previously saved state
+   * @param {any} state A saved state
+   */
+  restoreState(state) {
+    throw new Error("Define this method in a subclass!");
+  }
+
+  /**
+   * Return the current global state of the canvas
+   */
+  state() {
+    throw new Error("Define this method in a subclass!");
+  }
+
+  /**
+   * Undo last operation in the canvas
+   */
+  undo() {
+    if (this.#currentStateIndex > 0) {
+      this.restoreState(this.#history[--this.#currentStateIndex]);
+    }
+    console.log("UNDO", this.#currentStateIndex, this.#history);
+  }
+
+  /**
+   * Redo last undo-ed operation in the canvas
+   */
+  redo() {
+    if (this.#currentStateIndex < this.#history.length - 1) {
+      this.restoreState(this.#history[++this.#currentStateIndex]);
+    }
+    console.log("REDO", this.#currentStateIndex, this.#history);
+  }
+
+  /**
    * Add a new connection to the canvas, also add the related element to
    * the main SVG group of connections
    * @param {Connection} connection The connection to add
@@ -650,10 +743,10 @@ export class Canvas {
     this.#svgEl.appendChild(component.componentEl);
 
     if (component.moveable && component.selectable) {
-      component.events.on("cnui:clicked", this.#onComponentIsClicked);
+      component.events.on("cnui:clicked", this.onComponentIsClicked);
       component.events.on(
         "cnui:usermoveselected",
-        this.#onSelectedComponentMovedByUser
+        this.onSelectedComponentMovedByUser
       );
     }
   }
@@ -661,8 +754,7 @@ export class Canvas {
   /**
    * Remove a component from the canvas
    * @param {Component} component Component to remove
-   */
-  removeComponent(component) {
+   */ removeComponent(component) {
     // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
 
@@ -677,10 +769,10 @@ export class Canvas {
 
     // Unregister callbacks
     if (component.moveable && component.selectable) {
-      component.events.off("cnui:clicked", this.#onComponentIsClicked);
+      component.events.off("cnui:clicked", this.onComponentIsClicked);
       component.events.off(
         "cnui:usermove",
-        this.#onSelectedComponentMovedByUser
+        this.onSelectedComponentMovedByUser
       );
     }
   }
@@ -692,7 +784,6 @@ export class Canvas {
   isComponentSelected(component) {
     return this.#selectedComponents.includes(component);
   }
-
   /**
    * This method extract all connections in the canvas, that have
    * the source or the target SocketComponent as endpoint

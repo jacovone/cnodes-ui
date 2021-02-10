@@ -17,4 +17,5 @@
         "editor.showFoldingControls": "always",
         "editor.matchBrackets": "near",
         "editor.formatOnSave": true,
+        "terminal.integrated.fontSize": 14,
     }

@@ -22,12 +22,13 @@
     "@babel/plugin-proposal-private-methods": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
-    "@marco.jacovone/cnodes": "^0.18.9",
     "babel-loader": "^8.2.2",
     "events": "^3.2.0",
     "jsdoc": "^3.6.6",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@marco.jacovone/cnodes": "^0.18.13"
+  }
 }

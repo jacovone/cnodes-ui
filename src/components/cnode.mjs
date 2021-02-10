@@ -291,6 +291,7 @@ export class CnodeComponent extends Component {
           component.text = "title";
         }
         this.node.title = component.text;
+        this.canvas.saveState();
       });
 
       this.#titleComp.events.on("cnui:move", (component) => {
@@ -418,6 +419,7 @@ export class CnodeComponent extends Component {
           `<tspan alignment-baseline="middle">Add input</tspan>`,
           () => {
             this.node.addInput();
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "add input"
@@ -432,6 +434,7 @@ export class CnodeComponent extends Component {
           `<tspan alignment-baseline="middle">Add output</tspan>`,
           () => {
             this.node.addOutput();
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "add output"
@@ -444,6 +447,7 @@ export class CnodeComponent extends Component {
         `<tspan alignment-baseline="middle">Disconnect all</tspan>`,
         () => {
           this.events.emit("cnui:disconnectAll");
+          this.canvas.saveState();
         },
         "disconnect all"
       )
@@ -456,6 +460,7 @@ export class CnodeComponent extends Component {
           `<tspan alignment-baseline="middle">Delete</tspan>`,
           () => {
             this.destroy();
+            this.canvas.saveState();
           },
           "delete"
         )
@@ -473,6 +478,7 @@ export class CnodeComponent extends Component {
               this.height + 10,
               true
             );
+            this.canvas.saveState();
           },
           "add comment"
         )
@@ -487,6 +493,7 @@ export class CnodeComponent extends Component {
             this.#commentComp.destroy();
             this.node.meta.comment = undefined;
             this.#commentComp = null;
+            this.canvas.saveState();
           },
           "remove comment"
         )
@@ -537,6 +544,7 @@ export class CnodeComponent extends Component {
           y: component.pos.y,
         },
       };
+      this.canvas.saveState();
     });
     // Register "cnui:move" to update meta info
     this.#commentComp.events.on("cnui:move", (component) => {

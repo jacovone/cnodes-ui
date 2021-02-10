@@ -34,12 +34,6 @@ export class CnodesCanvas extends Canvas {
   /** The stack of edited programs */
   #stack = [];
 
-  /** The list of root program export for all undo/redo actions */
-  #history = [];
-
-  /** The integer pointer of the previous state in the undo/redo history */
-  #oldStateIndex = -1;
-
   /** The clipboard of the canvas */
   static clipboard = null;
 
@@ -142,11 +136,11 @@ export class CnodesCanvas extends Canvas {
           e.preventDefault();
         }
         if (e.key === "z" && !e.shiftKey) {
-          this.undoChanges();
+          this.undo();
           e.preventDefault();
         }
         if (e.key === "z" && e.shiftKey) {
-          this.redoChanges();
+          this.redo();
           e.preventDefault();
         }
       }
@@ -189,6 +183,7 @@ export class CnodesCanvas extends Canvas {
   set program(val) {
     this.importCnodesProgram(val);
     this.#program = val;
+    this.saveState();
   }
 
   /**
@@ -244,6 +239,7 @@ export class CnodesCanvas extends Canvas {
         `,
         () => {
           this.cloneSelectedNodes();
+          this.saveState();
         },
         "clone"
       )
@@ -302,6 +298,7 @@ export class CnodesCanvas extends Canvas {
           `,
           (x, y) => {
             this.pasteNodes(x, y);
+            this.saveState();
           },
           "paste"
         )
@@ -328,6 +325,7 @@ export class CnodesCanvas extends Canvas {
               (x, y) => {
                 let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
+                this.saveState();
               },
               n.title + n.name + nodeDef.description
             )
@@ -379,10 +377,6 @@ export class CnodesCanvas extends Canvas {
    * @param {Program} program Program to import
    */
   importCnodesProgram(program) {
-    if (this.program) {
-      this.saveState();
-    }
-
     // By temporary clearing the instance of the program, we inform
     // components that all creation/destruction will not have effect
     // on the program instance
@@ -483,7 +477,6 @@ export class CnodesCanvas extends Canvas {
    * at a position a bit doifferent from it source set
    */
   cloneSelectedNodes() {
-    this.saveState();
     let oldSelected = this.selectedComponents;
 
     let selectedNodes = Program.cloneNodes(
@@ -564,7 +557,6 @@ export class CnodesCanvas extends Canvas {
       return;
     }
 
-    this.saveState();
     let oldSelected = this.selectedComponents;
 
     let cloneNodes = Program.cloneNodes(CnodesCanvas.clipboard);
@@ -656,34 +648,18 @@ export class CnodesCanvas extends Canvas {
   }
 
   /**
-   * This method saves the current state of the canvas in the
-   * undo/redo history
+   * Restore a previously saved state
+   * @param {any} state A saved state
    */
-  saveState() {
-    console.log(this.#oldStateIndex);
-    // Saving the state means do a complete
-    // export of the program and shift the current
-    // state pointer ahead
+  restoreState(state) {
+    this.importCnodesProgram(Env.import(state));
+  }
+
+  /**
+   * Return the current global state of the canvas
+   */
+  state() {
     let state = Env.export(this.program);
-    ++this.#oldStateIndex;
-    this.#history.splice(this.#oldStateIndex, this.#history.length, state);
-  }
-
-  undoChanges() {
-    console.log(this.#oldStateIndex);
-    if (this.#oldStateIndex > -1) {
-      this.#program = null;
-      this.destroyAll();
-      this.program = Env.import(this.#history[this.#oldStateIndex--]);
-    }
-  }
-
-  redoChanges() {
-    console.log(this.#oldStateIndex);
-    if (this.#oldStateIndex < this.#history.length) {
-      this.#program = null;
-      this.destroyAll();
-      this.program = Env.import(this.#history[++this.#oldStateIndex]);
-    }
+    return state;
   }
 }

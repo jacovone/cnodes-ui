@@ -31,6 +31,7 @@ export class CnodesConnection extends Connection {
       // Connect cnodes sockets
       this.source.socket.connect(this.target.socket);
     }
+
     return this;
   }
 

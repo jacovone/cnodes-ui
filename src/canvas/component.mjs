@@ -182,7 +182,10 @@ export class Component {
    */
   #onPointerUp(e) {
     if (this.#moveable && e.button === 0) {
-      this.#moving = false;
+      if (this.#moving) {
+        this.#moving = false;
+        this.canvas.saveState();
+      }
       this.#componentEl.releasePointerCapture(e.pointerId);
       e.stopPropagation();
     }

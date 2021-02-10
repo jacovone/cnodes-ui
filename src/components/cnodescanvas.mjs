@@ -111,12 +111,14 @@ export class CnodesCanvas extends Canvas {
       }
       if (e.key === "Delete") {
         this.deleteSelectedNodes();
+        this.saveState();
         e.preventDefault();
       }
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "x") {
           this.copySelectedNodes();
           this.deleteSelectedNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "a") {
@@ -129,10 +131,12 @@ export class CnodesCanvas extends Canvas {
         }
         if (e.key === "v") {
           this.pasteNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "d") {
           this.cloneSelectedNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "z" && !e.shiftKey) {

@@ -659,7 +659,7 @@ export class Canvas {
       state
     );
 
-    console.log("SAVE", this.#currentStateIndex, this.#history);
+    // console.log("SAVE", this.#currentStateIndex, this.#history);
   }
 
   /**
@@ -684,7 +684,7 @@ export class Canvas {
     if (this.#currentStateIndex > 0) {
       this.restoreState(this.#history[--this.#currentStateIndex]);
     }
-    console.log("UNDO", this.#currentStateIndex, this.#history);
+    // console.log("UNDO", this.#currentStateIndex, this.#history);
   }
 
   /**
@@ -694,7 +694,7 @@ export class Canvas {
     if (this.#currentStateIndex < this.#history.length - 1) {
       this.restoreState(this.#history[++this.#currentStateIndex]);
     }
-    console.log("REDO", this.#currentStateIndex, this.#history);
+    // console.log("REDO", this.#currentStateIndex, this.#history);
   }
 
   /**

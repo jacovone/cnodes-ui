@@ -23863,9 +23863,8 @@ var Canvas = /*#__PURE__*/function () {
 
       _classPrivateFieldSet(this, _currentStateIndex, +_classPrivateFieldGet(this, _currentStateIndex) + 1);
 
-      _classPrivateFieldGet(this, _history).splice(_classPrivateFieldGet(this, _currentStateIndex), _classPrivateFieldGet(this, _history).length - _classPrivateFieldGet(this, _currentStateIndex), state);
+      _classPrivateFieldGet(this, _history).splice(_classPrivateFieldGet(this, _currentStateIndex), _classPrivateFieldGet(this, _history).length - _classPrivateFieldGet(this, _currentStateIndex), state); // console.log("SAVE", this.#currentStateIndex, this.#history);
 
-      console.log("SAVE", _classPrivateFieldGet(this, _currentStateIndex), _classPrivateFieldGet(this, _history));
     }
     /**
      * Restore a previously saved state
@@ -23895,9 +23894,8 @@ var Canvas = /*#__PURE__*/function () {
     value: function undo() {
       if (_classPrivateFieldGet(this, _currentStateIndex) > 0) {
         this.restoreState(_classPrivateFieldGet(this, _history)[_classPrivateFieldSet(this, _currentStateIndex, +_classPrivateFieldGet(this, _currentStateIndex) - 1)]);
-      }
+      } // console.log("UNDO", this.#currentStateIndex, this.#history);
 
-      console.log("UNDO", _classPrivateFieldGet(this, _currentStateIndex), _classPrivateFieldGet(this, _history));
     }
     /**
      * Redo last undo-ed operation in the canvas
@@ -23908,9 +23906,8 @@ var Canvas = /*#__PURE__*/function () {
     value: function redo() {
       if (_classPrivateFieldGet(this, _currentStateIndex) < _classPrivateFieldGet(this, _history).length - 1) {
         this.restoreState(_classPrivateFieldGet(this, _history)[_classPrivateFieldSet(this, _currentStateIndex, +_classPrivateFieldGet(this, _currentStateIndex) + 1)]);
-      }
+      } // console.log("REDO", this.#currentStateIndex, this.#history);
 
-      console.log("REDO", _classPrivateFieldGet(this, _currentStateIndex), _classPrivateFieldGet(this, _history));
     }
     /**
      * Add a new connection to the canvas, also add the related element to
@@ -24948,7 +24945,7 @@ var _onPointerDown2 = function _onPointerDown2(e) {
     this.events.emit("cnui:clicked", this, e.shiftKey);
 
     if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
-      _classPrivateFieldSet(this, _moving, true);
+      _classPrivateFieldSet(this, _moving, false);
 
       _classPrivateFieldSet(this, _startMovePos, _classPrivateFieldGet(this, _canvas).clientToSvgPoint(e.clientX, e.clientY));
 
@@ -24968,10 +24965,16 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
 var _onPointerUp2 = function _onPointerUp2(e) {
   if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
-    if (_classPrivateFieldGet(this, _moving)) {
-      _classPrivateFieldSet(this, _moving, false);
+    if (_classPrivateFieldGet(this, _startMovePos)) {
+      _classPrivateFieldSet(this, _startMovePos, null);
 
-      this.canvas.saveState();
+      _classPrivateFieldSet(this, _startMovePointerPos, null);
+
+      if (_classPrivateFieldGet(this, _moving)) {
+        _classPrivateFieldSet(this, _moving, false);
+
+        this.canvas.saveState();
+      }
     }
 
     _classPrivateFieldGet(this, _componentEl).releasePointerCapture(e.pointerId);
@@ -24982,7 +24985,9 @@ var _onPointerUp2 = function _onPointerUp2(e) {
 
 var _onPointerMove2 = function _onPointerMove2(e) {
   if (_classPrivateFieldGet(this, _moveable)) {
-    if (!_classPrivateFieldGet(this, _moving)) {
+    if (_classPrivateFieldGet(this, _startMovePos)) {
+      _classPrivateFieldSet(this, _moving, true);
+    } else {
       return;
     }
 
@@ -26775,6 +26780,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       if (e.key === "Delete") {
         _this.deleteSelectedNodes();
 
+        _this.saveState();
+
         e.preventDefault();
       }
 
@@ -26783,6 +26790,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           _this.copySelectedNodes();
 
           _this.deleteSelectedNodes();
+
+          _this.saveState();
 
           e.preventDefault();
         }
@@ -26802,11 +26811,15 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         if (e.key === "v") {
           _this.pasteNodes();
 
+          _this.saveState();
+
           e.preventDefault();
         }
 
         if (e.key === "d") {
           _this.cloneSelectedNodes();
+
+          _this.saveState();
 
           e.preventDefault();
         }

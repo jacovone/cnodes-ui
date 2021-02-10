@@ -159,7 +159,7 @@ export class Component {
       this.events.emit("cnui:clicked", this, e.shiftKey);
 
       if (this.#moveable && e.button === 0) {
-        this.#moving = true;
+        this.#moving = false;
         this.#startMovePos = this.#canvas.clientToSvgPoint(
           e.clientX,
           e.clientY
@@ -182,9 +182,13 @@ export class Component {
    */
   #onPointerUp(e) {
     if (this.#moveable && e.button === 0) {
-      if (this.#moving) {
-        this.#moving = false;
-        this.canvas.saveState();
+      if (this.#startMovePos) {
+        this.#startMovePos = null;
+        this.#startMovePointerPos = null;
+        if (this.#moving) {
+          this.#moving = false;
+          this.canvas.saveState();
+        }
       }
       this.#componentEl.releasePointerCapture(e.pointerId);
       e.stopPropagation();
@@ -197,7 +201,9 @@ export class Component {
    */
   #onPointerMove(e) {
     if (this.#moveable) {
-      if (!this.#moving) {
+      if (this.#startMovePos) {
+        this.#moving = true;
+      } else {
         return;
       }
 

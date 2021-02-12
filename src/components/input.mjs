@@ -236,6 +236,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
     // This creates the connection and connects sockets
     new IOConnection(socketComp, this, this.canvas).setup();
+    this.canvas.saveState();
   }
 
   /**
@@ -396,6 +397,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             // Disconnect this socket
             conn.destroy();
+            this.canvas.saveState();
           },
           "disconnect"
         )
@@ -408,6 +410,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.node.removeInput(this.socket);
             this.destroy();
+            this.canvas.saveState();
 
             // Ensure that node parent redraw itself
             this.parent.updateSVGElement();
@@ -425,6 +428,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.NUMBER;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "number"
@@ -436,6 +440,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.ANY;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "any"
@@ -447,6 +452,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.STRING;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "string"
@@ -458,6 +464,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.BOOLEAN;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "boolean"
@@ -469,6 +476,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.ARRAY;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "array"
@@ -480,6 +488,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.OBJECT;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "object"

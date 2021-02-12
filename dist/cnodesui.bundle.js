@@ -724,7 +724,7 @@ var Env = /*#__PURE__*/function () {
             name: node.name,
             title: node.title,
             functional: node.functional,
-            meta: node.meta,
+            meta: JSON.parse(JSON.stringify(node.meta)),
             program: node instanceof _program.Program ? Env["export"](node) : undefined,
             inputs: node.inputs.map(function (inp) {
               return {
@@ -929,6 +929,7 @@ var Env = /*#__PURE__*/function () {
 
       p.removeNode(p.enter);
       p.removeNode(p.exit);
+      p.id = data.id;
       _program.Program.version = data.version; // Now import nodes without connections
 
       var _iterator8 = _createForOfIteratorHelper(data.nodes),
@@ -960,7 +961,7 @@ var Env = /*#__PURE__*/function () {
           node.title = nodeData.title;
           node.id = nodeData.id;
           node.functional = nodeData.functional;
-          node.meta = nodeData.meta;
+          node.meta = JSON.parse(JSON.stringify(nodeData.meta));
 
           var _iterator10 = _createForOfIteratorHelper(nodeData.inputs),
               _step10;
@@ -23283,6 +23284,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
 function _classPrivateFieldGet(receiver, privateMap) { var descriptor = privateMap.get(receiver); if (!descriptor) { throw new TypeError("attempted to get private field on non-instance"); } if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
@@ -23346,6 +23349,10 @@ var _selectedComponents = new WeakMap();
 
 var _connections = new WeakMap();
 
+var _history = new WeakMap();
+
+var _currentStateIndex = new WeakMap();
+
 var _updateSVGViewBox = new WeakSet();
 
 var _adaptSVGSize = new WeakSet();
@@ -23359,10 +23366,6 @@ var _onPointerUp = new WeakSet();
 var _onPointerMove = new WeakSet();
 
 var _addComponentToSelectionForBox = new WeakSet();
-
-var _onSelectedComponentMovedByUser = new WeakMap();
-
-var _onComponentIsClicked = new WeakMap();
 
 var _onContextMenu = new WeakSet();
 
@@ -23404,6 +23407,10 @@ var Canvas = /*#__PURE__*/function () {
   /** The list of selected components */
 
   /** The list of connections between components in the canvas */
+
+  /** The list of root program export for all undo/redo actions */
+
+  /** The integer pointer of the previous state in the undo/redo history */
 
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
@@ -23511,72 +23518,76 @@ var Canvas = /*#__PURE__*/function () {
       value: []
     });
 
-    _onSelectedComponentMovedByUser.set(this, {
+    _history.set(this, {
       writable: true,
-      value: function value(component, delta) {
-        var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
-          return c !== component;
-        })),
-            _step;
+      value: []
+    });
 
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var c = _step.value;
-            c.pos = c.pos.add(delta);
-            c.updateSVGElement();
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
+    _currentStateIndex.set(this, {
+      writable: true,
+      value: -1
+    });
+
+    _defineProperty(this, "onSelectedComponentMovedByUser", function (component, delta) {
+      var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
+        return c !== component;
+      })),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var c = _step.value;
+          c.pos = c.pos.add(delta);
+          c.updateSVGElement();
         }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
     });
 
-    _onComponentIsClicked.set(this, {
-      writable: true,
-      value: function value(component, shiftKey) {
-        if (shiftKey) {
-          // Invert the component selection
-          if (_classPrivateFieldGet(_this, _selectedComponents).findIndex(function (c) {
-            return c === component;
-          }) !== -1) {
-            _classPrivateFieldSet(_this, _selectedComponents, _classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
-              return c !== component;
-            }));
-          } else {
-            _classPrivateFieldGet(_this, _selectedComponents).push(component);
+    _defineProperty(this, "onComponentIsClicked", function (component, shiftKey) {
+      if (shiftKey) {
+        // Invert the component selection
+        if (_classPrivateFieldGet(_this, _selectedComponents).findIndex(function (c) {
+          return c === component;
+        }) !== -1) {
+          _classPrivateFieldSet(_this, _selectedComponents, _classPrivateFieldGet(_this, _selectedComponents).filter(function (c) {
+            return c !== component;
+          }));
+        } else {
+          _classPrivateFieldGet(_this, _selectedComponents).push(component);
 
-            _this.bringToFront(component);
+          _this.bringToFront(component);
+        }
+
+        component.updateSVGElement();
+      } else {
+        // If is already selected does nothing
+        if (!_this.isComponentSelected(component)) {
+          // Set the component as the only one selected
+          var selection = _classPrivateFieldGet(_this, _selectedComponents);
+
+          _classPrivateFieldSet(_this, _selectedComponents, [component]);
+
+          var _iterator2 = _createForOfIteratorHelper(selection),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var c = _step2.value;
+              c.updateSVGElement();
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
           }
+
+          _this.bringToFront(component);
 
           component.updateSVGElement();
-        } else {
-          // If is already selected does nothing
-          if (!_this.isComponentSelected(component)) {
-            // Set the component as the only one selected
-            var selection = _classPrivateFieldGet(_this, _selectedComponents);
-
-            _classPrivateFieldSet(_this, _selectedComponents, [component]);
-
-            var _iterator2 = _createForOfIteratorHelper(selection),
-                _step2;
-
-            try {
-              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                var c = _step2.value;
-                c.updateSVGElement();
-              }
-            } catch (err) {
-              _iterator2.e(err);
-            } finally {
-              _iterator2.f();
-            }
-
-            _this.bringToFront(component);
-
-            component.updateSVGElement();
-          }
         }
       }
     });
@@ -23823,6 +23834,82 @@ var Canvas = /*#__PURE__*/function () {
       return null;
     }
     /**
+     * This method saves the current state of the canvas in the
+     * undo/redo history. All actions that are subsequent to the current
+     * index of undo/redo index are removed from the history
+     */
+
+  }, {
+    key: "saveState",
+    value: function saveState() {
+      var state = this.state(); // If the current state is the same as the last one
+      // dont store the new state in another #history position
+
+      if (_classPrivateFieldGet(this, _currentStateIndex) >= 0 && JSON.stringify(state) === JSON.stringify(_classPrivateFieldGet(this, _history)[_classPrivateFieldGet(this, _currentStateIndex)])) {
+        // console.log(
+        //   "Ignored, Current:",
+        //   this.#history[this.#currentStateIndex],
+        //   "Save:",
+        //   state
+        // );
+        return;
+      } // console.log(
+      //   "Accepted, Current:",
+      //   this.#history[this.#currentStateIndex],
+      //   "Save:",
+      //   state
+      // );
+
+
+      _classPrivateFieldSet(this, _currentStateIndex, +_classPrivateFieldGet(this, _currentStateIndex) + 1);
+
+      _classPrivateFieldGet(this, _history).splice(_classPrivateFieldGet(this, _currentStateIndex), _classPrivateFieldGet(this, _history).length - _classPrivateFieldGet(this, _currentStateIndex), state); // console.log("SAVE", this.#currentStateIndex, this.#history);
+
+    }
+    /**
+     * Restore a previously saved state
+     * @param {any} state A saved state
+     */
+
+  }, {
+    key: "restoreState",
+    value: function restoreState(state) {
+      throw new Error("Define this method in a subclass!");
+    }
+    /**
+     * Return the current global state of the canvas
+     */
+
+  }, {
+    key: "state",
+    value: function state() {
+      throw new Error("Define this method in a subclass!");
+    }
+    /**
+     * Undo last operation in the canvas
+     */
+
+  }, {
+    key: "undo",
+    value: function undo() {
+      if (_classPrivateFieldGet(this, _currentStateIndex) > 0) {
+        this.restoreState(_classPrivateFieldGet(this, _history)[_classPrivateFieldSet(this, _currentStateIndex, +_classPrivateFieldGet(this, _currentStateIndex) - 1)]);
+      } // console.log("UNDO", this.#currentStateIndex, this.#history);
+
+    }
+    /**
+     * Redo last undo-ed operation in the canvas
+     */
+
+  }, {
+    key: "redo",
+    value: function redo() {
+      if (_classPrivateFieldGet(this, _currentStateIndex) < _classPrivateFieldGet(this, _history).length - 1) {
+        this.restoreState(_classPrivateFieldGet(this, _history)[_classPrivateFieldSet(this, _currentStateIndex, +_classPrivateFieldGet(this, _currentStateIndex) + 1)]);
+      } // console.log("REDO", this.#currentStateIndex, this.#history);
+
+    }
+    /**
      * Add a new connection to the canvas, also add the related element to
      * the main SVG group of connections
      * @param {Connection} connection The connection to add
@@ -23879,8 +23966,8 @@ var Canvas = /*#__PURE__*/function () {
       _classPrivateFieldGet(this, _svgEl).appendChild(component.componentEl);
 
       if (component.moveable && component.selectable) {
-        component.events.on("cnui:clicked", _classPrivateFieldGet(this, _onComponentIsClicked));
-        component.events.on("cnui:usermoveselected", _classPrivateFieldGet(this, _onSelectedComponentMovedByUser));
+        component.events.on("cnui:clicked", this.onComponentIsClicked);
+        component.events.on("cnui:usermoveselected", this.onSelectedComponentMovedByUser);
       }
     }
     /**
@@ -23906,8 +23993,8 @@ var Canvas = /*#__PURE__*/function () {
 
 
       if (component.moveable && component.selectable) {
-        component.events.off("cnui:clicked", _classPrivateFieldGet(this, _onComponentIsClicked));
-        component.events.off("cnui:usermove", _classPrivateFieldGet(this, _onSelectedComponentMovedByUser));
+        component.events.off("cnui:clicked", this.onComponentIsClicked);
+        component.events.off("cnui:usermove", this.onSelectedComponentMovedByUser);
       }
     }
     /**
@@ -24137,6 +24224,22 @@ var Canvas = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _contextMenuComponent, val);
+    }
+  }, {
+    key: "history",
+    get: function get() {
+      return _classPrivateFieldGet(this, _history);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _history, val);
+    }
+  }, {
+    key: "currentStateIndex",
+    get: function get() {
+      return _classPrivateFieldGet(this, _currentStateIndex);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _currentStateIndex, val);
     }
     /**
      * Return the internal SVG element
@@ -24842,7 +24945,7 @@ var _onPointerDown2 = function _onPointerDown2(e) {
     this.events.emit("cnui:clicked", this, e.shiftKey);
 
     if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
-      _classPrivateFieldSet(this, _moving, true);
+      _classPrivateFieldSet(this, _moving, false);
 
       _classPrivateFieldSet(this, _startMovePos, _classPrivateFieldGet(this, _canvas).clientToSvgPoint(e.clientX, e.clientY));
 
@@ -24862,7 +24965,17 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 
 var _onPointerUp2 = function _onPointerUp2(e) {
   if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
-    _classPrivateFieldSet(this, _moving, false);
+    if (_classPrivateFieldGet(this, _startMovePos)) {
+      _classPrivateFieldSet(this, _startMovePos, null);
+
+      _classPrivateFieldSet(this, _startMovePointerPos, null);
+
+      if (_classPrivateFieldGet(this, _moving)) {
+        _classPrivateFieldSet(this, _moving, false);
+
+        this.canvas.saveState();
+      }
+    }
 
     _classPrivateFieldGet(this, _componentEl).releasePointerCapture(e.pointerId);
 
@@ -24872,7 +24985,9 @@ var _onPointerUp2 = function _onPointerUp2(e) {
 
 var _onPointerMove2 = function _onPointerMove2(e) {
   if (_classPrivateFieldGet(this, _moveable)) {
-    if (!_classPrivateFieldGet(this, _moving)) {
+    if (_classPrivateFieldGet(this, _startMovePos)) {
+      _classPrivateFieldSet(this, _moving, true);
+    } else {
       return;
     }
 
@@ -26223,6 +26338,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           }
 
           _this2.node.title = component.text;
+
+          _this2.canvas.saveState();
         });
 
         _classPrivateFieldGet(this, _titleComp).events.on("cnui:move", function (component) {
@@ -26306,6 +26423,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add input</tspan>", function () {
           _this3.node.addInput();
 
+          _this3.canvas.saveState();
+
           _this3.updateSVGElement();
         }, "add input"));
       } // The node can add inputs?
@@ -26315,23 +26434,31 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add output</tspan>", function () {
           _this3.node.addOutput();
 
+          _this3.canvas.saveState();
+
           _this3.updateSVGElement();
         }, "add output"));
       }
 
       items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect all</tspan>", function () {
         _this3.events.emit("cnui:disconnectAll");
+
+        _this3.canvas.saveState();
       }, "disconnect all")); // The node can be removed?
 
       if (this.node.removable) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Delete</tspan>", function () {
           _this3.destroy();
+
+          _this3.canvas.saveState();
         }, "delete"));
       }
 
       if (!_classPrivateFieldGet(this, _commentComp)) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Add comment</tspan>", function () {
           _this3.createCommentComponent("write a comment", 0, _this3.height + 10, true);
+
+          _this3.canvas.saveState();
         }, "add comment"));
       } else {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_7__.MenuItem("<tspan alignment-baseline=\"middle\">Remove comment</tspan>", function () {
@@ -26344,6 +26471,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
           _this3.node.meta.comment = undefined;
 
           _classPrivateFieldSet(_this3, _commentComp, null);
+
+          _this3.canvas.saveState();
         }, "remove comment"));
       }
 
@@ -26399,6 +26528,8 @@ var CnodeComponent = /*#__PURE__*/function (_Component) {
             y: component.pos.y
           }
         };
+
+        _this4.canvas.saveState();
       }); // Register "cnui:move" to update meta info
 
 
@@ -26588,8 +26719,6 @@ var _program = new WeakMap();
 
 var _stack = new WeakMap();
 
-var _history = new WeakMap();
-
 var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   _inherits(CnodesCanvas, _Canvas);
 
@@ -26600,8 +26729,6 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
   /** The edited program */
 
   /** The stack of edited programs */
-
-  /** The list of root program export for all actions */
 
   /** The clipboard of the canvas */
 
@@ -26619,11 +26746,6 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     });
 
     _stack.set(_assertThisInitialized(_this), {
-      writable: true,
-      value: []
-    });
-
-    _history.set(_assertThisInitialized(_this), {
       writable: true,
       value: []
     });
@@ -26658,6 +26780,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       if (e.key === "Delete") {
         _this.deleteSelectedNodes();
 
+        _this.saveState();
+
         e.preventDefault();
       }
 
@@ -26666,6 +26790,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
           _this.copySelectedNodes();
 
           _this.deleteSelectedNodes();
+
+          _this.saveState();
 
           e.preventDefault();
         }
@@ -26685,26 +26811,49 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         if (e.key === "v") {
           _this.pasteNodes();
 
+          _this.saveState();
+
           e.preventDefault();
         }
 
         if (e.key === "d") {
           _this.cloneSelectedNodes();
 
+          _this.saveState();
+
           e.preventDefault();
         }
 
         if (e.key === "z" && !e.shiftKey) {
-          // this.undoChanges();
+          _this.undo();
+
           e.preventDefault();
         }
 
         if (e.key === "z" && e.shiftKey) {
-          // this.redoChanges();
+          _this.redo();
+
           e.preventDefault();
         }
       }
     });
+    var prg = new _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program();
+    prg.enter.meta = {
+      pos: {
+        x: 100,
+        y: 100
+      }
+    };
+    prg.exit.meta = {
+      pos: {
+        x: 1000,
+        y: 100
+      }
+    };
+    _this.program = prg; // First save
+
+    _this.saveState();
+
     return _this;
   }
 
@@ -26765,6 +26914,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       }, "copy"));
       retArr.unshift(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n        <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n          Clone ").concat(this.selectedComponents.length, " node").concat(this.selectedComponents.length !== 1 ? "s" : "", "\n        </tspan>\n        "), function () {
         _this2.cloneSelectedNodes();
+
+        _this2.saveState();
       }, "clone"));
       return retArr;
     }
@@ -26792,6 +26943,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       if (CnodesCanvas.clipboard) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">\n            Paste ").concat(CnodesCanvas.clipboard.length, " node").concat(CnodesCanvas.clipboard.length !== 1 ? "s" : "", "\n          </tspan>\n          "), function (x, y) {
           _this3.pasteNodes(x, y);
+
+          _this3.saveState();
         }, "paste"));
       }
 
@@ -26814,6 +26967,8 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
                 items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n              <tspan alignment-baseline=\"middle\" style=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                New\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_COLOR, "\">\n                ").concat(nodeDef.description, "\n              </tspan>\n              <tspan alignment-baseline=\"middle\" style=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_STYLE, "\" fill=\"").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_10__.Theme.current.MENU_ITEM_CATEGORY_COLOR, "\">\n                (").concat(nodeDef.category, ")\n              </tspan>\n              "), function (x, y) {
                   var node = CnodesCanvas.getNodeUIInstance(n, _this3);
                   node.pos = new _canvas_position_mjs__WEBPACK_IMPORTED_MODULE_5__.Position(x, y);
+
+                  _this3.saveState();
                 }, n.title + n.name + nodeDef.description));
               }
             };
@@ -27310,10 +27465,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var _this4 = this;
 
       setTimeout(function () {
-        // Push this current program to the stack
-        _classPrivateFieldGet(_this4, _stack).unshift(_this4.program); // Set the new Program
+        // Push this current program, the history and the currentStateIndex to the stack
+        _classPrivateFieldGet(_this4, _stack).unshift(_this4.program); // Set the new Program and reset the history
 
 
+        _this4.history = [];
+        _this4.currentStateIndex = -1;
         _this4.program = program;
       });
     }
@@ -27328,7 +27485,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var _this5 = this;
 
       setTimeout(function () {
-        _this5.program = _classPrivateFieldGet(_this5, _stack).shift();
+        // Restore the old program and history
+        var prg = _classPrivateFieldGet(_this5, _stack).shift(); // Set the new Program and reset history
+
+
+        _this5.history = [];
+        _this5.currentStateIndex = -1;
+        _this5.program = prg;
       });
     }
     /**
@@ -27340,6 +27503,26 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
     key: "canPopProgram",
     value: function canPopProgram() {
       return _classPrivateFieldGet(this, _stack).length > 0;
+    }
+    /**
+     * Restore a previously saved state
+     * @param {any} state A saved state
+     */
+
+  }, {
+    key: "restoreState",
+    value: function restoreState(state) {
+      this.importCnodesProgram(_marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.import(state));
+    }
+    /**
+     * Return the current global state of the canvas
+     */
+
+  }, {
+    key: "state",
+    value: function state() {
+      var state = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Env.export(this.program);
+      return state;
     }
   }, {
     key: "program",
@@ -27363,7 +27546,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
       _classPrivateFieldSet(this, _program, val);
 
-      this.fitGraph();
+      this.saveState();
     }
   }], [{
     key: "registerNodeUI",
@@ -28803,6 +28986,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
       new _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_2__.IOConnection(socketComp, this, this.canvas).setup();
+      this.canvas.saveState();
     }
     /**
      * Query if this socket could accept a connection with
@@ -28979,6 +29163,8 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           // Disconnect this socket
           conn.destroy();
+
+          _this4.canvas.saveState();
         }, "disconnect"));
       }
 
@@ -28986,7 +29172,9 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("<tspan alignment-baseline=\"middle\">Delete input</tspan>", function () {
           _this4.socket.node.removeInput(_this4.socket);
 
-          _this4.destroy(); // Ensure that node parent redraw itself
+          _this4.destroy();
+
+          _this4.canvas.saveState(); // Ensure that node parent redraw itself
 
 
           _this4.parent.updateSVGElement();
@@ -28997,25 +29185,37 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
 
+          _this4.canvas.saveState();
+
           _this4.updateSVGElement();
         }, "number"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.ANY;
+
+          _this4.canvas.saveState();
 
           _this4.updateSVGElement();
         }, "any"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.STRING;
 
+          _this4.canvas.saveState();
+
           _this4.updateSVGElement();
         }, "string"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.BOOLEAN;
+
+          _this4.canvas.saveState();
 
           _this4.updateSVGElement();
         }, "boolean"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.ARRAY;
 
+          _this4.canvas.saveState();
+
           _this4.updateSVGElement();
         }, "array"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_5__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.OBJECT;
+
+          _this4.canvas.saveState();
 
           _this4.updateSVGElement();
         }, "object"));
@@ -29199,6 +29399,7 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
       new _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_3__.PrevNextConnection(this, socketComp, this.canvas).setup();
+      this.canvas.saveState();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -29295,12 +29496,16 @@ var NextSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
+      var _this3 = this;
+
       var items = [];
       var conn = this.canvas.getConnectionsFor(this)[0];
 
       if (conn) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_6__.MenuItem("<tspan alignment-baseline=\"middle\">Disconnect</tspan>", function () {
           conn.destroy();
+
+          _this3.canvas.saveState();
         }, "disconnect"));
       }
 
@@ -29460,6 +29665,8 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
           _iterator.f();
         }
 
+        _this2.canvas.saveState();
+
         _this2.updateSVGElement();
       }, "remove unused"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_1__.MenuItem("<tspan alignment-baseline=\"middle\" style=\"font: ".concat(_index_mjs__WEBPACK_IMPORTED_MODULE_0__.Theme.current.MENU_SPECIAL_ITEM_STYLE, "\">Reset outputs</tspan>"), function () {
         var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(_this2, _originalOutputs)),
@@ -29478,6 +29685,8 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
         } finally {
           _iterator2.f();
         }
+
+        _this2.canvas.saveState();
 
         _this2.updateSVGElement();
       }, "reset outputs"));
@@ -29853,6 +30062,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
       new _connections_ioconnection_mjs__WEBPACK_IMPORTED_MODULE_2__.IOConnection(this, socketComp, this.canvas).setup();
+      this.canvas.saveState();
     }
     /**
      * Query if this socket could accept a connection with
@@ -30003,6 +30213,8 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           } finally {
             _iterator4.f();
           }
+
+          _this4.canvas.saveState();
         }, "disconnect all"));
       }
 
@@ -30010,7 +30222,9 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("<tspan alignment-baseline=\"middle\">Delete output</tspan>", function () {
           _this4.socket.node.removeOutput(_this4.socket);
 
-          _this4.destroy(); // Ensure that node parent redraw itself
+          _this4.destroy();
+
+          _this4.canvas.saveState(); // Ensure that node parent redraw itself
 
 
           _this4.parent.updateSVGElement();
@@ -30021,25 +30235,37 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
         items.push(new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_ANY_COLOR, "\">ANY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.ANY;
 
+          _this4.canvas.saveState();
+
           _this4.updateSVGElement();
         }, "any"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_NUMBER_COLOR, "\">NUMBER</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER;
+
+          _this4.canvas.saveState();
 
           _this4.updateSVGElement();
         }, "number"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_STRING_COLOR, "\">STRING</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.STRING;
 
+          _this4.canvas.saveState();
+
           _this4.updateSVGElement();
         }), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_BOOLEAN_COLOR, "\">BOOLEAN</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.BOOLEAN;
+
+          _this4.canvas.saveState();
 
           _this4.updateSVGElement();
         }, "boolean"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_ARRAY_COLOR, "\">ARRAY</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.ARRAY;
 
+          _this4.canvas.saveState();
+
           _this4.updateSVGElement();
         }, "array"), new _canvas_menu_mjs__WEBPACK_IMPORTED_MODULE_4__.MenuItem("\n          <tspan alignment-baseline=\"middle\">Set type as</tspan>\n          <tspan alignment-baseline=\"middle\" fill=\"".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.TYPE_OBJECT_COLOR, "\">OBJECT</tspan>\n          "), function () {
           _this4.socket.type = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.OBJECT;
+
+          _this4.canvas.saveState();
 
           _this4.updateSVGElement();
         }, "object"));
@@ -30216,6 +30442,7 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
 
       new _connections_prevnextconnection_mjs__WEBPACK_IMPORTED_MODULE_2__.PrevNextConnection(socketComp, this, this.canvas).setup();
+      this.canvas.saveState();
     }
     /**
      * Quesry if this socket could accept a connection with
@@ -30328,6 +30555,8 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
   }, {
     key: "getContextMenuItems",
     value: function getContextMenuItems() {
+      var _this3 = this;
+
       var items = [];
       var conns = this.canvas.getConnectionsFor(this);
 
@@ -30346,6 +30575,8 @@ var PrevSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
           } finally {
             _iterator4.f();
           }
+
+          _this3.canvas.saveState();
         }, "disconnect all"));
       }
 

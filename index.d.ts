@@ -883,6 +883,30 @@ declare module cnui {
       onlySockets?: boolean
     ): Component;
     /**
+     * This method saves the current state of the canvas in the
+     * undo/redo history. All actions that are subsequent to the current
+     * index of undo/redo index are removed from the history
+     */
+    saveState(): void;
+    /**
+     * Restore a previously saved state
+     * @param {any} state A saved state
+     */
+    restoreState(state: any): void;
+    /**
+     * Return the current global state of the canvas
+     * @returns The current status of the canvas
+     */
+    state(): any;
+    /**
+     * Undo last operation in the canvas
+     */
+    undo(): void;
+    /**
+     * Redo last undo-ed operation in the canvas
+     */
+    redo(): void;
+    /**
      * Add a new connection to the canvas, also add the related element to
      * the main SVG group of connections
      * @param {Connection} connection The connection to add

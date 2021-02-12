@@ -119,6 +119,7 @@ export class PrevSocketComponent extends CnodesSocketComponent {
 
     // This creates the connection and connects sockets
     new PrevNextConnection(socketComp, this, this.canvas).setup();
+    this.canvas.saveState();
   }
 
   /**
@@ -209,6 +210,7 @@ export class PrevSocketComponent extends CnodesSocketComponent {
             for (let c of conns) {
               c.destroy();
             }
+            this.canvas.saveState();
           },
           "disconnect all"
         )

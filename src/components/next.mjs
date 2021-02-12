@@ -126,6 +126,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
 
     // This creates the connection and connects sockets
     new PrevNextConnection(this, socketComp, this.canvas).setup();
+    this.canvas.saveState();
   }
 
   /**
@@ -212,6 +213,7 @@ export class NextSocketComponent extends CnodesSocketComponent {
           `<tspan alignment-baseline="middle">Disconnect</tspan>`,
           () => {
             conn.destroy();
+            this.canvas.saveState();
           },
           "disconnect"
         )

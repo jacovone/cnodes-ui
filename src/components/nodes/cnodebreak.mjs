@@ -51,6 +51,7 @@ export class CnodeBreakComponent extends CnodeComponent {
               o.__comp.destroy();
             }
           }
+          this.canvas.saveState();
           this.updateSVGElement();
         },
         "remove unused"
@@ -63,6 +64,7 @@ export class CnodeBreakComponent extends CnodeComponent {
               this.node.addOutput(o);
             }
           }
+          this.canvas.saveState();
           this.updateSVGElement();
         },
         "reset outputs"

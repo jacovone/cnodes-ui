@@ -34,9 +34,6 @@ export class CnodesCanvas extends Canvas {
   /** The stack of edited programs */
   #stack = [];
 
-  /** The list of root program export for all actions */
-  #history = [];
-
   /** The clipboard of the canvas */
   static clipboard = null;
 
@@ -114,12 +111,14 @@ export class CnodesCanvas extends Canvas {
       }
       if (e.key === "Delete") {
         this.deleteSelectedNodes();
+        this.saveState();
         e.preventDefault();
       }
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "x") {
           this.copySelectedNodes();
           this.deleteSelectedNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "a") {
@@ -132,22 +131,42 @@ export class CnodesCanvas extends Canvas {
         }
         if (e.key === "v") {
           this.pasteNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "d") {
           this.cloneSelectedNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "z" && !e.shiftKey) {
-          // this.undoChanges();
+          this.undo();
           e.preventDefault();
         }
         if (e.key === "z" && e.shiftKey) {
-          // this.redoChanges();
+          this.redo();
           e.preventDefault();
         }
       }
     });
+
+    let prg = new Program();
+    prg.enter.meta = {
+      pos: {
+        x: 100,
+        y: 100,
+      },
+    };
+    prg.exit.meta = {
+      pos: {
+        x: 1000,
+        y: 100,
+      },
+    };
+    this.program = prg;
+
+    // First save
+    this.saveState();
   }
 
   get program() {
@@ -186,7 +205,7 @@ export class CnodesCanvas extends Canvas {
   set program(val) {
     this.importCnodesProgram(val);
     this.#program = val;
-    this.fitGraph();
+    this.saveState();
   }
 
   /**
@@ -242,6 +261,7 @@ export class CnodesCanvas extends Canvas {
         `,
         () => {
           this.cloneSelectedNodes();
+          this.saveState();
         },
         "clone"
       )
@@ -300,6 +320,7 @@ export class CnodesCanvas extends Canvas {
           `,
           (x, y) => {
             this.pasteNodes(x, y);
+            this.saveState();
           },
           "paste"
         )
@@ -326,6 +347,7 @@ export class CnodesCanvas extends Canvas {
               (x, y) => {
                 let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
+                this.saveState();
               },
               n.title + n.name + nodeDef.description
             )
@@ -621,10 +643,12 @@ export class CnodesCanvas extends Canvas {
    */
   pushProgram(program) {
     setTimeout(() => {
-      // Push this current program to the stack
+      // Push this current program, the history and the currentStateIndex to the stack
       this.#stack.unshift(this.program);
 
-      // Set the new Program
+      // Set the new Program and reset the history
+      this.history = [];
+      this.currentStateIndex = -1;
       this.program = program;
     });
   }
@@ -635,7 +659,13 @@ export class CnodesCanvas extends Canvas {
    */
   popProgram() {
     setTimeout(() => {
-      this.program = this.#stack.shift();
+      // Restore the old program and history
+      let prg = this.#stack.shift();
+
+      // Set the new Program and reset history
+      this.history = [];
+      this.currentStateIndex = -1;
+      this.program = prg;
     });
   }
 
@@ -645,5 +675,21 @@ export class CnodesCanvas extends Canvas {
    */
   canPopProgram() {
     return this.#stack.length > 0;
+  }
+
+  /**
+   * Restore a previously saved state
+   * @param {any} state A saved state
+   */
+  restoreState(state) {
+    this.importCnodesProgram(Env.import(state));
+  }
+
+  /**
+   * Return the current global state of the canvas
+   */
+  state() {
+    let state = Env.export(this.program);
+    return state;
   }
 }

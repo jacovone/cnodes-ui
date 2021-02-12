@@ -43,4 +43,4 @@ let devConfig = {
   },
 };
 
-module.exports = [devConfig]; //, minConfig];
+module.exports = [devConfig, minConfig];

@@ -26837,6 +26837,23 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         }
       }
     });
+    var prg = new _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program();
+    prg.enter.meta = {
+      pos: {
+        x: 100,
+        y: 100
+      }
+    };
+    prg.exit.meta = {
+      pos: {
+        x: 1000,
+        y: 100
+      }
+    };
+    _this.program = prg; // First save
+
+    _this.saveState();
+
     return _this;
   }
 
@@ -27448,10 +27465,12 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var _this4 = this;
 
       setTimeout(function () {
-        // Push this current program to the stack
-        _classPrivateFieldGet(_this4, _stack).unshift(_this4.program); // Set the new Program
+        // Push this current program, the history and the currentStateIndex to the stack
+        _classPrivateFieldGet(_this4, _stack).unshift(_this4.program); // Set the new Program and reset the history
 
 
+        _this4.history = [];
+        _this4.currentStateIndex = -1;
         _this4.program = program;
       });
     }
@@ -27466,7 +27485,13 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
       var _this5 = this;
 
       setTimeout(function () {
-        _this5.program = _classPrivateFieldGet(_this5, _stack).shift();
+        // Restore the old program and history
+        var prg = _classPrivateFieldGet(_this5, _stack).shift(); // Set the new Program and reset history
+
+
+        _this5.history = [];
+        _this5.currentStateIndex = -1;
+        _this5.program = prg;
       });
     }
     /**

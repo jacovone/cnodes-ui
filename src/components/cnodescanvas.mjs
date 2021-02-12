@@ -149,6 +149,24 @@ export class CnodesCanvas extends Canvas {
         }
       }
     });
+
+    let prg = new Program();
+    prg.enter.meta = {
+      pos: {
+        x: 100,
+        y: 100,
+      },
+    };
+    prg.exit.meta = {
+      pos: {
+        x: 1000,
+        y: 100,
+      },
+    };
+    this.program = prg;
+
+    // First save
+    this.saveState();
   }
 
   get program() {
@@ -625,10 +643,12 @@ export class CnodesCanvas extends Canvas {
    */
   pushProgram(program) {
     setTimeout(() => {
-      // Push this current program to the stack
+      // Push this current program, the history and the currentStateIndex to the stack
       this.#stack.unshift(this.program);
 
-      // Set the new Program
+      // Set the new Program and reset the history
+      this.history = [];
+      this.currentStateIndex = -1;
       this.program = program;
     });
   }
@@ -639,7 +659,13 @@ export class CnodesCanvas extends Canvas {
    */
   popProgram() {
     setTimeout(() => {
-      this.program = this.#stack.shift();
+      // Restore the old program and history
+      let prg = this.#stack.shift();
+
+      // Set the new Program and reset history
+      this.history = [];
+      this.currentStateIndex = -1;
+      this.program = prg;
     });
   }
 

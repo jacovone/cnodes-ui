@@ -60,8 +60,9 @@ export class CnodeBreakComponent extends CnodeComponent {
         `<tspan alignment-baseline="middle" style="font: ${Theme.current.MENU_SPECIAL_ITEM_STYLE}">Reset outputs</tspan>`,
         () => {
           for (let o of this.#originalOutputs) {
-            if (!this.node.outputs.includes(o)) {
+            if (!this.node.outputs.map((o) => o.name).includes(o.name)) {
               this.node.addOutput(o);
+              o.node = this.node;
             }
           }
           this.canvas.saveState();

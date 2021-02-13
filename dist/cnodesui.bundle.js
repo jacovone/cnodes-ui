@@ -29676,8 +29676,12 @@ var CnodeBreakComponent = /*#__PURE__*/function (_CnodeComponent) {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var o = _step2.value;
 
-            if (!_this2.node.outputs.includes(o)) {
+            if (!_this2.node.outputs.map(function (o) {
+              return o.name;
+            }).includes(o.name)) {
               _this2.node.addOutput(o);
+
+              o.node = _this2.node;
             }
           }
         } catch (err) {

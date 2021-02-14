@@ -240,6 +240,12 @@ export class Theme {
   get MENU_SEARCH_FONT() {
     return "bold 11px verdana";
   }
+  get MENU_SEARCH_COLOR() {
+    return "black";
+  }
+  get MENU_SEARCH_BACKGROUND_COLOR() {
+    return "white";
+  }
 
   // Types
 
@@ -353,6 +359,17 @@ class DarkTheme extends Theme {
   }
   get NODE_FUNCTIONAL_SELECTED_FILL_COLOR() {
     return "orangered";
+  }
+
+  // Menu
+  get MENU_SEARCH_FONT() {
+    return "bold 11px verdana";
+  }
+  get MENU_SEARCH_COLOR() {
+    return "brown";
+  }
+  get MENU_SEARCH_BACKGROUND_COLOR() {
+    return "lightyellow";
   }
 }
 

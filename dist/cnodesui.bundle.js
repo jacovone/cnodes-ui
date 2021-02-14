@@ -28273,7 +28273,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
       var menuEl = document.createElementNS("http://www.w3.org/2000/svg", "g");
       var textInputElem = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-      textInputElem.style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_FONT, "; \n      color: black; \n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ");
+      textInputElem.style = "\n      text-align: left;\n      line-height: 30px;\n      user-select: none;\n      pointer-events: auto;\n    ";
       textInputElem.setAttribute("x", 0);
       textInputElem.setAttribute("y", 0);
       textInputElem.setAttribute("transform", "translate(".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ", ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_BORDER_RADIUS, ")"));
@@ -28282,7 +28282,7 @@ var CnodesMenu = /*#__PURE__*/function (_Menu) {
 
       _classPrivateFieldSet(this, _inputElement, document.createElement("input"));
 
-      _classPrivateFieldGet(this, _inputElement).style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(textInputElem.getAttribute("width") - 10, "px; // 10px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
+      _classPrivateFieldGet(this, _inputElement).style = "\n      color: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_COLOR, "; \n      font: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_FONT, "; \n      background-color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_2__.Theme.current.MENU_SEARCH_BACKGROUND_COLOR, ";\n      width: ").concat(textInputElem.getAttribute("width") - 10, "px; // 10px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
 
       _classPrivateFieldGet(this, _inputElement).setAttribute("value", "");
 
@@ -30987,6 +30987,16 @@ var Theme = /*#__PURE__*/function () {
     key: "MENU_SEARCH_FONT",
     get: function get() {
       return "bold 11px verdana";
+    }
+  }, {
+    key: "MENU_SEARCH_COLOR",
+    get: function get() {
+      return "black";
+    }
+  }, {
+    key: "MENU_SEARCH_BACKGROUND_COLOR",
+    get: function get() {
+      return "white";
     } // Types
 
   }, {
@@ -31178,6 +31188,22 @@ var DarkTheme = /*#__PURE__*/function (_Theme2) {
     key: "NODE_FUNCTIONAL_SELECTED_FILL_COLOR",
     get: function get() {
       return "orangered";
+    } // Menu
+
+  }, {
+    key: "MENU_SEARCH_FONT",
+    get: function get() {
+      return "bold 11px verdana";
+    }
+  }, {
+    key: "MENU_SEARCH_COLOR",
+    get: function get() {
+      return "brown";
+    }
+  }, {
+    key: "MENU_SEARCH_BACKGROUND_COLOR",
+    get: function get() {
+      return "lightyellow";
     }
   }]);
 

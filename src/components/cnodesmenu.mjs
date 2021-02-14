@@ -102,8 +102,6 @@ export class CnodesMenu extends Menu {
       "foreignObject"
     );
     textInputElem.style = `
-      font: ${Theme.current.MENU_SEARCH_FONT}; 
-      color: black; 
       text-align: left;
       line-height: 30px;
       user-select: none;
@@ -124,8 +122,9 @@ export class CnodesMenu extends Menu {
 
     this.#inputElement = document.createElement("input");
     this.#inputElement.style = `
-      font: ${Theme.current.NODE_IO_NAME_FONT}; 
-      color: ${Theme.current.NODE_IO_NAME_COLOR}; 
+      color: ${Theme.current.MENU_SEARCH_COLOR}; 
+      font: ${Theme.current.MENU_SEARCH_FONT}; 
+      background-color: ${Theme.current.MENU_SEARCH_BACKGROUND_COLOR};
       width: ${
         textInputElem.getAttribute("width") - 10
       }px; // 10px less than foreignObject

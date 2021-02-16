@@ -112,7 +112,7 @@ export class OutputSocketComponent extends CnodesSocketComponent {
         text-align: right
       `;
 
-      this.#outputNameElement.addEventListener("keyup", (e) => {
+      this.#outputNameElement.addEventListener("input", (e) => {
         this.socket.name = e.target.value;
       });
 

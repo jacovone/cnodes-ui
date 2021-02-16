@@ -113,7 +113,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
         margin: 2px;
       `;
 
-      this.#inputNameElement.addEventListener("keyup", (e) => {
+      this.#inputNameElement.addEventListener("input", (e) => {
         this.socket.name = e.target.value;
       });
       /** Prevent descendants management of the click (pan) and allow selection */
@@ -192,7 +192,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     `;
 
     /** Register value modifications */
-    this.#inputValueElement.addEventListener("keyup", (e) => {
+    this.#inputValueElement.addEventListener("input", (e) => {
       this.socket.value = e.target.value;
     });
 

@@ -28894,7 +28894,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _inputNameElement).style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n      ");
 
-        _classPrivateFieldGet(this, _inputNameElement).addEventListener("keyup", function (e) {
+        _classPrivateFieldGet(this, _inputNameElement).addEventListener("input", function (e) {
           _this2.socket.name = e.target.value;
         });
         /** Prevent descendants management of the click (pan) and allow selection */
@@ -28942,7 +28942,7 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _classPrivateFieldGet(this, _inputValueElement).style = "\n      font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_NAME_FONT, "; \n      color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_NAME_COLOR, "; \n      width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n      height: ", 20, "px;\n      border: 0;\n      padding: 2px;\n      margin: 2px;\n    ");
       /** Register value modifications */
 
-      _classPrivateFieldGet(this, _inputValueElement).addEventListener("keyup", function (e) {
+      _classPrivateFieldGet(this, _inputValueElement).addEventListener("input", function (e) {
         _this2.socket.value = e.target.value;
       });
       /** Prevent descendants management of the click (pan) and allow selection */
@@ -30000,7 +30000,7 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
 
         _classPrivateFieldGet(this, _outputNameElement).style = "\n        font: ".concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_NAME_FONT, "; \n        color: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_IO_NAME_COLOR, "; \n        width: ").concat(_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.NODE_WIDTH / 2 - 25, "px; // 5px less than foreignObject\n        height: ", 20, "px;\n        border: 0;\n        padding: 2px;\n        margin: 2px;\n        text-align: right\n      ");
 
-        _classPrivateFieldGet(this, _outputNameElement).addEventListener("keyup", function (e) {
+        _classPrivateFieldGet(this, _outputNameElement).addEventListener("input", function (e) {
           _this2.socket.name = e.target.value;
         });
         /** Prevent descendants management of the click (pan) and allow selection */

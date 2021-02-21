@@ -817,6 +817,8 @@ declare module cnui {
     get connections(): Connection[];
     set contextMenuComponent(arg: Menu);
     get contextMenuComponent(): Menu;
+    set enabled(arg: boolean);
+    get enabled(): boolean;
     /**
      * Return the internal SVG element
      */

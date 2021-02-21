@@ -106,6 +106,8 @@ export class Canvas {
 
     this.#svgEl.style.width = "100%";
     this.#svgEl.style.height = "100%";
+
+    el.innerHTML = "";
     el.appendChild(this.#svgEl);
 
     // Background color
@@ -119,7 +121,6 @@ export class Canvas {
       "g"
     );
 
-    this.#svgEl.innerHTML = "";
     this.#svgEl.appendChild(this.#connectionsEl);
 
     this.#adaptSVGSize();

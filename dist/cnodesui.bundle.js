@@ -23619,6 +23619,8 @@ var Canvas = /*#__PURE__*/function () {
 
     _classPrivateFieldSet(this, _connectionsEl, document.createElementNS("http://www.w3.org/2000/svg", "g"));
 
+    _classPrivateFieldGet(this, _svgEl).innerHTML = "";
+
     _classPrivateFieldGet(this, _svgEl).appendChild(_classPrivateFieldGet(this, _connectionsEl));
 
     _classPrivateMethodGet(this, _adaptSVGSize, _adaptSVGSize2).call(this); // Define all pointer events to manager pan and zoom

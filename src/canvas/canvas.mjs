@@ -118,6 +118,8 @@ export class Canvas {
       "http://www.w3.org/2000/svg",
       "g"
     );
+
+    this.#svgEl.innerHTML = "";
     this.#svgEl.appendChild(this.#connectionsEl);
 
     this.#adaptSVGSize();

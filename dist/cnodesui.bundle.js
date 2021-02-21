@@ -23613,7 +23613,10 @@ var Canvas = /*#__PURE__*/function () {
     _classPrivateFieldGet(this, _svgEl).style.width = "100%";
     _classPrivateFieldGet(this, _svgEl).style.height = "100%";
     el.innerHTML = "";
-    el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Background color
+    el.appendChild(_classPrivateFieldGet(this, _svgEl)); // Layout
+
+    _classPrivateFieldGet(this, _svgEl).style["position"] = "absolute";
+    _classPrivateFieldGet(this, _svgEl).style["inset"] = "0"; // Background color
 
     _classPrivateFieldGet(this, _svgEl).style["background-color"] = _components_theme_mjs__WEBPACK_IMPORTED_MODULE_1__.Theme.current.CANVAS_BACKGROUND_COLOR; // Now create a "g" element that will be the parent of all connections. This is
     // important to guarantee that connections will be always behind components

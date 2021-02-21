@@ -110,6 +110,10 @@ export class Canvas {
     el.innerHTML = "";
     el.appendChild(this.#svgEl);
 
+    // Layout
+    this.#svgEl.style["position"] = "absolute";
+    this.#svgEl.style["inset"] = "0";
+
     // Background color
     this.#svgEl.style["background-color"] =
       Theme.current.CANVAS_BACKGROUND_COLOR;

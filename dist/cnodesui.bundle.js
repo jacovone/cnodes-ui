@@ -26848,9 +26848,7 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
 
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "x") {
-          _this.copySelectedNodes();
-
-          _this.deleteSelectedNodes();
+          _this.cutNodes();
 
           _this.saveState();
 
@@ -27349,6 +27347,14 @@ var CnodesCanvas = /*#__PURE__*/function (_Canvas) {
         return c.node;
       }));
       CnodesCanvas.clipboard = _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_1__.Program.cloneNodes(selectedNodes);
+    }
+    /** This method cut (copy,delete) all selected nodes */
+
+  }, {
+    key: "cutNodes",
+    value: function cutNodes() {
+      this.copySelectedNodes();
+      this.deleteSelectedNodes();
     }
     /**
      * This method deletes selected nodes

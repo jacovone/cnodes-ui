@@ -24261,6 +24261,20 @@ var Canvas = /*#__PURE__*/function () {
     },
     set: function set(val) {
       _classPrivateFieldSet(this, _enabled, val);
+
+      var _iterator7 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components)),
+          _step7;
+
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var c = _step7.value;
+          c.updateSVGElement();
+        }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
     }
     /**
      * Return the internal SVG element
@@ -24348,18 +24362,18 @@ var _onPointerDown2 = function _onPointerDown2(e) {
       _classPrivateFieldSet(this, _selectedComponents, []); // Update components
 
 
-      var _iterator7 = _createForOfIteratorHelper(selection),
-          _step7;
+      var _iterator8 = _createForOfIteratorHelper(selection),
+          _step8;
 
       try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          var c = _step7.value;
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var c = _step8.value;
           c.updateSVGElement();
         }
       } catch (err) {
-        _iterator7.e(err);
+        _iterator8.e(err);
       } finally {
-        _iterator7.f();
+        _iterator8.f();
       }
 
       _classPrivateFieldSet(this, _panning, true);
@@ -24499,14 +24513,14 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
     return Math.max(x1, x2, x1 + width1, x2 + width2) - Math.min(x1, x2, x1 + width1, x2 + width2) < width1 + width2 && Math.max(y1, y2, y1 + height1, y2 + height2) - Math.min(y1, y2, y1 + height1, y2 + height2) < height1 + height2;
   }
 
-  var _iterator8 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components).filter(function (comp) {
+  var _iterator9 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _components).filter(function (comp) {
     return comp.selectable;
   })),
-      _step8;
+      _step9;
 
   try {
     var _loop2 = function _loop2() {
-      var c = _step8.value;
+      var c = _step9.value;
 
       if (rectsOverlaps(c.absPos.x, c.absPos.y, c.width, c.height, x, y, width, height)) {
         if (_classPrivateFieldGet(_this2, _selectedComponents).findIndex(function (comp) {
@@ -24525,13 +24539,13 @@ var _addComponentToSelectionForBox2 = function _addComponentToSelectionForBox2(x
       c.updateSVGElement();
     };
 
-    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
       _loop2();
     }
   } catch (err) {
-    _iterator8.e(err);
+    _iterator9.e(err);
   } finally {
-    _iterator8.f();
+    _iterator9.f();
   }
 };
 
@@ -29100,14 +29114,20 @@ var InputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
       _classPrivateFieldGet(this, _inputValueElement).style["display"] = this.isConnected ? "none" : "table-cell";
 
       if (this.socket.canEditName) {
-        _classPrivateFieldGet(this, _inputNameElement).value = "".concat(this.socket.name);
+        _classPrivateFieldGet(this, _inputNameElement).value = "".concat(this.socket.name); // Canvas may be disabled
+
+        if (this.canvas.enabled) {
+          _classPrivateFieldGet(this, _inputValueElement).removeAttribute("disabled");
+        } else {
+          _classPrivateFieldGet(this, _inputValueElement).setAttribute("disabled", "1");
+        }
       } else {
         _classPrivateFieldGet(this, _labelElement).innerHTML = "".concat(this.socket.name);
       } // Only boolean, strings, anys and numbers can be modidied via the
       // input textbox
 
 
-      if (this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.ANY || this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.STRING || this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER) {
+      if (this.canvas.enabled && (this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.ANY || this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.BOOLEAN || this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.STRING || this.socket.type === _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_0__.Types.NUMBER)) {
         _classPrivateFieldGet(this, _inputValueElement).removeAttribute("disabled"); // Now update the internal socket value according to the
         // text input box by parsing the text
 
@@ -30174,7 +30194,16 @@ var OutputSocketComponent = /*#__PURE__*/function (_CnodesSocketComponen) {
     value: function updateSVGElement() {
       _get(_getPrototypeOf(OutputSocketComponent.prototype), "updateSVGElement", this).call(this);
 
-      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type));
+      _classPrivateFieldGet(this, _socketSymbol).setAttribute("fill", _cnodessocket_mjs__WEBPACK_IMPORTED_MODULE_3__.CnodesSocketComponent.getColorForType(this.socket.type)); // Canvas may be disabled
+
+
+      if (_classPrivateFieldGet(this, _outputNameElement)) {
+        if (this.canvas.enabled) {
+          _classPrivateFieldGet(this, _outputNameElement).removeAttribute("disabled");
+        } else {
+          _classPrivateFieldGet(this, _outputNameElement).setAttribute("disabled", "1");
+        }
+      }
     }
     /**
      * This method is responsible to enumerate all socket of registered nodes

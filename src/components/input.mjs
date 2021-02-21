@@ -289,6 +289,13 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
     if (this.socket.canEditName) {
       this.#inputNameElement.value = `${this.socket.name}`;
+
+      // Canvas may be disabled
+      if (this.canvas.enabled) {
+        this.#inputValueElement.removeAttribute("disabled");
+      } else {
+        this.#inputValueElement.setAttribute("disabled", "1");
+      }
     } else {
       this.#labelElement.innerHTML = `${this.socket.name}`;
     }
@@ -296,10 +303,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
     // Only boolean, strings, anys and numbers can be modidied via the
     // input textbox
     if (
-      this.socket.type === Types.ANY ||
-      this.socket.type === Types.BOOLEAN ||
-      this.socket.type === Types.STRING ||
-      this.socket.type === Types.NUMBER
+      this.canvas.enabled &&
+      (this.socket.type === Types.ANY ||
+        this.socket.type === Types.BOOLEAN ||
+        this.socket.type === Types.STRING ||
+        this.socket.type === Types.NUMBER)
     ) {
       this.#inputValueElement.removeAttribute("disabled");
 

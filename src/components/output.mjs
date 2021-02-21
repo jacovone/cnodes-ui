@@ -235,6 +235,15 @@ export class OutputSocketComponent extends CnodesSocketComponent {
       "fill",
       CnodesSocketComponent.getColorForType(this.socket.type)
     );
+
+    // Canvas may be disabled
+    if (this.#outputNameElement) {
+      if (this.canvas.enabled) {
+        this.#outputNameElement.removeAttribute("disabled");
+      } else {
+        this.#outputNameElement.setAttribute("disabled", "1");
+      }
+    }
   }
 
   /**

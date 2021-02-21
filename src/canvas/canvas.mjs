@@ -225,6 +225,9 @@ export class Canvas {
   }
   set enabled(val) {
     this.#enabled = val;
+    for (let c of this.#components) {
+      c.updateSVGElement();
+    }
   }
 
   /**

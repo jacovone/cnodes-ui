@@ -23353,6 +23353,8 @@ var _history = new WeakMap();
 
 var _currentStateIndex = new WeakMap();
 
+var _enabled = new WeakMap();
+
 var _updateSVGViewBox = new WeakSet();
 
 var _adaptSVGSize = new WeakSet();
@@ -23411,6 +23413,8 @@ var Canvas = /*#__PURE__*/function () {
   /** The list of root program export for all undo/redo actions */
 
   /** The integer pointer of the previous state in the undo/redo history */
+
+  /** Interaction enabled/disabled */
 
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
@@ -23526,6 +23530,11 @@ var Canvas = /*#__PURE__*/function () {
     _currentStateIndex.set(this, {
       writable: true,
       value: -1
+    });
+
+    _enabled.set(this, {
+      writable: true,
+      value: true
     });
 
     _defineProperty(this, "onSelectedComponentMovedByUser", function (component, delta) {
@@ -24241,6 +24250,14 @@ var Canvas = /*#__PURE__*/function () {
     set: function set(val) {
       _classPrivateFieldSet(this, _currentStateIndex, val);
     }
+  }, {
+    key: "enabled",
+    get: function get() {
+      return _classPrivateFieldGet(this, _enabled);
+    },
+    set: function set(val) {
+      _classPrivateFieldSet(this, _enabled, val);
+    }
     /**
      * Return the internal SVG element
      */
@@ -24282,6 +24299,10 @@ var _adaptSVGSize2 = function _adaptSVGSize2() {
 };
 
 var _onWheel2 = function _onWheel2(e) {
+  if (!this.enabled) {
+    return;
+  }
+
   var p = this.clientToSvgPoint(e.clientX, e.clientY);
   var zoomFactor = 0.002;
   var zoom = 1 + e.deltaY * zoomFactor;
@@ -24311,6 +24332,10 @@ var _onWheel2 = function _onWheel2(e) {
 };
 
 var _onPointerDown2 = function _onPointerDown2(e) {
+  if (!this.enabled) {
+    return;
+  }
+
   if (e.button === 0) {
     if (!e.shiftKey) {
       // Reset selection
@@ -24370,6 +24395,10 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 };
 
 var _onPointerUp2 = function _onPointerUp2(e) {
+  if (!this.enabled) {
+    return;
+  }
+
   if (e.button === 0) {
     // Pan end
     _classPrivateFieldSet(this, _panning, false);
@@ -24406,6 +24435,10 @@ var _onPointerUp2 = function _onPointerUp2(e) {
 };
 
 var _onPointerMove2 = function _onPointerMove2(e) {
+  if (!this.enabled) {
+    return;
+  }
+
   if (!_classPrivateFieldGet(this, _panning) && !_classPrivateFieldGet(this, _selecting)) {
     return;
   }
@@ -24941,6 +24974,10 @@ var Component = /*#__PURE__*/function () {
 }();
 
 var _onPointerDown2 = function _onPointerDown2(e) {
+  if (!this.canvas.enabled) {
+    return;
+  }
+
   if (e.button === 0 || e.button === 2) {
     this.events.emit("cnui:clicked", this, e.shiftKey);
 
@@ -24964,6 +25001,10 @@ var _onPointerDown2 = function _onPointerDown2(e) {
 };
 
 var _onPointerUp2 = function _onPointerUp2(e) {
+  if (!this.canvas.enabled) {
+    return;
+  }
+
   if (_classPrivateFieldGet(this, _moveable) && e.button === 0) {
     if (_classPrivateFieldGet(this, _startMovePos)) {
       _classPrivateFieldSet(this, _startMovePos, null);
@@ -24984,6 +25025,10 @@ var _onPointerUp2 = function _onPointerUp2(e) {
 };
 
 var _onPointerMove2 = function _onPointerMove2(e) {
+  if (!this.canvas.enabled) {
+    return;
+  }
+
   if (_classPrivateFieldGet(this, _moveable)) {
     if (_classPrivateFieldGet(this, _startMovePos)) {
       _classPrivateFieldSet(this, _moving, true);
@@ -25738,6 +25783,10 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
      * @param {Event} e The pointerdown event
      */
     value: function onPointerDown(e) {
+      if (!this.canvas.enabled) {
+        return;
+      }
+
       if (e.button === 0) {
         // Cancel previous context menu
         if (_classPrivateFieldGet(this, _tempConnectionEl)) {
@@ -25775,6 +25824,10 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "onPointerUp",
     value: function onPointerUp(e) {
+      if (!this.canvas.enabled) {
+        return;
+      }
+
       if (e.button === 0) {
         _classPrivateFieldSet(this, _connecting, false);
 
@@ -25805,6 +25858,10 @@ var SocketComponent = /*#__PURE__*/function (_Component) {
   }, {
     key: "onPointerMove",
     value: function onPointerMove(e) {
+      if (!this.canvas.enabled) {
+        return;
+      }
+
       if (_classPrivateFieldGet(this, _connecting)) {
         // Test if a socket is pointed
         var pointedComponent = this.canvas.componentFromPosition(e.clientX, e.clientY, true);

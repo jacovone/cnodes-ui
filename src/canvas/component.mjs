@@ -155,6 +155,10 @@ export class Component {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
+    if (!this.canvas.enabled) {
+      return;
+    }
+
     if (e.button === 0 || e.button === 2) {
       this.events.emit("cnui:clicked", this, e.shiftKey);
 
@@ -181,6 +185,10 @@ export class Component {
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
+    if (!this.canvas.enabled) {
+      return;
+    }
+
     if (this.#moveable && e.button === 0) {
       if (this.#startMovePos) {
         this.#startMovePos = null;
@@ -200,6 +208,10 @@ export class Component {
    * @param {Event} e The mousemove event
    */
   #onPointerMove(e) {
+    if (!this.canvas.enabled) {
+      return;
+    }
+
     if (this.#moveable) {
       if (this.#startMovePos) {
         this.#moving = true;

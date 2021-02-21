@@ -97,6 +97,10 @@ export class SocketComponent extends Component {
    * @param {Event} e The pointerdown event
    */
   onPointerDown(e) {
+    if (!this.canvas.enabled) {
+      return;
+    }
+
     if (e.button === 0) {
       // Cancel previous context menu
       if (this.#tempConnectionEl) {
@@ -133,6 +137,10 @@ export class SocketComponent extends Component {
    * @param {Event} e The pointerup event
    */
   onPointerUp(e) {
+    if (!this.canvas.enabled) {
+      return;
+    }
+
     if (e.button === 0) {
       this.#connecting = false;
       this.dragElement.releasePointerCapture(e.pointerId);
@@ -158,6 +166,10 @@ export class SocketComponent extends Component {
    * @param {Event} e The pointermove event
    */
   onPointerMove(e) {
+    if (!this.canvas.enabled) {
+      return;
+    }
+
     if (this.#connecting) {
       // Test if a socket is pointed
       let pointedComponent = this.canvas.componentFromPosition(

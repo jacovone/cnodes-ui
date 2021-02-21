@@ -85,6 +85,9 @@ export class Canvas {
   /** The integer pointer of the previous state in the undo/redo history */
   #currentStateIndex = -1;
 
+  /** Interaction enabled/disabled */
+  #enabled = true;
+
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
    * set up all listeners to manage panning, zooming and selection.
@@ -210,6 +213,12 @@ export class Canvas {
   set currentStateIndex(val) {
     this.#currentStateIndex = val;
   }
+  get enabled() {
+    return this.#enabled;
+  }
+  set enabled(val) {
+    this.#enabled = val;
+  }
 
   /**
    * Return the internal SVG element
@@ -251,6 +260,10 @@ export class Canvas {
    * @param {Event} e Wheel event
    */
   #onWheel(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     let p = this.clientToSvgPoint(e.clientX, e.clientY);
 
     let zoomFactor = 0.002;
@@ -304,6 +317,10 @@ export class Canvas {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     if (e.button === 0) {
       if (!e.shiftKey) {
         // Reset selection
@@ -353,6 +370,10 @@ export class Canvas {
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     if (e.button === 0) {
       // Pan end
       this.#panning = false;
@@ -390,6 +411,10 @@ export class Canvas {
    * @param {Event} e The mousemove event
    */
   #onPointerMove(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     if (!this.#panning && !this.#selecting) {
       return;
     }

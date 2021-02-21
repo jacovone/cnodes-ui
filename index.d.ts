@@ -92,6 +92,8 @@ declare module cnui {
      * This method copy all selected nodes to a property of the canvas
      */
     copySelectedNodes(): void;
+    /** This method cut (copy,delete) all selected nodes */
+    cutNodes(): void;
     /**
      * This method deletes selected nodes
      */
@@ -109,7 +111,7 @@ declare module cnui {
      * @param {number} x X Position to which paste nodes
      * @param {number} y Y Position to which paste nodes
      */
-    pasteNodes(x: number, y: number): void;
+    pasteNodes(x?: number, y?: number): void;
     /**
      * Push a subprogram on the canvas. The current program
      * is pushed on to the stack and the new one is placed on the canvas

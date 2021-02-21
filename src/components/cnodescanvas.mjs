@@ -116,8 +116,7 @@ export class CnodesCanvas extends Canvas {
       }
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "x") {
-          this.copySelectedNodes();
-          this.deleteSelectedNodes();
+          this.cutNodes();
           this.saveState();
           e.preventDefault();
         }
@@ -538,6 +537,12 @@ export class CnodesCanvas extends Canvas {
         .map((c) => c.node)
     );
     CnodesCanvas.clipboard = Program.cloneNodes(selectedNodes);
+  }
+
+  /** This method cut (copy,delete) all selected nodes */
+  cutNodes() {
+    this.copySelectedNodes();
+    this.deleteSelectedNodes();
   }
 
   /**

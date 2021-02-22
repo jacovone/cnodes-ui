@@ -84,10 +84,9 @@ export function canvas(elId) {
     console.log(`No element with id '${elId}'`);
     return null;
   }
-  Env.init();
   return new CnodesCanvas(el);
 }
 
-// register core custom nodes
+// Register core custom nodes
 CnodesCanvas.registerNodeUI(new Program(), CnodeProgramComponent.instance);
 CnodesCanvas.registerNodeUI(new FOBreak(), CnodeBreakComponent.instance);

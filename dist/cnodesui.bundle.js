@@ -946,6 +946,10 @@ var Env = /*#__PURE__*/function () {
           } else {
             // Otherwise import the node
             node = Env.getInstance(nodeData.name);
+          }
+
+          if (!node) {
+            throw new Error("Node type '".concat(nodeData.name, "' is not registered"));
           } // Delete default sockets (created by getInstance())
 
 
@@ -953,11 +957,6 @@ var Env = /*#__PURE__*/function () {
           node.outputs = [];
           node.prev = null;
           node.nexts = [];
-
-          if (!node) {
-            throw new Error("Node type '".concat(nodeData.name, "' is not registered"));
-          }
-
           node.title = nodeData.title;
           node.id = nodeData.id;
           node.functional = nodeData.functional;
@@ -3644,7 +3643,9 @@ exports.FAMap = _famap.FAMap;
 exports.AReduce = _areduce.AReduce;
 exports.FAReduce = _fareduce.FAReduce;
 exports.FOMake = _fomake.FOMake;
-exports.FOBreak = _fobreak.FOBreak;
+exports.FOBreak = _fobreak.FOBreak; // Register internal nodes
+
+_env.Env.init();
 
 /***/ }),
 
@@ -31654,9 +31655,8 @@ function canvas(elId) {
     return null;
   }
 
-  _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.Env.init();
   return new _components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas(el);
-} // register core custom nodes
+} // Register core custom nodes
 
 _components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.Program(), _components_nodes_cnodeprogram_mjs__WEBPACK_IMPORTED_MODULE_17__.CnodeProgramComponent.instance);
 _components_cnodescanvas_mjs__WEBPACK_IMPORTED_MODULE_7__.CnodesCanvas.registerNodeUI(new _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FOBreak(), _components_nodes_cnodebreak_mjs__WEBPACK_IMPORTED_MODULE_18__.CnodeBreakComponent.instance);

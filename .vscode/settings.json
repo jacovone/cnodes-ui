@@ -1,5 +1,5 @@
     {
-        "workbench.iconTheme": "vscode-icons",
+        "workbench.iconTheme": "material-icon-theme",
         // "editor.fontFamily": "Input Sans Narrow, Menlo, Monaco, 'Courier New', monospace",
         "editor.fontFamily": "Dank Mono, Menlo, Monaco, 'Courier New', monospace",
         "editor.lineHeight": 20,

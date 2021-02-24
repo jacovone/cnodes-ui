@@ -58,7 +58,7 @@ export {
   PrevNextConnection,
 };
 
-import { Program, FOBreak, Env } from "@marco.jacovone/cnodes";
+import { Program, FOBreak } from "@marco.jacovone/cnodes";
 export * from "@marco.jacovone/cnodes";
 
 /**

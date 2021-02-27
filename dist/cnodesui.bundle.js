@@ -307,6 +307,10 @@ var _fmod = __webpack_require__(/*! ../nodes/math/fmod.js */ "./node_modules/@ma
 
 var _fif = __webpack_require__(/*! ../nodes/fif.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/fif.js");
 
+var _isnull = __webpack_require__(/*! ../nodes/isnull.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/isnull.js");
+
+var _isundefined = __webpack_require__(/*! ../nodes/isundefined.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/isundefined.js");
+
 var _fnconst = __webpack_require__(/*! ../nodes/math/fnconst.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/math/fnconst.js");
 
 var _fomake = __webpack_require__(/*! ../nodes/object/fomake.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/object/fomake.js");
@@ -395,6 +399,8 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("Getvar", "Core", _getvar.Getvar.instance);
       Env.registerNode("If", "Core", _if.If.instance);
       Env.registerNode("FIf", "Core", _fif.FIf.instance);
+      Env.registerNode("FIsNull", "Core", _isnull.FIsNull.instance);
+      Env.registerNode("FIsUndefined", "Core", _isundefined.FIsUndefined.instance);
       Env.registerNode("Setvar", "Core", _setvar.Setvar.instance);
       Env.registerNode("While", "Core", _while.While.instance);
       Env.registerNode("Enter", "Core", _enter.Enter.instance);
@@ -3512,7 +3518,7 @@ var Types = exports.Types = {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.FOBreak = exports.FOMake = exports.FAReduce = exports.AReduce = exports.FAMap = exports.AMap = exports.FALength = exports.FAGet = exports.FAMake = exports.FAConst = exports.APush = exports.FTofixed = exports.FMod = exports.FSqrt = exports.FMul = exports.FDiv = exports.FAdd = exports.FNConst = exports.FConcat = exports.FSConst = exports.FCompare = exports.Wait = exports.FIf = exports.While = exports.Setvar = exports.If = exports.Getvar = exports.For = exports.FGetvar = exports.Log = exports.Console = exports.Call = exports.Types = exports.NextSocket = exports.PrevSocket = exports.OutputSocket = exports.InputSocket = exports.Socket = exports.Program = exports.Node = exports.Env = undefined;
+exports.FOBreak = exports.FOMake = exports.FAReduce = exports.AReduce = exports.FAMap = exports.AMap = exports.FALength = exports.FAGet = exports.FAMake = exports.FAConst = exports.APush = exports.FTofixed = exports.FMod = exports.FSqrt = exports.FMul = exports.FDiv = exports.FAdd = exports.FNConst = exports.FConcat = exports.FSConst = exports.FCompare = exports.Wait = exports.FIsUndefined = exports.FIsNull = exports.FIf = exports.While = exports.Setvar = exports.If = exports.Getvar = exports.For = exports.FGetvar = exports.Log = exports.Console = exports.Call = exports.Types = exports.NextSocket = exports.PrevSocket = exports.OutputSocket = exports.InputSocket = exports.Socket = exports.Program = exports.Node = exports.Env = undefined;
 
 var _env = __webpack_require__(/*! ./core/env.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/env.js");
 
@@ -3543,6 +3549,10 @@ var _setvar = __webpack_require__(/*! ./nodes/setvar.js */ "./node_modules/@marc
 var _while = __webpack_require__(/*! ./nodes/while.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/while.js");
 
 var _fif = __webpack_require__(/*! ./nodes/fif.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/fif.js");
+
+var _isnull = __webpack_require__(/*! ./nodes/isnull.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/isnull.js");
+
+var _isundefined = __webpack_require__(/*! ./nodes/isundefined.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/isundefined.js");
 
 var _wait = __webpack_require__(/*! ./nodes/wait.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/wait.js");
 
@@ -3622,6 +3632,8 @@ exports.If = _if.If;
 exports.Setvar = _setvar.Setvar;
 exports.While = _while.While;
 exports.FIf = _fif.FIf;
+exports.FIsNull = _isnull.FIsNull;
+exports.FIsUndefined = _isundefined.FIsUndefined;
 exports.Wait = _wait.Wait;
 exports.FCompare = _fcompare.FCompare;
 exports.FSConst = _fsconst.FSConst;
@@ -7245,6 +7257,310 @@ exports.If = If;
 
 _defineProperty(If, "instance", function () {
   return new If();
+});
+
+/***/ }),
+
+/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/isnull.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/isnull.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FIsNull = undefined;
+
+var _node = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
+
+var _socket = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
+
+var _type = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * This class implements a functional conditional node
+ */
+
+
+var FIsNull = /*#__PURE__*/function (_node$Node) {
+  _inherits(FIsNull, _node$Node);
+
+  var _super = _createSuper(FIsNull);
+
+  // Provide a node instance
+
+  /**
+   * Construct a new FIf node
+   */
+  function FIsNull() {
+    var _this;
+
+    _classCallCheck(this, FIsNull);
+
+    _this = _super.call(this, "FIsNull"); // The node is pure functional
+
+    _this.functional = true; // One single input for any value
+
+    _this.inputs = [new _socket.InputSocket("Val", _assertThisInitialized(_this), _type.Types.ANY, {})]; // The output value indicates if the input value is null
+
+    _this.outputs = [new _socket.OutputSocket("Val", _assertThisInitialized(_this), _type.Types.BOOLEAN, false)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FIsNull, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FIsNull.instance;
+      return _get(_getPrototypeOf(FIsNull.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
+    key: "process",
+    value: function () {
+      var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.evaluateInputs();
+
+              case 2:
+                this.output("Val").value = this.input("Val").value === null;
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function process() {
+        return _process.apply(this, arguments);
+      }
+
+      return process;
+    }()
+  }]);
+
+  return FIsNull;
+}(_node.Node);
+
+exports.FIsNull = FIsNull;
+
+_defineProperty(FIsNull, "instance", function () {
+  return new FIsNull();
+});
+
+/***/ }),
+
+/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/isundefined.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/isundefined.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FIsUndefined = undefined;
+
+var _node = __webpack_require__(/*! ../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
+
+var _socket = __webpack_require__(/*! ../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
+
+var _type = __webpack_require__(/*! ../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * This class implements a functional conditional node
+ */
+
+
+var FIsUndefined = /*#__PURE__*/function (_node$Node) {
+  _inherits(FIsUndefined, _node$Node);
+
+  var _super = _createSuper(FIsUndefined);
+
+  // Provide a node instance
+
+  /**
+   * Construct a new FIf node
+   */
+  function FIsUndefined() {
+    var _this;
+
+    _classCallCheck(this, FIsUndefined);
+
+    _this = _super.call(this, "FIsUndefined"); // The node is pure functional
+
+    _this.functional = true; // One single input for any value
+
+    _this.inputs = [new _socket.InputSocket("Val", _assertThisInitialized(_this), _type.Types.ANY, {})]; // The output value indicates if the input value is undefined
+
+    _this.outputs = [new _socket.OutputSocket("Val", _assertThisInitialized(_this), _type.Types.BOOLEAN, false)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FIsUndefined, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FIsUndefined.instance;
+      return _get(_getPrototypeOf(FIsUndefined.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
+    key: "process",
+    value: function () {
+      var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.evaluateInputs();
+
+              case 2:
+                this.output("Val").value = this.input("Val").value === undefined;
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function process() {
+        return _process.apply(this, arguments);
+      }
+
+      return process;
+    }()
+  }]);
+
+  return FIsUndefined;
+}(_node.Node);
+
+exports.FIsUndefined = FIsUndefined;
+
+_defineProperty(FIsUndefined, "instance", function () {
+  return new FIsUndefined();
 });
 
 /***/ }),
@@ -31549,6 +31865,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FDiv": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FDiv,
 /* harmony export */   "FGetvar": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FGetvar,
 /* harmony export */   "FIf": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FIf,
+/* harmony export */   "FIsNull": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FIsNull,
+/* harmony export */   "FIsUndefined": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FIsUndefined,
 /* harmony export */   "FMod": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FMod,
 /* harmony export */   "FMul": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FMul,
 /* harmony export */   "FNConst": () => /* reexport safe */ _marco_jacovone_cnodes__WEBPACK_IMPORTED_MODULE_21__.FNConst,

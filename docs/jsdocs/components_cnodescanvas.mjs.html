@@ -139,12 +139,13 @@ export class CnodesCanvas extends Canvas {
       }
       if (e.key === "Delete") {
         this.deleteSelectedNodes();
+        this.saveState();
         e.preventDefault();
       }
       if (e.ctrlKey || e.metaKey) {
         if (e.key === "x") {
-          this.copySelectedNodes();
-          this.deleteSelectedNodes();
+          this.cutNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "a") {
@@ -157,22 +158,42 @@ export class CnodesCanvas extends Canvas {
         }
         if (e.key === "v") {
           this.pasteNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "d") {
           this.cloneSelectedNodes();
+          this.saveState();
           e.preventDefault();
         }
         if (e.key === "z" &amp;&amp; !e.shiftKey) {
-          // this.undoChanges();
+          this.undo();
           e.preventDefault();
         }
         if (e.key === "z" &amp;&amp; e.shiftKey) {
-          // this.redoChanges();
+          this.redo();
           e.preventDefault();
         }
       }
     });
+
+    let prg = new Program();
+    prg.enter.meta = {
+      pos: {
+        x: 100,
+        y: 100,
+      },
+    };
+    prg.exit.meta = {
+      pos: {
+        x: 1000,
+        y: 100,
+      },
+    };
+    this.program = prg;
+
+    // First save
+    this.saveState();
   }
 
   get program() {
@@ -211,7 +232,7 @@ export class CnodesCanvas extends Canvas {
   set program(val) {
     this.importCnodesProgram(val);
     this.#program = val;
-    this.fitGraph();
+    this.saveState();
   }
 
   /**
@@ -267,6 +288,7 @@ export class CnodesCanvas extends Canvas {
         `,
         () => {
           this.cloneSelectedNodes();
+          this.saveState();
         },
         "clone"
       )
@@ -325,6 +347,7 @@ export class CnodesCanvas extends Canvas {
           `,
           (x, y) => {
             this.pasteNodes(x, y);
+            this.saveState();
           },
           "paste"
         )
@@ -351,6 +374,7 @@ export class CnodesCanvas extends Canvas {
               (x, y) => {
                 let node = CnodesCanvas.getNodeUIInstance(n, this);
                 node.pos = new Position(x, y);
+                this.saveState();
               },
               n.title + n.name + nodeDef.description
             )
@@ -543,6 +567,12 @@ export class CnodesCanvas extends Canvas {
     CnodesCanvas.clipboard = Program.cloneNodes(selectedNodes);
   }
 
+  /** This method cut (copy,delete) all selected nodes */
+  cutNodes() {
+    this.copySelectedNodes();
+    this.deleteSelectedNodes();
+  }
+
   /**
    * This method deletes selected nodes
    */
@@ -646,10 +676,12 @@ export class CnodesCanvas extends Canvas {
    */
   pushProgram(program) {
     setTimeout(() => {
-      // Push this current program to the stack
+      // Push this current program, the history and the currentStateIndex to the stack
       this.#stack.unshift(this.program);
 
-      // Set the new Program
+      // Set the new Program and reset the history
+      this.history = [];
+      this.currentStateIndex = -1;
       this.program = program;
     });
   }
@@ -660,7 +692,13 @@ export class CnodesCanvas extends Canvas {
    */
   popProgram() {
     setTimeout(() => {
-      this.program = this.#stack.shift();
+      // Restore the old program and history
+      let prg = this.#stack.shift();
+
+      // Set the new Program and reset history
+      this.history = [];
+      this.currentStateIndex = -1;
+      this.program = prg;
     });
   }
 
@@ -670,6 +708,22 @@ export class CnodesCanvas extends Canvas {
    */
   canPopProgram() {
     return this.#stack.length > 0;
+  }
+
+  /**
+   * Restore a previously saved state
+   * @param {any} state A saved state
+   */
+  restoreState(state) {
+    this.importCnodesProgram(Env.import(state));
+  }
+
+  /**
+   * Return the current global state of the canvas
+   */
+  state() {
+    let state = Env.export(this.program);
+    return state;
   }
 }
 </code></pre>
@@ -682,13 +736,13 @@ export class CnodesCanvas extends Canvas {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="DarkTheme.html">DarkTheme</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="LightTheme.html">LightTheme</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultDark">defaultDark</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:54:33 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 02 2021 11:01:24 GMT+0100 (Ora standard dell’Europa centrale)
 </footer>
 
 <script> prettyPrint(); </script>

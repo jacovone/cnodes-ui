@@ -279,7 +279,7 @@ class LightTheme extends Theme {}
 /**
  * The dark version of default theme
  */
-class DarkTheme extends Theme {
+export class DarkTheme extends Theme {
   // Canvas
   get CANVAS_BACKGROUND_COLOR() {
     return "black";

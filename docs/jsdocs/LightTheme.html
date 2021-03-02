@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: canvas/position.mjs</title>
+    <title>JSDoc: Class: LightTheme</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,78 +17,137 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: canvas/position.mjs</h1>
+    <h1 class="page-title">Class: LightTheme</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * cnodes-ui
- *
- * A GUI for cnodes
- * License: MIT
- * Author: Marco Jacovone
- * Year: 2020/2021
- */
+        <h2><span class="attribs"><span class="type-signature"></span></span>LightTheme<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">The light version of the theme</div>
+        
+    
+</header>
 
-/**
- * A class that represents a position in SVG space
- */
-export class Position {
-  /** The x coordinate */
-  #x = 0;
+<article>
+    <div class="container-overview">
+    
+        
 
-  /** The y coordinate */
-  #y = 0;
+    
+    <h2>Constructor</h2>
+    
 
-  /**
-   * Construct a new Position
-   * @param {number} x The x coordinate
-   * @param {number} y The y coordinate
-   */
-  constructor(x, y) {
-    this.#x = x;
-    this.#y = y;
-  }
+    
+    <h4 class="name" id="LightTheme"><span class="type-signature"></span>new LightTheme<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-  get x() {
-    return this.#x;
-  }
-  set x(val) {
-    this.#x = val;
-  }
-  get y() {
-    return this.#y;
-  }
-  set y(val) {
-    this.#y = val;
-  }
+    
 
-  /**
-   * Return a new position by adding another instance of
-   * position coordinate by coordinate
-   * @param {Position} pos
-   */
-  add(pos) {
-    return new Position(this.#x + pos.x, this.#y + pos.y);
-  }
 
-  /**
-   * Return a new position by subtracting another instance of
-   * position coordinate by coordinate
-   * @param {Position} pos
-   */
-  sub(pos) {
-    return new Position(this.#x - pos.x, this.#y - pos.y);
-  }
-}
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_theme.mjs.html">components/theme.mjs</a>, <a href="components_theme.mjs.html#line277">line 277</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

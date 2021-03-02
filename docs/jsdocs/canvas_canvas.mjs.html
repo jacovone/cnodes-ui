@@ -107,6 +107,15 @@ export class Canvas {
   /** The list of connections between components in the canvas */
   #connections = [];
 
+  /** The list of root program export for all undo/redo actions */
+  #history = [];
+
+  /** The integer pointer of the previous state in the undo/redo history */
+  #currentStateIndex = -1;
+
+  /** Interaction enabled/disabled */
+  #enabled = true;
+
   /**
    * The constructor of the Canvas object. Initializes the SVG element,
    * set up all listeners to manage panning, zooming and selection.
@@ -125,7 +134,13 @@ export class Canvas {
 
     this.#svgEl.style.width = "100%";
     this.#svgEl.style.height = "100%";
+
+    el.innerHTML = "";
     el.appendChild(this.#svgEl);
+
+    // Layout
+    this.#svgEl.style["position"] = "absolute";
+    this.#svgEl.style["inset"] = "0";
 
     // Background color
     this.#svgEl.style["background-color"] =
@@ -137,6 +152,7 @@ export class Canvas {
       "http://www.w3.org/2000/svg",
       "g"
     );
+
     this.#svgEl.appendChild(this.#connectionsEl);
 
     this.#adaptSVGSize();
@@ -220,6 +236,27 @@ export class Canvas {
   set contextMenuComponent(val) {
     this.#contextMenuComponent = val;
   }
+  get history() {
+    return this.#history;
+  }
+  set history(val) {
+    this.#history = val;
+  }
+  get currentStateIndex() {
+    return this.#currentStateIndex;
+  }
+  set currentStateIndex(val) {
+    this.#currentStateIndex = val;
+  }
+  get enabled() {
+    return this.#enabled;
+  }
+  set enabled(val) {
+    this.#enabled = val;
+    for (let c of this.#components) {
+      c.updateSVGElement();
+    }
+  }
 
   /**
    * Return the internal SVG element
@@ -261,6 +298,10 @@ export class Canvas {
    * @param {Event} e Wheel event
    */
   #onWheel(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     let p = this.clientToSvgPoint(e.clientX, e.clientY);
 
     let zoomFactor = 0.002;
@@ -314,6 +355,10 @@ export class Canvas {
    * @param {Event} e The mousedown event
    */
   #onPointerDown(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     if (e.button === 0) {
       if (!e.shiftKey) {
         // Reset selection
@@ -363,6 +408,10 @@ export class Canvas {
    * @param {Event} e The mouseup event
    */
   #onPointerUp(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     if (e.button === 0) {
       // Pan end
       this.#panning = false;
@@ -400,6 +449,10 @@ export class Canvas {
    * @param {Event} e The mousemove event
    */
   #onPointerMove(e) {
+    if (!this.enabled) {
+      return;
+    }
+
     if (!this.#panning &amp;&amp; !this.#selecting) {
       return;
     }
@@ -427,6 +480,17 @@ export class Canvas {
       // Update the selection
       this.#addComponentToSelectionForBox(x, y, width, height);
     }
+  }
+
+  /**
+   * Bring a component in front of others
+   * @param {Component} c The component to bring to front
+   */
+  bringToFront(c) {
+    // Bring to front
+    this.#svgEl.removeChild(c.componentEl);
+    this.#svgEl.appendChild(c.componentEl);
+    c.events.emit("cnui:bringedToFront");
   }
 
   /**
@@ -475,6 +539,7 @@ export class Canvas {
       ) {
         if (this.#selectedComponents.findIndex((comp) => comp === c) === -1) {
           this.#selectedComponents.push(c);
+          this.bringToFront(c);
         }
       } else {
         this.#selectedComponents = this.#selectedComponents.filter(
@@ -484,13 +549,6 @@ export class Canvas {
       c.updateSVGElement();
     }
   }
-
-  /**
-   * This method clones a list of components and put it on the map. Components
-   * have to be selectable and clonable
-   * @param {Component[]} components Components to clone
-   */
-  #cloneComponents(components) {}
 
   /**
    * This method extract all common menu items from an
@@ -551,7 +609,7 @@ export class Canvas {
    * @param {Component} component The moved component
    * @param {Position} delta The diff position of movement
    */
-  #onSelectedComponentMovedByUser = (component, delta) => {
+  onSelectedComponentMovedByUser = (component, delta) => {
     for (let c of this.#selectedComponents.filter((c) => c !== component)) {
       c.pos = c.pos.add(delta);
       c.updateSVGElement();
@@ -563,7 +621,7 @@ export class Canvas {
    * @param {Component} component Thye clicked component
    * @param {boolean} shiftKey Was the shift key pressed during the clock action?
    */
-  #onComponentIsClicked = (component, shiftKey) => {
+  onComponentIsClicked = (component, shiftKey) => {
     if (shiftKey) {
       // Invert the component selection
       if (this.#selectedComponents.findIndex((c) => c === component) !== -1) {
@@ -572,6 +630,7 @@ export class Canvas {
         );
       } else {
         this.#selectedComponents.push(component);
+        this.bringToFront(component);
       }
       component.updateSVGElement();
     } else {
@@ -583,6 +642,7 @@ export class Canvas {
         for (let c of selection) {
           c.updateSVGElement();
         }
+        this.bringToFront(component);
         component.updateSVGElement();
       }
     }
@@ -623,6 +683,81 @@ export class Canvas {
       pointedEl = pointedEl.parentElement;
     }
     return null;
+  }
+
+  /**
+   * This method saves the current state of the canvas in the
+   * undo/redo history. All actions that are subsequent to the current
+   * index of undo/redo index are removed from the history
+   */
+  saveState() {
+    let state = this.state();
+
+    // If the current state is the same as the last one
+    // dont store the new state in another #history position
+    if (
+      this.#currentStateIndex >= 0 &amp;&amp;
+      JSON.stringify(state) ===
+        JSON.stringify(this.#history[this.#currentStateIndex])
+    ) {
+      // console.log(
+      //   "Ignored, Current:",
+      //   this.#history[this.#currentStateIndex],
+      //   "Save:",
+      //   state
+      // );
+      return;
+    }
+    // console.log(
+    //   "Accepted, Current:",
+    //   this.#history[this.#currentStateIndex],
+    //   "Save:",
+    //   state
+    // );
+
+    ++this.#currentStateIndex;
+    this.#history.splice(
+      this.#currentStateIndex,
+      this.#history.length - this.#currentStateIndex,
+      state
+    );
+
+    // console.log("SAVE", this.#currentStateIndex, this.#history);
+  }
+
+  /**
+   * Restore a previously saved state
+   * @param {any} state A saved state
+   */
+  restoreState(state) {
+    throw new Error("Define this method in a subclass!");
+  }
+
+  /**
+   * Return the current global state of the canvas
+   */
+  state() {
+    throw new Error("Define this method in a subclass!");
+  }
+
+  /**
+   * Undo last operation in the canvas
+   */
+  undo() {
+    if (this.#currentStateIndex > 0) {
+      this.restoreState(this.#history[--this.#currentStateIndex]);
+    }
+    // console.log("UNDO", this.#currentStateIndex, this.#history);
+  }
+
+  /**
+   * Redo last undo-ed operation in the canvas
+   */
+  redo() {
+    if (this.#currentStateIndex &lt; this.#history.length - 1) {
+      this.restoreState(this.#history[++this.#currentStateIndex]);
+    }
+    // console.log("REDO", this.#currentStateIndex, this.#history);
   }
 
   /**
@@ -671,10 +806,10 @@ export class Canvas {
     this.#svgEl.appendChild(component.componentEl);
 
     if (component.moveable &amp;&amp; component.selectable) {
-      component.events.on("cnui:clicked", this.#onComponentIsClicked);
+      component.events.on("cnui:clicked", this.onComponentIsClicked);
       component.events.on(
         "cnui:usermoveselected",
-        this.#onSelectedComponentMovedByUser
+        this.onSelectedComponentMovedByUser
       );
     }
   }
@@ -682,8 +817,7 @@ export class Canvas {
   /**
    * Remove a component from the canvas
    * @param {Component} component Component to remove
-   */
-  removeComponent(component) {
+   */ removeComponent(component) {
     // Remove the component from the SVG space
     this.components = this.#components.filter((c) => c !== component);
 
@@ -698,10 +832,10 @@ export class Canvas {
 
     // Unregister callbacks
     if (component.moveable &amp;&amp; component.selectable) {
-      component.events.off("cnui:clicked", this.#onComponentIsClicked);
+      component.events.off("cnui:clicked", this.onComponentIsClicked);
       component.events.off(
         "cnui:usermove",
-        this.#onSelectedComponentMovedByUser
+        this.onSelectedComponentMovedByUser
       );
     }
   }
@@ -713,7 +847,6 @@ export class Canvas {
   isComponentSelected(component) {
     return this.#selectedComponents.includes(component);
   }
-
   /**
    * This method extract all connections in the canvas, that have
    * the source or the target SocketComponent as endpoint
@@ -853,13 +986,13 @@ export class Canvas {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="DarkTheme.html">DarkTheme</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="LightTheme.html">LightTheme</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultDark">defaultDark</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:54:33 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 02 2021 11:01:24 GMT+0100 (Ora standard dell’Europa centrale)
 </footer>
 
 <script> prettyPrint(); </script>

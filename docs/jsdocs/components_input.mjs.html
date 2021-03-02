@@ -141,7 +141,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
         margin: 2px;
       `;
 
-      this.#inputNameElement.addEventListener("keyup", (e) => {
+      this.#inputNameElement.addEventListener("input", (e) => {
         this.socket.name = e.target.value;
       });
       /** Prevent descendants management of the click (pan) and allow selection */
@@ -151,6 +151,10 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
       this.#inputNameElement.setAttribute("value", this.socket.name);
       this.#inputNameElement.setAttribute("type", "text");
+      this.#inputNameElement.style["background-color"] =
+        Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+      this.#inputNameElement.style["color"] = Theme.current.NODE_IO_INPUT_COLOR;
+      this.#inputNameElement.style["font"] = Theme.current.NODE_IO_INPUT_FONT;
 
       textInputNameElem.appendChild(this.#inputNameElement);
     } else {
@@ -216,7 +220,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
     `;
 
     /** Register value modifications */
-    this.#inputValueElement.addEventListener("keyup", (e) => {
+    this.#inputValueElement.addEventListener("input", (e) => {
       this.socket.value = e.target.value;
     });
 
@@ -227,6 +231,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
     this.#inputValueElement.setAttribute("value", this.socket.value);
     this.#inputValueElement.setAttribute("type", "text");
+
+    this.#inputValueElement.style["background-color"] =
+      Theme.current.NODE_IO_INPUT_BACKGROUND_COLOR;
+    this.#inputValueElement.style["color"] = Theme.current.NODE_IO_INPUT_COLOR;
+    this.#inputValueElement.style["font"] = Theme.current.NODE_IO_INPUT_FONT;
 
     textInputValueElem.appendChild(this.#inputValueElement);
 
@@ -255,6 +264,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
     // This creates the connection and connects sockets
     new IOConnection(socketComp, this, this.canvas).setup();
+    this.canvas.saveState();
   }
 
   /**
@@ -307,6 +317,13 @@ export class InputSocketComponent extends CnodesSocketComponent {
 
     if (this.socket.canEditName) {
       this.#inputNameElement.value = `${this.socket.name}`;
+
+      // Canvas may be disabled
+      if (this.canvas.enabled) {
+        this.#inputValueElement.removeAttribute("disabled");
+      } else {
+        this.#inputValueElement.setAttribute("disabled", "1");
+      }
     } else {
       this.#labelElement.innerHTML = `${this.socket.name}`;
     }
@@ -314,10 +331,11 @@ export class InputSocketComponent extends CnodesSocketComponent {
     // Only boolean, strings, anys and numbers can be modidied via the
     // input textbox
     if (
-      this.socket.type === Types.ANY ||
-      this.socket.type === Types.BOOLEAN ||
-      this.socket.type === Types.STRING ||
-      this.socket.type === Types.NUMBER
+      this.canvas.enabled &amp;&amp;
+      (this.socket.type === Types.ANY ||
+        this.socket.type === Types.BOOLEAN ||
+        this.socket.type === Types.STRING ||
+        this.socket.type === Types.NUMBER)
     ) {
       this.#inputValueElement.removeAttribute("disabled");
 
@@ -415,6 +433,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             // Disconnect this socket
             conn.destroy();
+            this.canvas.saveState();
           },
           "disconnect"
         )
@@ -427,6 +446,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           () => {
             this.socket.node.removeInput(this.socket);
             this.destroy();
+            this.canvas.saveState();
 
             // Ensure that node parent redraw itself
             this.parent.updateSVGElement();
@@ -444,6 +464,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.NUMBER;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "number"
@@ -455,6 +476,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.ANY;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "any"
@@ -466,6 +488,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.STRING;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "string"
@@ -477,6 +500,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.BOOLEAN;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "boolean"
@@ -488,6 +512,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.ARRAY;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "array"
@@ -499,6 +524,7 @@ export class InputSocketComponent extends CnodesSocketComponent {
           `,
           () => {
             this.socket.type = Types.OBJECT;
+            this.canvas.saveState();
             this.updateSVGElement();
           },
           "object"
@@ -519,13 +545,13 @@ export class InputSocketComponent extends CnodesSocketComponent {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="CnodeComponent.html">CnodeComponent</a></li><li><a href="CnodesCanvas.html">CnodesCanvas</a></li><li><a href="CnodesConnection.html">CnodesConnection</a></li><li><a href="CnodesEditableTextComponent.html">CnodesEditableTextComponent</a></li><li><a href="CnodesMenu.html">CnodesMenu</a></li><li><a href="CnodesSocketComponent.html">CnodesSocketComponent</a></li><li><a href="Component.html">Component</a></li><li><a href="Connection.html">Connection</a></li><li><a href="DarkTheme.html">DarkTheme</a></li><li><a href="InputSocketComponent.html">InputSocketComponent</a></li><li><a href="IOConnection.html">IOConnection</a></li><li><a href="LightTheme.html">LightTheme</a></li><li><a href="Menu.html">Menu</a></li><li><a href="MenuItem.html">MenuItem</a></li><li><a href="NextSocketComponent.html">NextSocketComponent</a></li><li><a href="OutputSocketComponent.html">OutputSocketComponent</a></li><li><a href="Position.html">Position</a></li><li><a href="PrevNextConnection.html">PrevNextConnection</a></li><li><a href="PrevSocketComponent.html">PrevSocketComponent</a></li><li><a href="SocketComponent.html">SocketComponent</a></li><li><a href="Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#defaultDark">defaultDark</a></li><li><a href="global.html#defaultLight">defaultLight</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Feb 02 2021 02:54:33 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 02 2021 11:01:24 GMT+0100 (Ora standard dell’Europa centrale)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -24,7 +24,7 @@ import { InputSocketComponent } from "./components/input.mjs";
 import { OutputSocketComponent } from "./components/output.mjs";
 import { PrevSocketComponent } from "./components/prev.mjs";
 import { NextSocketComponent } from "./components/next.mjs";
-import { Theme, defaultLight, defaultDark } from "./components/theme.mjs";
+import { Theme, DarkTheme, defaultLight, defaultDark } from "./components/theme.mjs";
 
 import { CnodeProgramComponent } from "./components/nodes/cnodeprogram.mjs";
 import { CnodeBreakComponent } from "./components/nodes/cnodebreak.mjs";
@@ -50,6 +50,7 @@ export {
   PrevSocketComponent,
   NextSocketComponent,
   Theme,
+  DarkTheme,
   defaultLight,
   defaultDark,
   CnodeProgramComponent,

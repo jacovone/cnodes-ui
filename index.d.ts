@@ -226,6 +226,10 @@ declare module cnui {
     get TYPE_BOOLEAN_COLOR(): string;
     get TYPE_ANY_COLOR(): string;
   }
+  /** The dark theme */
+  export class DarkTheme extends Theme {
+
+  }
   /** Default Light Theme */
   export const defaultLight: Theme;
   /** Default Dark Theme */

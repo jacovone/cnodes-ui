@@ -476,6 +476,25 @@ var Env = /*#__PURE__*/function () {
       });
     }
     /**
+     * Unregister a node
+     * @param {string} instance The instance static function of the node
+     */
+
+  }, {
+    key: "unregisterNode",
+    value: function unregisterNode(instance) {
+      _classStaticPrivateFieldSpecGet(Env, Env, _nodeRegistry)["delete"](instance().name);
+    }
+    /**
+     * Unregister all nodes
+     */
+
+  }, {
+    key: "unregisterAllNodes",
+    value: function unregisterAllNodes() {
+      _classStaticPrivateFieldSpecGet(Env, Env, _nodeRegistry).clear();
+    }
+    /**
      * Return the list of unique registered categories
      */
 

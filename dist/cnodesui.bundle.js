@@ -335,6 +335,12 @@ var _ftofixed = __webpack_require__(/*! ../nodes/math/ftofixed.js */ "./node_mod
 
 var _wait = __webpack_require__(/*! ../nodes/wait.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/wait.js");
 
+var _fand = __webpack_require__(/*! ../nodes/bool/fand.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fand.js");
+
+var _f_or = __webpack_require__(/*! ../nodes/bool/f_or.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/f_or.js");
+
+var _fnot = __webpack_require__(/*! ../nodes/bool/fnot.js */ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fnot.js");
+
 function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) {
   if (receiver !== classConstructor) {
     throw new TypeError("Private static access of wrong provenance");
@@ -425,7 +431,10 @@ var Env = /*#__PURE__*/function () {
       Env.registerNode("FGTE", "Boolean", _fgte.FGTE.instance);
       Env.registerNode("FLT", "Boolean", _flt.FLT.instance);
       Env.registerNode("FLTE", "Boolean", _flte.FLTE.instance);
-      Env.registerNode("FNotEqual", "Boolean", _fnotequal.FNotEqual.instance); // Arrays Nodes
+      Env.registerNode("FNotEqual", "Boolean", _fnotequal.FNotEqual.instance);
+      Env.registerNode("FAnd", "Boolean", _fand.FAnd.instance);
+      Env.registerNode("FOr", "Boolean", _f_or.FOr.instance);
+      Env.registerNode("FNot", "Boolean", _fnot.FNot.instance); // Arrays Nodes
 
       Env.registerNode("APush", "Arrays", _apush.APush.instance);
       Env.registerNode("FAConst", "Arrays", _faconst.FAConst.instance);
@@ -5268,6 +5277,314 @@ _defineProperty(FAReduce, "instance", function () {
 
 /***/ }),
 
+/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/f_or.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/f_or.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FOr = undefined;
+
+var _node = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
+
+var _socket = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
+
+var _type = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * This class implements a functional node for compairing boolean values.
+ */
+
+
+var FOr = /*#__PURE__*/function (_node$Node) {
+  _inherits(FOr, _node$Node);
+
+  var _super = _createSuper(FOr);
+
+  // Provide a node instance
+
+  /**
+   * Construct a new FOr node
+   */
+  function FOr() {
+    var _this;
+
+    _classCallCheck(this, FOr);
+
+    _this = _super.call(this, "FOr"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _socket.InputSocket("Val1", _assertThisInitialized(_this), _type.Types.BOOLEAN, false), new _socket.InputSocket("Val2", _assertThisInitialized(_this), _type.Types.BOOLEAN, false)];
+    _this.outputs = [new _socket.OutputSocket("Val", _assertThisInitialized(_this), _type.Types.BOOLEAN, 0, false)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FOr, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FOr.instance;
+      return _get(_getPrototypeOf(FOr.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
+    key: "process",
+    value: function () {
+      var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var val1, val2;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.evaluateInputs();
+
+              case 2:
+                val1 = this.input("Val1").value;
+                val2 = this.input("Val2").value;
+                this.output("Val").value = val1 || val2;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function process() {
+        return _process.apply(this, arguments);
+      }
+
+      return process;
+    }()
+  }]);
+
+  return FOr;
+}(_node.Node);
+
+exports.FOr = FOr;
+
+_defineProperty(FOr, "instance", function () {
+  return new FOr();
+});
+
+/***/ }),
+
+/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fand.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fand.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FAnd = undefined;
+
+var _node = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
+
+var _socket = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
+
+var _type = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * This class implements a functional node for compairing boolean values.
+ */
+
+
+var FAnd = /*#__PURE__*/function (_node$Node) {
+  _inherits(FAnd, _node$Node);
+
+  var _super = _createSuper(FAnd);
+
+  // Provide a node instance
+
+  /**
+   * Construct a new FAnd node
+   */
+  function FAnd() {
+    var _this;
+
+    _classCallCheck(this, FAnd);
+
+    _this = _super.call(this, "FAnd"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _socket.InputSocket("Val1", _assertThisInitialized(_this), _type.Types.BOOLEAN, false), new _socket.InputSocket("Val2", _assertThisInitialized(_this), _type.Types.BOOLEAN, false)];
+    _this.outputs = [new _socket.OutputSocket("Val", _assertThisInitialized(_this), _type.Types.BOOLEAN, 0, false)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FAnd, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FAnd.instance;
+      return _get(_getPrototypeOf(FAnd.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
+    key: "process",
+    value: function () {
+      var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var val1, val2;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.evaluateInputs();
+
+              case 2:
+                val1 = this.input("Val1").value;
+                val2 = this.input("Val2").value;
+                this.output("Val").value = val1 && val2;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function process() {
+        return _process.apply(this, arguments);
+      }
+
+      return process;
+    }()
+  }]);
+
+  return FAnd;
+}(_node.Node);
+
+exports.FAnd = FAnd;
+
+_defineProperty(FAnd, "instance", function () {
+  return new FAnd();
+});
+
+/***/ }),
+
 /***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fcompare.js ***!
@@ -6049,6 +6366,159 @@ exports.FLTE = FLTE;
 
 _defineProperty(FLTE, "instance", function () {
   return new FLTE();
+});
+
+/***/ }),
+
+/***/ "./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fnot.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@marco.jacovone/cnodes/lib/nodes/bool/fnot.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FNot = undefined;
+
+var _node = __webpack_require__(/*! ../../core/node.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/node.js");
+
+var _socket = __webpack_require__(/*! ../../core/socket.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/socket.js");
+
+var _type = __webpack_require__(/*! ../../core/type.js */ "./node_modules/@marco.jacovone/cnodes/lib/core/type.js");
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * This class implements a functional node FNot compairing boolean values.
+ */
+
+
+var FNot = /*#__PURE__*/function (_node$Node) {
+  _inherits(FNot, _node$Node);
+
+  var _super = _createSuper(FNot);
+
+  // Provide a node instance
+
+  /**
+   * Construct a new FNot node
+   */
+  function FNot() {
+    var _this;
+
+    _classCallCheck(this, FNot);
+
+    _this = _super.call(this, "FNot"); // The node is pure functional
+
+    _this.functional = true; // Default to two numeric inputs
+
+    _this.inputs = [new _socket.InputSocket("Val", _assertThisInitialized(_this), _type.Types.BOOLEAN, false)];
+    _this.outputs = [new _socket.OutputSocket("Val", _assertThisInitialized(_this), _type.Types.BOOLEAN, 0, false)];
+    _this.prev = null;
+    _this.nexts = [];
+    return _this;
+  }
+  /**
+   * Clone this node
+   * @param {Function} factory The factory class function
+   */
+
+
+  _createClass(FNot, [{
+    key: "clone",
+    value: function clone() {
+      var factory = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : FNot.instance;
+      return _get(_getPrototypeOf(FNot.prototype), "clone", this).call(this, factory);
+    }
+    /**
+     * The process override
+     */
+
+  }, {
+    key: "process",
+    value: function () {
+      var _process = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var val;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.evaluateInputs();
+
+              case 2:
+                val = this.input("Val").value;
+                this.output("Val").value = !val;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function process() {
+        return _process.apply(this, arguments);
+      }
+
+      return process;
+    }()
+  }]);
+
+  return FNot;
+}(_node.Node);
+
+exports.FNot = FNot;
+
+_defineProperty(FNot, "instance", function () {
+  return new FNot();
 });
 
 /***/ }),

@@ -227,9 +227,7 @@ declare module cnui {
     get TYPE_ANY_COLOR(): string;
   }
   /** The dark theme */
-  export class DarkTheme extends Theme {
-
-  }
+  export class DarkTheme extends Theme {}
   /** Default Light Theme */
   export const defaultLight: Theme;
   /** Default Dark Theme */
@@ -1711,6 +1709,18 @@ declare module cnui {
       category: string,
       factory: () => Node
     ): void;
+    /**
+     * Unregister a node from the registry
+     * @param {()=>Node} instance The instance of the node
+     */
+    static unregisterNode(instance: () => Node): void;
+    /**
+     * Unregister aall nodes from the registry
+     */
+    static unregisterAllNodes(): void;
+    /**
+     * Return the list of unique registered categories
+     */
     /**
      * Return the list of unique registered categories
      */
